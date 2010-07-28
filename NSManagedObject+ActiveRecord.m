@@ -172,6 +172,9 @@ static NSNumber *defaultBatchSize = nil;
 	return [self createFetchRequestInContext:[NSManagedObjectContext defaultContext]];
 }
 
+#pragma mark -
+#pragma mark Number of Entities
+
 + (NSNumber *) numberOfEntitiesWithContext:(NSManagedObjectContext *)context
 {
 	NSError *error = nil;
@@ -204,6 +207,16 @@ static NSNumber *defaultBatchSize = nil;
 									 inContext:[NSManagedObjectContext defaultContext]];
 }
 
++ (BOOL) hasAtLeastOneEntity
+{
+    return [self hasAtLeastOneEntityInContext:[NSManagedObjectContext defaultContext]];
+}
+
++ (BOOL) hasAtLeastOneEntityInContext:(NSManagedObjectContext *)context
+{
+    return [[self numberOfEntitiesWithContext:context] intValue] > 0;
+}
+
 #pragma mark -
 #pragma mark Reqest Helpers
 + (NSFetchRequest *) requestAll
@@ -214,6 +227,20 @@ static NSNumber *defaultBatchSize = nil;
 + (NSFetchRequest *) requestAllInContext:(NSManagedObjectContext *)context
 {
 	return [self createFetchRequestInContext:context];
+}
+
++ (NSFetchRequest *) requestFirstByAttribute:(NSString *)attribute withValue:(id)searchValue;
+{
+    return [self requestFirstByAttribute:attribute withValue:searchValue inContext:[NSManagedObjectContext defaultContext]];
+}
+
++ (NSFetchRequest *) requestFirstByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context;
+{
+    NSFetchRequest *request = [self createFetchRequestInContext:context];
+    [request setPropertiesToFetch:[NSArray arrayWithObject:attribute]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", attribute, searchValue]];
+    
+    return request;
 }
 
 + (NSFetchRequest *) requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
@@ -397,8 +424,7 @@ static NSNumber *defaultBatchSize = nil;
 
 + (id)findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context
 {	
-	NSFetchRequest *request = [self createFetchRequestInContext:context];
-	[request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", attribute, searchValue]];
+	NSFetchRequest *request = [self requestFirstByAttribute:attribute withValue:searchValue inContext:context];
 
 	return [self executeFetchRequestAndReturnFirstObject:request inContext:context];
 }

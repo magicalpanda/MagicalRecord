@@ -26,8 +26,6 @@
 {
 	if (error)
 	{
-		//		NSLog(@"NSManagedObjectContext errors: %@", error);
-		//		NSLog(@"Details: %@", [error userInfo]);
 		NSDictionary *userInfo = [error userInfo];
 		for (NSArray *detailedError in [userInfo allValues])
 		{
@@ -64,6 +62,11 @@
 {
     NSManagedObjectContext *context = [NSManagedObjectContext context];
 	[NSManagedObjectContext setDefaultContext:context];
+}
+
++ (void) setupAutoMigratingDefaultCoreDataStack
+{
+    [self setupCoreDataStackWithAutoMigratingSqliteStoreNamed:kActiveRecordDefaultStoreFileName];
 }
 
 + (void) setupDefaultCoreDataStackWithStoreNamed:(NSString *)storeName

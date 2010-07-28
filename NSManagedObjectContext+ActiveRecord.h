@@ -22,6 +22,7 @@
 + (void) setDefaultContext:(NSManagedObjectContext *)moc;
 
 + (NSManagedObjectContext *) context;
++ (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThread;
 + (NSManagedObjectContext *) contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 
 @end

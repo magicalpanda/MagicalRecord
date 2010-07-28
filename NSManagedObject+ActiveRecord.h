@@ -36,8 +36,13 @@
 + (NSNumber *) numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm;
 + (NSNumber *) numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
 
++ (BOOL) hasAtLeastOneEntity;
++ (BOOL) hasAtLeastOneEntityInContext:(NSManagedObjectContext *)context;
+
 + (NSFetchRequest *) requestAll;
 + (NSFetchRequest *) requestAllInContext:(NSManagedObjectContext *)context;
++ (NSFetchRequest *) requestFirstByAttribute:(NSString *)attribute withValue:(id)searchValue;
++ (NSFetchRequest *) requestFirstByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context;
 + (NSFetchRequest *) requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending;
 + (NSFetchRequest *) requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
 + (NSFetchRequest *) requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm;

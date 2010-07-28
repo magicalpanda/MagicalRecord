@@ -137,4 +137,11 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 	return [self contextWithStoreCoordinator:[NSPersistentStoreCoordinator defaultStoreCoordinator]];
 }
 
++ (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThread
+{
+    NSManagedObjectContext *context = [self context];
+    [[self defaultContext] observeContextOnMainThread:context];
+    return context;
+}
+
 @end
