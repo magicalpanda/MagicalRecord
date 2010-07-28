@@ -1,0 +1,137 @@
+= ActiveRecord Fetching for Core Data =
+
+In software engineering, the active record pattern is a design pattern found in software that stores its data in relational databases. It was named by Martin Fowler in his book Patterns of Enterprise Application Architecture. The interface to such an object would include functions such as Insert, Update, and Delete, plus properties that correspond more-or-less directly to the columns in the underlying database table.
+
+Active record is an approach to accessing data in a database. A database table or view is wrapped into a class; thus an object instance is tied to a single row in the table. After creation of an object, a new row is added to the table upon save. Any object loaded gets its information from the database; when an object is updated, the corresponding row in the table is also updated. The wrapper class implements accessor methods or properties for each column in the table or view.
+
+-- From [[http://en.wikipedia.org/wiki/Active_record_pattern|Wikipedia]]
+
+Active Record for Core Data was inspired by the ease of Ruby on Rails' Active Record fetching. The goals of this code are:
+
+* Clean up my Core Data related code
+* Allow for clear, simple, one-line fetches
+* Still allow the modification of the NSFetchRequest when request optimizations are needed
+
+[[BeforeAndAfter|See amazing examples of before and after using the code]]
+
+== Installation ==
+
+# In your XCode Project, add the NSManagedObject+ActiveRecord.(h/m) and NSManagedObjectContext+ActiveRecord.(h/m) files into your project. 
+# Add the proper import states for the .h files either to your specific files using Core Data, or in your pre-compiled header file
+# Start writing code! ... There is no step 3!
+
+== Usage ==
+
+=== Persistant Store Information ===
+
+First, set the **DB_FILE_NAME** preprocessor constant in your project
+{{{
+#define DB_FILE_NAME @"YourStoreFileName.sqlite"
+}}}
+
+=== Default Managed Object Context ===
+
+When using Core Data, you will deal with two types of objects the most: NSManagedObject and NSManagedObjectContext. ActiveRecord for Core Data gives you a place for a default NSManagedObjectContext for use within your app. This is great for single threaded apps. If you need to create a new Managed Object Context for use in other threads, based on your single persistent store, use:
+
+{{{
+NSManagedObjectContext *myNewContext = [NSManagedObjectContext newContext];
+}}}
+
+You can then take this context, and set it as the default. This default context will be used for all fetch requests, unless otherwise specified in the methods ending with "inContext:".
+
+{{{
+[NSManagedObjectContext setDefaultContext:myNewContext];
+}}}
+
+This will use the same object model and persistent store, but create an entirely new context for use with threads other than the main thread. 
+
+**//It is recommended that the default context is created and set using the main thread//**
+
+=== Fetching ===
+
+==== Basic Finding ====
+Most methods in the ActiveRecord for Core Data library return an NSArray of results. So, if you have an Entity called Person, related to a Department (as seen in various Apple Core Data documentation), to get all the Person entities from your Persistent Store:
+
+{{{
+NSArray *people = [Person findAll];
+}}}
+
+Or, to have the results sorted by a property:
+
+{{{
+NSArray *peopleSorted = [Person findAllSortedByProperty:@"LastName" ascending:YES];
+}}}
+
+If you have a unique way of retrieving a single object from your data store, you can get that object directly:
+
+{{{
+Person *person = [Person findFirstByAttribute:@"FirstName" withValue:@"Forrest"];
+}}}
+
+==== Advanced Finding ====
+
+If you want to be more specific with your search, you can send in a predicate:
+
+{{{
+NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"Department IN %@", ...];
+
+NSArray *people = [Person findAllWithPredicate:peopleFilter];
+}}}
+
+Returning an NSFetchRequest
+
+{{{
+NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"Department IN %@", ...];
+
+NSArray *people = [Person fetchAllWithPredicate:peopleFilter];
+}}}
+
+For each of these single line calls, the full stack of NSFetchRequest, NSSortDescriptors and a simple default error handling scheme (ie. logging to the console) is created.
+
+Customizing the Request
+
+{{{
+NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"Department IN %@", ...];
+
+NSFetchRequest *peopleRequest = [Person requestAllWithPredicate:peopleFilter];
+[peopleRequest setReturnsDistinctResults:NO];
+...
+
+NSArray *people = [Person executeFetchRequest:peopleRequest];
+}}}
+
+==== Find the number of entities ====
+
+You can also perform a count of entities in your Store, that will be performed on the Store
+
+{{{
+NSUInteger count = [Person numberOfEntities];
+}}}
+
+Or, if you're looking for a count of entities based on a predicate:
+
+{{{
+NSUInteger count = [Person numberOfEntitiesWithPredicate:...];
+}}}
+
+==== Finding from a different context ====
+
+All find, fetch and request methods have an inContext: method parameter
+
+{{{
+NSManagedObjectContext *someOtherContext = ...;
+
+NSArray *peopleFromAnotherContext = [Person findAllInContext:someOtherContext];
+}}}
+...
+{{{
+Person *personFromContext = [Person findFirstByAttribute:@"lastName" withValue:@"Gump" inContext:someOtherContext];
+}}}
+...
+{{{
+NSUInteger count = [Person numberOfEntitiesInContext:someOtherContext];
+}}}
+
+== Extra Bits ==
+This Code is released under the MIT License by Magical Panda Software, LLC.
+Magical Panda Software is a iPhone consulting firm based out of Phoenix, Arizona ready to tackle your data driven applications. See [[http://www.magicalpanda.com|Magical Panda.com]] for more information. 
