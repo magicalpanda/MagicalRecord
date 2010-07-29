@@ -96,4 +96,17 @@
 	[NSManagedObjectContext setDefaultContext:context];
 }
 
+#ifdef NS_BLOCKS_AVAILABLE
++ (void) performSaveDataOperationWithBlock:(CoreDataBlock)block
+{
+    NSManagedObjectContext *localContext = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
+    [localContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
+    
+    block(localContext);
+    
+    [localContext save];
+    [[NSManagedObjectContext defaultContext] stopObservingContext:localContext];
+}
+#endif
+
 @end
