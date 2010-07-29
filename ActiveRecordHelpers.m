@@ -58,18 +58,18 @@
 	[[self class] handleErrors:error];
 }
 
-+ (void) setupDefaultCoreDataStack
++ (void) setupCoreDataStack
 {
     NSManagedObjectContext *context = [NSManagedObjectContext context];
 	[NSManagedObjectContext setDefaultContext:context];
 }
 
-+ (void) setupAutoMigratingDefaultCoreDataStack
++ (void) setupAutoMigratingCoreDataStack
 {
     [self setupCoreDataStackWithAutoMigratingSqliteStoreNamed:kActiveRecordDefaultStoreFileName];
 }
 
-+ (void) setupDefaultCoreDataStackWithStoreNamed:(NSString *)storeName
++ (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName
 {
 	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator coordinatorWithSqliteStoreNamed:storeName];
 	[NSPersistentStoreCoordinator setDefaultStoreCoordinator:coordinator];

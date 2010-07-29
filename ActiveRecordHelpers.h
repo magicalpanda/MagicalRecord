@@ -24,11 +24,11 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *);
 + (void) handleErrors:(NSError *)error;
 - (void) handleErrors:(NSError *)error;
 
-+ (void) setupDefaultCoreDataStack;
++ (void) setupCoreDataStack;
 + (void) setupCoreDataStackWithInMemoryStore;
-+ (void) setupAutoMigratingDefaultCoreDataStack;
++ (void) setupAutoMigratingCoreDataStack;
 
-+ (void) setupDefaultCoreDataStackWithStoreNamed:(NSString *)storeName;
++ (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName;
 + (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName;
 
 #ifdef NS_BLOCKS_AVAILABLE
