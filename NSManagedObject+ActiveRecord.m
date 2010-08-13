@@ -86,8 +86,16 @@ static NSNumber *defaultBatchSize = nil;
 
 + (NSEntityDescription *)entityDescriptionInContext:(NSManagedObjectContext *)context
 {
-	NSString *entityName = NSStringFromClass([self class]);
-	return [NSEntityDescription entityForName:entityName inManagedObjectContext:context];	
+    if ([self respondsToSelector:@selector(entityInManagedObjectContext:)]) 
+    {
+        NSEntityDescription *entity = [self performSelector:@selector(entityInManagedObjectContext:) withObject:context];
+        return entity;
+    }
+    else
+    {
+        NSString *entityName = NSStringFromClass([self class]);
+        return [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+    }
 }
 
 + (NSEntityDescription *)entityDescription
