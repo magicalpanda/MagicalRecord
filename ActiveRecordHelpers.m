@@ -1,9 +1,8 @@
 //
 //  ActiveRecordHelpers.m
-//  DocBook
 //
 //  Created by Saul Mora on 3/11/10.
-//  Copyright 2010 Willow Tree Mobile, Inc. All rights reserved.
+//  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
 #import "ActiveRecordHelpers.h"
@@ -26,8 +25,6 @@
 {
 	if (error)
 	{
-		//		NSLog(@"NSManagedObjectContext errors: %@", error);
-		//		NSLog(@"Details: %@", [error userInfo]);
 		NSDictionary *userInfo = [error userInfo];
 		for (NSArray *detailedError in [userInfo allValues])
 		{
@@ -60,13 +57,18 @@
 	[[self class] handleErrors:error];
 }
 
-+ (void) setupDefaultCoreDataStack
++ (void) setupCoreDataStack
 {
     NSManagedObjectContext *context = [NSManagedObjectContext context];
 	[NSManagedObjectContext setDefaultContext:context];
 }
 
-+ (void) setupDefaultCoreDataStackWithStoreNamed:(NSString *)storeName
++ (void) setupAutoMigratingCoreDataStack
+{
+    [self setupCoreDataStackWithAutoMigratingSqliteStoreNamed:kActiveRecordDefaultStoreFileName];
+}
+
++ (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName
 {
 	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator coordinatorWithSqliteStoreNamed:storeName];
 	[NSPersistentStoreCoordinator setDefaultStoreCoordinator:coordinator];

@@ -1,9 +1,7 @@
 //
-//  CARDBase.h
-//  Freshpod
 //
 //  Created by Saul Mora on 11/15/09.
-//  Copyright 2009 Magical Panda Software, LLC. All rights reserved.
+//  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
 #import <CoreData/CoreData.h>

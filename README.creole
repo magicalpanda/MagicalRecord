@@ -16,25 +16,33 @@ Active Record for Core Data was inspired by the ease of Ruby on Rails' Active Re
 
 == Installation ==
 
-# In your XCode Project, add the NSManagedObject+ActiveRecord.(h/m) and NSManagedObjectContext+ActiveRecord.(h/m) files into your project. 
+# In your XCode Project, add all the .h and .m files into your project. 
 # Add the proper import states for the .h files either to your specific files using Core Data, or in your pre-compiled header file
 # Start writing code! ... There is no step 3!
 
 == Usage ==
 
-=== Persistant Store Information ===
+=== Setting up the Core Data Stack ===
 
-First, set the **DB_FILE_NAME** preprocessor constant in your project
-{{{
-#define DB_FILE_NAME @"YourStoreFileName.sqlite"
-}}}
+To get started, first, import the header file "CoreData+ActiveRecordFetching.h" in your project's pch file. This will allow a global include of all the required headers.
+Next, somewhere in your app's startup, say in the applicationDidFinishLaunching:(UIApplication *) withOptions:(NSDictionary *) method, use one of the following setup calls with the ActiveRecordHelpers class:
+
+* + (void) setupDefaultCoreDataStack;
+* + (void) setupAutoMigratingDefaultCoreDataStack;
+* + (void) setupCoreDataStackWithInMemoryStore;
+* + (void) setupDefaultCoreDataStackWithStoreNamed:(NSString *)storeName;
+* + (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName;
+
+And, before your app exits, you can use the clean up method:
+
+[ActiveRecordHelpers cleanUp];
 
 === Default Managed Object Context ===
 
 When using Core Data, you will deal with two types of objects the most: NSManagedObject and NSManagedObjectContext. ActiveRecord for Core Data gives you a place for a default NSManagedObjectContext for use within your app. This is great for single threaded apps. If you need to create a new Managed Object Context for use in other threads, based on your single persistent store, use:
 
 {{{
-NSManagedObjectContext *myNewContext = [NSManagedObjectContext newContext];
+NSManagedObjectContext *myNewContext = [NSManagedObjectContext context];
 }}}
 
 You can then take this context, and set it as the default. This default context will be used for all fetch requests, unless otherwise specified in the methods ending with "inContext:".
@@ -73,7 +81,8 @@ Person *person = [Person findFirstByAttribute:@"FirstName" withValue:@"Forrest"]
 If you want to be more specific with your search, you can send in a predicate:
 
 {{{
-NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"Department IN %@", ...];
+NSArray *departments = [NSArray arrayWithObjects:dept1, dept2, ..., nil];
+NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"Department IN %@", departments];
 
 NSArray *people = [Person findAllWithPredicate:peopleFilter];
 }}}
@@ -81,7 +90,7 @@ NSArray *people = [Person findAllWithPredicate:peopleFilter];
 Returning an NSFetchRequest
 
 {{{
-NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"Department IN %@", ...];
+NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"Department IN %@", departments];
 
 NSArray *people = [Person fetchAllWithPredicate:peopleFilter];
 }}}
@@ -91,10 +100,11 @@ For each of these single line calls, the full stack of NSFetchRequest, NSSortDes
 Customizing the Request
 
 {{{
-NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"Department IN %@", ...];
+NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"Department IN %@", departments];
 
 NSFetchRequest *peopleRequest = [Person requestAllWithPredicate:peopleFilter];
 [peopleRequest setReturnsDistinctResults:NO];
+[peopleRequest setReturnPropertiesNamed:[NSArray arrayWithObjects:@"FirstName", @"LastName", nil]];
 ...
 
 NSArray *people = [Person executeFetchRequest:peopleRequest];
@@ -134,4 +144,4 @@ NSUInteger count = [Person numberOfEntitiesInContext:someOtherContext];
 
 == Extra Bits ==
 This Code is released under the MIT License by Magical Panda Software, LLC.
-Magical Panda Software is a iPhone consulting firm based out of Phoenix, Arizona ready to tackle your data driven applications. See [[http://www.magicalpanda.com|Magical Panda.com]] for more information. 
+[[http://www.magicalpanda.com|Magical Panda Software]] is an iPhone consulting firm based out of Phoenix, Arizona ready to tackle your data driven applications.

@@ -1,9 +1,8 @@
 //
 //  NSManagedObjectContext+ActiveRecord.m
-//  Conference
 //
 //  Created by Saul Mora on 11/23/09.
-//  Copyright 2009 Magical Panda Software, LLC. All rights reserved.
+//  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
 #import "NSManagedObject+ActiveRecord.h"
@@ -30,6 +29,26 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 {
 	[defaultManageObjectContext release];
 	defaultManageObjectContext = [moc retain];
+}
+
++ (NSManagedObjectContext *) contextForCurrentThread
+{
+	if ( [NSThread isMainThread] )
+	{
+		return [self defaultContext];
+	}
+	else
+	{
+		NSMutableDictionary *threadDict = [[NSThread currentThread] threadDictionary];
+		NSManagedObjectContext *threadContext = [threadDict objectForKey:@"MO_Context"];
+		if ( threadContext == nil )
+		{
+			threadContext = [self context];
+			[threadDict setObject:threadContext forKey:@"MO_Context"];
+			[threadContext release];
+		}
+		return threadContext;
+	}
 }
 
 - (void) observeContext:(NSManagedObjectContext *)otherContext
