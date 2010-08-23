@@ -7,6 +7,12 @@
 
 #import <Foundation/Foundation.h>
 
+#ifdef NS_BLOCKS_AVAILABLE
+
+@class NSManagedObjectContext;
+typedef void (^CoreDataBlock)(NSManagedObjectContext *);
+
+#endif
 
 @interface ActiveRecordHelpers : NSObject {
 
@@ -18,10 +24,16 @@
 - (void) handleErrors:(NSError *)error;
 
 + (void) setupCoreDataStack;
-+ (void) setupAutoMigratingCoreDataStack;
 + (void) setupCoreDataStackWithInMemoryStore;
++ (void) setupAutoMigratingCoreDataStack;
 
 + (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName;
 + (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName;
+
+#ifdef NS_BLOCKS_AVAILABLE
+
++ (void) performSaveDataOperationWithBlock:(CoreDataBlock)block;
+
+#endif
 
 @end
