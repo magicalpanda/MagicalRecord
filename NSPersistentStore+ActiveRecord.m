@@ -1,9 +1,8 @@
 //
 //  NSPersistentStore+ActiveRecord.m
-//  DocBook
 //
 //  Created by Saul Mora on 3/11/10.
-//  Copyright 2010 Willow Tree Mobile, Inc. All rights reserved.
+//  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
 #import "NSPersistentStore+ActiveRecord.h"
