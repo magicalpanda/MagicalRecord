@@ -41,6 +41,8 @@
 
 + (NSFetchRequest *) requestAll;
 + (NSFetchRequest *) requestAllInContext:(NSManagedObjectContext *)context;
++ (NSFetchRequest *) requestFirstWithPredicate:(NSPredicate *)searchTerm;
++ (NSFetchRequest *) requestFirstWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
 + (NSFetchRequest *) requestFirstByAttribute:(NSString *)attribute withValue:(id)searchValue;
 + (NSFetchRequest *) requestFirstByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context;
 + (NSFetchRequest *) requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending;
@@ -64,6 +66,8 @@
 
 + (id)findFirst;
 + (id)findFirstInContext:(NSManagedObjectContext *)context;
++ (id)findFirstWithPredicate:(NSPredicate *)searchTerm;
++ (id)findFirstWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
 + (id)findFirstWithPredicate:(NSPredicate *)searchterm sortedBy:(NSString *)property ascending:(BOOL)ascending;
 + (id)findFirstWithPredicate:(NSPredicate *)searchterm sortedBy:(NSString *)property ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
 + (id)findFirstWithPredicate:(NSPredicate *)searchTerm andRetrieveAttributes:(NSArray *)attributes;

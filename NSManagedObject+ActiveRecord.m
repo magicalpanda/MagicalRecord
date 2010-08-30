@@ -237,6 +237,20 @@ static NSNumber *defaultBatchSize = nil;
 	return [self createFetchRequestInContext:context];
 }
 
++ (NSFetchRequest *) requestFirstWithPredicate:(NSPredicate *)searchTerm
+{
+    return [self requestFirstWithPredicate:searchTerm inContext:[NSManagedObjectContext defaultContext]];
+}
+
++ (NSFetchRequest *) requestFirstWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
+{
+    NSFetchRequest *request = [self createFetchRequestInContext:context];
+    [request setPredicate:searchTerm];
+    [request setFetchLimit:1];
+    
+    return request;
+}
+
 + (NSFetchRequest *) requestFirstByAttribute:(NSString *)attribute withValue:(id)searchValue;
 {
     return [self requestFirstByAttribute:attribute withValue:searchValue inContext:[NSManagedObjectContext defaultContext]];
@@ -442,6 +456,18 @@ static NSNumber *defaultBatchSize = nil;
 	return [self findFirstByAttribute:attribute 
 							withValue:searchValue 
 							inContext:[NSManagedObjectContext defaultContext]];
+}
+
++ (id)findFirstWithPredicate:(NSPredicate *)searchTerm
+{
+    return [self findFirstWithPredicate:searchTerm inContext:[NSManagedObjectContext defaultContext]];
+}
+
++ (id)findFirstWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
+{
+    NSFetchRequest *request = [self requestFirstWithPredicate:searchTerm];
+    
+    return [self executeFetchRequestAndReturnFirstObject:request inContext:context];
 }
 
 + (id)findFirstWithPredicate:(NSPredicate *)searchterm sortedBy:(NSString *)property ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
