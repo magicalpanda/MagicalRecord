@@ -358,10 +358,10 @@ static NSNumber *defaultBatchSize = nil;
 										 withPredicate:searchTerm
 											 inContext:context];
 	
-	NSFetchedResultsController *controller = [[NSFetchedResultsController alloc] initWithFetchRequest:request 
+	NSFetchedResultsController *controller = [[[NSFetchedResultsController alloc] initWithFetchRequest:request 
 																				 managedObjectContext:context
 																				   sectionNameKeyPath:group
-																							cacheName:cacheName];
+																							cacheName:cacheName] autorelease];
 	return controller;
 }
 + (NSFetchedResultsController *) fetchRequestAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending 
@@ -398,10 +398,10 @@ static NSNumber *defaultBatchSize = nil;
 {
 	NSString *cacheName = [NSString stringWithFormat:@"cache-%@", NSStringFromClass([self class])];
 	NSFetchedResultsController *frc =
-		[[NSFetchedResultsController alloc] initWithFetchRequest:request
+		[[[NSFetchedResultsController alloc] initWithFetchRequest:request
 											managedObjectContext:context
 											  sectionNameKeyPath:group
-													   cacheName:cacheName];
+													   cacheName:cacheName] autorelease];
     [self performFetch:frc];
 	return frc;
 }
