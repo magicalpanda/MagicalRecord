@@ -107,7 +107,7 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 	}
 	@catch (NSException *exception)
 	{
-		NSLog(@"Problem saving: %@", [exception userInfo]);
+		NSLog(@"Problem saving: %@", [exception userInfo] ?: [exception reason]);
 	}
 	
 	[ActiveRecordHelpers handleErrors:error];
