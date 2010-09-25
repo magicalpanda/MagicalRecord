@@ -45,7 +45,7 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 		{
 			threadContext = [self context];
 			[threadDict setObject:threadContext forKey:@"MO_Context"];
-			[threadContext release];
+			//[threadContext release];
 		}
 		return threadContext;
 	}
