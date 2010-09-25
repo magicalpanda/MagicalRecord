@@ -349,7 +349,11 @@ static NSNumber *defaultBatchSize = nil;
 					   inContext:[NSManagedObjectContext defaultContext]];
 }
 
+#pragma mark -
+#pragma mark NSFetchedResultsController helpers
+
 #if TARGET_OS_IPHONE
+
 + (NSFetchedResultsController *) fetchRequestAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
 {
 	NSString *cacheName = [NSString stringWithFormat:@"cache-%@", NSStringFromClass(self)];
@@ -362,8 +366,9 @@ static NSNumber *defaultBatchSize = nil;
 																				 managedObjectContext:context
 																				   sectionNameKeyPath:group
 																							cacheName:cacheName];
-	return controller;
+	return [controller autorelease];
 }
+
 + (NSFetchedResultsController *) fetchRequestAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending 
 {
 	return [self fetchRequestAllGroupedBy:group
@@ -397,13 +402,13 @@ static NSNumber *defaultBatchSize = nil;
 + (NSFetchedResultsController *) fetchRequest:(NSFetchRequest *)request groupedBy:(NSString *)group inContext:(NSManagedObjectContext *)context
 {
 	NSString *cacheName = [NSString stringWithFormat:@"cache-%@", NSStringFromClass([self class])];
-	NSFetchedResultsController *frc =
+	NSFetchedResultsController *controller =
 		[[NSFetchedResultsController alloc] initWithFetchRequest:request
 											managedObjectContext:context
 											  sectionNameKeyPath:group
 													   cacheName:cacheName];
-    [self performFetch:frc];
-	return frc;
+    [self performFetch:controller];
+	return [controller autorelease];
 }
 
 + (NSFetchedResultsController *) fetchRequest:(NSFetchRequest *)request groupedBy:(NSString *)group
@@ -413,6 +418,8 @@ static NSNumber *defaultBatchSize = nil;
 					inContext:[NSManagedObjectContext defaultContext]];
 }
 #endif
+
+#pragma mark -
 
 + (NSArray *)findAllWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
 {
