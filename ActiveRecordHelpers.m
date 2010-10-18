@@ -10,6 +10,7 @@
 #import "NSPersistentStoreCoordinator+ActiveRecord.h"
 #import "NSManagedObjectModel+ActiveRecord.h"
 #import "NSPersistentStore+ActiveRecord.h"
+#import <dispatch/dispatch.h>
 
 @implementation ActiveRecordHelpers
 
@@ -96,16 +97,29 @@
 }
 
 #ifdef NS_BLOCKS_AVAILABLE
+
 + (void) performSaveDataOperationWithBlock:(CoreDataBlock)block
-{
+{    
     NSManagedObjectContext *localContext = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
     [localContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
     
     block(localContext);
     
-    [localContext save];
-    [[NSManagedObjectContext defaultContext] stopObservingContext:localContext];
+    if ([localContext hasChanges]) 
+    {
+        [localContext save];
+    }
+    [[NSManagedObjectContext defaultContext] stopObservingContext:localContext];    
 }
+
++ (void) performSaveDataOperationInBackgroundWithBlock:(CoreDataBlock)block
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        [self performSaveDataOperationWithBlock:block];
+    });
+}
+
 #endif
 
 @end

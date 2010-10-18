@@ -26,6 +26,9 @@
 - (BOOL) deleteEntity;
 - (BOOL) deleteInContext:(NSManagedObjectContext *)context;
 
++ (BOOL) truncateAll;
++ (BOOL) truncateAllInContext:(NSManagedObjectContext *)context;
+
 + (NSArray *) ascendingSortDescriptors:(id)attributesToSortBy, ...;
 + (NSArray *) descendingSortDescriptors:(id)attributesToSortyBy, ...;
 
@@ -39,6 +42,8 @@
 
 + (NSFetchRequest *) requestAll;
 + (NSFetchRequest *) requestAllInContext:(NSManagedObjectContext *)context;
++ (NSFetchRequest *) requestAllWhere:(NSString *)property isEqualTo:(id)value;
++ (NSFetchRequest *) requestAllWhere:(NSString *)property isEqualTo:(id)value inContext:(NSManagedObjectContext *)context;
 + (NSFetchRequest *) requestFirstWithPredicate:(NSPredicate *)searchTerm;
 + (NSFetchRequest *) requestFirstWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
 + (NSFetchRequest *) requestFirstByAttribute:(NSString *)attribute withValue:(id)searchValue;

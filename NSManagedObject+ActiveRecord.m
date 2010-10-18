@@ -234,6 +234,19 @@ static NSNumber *defaultBatchSize = nil;
 	return [self createFetchRequestInContext:context];
 }
 
++ (NSFetchRequest *) requestAllWhere:(NSString *)property isEqualTo:(id)value
+{
+    return [self requestAllWhere:property isEqualTo:value inContext:[NSManagedObjectContext defaultContext]];
+}
+
++ (NSFetchRequest *) requestAllWhere:(NSString *)property isEqualTo:(id)value inContext:(NSManagedObjectContext *)context
+{
+    NSFetchRequest *request = [self createFetchRequestInContext:context];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", property, value]];
+
+    return request;
+}
+
 + (NSFetchRequest *) requestFirstWithPredicate:(NSPredicate *)searchTerm
 {
     return [self requestFirstWithPredicate:searchTerm inContext:[NSManagedObjectContext defaultContext]];
@@ -582,6 +595,22 @@ static NSNumber *defaultBatchSize = nil;
 {
 	[self deleteInContext:[NSManagedObjectContext defaultContext]];
 	return YES;
+}
+
++ (BOOL) truncateAllInContext:(NSManagedObjectContext *)context
+{
+    NSArray *allEntities = [self findAllInContext:context];
+    for (NSManagedObject *obj in allEntities)
+    {
+        [obj deleteInContext:context];
+    }
+    return YES;
+}
+
++ (BOOL) truncateAll
+{
+    [self truncateAllInContext:[NSManagedObjectContext defaultContext]];
+    return YES;
 }
 
 - (NSNumber *)maxValueFor:(NSString *)property

@@ -33,6 +33,7 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *);
 #ifdef NS_BLOCKS_AVAILABLE
 
 + (void) performSaveDataOperationWithBlock:(CoreDataBlock)block;
++ (void) performSaveDataOperationInBackgroundWithBlock:(CoreDataBlock)block;
 
 #endif
 
