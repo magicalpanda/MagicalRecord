@@ -15,6 +15,7 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 
 + (NSManagedObjectContext *)defaultContext
 {
+//    NSAssert([NSThread isMainThread], @"The defaultContext must only be accessed on the **Main Thread**");
 	@synchronized (self)
 	{
 		if (defaultManageObjectContext)
@@ -29,6 +30,13 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 {
 	[defaultManageObjectContext release];
 	defaultManageObjectContext = [moc retain];
+}
+
++ (void) resetDefaultContext
+{
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [[NSManagedObjectContext defaultContext] reset];
+    });    
 }
 
 + (NSManagedObjectContext *) contextForCurrentThread

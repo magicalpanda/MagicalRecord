@@ -464,7 +464,8 @@ static NSNumber *defaultBatchSize = nil;
 + (id)findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context
 {	
 	NSFetchRequest *request = [self requestFirstByAttribute:attribute withValue:searchValue inContext:context];
-
+    [request setPropertiesToFetch:[NSArray arrayWithObject:attribute]];
+    
 	return [self executeFetchRequestAndReturnFirstObject:request inContext:context];
 }
 
