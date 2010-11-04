@@ -86,7 +86,14 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 
 - (void) mergeChangesOnMainThread:(NSNotification *)notification
 {
-	[self performSelectorOnMainThread:@selector(mergeChangesFromNotification:) withObject:notification waitUntilDone:YES];
+    if ([NSThread isMainThread])
+    {
+        [self mergeChangesFromNotification:notification];
+    }
+    else
+    {
+        [self performSelectorOnMainThread:@selector(mergeChangesFromNotification:) withObject:notification waitUntilDone:YES];
+    }
 }
 
 - (void) mergeChangesFromNotification:(NSNotification *)notification
