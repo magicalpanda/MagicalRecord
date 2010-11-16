@@ -36,11 +36,7 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 {
     dispatch_sync(dispatch_get_main_queue(), ^{
         [[NSManagedObjectContext defaultContext] reset];
-<<<<<<< HEAD
     });
-=======
-    });    
->>>>>>> 6b8e57078cdcb5783afda4f86c2145df05b1254b
 }
 
 + (NSManagedObjectContext *) contextForCurrentThread
@@ -73,7 +69,7 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 
 - (void) observeContextOnMainThread:(NSManagedObjectContext *)otherContext
 {
-  DDLogVerbose(@"Start Observing on Main Thread");
+    //	NSLog(@"Start Observing on Main Thread");
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(mergeChangesOnMainThread:)
 												 name:NSManagedObjectContextDidSaveNotification
@@ -82,7 +78,7 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 
 - (void) stopObservingContext:(NSManagedObjectContext *)otherContext
 {
-  DDLogVerbose(@"Stop Observing Context");
+    //	NSLog(@"Stop Observing Context");
 	[[NSNotificationCenter defaultCenter] removeObserver:self
 													name:NSManagedObjectContextDidSaveNotification
 												  object:otherContext];
@@ -90,8 +86,23 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 
 - (void) mergeChangesFromNotification:(NSNotification *)notification
 {
+	NSLog(@"Merging changes to context%@", [NSThread isMainThread] ? @" *** on Main Thread ***" : @"");
 <<<<<<< HEAD
-	DDLogInfo(@"Merging changes to context%@", [NSThread isMainThread] ? @" *** on Main Thread ***" : @"");
+	
+	[self mergeChangesFromContextDidSaveNotification:notification];
+}
+	
+- (void) mergeChangesOnMainThread:(NSNotification *)notification
+{
+    if ([NSThread isMainThread])
+    {
+        [self mergeChangesFromNotification:notification];
+    }
+    else
+    {
+	[self performSelectorOnMainThread:@selector(mergeChangesFromNotification:) withObject:notification waitUntilDone:YES];
+    }
+=======
     //	NSAssert([NSThread isMainThread], @"Not on main thread");
 
 //	for (id object in [self updatedObjects])
@@ -101,16 +112,11 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 //			[self refreshObject:object mergeChanges:NO];
 //		}
 //	}
-=======
-	NSLog(@"Merging changes to context%@", [NSThread isMainThread] ? @" *** on Main Thread ***" : @"");
-    
->>>>>>> 6b8e57078cdcb5783afda4f86c2145df05b1254b
 	[self mergeChangesFromContextDidSaveNotification:notification];
 }
 
 - (void) mergeChangesOnMainThread:(NSNotification *)notification
 {
-<<<<<<< HEAD
   if ([NSThread isMainThread])
   {
     [self mergeChangesFromNotification:notification];
@@ -119,16 +125,7 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
   {
     [self performSelectorOnMainThread:@selector(mergeChangesFromNotification:) withObject:notification waitUntilDone:YES];
   }
-=======
-    if ([NSThread isMainThread])
-    {
-        [self mergeChangesFromNotification:notification];
-    }
-    else
-    {
-        [self performSelectorOnMainThread:@selector(mergeChangesFromNotification:) withObject:notification waitUntilDone:YES];
-    }
->>>>>>> 6b8e57078cdcb5783afda4f86c2145df05b1254b
+>>>>>>> b255dc40ab349c785671fef14df144ba15f82c7f
 }
 
 - (BOOL) save
@@ -137,18 +134,14 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 	BOOL saved = NO;
 	@try
 	{
-<<<<<<< HEAD
-		DDLogInfo(@"Saving Context%@", [NSThread isMainThread] ? @" *** on Main Thread ***" : @"");
-=======
 		NSLog(@"Saving %@Context%@", 
               self == [[self class] defaultContext] ? @" *** Default *** ": @"", 
               ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
->>>>>>> 6b8e57078cdcb5783afda4f86c2145df05b1254b
 		saved = [self save:&error];
 	}
 	@catch (NSException *exception)
 	{
-		DDLogWarn(@"Problem saving: %@", (id)[exception userInfo] ?: (id)[exception reason]);
+		NSLog(@"Problem saving: %@", (id)[exception userInfo] ?: (id)[exception reason]);
 	}
 
 	[ActiveRecordHelpers handleErrors:error];
