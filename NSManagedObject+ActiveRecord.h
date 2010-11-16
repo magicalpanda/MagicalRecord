@@ -7,7 +7,7 @@
 #import <CoreData/CoreData.h>
 #import "ActiveRecordHelpers.h"
 
-#define kActiveRecordDefaultBatchSize 6
+#define kActiveRecordDefaultBatchSize 50
 
 @interface NSManagedObject (ActiveRecord)
 
@@ -26,6 +26,9 @@
 - (BOOL) deleteEntity;
 - (BOOL) deleteInContext:(NSManagedObjectContext *)context;
 
++ (BOOL) truncateAll;
++ (BOOL) truncateAllInContext:(NSManagedObjectContext *)context;
+
 + (NSArray *) ascendingSortDescriptors:(id)attributesToSortBy, ...;
 + (NSArray *) descendingSortDescriptors:(id)attributesToSortyBy, ...;
 
@@ -39,6 +42,8 @@
 
 + (NSFetchRequest *) requestAll;
 + (NSFetchRequest *) requestAllInContext:(NSManagedObjectContext *)context;
++ (NSFetchRequest *) requestAllWhere:(NSString *)property isEqualTo:(id)value;
++ (NSFetchRequest *) requestAllWhere:(NSString *)property isEqualTo:(id)value inContext:(NSManagedObjectContext *)context;
 + (NSFetchRequest *) requestFirstWithPredicate:(NSPredicate *)searchTerm;
 + (NSFetchRequest *) requestFirstWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
 + (NSFetchRequest *) requestFirstByAttribute:(NSString *)attribute withValue:(id)searchValue;
@@ -62,6 +67,10 @@
 - (id) objectWithMinValueFor:(NSString *)property;
 - (id) objectWithMinValueFor:(NSString *)property inContext:(NSManagedObjectContext *)context;
 
++ (id) objectWithObjectID:(NSManagedObjectID *)objectID;
++ (id) objectWithObjectID:(NSManagedObjectID *)objectID inContext:(NSManagedObjectContext *)context;
+- (id) objectWithObjectID:(NSManagedObjectID *)objectID;
+
 + (id)findFirst;
 + (id)findFirstInContext:(NSManagedObjectContext *)context;
 + (id)findFirstWithPredicate:(NSPredicate *)searchTerm;
@@ -72,6 +81,9 @@
 + (id)findFirstWithPredicate:(NSPredicate *)searchTerm andRetrieveAttributes:(NSArray *)attributes inContext:(NSManagedObjectContext *)context;
 + (id) findFirstWithPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortBy ascending:(BOOL)ascending andRetrieveAttributes:(id)attributes, ...;
 + (id) findFirstWithPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortBy ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context andRetrieveAttributes:(id)attributes, ...;
+
++ (id)findFirstByUID:(id)searchValue;
++ (id)findFirstByUID:(id)searchValue inContext:(NSManagedObjectContext *)context;
 
 + (id)findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue;
 + (id)findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context;

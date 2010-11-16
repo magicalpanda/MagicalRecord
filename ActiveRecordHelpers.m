@@ -10,6 +10,7 @@
 #import "NSPersistentStoreCoordinator+ActiveRecord.h"
 #import "NSManagedObjectModel+ActiveRecord.h"
 #import "NSPersistentStore+ActiveRecord.h"
+#import <dispatch/dispatch.h>
 
 @implementation ActiveRecordHelpers
 
@@ -34,21 +35,21 @@
 				{
 					if ([e respondsToSelector:@selector(userInfo)])
 					{
-						NSLog(@"Error Details: %@", [e userInfo]);
+						DDLogError(@"Error Details: %@", [e userInfo]);
 					}
 					else
 					{
-						NSLog(@"Error Details: %@", e);
+						DDLogError(@"Error Details: %@", e);
 					}
 				}
 			}
 			else
 			{
-				NSLog(@"Error: %@", detailedError);
+				DDLogError(@"Error: %@", detailedError);
 			}
 		}
-		NSLog(@"Error Domain: %@", [error domain]);
-		NSLog(@"Recovery Suggestion: %@", [error localizedRecoverySuggestion]);	
+		DDLogError(@"Error Domain: %@", [error domain]);
+		DDLogError(@"Recovery Suggestion: %@", [error localizedRecoverySuggestion]);	
 	}
 }
 
@@ -96,16 +97,33 @@
 }
 
 #ifdef NS_BLOCKS_AVAILABLE
+
 + (void) performSaveDataOperationWithBlock:(CoreDataBlock)block
-{
+{    
     NSManagedObjectContext *localContext = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
     [localContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
     
     block(localContext);
     
-    [localContext save];
-    [[NSManagedObjectContext defaultContext] stopObservingContext:localContext];
+    if ([localContext hasChanges]) 
+    {
+        [localContext save];
+    }
+    [[NSManagedObjectContext defaultContext] stopObservingContext:localContext];    
 }
+
++ (void) performSaveDataOperationInBackgroundWithBlock:(CoreDataBlock)block
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+        
+        [self performSaveDataOperationWithBlock:block];
+        
+        [pool drain];
+    });
+}
+
 #endif
 
 @end

@@ -20,9 +20,9 @@ static NSPersistentStore *defaultPersistentStore = nil;
 {
 	[defaultPersistentStore release];
 	defaultPersistentStore = [store retain];
-    
+
 //#ifdef UIKIT_EXTERN_CLASS
-//    if (store == nil) 
+//    if (store == nil)
 //    {
 //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Core Data Error" message:@"The default NSPersistentStore was set to nil. The most likely cause is the NSManagedObjectModel version has changed. Either create a new data store, or delete the previous store to continue" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 //        [alert show];
@@ -33,10 +33,10 @@ static NSPersistentStore *defaultPersistentStore = nil;
 
 + (NSString *) directory:(int) type
 {
-	return [NSSearchPathForDirectoriesInDomains(type, NSUserDomainMask, YES) lastObject];	
+	return [NSSearchPathForDirectoriesInDomains(type, NSUserDomainMask, YES) lastObject];
 }
 
-+ (NSString *)applicationDocumentsDirectory 
++ (NSString *)applicationDocumentsDirectory
 {
 	return [self directory:NSDocumentDirectory];
 }
@@ -48,19 +48,25 @@ static NSPersistentStore *defaultPersistentStore = nil;
 
 + (NSURL *) urlForStoreName:(NSString *)storeFileName
 {
+
+  //set default url
+  return [NSURL fileURLWithPath:[self stringForStoreName:storeFileName]];
+}
+
++ (NSString *) stringForStoreName:(NSString *)storeFileName
+{
 	NSArray *paths = [NSArray arrayWithObjects:[self applicationDocumentsDirectory], [self applicationLibraryDirectory], nil];
-    
-    for (NSString *path in paths) 
+
+  for (NSString *path in paths)
+  {
+    NSString *filepath = [path stringByAppendingPathComponent:storeFileName];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filepath])
     {
-        NSString *filepath = [path stringByAppendingPathComponent:storeFileName];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:filepath])
-        {
-            return [NSURL fileURLWithPath:filepath];
-        }
+      return filepath;
     }
-    
-    //set default url
-    return [NSURL fileURLWithPath:[[self applicationLibraryDirectory] stringByAppendingPathComponent:storeFileName]];
+  }
+
+  return [[self applicationLibraryDirectory] stringByAppendingPathComponent:storeFileName];
 }
 
 + (NSURL *)defaultLocalStoreUrl

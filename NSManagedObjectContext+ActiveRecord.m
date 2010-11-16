@@ -15,6 +15,7 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 
 + (NSManagedObjectContext *)defaultContext
 {
+//    NSAssert([NSThread isMainThread], @"The defaultContext must only be accessed on the **Main Thread**");
 	@synchronized (self)
 	{
 		if (defaultManageObjectContext)
@@ -29,6 +30,13 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 {
 	[defaultManageObjectContext release];
 	defaultManageObjectContext = [moc retain];
+}
+
++ (void) resetDefaultContext
+{
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [[NSManagedObjectContext defaultContext] reset];
+    });
 }
 
 + (NSManagedObjectContext *) contextForCurrentThread
@@ -53,40 +61,35 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 
 - (void) observeContext:(NSManagedObjectContext *)otherContext
 {
-	[[NSNotificationCenter defaultCenter] addObserver:self 
-											 selector:@selector(mergeChangesFromNotification:) 
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(mergeChangesFromNotification:)
 												 name:NSManagedObjectContextDidSaveNotification
 											   object:otherContext];
 }
 
 - (void) observeContextOnMainThread:(NSManagedObjectContext *)otherContext
 {
-    //	NSLog(@"Start Observing on Main Thread");
-	[[NSNotificationCenter defaultCenter] addObserver:self 
-											 selector:@selector(mergeChangesOnMainThread:) 
+  DDLogVerbose(@"Start Observing on Main Thread");
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(mergeChangesOnMainThread:)
 												 name:NSManagedObjectContextDidSaveNotification
-											   object:otherContext];	
+											   object:otherContext];
 }
 
 - (void) stopObservingContext:(NSManagedObjectContext *)otherContext
 {
-    //	NSLog(@"Stop Observing Context");
-	[[NSNotificationCenter defaultCenter] removeObserver:self 
-													name:NSManagedObjectContextDidSaveNotification 
+  DDLogVerbose(@"Stop Observing Context");
+	[[NSNotificationCenter defaultCenter] removeObserver:self
+													name:NSManagedObjectContextDidSaveNotification
 												  object:otherContext];
-}
-
-- (void) mergeChangesOnMainThread:(NSNotification *)notification
-{
-	[self performSelectorOnMainThread:@selector(mergeChangesFromNotification:) withObject:notification waitUntilDone:YES];
 }
 
 - (void) mergeChangesFromNotification:(NSNotification *)notification
 {
-	NSLog(@"Merging changes to context%@", [NSThread isMainThread] ? @" *** on Main Thread ***" : @"");
+	DDLogInfo(@"Merging changes to context%@", [NSThread isMainThread] ? @" *** on Main Thread ***" : @"");
     //	NSAssert([NSThread isMainThread], @"Not on main thread");
-	
-//	for (id object in [self updatedObjects]) 
+
+//	for (id object in [self updatedObjects])
 //	{
 //		if ([[object changedValues] count] > 0)
 //		{
@@ -96,23 +99,35 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 	[self mergeChangesFromContextDidSaveNotification:notification];
 }
 
+- (void) mergeChangesOnMainThread:(NSNotification *)notification
+{
+  if ([NSThread isMainThread])
+  {
+    [self mergeChangesFromNotification:notification];
+  }
+  else
+  {
+    [self performSelectorOnMainThread:@selector(mergeChangesFromNotification:) withObject:notification waitUntilDone:YES];
+  }
+}
+
 - (BOOL) save
 {
 	NSError *error = nil;
 	BOOL saved = NO;
 	@try
 	{
-		NSLog(@"Saving Context%@", [NSThread isMainThread] ? @" *** on Main Thread ***" : @"");
+		DDLogInfo(@"Saving Context%@", [NSThread isMainThread] ? @" *** on Main Thread ***" : @"");
 		saved = [self save:&error];
 	}
 	@catch (NSException *exception)
 	{
-		NSLog(@"Problem saving: %@", [exception userInfo] ?: [exception reason]);
+		DDLogWarn(@"Problem saving: %@", (id)[exception userInfo] ?: (id)[exception reason]);
 	}
-	
+
 	[ActiveRecordHelpers handleErrors:error];
 
-	return saved && error == nil; 
+	return saved && error == nil;
 }
 
 - (void) saveWrapper
@@ -129,7 +144,7 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 
 	return YES;
 }
-	   
+
 - (BOOL) saveOnMainThread
 {
 	@synchronized(self)
@@ -143,15 +158,15 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 + (NSManagedObjectContext *) contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
 	NSManagedObjectContext *context = nil;
-    if (coordinator != nil) 
+    if (coordinator != nil)
 	{
         context = [[NSManagedObjectContext alloc] init];
         [context setPersistentStoreCoordinator:coordinator];
     }
-    return [context autorelease];	
+    return [context autorelease];
 }
 
-+ (NSManagedObjectContext *) context 
++ (NSManagedObjectContext *) context
 {
 	return [self contextWithStoreCoordinator:[NSPersistentStoreCoordinator defaultStoreCoordinator]];
 }

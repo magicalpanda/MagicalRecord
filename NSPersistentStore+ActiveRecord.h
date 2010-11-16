@@ -6,6 +6,7 @@
 //
 
 #import "ActiveRecordHelpers.h"
+#import <CoreData/CoreData.h>
 
 #define kActiveRecordDefaultStoreFileName @"CoreDataStore.sqlite"
 
@@ -17,5 +18,6 @@
 + (void) setDetaultPersistentStore:(NSPersistentStore *) store;
 
 + (NSURL *) urlForStoreName:(NSString *)storeFileName;
++ (NSString *) stringForStoreName:(NSString *)storeFileName;
 
 @end

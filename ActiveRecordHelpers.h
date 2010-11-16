@@ -6,6 +6,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
+// enable to use caches for the fetchedResultsControllers (iOS only)
+// #define STORE_USE_CACHE
 
 #ifdef NS_BLOCKS_AVAILABLE
 
@@ -33,6 +37,7 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *);
 #ifdef NS_BLOCKS_AVAILABLE
 
 + (void) performSaveDataOperationWithBlock:(CoreDataBlock)block;
++ (void) performSaveDataOperationInBackgroundWithBlock:(CoreDataBlock)block;
 
 #endif
 

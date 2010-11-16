@@ -17,6 +17,7 @@
 - (BOOL) saveOnMainThread;
 - (BOOL) saveOnBackgroundThread;
 
++ (void) resetDefaultContext;
 + (NSManagedObjectContext *) defaultContext;
 + (void) setDefaultContext:(NSManagedObjectContext *)moc;
 + (NSManagedObjectContext *) contextForCurrentThread;
