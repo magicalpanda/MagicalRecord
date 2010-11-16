@@ -35,21 +35,21 @@
 				{
 					if ([e respondsToSelector:@selector(userInfo)])
 					{
-						NSLog(@"Error Details: %@", [e userInfo]);
+						DDLogError(@"Error Details: %@", [e userInfo]);
 					}
 					else
 					{
-						NSLog(@"Error Details: %@", e);
+						DDLogError(@"Error Details: %@", e);
 					}
 				}
 			}
 			else
 			{
-				NSLog(@"Error: %@", detailedError);
+				DDLogError(@"Error: %@", detailedError);
 			}
 		}
-		NSLog(@"Error Domain: %@", [error domain]);
-		NSLog(@"Recovery Suggestion: %@", [error localizedRecoverySuggestion]);	
+		DDLogError(@"Error Domain: %@", [error domain]);
+		DDLogError(@"Recovery Suggestion: %@", [error localizedRecoverySuggestion]);	
 	}
 }
 
@@ -99,21 +99,25 @@
 #ifdef NS_BLOCKS_AVAILABLE
 
 + (void) performSaveDataOperationWithBlock:(CoreDataBlock)block
-{
+<<<<<<< HEAD
+{    
+=======
+{   
+>>>>>>> 6b8e57078cdcb5783afda4f86c2145df05b1254b
     NSManagedObjectContext *localContext = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
 //    if (![NSThread isMainThread]) 
 //    {
 //        [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
-    [localContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
+        [localContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
 //    }
     
     block(localContext);
     
     if ([localContext hasChanges]) 
     {
-    [localContext save];
+        [localContext save];
     }
-    [[NSManagedObjectContext defaultContext] stopObservingContext:localContext];
+    [[NSManagedObjectContext defaultContext] stopObservingContext:localContext];    
 }
 
 + (void) performSaveDataOperationInBackgroundWithBlock:(CoreDataBlock)block
