@@ -84,6 +84,13 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 												  object:otherContext];
 }
 
+- (void) mergeChangesFromNotification:(NSNotification *)notification
+{
+	NSLog(@"Merging changes to context%@", [NSThread isMainThread] ? @" *** on Main Thread ***" : @"");
+    
+	[self mergeChangesFromContextDidSaveNotification:notification];
+}
+
 - (void) mergeChangesOnMainThread:(NSNotification *)notification
 {
     if ([NSThread isMainThread])
@@ -96,28 +103,15 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
     }
 }
 
-- (void) mergeChangesFromNotification:(NSNotification *)notification
-{
-	NSLog(@"Merging changes to context%@", [NSThread isMainThread] ? @" *** on Main Thread ***" : @"");
-    //	NSAssert([NSThread isMainThread], @"Not on main thread");
-	
-//	for (id object in [self updatedObjects]) 
-//	{
-//		if ([[object changedValues] count] > 0)
-//		{
-//			[self refreshObject:object mergeChanges:NO];
-//		}
-//	}
-	[self mergeChangesFromContextDidSaveNotification:notification];
-}
-
 - (BOOL) save
 {
 	NSError *error = nil;
 	BOOL saved = NO;
 	@try
 	{
-		NSLog(@"Saving Context%@", [NSThread isMainThread] ? @" *** on Main Thread ***" : @"");
+		NSLog(@"Saving %@Context%@", 
+              self == [[self class] defaultContext] ? @" *** Default *** ": @"", 
+              ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
 		saved = [self save:&error];
 	}
 	@catch (NSException *exception)
@@ -139,7 +133,6 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 
 - (BOOL) saveOnBackgroundThread
 {
-
 	[self performSelectorInBackground:@selector(saveWrapper) withObject:nil];
 
 	return YES;

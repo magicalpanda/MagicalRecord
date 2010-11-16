@@ -99,9 +99,13 @@
 #ifdef NS_BLOCKS_AVAILABLE
 
 + (void) performSaveDataOperationWithBlock:(CoreDataBlock)block
-{    
+{   
     NSManagedObjectContext *localContext = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
-    [localContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
+//    if (![NSThread isMainThread]) 
+//    {
+//        [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
+        [localContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
+//    }
     
     block(localContext);
     
