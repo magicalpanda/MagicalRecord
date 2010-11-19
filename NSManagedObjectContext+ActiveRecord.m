@@ -87,43 +87,19 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 - (void) mergeChangesFromNotification:(NSNotification *)notification
 {
 	NSLog(@"Merging changes to context%@", [NSThread isMainThread] ? @" *** on Main Thread ***" : @"");
-<<<<<<< HEAD
-    
-=======
-    //	NSAssert([NSThread isMainThread], @"Not on main thread");
-
-//	for (id object in [self updatedObjects])
-//	{
-//		if ([[object changedValues] count] > 0)
-//		{
-//			[self refreshObject:object mergeChanges:NO];
-//		}
-//	}
->>>>>>> b255dc40ab349c785671fef14df144ba15f82c7f
 	[self mergeChangesFromContextDidSaveNotification:notification];
 }
 
 - (void) mergeChangesOnMainThread:(NSNotification *)notification
 {
-<<<<<<< HEAD
-    if ([NSThread isMainThread])
-    {
-        [self mergeChangesFromNotification:notification];
-    }
-    else
-    {
-        [self performSelectorOnMainThread:@selector(mergeChangesFromNotification:) withObject:notification waitUntilDone:YES];
-    }
-=======
-  if ([NSThread isMainThread])
-  {
-    [self mergeChangesFromNotification:notification];
-  }
-  else
-  {
-    [self performSelectorOnMainThread:@selector(mergeChangesFromNotification:) withObject:notification waitUntilDone:YES];
-  }
->>>>>>> b255dc40ab349c785671fef14df144ba15f82c7f
+	if ([NSThread isMainThread])
+	{
+	  [self mergeChangesFromNotification:notification];
+	}
+	else
+	{
+	  [self performSelectorOnMainThread:@selector(mergeChangesFromNotification:) withObject:notification waitUntilDone:YES];
+	}
 }
 
 - (BOOL) save
