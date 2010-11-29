@@ -369,7 +369,11 @@ static NSNumber *defaultBatchSize = nil;
 
 + (NSFetchedResultsController *) fetchRequestAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
 {
-	NSString *cacheName = [NSString stringWithFormat:@"cache-%@", NSStringFromClass(self)];
+	NSString *cacheName = nil;
+	#ifdef STORE_USE_CACHE
+	cacheName = [NSString stringWithFormat:@"cache-%@", NSStringFromClass(self)];
+	#endif
+	
 	NSFetchRequest *request = [self requestAllSortedBy:sortTerm 
 											 ascending:ascending 
 										 withPredicate:searchTerm
@@ -414,7 +418,10 @@ static NSNumber *defaultBatchSize = nil;
 
 + (NSFetchedResultsController *) fetchRequest:(NSFetchRequest *)request groupedBy:(NSString *)group inContext:(NSManagedObjectContext *)context
 {
-	NSString *cacheName = [NSString stringWithFormat:@"cache-%@", NSStringFromClass([self class])];
+	NSString *cacheName = nil;
+	#ifdef STORE_USE_CACHE
+	cacheName = [NSString stringWithFormat:@"cache-%@", NSStringFromClass([self class])];
+	#endif
 	NSFetchedResultsController *controller =
 		[[NSFetchedResultsController alloc] initWithFetchRequest:request
 											managedObjectContext:context
