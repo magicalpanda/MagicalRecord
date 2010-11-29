@@ -575,8 +575,16 @@ static NSNumber *defaultBatchSize = nil;
 
 + (id) createInContext:(NSManagedObjectContext *)context
 {
-	NSString *entityName = NSStringFromClass([self class]);
-	return [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:context];
+    if ([self respondsToSelector:@selector(insertInManagedObjectContext:)]) 
+    {
+        id entity = [self performSelector:@selector(insertInManagedObjectContext:) withObject:context];
+        return entity;
+    }
+    else
+    {
+        NSString *entityName = NSStringFromClass([self class]);
+        return [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:context];
+    }
 }
 
 + (id)createEntity
