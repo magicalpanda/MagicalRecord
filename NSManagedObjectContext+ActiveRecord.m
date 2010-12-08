@@ -8,6 +8,7 @@
 #import "NSManagedObject+ActiveRecord.h"
 #import "NSManagedObjectContext+ActiveRecord.h"
 #import "NSPersistentStoreCoordinator+ActiveRecord.h"
+#import <objc/runtime.h>
 
 static NSManagedObjectContext *defaultManageObjectContext = nil;
 
@@ -147,6 +148,23 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 	return YES;
 }
 
+- (BOOL) notifiesMainContextOnSave
+{
+    NSNumber *notifies = objc_getAssociatedObject(self, @"notifiesMainContext");
+    return notifies ? [notifies boolValue] : NO;
+}
+
+- (void) setNotifiesMainContextOnSave:(BOOL)enabled
+{
+    NSManagedObjectContext *mainContext = [[self class] defaultContext];
+    if (self != mainContext) 
+    {
+        SEL selector = enabled ? @selector(observeContextOnMainThread:) : @selector(stopObservingContext:);
+        objc_setAssociatedObject(self, @"notifiesMainContext", [NSNumber numberWithBool:enabled], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        [mainContext performSelector:selector withObject:self];
+    }
+}
+
 + (NSManagedObjectContext *) contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
 	NSManagedObjectContext *context = nil;
@@ -158,6 +176,14 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
     return [context autorelease];
 }
 
++ (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
+{
+    NSManagedObjectContext *context = [self contextWithStoreCoordinator:coordinator];
+//    [[self defaultContext] observeContext:context];
+    context.notifiesMainContextOnSave = YES;
+    return context;
+}
+
 + (NSManagedObjectContext *) context
 {
 	return [self contextWithStoreCoordinator:[NSPersistentStoreCoordinator defaultStoreCoordinator]];
@@ -166,7 +192,8 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 + (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThread
 {
     NSManagedObjectContext *context = [self context];
-    [[self defaultContext] observeContextOnMainThread:context];
+//    [[self defaultContext] observeContextOnMainThread:context];
+    context.notifiesMainContextOnSave = YES;
     return context;
 }
 

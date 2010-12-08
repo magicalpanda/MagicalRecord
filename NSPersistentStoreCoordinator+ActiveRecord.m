@@ -31,12 +31,13 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
 	defaultCoordinator = [coordinator retain];
 }
 
-- (void) setupSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *)options
+- (void) setupSqliteStoreNamed:(id)storeFileName withOptions:(NSDictionary *)options
 {
+    NSURL *url = [storeFileName isKindOfClass:[NSURL class]] ? storeFileName : [NSPersistentStore urlForStoreName:storeFileName];
     NSError *error = nil;
     NSPersistentStore *store = [self addPersistentStoreWithType:NSSQLiteStoreType
                                                  configuration:nil
-                                                           URL:[NSPersistentStore urlForStoreName:storeFileName] 
+                                                           URL:url
                                                        options:options
                                                          error:&error];
     if (!store) 
@@ -44,6 +45,16 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
         [ActiveRecordHelpers handleErrors:error];
     }
     [NSPersistentStore setDetaultPersistentStore:store];        
+}
+
++ (NSPersistentStoreCoordinator *) coordinatorWithPersitentStore:(NSPersistentStore *)persistentStore;
+{
+    NSManagedObjectModel *model = [NSManagedObjectModel defaultManagedObjectModel];
+    NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+    
+    [psc setupSqliteStoreNamed:[persistentStore URL] withOptions:nil];
+    
+    return [psc autorelease];
 }
 
 + (NSPersistentStoreCoordinator *) coordinatorWithSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *)options

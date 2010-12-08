@@ -16,6 +16,7 @@
 - (BOOL) save;
 - (BOOL) saveOnMainThread;
 - (BOOL) saveOnBackgroundThread;
+- (void) setNotifiesMainContextOnSave:(BOOL)enabled;
 
 + (void) resetDefaultContext;
 + (NSManagedObjectContext *) defaultContext;
@@ -24,6 +25,9 @@
 
 + (NSManagedObjectContext *) context;
 + (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThread;
++ (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 + (NSManagedObjectContext *) contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
+
+@property (nonatomic, assign) BOOL notifiesMainContextOnSave;
 
 @end

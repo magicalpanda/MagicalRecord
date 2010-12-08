@@ -371,7 +371,7 @@ static NSNumber *defaultBatchSize = nil;
 {
 	NSString *cacheName = nil;
 	#ifdef STORE_USE_CACHE
-	cacheName = [NSString stringWithFormat:@"cache-%@", NSStringFromClass(self)];
+	cacheName = [NSString stringWithFormat:@"ActiveRecord-Cache-%@", NSStringFromClass(self)];
 	#endif
 	
 	NSFetchRequest *request = [self requestAllSortedBy:sortTerm 
@@ -420,7 +420,7 @@ static NSNumber *defaultBatchSize = nil;
 {
 	NSString *cacheName = nil;
 	#ifdef STORE_USE_CACHE
-	cacheName = [NSString stringWithFormat:@"cache-%@", NSStringFromClass([self class])];
+	cacheName = [NSString stringWithFormat:@"ActiveRecord-Cache-%@", NSStringFromClass([self class])];
 	#endif
 	NSFetchedResultsController *controller =
 		[[NSFetchedResultsController alloc] initWithFetchRequest:request

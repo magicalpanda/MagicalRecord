@@ -8,9 +8,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-// enable to use caches for the fetchedResultsControllers (iOS only)
-// #define STORE_USE_CACHE
-
 #ifdef NS_BLOCKS_AVAILABLE
 
 @class NSManagedObjectContext;

@@ -20,6 +20,10 @@
 	[NSManagedObjectModel setDefaultManagedObjectModel:nil];
 	[NSPersistentStoreCoordinator setDefaultStoreCoordinator:nil];
 	[NSPersistentStore setDetaultPersistentStore:nil];
+
+//#ifdef NS_BLOCKS_AVAILABLE
+//    [self setBackgroundCoordinator:nil];
+//#endif
 }
 
 + (void) handleErrors:(NSError *)error
@@ -100,12 +104,22 @@
 
 + (void) performSaveDataOperationWithBlock:(CoreDataBlock)block
 {   
-    NSManagedObjectContext *localContext = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
-//    if (![NSThread isMainThread]) 
-//    {
-//        [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
+    NSManagedObjectContext *mainContext  = [NSManagedObjectContext defaultContext];
+    NSManagedObjectContext *localContext = mainContext;
+    
+    if (![NSThread isMainThread]) 
+    {
+        
+#if kCreateNewCoordinatorOnBackgroundOperations == 1
+        NSPersistentStoreCoordinator *localCoordinator = [NSPersistentStoreCoordinator coordinatorWithPersitentStore:[NSPersistentStore defaultPersistentStore]];
+        localContext = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:localCoordinator];
+#else
+        localContext = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
+#endif
+        
+        [mainContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
         [localContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
-//    }
+    }
     
     block(localContext);
     
@@ -113,7 +127,9 @@
     {
         [localContext save];
     }
-    [[NSManagedObjectContext defaultContext] stopObservingContext:localContext];    
+    
+    localContext.notifiesMainContextOnSave = NO;
+    [mainContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
 }
 
 + (void) performSaveDataOperationInBackgroundWithBlock:(CoreDataBlock)block
