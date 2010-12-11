@@ -41,9 +41,9 @@ static NSPersistentStore *defaultPersistentStore = nil;
 	return [self directory:NSDocumentDirectory];
 }
 
-+ (NSString *)applicationLibraryDirectory
-{
-	return [self directory:NSLibraryDirectory];
++ (NSString *)applicationLibraryDirectory {
+	//return [self directory:NSLibraryDirectory];
+  return [self directory:NSDocumentDirectory];
 }
 
 + (NSURL *) urlForStoreName:(NSString *)storeFileName
