@@ -14,7 +14,7 @@
 
 @implementation ActiveRecordHelpers
 
-+ (void) cleanUp
++ (void)cleanUp
 {
 	[NSManagedObjectContext setDefaultContext:nil];
 	[NSManagedObjectModel setDefaultManagedObjectModel:nil];
@@ -22,7 +22,7 @@
 	[NSPersistentStore setDetaultPersistentStore:nil];
 }
 
-+ (void) handleErrors:(NSError *)error
++ (void)handleErrors:(NSError *)error
 {
 	if (error)
 	{
@@ -35,21 +35,22 @@
 				{
 					if ([e respondsToSelector:@selector(userInfo)])
 					{
-						NSLog(@"Error Details: %@", [e userInfo]);
+						DDLogError(@"Error Details: %@", [e userInfo]);
 					}
 					else
 					{
-						NSLog(@"Error Details: %@", e);
+						DDLogError(@"Error Details: %@", e);
 					}
 				}
 			}
 			else
 			{
-				NSLog(@"Error: %@", detailedError);
+        NSLog(@"Error: %@", detailedError);
+				//DDLogWarn(@"Error: %@", detailedError);
 			}
 		}
-		NSLog(@"Error Domain: %@", [error domain]);
-		NSLog(@"Recovery Suggestion: %@", [error localizedRecoverySuggestion]);	
+		DDLogError(@"Error Domain: %@", [error domain]);
+		DDLogError(@"Recovery Suggestion: %@", [error localizedRecoverySuggestion]);	
 	}
 }
 
@@ -99,21 +100,17 @@
 #ifdef NS_BLOCKS_AVAILABLE
 
 + (void) performSaveDataOperationWithBlock:(CoreDataBlock)block
-{
+{    
     NSManagedObjectContext *localContext = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
-//    if (![NSThread isMainThread]) 
-//    {
-//        [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
     [localContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
-//    }
     
     block(localContext);
     
     if ([localContext hasChanges]) 
     {
-    [localContext save];
+        [localContext save];
     }
-    [[NSManagedObjectContext defaultContext] stopObservingContext:localContext];
+    [[NSManagedObjectContext defaultContext] stopObservingContext:localContext];    
 }
 
 + (void) performSaveDataOperationInBackgroundWithBlock:(CoreDataBlock)block
