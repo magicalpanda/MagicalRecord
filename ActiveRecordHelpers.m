@@ -20,10 +20,6 @@
 	[NSManagedObjectModel setDefaultManagedObjectModel:nil];
 	[NSPersistentStoreCoordinator setDefaultStoreCoordinator:nil];
 	[NSPersistentStore setDetaultPersistentStore:nil];
-
-//#ifdef NS_BLOCKS_AVAILABLE
-//    [self setBackgroundCoordinator:nil];
-//#endif
 }
 
 + (void) handleErrors:(NSError *)error
@@ -117,7 +113,7 @@
         localContext = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
 #endif
         
-        [mainContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
+//        [mainContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
         [localContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
     }
     
@@ -129,19 +125,26 @@
     }
     
     localContext.notifiesMainContextOnSave = NO;
-    [mainContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
+//    [mainContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
 }
 
 + (void) performSaveDataOperationInBackgroundWithBlock:(CoreDataBlock)block
 {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+//        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
         
         [self performSaveDataOperationWithBlock:block];
         
-        [pool drain];
+//        [pool drain];
     });
+}
+
++ (void) performLookupOperationWithBlock:(CoreDataBlock)block
+{
+    NSManagedObjectContext *context = [NSManagedObjectContext contextForCurrentThread];
+    
+    block(context);
 }
 
 #endif

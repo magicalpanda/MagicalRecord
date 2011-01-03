@@ -1,7 +1,8 @@
 
 // enable to use caches for the fetchedResultsControllers (iOS only)
 // #define STORE_USE_CACHE
-#define kCreateNewCoordinatorOnBackgroundOperations     1
+
+#define kCreateNewCoordinatorOnBackgroundOperations     0
 
 #import "ActiveRecordHelpers.h"
 #import "NSManagedObject+ActiveRecord.h"

@@ -170,6 +170,7 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
 	NSManagedObjectContext *context = nil;
     if (coordinator != nil)
 	{
+        NSLog(@"Creating MOContext %@", [NSThread isMainThread] ? @" *** On Main Thread ***" : @"");
         context = [[NSManagedObjectContext alloc] init];
         [context setPersistentStoreCoordinator:coordinator];
     }
