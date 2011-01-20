@@ -4,6 +4,12 @@
 
 #define kCreateNewCoordinatorOnBackgroundOperations     0
 
+#ifdef ENABLE_ACTIVE_RECORD_LOGGING
+    #define ARLog(...) NSLog(...)
+#else
+    #define ARLog(...)
+#endif
+
 #import "ActiveRecordHelpers.h"
 #import "NSManagedObject+ActiveRecord.h"
 #import "NSManagedObjectContext+ActiveRecord.h"

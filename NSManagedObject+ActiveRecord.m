@@ -34,7 +34,7 @@ static NSNumber *defaultBatchSize = nil;
 {
 	if (error)
 	{
-		NSLog(@"Error Requesting Data: %@", [error userInfo]);
+		ARLog(@"Error Requesting Data: %@", [error userInfo]);
 		//TODO: maybe call a delegate to handle the error? subclass/hook method for error?
 	}
 }
@@ -118,7 +118,7 @@ static NSNumber *defaultBatchSize = nil;
 			}
 			else
 			{
-				NSLog(@"Property '%@' not found in %@ properties for %@", propertyName, [propDict count], NSStringFromClass(self));
+				ARLog(@"Property '%@' not found in %@ properties for %@", propertyName, [propDict count], NSStringFromClass(self));
 			}
 		}
 	}
