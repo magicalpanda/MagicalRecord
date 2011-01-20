@@ -35,21 +35,21 @@
 				{
 					if ([e respondsToSelector:@selector(userInfo)])
 					{
-						NSLog(@"Error Details: %@", [e userInfo]);
+						ARLog(@"Error Details: %@", [e userInfo]);
 					}
 					else
 					{
-						NSLog(@"Error Details: %@", e);
+						ARLog(@"Error Details: %@", e);
 					}
 				}
 			}
 			else
 			{
-				NSLog(@"Error: %@", detailedError);
+				ARLog(@"Error: %@", detailedError);
 			}
 		}
-		NSLog(@"Error Domain: %@", [error domain]);
-		NSLog(@"Recovery Suggestion: %@", [error localizedRecoverySuggestion]);	
+		ARLog(@"Error Domain: %@", [error domain]);
+		ARLog(@"Recovery Suggestion: %@", [error localizedRecoverySuggestion]);	
 	}
 }
 
@@ -113,8 +113,8 @@
         localContext = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
 #endif
         
-//        [mainContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
-        [localContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
+        [mainContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
+        [localContext setMergePolicy:NSOverwriteMergePolicy];
     }
     
     block(localContext);
@@ -125,18 +125,27 @@
     }
     
     localContext.notifiesMainContextOnSave = NO;
-//    [mainContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
+    [mainContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
 }
 
 + (void) performSaveDataOperationInBackgroundWithBlock:(CoreDataBlock)block
 {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
-//        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-        
+        [self performSaveDataOperationWithBlock:block];
+    });
+}
+
++ (void) performSaveDataOperationInBackgroundWithBlock:(CoreDataBlock)block completion:(void(^)(void))callback
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
         [self performSaveDataOperationWithBlock:block];
         
-//        [pool drain];
+        if (callback) 
+        {
+            dispatch_async(dispatch_get_main_queue(), callback);
+        }
     });
 }
 

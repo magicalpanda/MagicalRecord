@@ -36,6 +36,7 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *);
 + (void) performSaveDataOperationWithBlock:(CoreDataBlock)block;
 + (void) performSaveDataOperationInBackgroundWithBlock:(CoreDataBlock)block;
 + (void) performLookupOperationWithBlock:(CoreDataBlock)block;
++ (void) performSaveDataOperationInBackgroundWithBlock:(CoreDataBlock)block completion:(void(^)(void))callback;
 
 #endif
 
