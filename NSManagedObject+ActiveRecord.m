@@ -212,6 +212,25 @@ static NSNumber *defaultBatchSize = nil;
 									 inContext:[NSManagedObjectContext defaultContext]];
 }
 
++ (NSNumber *) numberOfUniqueEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
+{
+	NSError *error = nil;
+	NSFetchRequest *request = [self createFetchRequestInContext:context];
+	[request setPredicate:searchTerm];
+    [request setReturnsDistinctResults:YES];
+	
+	NSUInteger count = [context countForFetchRequest:request error:&error];
+	[ActiveRecordHelpers handleErrors:error];
+	
+	return [NSNumber numberWithUnsignedInt:count];	   
+}
+
++ (NSNumber *) numberOfUniqueEntitiesWithPredicate:(NSPredicate *)searchTerm;
+{
+    return [self numberOfEntitiesWithPredicate:searchTerm 
+                                     inContext:[NSManagedObjectContext defaultContext]];
+}
+
 + (BOOL) hasAtLeastOneEntity
 {
     return [self hasAtLeastOneEntityInContext:[NSManagedObjectContext defaultContext]];

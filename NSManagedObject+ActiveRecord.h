@@ -7,7 +7,7 @@
 #import <CoreData/CoreData.h>
 #import "ActiveRecordHelpers.h"
 
-#define kActiveRecordDefaultBatchSize 6
+#define kActiveRecordDefaultBatchSize 20
 
 @interface NSManagedObject (ActiveRecord)
 
@@ -36,6 +36,8 @@
 + (NSNumber *) numberOfEntitiesWithContext:(NSManagedObjectContext *)context;
 + (NSNumber *) numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm;
 + (NSNumber *) numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
++ (NSNumber *) numberOfUniqueEntitiesWithPredicate:(NSPredicate *)searchTerm;
++ (NSNumber *) numberOfUniqueEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
 
 + (BOOL) hasAtLeastOneEntity;
 + (BOOL) hasAtLeastOneEntityInContext:(NSManagedObjectContext *)context;
