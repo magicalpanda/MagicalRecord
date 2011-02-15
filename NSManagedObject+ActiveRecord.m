@@ -8,26 +8,26 @@
 #import "NSManagedObjectContext+ActiveRecord.h"
 
 
-static NSNumber *defaultBatchSize = nil;
+static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 @implementation NSManagedObject (ActiveRecord)
 
 
 + (void) setDefaultBatchSize:(NSUInteger)newBatchSize
 {
-	@synchronized(defaultBatchSize)
+	@synchronized(self)
 	{
-		defaultBatchSize = [NSNumber numberWithInt:newBatchSize];
+		defaultBatchSize = newBatchSize;
 	}
 }
 
-+ (NSInteger) defaultBatchSize
++ (NSUInteger) defaultBatchSize
 {
 	if (defaultBatchSize == nil)
 	{
 		[self setDefaultBatchSize:kActiveRecordDefaultBatchSize];
 	}
-	return [defaultBatchSize integerValue];
+	return defaultBatchSize;
 }
 
 + (void) handleErrors:(NSError *)error

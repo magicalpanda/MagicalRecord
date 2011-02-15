@@ -7,7 +7,7 @@
 #ifdef ENABLE_ACTIVE_RECORD_LOGGING
     #define ARLog(...) NSLog(@"%s(%x) %@", __PRETTY_FUNCTION__, self, [NSString stringWithFormat:__VA_ARGS__])
 #else
-    #define ARLog(...)
+    #define ARLog(...) ((void)0)
 #endif
 
 #import "ActiveRecordHelpers.h"
