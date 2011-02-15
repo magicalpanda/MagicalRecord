@@ -13,6 +13,9 @@
 
 + (void) handleErrors:(NSError *)error;
 
++ (NSUInteger) defaultBatchSize;
++ (void) setDefaultBatchSize:(NSUInteger)newBatchSize;
+
 + (NSArray *) executeFetchRequest:(NSFetchRequest *)request;
 + (NSArray *) executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
 + (NSFetchRequest *)createFetchRequest;

@@ -23,10 +23,6 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 + (NSUInteger) defaultBatchSize
 {
-	if (defaultBatchSize == nil)
-	{
-		[self setDefaultBatchSize:kActiveRecordDefaultBatchSize];
-	}
 	return defaultBatchSize;
 }
 
