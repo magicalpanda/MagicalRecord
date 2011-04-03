@@ -46,7 +46,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 + (NSArray *) executeFetchRequest:(NSFetchRequest *)request 
 {
-	return [self executeFetchRequest:request inContext:[NSManagedObjectContext defaultContext]];
+	return [self executeFetchRequest:request inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (id) executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
@@ -63,7 +63,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 + (id) executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request
 {
-	return [self executeFetchRequestAndReturnFirstObject:request inContext:[NSManagedObjectContext defaultContext]];
+	return [self executeFetchRequestAndReturnFirstObject:request inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 #if TARGET_OS_IPHONE
@@ -93,7 +93,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 + (NSEntityDescription *)entityDescription
 {
-	return [self entityDescriptionInContext:[NSManagedObjectContext defaultContext]];
+	return [self entityDescriptionInContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (NSArray *)propertiesNamed:(NSArray *)properties
@@ -170,7 +170,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 + (NSFetchRequest *)createFetchRequest
 {
-	return [self createFetchRequestInContext:[NSManagedObjectContext defaultContext]];
+	return [self createFetchRequestInContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 #pragma mark -
@@ -187,7 +187,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 + (NSNumber *)numberOfEntities
 {
-	return [self numberOfEntitiesWithContext:[NSManagedObjectContext defaultContext]];
+	return [self numberOfEntitiesWithContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (NSNumber *) numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
@@ -199,13 +199,13 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 	NSUInteger count = [context countForFetchRequest:request error:&error];
 	[ActiveRecordHelpers handleErrors:error];
 	
-	return [NSNumber numberWithUnsignedInt:count];	
+	return [NSNumber numberWithUnsignedInteger:count];	
 }
 																				  
 + (NSNumber *) numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm;
 {
 	return [self numberOfEntitiesWithPredicate:searchTerm 
-									 inContext:[NSManagedObjectContext defaultContext]];
+									 inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (NSNumber *) numberOfUniqueEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
@@ -218,18 +218,18 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 	NSUInteger count = [context countForFetchRequest:request error:&error];
 	[ActiveRecordHelpers handleErrors:error];
 	
-	return [NSNumber numberWithUnsignedInt:count];	   
+	return [NSNumber numberWithUnsignedInteger:count];	   
 }
 
 + (NSNumber *) numberOfUniqueEntitiesWithPredicate:(NSPredicate *)searchTerm;
 {
     return [self numberOfEntitiesWithPredicate:searchTerm 
-                                     inContext:[NSManagedObjectContext defaultContext]];
+                                     inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (BOOL) hasAtLeastOneEntity
 {
-    return [self hasAtLeastOneEntityInContext:[NSManagedObjectContext defaultContext]];
+    return [self hasAtLeastOneEntityInContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (BOOL) hasAtLeastOneEntityInContext:(NSManagedObjectContext *)context
@@ -241,7 +241,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 #pragma mark Reqest Helpers
 + (NSFetchRequest *) requestAll
 {
-	return [self createFetchRequestInContext:[NSManagedObjectContext defaultContext]];
+	return [self createFetchRequestInContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (NSFetchRequest *) requestAllInContext:(NSManagedObjectContext *)context
@@ -251,7 +251,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 + (NSFetchRequest *) requestAllWhere:(NSString *)property isEqualTo:(id)value
 {
-    return [self requestAllWhere:property isEqualTo:value inContext:[NSManagedObjectContext defaultContext]];
+    return [self requestAllWhere:property isEqualTo:value inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (NSFetchRequest *) requestAllWhere:(NSString *)property isEqualTo:(id)value inContext:(NSManagedObjectContext *)context
@@ -264,7 +264,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 + (NSFetchRequest *) requestFirstWithPredicate:(NSPredicate *)searchTerm
 {
-    return [self requestFirstWithPredicate:searchTerm inContext:[NSManagedObjectContext defaultContext]];
+    return [self requestFirstWithPredicate:searchTerm inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (NSFetchRequest *) requestFirstWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
@@ -278,7 +278,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 + (NSFetchRequest *) requestFirstByAttribute:(NSString *)attribute withValue:(id)searchValue;
 {
-    return [self requestFirstByAttribute:attribute withValue:searchValue inContext:[NSManagedObjectContext defaultContext]];
+    return [self requestFirstByAttribute:attribute withValue:searchValue inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (NSFetchRequest *) requestFirstByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context;
@@ -305,7 +305,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 {
 	return [self requestAllSortedBy:sortTerm 
 						  ascending:ascending
-						  inContext:[NSManagedObjectContext defaultContext]];
+						  inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (NSFetchRequest *) requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
@@ -327,7 +327,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 	NSFetchRequest *request = [self requestAllSortedBy:sortTerm 
 											 ascending:ascending
 										 withPredicate:searchTerm 
-											 inContext:[NSManagedObjectContext defaultContext]];
+											 inContext:[NSManagedObjectContext contextForCurrentThread]];
 	return request;
 }
 
@@ -342,7 +342,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 + (NSArray *)findAll
 {
-	return [self findAllInContext:[NSManagedObjectContext defaultContext]];
+	return [self findAllInContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (NSArray *)findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
@@ -356,7 +356,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 {
 	return [self findAllSortedBy:sortTerm 
 					   ascending:ascending 
-					   inContext:[NSManagedObjectContext defaultContext]];
+					   inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (NSArray *)findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
@@ -374,7 +374,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 	return [self findAllSortedBy:sortTerm 
 					   ascending:ascending
 				   withPredicate:searchTerm 
-					   inContext:[NSManagedObjectContext defaultContext]];
+					   inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 #pragma mark -
@@ -407,7 +407,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 							withPredicate:searchTerm
 								 sortedBy:sortTerm
 								ascending:ascending
-								inContext:[NSManagedObjectContext defaultContext]];
+								inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (NSFetchedResultsController *) fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath inContext:(NSManagedObjectContext *)context
@@ -428,7 +428,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 						ascending:ascending
 					withPredicate:searchTerm 
 						  groupBy:groupingKeyPath 
-						inContext:[NSManagedObjectContext defaultContext]];
+						inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (NSFetchedResultsController *) fetchRequest:(NSFetchRequest *)request groupedBy:(NSString *)group inContext:(NSManagedObjectContext *)context
@@ -450,7 +450,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 {
 	return [self fetchRequest:request 
 					groupedBy:group
-					inContext:[NSManagedObjectContext defaultContext]];
+					inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 #endif
 
@@ -468,7 +468,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 + (NSArray *)findAllWithPredicate:(NSPredicate *)searchTerm
 {
 	return [self findAllWithPredicate:searchTerm 
-							inContext:[NSManagedObjectContext defaultContext]];
+							inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (id)findFirstInContext:(NSManagedObjectContext *)context
@@ -480,7 +480,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 + (id)findFirst
 {
-	return [self findFirstInContext:[NSManagedObjectContext defaultContext]];
+	return [self findFirstInContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (id)findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context
@@ -495,12 +495,12 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 {
 	return [self findFirstByAttribute:attribute 
 							withValue:searchValue 
-							inContext:[NSManagedObjectContext defaultContext]];
+							inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (id)findFirstWithPredicate:(NSPredicate *)searchTerm
 {
-    return [self findFirstWithPredicate:searchTerm inContext:[NSManagedObjectContext defaultContext]];
+    return [self findFirstWithPredicate:searchTerm inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (id)findFirstWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
@@ -522,7 +522,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 	return [self findFirstWithPredicate:searchterm 
 							   sortedBy:property 
 							  ascending:ascending 
-							  inContext:[NSManagedObjectContext defaultContext]];
+							  inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (id)findFirstWithPredicate:(NSPredicate *)searchTerm andRetrieveAttributes:(NSArray *)attributes inContext:(NSManagedObjectContext *)context
@@ -538,7 +538,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 {
 	return [self findFirstWithPredicate:searchTerm 
 				  andRetrieveAttributes:attributes 
-							  inContext:[NSManagedObjectContext defaultContext]];
+							  inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 
@@ -558,7 +558,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 	return [self findFirstWithPredicate:searchTerm
 							   sortedBy:sortBy 
 							  ascending:ascending 
-								inContext:[NSManagedObjectContext defaultContext]
+								inContext:[NSManagedObjectContext contextForCurrentThread]
 				  andRetrieveAttributes:attributes];
 }
 
@@ -575,7 +575,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 {
 	return [self findByAttribute:attribute 
 					   withValue:searchValue 
-					   inContext:[NSManagedObjectContext defaultContext]];
+					   inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (NSArray *)findByAttribute:(NSString *)attribute withValue:(id)searchValue andOrderBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
@@ -592,7 +592,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 					   withValue:searchValue
 					  andOrderBy:sortTerm 
 					   ascending:ascending 
-					   inContext:[NSManagedObjectContext defaultContext]];
+					   inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (id) createInContext:(NSManagedObjectContext *)context
@@ -611,7 +611,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 + (id)createEntity
 {	
-	NSManagedObject *newEntity = [self createInContext:[NSManagedObjectContext defaultContext]];
+	NSManagedObject *newEntity = [self createInContext:[NSManagedObjectContext contextForCurrentThread]];
 
 	return newEntity;
 }
@@ -624,7 +624,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 - (BOOL) deleteEntity
 {
-	[self deleteInContext:[NSManagedObjectContext defaultContext]];
+	[self deleteInContext:[NSManagedObjectContext contextForCurrentThread]];
 	return YES;
 }
 
@@ -640,7 +640,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 + (BOOL) truncateAll
 {
-    [self truncateAllInContext:[NSManagedObjectContext defaultContext]];
+    [self truncateAllInContext:[NSManagedObjectContext contextForCurrentThread]];
     return YES;
 }
 
@@ -664,7 +664,23 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 - (id) objectWithMinValueFor:(NSString *)property 
 {
-	return [self objectWithMinValueFor:property inContext:[NSManagedObjectContext defaultContext]];
+	return [self objectWithMinValueFor:property inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
+
+
+- (id) inContext:(NSManagedObjectContext*)context 
+{
+    NSError *error = nil;
+    NSManagedObject *inContext = [[context existingObjectWithID:[self objectID] error:&error] retain];
+    [ActiveRecordHelpers handleErrors:error];
+    
+    return [inContext autorelease];
+}
+
+- (id) inThreadContext 
+{
+    return [self inContext:[NSManagedObjectContext contextForCurrentThread]];
+}
+
 
 @end

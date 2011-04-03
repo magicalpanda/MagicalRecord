@@ -40,6 +40,10 @@ static NSManagedObjectContext *defaultManageObjectContext = nil;
     });
 }
 
++ (void) resetContextForCurrentThread {
+    [[NSManagedObjectContext contextForCurrentThread] reset];
+}
+
 + (NSManagedObjectContext *) contextForCurrentThread
 {
 	if ( [NSThread isMainThread] )
