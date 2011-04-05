@@ -624,7 +624,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 - (BOOL) deleteEntity
 {
-	[self deleteInContext:[NSManagedObjectContext contextForCurrentThread]];
+	[self deleteInContext:[self managedObjectContext]];
 	return YES;
 }
 
@@ -664,7 +664,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 - (id) objectWithMinValueFor:(NSString *)property 
 {
-	return [self objectWithMinValueFor:property inContext:[NSManagedObjectContext contextForCurrentThread]];
+	return [self objectWithMinValueFor:property inContext:[self  managedObjectContext]];
 }
 
 
