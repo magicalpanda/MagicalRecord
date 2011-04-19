@@ -11,7 +11,7 @@
 #ifdef NS_BLOCKS_AVAILABLE
 
 @class NSManagedObjectContext;
-typedef void (^CoreDataBlock)(NSManagedObjectContext *);
+typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
 #endif
 

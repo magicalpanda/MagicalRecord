@@ -41,6 +41,10 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
     });
 }
 
++ (void) resetContextForCurrentThread {
+    [[NSManagedObjectContext contextForCurrentThread] reset];
+}
+
 + (NSManagedObjectContext *) contextForCurrentThread
 {
 	if ( [NSThread isMainThread] )

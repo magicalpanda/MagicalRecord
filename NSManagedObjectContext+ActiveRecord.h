@@ -21,6 +21,7 @@
 + (void) resetDefaultContext;
 + (NSManagedObjectContext *) defaultContext;
 + (void) setDefaultContext:(NSManagedObjectContext *)moc;
++ (void) resetContextForCurrentThread;
 + (NSManagedObjectContext *) contextForCurrentThread;
 
 + (NSManagedObjectContext *) context;
