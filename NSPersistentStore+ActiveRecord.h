@@ -14,7 +14,7 @@
 + (NSURL *) defaultLocalStoreUrl;
 
 + (NSPersistentStore *) defaultPersistentStore;
-+ (void) setDetaultPersistentStore:(NSPersistentStore *) store;
++ (void) setDefaultPersistentStore:(NSPersistentStore *) store;
 
 + (NSURL *) urlForStoreName:(NSString *)storeFileName;
 

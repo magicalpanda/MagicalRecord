@@ -44,7 +44,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
     {
         [ActiveRecordHelpers handleErrors:error];
     }
-    [NSPersistentStore setDetaultPersistentStore:store];        
+    [NSPersistentStore setDefaultPersistentStore:store];        
 }
 
 + (NSPersistentStoreCoordinator *) coordinatorWithPersitentStore:(NSPersistentStore *)persistentStore;
@@ -102,7 +102,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
 	NSManagedObjectModel *model = [NSManagedObjectModel defaultManagedObjectModel];
 	NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
 	
-    [NSPersistentStore setDetaultPersistentStore:[psc addInMemoryStore]];
+    [NSPersistentStore setDefaultPersistentStore:[psc addInMemoryStore]];
 	return [psc autorelease];
 }
 

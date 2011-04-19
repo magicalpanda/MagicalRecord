@@ -644,6 +644,12 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
     return YES;
 }
 
+- (id) inContext:(NSManagedObjectContext *)otherContext;
+{
+	NSManagedObjectID *objectID = [self objectID];
+	return [otherContext objectWithID:objectID];
+}
+
 - (NSNumber *)maxValueFor:(NSString *)property
 {
 	NSManagedObject *obj = [[self class] findFirstByAttribute:property

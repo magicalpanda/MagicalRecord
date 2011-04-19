@@ -19,7 +19,7 @@
 	[NSManagedObjectContext setDefaultContext:nil];
 	[NSManagedObjectModel setDefaultManagedObjectModel:nil];
 	[NSPersistentStoreCoordinator setDefaultStoreCoordinator:nil];
-	[NSPersistentStore setDetaultPersistentStore:nil];
+	[NSPersistentStore setDefaultPersistentStore:nil];
 }
 
 + (void) handleErrors:(NSError *)error
