@@ -249,6 +249,19 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 	return [self createFetchRequestInContext:context];
 }
 
++ (NSFetchRequest *) requestAllWithPredicate:(NSPredicate *)searchTerm;
+{
+    return [self requestAllWithPredicate:searchTerm inContext:[NSManagedObjectContext contextForCurrentThread]];
+}
+
++ (NSFetchRequest *) requestAllWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
+{
+    NSFetchRequest *request = [self createFetchRequestInContext:context];
+    [request setPredicate:searchTerm];
+    
+    return request;
+}
+
 + (NSFetchRequest *) requestAllWhere:(NSString *)property isEqualTo:(id)value
 {
     return [self requestAllWhere:property isEqualTo:value inContext:[NSManagedObjectContext contextForCurrentThread]];

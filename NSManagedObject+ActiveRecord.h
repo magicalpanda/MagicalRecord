@@ -47,6 +47,8 @@
 
 + (NSFetchRequest *) requestAll;
 + (NSFetchRequest *) requestAllInContext:(NSManagedObjectContext *)context;
++ (NSFetchRequest *) requestAllWithPredicate:(NSPredicate *)searchTerm;
++ (NSFetchRequest *) requestAllWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
 + (NSFetchRequest *) requestAllWhere:(NSString *)property isEqualTo:(id)value;
 + (NSFetchRequest *) requestAllWhere:(NSString *)property isEqualTo:(id)value inContext:(NSManagedObjectContext *)context;
 + (NSFetchRequest *) requestFirstWithPredicate:(NSPredicate *)searchTerm;
