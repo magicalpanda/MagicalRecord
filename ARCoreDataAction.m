@@ -14,7 +14,7 @@ dispatch_queue_t background_save_queue()
 {
     if (coredata_background_save_queue == NULL)
     {
-        coredata_background_save_queue = dispatch_queue_create("com.doubleencore.coredata.backgroundsaves", 0);
+        coredata_background_save_queue = dispatch_queue_create("com.magicalpanda.coredata.backgroundsaves", 0);
     }
     return coredata_background_save_queue;
 }
@@ -23,7 +23,7 @@ dispatch_queue_t background_save_queue()
 
 #ifdef NS_BLOCKS_AVAILABLE
 
-+ (void) saveDataWithBlock:(CoreDataBlock)block
++ (void) saveDataWithBlock:(void(^)(NSManagedObjectContext *localContext))block
 {   
     NSManagedObjectContext *mainContext  = [NSManagedObjectContext defaultContext];
     NSManagedObjectContext *localContext = mainContext;
@@ -53,14 +53,14 @@ dispatch_queue_t background_save_queue()
     [mainContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
 }
 
-+ (void) saveDataInBackgroundWithBlock:(CoreDataBlock)block
++ (void) saveDataInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block
 {
     dispatch_async(background_save_queue(), ^{
         [self saveDataWithBlock:block];
     });
 }
 
-+ (void) saveDataInBackgroundWithBlock:(CoreDataBlock)block completion:(void(^)(void))callback
++ (void) saveDataInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))callback
 {
     dispatch_async(background_save_queue(), ^{
         [self saveDataWithBlock:block];
@@ -72,11 +72,21 @@ dispatch_queue_t background_save_queue()
     });
 }
 
-+ (void) lookupWithBlock:(CoreDataBlock)block
++ (void) lookupWithBlock:(void(^)(NSManagedObjectContext *localContext))block
 {
     NSManagedObjectContext *context = [NSManagedObjectContext contextForCurrentThread];
     
     block(context);
+}
+
++ (void) saveDataWithOptions:(ARCoreDataSaveOption)options withBlock:(void(^)(NSManagedObjectContext *localContext))block;
+{
+    
+}
+
++ (void) saveDataWithOptions:(ARCoreDataSaveOption)options withBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))callback;
+{
+    
 }
 
 #endif
