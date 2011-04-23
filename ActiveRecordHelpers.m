@@ -19,7 +19,7 @@
 	[NSManagedObjectContext setDefaultContext:nil];
 	[NSManagedObjectModel setDefaultManagedObjectModel:nil];
 	[NSPersistentStoreCoordinator setDefaultStoreCoordinator:nil];
-	[NSPersistentStore setDetaultPersistentStore:nil];
+	[NSPersistentStore setDefaultPersistentStore:nil];
 }
 
 + (void) handleErrors:(NSError *)error
@@ -97,63 +97,26 @@
 }
 
 #ifdef NS_BLOCKS_AVAILABLE
+#pragma mark DEPRECATED_METHOD
 
-+ (void) performSaveDataOperationWithBlock:(CoreDataBlock)block
-{   
-    NSManagedObjectContext *mainContext  = [NSManagedObjectContext defaultContext];
-    NSManagedObjectContext *localContext = mainContext;
-    
-    if (![NSThread isMainThread]) 
-    {
-        
-#if kCreateNewCoordinatorOnBackgroundOperations == 1
-        NSPersistentStoreCoordinator *localCoordinator = [NSPersistentStoreCoordinator coordinatorWithPersitentStore:[NSPersistentStore defaultPersistentStore]];
-        localContext = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:localCoordinator];
-#else
-        localContext = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
-#endif
-        
-        [mainContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
-        [localContext setMergePolicy:NSOverwriteMergePolicy];
-    }
-    
-    block(localContext);
-    
-    if ([localContext hasChanges]) 
-    {
-        [localContext save];
-    }
-    
-    localContext.notifiesMainContextOnSave = NO;
-    [mainContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
++ (void) performSaveDataOperationWithBlock:(CoreDataBlock)block;
+{
+    [ARCoreDataAction saveDataWithBlock:block];
 }
 
-+ (void) performSaveDataOperationInBackgroundWithBlock:(CoreDataBlock)block
++ (void) performSaveDataOperationInBackgroundWithBlock:(CoreDataBlock)block;
 {
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
-        [self performSaveDataOperationWithBlock:block];
-    });
+    [ARCoreDataAction saveDataWithBlock:block];
 }
 
-+ (void) performSaveDataOperationInBackgroundWithBlock:(CoreDataBlock)block completion:(void(^)(void))callback
++ (void) performLookupOperationWithBlock:(CoreDataBlock)block;
 {
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
-        [self performSaveDataOperationWithBlock:block];
-        
-        if (callback) 
-        {
-            dispatch_async(dispatch_get_main_queue(), callback);
-        }
-    });
+    [ARCoreDataAction lookupWithBlock:block];
 }
 
-+ (void) performLookupOperationWithBlock:(CoreDataBlock)block
++ (void) performSaveDataOperationInBackgroundWithBlock:(CoreDataBlock)block completion:(void(^)(void))callback;
 {
-    NSManagedObjectContext *context = [NSManagedObjectContext contextForCurrentThread];
-    
-    block(context);
+    [ARCoreDataAction saveDataInBackgroundWithBlock:block completion:callback];
 }
 
 #endif
