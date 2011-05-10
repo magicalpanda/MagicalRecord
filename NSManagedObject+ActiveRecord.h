@@ -32,8 +32,8 @@
 + (BOOL) truncateAll;
 + (BOOL) truncateAllInContext:(NSManagedObjectContext *)context;
 
-+ (NSArray *) ascendingSortDescriptors:(id)attributesToSortBy, ...;
-+ (NSArray *) descendingSortDescriptors:(id)attributesToSortyBy, ...;
++ (NSArray *) ascendingSortDescriptors:(NSArray *)attributesToSortBy;
++ (NSArray *) descendingSortDescriptors:(NSArray *)attributesToSortBy;
 
 + (NSNumber *) numberOfEntities;
 + (NSNumber *) numberOfEntitiesWithContext:(NSManagedObjectContext *)context;
