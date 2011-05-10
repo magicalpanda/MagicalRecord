@@ -121,43 +121,27 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 	return propertiesWanted;
 }
 
-+ (NSArray *) sortAscending:(BOOL)ascending attributes:(id)attributesToSortBy, ...
++ (NSArray *) sortAscending:(BOOL)ascending attributes:(NSArray *)attributesToSortBy
 {
 	NSMutableArray *attributes = [NSMutableArray array];
-	
-	if ([attributesToSortBy isKindOfClass:[NSArray class]])
-	{
-		id attributeName;
-		va_list variadicArguments;
-		va_start(variadicArguments, attributesToSortBy);
-		while ((attributeName = va_arg(variadicArguments, id)) != nil)
-		{
-			NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:attributeName ascending:ascending];
-			[attributes addObject:sortDescriptor];
-			[sortDescriptor release];
-		}
-		va_end(variadicArguments);
-
-	}
-	else if ([attributesToSortBy isKindOfClass:[NSString class]])
-	{
-		va_list variadicArguments;
-		va_start(variadicArguments, attributesToSortBy);
-		[attributes addObject:[[[NSSortDescriptor alloc] initWithKey:attributesToSortBy ascending:ascending] autorelease] ];
-		va_end(variadicArguments);
-	}
-	
+    
+    for (NSString *attributeName in attributesToSortBy) {
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:attributeName ascending:ascending];
+        [attributes addObject:sortDescriptor];
+        [sortDescriptor release];
+    }
+    
 	return attributes;
 }
 
-+ (NSArray *) ascendingSortDescriptors:(id)attributesToSortBy, ...
++ (NSArray *) ascendingSortDescriptors:(NSArray *)attributesToSortBy
 {
 	return [self sortAscending:YES attributes:attributesToSortBy];
 }
 
-+ (NSArray *) descendingSortDescriptors:(id)attributesToSortyBy, ...
++ (NSArray *) descendingSortDescriptors:(NSArray *)attributesToSortBy
 {
-	return [self sortAscending:NO attributes:attributesToSortyBy];
+	return [self sortAscending:NO attributes:attributesToSortBy];
 }
 
 + (NSFetchRequest *)createFetchRequestInContext:(NSManagedObjectContext *)context
