@@ -601,8 +601,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
     }
     else
     {
-        NSString *entityName = NSStringFromClass([self class]);
-        return [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:context];
+        return [NSEntityDescription insertNewObjectForEntityForName:[[[self class] entityDescription] name] inManagedObjectContext:context];
     }
 }
 
