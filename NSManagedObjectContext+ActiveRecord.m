@@ -30,8 +30,10 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
 
 + (void) setDefaultContext:(NSManagedObjectContext *)moc
 {
-	[defaultManageObjectContext release];
-	defaultManageObjectContext = [moc retain];
+	if (defaultManageObjectContext != moc) {
+		[defaultManageObjectContext release];
+		defaultManageObjectContext = [moc retain];
+	}
 }
 
 + (void) resetDefaultContext
