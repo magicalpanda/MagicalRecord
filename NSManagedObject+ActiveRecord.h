@@ -16,6 +16,9 @@
 + (NSUInteger) defaultBatchSize;
 + (void) setDefaultBatchSize:(NSUInteger)newBatchSize;
 
++ (NSString *)defaultClassPrefix;
++ (void)setDefaultClassPrefix:(NSString *)newDefaultClassPrefix;
+
 + (NSArray *) executeFetchRequest:(NSFetchRequest *)request;
 + (NSArray *) executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
 + (NSFetchRequest *)createFetchRequest;
