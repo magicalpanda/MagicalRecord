@@ -9,6 +9,7 @@
 
 
 static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
+static NSString* defaultClassPrefix = nil;
 
 @implementation NSManagedObject (ActiveRecord)
 
@@ -24,6 +25,20 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 + (NSUInteger) defaultBatchSize
 {
 	return defaultBatchSize;
+}
+
++ (NSString *)defaultClassPrefix
+{
+    return defaultClassPrefix;
+}
+
++ (void)setDefaultClassPrefix:(NSString *)newDefaultClassPrefix
+{
+    @synchronized(self)
+	{
+        [defaultClassPrefix release];
+        defaultClassPrefix = [newDefaultClassPrefix retain];
+	}
 }
 
 + (void) handleErrors:(NSError *)error
@@ -87,7 +102,15 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
     else
     {
         NSString *entityName = NSStringFromClass([self class]);
-        return [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+        
+        NSString* classPrefixToStrip = [self defaultClassPrefix];
+        if (classPrefixToStrip && [entityName hasPrefix:classPrefixToStrip])
+        {
+            entityName = [entityName substringFromIndex:[classPrefixToStrip length]];
+        }
+        
+        return [NSEntityDescription entityForName:entityName
+                           inManagedObjectContext:context];
     }
 }
 
@@ -601,8 +624,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
     }
     else
     {
-        NSString *entityName = NSStringFromClass([self class]);
-        return [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:context];
+        return [NSEntityDescription insertNewObjectForEntityForName:[[[self class] entityDescription] name] inManagedObjectContext:context];
     }
 }
 
