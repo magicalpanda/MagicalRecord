@@ -7,7 +7,7 @@
 #define ENABLE_ACTIVE_RECORD_LOGGING
 
 #ifdef ENABLE_ACTIVE_RECORD_LOGGING
-    #if TARGET_OS_IPHONE
+    #if TARGET_OS_IPHONE || __i386__
         #define ARLog(...) NSLog(@"%s(%x) %@", __PRETTY_FUNCTION__, (unsigned int)self, [NSString stringWithFormat:__VA_ARGS__])        
     #else
         #define ARLog(...) NSLog(@"%s(%qx) %@", __PRETTY_FUNCTION__, (unsigned long long)self, [NSString stringWithFormat:__VA_ARGS__])
