@@ -15,6 +15,25 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
 
 @implementation NSManagedObjectContext (ActiveRecord)
 
+- (id)objectWithURI:(NSURL *)uri {
+	NSLog(@"Retrieving managed object with URI: %@", uri);
+	
+	NSManagedObjectID *objectID = [[self persistentStoreCoordinator] managedObjectIDForURIRepresentation:uri];
+	
+	if (!objectID) {
+		return nil;
+	}
+	
+	NSError *error = nil;
+	NSManagedObject *object = [self existingObjectWithID:objectID error:&error];
+	
+	if (error) {
+		[ActiveRecordHelpers handleErrors:error];
+	}
+	
+	return object;
+}
+
 + (NSManagedObjectContext *)defaultContext
 {
 //    NSAssert([NSThread isMainThread], @"The defaultContext must only be accessed on the **Main Thread**");

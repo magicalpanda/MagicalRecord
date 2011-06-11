@@ -9,6 +9,8 @@
 
 @interface NSManagedObjectContext (ActiveRecord)
 
+- (id)objectWithURI:(NSURL *)uri;
+
 - (void) observeContext:(NSManagedObjectContext *)otherContext;
 - (void) stopObservingContext:(NSManagedObjectContext *)otherContext;
 - (void) observeContextOnMainThread:(NSManagedObjectContext *)otherContext;

@@ -12,6 +12,13 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 @implementation NSManagedObject (ActiveRecord)
 
+- (NSURL *)uri {
+	return [[self objectID] URIRepresentation];
+}
+
+- (NSString *)uriString {
+	return [[self uri] absoluteString];
+}
 
 + (void) setDefaultBatchSize:(NSUInteger)newBatchSize
 {
