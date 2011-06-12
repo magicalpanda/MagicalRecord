@@ -77,33 +77,13 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 }
 #endif
 
-+ (NSEntityDescription *)entityDescriptionInContext:(NSManagedObjectContext *)context
-{
-    if ([self respondsToSelector:@selector(entityInManagedObjectContext:)]) 
-    {
-        NSEntityDescription *entity = [self performSelector:@selector(entityInManagedObjectContext:) withObject:context];
-        return entity;
-    }
-    else
-    {
-        NSString *entityName = NSStringFromClass([self class]);
-        return [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
-    }
-}
-
-+ (NSEntityDescription *)entityDescription
-{
-	return [self entityDescriptionInContext:[NSManagedObjectContext contextForCurrentThread]];
-}
-
 + (NSArray *)propertiesNamed:(NSArray *)properties
 {
-	NSEntityDescription *description = [self entityDescription];
 	NSMutableArray *propertiesWanted = [NSMutableArray array];
 	
 	if (properties)
 	{
-		NSDictionary *propDict = [description propertiesByName];
+		NSDictionary *propDict = [[self entity] propertiesByName];
 		
 		for (NSString *propertyName in properties)
 		{
@@ -147,7 +127,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 + (NSFetchRequest *)createFetchRequestInContext:(NSManagedObjectContext *)context
 {
 	NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
-	[request setEntity:[self entityDescriptionInContext:context]];
+	[request setEntity:[self entity]];
 	
 	return request;	
 }
