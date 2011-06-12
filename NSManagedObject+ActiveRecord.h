@@ -20,8 +20,6 @@
 + (NSArray *) executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
 + (NSFetchRequest *)createFetchRequest;
 + (NSFetchRequest *)createFetchRequestInContext:(NSManagedObjectContext *)context;
-+ (NSEntityDescription *)entityDescription;
-+ (NSEntityDescription *)entityDescriptionInContext:(NSManagedObjectContext *)context;
 + (NSArray *)propertiesNamed:(NSArray *)properties;
 
 + (id) createEntity;
