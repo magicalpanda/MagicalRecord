@@ -12,6 +12,9 @@
 #import "NSPersistentStore+ActiveRecord.h"
 #import <dispatch/dispatch.h>
 
+static id errorHandlerTarget = nil;
+static SEL errorHandlerAction = nil;
+
 @implementation ActiveRecordHelpers
 
 + (void) cleanUp
@@ -22,35 +25,53 @@
 	[NSPersistentStore setDefaultPersistentStore:nil];
 }
 
++ (void) defaultErrorHandler:(NSError *)error
+{
+    NSDictionary *userInfo = [error userInfo];
+    for (NSArray *detailedError in [userInfo allValues])
+    {
+        if ([detailedError isKindOfClass:[NSArray class]])
+        {
+            for (NSError *e in detailedError)
+            {
+                if ([e respondsToSelector:@selector(userInfo)])
+                {
+                    ARLog(@"Error Details: %@", [e userInfo]);
+                }
+                else
+                {
+                    ARLog(@"Error Details: %@", e);
+                }
+            }
+        }
+        else
+        {
+            ARLog(@"Error: %@", detailedError);
+        }
+    }
+    ARLog(@"Error Domain: %@", [error domain]);
+    ARLog(@"Recovery Suggestion: %@", [error localizedRecoverySuggestion]);
+}
+
 + (void) handleErrors:(NSError *)error
 {
 	if (error)
 	{
-		NSDictionary *userInfo = [error userInfo];
-		for (NSArray *detailedError in [userInfo allValues])
-		{
-			if ([detailedError isKindOfClass:[NSArray class]])
-			{
-				for (NSError *e in detailedError)
-				{
-					if ([e respondsToSelector:@selector(userInfo)])
-					{
-						ARLog(@"Error Details: %@", [e userInfo]);
-					}
-					else
-					{
-						ARLog(@"Error Details: %@", e);
-					}
-				}
-			}
-			else
-			{
-				ARLog(@"Error: %@", detailedError);
-			}
-		}
-		ARLog(@"Error Domain: %@", [error domain]);
-		ARLog(@"Recovery Suggestion: %@", [error localizedRecoverySuggestion]);	
-	}
+        // If a custom error handler is set, call that
+        if (errorHandlerTarget != nil && errorHandlerAction != nil) {
+            [errorHandlerTarget performSelector:errorHandlerAction withObject:error];
+            return;
+        }
+
+        // Otherwise, fall back to the default error handling
+        [self defaultErrorHandler:error];
+    }
+}
+
++ (void) setErrorHandlerTarget:(id)target action:(SEL)action
+{
+    errorHandlerTarget = target;    /* Deliberately don't retain to avoid potential retain cycles */
+    errorHandlerAction = action;
 }
 
 - (void) handleErrors:(NSError *)error
