@@ -104,11 +104,11 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
 {
 	if ([NSThread isMainThread])
 	{
-	  [self mergeChangesFromNotification:notification];
+		[self mergeChangesFromNotification:notification];
 	}
 	else
 	{
-	  [self performSelectorOnMainThread:@selector(mergeChangesFromNotification:) withObject:notification waitUntilDone:YES];
+		[self performSelectorOnMainThread:@selector(mergeChangesFromNotification:) withObject:notification waitUntilDone:YES];
 	}
 }
 
@@ -130,6 +130,31 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
 
 	[ActiveRecordHelpers handleErrors:error];
 
+	return saved && error == nil;
+}
+
+- (BOOL) saveWithErrorHandler:(void^(NSError *))errorCallback
+{
+	NSError *error = nil;
+	BOOL saved = NO;
+	
+	@try
+	{
+		saved = [self save:&error];
+	}
+	@catch (NSException *exception)
+	{
+		ARLog(@"Problem saving: %@", (id)[exception userInfo] ?: (id)[exception reason]);	
+	}
+	
+	if (!saved && errorCallback)
+	{
+		errorCallback(error);
+	}
+	else
+	{
+		[ActiveRecordHelpers handleErrors:error];
+	}
 	return saved && error == nil;
 }
 
@@ -189,7 +214,6 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
 + (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 {
     NSManagedObjectContext *context = [self contextWithStoreCoordinator:coordinator];
-//    [[self defaultContext] observeContext:context];
     context.notifiesMainContextOnSave = YES;
     return context;
 }
@@ -202,7 +226,6 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
 + (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThread
 {
     NSManagedObjectContext *context = [self context];
-//    [[self defaultContext] observeContextOnMainThread:context];
     context.notifiesMainContextOnSave = YES;
     return context;
 }

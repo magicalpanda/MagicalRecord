@@ -60,13 +60,15 @@ static SEL errorHandlerAction = nil;
 	if (error)
 	{
         // If a custom error handler is set, call that
-        if (errorHandlerTarget != nil && errorHandlerAction != nil) {
+        if (errorHandlerTarget != nil && errorHandlerAction != nil) 
+		{
             [errorHandlerTarget performSelector:errorHandlerAction withObject:error];
-            return;
         }
-
-        // Otherwise, fall back to the default error handling
-        [self defaultErrorHandler:error];
+		else
+		{
+	        // Otherwise, fall back to the default error handling
+	        [self defaultErrorHandler:error];			
+		}
     }
 }
 
