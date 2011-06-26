@@ -13,7 +13,7 @@
 #endif
 
 
-#define MAC_APP_STORE   1
+#define MAC_APP_STORE_SAFE   1
 
 #import "ActiveRecordHelpers.h"
 #import "ARCoreDataAction.h"
