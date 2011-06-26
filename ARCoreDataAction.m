@@ -7,10 +7,11 @@
 //
 
 #import "ARCoreDataAction.h"
+#import "CoreData+ActiveRecordFetching.h"
 
 static dispatch_queue_t coredata_background_save_queue;
 
-dispatch_queue_t background_save_queue()
+dispatch_queue_t background_save_queue(void)
 {
     if (coredata_background_save_queue == NULL)
     {
@@ -36,8 +37,8 @@ void cleanup_save_queue()
 
 #ifdef NS_BLOCKS_AVAILABLE
 
-+ (void) saveDataWithBlock:(void(^)(NSManagedObjectContext *localContext))block
-{   
++ (void) saveDataWithBlock:(void (^)(NSManagedObjectContext *localContext))block errorHandler:(void (^)(NSError *))errorHandler
+{
     NSManagedObjectContext *mainContext  = [NSManagedObjectContext defaultContext];
     NSManagedObjectContext *localContext = mainContext;
     
@@ -59,11 +60,16 @@ void cleanup_save_queue()
     
     if ([localContext hasChanges]) 
     {
-        [localContext save];
+        [localContext saveWithErrorHandler:errorHandler];
     }
     
     localContext.notifiesMainContextOnSave = NO;
     [mainContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
+}
+
++ (void) saveDataWithBlock:(void(^)(NSManagedObjectContext *localContext))block
+{   
+    [self saveDataWithBlock:block errorHandler:NULL];
 }
 
 + (void) saveDataInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block
@@ -85,21 +91,41 @@ void cleanup_save_queue()
     });
 }
 
++ (void) saveDataInBackgroundWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))callback errorHandler:(void (^)(NSError *))errorHandler
+{
+    dispatch_async(background_save_queue(), ^{
+        [self saveDataWithBlock:block errorHandler:errorHandler];
+        
+        if (callback)
+        {
+            dispatch_async(dispatch_get_main_queue(), callback);
+        }
+    });
+}
+
 + (void) lookupWithBlock:(void(^)(NSManagedObjectContext *localContext))block
 {
     NSManagedObjectContext *context = [NSManagedObjectContext contextForCurrentThread];
-    
-    block(context);
+
+    if (block)
+    {
+        block(context);
+    }
 }
 
 + (void) saveDataWithOptions:(ARCoreDataSaveOption)options withBlock:(void(^)(NSManagedObjectContext *localContext))block;
 {
-    //TODO: add implementation
+    [self saveDataWithOptions:options withBlock:block completion:NULL];
 }
 
 + (void) saveDataWithOptions:(ARCoreDataSaveOption)options withBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))callback;
 {
     //TODO: add implementation    
+}
+
++ (void) saveDataWithOptions:(ARCoreDataSaveOption)options withBlock:(void (^)(NSManagedObjectContext *))block completion:(void (^)(void))callback errorHandler:(void(^)(NSError *))errorCallback
+{
+    
 }
 
 #endif

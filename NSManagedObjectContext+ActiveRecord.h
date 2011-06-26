@@ -14,6 +14,11 @@
 - (void) observeContextOnMainThread:(NSManagedObjectContext *)otherContext;
 
 - (BOOL) save;
+
+#ifdef NS_BLOCKS_AVAILABLE
+- (BOOL) saveWithErrorHandler:(void(^)(NSError *))errorCallback;
+#endif
+
 - (BOOL) saveOnMainThread;
 - (BOOL) saveOnBackgroundThread;
 - (void) setNotifiesMainContextOnSave:(BOOL)enabled;
@@ -22,9 +27,10 @@
 + (NSManagedObjectContext *) defaultContext;
 + (void) setDefaultContext:(NSManagedObjectContext *)moc;
 + (void) resetContextForCurrentThread;
-+ (NSManagedObjectContext *) contextForCurrentThread;
 
 + (NSManagedObjectContext *) context;
++ (NSManagedObjectContext *) contextForCurrentThread;
+
 + (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThread;
 + (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 + (NSManagedObjectContext *) contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;

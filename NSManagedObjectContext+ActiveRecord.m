@@ -5,9 +5,7 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "NSManagedObject+ActiveRecord.h"
-#import "NSManagedObjectContext+ActiveRecord.h"
-#import "NSPersistentStoreCoordinator+ActiveRecord.h"
+#import "CoreData+ActiveRecordFetching.h"
 #import <objc/runtime.h>
 
 static NSManagedObjectContext *defaultManageObjectContext = nil;
@@ -32,16 +30,17 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
 {
 	if (defaultManageObjectContext != moc) 
 	{
-		[defaultManageObjectContext release];
-		defaultManageObjectContext = [moc retain];
+		defaultManageObjectContext = moc;
 	}
 }
 
 + (void) resetDefaultContext
 {
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        [[NSManagedObjectContext defaultContext] reset];
-    });
+    void (^resetBlock)(void) = ^{
+        [[NSManagedObjectContext defaultContext] reset];        
+    };
+    
+    dispatch_async(dispatch_get_current_queue(), resetBlock);
 }
 
 + (void) resetContextForCurrentThread {
@@ -133,7 +132,8 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
 	return saved && error == nil;
 }
 
-- (BOOL) saveWithErrorHandler:(void^(NSError *))errorCallback
+#ifdef NS_BLOCKS_AVAILABLE
+- (BOOL) saveWithErrorHandler:(void(^)(NSError *))errorCallback
 {
 	NSError *error = nil;
 	BOOL saved = NO;
@@ -157,12 +157,14 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
 	}
 	return saved && error == nil;
 }
+#endif
 
 - (void) saveWrapper
 {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	[self save];
-	[pool drain];
+    @autoreleasepool
+    {
+        [self save];
+    }
 }
 
 - (BOOL) saveOnBackgroundThread
@@ -208,7 +210,7 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
         context = [[NSManagedObjectContext alloc] init];
         [context setPersistentStoreCoordinator:coordinator];
     }
-    return [context autorelease];
+    return context;
 }
 
 + (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;

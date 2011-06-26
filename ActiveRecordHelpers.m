@@ -5,12 +5,7 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "ActiveRecordHelpers.h"
-#import "ARCoreDataAction.h"
-#import "NSManagedObjectContext+ActiveRecord.h"
-#import "NSPersistentStoreCoordinator+ActiveRecord.h"
-#import "NSManagedObjectModel+ActiveRecord.h"
-#import "NSPersistentStore+ActiveRecord.h"
+#import "CoreData+ActiveRecordFetching.h"
 #import <dispatch/dispatch.h>
 
 static id errorHandlerTarget = nil;

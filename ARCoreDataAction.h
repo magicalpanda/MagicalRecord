@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NSManagedObjectContext+ActiveRecord.h"
 
 typedef enum
 {
@@ -36,6 +37,5 @@ typedef enum
 + (void) lookupWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
 
 #endif
-
 
 @end

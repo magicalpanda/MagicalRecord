@@ -3,10 +3,8 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import <CoreData/CoreData.h>
 #import "NSManagedObject+ActiveRecord.h"
-#import "NSManagedObjectContext+ActiveRecord.h"
-
+#import "CoreData+ActiveRecordFetching.h"
 
 static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
@@ -125,10 +123,10 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 {
 	NSMutableArray *attributes = [NSMutableArray array];
     
-    for (NSString *attributeName in attributesToSortBy) {
+    for (NSString *attributeName in attributesToSortBy) 
+    {
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:attributeName ascending:ascending];
         [attributes addObject:sortDescriptor];
-        [sortDescriptor release];
     }
     
 	return attributes;
@@ -146,7 +144,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 + (NSFetchRequest *)createFetchRequestInContext:(NSManagedObjectContext *)context
 {
-	NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
 	[request setEntity:[self entityDescriptionInContext:context]];
 	
 	return request;	
@@ -293,7 +291,6 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 	
 	NSSortDescriptor *sortBy = [[NSSortDescriptor alloc] initWithKey:sortTerm ascending:ascending];
 	[request setSortDescriptors:[NSArray arrayWithObject:sortBy]];
-	[sortBy release];
 	
 	return request;
 }
@@ -314,7 +311,6 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 	
 	NSSortDescriptor *sortBy = [[NSSortDescriptor alloc] initWithKey:sortTerm ascending:ascending];
 	[request setSortDescriptors:[NSArray arrayWithObject:sortBy]];
-	[sortBy release];
 	
 	return request;
 }
@@ -395,7 +391,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 																				 managedObjectContext:context
 																				   sectionNameKeyPath:group
 																							cacheName:cacheName];
-	return [controller autorelease];
+	return controller;
 }
 
 + (NSFetchedResultsController *) fetchRequestAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending 
@@ -440,7 +436,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 											  sectionNameKeyPath:group
 													   cacheName:cacheName];
     [self performFetch:controller];
-	return [controller autorelease];
+	return controller;
 }
 
 + (NSFetchedResultsController *) fetchRequest:(NSFetchRequest *)request groupedBy:(NSString *)group
@@ -668,15 +664,16 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 - (id) inContext:(NSManagedObjectContext*)context 
 {
     NSError *error = nil;
-    NSManagedObject *inContext = [[context existingObjectWithID:[self objectID] error:&error] retain];
+    NSManagedObject *inContext = [context existingObjectWithID:[self objectID] error:&error];
     [ActiveRecordHelpers handleErrors:error];
     
-    return [inContext autorelease];
+    return inContext;
 }
 
 - (id) inThreadContext 
 {
-    return [self inContext:[NSManagedObjectContext contextForCurrentThread]];
+    __weak NSManagedObject *weakSelf = self;
+    return [weakSelf inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 @end
