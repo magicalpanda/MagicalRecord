@@ -133,7 +133,7 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
 	return saved && error == nil;
 }
 
-- (BOOL) saveWithErrorHandler:(void^(NSError *))errorCallback
+- (BOOL) saveWithErrorHandler:(void(^)(NSError *))errorCallback
 {
 	NSError *error = nil;
 	BOOL saved = NO;
