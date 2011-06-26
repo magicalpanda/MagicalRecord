@@ -12,6 +12,9 @@
     #define ARLog(...) ((void)0)
 #endif
 
+
+#define MAC_APP_STORE   1
+
 #import "ActiveRecordHelpers.h"
 #import "ARCoreDataAction.h"
 #import "NSManagedObject+ActiveRecord.h"
