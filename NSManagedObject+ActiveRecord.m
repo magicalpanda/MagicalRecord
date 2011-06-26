@@ -502,7 +502,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 + (id)findFirstWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
 {
-    NSFetchRequest *request = [self requestFirstWithPredicate:searchTerm];
+    NSFetchRequest *request = [self requestFirstWithPredicate:searchTerm inContext:context];
     
     return [self executeFetchRequestAndReturnFirstObject:request inContext:context];
 }
