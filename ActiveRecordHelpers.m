@@ -6,6 +6,7 @@
 //
 
 #import "ActiveRecordHelpers.h"
+#import "ARCoreDataAction.h"
 #import "NSManagedObjectContext+ActiveRecord.h"
 #import "NSPersistentStoreCoordinator+ActiveRecord.h"
 #import "NSManagedObjectModel+ActiveRecord.h"
@@ -19,6 +20,7 @@ static SEL errorHandlerAction = nil;
 
 + (void) cleanUp
 {
+	[ARCoreDataAction cleanUp];
 	[NSManagedObjectContext setDefaultContext:nil];
 	[NSManagedObjectModel setDefaultManagedObjectModel:nil];
 	[NSPersistentStoreCoordinator setDefaultStoreCoordinator:nil];
