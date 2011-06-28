@@ -9,9 +9,12 @@
 #import "ARCoreDataAction.h"
 #import "CoreData+ActiveRecordFetching.h"
 
+dispatch_queue_t background_save_queue(void);
+void cleanup_save_queue(void);
+
 static dispatch_queue_t coredata_background_save_queue;
 
-dispatch_queue_t background_save_queue(void)
+dispatch_queue_t background_save_queue()
 {
     if (coredata_background_save_queue == NULL)
     {
