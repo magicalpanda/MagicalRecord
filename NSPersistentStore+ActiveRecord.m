@@ -35,7 +35,7 @@ static NSPersistentStore *defaultPersistentStore = nil;
 + (NSString *)applicationLibraryDirectory
 {
 
-#ifdef TARGET_OS_MAC
+#ifndef TARGET_OS_IPHONE
         
     NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
     return [[self directory:NSApplicationSupportDirectory] stringByAppendingPathComponent:applicationName];
