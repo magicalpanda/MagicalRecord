@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ActiveRecordHelpers.h"
+#import "MagicalRecordHelpers.h"
 
 @interface NSManagedObjectModel (ActiveRecord)
 

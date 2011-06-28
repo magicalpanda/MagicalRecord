@@ -5,11 +5,11 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "CoreData+ActiveRecordFetching.h"
+#import "CoreData+MagicalRecord.h"
 #import <objc/runtime.h>
 
 static NSManagedObjectContext *defaultManageObjectContext = nil;
-static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NSManagedObjectContextForThreadKey";
+static NSString const * kActiveRecordManagedObjectContextKey = @"MagicalRecord_NSManagedObjectContextForThreadKey";
 
 @implementation NSManagedObjectContext (ActiveRecord)
 
@@ -49,7 +49,7 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
 
 + (NSManagedObjectContext *) contextForCurrentThread
 {
-	if ( [NSThread isMainThread] )
+	if ([NSThread isMainThread])
 	{
 		return [self defaultContext];
 	}
@@ -57,7 +57,7 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
 	{
 		NSMutableDictionary *threadDict = [[NSThread currentThread] threadDictionary];
 		NSManagedObjectContext *threadContext = [threadDict objectForKey:kActiveRecordManagedObjectContextKey];
-		if ( threadContext == nil )
+		if (threadContext == nil)
 		{
 			threadContext = [self contextThatNotifiesDefaultContextOnMainThread];
 			[threadDict setObject:threadContext forKey:kActiveRecordManagedObjectContextKey];
@@ -96,6 +96,7 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
 	ARLog(@"Merging changes to %@context%@", 
           self == [NSManagedObjectContext defaultContext] ? @"*** DEFAULT *** " : @"",
           ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
+    
 	[self mergeChangesFromContextDidSaveNotification:notification];
 }
 
@@ -120,6 +121,7 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
 		ARLog(@"Saving %@Context%@", 
               self == [[self class] defaultContext] ? @" *** Default *** ": @"", 
               ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
+        
 		saved = [self save:&error];
 	}
 	@catch (NSException *exception)
@@ -127,7 +129,7 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
 		ARLog(@"Problem saving: %@", (id)[exception userInfo] ?: (id)[exception reason]);
 	}
 
-	[ActiveRecordHelpers handleErrors:error];
+	[MagicalRecordHelpers handleErrors:error];
 
 	return saved && error == nil;
 }
@@ -153,7 +155,7 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
 	}
 	else
 	{
-		[ActiveRecordHelpers handleErrors:error];
+		[MagicalRecordHelpers handleErrors:error];
 	}
 	return saved && error == nil;
 }

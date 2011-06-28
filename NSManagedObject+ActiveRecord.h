@@ -5,13 +5,13 @@
 //
 
 #import <CoreData/CoreData.h>
-#import "ActiveRecordHelpers.h"
+#import "MagicalRecordHelpers.h"
 
 #define kActiveRecordDefaultBatchSize 20
 
 @interface NSManagedObject (ActiveRecord)
 
-+ (void) handleErrors:(NSError *)error;
+//+ (void) handleErrors:(NSError *)error;
 
 + (NSUInteger) defaultBatchSize;
 + (void) setDefaultBatchSize:(NSUInteger)newBatchSize;

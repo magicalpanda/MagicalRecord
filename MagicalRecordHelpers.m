@@ -5,13 +5,13 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "CoreData+ActiveRecordFetching.h"
+#import "CoreData+MagicalRecord.h"
 #import <dispatch/dispatch.h>
 
 static id errorHandlerTarget = nil;
 static SEL errorHandlerAction = nil;
 
-@implementation ActiveRecordHelpers
+@implementation MagicalRecordHelpers
 
 + (void) cleanUp
 {

@@ -4,7 +4,7 @@
 //
 
 #import "NSManagedObject+ActiveRecord.h"
-#import "CoreData+ActiveRecordFetching.h"
+#import "CoreData+MagicalRecord.h"
 
 static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
@@ -24,21 +24,12 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 	return defaultBatchSize;
 }
 
-+ (void) handleErrors:(NSError *)error
-{
-	if (error)
-	{
-		ARLog(@"Error Requesting Data: %@", [error userInfo]);
-		//TODO: maybe call a delegate to handle the error? subclass/hook method for error?
-	}
-}
-
 + (NSArray *) executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
 {
 	NSError *error = nil;
 	
 	NSArray *results = [context executeFetchRequest:request error:&error];
-	[ActiveRecordHelpers handleErrors:error];
+	[MagicalRecordHelpers handleErrors:error];
 	return results;	
 }
 
@@ -70,7 +61,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 	NSError *error = nil;
 	if (![controller performFetch:&error])
 	{
-		[ActiveRecordHelpers handleErrors:error];
+		[MagicalRecordHelpers handleErrors:error];
 	}
 }
 #endif
@@ -162,7 +153,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 {
 	NSError *error = nil;
 	NSUInteger count = [context countForFetchRequest:[self createFetchRequestInContext:context] error:&error];
-	[ActiveRecordHelpers handleErrors:error];
+	[MagicalRecordHelpers handleErrors:error];
 	
 	return [NSNumber numberWithUnsignedInteger:count];	
 }
@@ -179,7 +170,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 	[request setPredicate:searchTerm];
 	
 	NSUInteger count = [context countForFetchRequest:request error:&error];
-	[ActiveRecordHelpers handleErrors:error];
+	[MagicalRecordHelpers handleErrors:error];
 	
 	return [NSNumber numberWithUnsignedInteger:count];	
 }
@@ -198,7 +189,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
     [request setReturnsDistinctResults:YES];
 	
 	NSUInteger count = [context countForFetchRequest:request error:&error];
-	[ActiveRecordHelpers handleErrors:error];
+	[MagicalRecordHelpers handleErrors:error];
 	
 	return [NSNumber numberWithUnsignedInteger:count];	   
 }
@@ -665,7 +656,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 {
     NSError *error = nil;
     NSManagedObject *inContext = [context existingObjectWithID:[self objectID] error:&error];
-    [ActiveRecordHelpers handleErrors:error];
+    [MagicalRecordHelpers handleErrors:error];
     
     return inContext;
 }

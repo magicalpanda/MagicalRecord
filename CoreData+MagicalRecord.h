@@ -14,8 +14,9 @@
 
 #import <CoreData/CoreData.h>
 
-#import "ActiveRecordHelpers.h"
+#import "MagicalRecordHelpers.h"
 #import "ARCoreDataAction.h"
+
 #import "NSManagedObject+ActiveRecord.h"
 #import "NSManagedObjectContext+ActiveRecord.h"
 #import "NSPersistentStoreCoordinator+ActiveRecord.h"

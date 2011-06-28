@@ -15,7 +15,7 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
 #endif
 
-@interface ActiveRecordHelpers : NSObject {}
+@interface MagicalRecordHelpers : NSObject {}
 
 + (void) cleanUp;
 

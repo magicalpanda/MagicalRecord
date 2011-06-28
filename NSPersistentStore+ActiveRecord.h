@@ -5,7 +5,7 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "ActiveRecordHelpers.h"
+#import "MagicalRecordHelpers.h"
 
 #define kActiveRecordDefaultStoreFileName @"CoreDataStore.sqlite"
 

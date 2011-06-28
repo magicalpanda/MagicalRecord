@@ -23,8 +23,6 @@ static NSString * const kNSManagedObjectAttributeJSONKeyMapKey = @"jsonKeyName";
 
 @end
 
-
-
 @implementation NSManagedObject (NSManagedObject_JSONHelpers)
 
 
@@ -53,4 +51,5 @@ static NSString * const kNSManagedObjectAttributeJSONKeyMapKey = @"jsonKeyName";
         [self setValue:value forKey:attributeName];
     }
 }
+
 @end

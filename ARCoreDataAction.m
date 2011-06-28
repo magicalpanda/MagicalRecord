@@ -7,7 +7,7 @@
 //
 
 #import "ARCoreDataAction.h"
-#import "CoreData+ActiveRecordFetching.h"
+#import "CoreData+MagicalRecord.h"
 
 dispatch_queue_t background_save_queue(void);
 void cleanup_save_queue(void);

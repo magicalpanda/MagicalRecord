@@ -41,7 +41,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
                                                          error:&error];
     if (!store) 
     {
-        [ActiveRecordHelpers handleErrors:error];
+        [MagicalRecordHelpers handleErrors:error];
     }
     [NSPersistentStore setDefaultPersistentStore:store];        
 }
@@ -115,7 +115,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
                                                                  error:&error];
     if (!store)
     {
-        [ActiveRecordHelpers handleErrors:error];
+        [MagicalRecordHelpers handleErrors:error];
     }
     return store;
 }
