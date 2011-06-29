@@ -21,6 +21,8 @@ typedef enum
 
 @interface ARCoreDataAction : NSObject {}
 
++ (void) cleanUp;
+
 #ifdef NS_BLOCKS_AVAILABLE
 
 + (void) saveDataWithBlock:(void(^)(NSManagedObjectContext *localContext))block;

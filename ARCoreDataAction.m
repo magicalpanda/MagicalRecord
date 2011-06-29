@@ -19,7 +19,20 @@ dispatch_queue_t background_save_queue()
     return coredata_background_save_queue;
 }
 
+void cleanup_save_queue()
+{
+	if (coredata_background_save_queue != NULL)
+	{
+		dispatch_release(coredata_background_save_queue);
+	}
+}
+
 @implementation ARCoreDataAction
+
++ (void) cleanUp
+{
+	cleanup_save_queue();
+}
 
 #ifdef NS_BLOCKS_AVAILABLE
 

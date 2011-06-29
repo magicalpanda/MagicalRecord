@@ -15,14 +15,13 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
 #endif
 
-@interface ActiveRecordHelpers : NSObject {
-
-}
+@interface ActiveRecordHelpers : NSObject {}
 
 + (void) cleanUp;
 
 + (void) handleErrors:(NSError *)error;
 - (void) handleErrors:(NSError *)error;
++ (void) setErrorHandlerTarget:(id)target action:(SEL)action;
 
 + (void) setupCoreDataStack;
 + (void) setupCoreDataStackWithInMemoryStore;

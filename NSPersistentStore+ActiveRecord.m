@@ -20,15 +20,6 @@ static NSPersistentStore *defaultPersistentStore = nil;
 {
 	[defaultPersistentStore release];
 	defaultPersistentStore = [store retain];
-    
-//#ifdef UIKIT_EXTERN_CLASS
-//    if (store == nil) 
-//    {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Core Data Error" message:@"The default NSPersistentStore was set to nil. The most likely cause is the NSManagedObjectModel version has changed. Either create a new data store, or delete the previous store to continue" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//        [alert show];
-//        [alert release];
-//    }
-//#endif
 }
 
 + (NSString *) directory:(int) type
@@ -43,7 +34,20 @@ static NSPersistentStore *defaultPersistentStore = nil;
 
 + (NSString *)applicationLibraryDirectory
 {
-	return [self directory:NSLibraryDirectory];
+
+#ifdef TARGET_OS_MAC
+        
+    NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
+    return [[self directory:NSApplicationSupportDirectory] stringByAppendingPathComponent:applicationName];
+        
+#elif defined(TARGET_OS_IPHONE)
+
+    return [self directory:NSLibraryDirectory];
+        
+#else
+#warning Unsupported OS Target specified
+#endif
+        
 }
 
 + (NSURL *) urlForStoreName:(NSString *)storeFileName
