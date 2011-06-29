@@ -27,8 +27,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
 
 + (void) setDefaultStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
-	[defaultCoordinator release];
-	defaultCoordinator = [coordinator retain];
+	defaultCoordinator = coordinator;
 }
 
 - (void) setupSqliteStoreNamed:(id)storeFileName withOptions:(NSDictionary *)options
@@ -54,7 +53,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
     
     [psc setupSqliteStoreNamed:[persistentStore URL] withOptions:nil];
     
-    return [psc autorelease];
+    return psc;
 }
 
 + (NSPersistentStoreCoordinator *) coordinatorWithSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *)options
@@ -64,7 +63,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
 
     [psc setupSqliteStoreNamed:storeFileName withOptions:options];
     
-    return [psc autorelease];
+    return psc;
 }
 
 + (NSPersistentStoreCoordinator *) coordinatorWithSqliteStoreNamed:(NSString *)storeFileName
@@ -94,7 +93,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
     {
         [coordinator performSelector:@selector(setupAutoMigratingSqliteStoreNamed:) withObject:storeFileName afterDelay:0.5];
     }
-    return [coordinator autorelease];
+    return coordinator;
 }
 
 + (NSPersistentStoreCoordinator *) coordinatorWithInMemoryStore
@@ -103,7 +102,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
 	NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
 	
     [NSPersistentStore setDefaultPersistentStore:[psc addInMemoryStore]];
-	return [psc autorelease];
+	return psc;
 }
 
 - (NSPersistentStore *) addInMemoryStore
@@ -123,7 +122,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
 
 + (NSPersistentStoreCoordinator *) newPersistentStoreCoordinator
 {
-	return [[self coordinatorWithSqliteStoreNamed:kActiveRecordDefaultStoreFileName] retain];
+	return [self coordinatorWithSqliteStoreNamed:kActiveRecordDefaultStoreFileName];
 }
 
 @end
