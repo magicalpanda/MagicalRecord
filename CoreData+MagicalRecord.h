@@ -17,10 +17,10 @@
 #import "MagicalRecordHelpers.h"
 #import "ARCoreDataAction.h"
 
-#import "NSManagedObject+ActiveRecord.h"
-#import "NSManagedObjectContext+ActiveRecord.h"
-#import "NSPersistentStoreCoordinator+ActiveRecord.h"
-#import "NSManagedObjectModel+ActiveRecord.h"
-#import "NSPersistentStore+ActiveRecord.h"
+#import "NSManagedObject+MagicalRecord.h"
+#import "NSManagedObjectContext+MagicalRecord.h"
+#import "NSPersistentStoreCoordinator+MagicalRecord.h"
+#import "NSManagedObjectModel+MagicalRecord.h"
+#import "NSPersistentStore+MagicalRecord.h"
 
 #import "NSManagedObject+JSONHelpers.h"

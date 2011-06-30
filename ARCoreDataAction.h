@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NSManagedObjectContext+ActiveRecord.h"
+#import "NSManagedObjectContext+MagicalRecord.h"
 
 typedef enum
 {

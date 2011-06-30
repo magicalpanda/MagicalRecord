@@ -1,15 +1,15 @@
 //
-//  NSPersistentStore+ActiveRecord.m
+//  NSPersistentStore+MagicalRecord.m
 //
 //  Created by Saul Mora on 3/11/10.
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "NSPersistentStore+ActiveRecord.h"
+#import "NSPersistentStore+MagicalRecord.h"
 
 static NSPersistentStore *defaultPersistentStore = nil;
 
-@implementation NSPersistentStore (ActiveRecord)
+@implementation NSPersistentStore (MagicalRecord)
 
 + (NSPersistentStore *) defaultPersistentStore
 {
@@ -33,12 +33,12 @@ static NSPersistentStore *defaultPersistentStore = nil;
 
 + (NSString *)applicationLibraryDirectory
 {
-#ifdef TARGET_OS_MAC
+#if !defined(TARGET_OS_IPHONE) && !defined(TARGET_IPHONE_SIMULATOR)
     
     NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
     return [[self directory:NSApplicationSupportDirectory] stringByAppendingPathComponent:applicationName];
     
-#elif defined(TARGET_OS_IPHONE)
+#elif defined(TARGET_OS_MAC)
     
 	return [self directory:NSLibraryDirectory];
     
@@ -67,7 +67,7 @@ static NSPersistentStore *defaultPersistentStore = nil;
 
 + (NSURL *)defaultLocalStoreUrl
 {
-    return [self urlForStoreName:kActiveRecordDefaultStoreFileName];
+    return [self urlForStoreName:kMagicalRecordDefaultStoreFileName];
 }
 
 @end

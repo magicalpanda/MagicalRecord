@@ -1,5 +1,5 @@
 //
-//  NSManagedObjectContext+ActiveRecord.m
+//  NSManagedObjectContext+MagicalRecord.m
 //
 //  Created by Saul Mora on 11/23/09.
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
@@ -9,9 +9,9 @@
 #import <objc/runtime.h>
 
 static NSManagedObjectContext *defaultManageObjectContext = nil;
-static NSString const * kActiveRecordManagedObjectContextKey = @"MagicalRecord_NSManagedObjectContextForThreadKey";
+static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_NSManagedObjectContextForThreadKey";
 
-@implementation NSManagedObjectContext (ActiveRecord)
+@implementation NSManagedObjectContext (MagicalRecord)
 
 + (NSManagedObjectContext *)defaultContext
 {
@@ -56,11 +56,11 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"MagicalRecord_N
 	else
 	{
 		NSMutableDictionary *threadDict = [[NSThread currentThread] threadDictionary];
-		NSManagedObjectContext *threadContext = [threadDict objectForKey:kActiveRecordManagedObjectContextKey];
+		NSManagedObjectContext *threadContext = [threadDict objectForKey:kMagicalRecordManagedObjectContextKey];
 		if (threadContext == nil)
 		{
 			threadContext = [self contextThatNotifiesDefaultContextOnMainThread];
-			[threadDict setObject:threadContext forKey:kActiveRecordManagedObjectContextKey];
+			[threadDict setObject:threadContext forKey:kMagicalRecordManagedObjectContextKey];
 		}
 		return threadContext;
 	}

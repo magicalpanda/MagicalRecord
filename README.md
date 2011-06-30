@@ -1,4 +1,4 @@
-# ActiveRecord Fetching for Core Data
+# MagicalRecord for Core Data
 
 In software engineering, the active record pattern is a design pattern found in software that stores its data in relational databases. It was named by Martin Fowler in his book Patterns of Enterprise Application Architecture. The interface to such an object would include functions such as Insert, Update, and Delete, plus properties that correspond more-or-less directly to the columns in the underlying database table.
 
@@ -22,8 +22,8 @@ Active Record for Core Data was inspired by the ease of Ruby on Rails' Active Re
 
 ## Setting up the Core Data Stack
 
-To get started, first, import the header file *CoreData+ActiveRecordFetching.h* in your project's pch file. This will allow a global include of all the required headers.
-Next, somewhere in your app's startup, say in the applicationDidFinishLaunching:(UIApplication *) withOptions:(NSDictionary *) method, use one of the following setup calls with the ActiveRecordHelpers class:
+To get started, first, import the header file *CoreData+MagicalRecord.h* in your project's pch file. This will allow a global include of all the required headers.
+Next, somewhere in your app's startup, say in the applicationDidFinishLaunching:(UIApplication *) withOptions:(NSDictionary *) method, use one of the following setup calls with the MagicalRecordHelpers class:
 
 	+ (void) setupCoreDataStack;
 	+ (void) setupAutoMigratingDefaultCoreDataStack;
@@ -37,11 +37,11 @@ Simply start creating, fetching and updating objects. A default stack will be cr
 
 And, before your app exits, you can use the clean up method:
 
-	[ActiveRecordHelpers cleanUp];
+	[MagicalRecordHelpers cleanUp];
 
 ### Default Managed Object Context 
 
-When using Core Data, you will deal with two types of objects the most: NSManagedObject and NSManagedObjectContext. ActiveRecord for Core Data gives you a place for a default NSManagedObjectContext for use within your app. This is great for single threaded apps. If you need to create a new Managed Object Context for use in other threads, based on your single persistent store, use:
+When using Core Data, you will deal with two types of objects the most: NSManagedObject and NSManagedObjectContext. MagicalRecord for Core Data gives you a place for a default NSManagedObjectContext for use within your app. This is great for single threaded apps. If you need to create a new Managed Object Context for use in other threads, based on your single persistent store, use:
 
 	NSManagedObjectContext *myNewContext = [NSManagedObjectContext context];
 
@@ -59,7 +59,7 @@ This will use the same object model and persistent store, but create an entirely
 ### Fetching
 
 #### Basic Finding
-Most methods in the ActiveRecord for Core Data library return an NSArray of results. So, if you have an Entity called Person, related to a Department (as seen in various Apple Core Data documentation), to get all the Person entities from your Persistent Store:
+Most methods in the MagicalRecord for Core Data library return an NSArray of results. So, if you have an Entity called Person, related to a Department (as seen in various Apple Core Data documentation), to get all the Person entities from your Persistent Store:
 
 
 	NSArray *people = [Person findAll];
@@ -175,7 +175,7 @@ Paraphrasing the [Apple documentation on Core Data and Threading]("http://develo
 * Use an instance of your NSManagedObjects that is local for the new NSManagedObjectContext
 * Notify other contexts that the background is updated or saved
 
-The Active Record fetching library is trying to make these steps more reusable with the following methods:
+The Magical Record library is trying to make these steps more reusable with the following methods:
 
 	+ (void) performSaveDataOperationWithBlock:(CoreDataBlock)block;
 	+ (void) performSaveDataOperationInBackgroundWithBlock:(CoreDataBlock)block;

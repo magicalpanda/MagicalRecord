@@ -1,16 +1,16 @@
 //
-//  NSManagedObjectModel+ActiveRecord.m
+//  NSManagedObjectModel+MagicalRecord.m
 //  DocBook
 //
 //  Created by Saul Mora on 3/11/10.
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "NSManagedObjectModel+ActiveRecord.h"
+#import "NSManagedObjectModel+MagicalRecord.h"
 
 static NSManagedObjectModel *defaultManagedObjectModel = nil;
 
-@implementation NSManagedObjectModel (ActiveRecord)
+@implementation NSManagedObjectModel (MagicalRecord)
 
 
 + (NSManagedObjectModel *)defaultManagedObjectModel

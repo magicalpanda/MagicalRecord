@@ -1,5 +1,5 @@
 //
-//  NSPersistentStore+ActiveRecord.h
+//  NSPersistentStore+MagicalRecord.h
 //
 //  Created by Saul Mora on 3/11/10.
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
@@ -7,9 +7,9 @@
 
 #import "MagicalRecordHelpers.h"
 
-#define kActiveRecordDefaultStoreFileName @"CoreDataStore.sqlite"
+#define kMagicalRecordDefaultStoreFileName @"CoreDataStore.sqlite"
 
-@interface NSPersistentStore (ActiveRecord)
+@interface NSPersistentStore (MagicalRecord)
 
 + (NSURL *) defaultLocalStoreUrl;
 

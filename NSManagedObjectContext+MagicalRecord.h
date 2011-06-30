@@ -1,5 +1,5 @@
 //
-//  NSManagedObjectContext+ActiveRecord.h
+//  NSManagedObjectContext+MagicalRecord.h
 //
 //  Created by Saul Mora on 11/23/09.
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
@@ -7,7 +7,7 @@
 
 #import "MagicalRecordHelpers.h"
 
-@interface NSManagedObjectContext (ActiveRecord)
+@interface NSManagedObjectContext (MagicalRecord)
 
 - (void) observeContext:(NSManagedObjectContext *)otherContext;
 - (void) stopObservingContext:(NSManagedObjectContext *)otherContext;

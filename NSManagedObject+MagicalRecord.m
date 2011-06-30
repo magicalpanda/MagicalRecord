@@ -3,12 +3,12 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "NSManagedObject+ActiveRecord.h"
+#import "NSManagedObject+MagicalRecord.h"
 #import "CoreData+MagicalRecord.h"
 
-static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
+static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
-@implementation NSManagedObject (ActiveRecord)
+@implementation NSManagedObject (MagicalRecord)
 
 
 + (void) setDefaultBatchSize:(NSUInteger)newBatchSize
@@ -370,7 +370,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 {
 	NSString *cacheName = nil;
 	#ifdef STORE_USE_CACHE
-	cacheName = [NSString stringWithFormat:@"ActiveRecord-Cache-%@", NSStringFromClass(self)];
+	cacheName = [NSString stringWithFormat:@"MagicalRecord-Cache-%@", NSStringFromClass(self)];
 	#endif
 	
 	NSFetchRequest *request = [self requestAllSortedBy:sortTerm 
@@ -419,7 +419,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 {
 	NSString *cacheName = nil;
 	#ifdef STORE_USE_CACHE
-	cacheName = [NSString stringWithFormat:@"ActiveRecord-Cache-%@", NSStringFromClass([self class])];
+	cacheName = [NSString stringWithFormat:@"MagicalRecord-Cache-%@", NSStringFromClass([self class])];
 	#endif
 	NSFetchedResultsController *controller =
 		[[NSFetchedResultsController alloc] initWithFetchRequest:request

@@ -1,15 +1,15 @@
 //
-//  NSPersistentStoreCoordinator+ActiveRecord.h
+//  NSPersistentStoreCoordinator+MagicalRecord.h
 //
 //  Created by Saul Mora on 3/11/10.
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
 #import "MagicalRecordHelpers.h"
-#import "NSPersistentStore+ActiveRecord.h"
+#import "NSPersistentStore+MagicalRecord.h"
 
 
-@interface NSPersistentStoreCoordinator (ActiveRecord)
+@interface NSPersistentStoreCoordinator (MagicalRecord)
 
 + (NSPersistentStoreCoordinator *) defaultStoreCoordinator;
 + (void) setDefaultStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
