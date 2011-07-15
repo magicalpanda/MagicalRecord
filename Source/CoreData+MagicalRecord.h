@@ -23,4 +23,4 @@
 #import "NSManagedObjectModel+MagicalRecord.h"
 #import "NSPersistentStore+MagicalRecord.h"
 
-#import "NSManagedObject+JSONHelpers.h"
+#import "NSManagedObject+MagicalDataImport.h"

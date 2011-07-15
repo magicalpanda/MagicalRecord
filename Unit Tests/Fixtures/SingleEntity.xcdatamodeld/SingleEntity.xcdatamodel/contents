@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="848" systemVersion="11A511" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="SimpleTestEntity">
+    <entity name="SingleEntityWithNoRelationships" representedClassName="SingleEntityWithNoRelationships">
         <attribute name="integerTestAttribute" optional="YES" attributeType="Integer 64" defaultValueString="0"/>
         <attribute name="stringTestAttribute" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="SimpleTestEntity" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="SingleEntityWithNoRelationships" positionX="-108" positionY="-1521" width="128" height="75"/>
     </elements>
 </model>

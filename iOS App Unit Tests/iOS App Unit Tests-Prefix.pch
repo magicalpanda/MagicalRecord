@@ -18,4 +18,5 @@
     #import <OCHamcrestIOS/OCHamcrestIOS.h>
 
     #import "CoreData+MagicalRecord.h"
+    #import "FixtureHelpers.h"
 #endif
