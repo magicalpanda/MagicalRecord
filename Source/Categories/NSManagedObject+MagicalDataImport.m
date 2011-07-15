@@ -6,7 +6,9 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import "NSManagedObject+MagicalDataImport.h"
+//#import "NSManagedObject+MagicalDataImport.h"
+#import "CoreData+MagicalRecord.h"
+
 
 static NSString * const kNSManagedObjectDefaultDateFormatString = @"YYYY-MM-dd'T'HH:mm:ss'Z'";
 static NSString * const kNSManagedObjectAttributeJSONKeyMapKey = @"jsonKeyName";

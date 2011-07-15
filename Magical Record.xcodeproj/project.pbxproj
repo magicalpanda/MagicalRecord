@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C70B6E7113D0F62500709450 /* NSPersisentStoreHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C70B6E7013D0F62500709450 /* NSPersisentStoreHelperTests.m */; };
+		C70B6E7413D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C70B6E7313D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.m */; };
+		C70B6E7713D0F66000709450 /* NSManagedObjectModelHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C70B6E7613D0F66000709450 /* NSManagedObjectModelHelperTests.m */; };
+		C70B6E7A13D0F68400709450 /* NSManagedObjectContextHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C70B6E7913D0F68400709450 /* NSManagedObjectContextHelperTests.m */; };
+		C70B6E7D13D0F69A00709450 /* NSManagedObjectHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C70B6E7C13D0F69A00709450 /* NSManagedObjectHelperTests.m */; };
 		C721C7DF13D0C3A00097AB6F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C7DE13D0C3A00097AB6F /* Cocoa.framework */; };
 		C721C7E913D0C3A00097AB6F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C721C7E713D0C3A00097AB6F /* InfoPlist.strings */; };
 		C721C7EB13D0C3A00097AB6F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C721C7EA13D0C3A00097AB6F /* main.m */; };
@@ -53,6 +58,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C70B6E6F13D0F62500709450 /* NSPersisentStoreHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSPersisentStoreHelperTests.h; path = "Unit Tests/NSPersisentStoreHelperTests.h"; sourceTree = "<group>"; };
+		C70B6E7013D0F62500709450 /* NSPersisentStoreHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSPersisentStoreHelperTests.m; path = "Unit Tests/NSPersisentStoreHelperTests.m"; sourceTree = "<group>"; };
+		C70B6E7213D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSPersistentStoreCoordinatorHelperTests.h; path = "Unit Tests/NSPersistentStoreCoordinatorHelperTests.h"; sourceTree = "<group>"; };
+		C70B6E7313D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSPersistentStoreCoordinatorHelperTests.m; path = "Unit Tests/NSPersistentStoreCoordinatorHelperTests.m"; sourceTree = "<group>"; };
+		C70B6E7513D0F66000709450 /* NSManagedObjectModelHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSManagedObjectModelHelperTests.h; path = "Unit Tests/NSManagedObjectModelHelperTests.h"; sourceTree = "<group>"; };
+		C70B6E7613D0F66000709450 /* NSManagedObjectModelHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSManagedObjectModelHelperTests.m; path = "Unit Tests/NSManagedObjectModelHelperTests.m"; sourceTree = "<group>"; };
+		C70B6E7813D0F68400709450 /* NSManagedObjectContextHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSManagedObjectContextHelperTests.h; path = "Unit Tests/NSManagedObjectContextHelperTests.h"; sourceTree = "<group>"; };
+		C70B6E7913D0F68400709450 /* NSManagedObjectContextHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSManagedObjectContextHelperTests.m; path = "Unit Tests/NSManagedObjectContextHelperTests.m"; sourceTree = "<group>"; };
+		C70B6E7B13D0F69A00709450 /* NSManagedObjectHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSManagedObjectHelperTests.h; path = "Unit Tests/NSManagedObjectHelperTests.h"; sourceTree = "<group>"; };
+		C70B6E7C13D0F69A00709450 /* NSManagedObjectHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSManagedObjectHelperTests.m; path = "Unit Tests/NSManagedObjectHelperTests.m"; sourceTree = "<group>"; };
 		C721C7DC13D0C3A00097AB6F /* Mac App Unit Tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mac App Unit Tests.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C721C7DE13D0C3A00097AB6F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		C721C7E113D0C3A00097AB6F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -358,6 +373,16 @@
 				C77E5FA713D0CBDE00298F87 /* MagicalRecordHelperTests.m */,
 				C77E5FB613D0D25100298F87 /* DataImportTests.h */,
 				C77E5FB713D0D25100298F87 /* DataImportTests.m */,
+				C70B6E6F13D0F62500709450 /* NSPersisentStoreHelperTests.h */,
+				C70B6E7013D0F62500709450 /* NSPersisentStoreHelperTests.m */,
+				C70B6E7213D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.h */,
+				C70B6E7313D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.m */,
+				C70B6E7513D0F66000709450 /* NSManagedObjectModelHelperTests.h */,
+				C70B6E7613D0F66000709450 /* NSManagedObjectModelHelperTests.m */,
+				C70B6E7813D0F68400709450 /* NSManagedObjectContextHelperTests.h */,
+				C70B6E7913D0F68400709450 /* NSManagedObjectContextHelperTests.m */,
+				C70B6E7B13D0F69A00709450 /* NSManagedObjectHelperTests.h */,
+				C70B6E7C13D0F69A00709450 /* NSManagedObjectHelperTests.m */,
 			);
 			name = "Unit Tests";
 			sourceTree = "<group>";
@@ -525,6 +550,11 @@
 				C77E5FC113D0D55300298F87 /* _SingleEntityWithNoRelationships.m in Sources */,
 				C77E5FC213D0D55300298F87 /* SingleEntityWithNoRelationships.m in Sources */,
 				C75A4E7313D0D88D00790CEB /* NSManagedObject+MagicalDataImport.m in Sources */,
+				C70B6E7113D0F62500709450 /* NSPersisentStoreHelperTests.m in Sources */,
+				C70B6E7413D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.m in Sources */,
+				C70B6E7713D0F66000709450 /* NSManagedObjectModelHelperTests.m in Sources */,
+				C70B6E7A13D0F68400709450 /* NSManagedObjectContextHelperTests.m in Sources */,
+				C70B6E7D13D0F69A00709450 /* NSManagedObjectHelperTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

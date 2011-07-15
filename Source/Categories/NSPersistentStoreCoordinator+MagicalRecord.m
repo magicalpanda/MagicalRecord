@@ -5,9 +5,11 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "NSPersistentStoreCoordinator+MagicalRecord.h"
-#import "NSManagedObjectModel+MagicalRecord.h"
-#import "NSPersistentStore+MagicalRecord.h"
+#import "CoreData+MagicalRecord.h"
+
+//#import "NSPersistentStoreCoordinator+MagicalRecord.h"
+//#import "NSManagedObjectModel+MagicalRecord.h"
+//#import "NSPersistentStore+MagicalRecord.h"
 
 static NSPersistentStoreCoordinator *defaultCoordinator = nil;
 

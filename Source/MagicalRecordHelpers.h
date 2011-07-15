@@ -5,8 +5,8 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+//#import <Foundation/Foundation.h>
+//#import <CoreData/CoreData.h>
 
 #ifdef NS_BLOCKS_AVAILABLE
 

@@ -6,7 +6,9 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "NSManagedObjectModel+MagicalRecord.h"
+//#import "NSManagedObjectModel+MagicalRecord.h"
+#import "CoreData+MagicalRecord.h"
+
 
 static NSManagedObjectModel *defaultManagedObjectModel = nil;
 
