@@ -12,7 +12,10 @@
 
 + (id) dataFromPListFixtureNamed:(NSString *)fixtureName
 {
-    return nil;
+    NSString *resource = [[NSBundle mainBundle] pathForResource:fixtureName ofType:@"plist"];
+    NSData *plistData = [NSData dataWithContentsOfFile:resource];
+    
+    return [NSPropertyListSerialization propertyListWithData:plistData options:NSPropertyListImmutable format:nil error:nil];
 }
 
 + (id) dataFromJSONFixtureNamed:(NSString *)fixtureName

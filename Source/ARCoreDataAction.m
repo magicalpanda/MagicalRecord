@@ -6,8 +6,9 @@
 //  Copyright 2011 Magical Panda Software. All rights reserved.
 //
 
-#import "ARCoreDataAction.h"
+//#import "ARCoreDataAction.h"
 #import "CoreData+MagicalRecord.h"
+#import <dispatch/dispatch.h>
 
 dispatch_queue_t background_save_queue(void);
 void cleanup_save_queue(void);

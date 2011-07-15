@@ -43,7 +43,7 @@
 		C77E5FA113D0CA3000298F87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C77E5F9F13D0CA2700298F87 /* UIKit.framework */; };
 		C77E5FA413D0CAD000298F87 /* GHUnitIOSTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FA213D0CAC700298F87 /* GHUnitIOSTestMain.m */; };
 		C77E5FA813D0CBDE00298F87 /* MagicalRecordHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FA713D0CBDE00298F87 /* MagicalRecordHelperTests.m */; };
-		C77E5FAC13D0CC0E00298F87 /* SingleEntity.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FAA13D0CC0E00298F87 /* SingleEntity.xcdatamodeld */; };
+		C77E5FAC13D0CC0E00298F87 /* TestModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FAA13D0CC0E00298F87 /* TestModel.xcdatamodeld */; };
 		C77E5FB313D0D1D100298F87 /* SingleEntityWithNoRelationships.plist in Resources */ = {isa = PBXBuildFile; fileRef = C77E5FB213D0D1D100298F87 /* SingleEntityWithNoRelationships.plist */; };
 		C77E5FB513D0D1EC00298F87 /* SampleJSONDataForImport.json in Resources */ = {isa = PBXBuildFile; fileRef = C77E5FB413D0D1EC00298F87 /* SampleJSONDataForImport.json */; };
 		C77E5FB813D0D25100298F87 /* DataImportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FB713D0D25100298F87 /* DataImportTests.m */; };
@@ -113,7 +113,7 @@
 		C77E5FA213D0CAC700298F87 /* GHUnitIOSTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHUnitIOSTestMain.m; path = "../../../../../../saul/Desktop/iOS Test Frameworks/GHUnitIOSTestMain.m"; sourceTree = "<group>"; };
 		C77E5FA613D0CBDE00298F87 /* MagicalRecordHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MagicalRecordHelperTests.h; path = "Unit Tests/MagicalRecordHelperTests.h"; sourceTree = "<group>"; };
 		C77E5FA713D0CBDE00298F87 /* MagicalRecordHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MagicalRecordHelperTests.m; path = "Unit Tests/MagicalRecordHelperTests.m"; sourceTree = "<group>"; };
-		C77E5FAB13D0CC0E00298F87 /* SingleEntity.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SingleEntity.xcdatamodel; sourceTree = "<group>"; };
+		C77E5FAB13D0CC0E00298F87 /* TestModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TestModel.xcdatamodel; sourceTree = "<group>"; };
 		C77E5FB213D0D1D100298F87 /* SingleEntityWithNoRelationships.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SingleEntityWithNoRelationships.plist; path = "Unit Tests/Fixtures/SingleEntityWithNoRelationships.plist"; sourceTree = "<group>"; };
 		C77E5FB413D0D1EC00298F87 /* SampleJSONDataForImport.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SampleJSONDataForImport.json; path = "Unit Tests/Fixtures/SampleJSONDataForImport.json"; sourceTree = "<group>"; };
 		C77E5FB613D0D25100298F87 /* DataImportTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataImportTests.h; path = "Unit Tests/DataImportTests.h"; sourceTree = "<group>"; };
@@ -377,7 +377,7 @@
 			isa = PBXGroup;
 			children = (
 				C77E5FBC13D0D55300298F87 /* TestEntities */,
-				C77E5FAA13D0CC0E00298F87 /* SingleEntity.xcdatamodeld */,
+				C77E5FAA13D0CC0E00298F87 /* TestModel.xcdatamodeld */,
 			);
 			name = "Sample Models";
 			sourceTree = "<group>";
@@ -519,7 +519,7 @@
 				C721C87713D0C7030097AB6F /* MagicalRecordHelpers.m in Sources */,
 				C77E5FA413D0CAD000298F87 /* GHUnitIOSTestMain.m in Sources */,
 				C77E5FA813D0CBDE00298F87 /* MagicalRecordHelperTests.m in Sources */,
-				C77E5FAC13D0CC0E00298F87 /* SingleEntity.xcdatamodeld in Sources */,
+				C77E5FAC13D0CC0E00298F87 /* TestModel.xcdatamodeld in Sources */,
 				C77E5FB813D0D25100298F87 /* DataImportTests.m in Sources */,
 				C77E5FBB13D0D2AE00298F87 /* FixtureHelpers.m in Sources */,
 				C77E5FC113D0D55300298F87 /* _SingleEntityWithNoRelationships.m in Sources */,
@@ -767,14 +767,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		C77E5FAA13D0CC0E00298F87 /* SingleEntity.xcdatamodeld */ = {
+		C77E5FAA13D0CC0E00298F87 /* TestModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				C77E5FAB13D0CC0E00298F87 /* SingleEntity.xcdatamodel */,
+				C77E5FAB13D0CC0E00298F87 /* TestModel.xcdatamodel */,
 			);
-			currentVersion = C77E5FAB13D0CC0E00298F87 /* SingleEntity.xcdatamodel */;
-			name = SingleEntity.xcdatamodeld;
-			path = "Unit Tests/Fixtures/SingleEntity.xcdatamodeld";
+			currentVersion = C77E5FAB13D0CC0E00298F87 /* TestModel.xcdatamodel */;
+			name = TestModel.xcdatamodeld;
+			path = "Unit Tests/Fixtures/TestModel.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

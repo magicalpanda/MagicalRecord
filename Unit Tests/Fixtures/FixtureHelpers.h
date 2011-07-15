@@ -6,8 +6,6 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface FixtureHelpers : NSObject
 
 + (id) dataFromPListFixtureNamed:(NSString *)fixtureName;

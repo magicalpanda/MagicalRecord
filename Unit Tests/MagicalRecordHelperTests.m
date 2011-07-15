@@ -10,6 +10,11 @@
 
 @implementation MagicalRecordHelperTests
 
+- (void) setUp
+{
+    [NSManagedObjectModel setDefaultManagedObjectModel:[NSManagedObjectModel managedObjectModelNamed:@"TestModel.momd"]];
+}
+
 - (void) assertDefaultStack
 {
     assertThat([NSManagedObjectContext defaultContext], is(notNilValue()));

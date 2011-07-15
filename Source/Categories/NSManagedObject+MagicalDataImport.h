@@ -10,7 +10,13 @@
 
 @interface NSManagedObject (NSManagedObject_JSONHelpers)
 
-- (void) setValuesForKeysWithJSONDictionary:(NSDictionary *)jsonData;
-+ (NSManagedObject *) mr_importFromDictionary:(NSDictionary *)data;
+- (void) mr_setValuesForKeysWithJSONDictionary:(NSDictionary *)jsonData;
++ (id) mr_importFromDictionary:(NSDictionary *)data;
 
 @end
+
+
+#ifdef MR_SHORTHAND
+    #define importFromDictionary                    mr_importFromDictionary
+    #define setValuesForKeysWithJSDONDictionary     mr_setValuesForKeysWithJSONDictionary
+#endif

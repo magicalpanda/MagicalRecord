@@ -13,6 +13,7 @@
 
 - (void) setUp
 {
+    [NSManagedObjectModel setDefaultManagedObjectModel:[NSManagedObjectModel managedObjectModelNamed:@"TestModel.momd"]];
     [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
 }
 
@@ -28,6 +29,9 @@
     SingleEntityWithNoRelationships *testEntity = [SingleEntityWithNoRelationships mr_importFromDictionary:singleEntity];
     
     assertThat(testEntity, is(notNilValue()));
+    
+    assertThat(testEntity.integerTestAttribute, is(equalToInteger(42)));
+    assertThat(testEntity.stringTestAttribute, is(equalTo(@"This is a test value")));
 }
 
 @end

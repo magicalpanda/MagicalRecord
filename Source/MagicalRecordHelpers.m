@@ -6,7 +6,6 @@
 //
 
 #import "CoreData+MagicalRecord.h"
-#import <dispatch/dispatch.h>
 
 static id errorHandlerTarget = nil;
 static SEL errorHandlerAction = nil;

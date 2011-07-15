@@ -31,7 +31,7 @@ static NSString * const kNSManagedObjectRelationshipJSONTypeKey = @"type";
 
 @implementation NSManagedObject (NSManagedObject_JSONHelpers)
 
-- (id) attributeValueFromJSONDicationary:(NSDictionary *)jsonData forAttribute:(NSAttributeDescription *)attributeInfo
+- (id) mr_attributeValueFromJSONDicationary:(NSDictionary *)jsonData forAttribute:(NSAttributeDescription *)attributeInfo
 {
     NSString *attributeName = [attributeInfo name];
     NSString *lookupKey = [[attributeInfo userInfo] valueForKey:kNSManagedObjectAttributeJSONKeyMapKey] ?: attributeName;
@@ -51,26 +51,26 @@ static NSString * const kNSManagedObjectRelationshipJSONTypeKey = @"type";
     return value;
 }
 
-- (void) setAttributes:(NSDictionary *)attributes forKeysWithJSONDictionary:(NSDictionary *)jsonData
+- (void) mr_setAttributes:(NSDictionary *)attributes forKeysWithJSONDictionary:(NSDictionary *)jsonData
 {    
     for (NSString *attributeName in attributes) 
     {
         NSAttributeDescription *attributeInfo = [attributes valueForKey:attributeName];
-        id value = [self attributeValueFromJSONDicationary:jsonData forAttribute:attributeInfo];
+        id value = [self mr_attributeValueFromJSONDicationary:jsonData forAttribute:attributeInfo];
         [self setValue:value forKey:attributeName];
     }
 }
 
-- (NSManagedObject *) createInstanceForEntity:(NSEntityDescription *)entityDescription withJSONDictionary:(id)jsonData
+- (NSManagedObject *) mr_createInstanceForEntity:(NSEntityDescription *)entityDescription withJSONDictionary:(id)jsonData
 {
     NSManagedObject *relatedObject = [[NSManagedObject alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:[self managedObjectContext]];
     
-    [relatedObject setValuesForKeysWithJSONDictionary:jsonData];
+    [relatedObject mr_setValuesForKeysWithJSONDictionary:jsonData];
     
     return relatedObject;
 }
 
-- (NSManagedObject *)findObjectForRelationship:(NSRelationshipDescription *)relationshipInfo withJSONData:(id)singleRelatedObjectData
+- (NSManagedObject *) mr_findObjectForRelationship:(NSRelationshipDescription *)relationshipInfo withJSONData:(id)singleRelatedObjectData
 {
     NSEntityDescription *originalDestinationEntity = [relationshipInfo destinationEntity];
     NSDictionary *subentities = [originalDestinationEntity subentitiesByName];
@@ -91,10 +91,10 @@ static NSString * const kNSManagedObjectRelationshipJSONTypeKey = @"type";
     
     id existingObject = nil; //[managedObjectClass findFirstByAttribute:@"" withValue:@"" inContext:[self managedObjectContext]];
     
-    return existingObject ?: [self createInstanceForEntity:destinationEntity withJSONDictionary:singleRelatedObjectData];
+    return existingObject ?: [self mr_createInstanceForEntity:destinationEntity withJSONDictionary:singleRelatedObjectData];
 }
 
-- (void) addObject:(NSManagedObject *)relatedObject forRelationship:(NSRelationshipDescription *)relationshipInfo
+- (void) mr_addObject:(NSManagedObject *)relatedObject forRelationship:(NSRelationshipDescription *)relationshipInfo
 {
     //add related object to set
     NSString *addRelationMessageFormat = [relationshipInfo isToMany] ? @"add%@Object:" : @"set%@:";
@@ -103,7 +103,7 @@ static NSString * const kNSManagedObjectRelationshipJSONTypeKey = @"type";
     [self performSelector:NSSelectorFromString(addRelatedObjectToSetMessage) withObject:relatedObject];
 }
 
-- (void) setRelationships:(NSDictionary *)relationships forKeysWithJSONDictionary:(NSDictionary *)jsonData
+- (void) mr_setRelationships:(NSDictionary *)relationships forKeysWithJSONDictionary:(NSDictionary *)jsonData
 {
     for (NSString *relationshipName in relationships) 
     {
@@ -122,34 +122,36 @@ static NSString * const kNSManagedObjectRelationshipJSONTypeKey = @"type";
         {
             for (id singleRelatedObjectData in relatedObjectData) 
             {
-                NSManagedObject *relatedObject = [self findObjectForRelationship:relationshipInfo
+                NSManagedObject *relatedObject = [self mr_findObjectForRelationship:relationshipInfo
                                                                     withJSONData:singleRelatedObjectData];
                 
-                [self addObject:relatedObject forRelationship:relationshipInfo];
+                [self mr_addObject:relatedObject forRelationship:relationshipInfo];
             }
         }
         else
         {
-            NSManagedObject *relatedObject = [self findObjectForRelationship:relationshipInfo
+            NSManagedObject *relatedObject = [self mr_findObjectForRelationship:relationshipInfo
                                                                 withJSONData:relatedObjectData];
             
-            [self addObject:relatedObject forRelationship:relationshipInfo];
+            [self mr_addObject:relatedObject forRelationship:relationshipInfo];
         }
     }
 }
 
-- (void) setValuesForKeysWithJSONDictionary:(NSDictionary *)jsonData
+- (void) mr_setValuesForKeysWithJSONDictionary:(NSDictionary *)jsonData
 {
     NSDictionary *attributes = [[self entity] attributesByName];
-    [self setAttributes:attributes forKeysWithJSONDictionary:jsonData];
+    [self mr_setAttributes:attributes forKeysWithJSONDictionary:jsonData];
     
     NSDictionary *relationships = [[self entity] relationshipsByName];
-    [self setRelationships:relationships forKeysWithJSONDictionary:jsonData];
+    [self mr_setRelationships:relationships forKeysWithJSONDictionary:jsonData];
 }
 
-+ (NSManagedObject *) mr_importFromDictionary:(NSDictionary *)data;
++ (id) mr_importFromDictionary:(NSDictionary *)data;
 {
-    return nil;
+    id managedObject = [[self alloc] initWithEntity:[self entityDescription] insertIntoManagedObjectContext:[NSManagedObjectContext defaultContext]];
+    [managedObject mr_setValuesForKeysWithJSONDictionary:data];
+    return managedObject;
 }
 
 @end
