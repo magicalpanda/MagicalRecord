@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'Mac App Unit Tests' target in the 'Mac App Unit Tests' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
