@@ -43,6 +43,8 @@
 		C77E5F9E13D0CA2100298F87 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C77E5F9C13D0CA1800298F87 /* CoreGraphics.framework */; };
 		C77E5FA113D0CA3000298F87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C77E5F9F13D0CA2700298F87 /* UIKit.framework */; };
 		C77E5FA413D0CAD000298F87 /* GHUnitIOSTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FA213D0CAC700298F87 /* GHUnitIOSTestMain.m */; };
+		C77E5FA813D0CBDE00298F87 /* MagicalRecordHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FA713D0CBDE00298F87 /* MagicalRecordHelperTests.m */; };
+		C77E5FAC13D0CC0E00298F87 /* SingleEntity.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FAA13D0CC0E00298F87 /* SingleEntity.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +106,9 @@
 		C77E5F9C13D0CA1800298F87 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		C77E5F9F13D0CA2700298F87 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		C77E5FA213D0CAC700298F87 /* GHUnitIOSTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHUnitIOSTestMain.m; path = "../../../../../../saul/Desktop/iOS Test Frameworks/GHUnitIOSTestMain.m"; sourceTree = "<group>"; };
+		C77E5FA613D0CBDE00298F87 /* MagicalRecordHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MagicalRecordHelperTests.h; path = "Unit Tests/MagicalRecordHelperTests.h"; sourceTree = "<group>"; };
+		C77E5FA713D0CBDE00298F87 /* MagicalRecordHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MagicalRecordHelperTests.m; path = "Unit Tests/MagicalRecordHelperTests.m"; sourceTree = "<group>"; };
+		C77E5FAB13D0CC0E00298F87 /* SingleEntity.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SingleEntity.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +149,7 @@
 				C721C80213D0C3CD0097AB6F /* iOS App Unit Tests */,
 				C721C7B313D0A3AF0097AB6F /* Frameworks */,
 				C721C7B113D0A3AF0097AB6F /* Products */,
+				C77E5FA513D0CBA600298F87 /* Unit Tests */,
 				C721C85513D0C7030097AB6F /* Source */,
 			);
 			sourceTree = "<group>";
@@ -300,9 +306,9 @@
 		C721C85513D0C7030097AB6F /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				C721C85813D0C7030097AB6F /* Categories */,
 				C721C85613D0C7030097AB6F /* ARCoreDataAction.h */,
 				C721C85713D0C7030097AB6F /* ARCoreDataAction.m */,
-				C721C85813D0C7030097AB6F /* Categories */,
 				C721C86513D0C7030097AB6F /* CoreData+MagicalRecord.h */,
 				C721C86613D0C7030097AB6F /* MagicalRecordHelpers.h */,
 				C721C86713D0C7030097AB6F /* MagicalRecordHelpers.m */,
@@ -327,6 +333,24 @@
 				C721C86413D0C7030097AB6F /* NSPersistentStoreCoordinator+MagicalRecord.m */,
 			);
 			path = Categories;
+			sourceTree = "<group>";
+		};
+		C77E5FA513D0CBA600298F87 /* Unit Tests */ = {
+			isa = PBXGroup;
+			children = (
+				C77E5FA913D0CBE300298F87 /* Fixtures */,
+				C77E5FA613D0CBDE00298F87 /* MagicalRecordHelperTests.h */,
+				C77E5FA713D0CBDE00298F87 /* MagicalRecordHelperTests.m */,
+			);
+			name = "Unit Tests";
+			sourceTree = "<group>";
+		};
+		C77E5FA913D0CBE300298F87 /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				C77E5FAA13D0CC0E00298F87 /* SingleEntity.xcdatamodeld */,
+			);
+			name = Fixtures;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -444,6 +468,8 @@
 				C721C87513D0C7030097AB6F /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
 				C721C87713D0C7030097AB6F /* MagicalRecordHelpers.m in Sources */,
 				C77E5FA413D0CAD000298F87 /* GHUnitIOSTestMain.m in Sources */,
+				C77E5FA813D0CBDE00298F87 /* MagicalRecordHelperTests.m in Sources */,
+				C77E5FAC13D0CC0E00298F87 /* SingleEntity.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,6 +630,7 @@
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
+					"-lstdc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -642,6 +669,7 @@
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
+					"-lstdc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -682,6 +710,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C77E5FAA13D0CC0E00298F87 /* SingleEntity.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C77E5FAB13D0CC0E00298F87 /* SingleEntity.xcdatamodel */,
+			);
+			currentVersion = C77E5FAB13D0CC0E00298F87 /* SingleEntity.xcdatamodel */;
+			name = SingleEntity.xcdatamodeld;
+			path = "Unit Tests/Fixtures/SingleEntity.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C721C7A213D0A3750097AB6F /* Project object */;
 }

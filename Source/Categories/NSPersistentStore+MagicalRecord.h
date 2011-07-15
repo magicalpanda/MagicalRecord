@@ -7,7 +7,8 @@
 
 #import "MagicalRecordHelpers.h"
 
-#define kMagicalRecordDefaultStoreFileName @"CoreDataStore.sqlite"
+//#define kMagicalRecordDefaultStoreFileName @"CoreDataStore.sqlite"
+extern NSString * const kMagicalRecordDefaultStoreFileName;
 
 @interface NSPersistentStore (MagicalRecord)
 
