@@ -149,11 +149,16 @@ static NSString * const kNSManagedObjectRelationshipJSONTypeKey = @"type";
     [self mr_setRelationships:relationships forKeysWithJSONDictionary:jsonData];
 }
 
-+ (id) mr_importFromDictionary:(NSDictionary *)data;
++ (id) mr_importFromDictionary:(NSDictionary *)data inContext:(NSManagedObjectContext *)context;
 {
-    id managedObject = [[self alloc] initWithEntity:[self entityDescription] insertIntoManagedObjectContext:[NSManagedObjectContext defaultContext]];
+    id managedObject = [[self alloc] initWithEntity:[self entityDescription] insertIntoManagedObjectContext:context];
     [managedObject mr_setValuesForKeysWithJSONDictionary:data];
     return managedObject;
+}
+
++ (id) mr_importFromDictionary:(NSDictionary *)data
+{
+    return [self mr_importFromDictionary:data inContext:[NSManagedObjectContext defaultContext]];
 }
 
 @end
