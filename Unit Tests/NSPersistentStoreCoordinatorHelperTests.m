@@ -10,5 +10,30 @@
 
 @implementation NSPersistentStoreCoordinatorHelperTests
 
+- (void) testCreateCoodinatorWithSqlitePersistentStore
+{
+    GHFail(@"Test Not Implemented");
+}
+
+- (void) testCreateCoordinatoeWithInMemoryStore
+{
+    GHFail(@"Test Not Implemented");
+}
+
+- (void) testCanAddAnInMemoryStoreToAnExistingCoordinator
+{
+    GHFail(@"Test Not Implemented");   
+}
+
+- (void) testCanSetAUserSpecifiedErrroHandler
+{
+    GHFail(@"Test Not Implemented");
+}
+
+- (void) testLogsErrorsToLogger
+{
+    GHFail(@"Test Not Implemented");
+}
+
 
 @end

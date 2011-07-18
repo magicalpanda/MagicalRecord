@@ -10,6 +10,15 @@
 
 @implementation NSManagedObjectContextHelperTests
 
+- (void) testCanCreateContextForCurrentThead
+{
+    GHFail(@"Test Not Implemented");
+}
+
+- (void) testCanNotifyDefaultContextOnSave
+{
+    GHFail(@"Test Not Implemented");
+}
 
 
 @end

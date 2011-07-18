@@ -10,5 +10,20 @@
 
 @implementation NSPersisentStoreHelperTests
 
+- (void) testDefaultStoreFolderForiOSDevicesIsTheLibraryFolder
+{
+    GHFail(@"Test Not Implemented"); 
+}
+
+- (void) testDefaultStoreFolderForMacIsTheApplicationSupportSlashApplicationFolder
+{
+    GHFail(@"Test Not Implemented");
+}
+
+- (void) testCanFindAURLforASpecifiedStoreName
+{
+    GHFail(@"Test Not Implemented");
+}
+
 
 @end
