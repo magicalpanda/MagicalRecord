@@ -69,8 +69,8 @@
 + (NSArray *)findAllWithPredicate:(NSPredicate *)searchTerm;
 + (NSArray *)findAllWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
 
-- (id) objectWithMinValueFor:(NSString *)property;
-- (id) objectWithMinValueFor:(NSString *)property inContext:(NSManagedObjectContext *)context;
+- (id)objectWithMinValueFor:(NSString *)property;
+- (id)objectWithMinValueFor:(NSString *)property inContext:(NSManagedObjectContext *)context;
 
 + (id)findFirst;
 + (id)findFirstInContext:(NSManagedObjectContext *)context;
@@ -80,8 +80,8 @@
 + (id)findFirstWithPredicate:(NSPredicate *)searchterm sortedBy:(NSString *)property ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
 + (id)findFirstWithPredicate:(NSPredicate *)searchTerm andRetrieveAttributes:(NSArray *)attributes;
 + (id)findFirstWithPredicate:(NSPredicate *)searchTerm andRetrieveAttributes:(NSArray *)attributes inContext:(NSManagedObjectContext *)context;
-+ (id) findFirstWithPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortBy ascending:(BOOL)ascending andRetrieveAttributes:(id)attributes, ...;
-+ (id) findFirstWithPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortBy ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context andRetrieveAttributes:(id)attributes, ...;
++ (id)findFirstWithPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortBy ascending:(BOOL)ascending andRetrieveAttributes:(id)attributes, ...;
++ (id)findFirstWithPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortBy ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context andRetrieveAttributes:(id)attributes, ...;
 
 + (id)findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue;
 + (id)findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context;
@@ -104,6 +104,36 @@
 
 + (NSFetchedResultsController *) fetchRequestAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending;
 + (NSFetchedResultsController *) fetchRequestAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
+
+#endif
+
+
+
+#ifdef MR_SHORTHAND
+
+#define defaultBatchSize        MR_defaultBatchSize
+#define setDefaultBatchSize     MR_setDefaultBatchSize
+
+#define createFetchRequest      MR_createFetchRequest
+#define executeFetchRequest     MR_executeFetchRequest
+
+#define requestAll              MR_requestAll
+#define trucateAll              MR_truncateAll
+
+#define numberOfEntities        MR_numberOfEntities
+#define hasAtLeastOneEntity     MR_hasAtLeastOneEntity
+
+#define findAll                 MR_findAll
+#define findByAttribute         MR_findByAttribute
+
+#define findFirst               MR_findFirst
+#define findFirstByAttribute    MR_findFirstByAttribute
+
+#define fetchAllSortedBy        MR_fetchAllSortedBy
+#define fetchRequest            MR_fetchRequest
+
+#define inContext               MR_inContext
+#define inThreadContext         MR_inThreadContext
 
 #endif
 

@@ -19,3 +19,13 @@
 + (NSManagedObjectModel *) newModelNamed:(NSString *) modelName inBundleNamed:(NSString *) bundleName;
 
 @end
+
+#ifdef MR_SHORTHAND
+
+#define defaultManagedObjectModel               MR_defaultManagedObjectModel
+#define setDefaultManagedObjectModel            MR_setDefaultManagedObjectModel
+#define newManagedObjectModel                   MR_newManagedObjectModel
+#define managedObectModelNamed                  MR_managedObjectModelNamed
+#define newModelNamed                           MR_newModelNamed
+
+#endif

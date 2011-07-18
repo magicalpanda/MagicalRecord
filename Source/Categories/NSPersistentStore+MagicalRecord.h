@@ -20,3 +20,13 @@ extern NSString * const kMagicalRecordDefaultStoreFileName;
 + (NSURL *) urlForStoreName:(NSString *)storeFileName;
 
 @end
+
+
+#ifdef MR_SHORTHAND
+
+#define defaultLocalStoreUrl            MR_defaultLocalStoreUrl
+#define defaultPersistentStore          MR_defaultPersistentStore
+#define setDefaultPersistentStore       MR_setDefaultPersistentStore
+#define urlForStoreName                 MR_urlForStoreName
+
+#endif

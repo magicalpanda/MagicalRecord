@@ -25,3 +25,20 @@
 - (NSPersistentStore *) addInMemoryStore;
 
 @end
+
+
+#ifdef MR_SHORTHAND
+
+#define defautlStoreCoordinator         MR_defaultStoreCoordinator
+#define setDefaultStoreCoordinator      MR_setDefaultStoreCoordinator
+
+#define coordinatorWithInMemoryStore        MR_coordinatorWithInMemoryStore
+#define newPersistentStoreCoordinator       MR_newPersistentStoreCoordinator
+
+#define coordinatorWithSqliteStoreNamed                     MR_coordinatorWithSqliteStoreNamed
+#define coordinatorWithAutoMigratingSqliteStoreNamed        MR_coordinatorWithAutoMigratingSqliteStoreNamed
+#define coordinatorWithPersitentStore                       MR_coordinatorWithPersitentStore
+
+#define addInMemoryStore                MR_addInMemoryStore
+
+#endif
