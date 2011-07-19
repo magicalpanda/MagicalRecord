@@ -235,7 +235,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 + (NSFetchRequest *) requestAllWithPredicate:(NSPredicate *)searchTerm;
 {
-    return [self requestAllWithPredicate:searchTerm inContext:[NSManagedObjectContext contextForCurrentThread]];
+    return [self requestAllWithPredicate:searchTerm inContext:[NSManagedObjectContext defaultContext]];
 }
 
 + (NSFetchRequest *) requestAllWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
@@ -312,9 +312,16 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 	[request setIncludesSubentities:NO];
 	[request setFetchBatchSize:[self defaultBatchSize]];
 	
-	NSSortDescriptor *sortBy = [[NSSortDescriptor alloc] initWithKey:sortTerm ascending:ascending];
-	[request setSortDescriptors:[NSArray arrayWithObject:sortBy]];
-	[sortBy release];
+    NSMutableArray* sortDescriptors = [[NSMutableArray alloc] init];
+    NSArray* sortKeys = [sortTerm componentsSeparatedByString:@","];
+    for (NSString* sortKey in sortKeys) {
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
+        [sortDescriptors addObject:sortDescriptor];
+        [sortDescriptor release], sortDescriptor = nil;
+    }
+
+	[request setSortDescriptors:sortDescriptors];
+	[sortDescriptors release], sortDescriptors = nil;
 	
 	return request;
 }
