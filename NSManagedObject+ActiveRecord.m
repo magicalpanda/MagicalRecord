@@ -679,4 +679,36 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
     return [self inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
++ (NSNumber *)aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate {
+    return [self aggregateOperation:function onAttribute:attributeName withPredicate:predicate inContext:[NSManagedObjectContext defaultContext]];
+    
+}
+
++ (NSNumber *)aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context {
+    NSExpression *ex = [NSExpression expressionForFunction:function arguments:[NSArray arrayWithObject:[NSExpression expressionForKeyPath:attributeName]]];
+    
+    NSExpressionDescription *ed = [[NSExpressionDescription alloc] init];
+    [ed setName:@"result"];
+    [ed setExpression:ex];
+    [ed setExpressionResultType:NSInteger64AttributeType];
+    
+    NSArray *properties = [NSArray arrayWithObject:ed];
+    [ed release], ed = nil;
+    
+    NSFetchRequest *request = [self requestAllWithPredicate:predicate inContext:context];
+    [request setPropertiesToFetch:properties];
+    [request setResultType:NSDictionaryResultType];    
+
+    NSError *error = nil;
+	
+	NSArray *results = [context executeFetchRequest:request error:&error];
+	[ActiveRecordHelpers handleErrors:error];
+
+    NSDictionary *resultsDictionary = [results objectAtIndex:0];
+    NSNumber *resultValue = [resultsDictionary objectForKey:@"result"];
+    
+    return resultValue;    
+}
+
+
 @end
