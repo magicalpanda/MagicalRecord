@@ -291,10 +291,16 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 {
 	NSFetchRequest *request = [self requestAllInContext:context];
 	
-	NSSortDescriptor *sortBy = [[NSSortDescriptor alloc] initWithKey:sortTerm ascending:ascending];
-	[request setSortDescriptors:[NSArray arrayWithObject:sortBy]];
-	[sortBy release];
-	
+    NSMutableArray* sortDescriptors = [[NSMutableArray alloc] init];
+    NSArray* sortKeys = [sortTerm componentsSeparatedByString:@","];
+    for (NSString* sortKey in sortKeys) {
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
+        [sortDescriptors addObject:sortDescriptor];
+        [sortDescriptor release], sortDescriptor = nil;
+    }
+    
+	[request setSortDescriptors:sortDescriptors];
+	[sortDescriptors release], sortDescriptors = nil;	
 	return request;
 }
 
@@ -702,16 +708,12 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
     NSArray *properties = [NSArray arrayWithObject:ed];
     [ed release], ed = nil;
     
+   
     NSFetchRequest *request = [self requestAllWithPredicate:predicate inContext:context];
     [request setPropertiesToFetch:properties];
     [request setResultType:NSDictionaryResultType];    
 
-    NSError *error = nil;
-	
-	NSArray *results = [context executeFetchRequest:request error:&error];
-	[ActiveRecordHelpers handleErrors:error];
-
-    NSDictionary *resultsDictionary = [results objectAtIndex:0];
+    NSDictionary *resultsDictionary = [self executeFetchRequestAndReturnFirstObject:request];
     NSNumber *resultValue = [resultsDictionary objectForKey:@"result"];
     
     return resultValue;    
