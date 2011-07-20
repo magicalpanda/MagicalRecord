@@ -13,6 +13,9 @@
 
 + (void) handleErrors:(NSError *)error;
 
+- (NSURL *)uri;
+- (NSString *)uriString;
+
 + (NSUInteger) defaultBatchSize;
 + (void) setDefaultBatchSize:(NSUInteger)newBatchSize;
 

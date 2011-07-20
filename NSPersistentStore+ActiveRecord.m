@@ -18,8 +18,7 @@ static NSPersistentStore *defaultPersistentStore = nil;
 
 + (void) setDefaultPersistentStore:(NSPersistentStore *) store
 {
-	[defaultPersistentStore release];
-	defaultPersistentStore = [store retain];
+	defaultPersistentStore = store;
 }
 
 + (NSString *) directory:(int) type
@@ -35,25 +34,23 @@ static NSPersistentStore *defaultPersistentStore = nil;
 + (NSString *)applicationLibraryDirectory
 {
 
-#ifdef TARGET_OS_MAC
-        
-    NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
-    return [[self directory:NSApplicationSupportDirectory] stringByAppendingPathComponent:applicationName];
-        
-#elif defined(TARGET_OS_IPHONE)
-
-    return [self directory:NSLibraryDirectory];
-        
+#ifdef TARGET_OS_IPHONE
+	return [self directory:NSLibraryDirectory];
 #else
-#warning Unsupported OS Target specified
+	#ifdef TARGET_OS_MAC
+		NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
+		return [[self directory:NSApplicationSupportDirectory] stringByAppendingPathComponent:applicationName];
+	#else
+		#warning Unsupported OS Target specified
+	#endif
 #endif
-        
+
 }
 
 + (NSURL *) urlForStoreName:(NSString *)storeFileName
 {
 	NSArray *paths = [NSArray arrayWithObjects:[self applicationDocumentsDirectory], [self applicationLibraryDirectory], nil];
-    NSFileManager *fm = [[[NSFileManager alloc] init] autorelease];
+    NSFileManager *fm = [[NSFileManager alloc] init];
 
     for (NSString *path in paths) 
     {

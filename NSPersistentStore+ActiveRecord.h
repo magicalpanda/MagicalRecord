@@ -11,6 +11,9 @@
 
 @interface NSPersistentStore (ActiveRecord)
 
++ (NSString *)applicationDocumentsDirectory;
++ (NSString *)applicationLibraryDirectory;
+
 + (NSURL *) defaultLocalStoreUrl;
 
 + (NSPersistentStore *) defaultPersistentStore;

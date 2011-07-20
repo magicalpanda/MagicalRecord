@@ -19,6 +19,9 @@ typedef enum
     ARCoreDataLookupOptionWithNewContext    = 1 << 0
 } ARCoreDataLookupOption;
 
+dispatch_queue_t background_save_queue(void);
+void cleanup_save_queue(void);
+
 @interface ARCoreDataAction : NSObject {}
 
 + (void) cleanUp;

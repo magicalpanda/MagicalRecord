@@ -15,6 +15,25 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
 
 @implementation NSManagedObjectContext (ActiveRecord)
 
+- (id)objectWithURI:(NSURL *)uri {
+	NSLog(@"Retrieving managed object with URI: %@", uri);
+	
+	NSManagedObjectID *objectID = [[self persistentStoreCoordinator] managedObjectIDForURIRepresentation:uri];
+	
+	if (!objectID) {
+		return nil;
+	}
+	
+	NSError *error = nil;
+	NSManagedObject *object = [self existingObjectWithID:objectID error:&error];
+	
+	if (error) {
+		[ActiveRecordHelpers handleErrors:error];
+	}
+	
+	return object;
+}
+
 + (NSManagedObjectContext *)defaultContext
 {
 //    NSAssert([NSThread isMainThread], @"The defaultContext must only be accessed on the **Main Thread**");
@@ -32,8 +51,7 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
 {
 	if (defaultManageObjectContext != moc) 
 	{
-		[defaultManageObjectContext release];
-		defaultManageObjectContext = [moc retain];
+		defaultManageObjectContext = moc;
 	}
 }
 
@@ -160,9 +178,9 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
 
 - (void) saveWrapper
 {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	[self save];
-	[pool drain];
+	@autoreleasepool {
+		[self save];
+	}
 }
 
 - (BOOL) saveOnBackgroundThread
@@ -208,7 +226,7 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
         context = [[NSManagedObjectContext alloc] init];
         [context setPersistentStoreCoordinator:coordinator];
     }
-    return [context autorelease];
+    return context;
 }
 
 + (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
