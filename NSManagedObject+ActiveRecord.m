@@ -692,18 +692,23 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
     return [self inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
-+ (NSNumber *)aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate {
++ (NSNumber *)aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate
+{
     return [self aggregateOperation:function onAttribute:attributeName withPredicate:predicate inContext:[NSManagedObjectContext defaultContext]];
     
 }
 
-+ (NSNumber *)aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context {
++ (NSNumber *)aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context
+{
     NSExpression *ex = [NSExpression expressionForFunction:function arguments:[NSArray arrayWithObject:[NSExpression expressionForKeyPath:attributeName]]];
-    
+
     NSExpressionDescription *ed = [[NSExpressionDescription alloc] init];
     [ed setName:@"result"];
     [ed setExpression:ex];
-    [ed setExpressionResultType:NSInteger64AttributeType];
+
+    // determine the type of attribute, required to set the expression return type    
+    NSAttributeDescription *attributeDescription = [[[self entityDescription] attributesByName] objectForKey:attributeName];
+    [ed setExpressionResultType:[attributeDescription attributeType]];
     
     NSArray *properties = [NSArray arrayWithObject:ed];
     [ed release], ed = nil;
