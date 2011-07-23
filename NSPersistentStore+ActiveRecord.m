@@ -35,14 +35,14 @@ static NSPersistentStore *defaultPersistentStore = nil;
 + (NSString *)applicationLibraryDirectory
 {
 
-#ifdef TARGET_OS_MAC
+#ifdef TARGET_OS_IPHONE
         
-    NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
-    return [[self directory:NSApplicationSupportDirectory] stringByAppendingPathComponent:applicationName];
+  return [self directory:NSLibraryDirectory];
         
-#elif defined(TARGET_OS_IPHONE)
+#elif TARGET_OS_MAC
 
-    return [self directory:NSLibraryDirectory];
+  NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
+  return [[self directory:NSApplicationSupportDirectory] stringByAppendingPathComponent:applicationName];
         
 #else
 #warning Unsupported OS Target specified
