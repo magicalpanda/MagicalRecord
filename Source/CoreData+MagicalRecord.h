@@ -15,7 +15,7 @@
 #import <CoreData/CoreData.h>
 
 #import "MagicalRecordHelpers.h"
-#import "ARCoreDataAction.h"
+#import "MRCoreDataAction.h"
 
 #import "NSManagedObject+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalRecord.h"

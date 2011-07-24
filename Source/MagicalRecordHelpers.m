@@ -14,7 +14,7 @@ static SEL errorHandlerAction = nil;
 
 + (void) cleanUp
 {
-	[ARCoreDataAction cleanUp];
+	[MRCoreDataAction cleanUp];
 	[NSManagedObjectContext setDefaultContext:nil];
 	[NSManagedObjectModel setDefaultManagedObjectModel:nil];
 	[NSPersistentStoreCoordinator setDefaultStoreCoordinator:nil];
@@ -120,22 +120,22 @@ static SEL errorHandlerAction = nil;
 
 + (void) performSaveDataOperationWithBlock:(CoreDataBlock)block;
 {
-    [ARCoreDataAction saveDataWithBlock:block];
+    [MRCoreDataAction saveDataWithBlock:block];
 }
 
 + (void) performSaveDataOperationInBackgroundWithBlock:(CoreDataBlock)block;
 {
-    [ARCoreDataAction saveDataWithBlock:block];
+    [MRCoreDataAction saveDataWithBlock:block];
 }
 
 + (void) performLookupOperationWithBlock:(CoreDataBlock)block;
 {
-    [ARCoreDataAction lookupWithBlock:block];
+    [MRCoreDataAction lookupWithBlock:block];
 }
 
 + (void) performSaveDataOperationInBackgroundWithBlock:(CoreDataBlock)block completion:(void(^)(void))callback;
 {
-    [ARCoreDataAction saveDataInBackgroundWithBlock:block completion:callback];
+    [MRCoreDataAction saveDataInBackgroundWithBlock:block completion:callback];
 }
 
 #endif

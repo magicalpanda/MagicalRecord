@@ -4,4 +4,11 @@
 
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
+    #import <GHUnit/GHUnit.h>
+
+    #define HC_SHORTHAND
+    #import <OCHamcrest/OCHamcrest.h>
+
+    #import "CoreData+MagicalRecord.h"
+    #import "FixtureHelpers.h"
 #endif

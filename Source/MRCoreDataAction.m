@@ -32,7 +32,7 @@ void cleanup_save_queue()
 	}
 }
 
-@implementation ARCoreDataAction
+@implementation MRCoreDataAction
 
 + (void) cleanUp
 {

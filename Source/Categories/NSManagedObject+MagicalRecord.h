@@ -94,7 +94,7 @@
 - (id) inContext:(NSManagedObjectContext *)otherContext;
 - (id) inThreadContext;
 
-#ifdef TARGET_OS_IPHONE
+#if !defined (TARGET_OS_IPHONE) && !defined (TARGET_OS_EMBEDDED)
 
 + (NSFetchedResultsController *) fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath;
 + (NSFetchedResultsController *) fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath inContext:(NSManagedObjectContext *)context;
