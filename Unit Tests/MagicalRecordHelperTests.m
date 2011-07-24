@@ -62,4 +62,21 @@
     assertThat([[defaultStore URL] absoluteString], endsWith(testStoreName));
 }
 
+
+- (void) testCanSetAUserSpecifiedErrorHandler
+{
+    GHFail(@"Test Not Implemented");
+}
+
+- (void) testUserSpecifiedErrorHandlersAreTriggeredOnError
+{
+    GHFail(@"Test Not Implemented");
+}
+
+
+- (void) testLogsErrorsToLogger
+{
+    GHFail(@"Test Not Implemented");
+}
+
 @end

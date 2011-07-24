@@ -12,7 +12,12 @@
 
 - (void) testCreateCoodinatorWithSqlitePersistentStore
 {
-    GHFail(@"Test Not Implemented");
+    NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator coordinatorWithSqliteStoreNamed:@"TestStore.sqlite"];
+    
+    assertThatUnsignedInteger([[testCoordinator persistentStores] count], is(equalToUnsignedInteger(1)));
+
+    NSPersistentStore *store = [[testCoordinator persistentStores] objectAtIndex:0];
+    assertThat([store type], is(equalTo(NSSQLiteStoreType)));
 }
 
 - (void) testCreateCoordinatorWithInMemoryStore
@@ -27,18 +32,20 @@
 
 - (void) testCanAddAnInMemoryStoreToAnExistingCoordinator
 {
-    GHFail(@"Test Not Implemented");   
-}
+    NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator coordinatorWithSqliteStoreNamed:@"TestStore.sqlite"];
+    
+    assertThatUnsignedInteger([[testCoordinator persistentStores] count], is(equalToUnsignedInteger(1)));
+    
+    NSPersistentStore *firstStore = [[testCoordinator persistentStores] objectAtIndex:0];
+    assertThat([firstStore type], is(equalTo(NSSQLiteStoreType)));
+    
+    [testCoordinator addInMemoryStore];
+    
+    assertThatUnsignedInteger([[testCoordinator persistentStores] count], is(equalToUnsignedInteger(2)));
+    
+    NSPersistentStore *secondStore = [[testCoordinator persistentStores] objectAtIndex:1];
+    assertThat([secondStore type], is(equalTo(NSInMemoryStoreType)));
 
-- (void) testCanSetAUserSpecifiedErrroHandler
-{
-    GHFail(@"Test Not Implemented");
 }
-
-- (void) testLogsErrorsToLogger
-{
-    GHFail(@"Test Not Implemented");
-}
-
 
 @end
