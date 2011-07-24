@@ -15,9 +15,14 @@
     GHFail(@"Test Not Implemented");
 }
 
-- (void) testCreateCoordinatoeWithInMemoryStore
+- (void) testCreateCoordinatorWithInMemoryStore
 {
-    GHFail(@"Test Not Implemented");
+    NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator coordinatorWithInMemoryStore];
+
+    assertThatUnsignedInteger([[testCoordinator persistentStores] count], is(equalToUnsignedInteger(1)));
+    
+    NSPersistentStore *store = [[testCoordinator persistentStores] objectAtIndex:0];
+    assertThat([store type], is(equalTo(NSInMemoryStoreType)));
 }
 
 - (void) testCanAddAnInMemoryStoreToAnExistingCoordinator
