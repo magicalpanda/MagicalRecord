@@ -27,12 +27,38 @@
 
 - (void) testCanFindAURLInTheLibraryForiOSForASpecifiedStoreName
 {
+    NSString *storeFileName = @"NotTheDefaultStoreName.storefile";
+    NSString *applicationLibraryDirectory = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *testStorePath = [applicationLibraryDirectory stringByAppendingPathComponent:storeFileName];
     
+    BOOL fileWasCreated = [[NSFileManager defaultManager] createFileAtPath:testStorePath contents:[storeFileName dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
+    
+    assertThatBool(fileWasCreated, is(equalToBool(YES)));
+    
+    NSURL *expectedFoundStoreUrl = [NSURL fileURLWithPath:testStorePath];
+    NSURL *foundStoreUrl = [NSPersistentStore urlForStoreName:storeFileName];
+    
+    assertThat(foundStoreUrl, is(equalTo(expectedFoundStoreUrl)));
+    
+    [[NSFileManager defaultManager] removeItemAtPath:testStorePath error:nil];
 }
 
 - (void) testCanFindAURLInDocumentsFolderForiOSForASpecifiedStoreName
 {
+    NSString *storeFileName = @"NotTheDefaultStoreName.storefile";
+    NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *testStorePath = [documentDirectory stringByAppendingPathComponent:storeFileName];
     
+    BOOL fileWasCreated = [[NSFileManager defaultManager] createFileAtPath:testStorePath contents:[storeFileName dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
+    
+    assertThatBool(fileWasCreated, is(equalToBool(YES)));
+    
+    NSURL *expectedFoundStoreUrl = [NSURL fileURLWithPath:testStorePath];
+    NSURL *foundStoreUrl = [NSPersistentStore urlForStoreName:storeFileName];
+    
+    assertThat(foundStoreUrl, is(equalTo(expectedFoundStoreUrl)));
+    
+    [[NSFileManager defaultManager] removeItemAtPath:testStorePath error:nil];   
 }
 
 #else
