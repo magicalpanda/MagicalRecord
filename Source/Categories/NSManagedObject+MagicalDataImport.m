@@ -34,7 +34,7 @@ NSString * const kNSManagedObjectRelationshipJSONTypeKey = @"type";
     NSString *desiredAttributeType = [[attributeInfo userInfo] valueForKey:kNSManagedObjectAttributeJSONValueClassNameKey];
     if (desiredAttributeType) 
     {
-        if ([desiredAttributeType hasSuffix:@"NSColor"])
+        if ([desiredAttributeType hasSuffix:@"Color"])
         {
             value = ColorFromString(value);
         }

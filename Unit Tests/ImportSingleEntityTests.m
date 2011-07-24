@@ -78,18 +78,18 @@
     assertThat(testEntity.booleanTestAttribute, is(equalToBool(NO)));
 }
 
-#ifdef TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE == 1
 
 - (void) testImportUIColorAttributeToEntity
 {
     UIColor *actualColor = testEntity.colorTestAttribute;
     CGFloat red, blue, green, alpha;
     [actualColor getRed:&red green:&green blue:&blue alpha:&alpha];
-    
-    assertThatFloat(red, is(equalToFloat(128/255)));
-    assertThatFloat(green, is(equalToFloat(128/255)));
-    assertThatFloat(blue, is(equalToFloat(128/255)));
-    assertThatFloat(alpha, is(equalToFloat(1)));
+
+    assertThatFloat(alpha, is(equalToFloat(1.)));
+    assertThatFloat(red, is(equalToFloat(64./255.)));
+    assertThatFloat(green, is(equalToFloat(128./255.)));
+    assertThatFloat(blue, is(equalToFloat(225./255.)));
 }
 
 #else

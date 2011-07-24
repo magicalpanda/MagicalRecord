@@ -156,19 +156,18 @@ NSDate * dateFromString(NSString *value)
     return [formatter dateFromString:value];
 }
 
-#ifdef MAC_PLATFORM_ONLY
-
-NSColor * NSColorFromString(NSString *serializedColor)
+NSInteger* newColorComponentsFromString(NSString *serializedColor);
+NSInteger* newColorComponentsFromString(NSString *serializedColor)
 {
     NSScanner *colorScanner = [NSScanner scannerWithString:serializedColor];
     NSString *colorType;
     [colorScanner scanUpToString:@"(" intoString:&colorType];
     
-    NSColor *color = nil;
+    NSInteger *componentValues = malloc(4 * sizeof(NSInteger));
     if ([colorType hasPrefix:@"rgba"])
     {
         NSCharacterSet *rgbaCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"(,)"];
-        NSInteger componentValues[4];
+
         NSInteger *componentValue = componentValues;
         while (![colorScanner isAtEnd]) 
         {
@@ -176,12 +175,20 @@ NSColor * NSColorFromString(NSString *serializedColor)
             [colorScanner scanInteger:componentValue];
             componentValue++;
         }
-        color = [NSColor colorWithDeviceRed:(componentValues[0] / 255.)
+    }
+    return componentValues;
+}
+
+#ifdef MAC_PLATFORM_ONLY
+
+NSColor * NSColorFromString(NSString *serializedColor)
+{
+    NSInteger *componentValues = newColorComponentsFromString(serializedColor);
+    NSColor *color = [NSColor colorWithDeviceRed:(componentValues[0] / 255.)
                                       green:(componentValues[1] / 255.)
                                        blue:(componentValues[2] / 255.)
                                       alpha:componentValues[3]];
-    }
-    
+    free(componentValues);
     return color;
 }
 id (*ColorFromString)(NSString *) = NSColorFromString;
@@ -190,7 +197,14 @@ id (*ColorFromString)(NSString *) = NSColorFromString;
 
 UIColor * UIColorFromString(NSString *serializedColor)
 {
-    return nil;
+    NSInteger *componentValues = newColorComponentsFromString(serializedColor);
+    UIColor *color = [UIColor colorWithRed:(componentValues[0] / 255.)
+                                     green:(componentValues[1] / 255.)
+                                      blue:(componentValues[2] / 255.)
+                                     alpha:componentValues[3]];
+    
+    free(componentValues);
+    return color;
 }
 
 id (*ColorFromString)(NSString *) = UIColorFromString;
