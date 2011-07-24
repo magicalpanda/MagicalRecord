@@ -19,17 +19,41 @@ static NSString * const kNSManagedObjectRelationshipJSONPrimaryKey = @"primaryRe
 static NSString * const kNSManagedObjectRelationshipJSONTypeKey = @"type";
 
 
-@implementation NSString (JSONParsingHelpers)
-
-- (NSDate *) mr_dateFromJSONString;
+NSDate * dateFromString(NSString *value);
+NSDate * dateFromString(NSString *value)
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:kNSManagedObjectDefaultDateFormatString];
     
-    return [formatter dateFromString:self];
+    return [formatter dateFromString:value];
 }
 
-@end
+NSColor * NSColorFromString(NSString *serializedColor);NSColor * NSColorFromString(NSString *serializedColor)
+{
+    NSScanner *colorScanner = [NSScanner scannerWithString:serializedColor];
+    NSString *colorType;
+    [colorScanner scanUpToString:@"(" intoString:&colorType];
+    
+    NSColor *color = nil;
+    if ([colorType hasPrefix:@"rgba"])
+    {
+        NSCharacterSet *rgbaCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"(,)"];
+        NSInteger componentValues[4];
+        NSInteger *componentValue = componentValues;
+        while (![colorScanner isAtEnd]) 
+        {
+            [colorScanner scanCharactersFromSet:rgbaCharacterSet intoString:nil];
+            [colorScanner scanInteger:componentValue];
+            componentValue++;
+        }
+        color = [NSColor colorWithDeviceRed:(componentValues[0] / 255.)
+                                      green:(componentValues[1] / 255.)
+                                       blue:(componentValues[2] / 255.)
+                                      alpha:componentValues[3]];
+    }
+    
+    return color;
+}
 
 @implementation NSManagedObject (NSManagedObject_JSONHelpers)
 
@@ -37,6 +61,7 @@ static NSString * const kNSManagedObjectRelationshipJSONTypeKey = @"type";
 {
     NSString *attributeName = [attributeInfo name];
     NSString *lookupKey = [[attributeInfo userInfo] valueForKey:kNSManagedObjectAttributeJSONKeyMapKey] ?: attributeName;
+
     id value = [jsonData valueForKey:lookupKey];
     
     if (value == nil || [value isEqual:[NSNull null]])
@@ -45,9 +70,20 @@ static NSString * const kNSManagedObjectRelationshipJSONTypeKey = @"type";
     }
     
     NSAttributeType attributeType = [attributeInfo attributeType];
-    if (attributeType == NSDateAttributeType)
+    NSString *desiredAttributeType = [[attributeInfo userInfo] valueForKey:kNSManagedObjectAttributeJSONValueClassNameKey];
+    if (desiredAttributeType) 
     {
-        value = [value mr_dateFromJSONString];
+        if ([desiredAttributeType hasSuffix:@"NSColor"])
+        {
+            value = NSColorFromString(value);
+        }
+    }
+    else 
+    {
+        if (attributeType == NSDateAttributeType)
+        {
+            value = dateFromString([value description]);
+        }
     }
     
     return value;

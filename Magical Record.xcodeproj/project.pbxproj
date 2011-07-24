@@ -36,11 +36,11 @@
 		C721C87613D0C7030097AB6F /* MagicalRecordHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C721C86713D0C7030097AB6F /* MagicalRecordHelpers.m */; };
 		C721C87713D0C7030097AB6F /* MagicalRecordHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C721C86713D0C7030097AB6F /* MagicalRecordHelpers.m */; };
 		C753897413DB61CE002B2F57 /* GHUnitTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = C753897313DB61CE002B2F57 /* GHUnitTestMain.m */; };
-		C753897613DB6322002B2F57 /* GHUnit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C721C84113D0C6460097AB6F /* GHUnit.framework */; };
+		C753897613DB6322002B2F57 /* GHUnit.framework in Copy GHUnit into App Bundle */ = {isa = PBXBuildFile; fileRef = C721C84113D0C6460097AB6F /* GHUnit.framework */; };
 		C75A4E7313D0D88D00790CEB /* NSManagedObject+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = C75A4E7213D0D88D00790CEB /* NSManagedObject+MagicalDataImport.m */; };
 		C76AF7E513DBC08F00CE2E05 /* FixtureHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FBA13D0D2AE00298F87 /* FixtureHelpers.m */; };
 		C76AF7E613DBC08F00CE2E05 /* MagicalRecordHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FA713D0CBDE00298F87 /* MagicalRecordHelperTests.m */; };
-		C76AF7E713DBC08F00CE2E05 /* DataImportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FB713D0D25100298F87 /* DataImportTests.m */; };
+		C76AF7E713DBC08F00CE2E05 /* ImportSingleEntityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FB713D0D25100298F87 /* ImportSingleEntityTests.m */; };
 		C76AF7E813DBC08F00CE2E05 /* NSPersisentStoreHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C70B6E7013D0F62500709450 /* NSPersisentStoreHelperTests.m */; };
 		C76AF7E913DBC08F00CE2E05 /* NSPersistentStoreCoordinatorHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C70B6E7313D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.m */; };
 		C76AF7EA13DBC08F00CE2E05 /* NSManagedObjectModelHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C70B6E7613D0F66000709450 /* NSManagedObjectModelHelperTests.m */; };
@@ -52,7 +52,8 @@
 		C76AF7F013DBC0A400CE2E05 /* _SingleEntityWithNoRelationships.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FBE13D0D55300298F87 /* _SingleEntityWithNoRelationships.m */; };
 		C76AF7F113DBC0A400CE2E05 /* SingleEntityWithNoRelationships.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FC013D0D55300298F87 /* SingleEntityWithNoRelationships.m */; };
 		C76AF7F213DBC12500CE2E05 /* OCHamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C84213D0C6460097AB6F /* OCHamcrest.framework */; };
-		C76AF7F413DBC34300CE2E05 /* OCHamcrest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C721C84213D0C6460097AB6F /* OCHamcrest.framework */; };
+		C76AF7F413DBC34300CE2E05 /* OCHamcrest.framework in Copy OCHamcrest into App Bundle */ = {isa = PBXBuildFile; fileRef = C721C84213D0C6460097AB6F /* OCHamcrest.framework */; };
+		C76AF7F713DBD63E00CE2E05 /* NSManagedObject+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = C75A4E7213D0D88D00790CEB /* NSManagedObject+MagicalDataImport.m */; };
 		C77E5F9B13D0CA0A00298F87 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C7E213D0C3A00097AB6F /* CoreData.framework */; };
 		C77E5F9E13D0CA2100298F87 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C77E5F9C13D0CA1800298F87 /* CoreGraphics.framework */; };
 		C77E5FA113D0CA3000298F87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C77E5F9F13D0CA2700298F87 /* UIKit.framework */; };
@@ -61,31 +62,33 @@
 		C77E5FAC13D0CC0E00298F87 /* TestModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FAA13D0CC0E00298F87 /* TestModel.xcdatamodeld */; };
 		C77E5FB313D0D1D100298F87 /* SingleEntityWithNoRelationships.plist in Resources */ = {isa = PBXBuildFile; fileRef = C77E5FB213D0D1D100298F87 /* SingleEntityWithNoRelationships.plist */; };
 		C77E5FB513D0D1EC00298F87 /* SampleJSONDataForImport.json in Resources */ = {isa = PBXBuildFile; fileRef = C77E5FB413D0D1EC00298F87 /* SampleJSONDataForImport.json */; };
-		C77E5FB813D0D25100298F87 /* DataImportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FB713D0D25100298F87 /* DataImportTests.m */; };
+		C77E5FB813D0D25100298F87 /* ImportSingleEntityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FB713D0D25100298F87 /* ImportSingleEntityTests.m */; };
 		C77E5FBB13D0D2AE00298F87 /* FixtureHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FBA13D0D2AE00298F87 /* FixtureHelpers.m */; };
 		C77E5FC113D0D55300298F87 /* _SingleEntityWithNoRelationships.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FBE13D0D55300298F87 /* _SingleEntityWithNoRelationships.m */; };
 		C77E5FC213D0D55300298F87 /* SingleEntityWithNoRelationships.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FC013D0D55300298F87 /* SingleEntityWithNoRelationships.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		C753897513DB6310002B2F57 /* CopyFiles */ = {
+		C753897513DB6310002B2F57 /* Copy GHUnit into App Bundle */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C753897613DB6322002B2F57 /* GHUnit.framework in CopyFiles */,
+				C753897613DB6322002B2F57 /* GHUnit.framework in Copy GHUnit into App Bundle */,
 			);
+			name = "Copy GHUnit into App Bundle";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C76AF7F313DBC33100CE2E05 /* CopyFiles */ = {
+		C76AF7F313DBC33100CE2E05 /* Copy OCHamcrest into App Bundle */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				C76AF7F413DBC34300CE2E05 /* OCHamcrest.framework in CopyFiles */,
+				C76AF7F413DBC34300CE2E05 /* OCHamcrest.framework in Copy OCHamcrest into App Bundle */,
 			);
+			name = "Copy OCHamcrest into App Bundle";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -103,7 +106,6 @@
 		C70B6E7C13D0F69A00709450 /* NSManagedObjectHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSManagedObjectHelperTests.m; path = "Unit Tests/NSManagedObjectHelperTests.m"; sourceTree = "<group>"; };
 		C721C7DC13D0C3A00097AB6F /* Mac App Unit Tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mac App Unit Tests.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C721C7DE13D0C3A00097AB6F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		C721C7E113D0C3A00097AB6F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		C721C7E213D0C3A00097AB6F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C721C7E313D0C3A00097AB6F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C721C7E613D0C3A00097AB6F /* Mac App Unit Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mac App Unit Tests-Info.plist"; sourceTree = "<group>"; };
@@ -160,8 +162,7 @@
 		C77E5FAB13D0CC0E00298F87 /* TestModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TestModel.xcdatamodel; sourceTree = "<group>"; };
 		C77E5FB213D0D1D100298F87 /* SingleEntityWithNoRelationships.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SingleEntityWithNoRelationships.plist; path = "Unit Tests/Fixtures/SingleEntityWithNoRelationships.plist"; sourceTree = "<group>"; };
 		C77E5FB413D0D1EC00298F87 /* SampleJSONDataForImport.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SampleJSONDataForImport.json; path = "Unit Tests/Fixtures/SampleJSONDataForImport.json"; sourceTree = "<group>"; };
-		C77E5FB613D0D25100298F87 /* DataImportTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataImportTests.h; path = "Unit Tests/DataImportTests.h"; sourceTree = "<group>"; };
-		C77E5FB713D0D25100298F87 /* DataImportTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataImportTests.m; path = "Unit Tests/DataImportTests.m"; sourceTree = "<group>"; };
+		C77E5FB713D0D25100298F87 /* ImportSingleEntityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImportSingleEntityTests.m; path = "Unit Tests/ImportSingleEntityTests.m"; sourceTree = "<group>"; };
 		C77E5FB913D0D2AE00298F87 /* FixtureHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FixtureHelpers.h; path = "Unit Tests/Fixtures/FixtureHelpers.h"; sourceTree = "<group>"; };
 		C77E5FBA13D0D2AE00298F87 /* FixtureHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FixtureHelpers.m; path = "Unit Tests/Fixtures/FixtureHelpers.m"; sourceTree = "<group>"; };
 		C77E5FBD13D0D55300298F87 /* _SingleEntityWithNoRelationships.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SingleEntityWithNoRelationships.h; sourceTree = "<group>"; };
@@ -315,7 +316,6 @@
 		C721C84013D0C6460097AB6F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C721C7E113D0C3A00097AB6F /* AppKit.framework */,
 				C721C7DE13D0C3A00097AB6F /* Cocoa.framework */,
 				C721C84113D0C6460097AB6F /* GHUnit.framework */,
 				C721C84213D0C6460097AB6F /* OCHamcrest.framework */,
@@ -387,14 +387,21 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
+		C76AF7F513DBC6E900CE2E05 /* Data Import Tests */ = {
+			isa = PBXGroup;
+			children = (
+				C77E5FB713D0D25100298F87 /* ImportSingleEntityTests.m */,
+			);
+			name = "Data Import Tests";
+			sourceTree = "<group>";
+		};
 		C77E5FA513D0CBA600298F87 /* Unit Tests */ = {
 			isa = PBXGroup;
 			children = (
+				C76AF7F513DBC6E900CE2E05 /* Data Import Tests */,
 				C77E5FA913D0CBE300298F87 /* Fixtures */,
 				C77E5FA613D0CBDE00298F87 /* MagicalRecordHelperTests.h */,
 				C77E5FA713D0CBDE00298F87 /* MagicalRecordHelperTests.m */,
-				C77E5FB613D0D25100298F87 /* DataImportTests.h */,
-				C77E5FB713D0D25100298F87 /* DataImportTests.m */,
 				C70B6E6F13D0F62500709450 /* NSPersisentStoreHelperTests.h */,
 				C70B6E7013D0F62500709450 /* NSPersisentStoreHelperTests.m */,
 				C70B6E7213D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.h */,
@@ -457,11 +464,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C721C7F613D0C3A00097AB6F /* Build configuration list for PBXNativeTarget "Mac App Unit Tests" */;
 			buildPhases = (
+				C76AF7F613DBD47400CE2E05 /* Update Generated Core Data Entities */,
 				C721C7D813D0C3A00097AB6F /* Sources */,
 				C721C7D913D0C3A00097AB6F /* Frameworks */,
 				C721C7DA13D0C3A00097AB6F /* Resources */,
-				C753897513DB6310002B2F57 /* CopyFiles */,
-				C76AF7F313DBC33100CE2E05 /* CopyFiles */,
+				C753897513DB6310002B2F57 /* Copy GHUnit into App Bundle */,
+				C76AF7F313DBC33100CE2E05 /* Copy OCHamcrest into App Bundle */,
 			);
 			buildRules = (
 			);
@@ -540,6 +548,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C76AF7F613DBD47400CE2E05 /* Update Generated Core Data Entities */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Generated Core Data Entities";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"Unit Tests/Fixtures\" && mogenerator -m TestModel.xcdatamodeld/TestModel.xcdatamodel -O TestEntities";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C721C7D813D0C3A00097AB6F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -551,11 +576,12 @@
 				C721C87013D0C7030097AB6F /* NSManagedObjectModel+MagicalRecord.m in Sources */,
 				C721C87213D0C7030097AB6F /* NSPersistentStore+MagicalRecord.m in Sources */,
 				C721C87413D0C7030097AB6F /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
+				C76AF7F713DBD63E00CE2E05 /* NSManagedObject+MagicalDataImport.m in Sources */,
 				C721C87613D0C7030097AB6F /* MagicalRecordHelpers.m in Sources */,
 				C753897413DB61CE002B2F57 /* GHUnitTestMain.m in Sources */,
 				C76AF7E513DBC08F00CE2E05 /* FixtureHelpers.m in Sources */,
 				C76AF7E613DBC08F00CE2E05 /* MagicalRecordHelperTests.m in Sources */,
-				C76AF7E713DBC08F00CE2E05 /* DataImportTests.m in Sources */,
+				C76AF7E713DBC08F00CE2E05 /* ImportSingleEntityTests.m in Sources */,
 				C76AF7E813DBC08F00CE2E05 /* NSPersisentStoreHelperTests.m in Sources */,
 				C76AF7E913DBC08F00CE2E05 /* NSPersistentStoreCoordinatorHelperTests.m in Sources */,
 				C76AF7EA13DBC08F00CE2E05 /* NSManagedObjectModelHelperTests.m in Sources */,
@@ -581,7 +607,7 @@
 				C77E5FA413D0CAD000298F87 /* GHUnitIOSTestMain.m in Sources */,
 				C77E5FA813D0CBDE00298F87 /* MagicalRecordHelperTests.m in Sources */,
 				C77E5FAC13D0CC0E00298F87 /* TestModel.xcdatamodeld in Sources */,
-				C77E5FB813D0D25100298F87 /* DataImportTests.m in Sources */,
+				C77E5FB813D0D25100298F87 /* ImportSingleEntityTests.m in Sources */,
 				C77E5FBB13D0D2AE00298F87 /* FixtureHelpers.m in Sources */,
 				C77E5FC113D0D55300298F87 /* _SingleEntityWithNoRelationships.m in Sources */,
 				C77E5FC213D0D55300298F87 /* SingleEntityWithNoRelationships.m in Sources */,
@@ -677,6 +703,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-all_load",
+					"-ObjC",
 					"-lstdc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -716,6 +743,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = (
 					"-all_load",
+					"-ObjC",
 					"-lstdc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";

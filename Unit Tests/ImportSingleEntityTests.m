@@ -1,0 +1,147 @@
+//
+//  DataImportTests.m
+//  Magical Record
+//
+//  Created by Saul Mora on 7/15/11.
+//  Copyright 2011 Magical Panda Software LLC. All rights reserved.
+//
+
+#import "SingleEntityWithNoRelationships.h"
+
+@interface ImportSingleEntityTests : GHTestCase
+
+@property (nonatomic, strong) SingleEntityWithNoRelationships *testEntity;
+
+@end
+
+@implementation ImportSingleEntityTests
+
+@synthesize testEntity;
+
+- (void) setUp
+{
+    [NSManagedObjectModel setDefaultManagedObjectModel:[NSManagedObjectModel managedObjectModelNamed:@"TestModel.momd"]];
+    [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
+    
+    id singleEntity = [FixtureHelpers dataFromPListFixtureNamed:@"SingleEntityWithNoRelationships"];
+    
+    testEntity = [SingleEntityWithNoRelationships mr_importFromDictionary:singleEntity];
+}
+
+- (void) tearDown
+{
+    [MagicalRecordHelpers cleanUp];
+}
+
+- (void) testImportASingleEntity
+{
+    assertThat(testEntity, is(notNilValue()));
+}
+
+- (void) testImportStringAttributeToEntity
+{
+    assertThat(testEntity.stringTestAttribute, is(equalTo(@"This is a test value")));
+}
+
+- (void) testImportInt16AttributeToEntity
+{
+    assertThat(testEntity.int16TestAttribute, is(equalToInteger(256)));
+}
+
+- (void) testImportInt32AttributeToEntity
+{
+    assertThat(testEntity.int32TestAttribute, is(equalToInt(32)));
+}
+
+- (void) testImportInt64AttributeToEntity
+{
+    assertThat(testEntity.int64TestAttribute, is(equalToInteger(42)));
+}
+
+- (void) testImportDecimalAttributeToEntity
+{
+    assertThat(testEntity.decimalTestAttribute, is(equalToDouble(1.2)));
+}
+
+- (void) testImportDoubleAttributeToEntity
+{
+    assertThat(testEntity.doubleTestAttribute, is(equalToDouble(124.3)));
+}
+
+- (void) testImportFloatAttributeToEntity
+{
+    assertThat(testEntity.floatTestAttribute, is(equalToFloat(100000000000)));
+}
+
+- (void) testImportBooleanAttributeToEntity
+{
+    assertThat(testEntity.booleanTestAttribute, is(equalToBool(NO)));
+}
+
+#ifndef TARGET_OS_IPHONE
+
+- (void) testImportUIColorAttributeToEntity
+{
+    UIColor *actualColor = testEntity.colorTestAttribute;
+    CGFloat red, blue, green, alpha;
+    [actualColor getRed:&red green:&green blue:&blue alpha:&alpha];
+    
+    assertThatFloat(red, is(equalToFloat(128/255)));
+    assertThatFloat(green, is(equalToFloat(128/255)));
+    assertThatFloat(blue, is(equalToFloat(128/255)));
+    assertThatFloat(alpha, is(equalToFloat(1)));
+}
+
+#else
+
+- (void) testImportNSColorAttributeToEntity
+{
+    NSColor *actualColor = testEntity.colorTestAttribute;
+    
+    assertThatFloat(actualColor.alphaComponent, is(equalToFloat(255./255.)));
+    assertThatFloat(actualColor.redComponent, is(equalToFloat(64./255.)));
+    assertThatFloat(actualColor.greenComponent, is(equalToFloat(128./255.)));
+    assertThatFloat(actualColor.blueComponent, is(equalToFloat(225./255.)));
+}
+
+#endif
+
+- (void) testImportDateAttributeToEntity
+{
+    NSDate *expectedDate = [NSDate dateWithString:@"Jul 23, 2011 10:30:40 PM"];
+    assertThat(testEntity.dateTestAttribute, is(equalTo(expectedDate)));
+}
+
+
+
+- (void) testImportAnEntityRelatedToAnotherEntityWithAOneToOneRelationship
+{
+    GHFail(@"Test Not Implemented");
+}
+
+- (void) testImportAnEntityRelatedToAnotherEntityWithAManyToOneRelationship
+{
+    GHFail(@"Test Not Implemented");    
+}
+
+- (void) testImportAnEntityRelatedToAnitherEntityWithAManyToManyRelationship
+{
+    GHFail(@"Test Not Implemented");
+}
+
+- (void) testImportAnEntityRelatedToASubEntityWithAOneToOneRelationship
+{
+    GHFail(@"Test Not Implemented");
+}
+
+- (void) testImportAnEntityRelatedToASubEntityWithAManyToOneRelationship
+{
+    GHFail(@"Test Not Implemented");   
+}
+
+- (void) testImportAnEntityRelatedToASubEntityWithAManyToManyRelationship
+{
+    GHFail(@"Test Not Implemented");
+}
+
+@end
