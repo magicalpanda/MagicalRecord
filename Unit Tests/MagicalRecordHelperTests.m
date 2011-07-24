@@ -75,7 +75,7 @@
 {
     assertThat(error, is(notNilValue()));
     assertThat([error domain], is(equalTo(@"MRTests")));
-    assertThatInt([error code], is(equalToInteger(1000)));
+    assertThatInteger([error code], is(equalToInteger(1000)));
     errorHandlerWasCalled_ = YES;
 }
 

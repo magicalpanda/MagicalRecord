@@ -14,7 +14,6 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 
 @implementation NSManagedObjectModel (MagicalRecord)
 
-
 + (NSManagedObjectModel *)MR_defaultManagedObjectModel
 {
 	if (defaultManagedObjectModel_ == nil)

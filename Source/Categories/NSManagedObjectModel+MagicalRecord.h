@@ -26,7 +26,7 @@
 #define defaultManagedObjectModel               MR_defaultManagedObjectModel
 #define setDefaultManagedObjectModel            MR_setDefaultManagedObjectModel
 #define newManagedObjectModel                   MR_newManagedObjectModel
-#define managedObjectModelNamed                  MR_managedObjectModelNamed
+#define managedObjectModelNamed                 MR_managedObjectModelNamed
 #define newModelNamed                           MR_newModelNamed
 
 #endif

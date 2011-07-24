@@ -11,7 +11,7 @@
 //#import "NSManagedObjectModel+MagicalRecord.h"
 //#import "NSPersistentStore+MagicalRecord.h"
 
-static NSPersistentStoreCoordinator *defaultCoordinator = nil;
+static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
 
 @implementation NSPersistentStoreCoordinator (MagicalRecord)
 
@@ -19,23 +19,40 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
 {
     @synchronized (self)
     {
-        if (defaultCoordinator == nil)
+        if (defaultCoordinator_ == nil)
         {
-            defaultCoordinator = [self MR_newPersistentStoreCoordinator];
+            defaultCoordinator_ = [self MR_newPersistentStoreCoordinator];
         }
     }
-	return defaultCoordinator;
+	return defaultCoordinator_;
 }
 
 + (void) MR_setDefaultStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
-	defaultCoordinator = coordinator;
+	defaultCoordinator_ = coordinator;
+}
+
+- (void) createPathToStoreFileIfNeccessary:(NSURL *)urlForStore
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *pathToStore = [urlForStore URLByDeletingLastPathComponent];
+    
+    NSError *error = nil;
+    BOOL pathWasCreated = [fileManager createDirectoryAtURL:pathToStore withIntermediateDirectories:YES attributes:nil error:&error];
+
+    if (!pathWasCreated) 
+    {
+        [MagicalRecordHelpers handleErrors:error];
+    }
 }
 
 - (void) MR_setupSqliteStoreNamed:(id)storeFileName withOptions:(NSDictionary *)options
 {
-    NSURL *url = [storeFileName isKindOfClass:[NSURL class]] ? storeFileName : [NSPersistentStore urlForStoreName:storeFileName];
+    NSURL *url = [storeFileName isKindOfClass:[NSURL class]] ? storeFileName : [NSPersistentStore MR_urlForStoreName:storeFileName];
     NSError *error = nil;
+    
+    [self createPathToStoreFileIfNeccessary:url];
+    
     NSPersistentStore *store = [self addPersistentStoreWithType:NSSQLiteStoreType
                                                  configuration:nil
                                                            URL:url
@@ -45,7 +62,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
     {
         [MagicalRecordHelpers handleErrors:error];
     }
-    [NSPersistentStore setDefaultPersistentStore:store];        
+    [NSPersistentStore MR_setDefaultPersistentStore:store];        
 }
 
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithPersitentStore:(NSPersistentStore *)persistentStore;
@@ -103,7 +120,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
 	NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
 	NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
 	
-    [NSPersistentStore setDefaultPersistentStore:[psc MR_addInMemoryStore]];
+    [NSPersistentStore MR_setDefaultPersistentStore:[psc MR_addInMemoryStore]];
     return psc;
 }
 
