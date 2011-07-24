@@ -24,7 +24,10 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
 + (void) handleErrors:(NSError *)error;
 - (void) handleErrors:(NSError *)error;
+
 + (void) setErrorHandlerTarget:(id)target action:(SEL)action;
++ (SEL) errorHandlerAction;
++ (id) errorHandlerTarget;
 
 + (void) setupCoreDataStack;
 + (void) setupCoreDataStackWithInMemoryStore;
@@ -51,13 +54,13 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 NSDate * dateFromString(NSString *value);
 NSString * attributeNameFromString(NSString *value);
 
-#ifdef MAC_PLATFORM_ONLY
+#if TARGET_OS_IPHONE
 
-NSColor * NSColorFromString(NSString *serializedColor);
+UIColor * UIColorFromString(NSString *serializedColor);
 
 #else
 
-UIColor * UIColorFromString(NSString *serializedColor);
+NSColor * NSColorFromString(NSString *serializedColor);
 
 #endif
 id (*ColorFromString)(NSString *);

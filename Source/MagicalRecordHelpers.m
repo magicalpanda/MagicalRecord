@@ -66,6 +66,16 @@ static SEL errorHandlerAction = nil;
     }
 }
 
++ (id) errorHandlerTarget
+{
+    return errorHandlerTarget;
+}
+
++ (SEL) errorHandlerAction
+{
+    return errorHandlerAction;
+}
+
 + (void) setErrorHandlerTarget:(id)target action:(SEL)action
 {
     errorHandlerTarget = target;    /* Deliberately don't retain to avoid potential retain cycles */

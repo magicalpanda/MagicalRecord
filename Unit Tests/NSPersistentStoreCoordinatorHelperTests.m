@@ -45,7 +45,6 @@
     
     NSPersistentStore *secondStore = [[testCoordinator persistentStores] objectAtIndex:1];
     assertThat([secondStore type], is(equalTo(NSInMemoryStoreType)));
-
 }
 
 @end

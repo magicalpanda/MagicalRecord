@@ -65,12 +65,29 @@
 
 - (void) testCanSetAUserSpecifiedErrorHandler
 {
-    GHFail(@"Test Not Implemented");
+    [MagicalRecordHelpers setErrorHandlerTarget:self action:@selector(customErrorHandler:)];
+    
+    assertThat([MagicalRecordHelpers errorHandlerTarget], is(equalTo(self)));
+    assertThat(NSStringFromSelector([MagicalRecordHelpers errorHandlerAction]), is(equalTo(NSStringFromSelector(@selector(customErrorHandler:)))));
+}
+
+- (void) magicalRecordErrorHandlerTest:(NSError *)error
+{
+    assertThat(error, is(notNilValue()));
+    assertThat([error domain], is(equalTo(@"MRTests")));
+    assertThatInt([error code], is(equalToInteger(1000)));
+    errorHandlerWasCalled_ = YES;
 }
 
 - (void) testUserSpecifiedErrorHandlersAreTriggeredOnError
 {
-    GHFail(@"Test Not Implemented");
+    errorHandlerWasCalled_ = NO;
+    [MagicalRecordHelpers setErrorHandlerTarget:self action:@selector(magicalRecordErrorHandlerTest:)];
+    
+    NSError *testError = [NSError errorWithDomain:@"MRTests" code:1000 userInfo:nil];
+    [MagicalRecordHelpers handleErrors:testError];
+    
+    assertThatBool(errorHandlerWasCalled_, is(equalToBool(YES)));
 }
 
 
