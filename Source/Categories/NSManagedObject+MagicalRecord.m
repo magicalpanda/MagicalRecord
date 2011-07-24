@@ -56,6 +56,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 }
 
 #if TARGET_OS_IPHONE
+
 + (void) performFetch:(NSFetchedResultsController *)controller
 {
 	NSError *error = nil;
@@ -64,6 +65,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 		[MagicalRecordHelpers handleErrors:error];
 	}
 }
+
 #endif
 
 + (NSEntityDescription *)entityDescriptionInContext:(NSManagedObjectContext *)context

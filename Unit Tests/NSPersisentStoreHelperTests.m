@@ -10,20 +10,52 @@
 
 @implementation NSPersisentStoreHelperTests
 
+#if TARGET_OS_IPHONE
+
 - (void) testDefaultStoreFolderForiOSDevicesIsTheLibraryFolder
 {
-    GHFail(@"Test Not Implemented"); 
+    NSString *applicationLibraryDirectory = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *defaultStoreName = kMagicalRecordDefaultStoreFileName;
+    
+    NSURL *expectedStoreUrl = [NSURL fileURLWithPath:[applicationLibraryDirectory stringByAppendingPathComponent:defaultStoreName]];
+    
+    NSURL *defaultStoreUrl = [NSPersistentStore defaultLocalStoreUrl];
+    
+    assertThat(defaultStoreUrl, is(equalTo(expectedStoreUrl)));
 }
+
+
+- (void) testCanFindAURLInTheLibraryForiOSForASpecifiedStoreName
+{
+    
+}
+
+- (void) testCanFindAURLInDocumentsFolderForiOSForASpecifiedStoreName
+{
+    
+}
+
+#else
 
 - (void) testDefaultStoreFolderForMacIsTheApplicationSupportSlashApplicationFolder
 {
-    GHFail(@"Test Not Implemented");
+    NSString *applictionSupportDirectory = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
+    NSString *defaultStoreName = kMagicalRecordDefaultStoreFileName;
+    
+    NSURL *expectedStoreUrl = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@/%@", applictionSupportDirectory, applicationName, defaultStoreName]];
+    
+    NSURL *defaultStoreUrl = [NSPersistentStore defaultLocalStoreUrl];
+    assertThat(defaultStoreUrl, is(equalTo(expectedStoreUrl)));
 }
 
-- (void) testCanFindAURLforASpecifiedStoreName
+
+- (void) testCanFindAURLInTheApplicationSupportLibraryForMacForASpecifiedStoreName
 {
     GHFail(@"Test Not Implemented");
 }
+
+#endif
 
 
 @end

@@ -36,6 +36,10 @@
     GHFail(@"Test Not Implemented");
 }
 
+- (void) testCreateSimpleRequest
+{
+    
+}
 
 - (void) testCanSearchForNumberOfAllEntities
 {

@@ -78,7 +78,7 @@
     assertThat(testEntity.booleanTestAttribute, is(equalToBool(NO)));
 }
 
-#if TARGET_OS_IPHONE == 1
+#if TARGET_OS_IPHONE
 
 - (void) testImportUIColorAttributeToEntity
 {

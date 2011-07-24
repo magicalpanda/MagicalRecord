@@ -15,6 +15,12 @@
     [NSManagedObjectModel setDefaultManagedObjectModel:[NSManagedObjectModel managedObjectModelNamed:@"TestModel.momd"]];
 }
 
+- (void) tearDown
+{
+    [MagicalRecordHelpers cleanUp];
+    //delete temp store
+}
+
 - (void) assertDefaultStack
 {
     assertThat([NSManagedObjectContext defaultContext], is(notNilValue()));
@@ -32,8 +38,6 @@
     NSPersistentStore *defaultStore = [NSPersistentStore defaultPersistentStore];
     assertThat([[defaultStore URL] absoluteString], endsWith(kMagicalRecordDefaultStoreFileName));
     assertThat([defaultStore type], is(equalTo(NSSQLiteStoreType)));
-    
-    [MagicalRecordHelpers cleanUp];
 }
 
 - (void) testCreateInMemoryCoreDataStack
@@ -44,8 +48,6 @@
     
     NSPersistentStore *defaultStore = [NSPersistentStore defaultPersistentStore];
     assertThat([defaultStore type], is(equalTo(NSInMemoryStoreType)));
-
-    [MagicalRecordHelpers cleanUp];
 }
 
 - (void) testCreateSqliteStackWithCustomName
