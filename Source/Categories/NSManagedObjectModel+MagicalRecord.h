@@ -10,24 +10,23 @@
 
 @interface NSManagedObjectModel (MagicalRecord)
 
-+ (NSManagedObjectModel *)defaultManagedObjectModel;
-+ (void) setDefaultManagedObjectModel:(NSManagedObjectModel *)newDefaultModel;
++ (NSManagedObjectModel *)MR_defaultManagedObjectModel;
++ (void) MR_setDefaultManagedObjectModel:(NSManagedObjectModel *)newDefaultModel;
 
-+ (NSManagedObjectModel *) newManagedObjectModel;
-+ (NSManagedObjectModel *) newManagedObjectModelNamed:(NSString *)modelFileName;
-+ (NSManagedObjectModel *) managedObjectModelNamed:(NSString *)modelFileName;
-+ (NSManagedObjectModel *) newModelNamed:(NSString *) modelName inBundleNamed:(NSString *) bundleName;
++ (NSManagedObjectModel *) MR_newManagedObjectModel;
++ (NSManagedObjectModel *) MR_newManagedObjectModelNamed:(NSString *)modelFileName;
++ (NSManagedObjectModel *) MR_managedObjectModelNamed:(NSString *)modelFileName;
++ (NSManagedObjectModel *) MR_newModelNamed:(NSString *) modelName inBundleNamed:(NSString *) bundleName;
 
 @end
 
-/*
+
 #ifdef MR_SHORTHAND
 
 #define defaultManagedObjectModel               MR_defaultManagedObjectModel
 #define setDefaultManagedObjectModel            MR_setDefaultManagedObjectModel
 #define newManagedObjectModel                   MR_newManagedObjectModel
-#define managedObectModelNamed                  MR_managedObjectModelNamed
+#define managedObjectModelNamed                  MR_managedObjectModelNamed
 #define newModelNamed                           MR_newModelNamed
 
 #endif
-*/

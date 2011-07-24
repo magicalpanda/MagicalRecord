@@ -10,31 +10,31 @@
 #import "CoreData+MagicalRecord.h"
 
 
-static NSManagedObjectModel *defaultManagedObjectModel = nil;
+static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 
 @implementation NSManagedObjectModel (MagicalRecord)
 
 
-+ (NSManagedObjectModel *)defaultManagedObjectModel
++ (NSManagedObjectModel *)MR_defaultManagedObjectModel
 {
-	if (defaultManagedObjectModel == nil)
+	if (defaultManagedObjectModel_ == nil)
 	{
-		defaultManagedObjectModel = [self newManagedObjectModel];
+		defaultManagedObjectModel_ = [self MR_newManagedObjectModel];
 	}
-	return defaultManagedObjectModel;
+	return defaultManagedObjectModel_;
 }
 
-+ (void) setDefaultManagedObjectModel:(NSManagedObjectModel *)newDefaultModel
++ (void) MR_setDefaultManagedObjectModel:(NSManagedObjectModel *)newDefaultModel
 {
-	defaultManagedObjectModel = newDefaultModel;
+	defaultManagedObjectModel_ = newDefaultModel;
 }
 
-+ (NSManagedObjectModel *) newManagedObjectModel 
++ (NSManagedObjectModel *) MR_newManagedObjectModel 
 {
     return [NSManagedObjectModel mergedModelFromBundles:nil];
 }
 
-+ (NSManagedObjectModel *) newModelNamed:(NSString *) modelName inBundleNamed:(NSString *) bundleName
++ (NSManagedObjectModel *) MR_newModelNamed:(NSString *) modelName inBundleNamed:(NSString *) bundleName
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:[modelName stringByDeletingPathExtension] 
                                                      ofType:[modelName pathExtension] 
@@ -44,7 +44,7 @@ static NSManagedObjectModel *defaultManagedObjectModel = nil;
     return [[NSManagedObjectModel alloc] initWithContentsOfURL:modelUrl];
 }
 
-+ (NSManagedObjectModel *) newManagedObjectModelNamed:(NSString *)modelFileName
++ (NSManagedObjectModel *) MR_newManagedObjectModelNamed:(NSString *)modelFileName
 {
 	NSString *path = [[NSBundle mainBundle] pathForResource:[modelFileName stringByDeletingPathExtension] ofType:[modelFileName pathExtension]];
 	NSURL *momURL = [NSURL fileURLWithPath:path];
@@ -53,9 +53,9 @@ static NSManagedObjectModel *defaultManagedObjectModel = nil;
 	return model;
 }
 
-+ (NSManagedObjectModel *) managedObjectModelNamed:(NSString *)modelFileName
++ (NSManagedObjectModel *) MR_managedObjectModelNamed:(NSString *)modelFileName
 {
-	return [self newManagedObjectModelNamed:modelFileName];
+	return [self MR_newManagedObjectModelNamed:modelFileName];
 }
 
 @end

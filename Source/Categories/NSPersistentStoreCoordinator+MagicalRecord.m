@@ -50,7 +50,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
 
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithPersitentStore:(NSPersistentStore *)persistentStore;
 {
-    NSManagedObjectModel *model = [NSManagedObjectModel defaultManagedObjectModel];
+    NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
     NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
     
     [psc MR_setupSqliteStoreNamed:[persistentStore URL] withOptions:nil];
@@ -60,7 +60,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
 
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *)options
 {
-    NSManagedObjectModel *model = [NSManagedObjectModel defaultManagedObjectModel];
+    NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
     NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
 
     [psc MR_setupSqliteStoreNamed:storeFileName withOptions:options];
@@ -85,7 +85,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
 
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *) storeFileName
 {
-    NSManagedObjectModel *model = [NSManagedObjectModel defaultManagedObjectModel];
+    NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
     
     [coordinator MR_setupAutoMigratingSqliteStoreNamed:storeFileName];
@@ -100,7 +100,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
 
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithInMemoryStore
 {
-	NSManagedObjectModel *model = [NSManagedObjectModel defaultManagedObjectModel];
+	NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
 	NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
 	
     [NSPersistentStore setDefaultPersistentStore:[psc MR_addInMemoryStore]];
