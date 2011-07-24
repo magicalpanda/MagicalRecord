@@ -235,7 +235,7 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 
 + (NSFetchRequest *) requestAllWithPredicate:(NSPredicate *)searchTerm;
 {
-    return [self requestAllWithPredicate:searchTerm inContext:[NSManagedObjectContext contextForCurrentThread]];
+    return [self requestAllWithPredicate:searchTerm inContext:[NSManagedObjectContext defaultContext]];
 }
 
 + (NSFetchRequest *) requestAllWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
@@ -291,10 +291,16 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 {
 	NSFetchRequest *request = [self requestAllInContext:context];
 	
-	NSSortDescriptor *sortBy = [[NSSortDescriptor alloc] initWithKey:sortTerm ascending:ascending];
-	[request setSortDescriptors:[NSArray arrayWithObject:sortBy]];
-	[sortBy release];
-	
+    NSMutableArray* sortDescriptors = [[NSMutableArray alloc] init];
+    NSArray* sortKeys = [sortTerm componentsSeparatedByString:@","];
+    for (NSString* sortKey in sortKeys) {
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
+        [sortDescriptors addObject:sortDescriptor];
+        [sortDescriptor release], sortDescriptor = nil;
+    }
+    
+	[request setSortDescriptors:sortDescriptors];
+	[sortDescriptors release], sortDescriptors = nil;	
 	return request;
 }
 
@@ -312,9 +318,16 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 	[request setIncludesSubentities:NO];
 	[request setFetchBatchSize:[self defaultBatchSize]];
 	
-	NSSortDescriptor *sortBy = [[NSSortDescriptor alloc] initWithKey:sortTerm ascending:ascending];
-	[request setSortDescriptors:[NSArray arrayWithObject:sortBy]];
-	[sortBy release];
+    NSMutableArray* sortDescriptors = [[NSMutableArray alloc] init];
+    NSArray* sortKeys = [sortTerm componentsSeparatedByString:@","];
+    for (NSString* sortKey in sortKeys) {
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
+        [sortDescriptors addObject:sortDescriptor];
+        [sortDescriptor release], sortDescriptor = nil;
+    }
+
+	[request setSortDescriptors:sortDescriptors];
+	[sortDescriptors release], sortDescriptors = nil;
 	
 	return request;
 }
@@ -678,5 +691,38 @@ static NSUInteger defaultBatchSize = kActiveRecordDefaultBatchSize;
 {
     return [self inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
+
++ (NSNumber *)aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate
+{
+    return [self aggregateOperation:function onAttribute:attributeName withPredicate:predicate inContext:[NSManagedObjectContext defaultContext]];
+    
+}
+
++ (NSNumber *)aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context
+{
+    NSExpression *ex = [NSExpression expressionForFunction:function arguments:[NSArray arrayWithObject:[NSExpression expressionForKeyPath:attributeName]]];
+
+    NSExpressionDescription *ed = [[NSExpressionDescription alloc] init];
+    [ed setName:@"result"];
+    [ed setExpression:ex];
+
+    // determine the type of attribute, required to set the expression return type    
+    NSAttributeDescription *attributeDescription = [[[self entityDescription] attributesByName] objectForKey:attributeName];
+    [ed setExpressionResultType:[attributeDescription attributeType]];
+    
+    NSArray *properties = [NSArray arrayWithObject:ed];
+    [ed release], ed = nil;
+    
+   
+    NSFetchRequest *request = [self requestAllWithPredicate:predicate inContext:context];
+    [request setPropertiesToFetch:properties];
+    [request setResultType:NSDictionaryResultType];    
+
+    NSDictionary *resultsDictionary = [self executeFetchRequestAndReturnFirstObject:request];
+    NSNumber *resultValue = [resultsDictionary objectForKey:@"result"];
+    
+    return resultValue;    
+}
+
 
 @end
