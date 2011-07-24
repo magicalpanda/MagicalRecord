@@ -156,7 +156,9 @@ NSDate * dateFromString(NSString *value)
     return [formatter dateFromString:value];
 }
 
-NSColor * NSColorFromString(NSString *serializedColor);NSColor * NSColorFromString(NSString *serializedColor)
+#ifdef MAC_PLATFORM_ONLY
+
+NSColor * NSColorFromString(NSString *serializedColor)
 {
     NSScanner *colorScanner = [NSScanner scannerWithString:serializedColor];
     NSString *colorType;
@@ -182,4 +184,15 @@ NSColor * NSColorFromString(NSString *serializedColor);NSColor * NSColorFromStri
     
     return color;
 }
+id (*ColorFromString)(NSString *) = NSColorFromString;
 
+#else
+
+UIColor * UIColorFromString(NSString *serializedColor)
+{
+    return nil;
+}
+
+id (*ColorFromString)(NSString *) = UIColorFromString;
+
+#endif

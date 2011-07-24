@@ -78,7 +78,7 @@
     assertThat(testEntity.booleanTestAttribute, is(equalToBool(NO)));
 }
 
-#ifndef TARGET_OS_IPHONE
+#ifdef TARGET_OS_IPHONE
 
 - (void) testImportUIColorAttributeToEntity
 {
@@ -104,12 +104,11 @@
     assertThatFloat(actualColor.blueComponent, is(equalToFloat(225./255.)));
 }
 
-#endif
-
 - (void) testImportDateAttributeToEntity
 {
     NSDate *expectedDate = [NSDate dateWithString:@"Jul 23, 2011 10:30:40 PM"];
     assertThat(testEntity.dateTestAttribute, is(equalTo(expectedDate)));
 }
+#endif
 
 @end

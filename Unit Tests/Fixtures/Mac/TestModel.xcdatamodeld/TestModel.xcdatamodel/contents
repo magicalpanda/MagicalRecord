@@ -28,10 +28,10 @@
         <relationship name="testRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ConcreteRelatedEntity" inverseName="mainTestEntity" inverseEntity="AbstractRelatedEntity"/>
     </entity>
     <elements>
-        <element name="SingleEntityWithNoRelationships" positionX="-108" positionY="-1521" width="180" height="195"/>
-        <element name="SingleRelatedEntity" positionX="-362" positionY="-149631" width="128" height="60"/>
         <element name="AbstractRelatedEntity" positionX="-81" positionY="-149679" width="128" height="75"/>
         <element name="ConcreteRelatedEntity" positionX="-119" positionY="-1764" width="128" height="60"/>
         <element name="EntityWithDiffernentClassName" positionX="-540" positionY="-1665" width="173" height="45"/>
+        <element name="SingleEntityWithNoRelationships" positionX="-108" positionY="-1521" width="180" height="195"/>
+        <element name="SingleRelatedEntity" positionX="-362" positionY="-149631" width="128" height="60"/>
     </elements>
 </model>

@@ -5,6 +5,11 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
+#if TARGET_OS_IPHONE == 0
+#define MAC_PLATFORM_ONLY YES
+#endif
+
+
 
 #ifdef NS_BLOCKS_AVAILABLE
 
@@ -44,6 +49,16 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
 //Helper Functions
 NSDate * dateFromString(NSString *value);
-NSColor * NSColorFromString(NSString *serializedColor);NSColor * NSColorFromString(NSString *serializedColor);
 NSString * attributeNameFromString(NSString *value);
+
+#ifdef MAC_PLATFORM_ONLY
+
+NSColor * NSColorFromString(NSString *serializedColor);
+
+#else
+
+UIColor * UIColorFromString(NSString *serializedColor);
+
+#endif
+id (*ColorFromString)(NSString *);
 
