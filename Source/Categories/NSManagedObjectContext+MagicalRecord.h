@@ -39,7 +39,7 @@
 
 @end
 
-
+/*
 #ifdef MR_SHORTHAND
 
 #define observeContext              MR_observeContext
@@ -56,10 +56,12 @@
 #define setNotifiesMainContextOnSave    MR_setNotifiesMainContextOnSave
 #define notifiesMainContextonSave       MR_notifiesMainContextonSave
 
-#define context]                    MR_context]
+//#define context]                    MR_context]
 #define contextForCurrentThread     MR_contextForCurrentThread
 
 #define contextThatNotifiesDefaultContextOnMainThread       MR_contextThatNotifiesDefaultContextOnMainThread
 #define contextWithStoreCoordinator                         MR_contextWithStoreCoodinator
 
 #endif
+
+*/

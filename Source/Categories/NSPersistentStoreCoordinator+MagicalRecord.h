@@ -11,18 +11,18 @@
 
 @interface NSPersistentStoreCoordinator (MagicalRecord)
 
-+ (NSPersistentStoreCoordinator *) defaultStoreCoordinator;
-+ (void) setDefaultStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
++ (NSPersistentStoreCoordinator *) MR_defaultStoreCoordinator;
++ (void) MR_setDefaultStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 
-+ (NSPersistentStoreCoordinator *) coordinatorWithInMemoryStore;
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithInMemoryStore;
 
-+ (NSPersistentStoreCoordinator *)newPersistentStoreCoordinator;
++ (NSPersistentStoreCoordinator *) MR_newPersistentStoreCoordinator;
 
-+ (NSPersistentStoreCoordinator *) coordinatorWithSqliteStoreNamed:(NSString *)storeFileName;
-+ (NSPersistentStoreCoordinator *) coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *) storeFileName;
-+ (NSPersistentStoreCoordinator *) coordinatorWithPersitentStore:(NSPersistentStore *)persistentStore;
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreNamed:(NSString *)storeFileName;
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *) storeFileName;
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithPersitentStore:(NSPersistentStore *)persistentStore;
 
-- (NSPersistentStore *) addInMemoryStore;
+- (NSPersistentStore *) MR_addInMemoryStore;
 
 @end
 

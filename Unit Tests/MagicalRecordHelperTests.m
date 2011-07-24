@@ -25,7 +25,7 @@
 {
     assertThat([NSManagedObjectContext defaultContext], is(notNilValue()));
     assertThat([NSManagedObjectModel defaultManagedObjectModel], is(notNilValue()));
-    assertThat([NSPersistentStoreCoordinator defaultStoreCoordinator], is(notNilValue()));
+    assertThat([NSPersistentStoreCoordinator MR_defaultStoreCoordinator], is(notNilValue()));
     assertThat([NSPersistentStore defaultPersistentStore], is(notNilValue()));    
 }
 
@@ -89,7 +89,6 @@
     
     assertThatBool(errorHandlerWasCalled_, is(equalToBool(YES)));
 }
-
 
 - (void) testLogsErrorsToLogger
 {

@@ -15,24 +15,24 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
 
 @implementation NSPersistentStoreCoordinator (MagicalRecord)
 
-+ (NSPersistentStoreCoordinator *) defaultStoreCoordinator
++ (NSPersistentStoreCoordinator *) MR_defaultStoreCoordinator
 {
     @synchronized (self)
     {
         if (defaultCoordinator == nil)
         {
-            defaultCoordinator = [self newPersistentStoreCoordinator];
+            defaultCoordinator = [self MR_newPersistentStoreCoordinator];
         }
     }
 	return defaultCoordinator;
 }
 
-+ (void) setDefaultStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
++ (void) MR_setDefaultStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
 	defaultCoordinator = coordinator;
 }
 
-- (void) setupSqliteStoreNamed:(id)storeFileName withOptions:(NSDictionary *)options
+- (void) MR_setupSqliteStoreNamed:(id)storeFileName withOptions:(NSDictionary *)options
 {
     NSURL *url = [storeFileName isKindOfClass:[NSURL class]] ? storeFileName : [NSPersistentStore urlForStoreName:storeFileName];
     NSError *error = nil;
@@ -48,66 +48,66 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
     [NSPersistentStore setDefaultPersistentStore:store];        
 }
 
-+ (NSPersistentStoreCoordinator *) coordinatorWithPersitentStore:(NSPersistentStore *)persistentStore;
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithPersitentStore:(NSPersistentStore *)persistentStore;
 {
     NSManagedObjectModel *model = [NSManagedObjectModel defaultManagedObjectModel];
     NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
     
-    [psc setupSqliteStoreNamed:[persistentStore URL] withOptions:nil];
+    [psc MR_setupSqliteStoreNamed:[persistentStore URL] withOptions:nil];
     
     return psc;
 }
 
-+ (NSPersistentStoreCoordinator *) coordinatorWithSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *)options
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *)options
 {
     NSManagedObjectModel *model = [NSManagedObjectModel defaultManagedObjectModel];
     NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
 
-    [psc setupSqliteStoreNamed:storeFileName withOptions:options];
+    [psc MR_setupSqliteStoreNamed:storeFileName withOptions:options];
     
     return psc;
 }
 
-+ (NSPersistentStoreCoordinator *) coordinatorWithSqliteStoreNamed:(NSString *)storeFileName
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreNamed:(NSString *)storeFileName
 {
-	return [self coordinatorWithSqliteStoreNamed:storeFileName withOptions:nil];
+	return [self MR_coordinatorWithSqliteStoreNamed:storeFileName withOptions:nil];
 }
 
-- (void) setupAutoMigratingSqliteStoreNamed:(NSString *) storeFileName
+- (void) MR_setupAutoMigratingSqliteStoreNamed:(NSString *) storeFileName
 {
     NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
                              [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
                              [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
                              nil];
     
-    [self setupSqliteStoreNamed:storeFileName withOptions:options];
+    [self MR_setupSqliteStoreNamed:storeFileName withOptions:options];
 }
 
-+ (NSPersistentStoreCoordinator *) coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *) storeFileName
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *) storeFileName
 {
     NSManagedObjectModel *model = [NSManagedObjectModel defaultManagedObjectModel];
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
     
-    [coordinator setupAutoMigratingSqliteStoreNamed:storeFileName];
+    [coordinator MR_setupAutoMigratingSqliteStoreNamed:storeFileName];
     
     //HACK: lame solution to fix automigration error "Migration failed after first pass"
     if ([[coordinator persistentStores] count] == 0) 
     {
-        [coordinator performSelector:@selector(setupAutoMigratingSqliteStoreNamed:) withObject:storeFileName afterDelay:0.5];
+        [coordinator performSelector:@selector(MR_setupAutoMigratingSqliteStoreNamed:) withObject:storeFileName afterDelay:0.5];
     }
     return coordinator;
 }
 
-+ (NSPersistentStoreCoordinator *) coordinatorWithInMemoryStore
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithInMemoryStore
 {
 	NSManagedObjectModel *model = [NSManagedObjectModel defaultManagedObjectModel];
 	NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
 	
-    [NSPersistentStore setDefaultPersistentStore:[psc addInMemoryStore]];
+    [NSPersistentStore setDefaultPersistentStore:[psc MR_addInMemoryStore]];
     return psc;
 }
 
-- (NSPersistentStore *) addInMemoryStore
+- (NSPersistentStore *) MR_addInMemoryStore
 {
     NSError *error = nil;
     NSPersistentStore *store = [self addPersistentStoreWithType:NSInMemoryStoreType
@@ -122,9 +122,9 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
     return store;
 }
 
-+ (NSPersistentStoreCoordinator *) newPersistentStoreCoordinator
++ (NSPersistentStoreCoordinator *) MR_newPersistentStoreCoordinator
 {
-	return [self coordinatorWithSqliteStoreNamed:kMagicalRecordDefaultStoreFileName];
+	return [self MR_coordinatorWithSqliteStoreNamed:kMagicalRecordDefaultStoreFileName];
 }
 
 @end

@@ -17,7 +17,7 @@ static SEL errorHandlerAction = nil;
 	[MRCoreDataAction cleanUp];
 	[NSManagedObjectContext setDefaultContext:nil];
 	[NSManagedObjectModel setDefaultManagedObjectModel:nil];
-	[NSPersistentStoreCoordinator setDefaultStoreCoordinator:nil];
+	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:nil];
 	[NSPersistentStore setDefaultPersistentStore:nil];
 }
 
@@ -100,8 +100,8 @@ static SEL errorHandlerAction = nil;
 
 + (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName
 {
-	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator coordinatorWithSqliteStoreNamed:storeName];
-	[NSPersistentStoreCoordinator setDefaultStoreCoordinator:coordinator];
+	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreNamed:storeName];
+	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
 	
 	NSManagedObjectContext *context = [NSManagedObjectContext contextWithStoreCoordinator:coordinator];
 	[NSManagedObjectContext setDefaultContext:context];
@@ -109,8 +109,8 @@ static SEL errorHandlerAction = nil;
 
 + (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName
 {
-    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator coordinatorWithAutoMigratingSqliteStoreNamed:storeName];
-    [NSPersistentStoreCoordinator setDefaultStoreCoordinator:coordinator];
+    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithAutoMigratingSqliteStoreNamed:storeName];
+    [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
     
     NSManagedObjectContext *context = [NSManagedObjectContext contextWithStoreCoordinator:coordinator];
     [NSManagedObjectContext setDefaultContext:context];
@@ -118,8 +118,8 @@ static SEL errorHandlerAction = nil;
 
 + (void) setupCoreDataStackWithInMemoryStore
 {
-	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator coordinatorWithInMemoryStore];
-	[NSPersistentStoreCoordinator setDefaultStoreCoordinator:coordinator];
+	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithInMemoryStore];
+	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
 	
 	NSManagedObjectContext *context = [NSManagedObjectContext contextWithStoreCoordinator:coordinator];
 	[NSManagedObjectContext setDefaultContext:context];

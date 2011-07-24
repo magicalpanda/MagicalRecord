@@ -108,33 +108,34 @@
 #endif
 
 
-
-#ifdef MR_SHORTHAND
-
-#define defaultBatchSize        MR_defaultBatchSize
-#define setDefaultBatchSize     MR_setDefaultBatchSize
-
-#define createFetchRequest      MR_createFetchRequest
-#define executeFetchRequest     MR_executeFetchRequest
-
-#define requestAll              MR_requestAll
-#define trucateAll              MR_truncateAll
-
-#define numberOfEntities        MR_numberOfEntities
-#define hasAtLeastOneEntity     MR_hasAtLeastOneEntity
-
-#define findAll                 MR_findAll
-#define findByAttribute         MR_findByAttribute
-
-#define findFirst               MR_findFirst
-#define findFirstByAttribute    MR_findFirstByAttribute
-
-#define fetchAllSortedBy        MR_fetchAllSortedBy
-#define fetchRequest            MR_fetchRequest
-
-#define inContext               MR_inContext
-#define inThreadContext         MR_inThreadContext
-
-#endif
-
 @end
+
+/*
+ #ifdef MR_SHORTHAND
+ 
+ #define defaultBatchSize        MR_defaultBatchSize
+ #define setDefaultBatchSize     MR_setDefaultBatchSize
+ 
+ #define createFetchRequest      MR_createFetchRequest
+ #define executeFetchRequest     MR_executeFetchRequest
+ 
+ #define requestAll              MR_requestAll
+ #define trucateAll              MR_truncateAll
+ 
+ #define numberOfEntities        MR_numberOfEntities
+ #define hasAtLeastOneEntity     MR_hasAtLeastOneEntity
+ 
+ #define findAll                 MR_findAll
+ #define findByAttribute         MR_findByAttribute
+ 
+ #define findFirst               MR_findFirst
+ #define findFirstByAttribute    MR_findFirstByAttribute
+ 
+ #define fetchAllSortedBy        MR_fetchAllSortedBy
+ #define fetchRequest            MR_fetchRequest
+ 
+ #define inContext               MR_inContext
+ #define inThreadContext         MR_inThreadContext
+ 
+ #endif
+ */

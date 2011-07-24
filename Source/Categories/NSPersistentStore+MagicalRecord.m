@@ -10,47 +10,47 @@
 
 NSString * const kMagicalRecordDefaultStoreFileName = @"CoreDataStore.sqlite";
 
-static NSPersistentStore *defaultPersistentStore = nil;
+static NSPersistentStore *defaultPersistentStore_ = nil;
 
 @implementation NSPersistentStore (MagicalRecord)
 
-+ (NSPersistentStore *) defaultPersistentStore
++ (NSPersistentStore *) MR_defaultPersistentStore
 {
-	return defaultPersistentStore;
+	return defaultPersistentStore_;
 }
 
-+ (void) setDefaultPersistentStore:(NSPersistentStore *) store
++ (void) MR_setDefaultPersistentStore:(NSPersistentStore *) store
 {
-	defaultPersistentStore = store;
+	defaultPersistentStore_ = store;
 }
 
-+ (NSString *) directory:(int) type
++ (NSString *) MR_directory:(int) type
 {    
     return [NSSearchPathForDirectoriesInDomains(type, NSUserDomainMask, YES) lastObject];
 }
 
-+ (NSString *)applicationDocumentsDirectory 
++ (NSString *)MR_applicationDocumentsDirectory 
 {
-	return [self directory:NSDocumentDirectory];
+	return [self MR_directory:NSDocumentDirectory];
 }
 
-+ (NSString *)applicationLibraryDirectory
++ (NSString *)MR_applicationLibraryDirectory
 {
 #if !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
     
     NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
-    return [[self directory:NSApplicationSupportDirectory] stringByAppendingPathComponent:applicationName];
+    return [[self MR_directory:NSApplicationSupportDirectory] stringByAppendingPathComponent:applicationName];
     
 #else
     
-	return [self directory:NSLibraryDirectory];
+	return [self MR_directory:NSLibraryDirectory];
     
 #endif
 }
 
-+ (NSURL *) urlForStoreName:(NSString *)storeFileName
++ (NSURL *) MR_urlForStoreName:(NSString *)storeFileName
 {
-	NSArray *paths = [NSArray arrayWithObjects:[self applicationDocumentsDirectory], [self applicationLibraryDirectory], nil];
+	NSArray *paths = [NSArray arrayWithObjects:[self MR_applicationDocumentsDirectory], [self MR_applicationLibraryDirectory], nil];
     NSFileManager *fm = [[NSFileManager alloc] init];
 
     for (NSString *path in paths) 
@@ -63,12 +63,12 @@ static NSPersistentStore *defaultPersistentStore = nil;
     }
     
     //set default url
-    return [NSURL fileURLWithPath:[[self applicationLibraryDirectory] stringByAppendingPathComponent:storeFileName]];
+    return [NSURL fileURLWithPath:[[self MR_applicationLibraryDirectory] stringByAppendingPathComponent:storeFileName]];
 }
 
-+ (NSURL *)defaultLocalStoreUrl
++ (NSURL *)MR_defaultLocalStoreUrl
 {
-    return [self urlForStoreName:kMagicalRecordDefaultStoreFileName];
+    return [self MR_urlForStoreName:kMagicalRecordDefaultStoreFileName];
 }
 
 @end

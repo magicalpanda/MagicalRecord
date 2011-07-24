@@ -20,6 +20,7 @@
 
 @end
 
+/*
 #ifdef MR_SHORTHAND
 
 #define defaultManagedObjectModel               MR_defaultManagedObjectModel
@@ -29,3 +30,4 @@
 #define newModelNamed                           MR_newModelNamed
 
 #endif
+*/

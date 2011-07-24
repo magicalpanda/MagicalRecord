@@ -12,12 +12,12 @@ extern NSString * const kMagicalRecordDefaultStoreFileName;
 
 @interface NSPersistentStore (MagicalRecord)
 
-+ (NSURL *) defaultLocalStoreUrl;
++ (NSURL *) MR_defaultLocalStoreUrl;
 
-+ (NSPersistentStore *) defaultPersistentStore;
-+ (void) setDefaultPersistentStore:(NSPersistentStore *) store;
++ (NSPersistentStore *) MR_defaultPersistentStore;
++ (void) MR_setDefaultPersistentStore:(NSPersistentStore *) store;
 
-+ (NSURL *) urlForStoreName:(NSString *)storeFileName;
++ (NSURL *) MR_urlForStoreName:(NSString *)storeFileName;
 
 @end
 
