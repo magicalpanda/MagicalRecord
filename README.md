@@ -15,8 +15,12 @@ Magical Record for Core Data was inspired by the ease of Ruby on Rails' Active R
 # Installation
 
 - In your XCode Project, add all the .h and .m files from the Source folder into your project. 
-- Add the proper import states for the .h files either to your specific files using Core Data, or in your pre-compiled header file
+- Add *CoreData+MagicalRecord.h* file to your PCH file or your AppDelegate file.
 - Start writing code! ... There is no step 3!
+
+# ARC Support
+
+As of tag 1.5, ARC is supported. I am not aware of any way to provide a backward compatible solution and still maintain only 1 codebase, so MagicalRecord will be ARC compliant from here on in.
 
 # Usage
 
@@ -197,6 +201,12 @@ All the boilerplate operations that need to be done when saving are done in thes
 In this method, the CoreDataBlock provides you with the proper context in which to perform your operations, you don't need to worry about setting up the context so that it tells the Default Context that it's done, and should update because changes were performed on another thread.
 
 All MRCoreDataActions have a dedicated GCD queue on which they operate. This means that throughout your app, you only really have 2 queues (sort of like threads) performing Core Data actions at any one time: one on the main queue, and another on this dedicated GCD queue.
+
+# Data Import
+
+*Experimental*
+
+MagicalRecord will now import data from NSDictionaries into your Core Data store. This feature is currently under development, and is undergoing updates. Feel free to try it out, add tests and send in your feedback.
 	
 # Extra Bits
 This Code is released under the MIT License by [Magical Panda Software, LLC.](http://www.magicalpanda.com)
