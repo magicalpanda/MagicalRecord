@@ -161,7 +161,7 @@ NSString * attributeNameFromString(NSString *value)
 NSDate * dateFromString(NSString *value)
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:kNSManagedObjectDefaultDateFormatString];
+    [formatter setDateFormat:kMagicalRecordImportDefaultDateFormatString];
     
     return [formatter dateFromString:value];
 }
@@ -189,7 +189,22 @@ NSInteger* newColorComponentsFromString(NSString *serializedColor)
     return componentValues;
 }
 
-#ifdef MAC_PLATFORM_ONLY
+#if TARGET_OS_IPHONE
+
+UIColor * UIColorFromString(NSString *serializedColor)
+{
+    NSInteger *componentValues = newColorComponentsFromString(serializedColor);
+    UIColor *color = [UIColor colorWithRed:(componentValues[0] / 255.)
+                                     green:(componentValues[1] / 255.)
+                                      blue:(componentValues[2] / 255.)
+                                     alpha:componentValues[3]];
+    
+    free(componentValues);
+    return color;
+}
+id (*ColorFromString)(NSString *) = UIColorFromString;
+
+#else
 
 NSColor * NSColorFromString(NSString *serializedColor)
 {
@@ -203,20 +218,5 @@ NSColor * NSColorFromString(NSString *serializedColor)
 }
 id (*ColorFromString)(NSString *) = NSColorFromString;
 
-#else
-
-UIColor * UIColorFromString(NSString *serializedColor)
-{
-    NSInteger *componentValues = newColorComponentsFromString(serializedColor);
-    UIColor *color = [UIColor colorWithRed:(componentValues[0] / 255.)
-                                     green:(componentValues[1] / 255.)
-                                      blue:(componentValues[2] / 255.)
-                                     alpha:componentValues[3]];
-    
-    free(componentValues);
-    return color;
-}
-
-id (*ColorFromString)(NSString *) = UIColorFromString;
 
 #endif

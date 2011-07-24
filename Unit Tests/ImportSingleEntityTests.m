@@ -25,7 +25,7 @@
     
     id singleEntity = [FixtureHelpers dataFromPListFixtureNamed:@"SingleEntityWithNoRelationships"];
     
-    testEntity = [SingleEntityWithNoRelationships mr_importFromDictionary:singleEntity];
+    testEntity = [SingleEntityWithNoRelationships MR_importFromDictionary:singleEntity];
 }
 
 - (void) tearDown

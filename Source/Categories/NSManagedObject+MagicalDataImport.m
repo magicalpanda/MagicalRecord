@@ -8,20 +8,20 @@
 
 #import "CoreData+MagicalRecord.h"
 
-NSString * const kNSManagedObjectDefaultDateFormatString = @"YYYY-MM-dd'T'HH:mm:ss'Z'";
-NSString * const kNSManagedObjectAttributeJSONKeyMapKey = @"jsonKeyName";
-NSString * const kNSManagedObjectAttributeJSONValueClassNameKey = @"attributeValueClassName";
+NSString * const kMagicalRecordImportDefaultDateFormatString = @"YYYY-MM-dd'T'HH:mm:ss'Z'";
+NSString * const kMagicalRecordImportAttributeKeyMapKey = @"jsonKeyName";
+NSString * const kMagicalRecordImportAttributeValueClassNameKey = @"attributeValueClassName";
 
-NSString * const kNSManagedObjectRelationshipJSONMapKey = @"jsonKeyName";
-NSString * const kNSManagedObjectRelationshipJSONPrimaryKey = @"primaryRelationshipKey";
-NSString * const kNSManagedObjectRelationshipJSONTypeKey = @"type";
+NSString * const kMagicalRecordImportRelationshipMapKey = @"jsonKeyName";
+NSString * const kMagicalRecordImportRelationshipPrimaryKey = @"primaryRelationshipKey";
+NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 
-@implementation NSManagedObject (NSManagedObject_JSONHelpers)
+@implementation NSManagedObject (NSManagedObject_DataImport)
 
-- (id) mr_attributeValueFromJSONDicationary:(NSDictionary *)jsonData forAttribute:(NSAttributeDescription *)attributeInfo
+- (id) MR_attributeValueFromDictionary:(NSDictionary *)jsonData forAttribute:(NSAttributeDescription *)attributeInfo
 {
     NSString *attributeName = [attributeInfo name];
-    NSString *lookupKey = [[attributeInfo userInfo] valueForKey:kNSManagedObjectAttributeJSONKeyMapKey] ?: attributeName;
+    NSString *lookupKey = [[attributeInfo userInfo] valueForKey:kMagicalRecordImportAttributeKeyMapKey] ?: attributeName;
 
     id value = [jsonData valueForKey:lookupKey];
     
@@ -31,7 +31,7 @@ NSString * const kNSManagedObjectRelationshipJSONTypeKey = @"type";
     }
     
     NSAttributeType attributeType = [attributeInfo attributeType];
-    NSString *desiredAttributeType = [[attributeInfo userInfo] valueForKey:kNSManagedObjectAttributeJSONValueClassNameKey];
+    NSString *desiredAttributeType = [[attributeInfo userInfo] valueForKey:kMagicalRecordImportAttributeValueClassNameKey];
     if (desiredAttributeType) 
     {
         if ([desiredAttributeType hasSuffix:@"Color"])
@@ -50,36 +50,36 @@ NSString * const kNSManagedObjectRelationshipJSONTypeKey = @"type";
     return value;
 }
 
-- (void) mr_setAttributes:(NSDictionary *)attributes forKeysWithJSONDictionary:(NSDictionary *)jsonData
+- (void) MR_setAttributes:(NSDictionary *)attributes forKeysWithDictionary:(NSDictionary *)jsonData
 {    
     for (NSString *attributeName in attributes) 
     {
         NSAttributeDescription *attributeInfo = [attributes valueForKey:attributeName];
-        id value = [self mr_attributeValueFromJSONDicationary:jsonData forAttribute:attributeInfo];
+        id value = [self MR_attributeValueFromDictionary:jsonData forAttribute:attributeInfo];
         [self setValue:value forKey:attributeName];
     }
 }
 
-- (NSManagedObject *) mr_createInstanceForEntity:(NSEntityDescription *)entityDescription withJSONDictionary:(id)jsonData
+- (NSManagedObject *) MR_createInstanceForEntity:(NSEntityDescription *)entityDescription withDictionary:(id)jsonData
 {
     NSManagedObject *relatedObject = [[NSManagedObject alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:[self managedObjectContext]];
     
-    [relatedObject mr_setValuesForKeysWithJSONDictionary:jsonData];
+    [relatedObject MR_setValuesForKeysWithJSONDictionary:jsonData];
     
     return relatedObject;
 }
 
-- (NSManagedObject *) mr_findObjectForRelationship:(NSRelationshipDescription *)relationshipInfo withJSONData:(id)singleRelatedObjectData
+- (NSManagedObject *) MR_findObjectForRelationship:(NSRelationshipDescription *)relationshipInfo withData:(id)singleRelatedObjectData
 {
     NSEntityDescription *originalDestinationEntity = [relationshipInfo destinationEntity];
     NSDictionary *subentities = [originalDestinationEntity subentitiesByName];
     NSEntityDescription *destinationEntity = [subentities count] /* && ![entityDescription isAbstract]*/ ? 
-                                                [subentities valueForKey:[singleRelatedObjectData valueForKey:kNSManagedObjectRelationshipJSONTypeKey]] :
+                                                [subentities valueForKey:[singleRelatedObjectData valueForKey:kMagicalRecordImportRelationshipTypeKey]] :
                                                 originalDestinationEntity;
 
     if (destinationEntity == nil) 
     {
-        ARLog(@"Unable to find entity for type '%@'", [singleRelatedObjectData valueForKey:kNSManagedObjectRelationshipJSONTypeKey]);
+        ARLog(@"Unable to find entity for type '%@'", [singleRelatedObjectData valueForKey:kMagicalRecordImportRelationshipTypeKey]);
         return nil;
     }
     
@@ -90,10 +90,10 @@ NSString * const kNSManagedObjectRelationshipJSONTypeKey = @"type";
     
     id existingObject = nil; //[managedObjectClass findFirstByAttribute:@"" withValue:@"" inContext:[self managedObjectContext]];
     
-    return existingObject ?: [self mr_createInstanceForEntity:destinationEntity withJSONDictionary:singleRelatedObjectData];
+    return existingObject ?: [self MR_createInstanceForEntity:destinationEntity withDictionary:singleRelatedObjectData];
 }
 
-- (void) mr_addObject:(NSManagedObject *)relatedObject forRelationship:(NSRelationshipDescription *)relationshipInfo
+- (void) MR_addObject:(NSManagedObject *)relatedObject forRelationship:(NSRelationshipDescription *)relationshipInfo
 {
     //add related object to set
     NSString *addRelationMessageFormat = [relationshipInfo isToMany] ? @"add%@Object:" : @"set%@:";
@@ -102,13 +102,13 @@ NSString * const kNSManagedObjectRelationshipJSONTypeKey = @"type";
     [self performSelector:NSSelectorFromString(addRelatedObjectToSetMessage) withObject:relatedObject];
 }
 
-- (void) mr_setRelationships:(NSDictionary *)relationships forKeysWithJSONDictionary:(NSDictionary *)jsonData
+- (void) MR_setRelationships:(NSDictionary *)relationships forKeysWithDictionary:(NSDictionary *)jsonData
 {
     for (NSString *relationshipName in relationships) 
     {
         NSRelationshipDescription *relationshipInfo = [relationships valueForKey:relationshipName];
         
-        NSString *lookupKey = [[relationshipInfo userInfo] valueForKey:kNSManagedObjectRelationshipJSONMapKey] ?: relationshipName;
+        NSString *lookupKey = [[relationshipInfo userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey] ?: relationshipName;
         
         id relatedObjectData = [jsonData valueForKey:lookupKey];
         
@@ -121,41 +121,41 @@ NSString * const kNSManagedObjectRelationshipJSONTypeKey = @"type";
         {
             for (id singleRelatedObjectData in relatedObjectData) 
             {
-                NSManagedObject *relatedObject = [self mr_findObjectForRelationship:relationshipInfo
-                                                                    withJSONData:singleRelatedObjectData];
+                NSManagedObject *relatedObject = [self MR_findObjectForRelationship:relationshipInfo
+                                                                    withData:singleRelatedObjectData];
                 
-                [self mr_addObject:relatedObject forRelationship:relationshipInfo];
+                [self MR_addObject:relatedObject forRelationship:relationshipInfo];
             }
         }
         else
         {
-            NSManagedObject *relatedObject = [self mr_findObjectForRelationship:relationshipInfo
-                                                                withJSONData:relatedObjectData];
+            NSManagedObject *relatedObject = [self MR_findObjectForRelationship:relationshipInfo
+                                                                withData:relatedObjectData];
             
-            [self mr_addObject:relatedObject forRelationship:relationshipInfo];
+            [self MR_addObject:relatedObject forRelationship:relationshipInfo];
         }
     }
 }
 
-- (void) mr_setValuesForKeysWithJSONDictionary:(NSDictionary *)jsonData
+- (void) MR_setValuesForKeysWithJSONDictionary:(NSDictionary *)jsonData
 {
     NSDictionary *attributes = [[self entity] attributesByName];
-    [self mr_setAttributes:attributes forKeysWithJSONDictionary:jsonData];
+    [self MR_setAttributes:attributes forKeysWithDictionary:jsonData];
     
     NSDictionary *relationships = [[self entity] relationshipsByName];
-    [self mr_setRelationships:relationships forKeysWithJSONDictionary:jsonData];
+    [self MR_setRelationships:relationships forKeysWithDictionary:jsonData];
 }
 
-+ (id) mr_importFromDictionary:(NSDictionary *)data inContext:(NSManagedObjectContext *)context;
++ (id) MR_importFromDictionary:(NSDictionary *)data inContext:(NSManagedObjectContext *)context;
 {
     id managedObject = [[self alloc] initWithEntity:[self entityDescription] insertIntoManagedObjectContext:context];
-    [managedObject mr_setValuesForKeysWithJSONDictionary:data];
+    [managedObject MR_setValuesForKeysWithJSONDictionary:data];
     return managedObject;
 }
 
-+ (id) mr_importFromDictionary:(NSDictionary *)data
++ (id) MR_importFromDictionary:(NSDictionary *)data
 {
-    return [self mr_importFromDictionary:data inContext:[NSManagedObjectContext defaultContext]];
+    return [self MR_importFromDictionary:data inContext:[NSManagedObjectContext defaultContext]];
 }
 
 @end

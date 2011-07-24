@@ -26,7 +26,7 @@
     
     id singleEntity = [FixtureHelpers dataFromJSONFixtureNamed:@"SingleRelatedEntity"];
     
-    testEntity = [SingleRelatedEntity mr_importFromDictionary:singleEntity];
+    testEntity = [SingleRelatedEntity MR_importFromDictionary:singleEntity];
 }
 
 - (void) tearDown

@@ -8,23 +8,23 @@
 
 #import <CoreData/CoreData.h>
 
-extern NSString * const kNSManagedObjectDefaultDateFormatString;
-extern NSString * const kNSManagedObjectAttributeJSONKeyMapKey;
-extern NSString * const kNSManagedObjectAttributeJSONValueClassNameKey;
+extern NSString * const kMagicalRecordImportDefaultDateFormatString;
+extern NSString * const kMagicalRecordImportAttributeKeyMapKey;
+extern NSString * const kMagicalRecordImportAttributeValueClassNameKey;
 
-extern NSString * const kNSManagedObjectRelationshipJSONMapKey;
-extern NSString * const kNSManagedObjectRelationshipJSONPrimaryKey;
-extern NSString * const kNSManagedObjectRelationshipJSONTypeKey;
+extern NSString * const kMagicalRecordImportRelationshipMapKey;
+extern NSString * const kMagicalRecordImportRelationshipPrimaryKey;
+extern NSString * const kMagicalRecordImportRelationshipTypeKey;
 
-@interface NSManagedObject (NSManagedObject_JSONHelpers)
+@interface NSManagedObject (NSManagedObject_DataImport)
 
-- (void) mr_setValuesForKeysWithJSONDictionary:(NSDictionary *)jsonData;
-+ (id) mr_importFromDictionary:(NSDictionary *)data;
+- (void) MR_setValuesForKeysWithJSONDictionary:(NSDictionary *)jsonData;
++ (id) MR_importFromDictionary:(NSDictionary *)data;
 
 @end
 
 
 #ifdef MR_SHORTHAND
-    #define importFromDictionary                    mr_importFromDictionary
-    #define setValuesForKeysWithJSDONDictionary     mr_setValuesForKeysWithJSONDictionary
+    #define importFromDictionary                    MR_importFromDictionary
+    #define setValuesForKeysWithJSDONDictionary     MR_setValuesForKeysWithJSONDictionary
 #endif
