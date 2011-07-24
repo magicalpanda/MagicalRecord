@@ -48,7 +48,16 @@ static NSPersistentStore *defaultPersistentStore = nil;
 
 + (NSURL *) urlForStoreName:(NSString *)storeFileName
 {
-	NSArray *paths = [NSArray arrayWithObjects:[self applicationDocumentsDirectory], [self applicationLibraryDirectory], nil];
+	NSArray *paths = nil;
+    NSString *defaultDirectory = nil;
+#if MAC_APP_STORE_SAFE && !(TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
+    defaultDirectory = [[@"~/Library/Application Support/" stringByAppendingPathComponent:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]] stringByExpandingTildeInPath];
+    paths = [NSArray arrayWithObject:defaultDirectory];
+#else
+    defaultDirectory = [self applicationLibraryDirectory];
+    paths = [NSArray arrayWithObjects:[self applicationDocumentsDirectory], [self applicationLibraryDirectory], nil];
+#endif
+
     NSFileManager *fm = [[[NSFileManager alloc] init] autorelease];
 
     for (NSString *path in paths) 
@@ -61,7 +70,7 @@ static NSPersistentStore *defaultPersistentStore = nil;
     }
     
     //set default url
-    return [NSURL fileURLWithPath:[[self applicationLibraryDirectory] stringByAppendingPathComponent:storeFileName]];
+    return [NSURL fileURLWithPath:[defaultDirectory stringByAppendingPathComponent:storeFileName]];
 }
 
 + (NSURL *)defaultLocalStoreUrl
