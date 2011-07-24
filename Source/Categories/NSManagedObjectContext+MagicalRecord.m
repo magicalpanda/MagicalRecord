@@ -43,7 +43,8 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
     dispatch_async(dispatch_get_current_queue(), resetBlock);
 }
 
-+ (void) resetContextForCurrentThread {
++ (void) resetContextForCurrentThread 
+{
     [[NSManagedObjectContext contextForCurrentThread] reset];
 }
 
