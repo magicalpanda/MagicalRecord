@@ -6,54 +6,15 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-//#import "NSManagedObject+MagicalDataImport.h"
 #import "CoreData+MagicalRecord.h"
 
+NSString * const kNSManagedObjectDefaultDateFormatString = @"YYYY-MM-dd'T'HH:mm:ss'Z'";
+NSString * const kNSManagedObjectAttributeJSONKeyMapKey = @"jsonKeyName";
+NSString * const kNSManagedObjectAttributeJSONValueClassNameKey = @"attributeValueClassName";
 
-static NSString * const kNSManagedObjectDefaultDateFormatString = @"YYYY-MM-dd'T'HH:mm:ss'Z'";
-static NSString * const kNSManagedObjectAttributeJSONKeyMapKey = @"jsonKeyName";
-static NSString * const kNSManagedObjectAttributeJSONValueClassNameKey = @"attributeValueClassName";
-
-static NSString * const kNSManagedObjectRelationshipJSONMapKey = @"jsonKeyName";
-static NSString * const kNSManagedObjectRelationshipJSONPrimaryKey = @"primaryRelationshipKey";
-static NSString * const kNSManagedObjectRelationshipJSONTypeKey = @"type";
-
-
-NSDate * dateFromString(NSString *value);
-NSDate * dateFromString(NSString *value)
-{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:kNSManagedObjectDefaultDateFormatString];
-    
-    return [formatter dateFromString:value];
-}
-
-NSColor * NSColorFromString(NSString *serializedColor);NSColor * NSColorFromString(NSString *serializedColor)
-{
-    NSScanner *colorScanner = [NSScanner scannerWithString:serializedColor];
-    NSString *colorType;
-    [colorScanner scanUpToString:@"(" intoString:&colorType];
-    
-    NSColor *color = nil;
-    if ([colorType hasPrefix:@"rgba"])
-    {
-        NSCharacterSet *rgbaCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"(,)"];
-        NSInteger componentValues[4];
-        NSInteger *componentValue = componentValues;
-        while (![colorScanner isAtEnd]) 
-        {
-            [colorScanner scanCharactersFromSet:rgbaCharacterSet intoString:nil];
-            [colorScanner scanInteger:componentValue];
-            componentValue++;
-        }
-        color = [NSColor colorWithDeviceRed:(componentValues[0] / 255.)
-                                      green:(componentValues[1] / 255.)
-                                       blue:(componentValues[2] / 255.)
-                                      alpha:componentValues[3]];
-    }
-    
-    return color;
-}
+NSString * const kNSManagedObjectRelationshipJSONMapKey = @"jsonKeyName";
+NSString * const kNSManagedObjectRelationshipJSONPrimaryKey = @"primaryRelationshipKey";
+NSString * const kNSManagedObjectRelationshipJSONTypeKey = @"type";
 
 @implementation NSManagedObject (NSManagedObject_JSONHelpers)
 
@@ -118,7 +79,7 @@ NSColor * NSColorFromString(NSString *serializedColor);NSColor * NSColorFromStri
 
     if (destinationEntity == nil) 
     {
-        NSLog(@"Unable to find entity for type '%@'", [singleRelatedObjectData valueForKey:kNSManagedObjectRelationshipJSONTypeKey]);
+        ARLog(@"Unable to find entity for type '%@'", [singleRelatedObjectData valueForKey:kNSManagedObjectRelationshipJSONTypeKey]);
         return nil;
     }
     
@@ -136,7 +97,7 @@ NSColor * NSColorFromString(NSString *serializedColor);NSColor * NSColorFromStri
 {
     //add related object to set
     NSString *addRelationMessageFormat = [relationshipInfo isToMany] ? @"add%@Object:" : @"set%@:";
-    NSString *addRelatedObjectToSetMessage = [NSString stringWithFormat:addRelationMessageFormat, [[relationshipInfo name] capitalizedString]];
+    NSString *addRelatedObjectToSetMessage = [NSString stringWithFormat:addRelationMessageFormat, attributeNameFromString([relationshipInfo name])];
     
     [self performSelector:NSSelectorFromString(addRelatedObjectToSetMessage) withObject:relatedObject];
 }

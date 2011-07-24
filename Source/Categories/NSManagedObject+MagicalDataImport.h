@@ -8,6 +8,14 @@
 
 #import <CoreData/CoreData.h>
 
+extern NSString * const kNSManagedObjectDefaultDateFormatString;
+extern NSString * const kNSManagedObjectAttributeJSONKeyMapKey;
+extern NSString * const kNSManagedObjectAttributeJSONValueClassNameKey;
+
+extern NSString * const kNSManagedObjectRelationshipJSONMapKey;
+extern NSString * const kNSManagedObjectRelationshipJSONPrimaryKey;
+extern NSString * const kNSManagedObjectRelationshipJSONTypeKey;
+
 @interface NSManagedObject (NSManagedObject_JSONHelpers)
 
 - (void) mr_setValuesForKeysWithJSONDictionary:(NSDictionary *)jsonData;

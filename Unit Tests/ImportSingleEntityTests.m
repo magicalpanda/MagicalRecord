@@ -112,36 +112,4 @@
     assertThat(testEntity.dateTestAttribute, is(equalTo(expectedDate)));
 }
 
-
-
-- (void) testImportAnEntityRelatedToAnotherEntityWithAOneToOneRelationship
-{
-    GHFail(@"Test Not Implemented");
-}
-
-- (void) testImportAnEntityRelatedToAnotherEntityWithAManyToOneRelationship
-{
-    GHFail(@"Test Not Implemented");    
-}
-
-- (void) testImportAnEntityRelatedToAnitherEntityWithAManyToManyRelationship
-{
-    GHFail(@"Test Not Implemented");
-}
-
-- (void) testImportAnEntityRelatedToASubEntityWithAOneToOneRelationship
-{
-    GHFail(@"Test Not Implemented");
-}
-
-- (void) testImportAnEntityRelatedToASubEntityWithAManyToOneRelationship
-{
-    GHFail(@"Test Not Implemented");   
-}
-
-- (void) testImportAnEntityRelatedToASubEntityWithAManyToManyRelationship
-{
-    GHFail(@"Test Not Implemented");
-}
-
 @end

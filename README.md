@@ -6,7 +6,7 @@ In software engineering, the active record pattern is a design pattern found in 
 
 >	*- [Wikipedia]("http://en.wikipedia.org/wiki/Active_record_pattern")*
 
-Active Record for Core Data was inspired by the ease of Ruby on Rails' Active Record fetching. The goals of this code are:
+Magical Record for Core Data was inspired by the ease of Ruby on Rails' Active Record fetching. The goals of this code are:
 
 * Clean up my Core Data related code
 * Allow for clear, simple, one-line fetches
@@ -14,7 +14,7 @@ Active Record for Core Data was inspired by the ease of Ruby on Rails' Active Re
 
 # Installation
 
-- In your XCode Project, add all the .h and .m files into your project. 
+- In your XCode Project, add all the .h and .m files from the Source folder into your project. 
 - Add the proper import states for the .h files either to your specific files using Core Data, or in your pre-compiled header file
 - Start writing code! ... There is no step 3!
 
@@ -187,7 +187,7 @@ CoreDataBlock is typedef'd as:
 All the boilerplate operations that need to be done when saving are done in these methods. To use this method from the *main thread*:
 
 	Person *person = ...;
-	[ARCoreDataAction saveDataInBackgroundWithBlock:^(NSManagedObjectContext *localContext){
+	[MRCoreDataAction saveDataInBackgroundWithBlock:^(NSManagedObjectContext *localContext){
 		Person *localPerson = [person inContext:localContext];
 
 		localPerson.firstName = @"Chuck";
@@ -196,7 +196,7 @@ All the boilerplate operations that need to be done when saving are done in thes
 	
 In this method, the CoreDataBlock provides you with the proper context in which to perform your operations, you don't need to worry about setting up the context so that it tells the Default Context that it's done, and should update because changes were performed on another thread.
 
-All ARCoreDataActions have a dedicated GCD queue on which they operate. This means that throughout your app, you only really have 2 threads performing Core Data actions at any one time: one on the main thread, and another on this dedicated GCD queue.
+All MRCoreDataActions have a dedicated GCD queue on which they operate. This means that throughout your app, you only really have 2 queues (sort of like threads) performing Core Data actions at any one time: one on the main queue, and another on this dedicated GCD queue.
 	
 # Extra Bits
 This Code is released under the MIT License by [Magical Panda Software, LLC.](http://www.magicalpanda.com)

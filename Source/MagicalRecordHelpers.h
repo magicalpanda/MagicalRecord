@@ -5,8 +5,6 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-//#import <Foundation/Foundation.h>
-//#import <CoreData/CoreData.h>
 
 #ifdef NS_BLOCKS_AVAILABLE
 
@@ -41,3 +39,11 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 #endif
 
 @end
+
+
+
+//Helper Functions
+NSDate * dateFromString(NSString *value);
+NSColor * NSColorFromString(NSString *serializedColor);NSColor * NSColorFromString(NSString *serializedColor);
+NSString * attributeNameFromString(NSString *value);
+

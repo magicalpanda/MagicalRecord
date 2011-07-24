@@ -141,3 +141,45 @@ static SEL errorHandlerAction = nil;
 #endif
 
 @end
+
+NSString * attributeNameFromString(NSString *value)
+{
+    NSString *firstCharacter = [[value substringToIndex:1] capitalizedString];
+    return [firstCharacter stringByAppendingString:[value substringFromIndex:1]];
+}
+
+NSDate * dateFromString(NSString *value)
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:kNSManagedObjectDefaultDateFormatString];
+    
+    return [formatter dateFromString:value];
+}
+
+NSColor * NSColorFromString(NSString *serializedColor);NSColor * NSColorFromString(NSString *serializedColor)
+{
+    NSScanner *colorScanner = [NSScanner scannerWithString:serializedColor];
+    NSString *colorType;
+    [colorScanner scanUpToString:@"(" intoString:&colorType];
+    
+    NSColor *color = nil;
+    if ([colorType hasPrefix:@"rgba"])
+    {
+        NSCharacterSet *rgbaCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"(,)"];
+        NSInteger componentValues[4];
+        NSInteger *componentValue = componentValues;
+        while (![colorScanner isAtEnd]) 
+        {
+            [colorScanner scanCharactersFromSet:rgbaCharacterSet intoString:nil];
+            [colorScanner scanInteger:componentValue];
+            componentValue++;
+        }
+        color = [NSColor colorWithDeviceRed:(componentValues[0] / 255.)
+                                      green:(componentValues[1] / 255.)
+                                       blue:(componentValues[2] / 255.)
+                                      alpha:componentValues[3]];
+    }
+    
+    return color;
+}
+

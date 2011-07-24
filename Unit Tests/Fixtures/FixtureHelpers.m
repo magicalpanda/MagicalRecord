@@ -20,7 +20,11 @@
 
 + (id) dataFromJSONFixtureNamed:(NSString *)fixtureName
 {
-    return nil;
+    NSString *resource = [[NSBundle mainBundle] pathForResource:fixtureName ofType:@"json"];
+    NSInputStream *inputStream = [NSInputStream inputStreamWithFileAtPath:resource];
+    [inputStream open];
+    
+    return [NSJSONSerialization JSONObjectWithStream:inputStream options:0 error:nil];
 }
 
 @end

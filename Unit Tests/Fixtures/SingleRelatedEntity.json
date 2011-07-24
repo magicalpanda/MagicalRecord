@@ -1,0 +1,7 @@
+{
+    "testRelationship":
+    {
+        "sampleBaseAttribute": "This should be imported as: BASE ATTRIBUTE TEST",
+        "sampleConcreteAttribute": "This should be imported as: DECENDANT ATTRIBUTE TEST"
+    }
+}

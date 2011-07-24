@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Source/Categories/NSManagedObject+MagicalDataImport.m"
-         timestampString = "333178524.906029"
+         timestampString = "333180902.999718"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "87"
-         endingLineNumber = "87"
+         startingLineNumber = "48"
+         endingLineNumber = "48"
          landmarkName = "-mr_attributeValueFromJSONDicationary:forAttribute:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -22,14 +22,14 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "Source/Categories/NSManagedObject+MagicalDataImport.m"
-         timestampString = "333178678.0865"
+         filePath = "Unit Tests/ImportSingleEntityWithRelatedEntitiesTests.m"
+         timestampString = "333180930.947903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "49"
-         endingLineNumber = "49"
-         landmarkName = "NSColorFromString()"
-         landmarkType = "7">
+         startingLineNumber = "29"
+         endingLineNumber = "29"
+         landmarkName = "-setUp"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -37,13 +37,13 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Source/Categories/NSManagedObject+MagicalDataImport.m"
-         timestampString = "333178955.278904"
+         timestampString = "333181283.225817"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "44"
-         endingLineNumber = "44"
-         landmarkName = "NSColorFromString()"
-         landmarkType = "7">
+         startingLineNumber = "102"
+         endingLineNumber = "102"
+         landmarkName = "-mr_addObject:forRelationship:"
+         landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>
