@@ -16,9 +16,9 @@ static SEL errorHandlerAction = nil;
 {
 	[MRCoreDataAction cleanUp];
 	[NSManagedObjectContext setDefaultContext:nil];
-	[NSManagedObjectModel setDefaultManagedObjectModel:nil];
+	[NSManagedObjectModel MR_setDefaultManagedObjectModel:nil];
 	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:nil];
-	[NSPersistentStore setDefaultPersistentStore:nil];
+	[NSPersistentStore MR_setDefaultPersistentStore:nil];
 }
 
 + (void) defaultErrorHandler:(NSError *)error
