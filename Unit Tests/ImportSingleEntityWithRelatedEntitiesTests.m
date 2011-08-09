@@ -91,7 +91,9 @@
     id testRelatedEntity = testEntity.testMappedRelationship;
     
     //verify mapping in relationship description userinfo
-    //    NSRelationshipDescription *relationshipInfo = [testRelatedEntity relationshipsByName];
+    NSEntityDescription *mappedEntity = [testEntity entity];
+    NSRelationshipDescription *testRelationship = [[mappedEntity propertiesByName] valueForKey:@"testMappedRelationship"];
+    assertThat([[testRelationship userInfo] valueForKey:@"jsonKeyName"], is(equalTo(@"TestJsonEntityName")));
 
     assertThat(testRelatedEntity, is(notNilValue()));
     assertThat([testRelatedEntity sampleAttribute], is(containsString(@"sampleAttributeValue")));    
