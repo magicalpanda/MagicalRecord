@@ -9,6 +9,7 @@
 #import "SingleRelatedEntity.h"
 #import "AbstractRelatedEntity.h"
 #import "ConcreteRelatedEntity.h"
+#import "MappedEntity.h"
 
 @interface ImportSingleEntityWithRelatedEntitiesTests : GHTestCase
 
@@ -55,6 +56,7 @@
     assertThat([testRelatedEntity sampleBaseAttribute], containsString(@"BASE"));
 }
 
+
 #pragma - Subentity tests
 
 
@@ -78,6 +80,21 @@
     assertThat([testRelatedEntity sampleConcreteAttribute], containsString(@"DECENDANT"));
 }
 
+
 //Test ordered to many
+
+
+// Test mapped relationship
+
+- (void) testImportMappedEntityRelatedViaToOneRelationship
+{
+    id testRelatedEntity = testEntity.testMappedRelationship;
+    
+    //verify mapping in relationship description userinfo
+    //    NSRelationshipDescription *relationshipInfo = [testRelatedEntity relationshipsByName];
+
+    assertThat(testRelatedEntity, is(notNilValue()));
+    assertThat([testRelatedEntity sampleAttribute], is(containsString(@"sampleAttributeValue")));    
+}
 
 @end

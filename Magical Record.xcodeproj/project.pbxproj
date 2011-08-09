@@ -64,6 +64,10 @@
 		C77E5FB513D0D1EC00298F87 /* SampleJSONDataForImport.json in Resources */ = {isa = PBXBuildFile; fileRef = C77E5FB413D0D1EC00298F87 /* SampleJSONDataForImport.json */; };
 		C77E5FB813D0D25100298F87 /* ImportSingleEntityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FB713D0D25100298F87 /* ImportSingleEntityTests.m */; };
 		C77E5FBB13D0D2AE00298F87 /* FixtureHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FBA13D0D2AE00298F87 /* FixtureHelpers.m */; };
+		C784348F13F0FEE000463CEE /* _MappedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C784348C13F0FEE000463CEE /* _MappedEntity.m */; };
+		C784349013F0FEE000463CEE /* _MappedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C784348C13F0FEE000463CEE /* _MappedEntity.m */; };
+		C784349113F0FEE000463CEE /* MappedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C784348E13F0FEE000463CEE /* MappedEntity.m */; };
+		C784349213F0FEE000463CEE /* MappedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C784348E13F0FEE000463CEE /* MappedEntity.m */; };
 		C7BD886813DBF88F00274567 /* _AbstractRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD885313DBF88F00274567 /* _AbstractRelatedEntity.m */; };
 		C7BD886913DBF88F00274567 /* _ConcreteRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD885513DBF88F00274567 /* _ConcreteRelatedEntity.m */; };
 		C7BD886A13DBF88F00274567 /* _DifferentClassNameMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD885713DBF88F00274567 /* _DifferentClassNameMapping.m */; };
@@ -187,6 +191,10 @@
 		C77E5FB713D0D25100298F87 /* ImportSingleEntityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImportSingleEntityTests.m; path = "Unit Tests/ImportSingleEntityTests.m"; sourceTree = "<group>"; };
 		C77E5FB913D0D2AE00298F87 /* FixtureHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FixtureHelpers.h; path = "Unit Tests/Fixtures/FixtureHelpers.h"; sourceTree = "<group>"; };
 		C77E5FBA13D0D2AE00298F87 /* FixtureHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FixtureHelpers.m; path = "Unit Tests/Fixtures/FixtureHelpers.m"; sourceTree = "<group>"; };
+		C784348B13F0FEE000463CEE /* _MappedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MappedEntity.h; sourceTree = "<group>"; };
+		C784348C13F0FEE000463CEE /* _MappedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MappedEntity.m; sourceTree = "<group>"; };
+		C784348D13F0FEE000463CEE /* MappedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MappedEntity.h; sourceTree = "<group>"; };
+		C784348E13F0FEE000463CEE /* MappedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MappedEntity.m; sourceTree = "<group>"; };
 		C7BD885213DBF88F00274567 /* _AbstractRelatedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _AbstractRelatedEntity.h; sourceTree = "<group>"; };
 		C7BD885313DBF88F00274567 /* _AbstractRelatedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _AbstractRelatedEntity.m; sourceTree = "<group>"; };
 		C7BD885413DBF88F00274567 /* _ConcreteRelatedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ConcreteRelatedEntity.h; sourceTree = "<group>"; };
@@ -567,6 +575,10 @@
 				C7BD887F13DBFA6200274567 /* _SingleEntityWithNoRelationships.m */,
 				C7BD888013DBFA6200274567 /* _SingleRelatedEntity.h */,
 				C7BD888113DBFA6200274567 /* _SingleRelatedEntity.m */,
+				C784348B13F0FEE000463CEE /* _MappedEntity.h */,
+				C784348C13F0FEE000463CEE /* _MappedEntity.m */,
+				C784348D13F0FEE000463CEE /* MappedEntity.h */,
+				C784348E13F0FEE000463CEE /* MappedEntity.m */,
 				C7BD888213DBFA6200274567 /* AbstractRelatedEntity.h */,
 				C7BD888313DBFA6200274567 /* AbstractRelatedEntity.m */,
 				C7BD888413DBFA6200274567 /* ConcreteRelatedEntity.h */,
@@ -741,6 +753,8 @@
 				C7BD887013DBF88F00274567 /* SingleEntityWithNoRelationships.m in Sources */,
 				C7BD887113DBF88F00274567 /* SingleRelatedEntity.m in Sources */,
 				C7BD887213DBF88F00274567 /* TestModel.xcdatamodeld in Sources */,
+				C784348F13F0FEE000463CEE /* _MappedEntity.m in Sources */,
+				C784349113F0FEE000463CEE /* MappedEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -777,6 +791,8 @@
 				C7BD889413DBFA6200274567 /* SingleEntityWithNoRelationships.m in Sources */,
 				C7BD889513DBFA6200274567 /* SingleRelatedEntity.m in Sources */,
 				C763783213E10BEC0009A6CA /* GHUnitIOSTestMain.m in Sources */,
+				C784349013F0FEE000463CEE /* _MappedEntity.m in Sources */,
+				C784349213F0FEE000463CEE /* MappedEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

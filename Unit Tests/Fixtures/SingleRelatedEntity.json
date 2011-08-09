@@ -41,4 +41,9 @@
          "sampleConcreteAttribute": "Import as DECENDANT ATTRIBUTE TEST 3"
          }
     ]
+    ,
+    "TestJsonEntityName":
+    {
+        "sampleAttribute": "Import as sampleAttributeValue"
+    }
 }

@@ -66,6 +66,10 @@
 
 	
 
+@dynamic testMappedRelationship;
+
+	
+
 
 
 

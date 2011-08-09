@@ -8,6 +8,7 @@
 @class AbstractRelatedEntity;
 @class ConcreteRelatedEntity;
 @class ConcreteRelatedEntity;
+@class MappedEntity;
 
 
 @interface SingleRelatedEntityID : NSManagedObjectID {}
@@ -51,6 +52,13 @@
 
 
 
+@property (nonatomic, retain) MappedEntity* testMappedRelationship;
+
+//- (BOOL)validateTestMappedRelationship:(id*)value_ error:(NSError**)error_;
+
+
+
+
 @end
 
 @interface _SingleRelatedEntity (CoreDataGeneratedAccessors)
@@ -88,6 +96,11 @@
 
 - (ConcreteRelatedEntity*)primitiveTestConcreteToOneRelationship;
 - (void)setPrimitiveTestConcreteToOneRelationship:(ConcreteRelatedEntity*)value;
+
+
+
+- (MappedEntity*)primitiveTestMappedRelationship;
+- (void)setPrimitiveTestMappedRelationship:(MappedEntity*)value;
 
 
 @end
