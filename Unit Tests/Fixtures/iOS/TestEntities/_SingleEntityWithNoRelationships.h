@@ -16,6 +16,7 @@
 
 
 
+
 @interface SingleEntityWithNoRelationshipsID : NSManagedObjectID {}
 @end
 
@@ -124,6 +125,14 @@
 
 
 
+@property (nonatomic, retain) NSString *mappedStringAttribute;
+
+
+//- (BOOL)validateMappedStringAttribute:(id*)value_ error:(NSError**)error_;
+
+
+
+
 @property (nonatomic, retain) NSString *stringTestAttribute;
 
 
@@ -210,6 +219,12 @@
 
 - (long long)primitiveInt64TestAttributeValue;
 - (void)setPrimitiveInt64TestAttributeValue:(long long)value_;
+
+
+
+
+- (NSString*)primitiveMappedStringAttribute;
+- (void)setPrimitiveMappedStringAttribute:(NSString*)value;
 
 
 

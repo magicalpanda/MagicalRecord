@@ -237,6 +237,13 @@
 
 
 
+@dynamic mappedStringAttribute;
+
+
+
+
+
+
 @dynamic stringTestAttribute;
 
 

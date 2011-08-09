@@ -78,6 +78,11 @@
     assertThat(testEntity.booleanTestAttribute, is(equalToBool(NO)));
 }
 
+- (void) testImportMappedStringAttributeToEntity
+{
+    assertThat(testEntity.mappedStringAttribute, is(equalTo(@"Mapped value")));
+}
+
 #if TARGET_OS_IPHONE
 
 - (void) testImportUIColorAttributeToEntity

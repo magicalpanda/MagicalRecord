@@ -22,5 +22,7 @@
 	<date>2011-07-24T04:30:40Z</date>
 	<key>colorTestAttribute</key>
 	<string>rgba(64,128,225,1)</string>
+	<key>mappedAttributeWithStringValue</key>
+	<string>Mapped value</string>
 </dict>
 </plist>
