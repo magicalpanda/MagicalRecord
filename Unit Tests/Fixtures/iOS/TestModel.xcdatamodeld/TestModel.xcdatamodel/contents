@@ -2,29 +2,9 @@
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="851" systemVersion="11A511" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AbstractRelatedEntity" representedClassName="AbstractRelatedEntity" isAbstract="YES">
         <attribute name="sampleBaseAttribute" optional="YES" attributeType="String"/>
-        <relationship name="mainTestEntity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="SingleRelatedEntity" inverseName="testRelationship" inverseEntity="SingleRelatedEntity"/>
     </entity>
     <entity name="ConcreteRelatedEntity" representedClassName="ConcreteRelatedEntity" parentEntity="AbstractRelatedEntity">
         <attribute name="sampleConcreteAttribute" optional="YES" attributeType="String"/>
-    </entity>
-    <entity name="Entity">
-        <relationship name="newRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Entity1" inverseName="newRelationship" inverseEntity="Entity1"/>
-    </entity>
-    <entity name="Entity1" parentEntity="Entity2">
-        <relationship name="newRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Entity" inverseName="newRelationship" inverseEntity="Entity"/>
-    </entity>
-    <entity name="Entity2"/>
-    <entity name="Entity3">
-        <relationship name="newRelationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Entity4" inverseName="newRelationship" inverseEntity="Entity4"/>
-    </entity>
-    <entity name="Entity4">
-        <relationship name="newRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Entity3" inverseName="newRelationship" inverseEntity="Entity3"/>
-    </entity>
-    <entity name="Entity5">
-        <relationship name="newRelationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Entity6" inverseName="newRelationship" inverseEntity="Entity6"/>
-    </entity>
-    <entity name="Entity6">
-        <relationship name="newRelationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Entity5" inverseName="newRelationship" inverseEntity="Entity5"/>
     </entity>
     <entity name="EntityWithDiffernentClassName" representedClassName="DifferentClassNameMapping"/>
     <entity name="SingleEntityWithNoRelationships" representedClassName="SingleEntityWithNoRelationships">
@@ -44,20 +24,16 @@
         <attribute name="stringTestAttribute" optional="YES" attributeType="String"/>
     </entity>
     <entity name="SingleRelatedEntity" representedClassName="SingleRelatedEntity">
-        <relationship name="testRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AbstractRelatedEntity" inverseName="mainTestEntity" inverseEntity="AbstractRelatedEntity"/>
+        <relationship name="testAbstractToManyRelationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AbstractRelatedEntity"/>
+        <relationship name="testAbstractToOneRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AbstractRelatedEntity"/>
+        <relationship name="testConcreteToManyRelationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ConcreteRelatedEntity"/>
+        <relationship name="testConcreteToOneRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ConcreteRelatedEntity"/>
     </entity>
     <elements>
-        <element name="AbstractRelatedEntity" positionX="277" positionY="189" width="128" height="75"/>
-        <element name="ConcreteRelatedEntity" positionX="358" positionY="372" width="128" height="60"/>
-        <element name="EntityWithDiffernentClassName" positionX="160" positionY="360" width="128" height="45"/>
+        <element name="AbstractRelatedEntity" positionX="277" positionY="189" width="128" height="60"/>
+        <element name="ConcreteRelatedEntity" positionX="315" positionY="438" width="171" height="60"/>
+        <element name="EntityWithDiffernentClassName" positionX="-135" positionY="135" width="198" height="45"/>
         <element name="SingleEntityWithNoRelationships" positionX="-135" positionY="318" width="180" height="195"/>
-        <element name="SingleRelatedEntity" positionX="601" positionY="237" width="128" height="60"/>
-        <element name="Entity" positionX="547" positionY="45" width="128" height="60"/>
-        <element name="Entity1" positionX="286" positionY="75" width="128" height="60"/>
-        <element name="Entity2" positionX="295" positionY="-45" width="128" height="45"/>
-        <element name="Entity3" positionX="-135" positionY="-9" width="128" height="60"/>
-        <element name="Entity4" positionX="63" positionY="36" width="128" height="60"/>
-        <element name="Entity5" positionX="-135" positionY="180" width="128" height="60"/>
-        <element name="Entity6" positionX="72" positionY="189" width="128" height="60"/>
+        <element name="SingleRelatedEntity" positionX="594" positionY="261" width="171" height="105"/>
     </elements>
 </model>
