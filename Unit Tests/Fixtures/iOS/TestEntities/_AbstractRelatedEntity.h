@@ -4,7 +4,6 @@
 #import <CoreData/CoreData.h>
 
 
-@class SingleRelatedEntity;
 
 
 
@@ -29,13 +28,6 @@
 
 
 
-@property (nonatomic, retain) SingleRelatedEntity* mainTestEntity;
-
-//- (BOOL)validateMainTestEntity:(id*)value_ error:(NSError**)error_;
-
-
-
-
 @end
 
 @interface _AbstractRelatedEntity (CoreDataGeneratedAccessors)
@@ -49,11 +41,6 @@
 - (void)setPrimitiveSampleBaseAttribute:(NSString*)value;
 
 
-
-
-
-- (SingleRelatedEntity*)primitiveMainTestEntity;
-- (void)setPrimitiveMainTestEntity:(SingleRelatedEntity*)value;
 
 
 @end

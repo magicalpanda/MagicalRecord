@@ -43,10 +43,6 @@
 
 
 
-@dynamic mainTestEntity;
-
-	
-
 
 
 

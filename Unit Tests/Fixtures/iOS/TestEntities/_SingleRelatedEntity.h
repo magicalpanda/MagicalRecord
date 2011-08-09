@@ -5,6 +5,9 @@
 
 
 @class AbstractRelatedEntity;
+@class AbstractRelatedEntity;
+@class ConcreteRelatedEntity;
+@class ConcreteRelatedEntity;
 
 
 @interface SingleRelatedEntityID : NSManagedObjectID {}
@@ -20,9 +23,30 @@
 
 
 
-@property (nonatomic, retain) AbstractRelatedEntity* testRelationship;
+@property (nonatomic, retain) NSSet* testAbstractToManyRelationship;
 
-//- (BOOL)validateTestRelationship:(id*)value_ error:(NSError**)error_;
+- (NSMutableSet*)testAbstractToManyRelationshipSet;
+
+
+
+
+@property (nonatomic, retain) AbstractRelatedEntity* testAbstractToOneRelationship;
+
+//- (BOOL)validateTestAbstractToOneRelationship:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, retain) NSSet* testConcreteToManyRelationship;
+
+- (NSMutableSet*)testConcreteToManyRelationshipSet;
+
+
+
+
+@property (nonatomic, retain) ConcreteRelatedEntity* testConcreteToOneRelationship;
+
+//- (BOOL)validateTestConcreteToOneRelationship:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -31,14 +55,39 @@
 
 @interface _SingleRelatedEntity (CoreDataGeneratedAccessors)
 
+- (void)addTestAbstractToManyRelationship:(NSSet*)value_;
+- (void)removeTestAbstractToManyRelationship:(NSSet*)value_;
+- (void)addTestAbstractToManyRelationshipObject:(AbstractRelatedEntity*)value_;
+- (void)removeTestAbstractToManyRelationshipObject:(AbstractRelatedEntity*)value_;
+
+- (void)addTestConcreteToManyRelationship:(NSSet*)value_;
+- (void)removeTestConcreteToManyRelationship:(NSSet*)value_;
+- (void)addTestConcreteToManyRelationshipObject:(ConcreteRelatedEntity*)value_;
+- (void)removeTestConcreteToManyRelationshipObject:(ConcreteRelatedEntity*)value_;
+
 @end
 
 @interface _SingleRelatedEntity (CoreDataGeneratedPrimitiveAccessors)
 
 
 
-- (AbstractRelatedEntity*)primitiveTestRelationship;
-- (void)setPrimitiveTestRelationship:(AbstractRelatedEntity*)value;
+- (NSMutableSet*)primitiveTestAbstractToManyRelationship;
+- (void)setPrimitiveTestAbstractToManyRelationship:(NSMutableSet*)value;
+
+
+
+- (AbstractRelatedEntity*)primitiveTestAbstractToOneRelationship;
+- (void)setPrimitiveTestAbstractToOneRelationship:(AbstractRelatedEntity*)value;
+
+
+
+- (NSMutableSet*)primitiveTestConcreteToManyRelationship;
+- (void)setPrimitiveTestConcreteToManyRelationship:(NSMutableSet*)value;
+
+
+
+- (ConcreteRelatedEntity*)primitiveTestConcreteToOneRelationship;
+- (void)setPrimitiveTestConcreteToOneRelationship:(ConcreteRelatedEntity*)value;
 
 
 @end

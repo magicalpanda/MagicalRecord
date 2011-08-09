@@ -73,9 +73,20 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 {
     NSEntityDescription *originalDestinationEntity = [relationshipInfo destinationEntity];
     NSDictionary *subentities = [originalDestinationEntity subentitiesByName];
-    NSEntityDescription *destinationEntity = [subentities count] /* && ![entityDescription isAbstract]*/ ? 
-                                                [subentities valueForKey:[singleRelatedObjectData valueForKey:kMagicalRecordImportRelationshipTypeKey]] :
-                                                originalDestinationEntity;
+    
+    NSEntityDescription *destinationEntity = originalDestinationEntity;
+    NSDictionary *relationshipUserInfo = [relationshipInfo userInfo];
+    NSString *mappedEntityName = [relationshipUserInfo valueForKey:kMagicalRecordImportRelationshipTypeKey];
+    
+    if (mappedEntityName) 
+    {
+        destinationEntity = [NSEntityDescription entityForName:mappedEntityName inManagedObjectContext:self.managedObjectContext];
+    }
+    else if ([originalDestinationEntity isAbstract] && [subentities count]) 
+    {
+//        NSString *mappedSubentity = [singleRelatedObjectData valueForKey:kMagicalRecordImportRelationshipTypeKey];
+//        [subentities valueForKey:mappedSubentity];
+    }
 
     if (destinationEntity == nil) 
     {
@@ -95,6 +106,8 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 
 - (void) MR_addObject:(NSManagedObject *)relatedObject forRelationship:(NSRelationshipDescription *)relationshipInfo
 {
+    NSAssert2(relatedObject != nil, @"Cannot add nil to %@ for attribute %@", NSStringFromClass([self class]), [relationshipInfo name]);
+    
     //add related object to set
     NSString *addRelationMessageFormat = [relationshipInfo isToMany] ? @"add%@Object:" : @"set%@:";
     NSString *addRelatedObjectToSetMessage = [NSString stringWithFormat:addRelationMessageFormat, attributeNameFromString([relationshipInfo name])];

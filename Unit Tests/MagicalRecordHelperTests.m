@@ -12,7 +12,7 @@
 
 - (void) setUp
 {
-    [NSManagedObjectModel setDefaultManagedObjectModel:[NSManagedObjectModel managedObjectModelNamed:@"TestModel.momd"]];
+    [NSManagedObjectModel MR_setDefaultManagedObjectModel:[NSManagedObjectModel MR_managedObjectModelNamed:@"TestModel.momd"]];
 }
 
 - (void) tearDown
@@ -26,7 +26,7 @@
     assertThat([NSManagedObjectContext defaultContext], is(notNilValue()));
     assertThat([NSManagedObjectModel MR_defaultManagedObjectModel], is(notNilValue()));
     assertThat([NSPersistentStoreCoordinator MR_defaultStoreCoordinator], is(notNilValue()));
-    assertThat([NSPersistentStore defaultPersistentStore], is(notNilValue()));    
+    assertThat([NSPersistentStore MR_defaultPersistentStore], is(notNilValue()));    
 }
 
 - (void) testCreateDefaultCoreDataStack
@@ -35,7 +35,7 @@
     
     [self assertDefaultStack];
     
-    NSPersistentStore *defaultStore = [NSPersistentStore defaultPersistentStore];
+    NSPersistentStore *defaultStore = [NSPersistentStore MR_defaultPersistentStore];
     assertThat([[defaultStore URL] absoluteString], endsWith(kMagicalRecordDefaultStoreFileName));
     assertThat([defaultStore type], is(equalTo(NSSQLiteStoreType)));
 }
@@ -46,7 +46,7 @@
     
     [self assertDefaultStack];
     
-    NSPersistentStore *defaultStore = [NSPersistentStore defaultPersistentStore];
+    NSPersistentStore *defaultStore = [NSPersistentStore MR_defaultPersistentStore];
     assertThat([defaultStore type], is(equalTo(NSInMemoryStoreType)));
 }
 
@@ -57,7 +57,7 @@
     
     [self assertDefaultStack];
     
-    NSPersistentStore *defaultStore = [NSPersistentStore defaultPersistentStore];
+    NSPersistentStore *defaultStore = [NSPersistentStore MR_defaultPersistentStore];
     assertThat([defaultStore type], is(equalTo(NSSQLiteStoreType)));
     assertThat([[defaultStore URL] absoluteString], endsWith(testStoreName));
 }

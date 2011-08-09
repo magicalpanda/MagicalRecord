@@ -19,55 +19,65 @@
 
 @synthesize testEntity;
 
-- (void) setUp
+- (void) setUpClass
 {
     [NSManagedObjectModel setDefaultManagedObjectModel:[NSManagedObjectModel managedObjectModelNamed:@"TestModel.momd"]];
     [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
     
     id singleEntity = [FixtureHelpers dataFromJSONFixtureNamed:@"SingleRelatedEntity"];
     
-    testEntity = [SingleRelatedEntity MR_importFromDictionary:singleEntity];
+    self.testEntity = [SingleRelatedEntity MR_importFromDictionary:singleEntity];
 }
 
-- (void) tearDown
+- (void) tearDownClass
 {
     [MagicalRecordHelpers cleanUp];
 }
 
-- (void) testImportAnEntityRelatedToAnotherEntityWithAOneToOneRelationship
+- (void) testImportAnEntityRelatedToAbstractEntityViaToOneRelationshop
 {
     assertThat(testEntity, is(notNilValue()));
+
+    id testRelatedEntity = testEntity.testAbstractToOneRelationship;
     
-    assertThat(testEntity.testRelationship, is(notNilValue()));
-    assertThat(testEntity.testRelationship.sampleBaseAttribute, containsString(@"BASE"));
-    assertThat(testEntity.testRelationship.mainTestEntity, is(equalTo(testEntity)));
+    assertThat(testRelatedEntity, is(notNilValue()));
+    assertThat([testRelatedEntity sampleBaseAttribute], containsString(@"BASE"));
 }
 
-- (void) testImportAnEntityRelatedToAnotherEntityWithAManyToOneRelationship
+- (void) testImportAnEntityRelatedToAbstractEntityViaToManyRelationship
 {
-    GHFail(@"Test Not Implemented");    
+    assertThat(testEntity, is(notNilValue()));
+    assertThatInteger([testEntity.testAbstractToManyRelationship count], is(equalToInteger(2)));
+    
+    id testRelatedEntity = [testEntity.testAbstractToManyRelationship anyObject];
+    
+    assertThat(testRelatedEntity, is(notNilValue()));
+    assertThat([testRelatedEntity sampleBaseAttribute], containsString(@"BASE"));
 }
 
-- (void) testImportAnEntityRelatedToAnitherEntityWithAManyToManyRelationship
+#pragma - Subentity tests
+
+
+- (void) testImportAnEntityRelatedToAConcreteSubEntityViaToOneRelationship
 {
-    GHFail(@"Test Not Implemented");
+    id testRelatedEntity = testEntity.testConcreteToOneRelationship;
+    assertThat(testRelatedEntity, is(notNilValue()));
+    
+    assertThat([testRelatedEntity sampleBaseAttribute], containsString(@"BASE"));
+    assertThat([testRelatedEntity sampleConcreteAttribute], containsString(@"DECENDANT"));
 }
 
-- (void) testImportAnEntityRelatedToASubEntityWithAOneToOneRelationship
+- (void) testImportAnEntityRelatedToASubEntityViaToManyRelationship
 {
-//    assertThat(testEntity.testRelationship.sampleConcreteAttribute, containsString(@"DECENDANT"));
-
+    assertThatInteger([testEntity.testConcreteToManyRelationship count], is(equalToInteger(3)));
+    
+    id testRelatedEntity = [testEntity.testConcreteToManyRelationship anyObject];
+    assertThat(testRelatedEntity, is(notNilValue()));
+    
+    assertThat([testRelatedEntity sampleBaseAttribute], containsString(@"BASE"));
+    assertThat([testRelatedEntity sampleConcreteAttribute], containsString(@"DECENDANT"));
 }
 
-- (void) testImportAnEntityRelatedToASubEntityWithAManyToOneRelationship
-{
-    GHFail(@"Test Not Implemented");   
-}
-
-- (void) testImportAnEntityRelatedToASubEntityWithAManyToManyRelationship
-{
-    GHFail(@"Test Not Implemented");
-}
-
+//Test ordered to many
 
 @end

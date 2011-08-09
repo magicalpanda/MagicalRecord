@@ -946,6 +946,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/iOS App Unit Tests/Frameworks/OCMockLibrary\"",
 				);
+				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
+				MOMC_NO_WARNINGS = YES;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -984,6 +986,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/iOS App Unit Tests/Frameworks/OCMockLibrary\"",
 				);
+				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
+				MOMC_NO_WARNINGS = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-all_load",
