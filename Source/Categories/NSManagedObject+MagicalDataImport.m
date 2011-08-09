@@ -117,8 +117,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     Class managedObjectClass = NSClassFromString([destinationEntity managedObjectClassName]);
     NSAssert([managedObjectClass isSubclassOfClass:[NSManagedObject class]], @"Entity is not a managed object! Whoa!");
     
-
-    NSString *primaryKeyName = [[relationshipInfo userInfo] valueForKey:kMagicalRecordImportRelationshipPrimaryKey] ?: [NSString stringWithFormat:@"%@ID", [destinationEntity name]]; 
+    NSString *primaryKeyName = [[relationshipInfo userInfo] valueForKey:kMagicalRecordImportRelationshipPrimaryKey] ?: [NSString stringWithFormat:@"%@ID", [destinationEntity name]]; //TODO: lowercase first letter on convention based primary key, write test
     NSAttributeDescription *primaryKeyAttribute = [[destinationEntity attributesByName] valueForKey:primaryKeyName];
     NSString *lookupKey = [[primaryKeyAttribute userInfo] valueForKey:kMagicalRecordImportAttributeKeyMapKey];
     
