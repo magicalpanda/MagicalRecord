@@ -16,7 +16,21 @@ NSString * const kMagicalRecordImportRelationshipMapKey = @"jsonKeyName";
 NSString * const kMagicalRecordImportRelationshipPrimaryKey = @"primaryRelationshipKey";
 NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 
+
 @implementation NSManagedObject (NSManagedObject_DataImport)
+
+- (NSCache *) MR_requestCache
+{
+    static dispatch_once_t pred;
+    static NSCache *mr_requestCache = nil;
+    
+    dispatch_once(&pred, ^{
+        mr_requestCache = [[NSCache alloc] init];
+        mr_requestCache.name = @"com.magicalpanda.magicalrecord.requestcache";
+        mr_requestCache.totalCostLimit = 100;
+    });
+    return mr_requestCache;
+}
 
 - (id) MR_attributeValueFromDictionary:(NSDictionary *)jsonData forAttribute:(NSAttributeDescription *)attributeInfo
 {
@@ -69,7 +83,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     return relatedObject;
 }
 
-- (NSManagedObject *) MR_findObjectForRelationship:(NSRelationshipDescription *)relationshipInfo withData:(id)singleRelatedObjectData
+- (NSEntityDescription *)MR_targetEntityDescriptionForRelationship:(NSRelationshipDescription *)relationshipInfo 
 {
     NSEntityDescription *originalDestinationEntity = [relationshipInfo destinationEntity];
     NSDictionary *subentities = [originalDestinationEntity subentitiesByName];
@@ -84,10 +98,16 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     }
     else if ([originalDestinationEntity isAbstract] && [subentities count]) 
     {
-//        NSString *mappedSubentity = [singleRelatedObjectData valueForKey:kMagicalRecordImportRelationshipTypeKey];
-//        [subentities valueForKey:mappedSubentity];
+        //        NSString *mappedSubentity = [singleRelatedObjectData valueForKey:kMagicalRecordImportRelationshipTypeKey];
+        //        [subentities valueForKey:mappedSubentity];
     }
+    
+    return destinationEntity;
+}
 
+- (NSManagedObject *) MR_findObjectForRelationship:(NSRelationshipDescription *)relationshipInfo withData:(id)singleRelatedObjectData
+{
+    NSEntityDescription *destinationEntity = [self MR_targetEntityDescriptionForRelationship:relationshipInfo];
     if (destinationEntity == nil) 
     {
         ARLog(@"Unable to find entity for type '%@'", [singleRelatedObjectData valueForKey:kMagicalRecordImportRelationshipTypeKey]);
@@ -97,9 +117,14 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     Class managedObjectClass = NSClassFromString([destinationEntity managedObjectClassName]);
     NSAssert([managedObjectClass isSubclassOfClass:[NSManagedObject class]], @"Entity is not a managed object! Whoa!");
     
-//    NSString *lookupKey = [[destinationEntity userInfo] valueForKey:kNSManagedObjectAttributeJSONKeyMapKey] ?: [destinationEntity name];
+
+    NSString *primaryKeyName = [[relationshipInfo userInfo] valueForKey:kMagicalRecordImportRelationshipPrimaryKey] ?: [NSString stringWithFormat:@"%@ID", [destinationEntity name]]; 
+    NSAttributeDescription *primaryKeyAttribute = [[destinationEntity attributesByName] valueForKey:primaryKeyName];
+    NSString *lookupKey = [[primaryKeyAttribute userInfo] valueForKey:kMagicalRecordImportAttributeKeyMapKey];
     
-    id existingObject = nil; //[managedObjectClass findFirstByAttribute:@"" withValue:@"" inContext:[self managedObjectContext]];
+    id lookupValue = [singleRelatedObjectData valueForKey:lookupKey];
+    
+    id existingObject = lookupValue ? [managedObjectClass findFirstByAttribute:primaryKeyName withValue:lookupValue inContext:[self managedObjectContext]] : nil;
     
     return existingObject ?: [self MR_createInstanceForEntity:destinationEntity withDictionary:singleRelatedObjectData];
 }

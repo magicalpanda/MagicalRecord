@@ -7,6 +7,7 @@
 
 
 
+
 @interface MappedEntityID : NSManagedObjectID {}
 @end
 
@@ -27,6 +28,18 @@
 
 
 
+@property (nonatomic, retain) NSNumber *testMappedEntityID;
+
+
+@property long long testMappedEntityIDValue;
+- (long long)testMappedEntityIDValue;
+- (void)setTestMappedEntityIDValue:(long long)value_;
+
+//- (BOOL)validateTestMappedEntityID:(id*)value_ error:(NSError**)error_;
+
+
+
+
 
 @end
 
@@ -39,6 +52,15 @@
 
 - (NSString*)primitiveSampleAttribute;
 - (void)setPrimitiveSampleAttribute:(NSString*)value;
+
+
+
+
+- (NSNumber*)primitiveTestMappedEntityID;
+- (void)setPrimitiveTestMappedEntityID:(NSNumber*)value;
+
+- (long long)primitiveTestMappedEntityIDValue;
+- (void)setPrimitiveTestMappedEntityIDValue:(long long)value_;
 
 
 

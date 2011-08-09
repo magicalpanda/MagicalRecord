@@ -9,6 +9,11 @@
     <entity name="EntityWithDiffernentClassName" representedClassName="DifferentClassNameMapping"/>
     <entity name="MappedEntity" representedClassName="MappedEntity">
         <attribute name="sampleAttribute" optional="YES" attributeType="String"/>
+        <attribute name="testMappedEntityID" optional="YES" attributeType="Integer 64" defaultValueString="0">
+            <userInfo>
+                <entry key="jsonKeyName" value="id"/>
+            </userInfo>
+        </attribute>
     </entity>
     <entity name="SingleEntityWithNoRelationships" representedClassName="SingleEntityWithNoRelationships">
         <attribute name="booleanTestAttribute" optional="YES" attributeType="Boolean"/>
@@ -39,6 +44,7 @@
         <relationship name="testMappedRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MappedEntity">
             <userInfo>
                 <entry key="jsonKeyName" value="TestJsonEntityName"/>
+                <entry key="primaryRelationshipKey" value="testMappedEntityID"/>
             </userInfo>
         </relationship>
     </entity>
@@ -48,6 +54,6 @@
         <element name="EntityWithDiffernentClassName" positionX="-135" positionY="135" width="198" height="45"/>
         <element name="SingleEntityWithNoRelationships" positionX="-135" positionY="318" width="180" height="210"/>
         <element name="SingleRelatedEntity" positionX="333" positionY="198" width="171" height="120"/>
-        <element name="MappedEntity" positionX="565" positionY="372" width="128" height="60"/>
+        <element name="MappedEntity" positionX="601" positionY="231" width="128" height="75"/>
     </elements>
 </model>

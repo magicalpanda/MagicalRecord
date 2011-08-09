@@ -44,6 +44,7 @@
     ,
     "TestJsonEntityName":
     {
-        "sampleAttribute": "Import as sampleAttributeValue"
+        "sampleAttribute": "Import as sampleAttributeValue",
+        "id": 42
     }
 }
