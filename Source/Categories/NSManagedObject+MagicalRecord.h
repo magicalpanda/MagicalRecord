@@ -16,6 +16,10 @@
 
 + (NSArray *) executeFetchRequest:(NSFetchRequest *)request;
 + (NSArray *) executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
++ (id) executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request;
++ (id) executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
+
+
 + (NSFetchRequest *)createFetchRequest;
 + (NSFetchRequest *)createFetchRequestInContext:(NSManagedObjectContext *)context;
 + (NSEntityDescription *)entityDescription;

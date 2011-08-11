@@ -57,7 +57,7 @@
     assertThat([[testRelationship userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey], is(equalTo(@"someRandomAttributeName")));
     
     assertThat(testRelatedEntity, is(notNilValue()));
-    assertThat([testRelatedEntity sampleAttribute], is(containsString(@"test case")));    
+    assertThat([testRelatedEntity sampleAttribute], is(containsString(@"sample json file")));    
 }
 
 - (void) testImportMappedEntityUsingPrimaryRelationshipKey
@@ -69,9 +69,9 @@
     NSRelationshipDescription *testRelationship = [[mappedEntity propertiesByName] valueForKey:@"mappedEntity"];
     assertThat([[testRelationship userInfo] valueForKey:kMagicalRecordImportRelationshipPrimaryKey], is(equalTo(@"testMappedEntityID")));
     
-    //    assertThat(testRelatedEntity, is(equalTo(testMappedEntity)));
+
     assertThat([testRelatedEntity testMappedEntityID], is(equalToInteger(42)));
-    assertThat([testRelatedEntity sampleAttribute], containsString(@"test case setup"));
+    assertThat([testRelatedEntity sampleAttribute], containsString(@"sample json file"));
 }
 
 @end

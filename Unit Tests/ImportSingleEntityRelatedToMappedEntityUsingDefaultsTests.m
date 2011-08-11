@@ -23,7 +23,7 @@
     NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
     
     MappedEntity *testMappedEntity = [MappedEntity createInContext:context];
-    testMappedEntity.testMappedEntityIDValue = 42;
+    testMappedEntity.mappedEntityIDValue = 42;
     testMappedEntity.sampleAttribute = @"This attribute created as part of the test case setup";
     
     [context save];
@@ -48,7 +48,9 @@
 
 - (void) testImportMappedEntityViaToOneRelationship
 {
+    id testRelatedEntity = testEntity.mappedEntity;
     
+    assertThat(testRelatedEntity, is(notNilValue()));
 }
 
 @end
