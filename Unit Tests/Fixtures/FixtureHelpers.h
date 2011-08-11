@@ -12,3 +12,10 @@
 + (id) dataFromJSONFixtureNamed:(NSString *)fixtureName;
 
 @end
+
+
+@interface GHTestCase (FixtureHelpers)
+
+- (id) dataFromJSONFixture;
+
+@end

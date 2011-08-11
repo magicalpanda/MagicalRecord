@@ -10,6 +10,12 @@
 
 @implementation NSPersistentStoreCoordinatorHelperTests
 
+- (void) setUp
+{
+    NSURL *testStoreURL = [NSPersistentStore MR_urlForStoreName:@"TestStore.sqlite"];
+    [[NSFileManager defaultManager] removeItemAtPath:[testStoreURL path] error:nil];
+}
+
 - (void) testCreateCoodinatorWithSqlitePersistentStore
 {
     NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator coordinatorWithSqliteStoreNamed:@"TestStore.sqlite"];

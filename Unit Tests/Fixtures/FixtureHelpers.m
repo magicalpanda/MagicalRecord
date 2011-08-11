@@ -36,3 +36,15 @@
 }
 
 @end
+
+@implementation GHTestCase (FixtureHelpers)
+
+- (id) dataFromJSONFixture;
+{
+    NSString *className = NSStringFromClass([self class]);
+    className = [className stringByReplacingOccurrencesOfString:@"Import" withString:@""];
+    className = [className stringByReplacingOccurrencesOfString:@"Tests" withString:@""];
+    return [FixtureHelpers dataFromJSONFixtureNamed:className];
+}
+
+@end

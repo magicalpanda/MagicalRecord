@@ -8,13 +8,13 @@
 
 #import "SingleEntityWithNoRelationships.h"
 
-@interface ImportSingleEntityTests : GHTestCase
+@interface ImportSingleEntityWithNoRelationshipsTests : GHTestCase
 
 @property (nonatomic, retain) SingleEntityWithNoRelationships *testEntity;
 
 @end
 
-@implementation ImportSingleEntityTests
+@implementation ImportSingleEntityWithNoRelationshipsTests
 
 @synthesize testEntity;
 

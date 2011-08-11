@@ -11,12 +11,13 @@
 #import "ConcreteRelatedEntity.h"
 #import "MappedEntity.h"
 
-@interface ImportSingleEntityWithRelatedEntitiesTests : GHTestCase
+@interface ImportSingleRelatedEntityTests : GHTestCase
 
 @property (nonatomic, retain) SingleRelatedEntity *testEntity;
+
 @end
 
-@implementation ImportSingleEntityWithRelatedEntitiesTests
+@implementation ImportSingleRelatedEntityTests
 
 @synthesize testEntity;
 
@@ -43,7 +44,7 @@
     
     [self setupTestData];
     
-    id singleEntity = [FixtureHelpers dataFromJSONFixtureNamed:@"SingleRelatedEntity"];
+    id singleEntity = [self dataFromJSONFixture];
     
     self.testEntity = [SingleRelatedEntity MR_importFromDictionary:singleEntity];
 }
@@ -102,33 +103,6 @@
 //Test ordered to many
 
 
-// Test mapped relationship
 
-- (void) testImportMappedEntityRelatedViaToOneRelationship
-{
-    id testRelatedEntity = testEntity.testMappedRelationship;
-    
-    //verify mapping in relationship description userinfo
-    NSEntityDescription *mappedEntity = [testEntity entity];
-    NSRelationshipDescription *testRelationship = [[mappedEntity propertiesByName] valueForKey:@"testMappedRelationship"];
-    assertThat([[testRelationship userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey], is(equalTo(@"TestJsonEntityName")));
-
-    assertThat(testRelatedEntity, is(notNilValue()));
-    assertThat([testRelatedEntity sampleAttribute], is(containsString(@"test case")));    
-}
-
-- (void) testImportMappedEntityUsingPrimaryRelationshipKey
-{
-    id testRelatedEntity = testEntity.testMappedRelationship;
-    
-    //verify mapping in relationship description userinfo
-    NSEntityDescription *mappedEntity = [testEntity entity];
-    NSRelationshipDescription *testRelationship = [[mappedEntity propertiesByName] valueForKey:@"testMappedRelationship"];
-    assertThat([[testRelationship userInfo] valueForKey:kMagicalRecordImportRelationshipPrimaryKey], is(equalTo(@"testMappedEntityID")));
-
-    //    assertThat(testRelatedEntity, is(equalTo(testMappedEntity)));
-    assertThat([testRelatedEntity testMappedEntityID], is(equalToInteger(42)));
-    assertThat([testRelatedEntity sampleAttribute], containsString(@"test case setup"));
-}
 
 @end

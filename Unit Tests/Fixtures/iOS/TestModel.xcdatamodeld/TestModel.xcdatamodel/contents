@@ -16,13 +16,13 @@
             </userInfo>
         </attribute>
     </entity>
-    <entity name="SingleEntityRelatedToMappedEntityUsingDefaults">
+    <entity name="SingleEntityRelatedToMappedEntityUsingDefaults" representedClassName="SingleEntityRelatedToMappedEntityUsingDefaults">
         <relationship name="mappedEntity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MappedEntity"/>
     </entity>
-    <entity name="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey">
+    <entity name="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" representedClassName="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey">
         <relationship name="mappedEntity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MappedEntity">
             <userInfo>
-                <entry key="jsonKeyName" value="id"/>
+                <entry key="jsonKeyName" value="someRandomAttributeName"/>
                 <entry key="primaryRelationshipKey" value="testMappedEntityID"/>
             </userInfo>
         </relationship>
