@@ -83,20 +83,19 @@
     assertThat(testEntity.mappedStringAttribute, is(equalTo(@"Mapped value")));
 }
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && __IPHONE_5_0 >= 50000
 
 - (void) testImportUIColorAttributeToEntity
 {
-//    UIColor *actualColor = testEntity.colorTestAttribute;
-//    
-//    CGFloat red, blue, green, alpha;
-//    [actualColor getRed:&red green:&green blue:&blue alpha:&alpha];
-//
-//
-//    assertThatFloat(alpha, is(equalToFloat(1.)));
-//    assertThatFloat(red, is(equalToFloat(64./255.)));
-//    assertThatFloat(green, is(equalToFloat(128./255.)));
-//    assertThatFloat(blue, is(equalToFloat(225./255.)));
+    UIColor *actualColor = testEntity.colorTestAttribute;
+    
+    CGFloat red, blue, green, alpha;
+    [actualColor getRed:&red green:&green blue:&blue alpha:&alpha];
+
+    assertThatFloat(alpha, is(equalToFloat(1.)));
+    assertThatFloat(red, is(equalToFloat(64./255.)));
+    assertThatFloat(green, is(equalToFloat(128./255.)));
+    assertThatFloat(blue, is(equalToFloat(225./255.)));
 }
 
 #else

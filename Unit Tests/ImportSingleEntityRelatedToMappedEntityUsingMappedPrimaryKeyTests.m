@@ -30,7 +30,7 @@
     [context save];
 }
 
-- (void) setUpClass
+- (void) setUp
 {
     [NSManagedObjectModel setDefaultManagedObjectModel:[NSManagedObjectModel managedObjectModelNamed:@"TestModel.momd"]];
     [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
@@ -42,7 +42,7 @@
     self.testEntity = [SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_importFromDictionary:singleEntity];
 }
 
-- (void) tearDownClass
+- (void) tearDown
 {
     [MagicalRecordHelpers cleanUp];
 }
@@ -56,6 +56,7 @@
     NSRelationshipDescription *testRelationship = [[mappedEntity propertiesByName] valueForKey:@"mappedEntity"];
     assertThat([[testRelationship userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey], is(equalTo(@"someRandomAttributeName")));
     
+    assertThat([MappedEntity numberOfEntities], is(equalToInteger(1)));
     assertThat(testRelatedEntity, is(notNilValue()));
     assertThat([testRelatedEntity sampleAttribute], is(containsString(@"sample json file")));    
 }
@@ -69,7 +70,7 @@
     NSRelationshipDescription *testRelationship = [[mappedEntity propertiesByName] valueForKey:@"mappedEntity"];
     assertThat([[testRelationship userInfo] valueForKey:kMagicalRecordImportRelationshipPrimaryKey], is(equalTo(@"testMappedEntityID")));
     
-
+    assertThat([MappedEntity numberOfEntities], is(equalToInteger(1)));
     assertThat([testRelatedEntity testMappedEntityID], is(equalToInteger(42)));
     assertThat([testRelatedEntity sampleAttribute], containsString(@"sample json file"));
 }

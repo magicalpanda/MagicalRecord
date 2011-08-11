@@ -37,11 +37,6 @@
     [NSManagedObjectModel setDefaultManagedObjectModel:[NSManagedObjectModel managedObjectModelNamed:@"TestModel.momd"]];
     [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
     
-//    NSURL *storeUrl = [NSPersistentStore MR_urlForStoreName:@"ImportSingleEntityTestStore.sqlite"];
-//    [[NSFileManager defaultManager] removeItemAtURL:storeUrl error:nil];
-//    
-//    [MagicalRecordHelpers setupCoreDataStackWithStoreNamed:@"ImportSingleEntityTestStore.sqlite"];
-    
     [self setupTestData];
     
     id singleEntity = [self dataFromJSONFixture];
@@ -62,6 +57,7 @@
     
     assertThat(testRelatedEntity, is(notNilValue()));
     assertThat([testRelatedEntity sampleBaseAttribute], containsString(@"BASE"));
+    assertThatBool([testRelatedEntity respondsToSelector:@selector(sampleConcreteAttribute)], is(equalToBool(NO)));
 }
 
 - (void) testImportAnEntityRelatedToAbstractEntityViaToManyRelationship
@@ -73,6 +69,7 @@
     
     assertThat(testRelatedEntity, is(notNilValue()));
     assertThat([testRelatedEntity sampleBaseAttribute], containsString(@"BASE"));
+    assertThatBool([testRelatedEntity respondsToSelector:@selector(sampleConcreteAttribute)], is(equalToBool(NO)));
 }
 
 

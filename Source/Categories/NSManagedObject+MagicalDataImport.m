@@ -215,9 +215,17 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     return [self MR_importFromDictionary:data inContext:[NSManagedObjectContext defaultContext]];
 }
 
++ (id) MR_updateFromDictionary:(NSDictionary *)data inContext:(NSManagedObjectContext *)context
+{
+    //find object
+    //create if not exists
+    //apply dictionary updates
+    return nil;
+}
+
 + (id) MR_updateFromDictionary:(NSDictionary *)data
 {
-    return [self MR_importFromDictionary:data inContext:[NSManagedObjectContext defaultContext]];    
+    return [self MR_updateFromDictionary:data inContext:[NSManagedObjectContext defaultContext]];    
 }
 
 @end

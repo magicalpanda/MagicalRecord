@@ -23,13 +23,13 @@
     NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
     
     MappedEntity *testMappedEntity = [MappedEntity createInContext:context];
-    testMappedEntity.mappedEntityIDValue = 42;
+    testMappedEntity.testMappedEntityIDValue = 42;
     testMappedEntity.sampleAttribute = @"This attribute created as part of the test case setup";
     
     [context save];
 }
 
-- (void) setUpClass
+- (void) setUp
 {
     [NSManagedObjectModel setDefaultManagedObjectModel:[NSManagedObjectModel managedObjectModelNamed:@"TestModel.momd"]];
     [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
@@ -41,7 +41,7 @@
     self.testEntity = [SingleEntityRelatedToMappedEntityUsingDefaults MR_importFromDictionary:singleEntity];
 }
 
-- (void) tearDownClass
+- (void) tearDown
 {
     [MagicalRecordHelpers cleanUp];
 }
@@ -50,7 +50,10 @@
 {
     id testRelatedEntity = testEntity.mappedEntity;
     
+    assertThat([MappedEntity numberOfEntities], is(equalToInteger(1)));
+    
     assertThat(testRelatedEntity, is(notNilValue()));
+    assertThat([testRelatedEntity sampleAttribute], containsString(@"sample json file"));
 }
 
 @end

@@ -19,7 +19,9 @@ extern NSString * const kMagicalRecordImportRelationshipTypeKey;
 @interface NSManagedObject (NSManagedObject_DataImport)
 
 - (void) MR_setValuesForKeysWithJSONDictionary:(NSDictionary *)jsonData;
+
 + (id) MR_importFromDictionary:(NSDictionary *)data;
++ (id) MR_importFromDictionary:(NSDictionary *)data inContext:(NSManagedObjectContext *)context;
 
 @end
 
