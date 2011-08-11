@@ -83,8 +83,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
         return nil;
     }
     
-    Class managedObjectClass = NSClassFromString([destinationEntity managedObjectClassName]);
-    NSAssert([managedObjectClass isSubclassOfClass:[NSManagedObject class]], @"Entity is not a managed object! Whoa!");
+    NSAssert([NSClassFromString([destinationEntity managedObjectClassName]) isSubclassOfClass:[NSManagedObject class]], @"Entity is not a managed object! Whoa!");
     
 //    NSString *lookupKey = [[destinationEntity userInfo] valueForKey:kNSManagedObjectAttributeJSONKeyMapKey] ?: [destinationEntity name];
     
