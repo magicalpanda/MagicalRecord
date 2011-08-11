@@ -11,6 +11,7 @@
 @class MappedEntity;
 
 
+
 @interface SingleRelatedEntityID : NSManagedObjectID {}
 @end
 
@@ -19,6 +20,14 @@
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (SingleRelatedEntityID*)objectID;
+
+
+
+
+@property (nonatomic, retain) NSString *mappedStringAttribute;
+
+
+//- (BOOL)validateMappedStringAttribute:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -76,6 +85,12 @@
 @end
 
 @interface _SingleRelatedEntity (CoreDataGeneratedPrimitiveAccessors)
+
+
+- (NSString*)primitiveMappedStringAttribute;
+- (void)setPrimitiveMappedStringAttribute:(NSString*)value;
+
+
 
 
 

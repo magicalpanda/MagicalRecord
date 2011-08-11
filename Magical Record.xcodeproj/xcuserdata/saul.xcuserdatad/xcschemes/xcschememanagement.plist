@@ -4,12 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Mac App Unit Tests.xcscheme</key>
+		<key>Mac App Unit Tests.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>iOS App Unit Tests.xcscheme</key>
+		<key>iOS App Unit Tests.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -28,6 +28,11 @@
 			<true/>
 		</dict>
 		<key>C721C7FC13D0C3CD0097AB6F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C738F55613F1CC0200CD5F2C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

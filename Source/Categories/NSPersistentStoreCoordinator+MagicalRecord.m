@@ -7,22 +7,15 @@
 
 #import "CoreData+MagicalRecord.h"
 
-//#import "NSPersistentStoreCoordinator+MagicalRecord.h"
-//#import "NSManagedObjectModel+MagicalRecord.h"
-//#import "NSPersistentStore+MagicalRecord.h"
-
 static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
 
 @implementation NSPersistentStoreCoordinator (MagicalRecord)
 
 + (NSPersistentStoreCoordinator *) MR_defaultStoreCoordinator
 {
-    @synchronized (self)
+    if (defaultCoordinator_ == nil && [MagicalRecordHelpers shouldAutoCreateDefaultPersistentStoreCoordinator])
     {
-        if (defaultCoordinator_ == nil)
-        {
-            defaultCoordinator_ = [self MR_newPersistentStoreCoordinator];
-        }
+        defaultCoordinator_ = [self MR_newPersistentStoreCoordinator];
     }
 	return defaultCoordinator_;
 }
@@ -32,13 +25,14 @@ static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
 	defaultCoordinator_ = coordinator;
 }
 
-- (void) createPathToStoreFileIfNeccessary:(NSURL *)urlForStore
+- (void) MR_createPathToStoreFileIfNeccessary:(NSURL *)urlForStore
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *pathToStore = [urlForStore URLByDeletingLastPathComponent];
     
     NSError *error = nil;
-    BOOL pathWasCreated = [fileManager createDirectoryAtURL:pathToStore withIntermediateDirectories:YES attributes:nil error:&error];
+//    BOOL pathWasCreated = [fileManager createDirectoryAtURL:pathToStore withIntermediateDirectories:YES attributes:nil error:&error];
+    BOOL pathWasCreated = [fileManager createDirectoryAtPath:[pathToStore path] withIntermediateDirectories:YES attributes:nil error:&error];
 
     if (!pathWasCreated) 
     {
@@ -51,7 +45,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
     NSURL *url = [storeFileName isKindOfClass:[NSURL class]] ? storeFileName : [NSPersistentStore MR_urlForStoreName:storeFileName];
     NSError *error = nil;
     
-    [self createPathToStoreFileIfNeccessary:url];
+    [self MR_createPathToStoreFileIfNeccessary:url];
     
     NSPersistentStore *store = [self addPersistentStoreWithType:NSSQLiteStoreType
                                                  configuration:nil

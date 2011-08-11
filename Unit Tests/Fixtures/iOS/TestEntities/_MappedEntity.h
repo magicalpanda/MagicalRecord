@@ -8,6 +8,7 @@
 
 
 
+
 @interface MappedEntityID : NSManagedObjectID {}
 @end
 
@@ -16,6 +17,18 @@
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (MappedEntityID*)objectID;
+
+
+
+
+@property (nonatomic, retain) NSNumber *mappedEntityID;
+
+
+@property short mappedEntityIDValue;
+- (short)mappedEntityIDValue;
+- (void)setMappedEntityIDValue:(short)value_;
+
+//- (BOOL)validateMappedEntityID:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -48,6 +61,15 @@
 @end
 
 @interface _MappedEntity (CoreDataGeneratedPrimitiveAccessors)
+
+
+- (NSNumber*)primitiveMappedEntityID;
+- (void)setPrimitiveMappedEntityID:(NSNumber*)value;
+
+- (short)primitiveMappedEntityIDValue;
+- (void)setPrimitiveMappedEntityIDValue:(short)value_;
+
+
 
 
 - (NSString*)primitiveSampleAttribute;

@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
   
   NSSetUncaughtExceptionHandler(&exceptionHandler);
   
-    @autoreleasepool {
+//    @autoreleasepool {
   
       // Register any special test case classes
       //[[GHTesting sharedInstance] registerClassName:@"GHSpecialTestCase"];  
@@ -80,5 +80,5 @@ int main(int argc, char *argv[]) {
       }
 
         return retVal;
-    }
+//    }
 }

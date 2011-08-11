@@ -14,9 +14,9 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 
 @implementation NSManagedObjectModel (MagicalRecord)
 
-+ (NSManagedObjectModel *)MR_defaultManagedObjectModel
++ (NSManagedObjectModel *) MR_defaultManagedObjectModel
 {
-	if (defaultManagedObjectModel_ == nil)
+	if (defaultManagedObjectModel_ == nil && [MagicalRecordHelpers shouldAutoCreateManagedObjectModel])
 	{
 		defaultManagedObjectModel_ = [self MR_newManagedObjectModel];
 	}

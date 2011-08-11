@@ -20,6 +20,8 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
 @interface MagicalRecordHelpers : NSObject {}
 
++ (NSString *) currentStack;
+
 + (void) cleanUp;
 
 + (void) handleErrors:(NSError *)error;
@@ -28,6 +30,17 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 + (void) setErrorHandlerTarget:(id)target action:(SEL)action;
 + (SEL) errorHandlerAction;
 + (id) errorHandlerTarget;
+
+//global options
+// enable/disable logging
+// add logging provider
+// autocreate new PSC per Store
+// autoassign new instances to default store
++ (BOOL) shouldAutoCreateManagedObjectModel;
++ (void) setShouldAutoCreateManagedObjectModel:(BOOL)shouldAutoCreate;
++ (BOOL) shouldAutoCreateDefaultPersistentStoreCoordinator;
++ (void) setShouldAutoCreateDefaultPersistentStoreCoordinator:(BOOL)shouldAutoCreate;
+
 
 + (void) setupCoreDataStack;
 + (void) setupCoreDataStackWithInMemoryStore;

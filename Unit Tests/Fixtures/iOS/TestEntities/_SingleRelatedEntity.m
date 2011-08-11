@@ -36,6 +36,13 @@
 
 
 
+@dynamic mappedStringAttribute;
+
+
+
+
+
+
 @dynamic testAbstractToManyRelationship;
 
 	

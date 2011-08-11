@@ -13,7 +13,7 @@
 
 @interface ImportSingleEntityWithRelatedEntitiesTests : GHTestCase
 
-@property (nonatomic, strong) SingleRelatedEntity *testEntity;
+@property (nonatomic, retain) SingleRelatedEntity *testEntity;
 @end
 
 @implementation ImportSingleEntityWithRelatedEntitiesTests
@@ -22,17 +22,24 @@
 
 - (void) setupTestData
 {
-    MappedEntity *testMappedEntity = [MappedEntity createEntity];
+    NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
+    
+    MappedEntity *testMappedEntity = [MappedEntity createInContext:context];
     testMappedEntity.testMappedEntityIDValue = 42;
     testMappedEntity.sampleAttribute = @"This attribute created as part of the test case setup";
     
-    [[NSManagedObjectContext defaultContext] save];
+    [context save];
 }
 
 - (void) setUpClass
 {
     [NSManagedObjectModel setDefaultManagedObjectModel:[NSManagedObjectModel managedObjectModelNamed:@"TestModel.momd"]];
     [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
+    
+//    NSURL *storeUrl = [NSPersistentStore MR_urlForStoreName:@"ImportSingleEntityTestStore.sqlite"];
+//    [[NSFileManager defaultManager] removeItemAtURL:storeUrl error:nil];
+//    
+//    [MagicalRecordHelpers setupCoreDataStackWithStoreNamed:@"ImportSingleEntityTestStore.sqlite"];
     
     [self setupTestData];
     
@@ -107,7 +114,7 @@
     assertThat([[testRelationship userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey], is(equalTo(@"TestJsonEntityName")));
 
     assertThat(testRelatedEntity, is(notNilValue()));
-    assertThat([testRelatedEntity sampleAttribute], is(containsString(@"sampleAttributeValue")));    
+    assertThat([testRelatedEntity sampleAttribute], is(containsString(@"test case")));    
 }
 
 - (void) testImportMappedEntityUsingPrimaryRelationshipKey

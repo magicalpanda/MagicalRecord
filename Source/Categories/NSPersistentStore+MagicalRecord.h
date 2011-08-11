@@ -7,7 +7,8 @@
 
 #import "MagicalRecordHelpers.h"
 
-//#define kMagicalRecordDefaultStoreFileName @"CoreDataStore.sqlite"
+// option to autodelete store if it already exists
+
 extern NSString * const kMagicalRecordDefaultStoreFileName;
 
 @interface NSPersistentStore (MagicalRecord)

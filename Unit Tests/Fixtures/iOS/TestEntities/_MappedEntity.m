@@ -29,6 +29,10 @@
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
+	if ([key isEqualToString:@"mappedEntityIDValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"mappedEntityID"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
 	if ([key isEqualToString:@"testMappedEntityIDValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"testMappedEntityID"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -36,6 +40,32 @@
 
 	return keyPaths;
 }
+
+
+
+
+@dynamic mappedEntityID;
+
+
+
+- (short)mappedEntityIDValue {
+	NSNumber *result = [self mappedEntityID];
+	return [result shortValue];
+}
+
+- (void)setMappedEntityIDValue:(short)value_ {
+	[self setMappedEntityID:[NSNumber numberWithShort:value_]];
+}
+
+- (short)primitiveMappedEntityIDValue {
+	NSNumber *result = [self primitiveMappedEntityID];
+	return [result shortValue];
+}
+
+- (void)setPrimitiveMappedEntityIDValue:(short)value_ {
+	[self setPrimitiveMappedEntityID:[NSNumber numberWithShort:value_]];
+}
+
 
 
 

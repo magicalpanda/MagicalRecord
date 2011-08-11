@@ -8,30 +8,22 @@
 #import "CoreData+MagicalRecord.h"
 #import <objc/runtime.h>
 
-static NSManagedObjectContext *defaultManageObjectContext = nil;
+static NSManagedObjectContext *defaultManageObjectContext_ = nil;
 static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_NSManagedObjectContextForThreadKey";
 
 @implementation NSManagedObjectContext (MagicalRecord)
 
 + (NSManagedObjectContext *)defaultContext
 {
-//    NSAssert([NSThread isMainThread], @"The defaultContext must only be accessed on the **Main Thread**");
 	@synchronized (self)
 	{
-		if (defaultManageObjectContext)
-		{
-			return defaultManageObjectContext;
-		}
+        return defaultManageObjectContext_;
 	}
-	return nil;
 }
 
 + (void) setDefaultContext:(NSManagedObjectContext *)moc
 {
-	if (defaultManageObjectContext != moc) 
-	{
-		defaultManageObjectContext = moc;
-	}
+    defaultManageObjectContext_ = moc;
 }
 
 + (void) resetDefaultContext
@@ -40,7 +32,7 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
         [[NSManagedObjectContext defaultContext] reset];        
     };
     
-    dispatch_async(dispatch_get_current_queue(), resetBlock);
+    dispatch_async(dispatch_get_main_queue(), resetBlock);
 }
 
 + (void) resetContextForCurrentThread 
@@ -115,24 +107,7 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
 
 - (BOOL) save
 {
-	NSError *error = nil;
-	BOOL saved = NO;
-	@try
-	{
-		ARLog(@"Saving %@Context%@", 
-              self == [[self class] defaultContext] ? @" *** Default *** ": @"", 
-              ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
-        
-		saved = [self save:&error];
-	}
-	@catch (NSException *exception)
-	{
-		ARLog(@"Problem saving: %@", (id)[exception userInfo] ?: (id)[exception reason]);
-	}
-
-	[MagicalRecordHelpers handleErrors:error];
-
-	return saved && error == nil;
+	return [self saveWithErrorHandler:nil];
 }
 
 #ifdef NS_BLOCKS_AVAILABLE
@@ -143,31 +118,46 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
 	
 	@try
 	{
+		ARLog(@"Saving %@Context%@", 
+              self == [[self class] defaultContext] ? @" *** Default *** ": @"", 
+              ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
+        
 		saved = [self save:&error];
 	}
 	@catch (NSException *exception)
 	{
 		ARLog(@"Problem saving: %@", (id)[exception userInfo] ?: (id)[exception reason]);	
 	}
-	
-	if (!saved && errorCallback)
-	{
-		errorCallback(error);
-	}
-	else
-	{
-		[MagicalRecordHelpers handleErrors:error];
-	}
+	@finally 
+    {
+        if (!saved)
+        {
+            if (errorCallback)
+            {
+                errorCallback(error);
+            }
+            else if (error)
+            {
+                [MagicalRecordHelpers handleErrors:error];
+            }
+        }
+    }
 	return saved && error == nil;
 }
 #endif
 
 - (void) saveWrapper
 {
+#if __IPHONE_5_0
     @autoreleasepool
     {
         [self save];
     }
+#else
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    [self save];
+    [pool drain];
+#endif
 }
 
 - (BOOL) saveOnBackgroundThread

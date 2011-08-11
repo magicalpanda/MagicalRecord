@@ -10,6 +10,9 @@
 static id errorHandlerTarget = nil;
 static SEL errorHandlerAction = nil;
 
+static BOOL shouldAutoCreateManagedObjectModel_;
+static BOOL shouldAutoCreateDefaultPersistentStoreCoordinator_;
+
 @implementation MagicalRecordHelpers
 
 + (void) cleanUp
@@ -21,6 +24,18 @@ static SEL errorHandlerAction = nil;
 	[NSManagedObjectModel MR_setDefaultManagedObjectModel:nil];
 	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:nil];
 	[NSPersistentStore MR_setDefaultPersistentStore:nil];
+}
+
++ (NSString *) currentStack
+{
+    NSMutableString *status = [NSMutableString stringWithString:@"Current Default Core Data Stack: ---- \n"];
+    
+    [status appendFormat:@"Context:     %@\n", [NSManagedObjectContext defaultContext]];
+    [status appendFormat:@"Model:       %@\n", [NSManagedObjectModel MR_defaultManagedObjectModel]];
+    [status appendFormat:@"Coordinator: %@\n", [NSPersistentStoreCoordinator MR_defaultStoreCoordinator]];
+    [status appendFormat:@"Store:       %@\n", [NSPersistentStore MR_defaultPersistentStore]];
+    
+    return status;
 }
 
 + (void) defaultErrorHandler:(NSError *)error
@@ -89,6 +104,15 @@ static SEL errorHandlerAction = nil;
 	[[self class] handleErrors:error];
 }
 
++ (void) initialize
+{
+    if (self == [MagicalRecordHelpers class]) 
+    {
+        [self setShouldAutoCreateManagedObjectModel:YES];
+        [self setShouldAutoCreateDefaultPersistentStoreCoordinator:YES];
+    }
+}
+
 + (void) setupCoreDataStack
 {
     NSManagedObjectContext *context = [NSManagedObjectContext context];
@@ -125,6 +149,26 @@ static SEL errorHandlerAction = nil;
 	
 	NSManagedObjectContext *context = [NSManagedObjectContext contextWithStoreCoordinator:coordinator];
 	[NSManagedObjectContext setDefaultContext:context];
+}
+
++ (BOOL) shouldAutoCreateManagedObjectModel;
+{
+    return shouldAutoCreateManagedObjectModel_;
+}
+
++ (void) setShouldAutoCreateManagedObjectModel:(BOOL)shouldAutoCreate;
+{
+    shouldAutoCreateManagedObjectModel_ = shouldAutoCreate;
+}
+
++ (BOOL) shouldAutoCreateDefaultPersistentStoreCoordinator;
+{
+    return shouldAutoCreateDefaultPersistentStoreCoordinator_;
+}
+
++ (void) setShouldAutoCreateDefaultPersistentStoreCoordinator:(BOOL)shouldAutoCreate;
+{
+    shouldAutoCreateDefaultPersistentStoreCoordinator_ = shouldAutoCreate;
 }
 
 #ifdef NS_BLOCKS_AVAILABLE

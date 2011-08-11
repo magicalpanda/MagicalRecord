@@ -13,9 +13,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C721C7FC13D0C3CD0097AB6F"
-               BuildableName = "iOS App Unit Tests.app"
-               BlueprintName = "iOS App Unit Tests"
+               BlueprintIdentifier = "C721C7DB13D0C3A00097AB6F"
+               BuildableName = "Mac App Unit Tests.app"
+               BlueprintName = "Mac App Unit Tests"
                ReferencedContainer = "container:Magical Record.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,15 +26,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
-      <PostActions>
-         <ExecutionAction
-            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
-            <ActionContent
-               title = "Run Script"
-               scriptText = "GHUNIT_CLI=1 xcodebuild -target Tests -configuration Debug -sdk iphonesimulator build">
-            </ActionContent>
-         </ExecutionAction>
-      </PostActions>
       <Testables>
       </Testables>
    </TestAction>
@@ -44,13 +35,14 @@
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Debug"
-      debugDocumentVersioning = "YES">
+      debugDocumentVersioning = "YES"
+      allowLocationSimulation = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C721C7FC13D0C3CD0097AB6F"
-            BuildableName = "iOS App Unit Tests.app"
-            BlueprintName = "iOS App Unit Tests"
+            BlueprintIdentifier = "C721C7DB13D0C3A00097AB6F"
+            BuildableName = "Mac App Unit Tests.app"
+            BlueprintName = "Mac App Unit Tests"
             ReferencedContainer = "container:Magical Record.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -66,9 +58,9 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C721C7FC13D0C3CD0097AB6F"
-            BuildableName = "iOS App Unit Tests.app"
-            BlueprintName = "iOS App Unit Tests"
+            BlueprintIdentifier = "C721C7DB13D0C3A00097AB6F"
+            BuildableName = "Mac App Unit Tests.app"
+            BlueprintName = "Mac App Unit Tests"
             ReferencedContainer = "container:Magical Record.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
