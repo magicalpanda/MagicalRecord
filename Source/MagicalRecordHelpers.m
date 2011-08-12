@@ -204,6 +204,12 @@ NSString * attributeNameFromString(NSString *value)
     return [firstCharacter stringByAppendingString:[value substringFromIndex:1]];
 }
 
+NSString * primaryKeyNameFromString(NSString *value)
+{
+    NSString *firstCharacter = [[value substringToIndex:1] lowercaseString];
+    return [firstCharacter stringByAppendingString:[value substringFromIndex:1]];
+}
+
 NSDate * dateFromString(NSString *value)
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

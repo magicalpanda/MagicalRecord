@@ -23,7 +23,7 @@
     NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
     
     MappedEntity *testMappedEntity = [MappedEntity createInContext:context];
-    testMappedEntity.testMappedEntityIDValue = 42;
+    testMappedEntity.mappedEntityIDValue = 42;
     testMappedEntity.sampleAttribute = @"This attribute created as part of the test case setup";
     
     [context save];
@@ -39,6 +39,8 @@
     id singleEntity = [self dataFromJSONFixture];
     
     self.testEntity = [SingleEntityRelatedToMappedEntityUsingDefaults MR_importFromDictionary:singleEntity];
+    
+    [[NSManagedObjectContext defaultContext] save];
 }
 
 - (void) tearDown

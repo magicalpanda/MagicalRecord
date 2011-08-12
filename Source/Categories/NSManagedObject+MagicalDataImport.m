@@ -83,40 +83,22 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     return relatedObject;
 }
 
-- (NSEntityDescription *)MR_targetEntityDescriptionForRelationship:(NSRelationshipDescription *)relationshipInfo 
-{
-    NSEntityDescription *originalDestinationEntity = [relationshipInfo destinationEntity];
-//    NSDictionary *subentities = [originalDestinationEntity subentitiesByName];
-    
-    NSEntityDescription *destinationEntity = originalDestinationEntity;
-    
-//    NSDictionary *relationshipUserInfo = [relationshipInfo userInfo];
-//    NSString *mappedEntityName = [relationshipUserInfo valueForKey:kMagicalRecordImportRelationshipTypeKey];
-//    
-//    if (mappedEntityName) 
-//    {
-//        destinationEntity = [NSEntityDescription entityForName:mappedEntityName inManagedObjectContext:[self managedObjectContext]];
-//    }
-//    else if ([originalDestinationEntity isAbstract] && [subentities count]) 
-//    {
-//    }
-    
-    return destinationEntity;
-}
-
 - (NSManagedObject *) MR_findObjectForRelationship:(NSRelationshipDescription *)relationshipInfo withData:(id)singleRelatedObjectData
 {
-    NSEntityDescription *destinationEntity = [self MR_targetEntityDescriptionForRelationship:relationshipInfo];
+    NSEntityDescription *destinationEntity = [relationshipInfo destinationEntity];
     if (destinationEntity == nil) 
     {
         ARLog(@"Unable to find entity for type '%@'", [singleRelatedObjectData valueForKey:kMagicalRecordImportRelationshipTypeKey]);
         return nil;
     }
 
-    NSString *primaryKeyName = [[relationshipInfo userInfo] valueForKey:kMagicalRecordImportRelationshipPrimaryKey] ?: [NSString stringWithFormat:@"%@ID", [destinationEntity name]]; //TODO: lowercase first letter on convention based primary key, write test
+    NSString *primaryKeyName = [[relationshipInfo userInfo] valueForKey:kMagicalRecordImportRelationshipPrimaryKey] ?: 
+                                    [NSString stringWithFormat:@"%@ID", primaryKeyNameFromString([destinationEntity name])];
+    
     NSAttributeDescription *primaryKeyAttribute = [[destinationEntity attributesByName] valueForKey:primaryKeyName];
     NSString *lookupKey = [[primaryKeyAttribute userInfo] valueForKey:kMagicalRecordImportAttributeKeyMapKey] ?: [primaryKeyAttribute name];
     
+    NSManagedObject *objectForRelationship = nil;
     if (lookupKey) 
     {
         id lookupValue = [singleRelatedObjectData valueForKey:lookupKey];
@@ -127,11 +109,11 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
             NSFetchRequest *request = [managedObjectClass requestFirstByAttribute:primaryKeyName withValue:lookupValue inContext:[self managedObjectContext]];
             [request setEntity:destinationEntity];
             
-            id existingObject  = [managedObjectClass executeFetchRequestAndReturnFirstObject:request inContext:[self managedObjectContext]];
-            return existingObject ?: [self MR_createInstanceForEntity:destinationEntity withDictionary:singleRelatedObjectData];
+            objectForRelationship = [managedObjectClass executeFetchRequestAndReturnFirstObject:request inContext:[self managedObjectContext]];
         }
     }
-    return [self MR_createInstanceForEntity:destinationEntity withDictionary:singleRelatedObjectData];
+
+    return objectForRelationship;
 }
 
 - (void) MR_addObject:(NSManagedObject *)relatedObject forRelationship:(NSRelationshipDescription *)relationshipInfo
@@ -151,15 +133,15 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     }
     @catch (NSException *exception) 
     {
-        NSLog(@"Adding object for relationship failed: %@\n", relationshipInfo);
-        NSLog(@"relatedObject.entity %@", [relatedObject entity]);
-        NSLog(@"relationshipInfo.destinationEntity %@", [relationshipInfo destinationEntity]);
+        ARLog(@"Adding object for relationship failed: %@\n", relationshipInfo);
+        ARLog(@"relatedObject.entity %@", [relatedObject entity]);
+        ARLog(@"relationshipInfo.destinationEntity %@", [relationshipInfo destinationEntity]);
         
-        NSLog(@"perform selector error: %@", exception);
+        ARLog(@"perform selector error: %@", exception);
     }
 }
 
-- (void) MR_setRelationships:(NSDictionary *)relationships forKeysWithDictionary:(NSDictionary *)jsonData
+- (void) MR_setRelationships:(NSDictionary *)relationships forKeysWithDictionary:(NSDictionary *)relationshipData withBlock:(void(^)(NSRelationshipDescription *,NSDictionary *))setRelationshipBlock
 {
     for (NSString *relationshipName in relationships) 
     {
@@ -167,31 +149,47 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
         
         NSString *lookupKey = [[relationshipInfo userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey] ?: relationshipName;
         
-        id relatedObjectData = [jsonData valueForKey:lookupKey];
+        id relatedObjectData = [relationshipData valueForKey:lookupKey];
         
         if (relatedObjectData == nil || [relatedObjectData isEqual:[NSNull null]]) 
         {
             continue;
         }
-        
+
         if ([relationshipInfo isToMany]) 
         {
             for (id singleRelatedObjectData in relatedObjectData) 
             {
-                NSManagedObject *relatedObject = [self MR_findObjectForRelationship:relationshipInfo
-                                                                    withData:singleRelatedObjectData];
-                
-                [self MR_addObject:relatedObject forRelationship:relationshipInfo];
+                setRelationshipBlock(relationshipInfo, singleRelatedObjectData);
             }
         }
         else
         {
-            NSManagedObject *relatedObject = [self MR_findObjectForRelationship:relationshipInfo
-                                                                withData:relatedObjectData];
-            
-            [self MR_addObject:relatedObject forRelationship:relationshipInfo];
+            setRelationshipBlock(relationshipInfo, relatedObjectData);
         }
     }
+}
+
+- (void) MR_setRelationships:(NSDictionary *)relationships forKeysWithDictionary:(NSDictionary *)relationshipData
+{
+    [self MR_setRelationships:relationships
+        forKeysWithDictionary:relationshipData 
+                    withBlock:^(NSRelationshipDescription *relationshipInfo, NSDictionary *objectData)
+     {
+         NSManagedObject *relatedObject = [self MR_findObjectForRelationship:relationshipInfo
+                                                                    withData:objectData];
+         if (relatedObject == nil)
+         {
+             relatedObject = [self MR_createInstanceForEntity:[relationshipInfo destinationEntity]
+                                               withDictionary:objectData];
+         }
+         else
+         {
+             [relatedObject MR_setValuesForKeysWithJSONDictionary:objectData];
+         }
+         
+         [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
+     }];
 }
 
 - (void) MR_setValuesForKeysWithJSONDictionary:(NSDictionary *)jsonData
