@@ -7,13 +7,26 @@
 //
 
 #import "NSManagedObjectHelperTests.h"
+#import "SingleRelatedEntity.h"
 
 @implementation NSManagedObjectHelperTests
 
+- (void) setUpClass
+{
+    [NSManagedObjectModel MR_setDefaultManagedObjectModel:[NSManagedObjectModel MR_managedObjectModelNamed:@"TestModel.momd"]];
+    [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
+}
+
+//Test Request Creation
+
 - (void) testCreateFetchRequestForEntity
 {
-    GHFail(@"Test Not Implemented");
+    NSFetchRequest *testRequest = [SingleRelatedEntity requestAll];
+    
+    assertThat([[testRequest entity] name], is(equalTo(NSStringFromClass([SingleRelatedEntity class]))));
 }
+
+// Test return result set, all, first
 
 - (void) testCreateRequestForFirstEntity
 {
@@ -22,24 +35,24 @@
 
 - (void) testCanGetEntityDescriptionFromEntityClass
 {
-    
     GHFail(@"Test Not Implemented");
 }
+
+// Test Entity creation
 
 - (void) testCanCreateEntityInstance
 {
     GHFail(@"Test Not Implemented");
 }
 
+// Test Entity Deletion
+
 - (void) testCanDeleteEntityInstance
 {
     GHFail(@"Test Not Implemented");
 }
 
-- (void) testCreateSimpleRequest
-{
-    
-}
+// Test Number of Entities
 
 - (void) testCanSearchForNumberOfAllEntities
 {
