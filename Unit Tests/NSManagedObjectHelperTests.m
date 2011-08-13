@@ -26,53 +26,100 @@
     assertThat([[testRequest entity] name], is(equalTo(NSStringFromClass([SingleRelatedEntity class]))));
 }
 
+- (void) testCanRequestFirstEntityWithPredicate
+{
+    NSPredicate *testPredicate = [NSPredicate predicateWithFormat:@"mappedStringAttribute = 'Test Predicate'"];
+    NSFetchRequest *testRequest = [SingleRelatedEntity requestFirstWithPredicate:testPredicate];
+
+    assertThatInteger([testRequest fetchLimit], is(equalToInteger(1)));
+    assertThat([testRequest predicate], is(equalTo([NSPredicate predicateWithFormat:@"mappedStringAttribute = 'Test Predicate'"])));
+}
+
 // Test return result set, all, first
 
 - (void) testCreateRequestForFirstEntity
 {
-    GHFail(@"Test Not Implemented");
+    NSFetchRequest *testRequest = [SingleRelatedEntity requestFirstByAttribute:@"mappedStringAttribute" withValue:nil];
+    
+    assertThat([[testRequest entity] name], is(equalTo(NSStringFromClass([SingleRelatedEntity class]))));
+    assertThatInteger([testRequest fetchLimit], is(equalToInteger(1)));
+    assertThatInteger([testRequest fetchOffset], is(equalToInteger(0)));
+    assertThat([testRequest predicate], is(equalTo([NSPredicate predicateWithFormat:@"mappedStringAttribute = nil"])));
 }
 
 - (void) testCanGetEntityDescriptionFromEntityClass
 {
-    GHFail(@"Test Not Implemented");
+    NSEntityDescription *testDescription = [SingleRelatedEntity entityDescription];
+    assertThat(testDescription, is(notNilValue()));
 }
 
 // Test Entity creation
 
 - (void) testCanCreateEntityInstance
 {
-    GHFail(@"Test Not Implemented");
+    id testEntity = [SingleRelatedEntity createEntity];
+    
+    assertThat(testEntity, is(notNilValue()));
 }
 
 // Test Entity Deletion
 
 - (void) testCanDeleteEntityInstance
 {
-    GHFail(@"Test Not Implemented");
+    id testEntity = [SingleRelatedEntity createEntity];
+    [[NSManagedObjectContext defaultContext] save];
+    
+    assertThatBool([testEntity isDeleted], is(equalToBool(NO)));
+    
+    [testEntity deleteEntity];
+    
+    assertThat(testEntity, is(notNilValue()));
+    assertThatBool([testEntity isDeleted], is(equalToBool(YES)));
 }
 
 // Test Number of Entities
 
+- (void) createSampleData:(NSInteger)numberOfTestEntitiesToCreate
+{
+    for (NSInteger i = 1; i < numberOfTestEntitiesToCreate; i++) 
+    {
+        SingleRelatedEntity *testEntity = [SingleRelatedEntity createEntity];
+        testEntity.mappedStringAttribute = [NSString stringWithFormat:@"%d", i / 5];
+    }
+    
+    [[NSManagedObjectContext defaultContext] save];
+}
+
 - (void) testCanSearchForNumberOfAllEntities
 {
-    GHFail(@"Test Not Implemented");
+    NSInteger numberOfTestEntitiesToCreate = 20;
+    [self createSampleData:numberOfTestEntitiesToCreate];
+    
+    assertThat([SingleRelatedEntity numberOfEntities], is(equalToInteger(numberOfTestEntitiesToCreate)));
 }
 
-- (void) testCanSearchForNumberOfUniqueEntities
+- (void) testCanSearchForNumberOfAllUniqueEntities
 {
-    GHFail(@"Test Not Implemented");
-}
+    NSInteger numberOfTestEntitiesToCreate = 20;
+    [self createSampleData:numberOfTestEntitiesToCreate];
 
+    assertThat([SingleRelatedEntity numberOfUniqueEntities], is(equalToInteger(4)));
+}
 
 - (void) testCanSearchForNumberOfEntitesWithPredicate
 {
-    GHFail(@"Test Not Implemented");
+    NSInteger numberOfTestEntitiesToCreate = 20;
+    [self createSampleData:numberOfTestEntitiesToCreate];
+    
+    assertThat([SingleRelatedEntity numberOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"mappedStringAttribute = 0"]], is(equalToInteger(1)));
 }
 
 - (void) testCanSearchForNumberOfUniqueEntitiesWithPredicate
 {
-    GHFail(@"Test Not Implemented");
+    NSInteger numberOfTestEntitiesToCreate = 20;
+    [self createSampleData:numberOfTestEntitiesToCreate];
+    
+    assertThat([SingleRelatedEntity numberOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"mappedStringAttribute = 0"]], is(equalToInteger(4)));
 }
 
 

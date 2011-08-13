@@ -183,6 +183,23 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 									 inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
++ (NSNumber *) numberOfUniqueEntities
+{
+    return [self numberOfUniqueEntitiesWithContext:[NSManagedObjectContext defaultContext]];
+}
+
++ (NSNumber *) numberOfUniqueEntitiesWithContext:(NSManagedObjectContext *)context;
+{
+    NSError *error = nil;
+    NSFetchRequest *request = [self createFetchRequestInContext:context];
+    [request setReturnsDistinctResults:YES];
+    
+    NSUInteger count = [context countForFetchRequest:request error:&error];
+    [MagicalRecordHelpers handleErrors:error];
+    
+    return [NSNumber numberWithUnsignedInteger:count];    
+}
+
 + (NSNumber *) numberOfUniqueEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
 {
 	NSError *error = nil;
@@ -272,6 +289,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 + (NSFetchRequest *) requestFirstByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context;
 {
     NSFetchRequest *request = [self createFetchRequestInContext:context];
+    [request setFetchLimit:1];
     [request setPropertiesToFetch:[NSArray arrayWithObject:attribute]];
     [request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", attribute, searchValue]];
     
