@@ -162,12 +162,20 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
 }
 #endif
 
+#define AUTORELEASEPOOL_START NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]
+#define AUTORELEASEPOOL_END [pool drain]
+#ifdef __has_feature
+#if __has_feature(objc_arc)
+#define AUTORELEASEPOOL_START @autoreleasepool {
+#define AUTORELEASEPOOL_END }
+#endif
+#endif
+
 - (void) saveWrapper
 {
-    @autoreleasepool
-    {
+    AUTORELEASEPOOL_START;
         [self save];
-    }
+    AUTORELEASEPOOL_END;
 }
 
 - (BOOL) saveOnBackgroundThread
