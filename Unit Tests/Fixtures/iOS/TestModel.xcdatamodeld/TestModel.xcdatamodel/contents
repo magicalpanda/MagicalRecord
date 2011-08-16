@@ -12,9 +12,16 @@
         <attribute name="sampleAttribute" optional="YES" attributeType="String"/>
         <attribute name="testMappedEntityID" optional="YES" attributeType="Integer 64" defaultValueString="0">
             <userInfo>
-                <entry key="jsonKeyName" value="id"/>
+                <entry key="mappedKeyName" value="id"/>
             </userInfo>
         </attribute>
+    </entity>
+    <entity name="SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey" representedClassName="SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey">
+        <relationship name="mappedEntities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MappedEntity">
+            <userInfo>
+                <entry key="primaryRelationshipKey" value="testMappedEntityID"/>
+            </userInfo>
+        </relationship>
     </entity>
     <entity name="SingleEntityRelatedToMappedEntityUsingDefaults" representedClassName="SingleEntityRelatedToMappedEntityUsingDefaults">
         <relationship name="mappedEntity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MappedEntity"/>
@@ -22,7 +29,7 @@
     <entity name="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" representedClassName="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey">
         <relationship name="mappedEntity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MappedEntity">
             <userInfo>
-                <entry key="jsonKeyName" value="someRandomAttributeName"/>
+                <entry key="mappedKeyName" value="someRandomAttributeName"/>
                 <entry key="primaryRelationshipKey" value="testMappedEntityID"/>
             </userInfo>
         </relationship>
@@ -43,7 +50,7 @@
         <attribute name="int64TestAttribute" optional="YES" attributeType="Integer 64" defaultValueString="0"/>
         <attribute name="mappedStringAttribute" optional="YES" attributeType="String">
             <userInfo>
-                <entry key="jsonKeyName" value="mappedAttributeWithStringValue"/>
+                <entry key="mappedKeyName" value="mappedAttributeWithStringValue"/>
             </userInfo>
         </attribute>
         <attribute name="stringTestAttribute" optional="YES" attributeType="String"/>
@@ -59,10 +66,11 @@
         <element name="AbstractRelatedEntity" positionX="115" positionY="126" width="128" height="60"/>
         <element name="ConcreteRelatedEntity" positionX="153" positionY="375" width="171" height="60"/>
         <element name="EntityWithDiffernentClassName" positionX="-135" positionY="135" width="198" height="45"/>
-        <element name="MappedEntity" positionX="441" positionY="465" width="128" height="90"/>
+        <element name="MappedEntity" positionX="306" positionY="609" width="128" height="90"/>
+        <element name="SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey" positionX="495" positionY="756" width="351" height="60"/>
+        <element name="SingleEntityRelatedToMappedEntityUsingDefaults" positionX="493" positionY="441" width="272" height="60"/>
+        <element name="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" positionX="495" positionY="549" width="342" height="60"/>
         <element name="SingleEntityWithNoRelationships" positionX="-135" positionY="318" width="180" height="210"/>
         <element name="SingleRelatedEntity" positionX="333" positionY="198" width="189" height="120"/>
-        <element name="SingleEntityRelatedToMappedEntityUsingDefaults" positionX="621" positionY="333" width="272" height="60"/>
-        <element name="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" positionX="558" positionY="603" width="342" height="60"/>
     </elements>
 </model>

@@ -70,7 +70,7 @@
 
 - (void) testImportFloatAttributeToEntity
 {
-    assertThat(testEntity.floatTestAttribute, is(equalToFloat(100000000000)));
+    assertThat(testEntity.floatTestAttribute, is(equalToFloat(10000000000)));
 }
 
 - (void) testImportBooleanAttributeToEntity

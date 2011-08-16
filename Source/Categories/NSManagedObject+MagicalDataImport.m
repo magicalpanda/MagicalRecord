@@ -9,28 +9,28 @@
 #import "CoreData+MagicalRecord.h"
 
 NSString * const kMagicalRecordImportDefaultDateFormatString = @"YYYY-MM-dd'T'HH:mm:ss'Z'";
-NSString * const kMagicalRecordImportAttributeKeyMapKey = @"jsonKeyName";
+NSString * const kMagicalRecordImportAttributeKeyMapKey = @"mappedKeyName";
 NSString * const kMagicalRecordImportAttributeValueClassNameKey = @"attributeValueClassName";
 
-NSString * const kMagicalRecordImportRelationshipMapKey = @"jsonKeyName";
+NSString * const kMagicalRecordImportRelationshipMapKey = @"mappedKeyName";
 NSString * const kMagicalRecordImportRelationshipPrimaryKey = @"primaryRelationshipKey";
 NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 
 
 @implementation NSManagedObject (NSManagedObject_DataImport)
 
-- (NSCache *) MR_requestCache
-{
-    static dispatch_once_t pred;
-    static NSCache *mr_requestCache = nil;
-    
-    dispatch_once(&pred, ^{
-        mr_requestCache = [[NSCache alloc] init];
-        mr_requestCache.name = @"com.magicalpanda.magicalrecord.requestcache";
-        mr_requestCache.totalCostLimit = 100;
-    });
-    return mr_requestCache;
-}
+//- (NSCache *) MR_requestCache
+//{
+//    static dispatch_once_t pred;
+//    static NSCache *mr_requestCache = nil;
+//    
+//    dispatch_once(&pred, ^{
+//        mr_requestCache = [[NSCache alloc] init];
+//        mr_requestCache.name = @"com.magicalpanda.magicalrecord.requestcache";
+//        mr_requestCache.totalCostLimit = 100;
+//    });
+//    return mr_requestCache;
+//}
 
 - (id) MR_attributeValueFromDictionary:(NSDictionary *)jsonData forAttribute:(NSAttributeDescription *)attributeInfo
 {
@@ -64,21 +64,22 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     return value;
 }
 
-- (void) MR_setAttributes:(NSDictionary *)attributes forKeysWithDictionary:(NSDictionary *)jsonData
+- (void) MR_setAttributes:(NSDictionary *)attributes forKeysWithDictionary:(NSDictionary *)objectData
 {    
     for (NSString *attributeName in attributes) 
     {
         NSAttributeDescription *attributeInfo = [attributes valueForKey:attributeName];
-        id value = [self MR_attributeValueFromDictionary:jsonData forAttribute:attributeInfo];
+        id value = [self MR_attributeValueFromDictionary:objectData forAttribute:attributeInfo];
         [self setValue:value forKey:attributeName];
     }
 }
 
-- (NSManagedObject *) MR_createInstanceForEntity:(NSEntityDescription *)entityDescription withDictionary:(id)jsonData
+- (NSManagedObject *) MR_createInstanceForEntity:(NSEntityDescription *)entityDescription withDictionary:(id)objectData
 {
-    NSManagedObject *relatedObject = [[NSManagedObject alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:[self managedObjectContext]];
+    NSManagedObject *relatedObject = [NSEntityDescription insertNewObjectForEntityForName:[entityDescription name] 
+                                                                   inManagedObjectContext:[self managedObjectContext]];
     
-    [relatedObject MR_setValuesForKeysWithJSONDictionary:jsonData];
+    [relatedObject MR_setValuesForKeysWithJSONDictionary:objectData];
     
     return relatedObject;
 }
@@ -105,11 +106,9 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
         
         if (lookupValue) 
         {
+            NSManagedObjectContext *context = [self managedObjectContext];
             Class managedObjectClass = NSClassFromString([destinationEntity managedObjectClassName]);
-            NSFetchRequest *request = [managedObjectClass requestFirstByAttribute:primaryKeyName withValue:lookupValue inContext:[self managedObjectContext]];
-            [request setEntity:destinationEntity];
-            
-            objectForRelationship = [managedObjectClass executeFetchRequestAndReturnFirstObject:request inContext:[self managedObjectContext]];
+            objectForRelationship = [managedObjectClass findFirstByAttribute:primaryKeyName withValue:lookupValue inContext:context];
         }
     }
 
@@ -192,28 +191,29 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
      }];
 }
 
-- (void) MR_setValuesForKeysWithJSONDictionary:(NSDictionary *)jsonData
+- (void) MR_setValuesForKeysWithJSONDictionary:(NSDictionary *)objectData
 {
     NSDictionary *attributes = [[self entity] attributesByName];
-    [self MR_setAttributes:attributes forKeysWithDictionary:jsonData];
+    [self MR_setAttributes:attributes forKeysWithDictionary:objectData];
     
     NSDictionary *relationships = [[self entity] relationshipsByName];
-    [self MR_setRelationships:relationships forKeysWithDictionary:jsonData];
+    [self MR_setRelationships:relationships forKeysWithDictionary:objectData];
 }
 
-+ (id) MR_importFromDictionary:(NSDictionary *)data inContext:(NSManagedObjectContext *)context;
++ (id) MR_importFromDictionary:(NSDictionary *)objectData inContext:(NSManagedObjectContext *)context;
 {
-    id managedObject = [[self alloc] initWithEntity:[self entityDescription] insertIntoManagedObjectContext:context];
-    [managedObject MR_setValuesForKeysWithJSONDictionary:data];
+    NSManagedObject *managedObject = [NSEntityDescription insertNewObjectForEntityForName:[[self entityDescription] name] 
+                                                                   inManagedObjectContext:context];
+    [managedObject MR_setValuesForKeysWithJSONDictionary:objectData];
     return managedObject;
 }
 
-+ (id) MR_importFromDictionary:(NSDictionary *)data
++ (id) MR_importFromDictionary:(NSDictionary *)objectData
 {
-    return [self MR_importFromDictionary:data inContext:[NSManagedObjectContext defaultContext]];
+    return [self MR_importFromDictionary:objectData inContext:[NSManagedObjectContext defaultContext]];
 }
 
-+ (id) MR_updateFromDictionary:(NSDictionary *)data inContext:(NSManagedObjectContext *)context
++ (id) MR_updateFromDictionary:(NSDictionary *)objectData inContext:(NSManagedObjectContext *)context
 {
     //find object
     //create if not exists
@@ -221,9 +221,9 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     return nil;
 }
 
-+ (id) MR_updateFromDictionary:(NSDictionary *)data
++ (id) MR_updateFromDictionary:(NSDictionary *)objectData
 {
-    return [self MR_updateFromDictionary:data inContext:[NSManagedObjectContext defaultContext]];    
+    return [self MR_updateFromDictionary:objectData inContext:[NSManagedObjectContext defaultContext]];    
 }
 
 @end
