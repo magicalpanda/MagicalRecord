@@ -37,7 +37,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     NSString *attributeName = [attributeInfo name];
     NSString *lookupKey = [[attributeInfo userInfo] valueForKey:kMagicalRecordImportAttributeKeyMapKey] ?: attributeName;
 
-    id value = [jsonData valueForKey:lookupKey];
+    id value = [jsonData valueForKeyPath:lookupKey];
     
     if (value == nil || [value isEqual:[NSNull null]])
     {
@@ -102,7 +102,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     NSManagedObject *objectForRelationship = nil;
     if (lookupKey) 
     {
-        id lookupValue = [singleRelatedObjectData valueForKey:lookupKey];
+        id lookupValue = [singleRelatedObjectData valueForKeyPath:lookupKey];
         
         if (lookupValue) 
         {

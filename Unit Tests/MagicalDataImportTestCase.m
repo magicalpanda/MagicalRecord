@@ -10,13 +10,12 @@
 
 @implementation MagicalDataImportTestCase
 
-@synthesize testEntity;
+@synthesize testEntity = testEntity__;
 
 - (void) setUp
 {
     [NSManagedObjectModel setDefaultManagedObjectModel:[NSManagedObjectModel managedObjectModelNamed:@"TestModel.momd"]];
     [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
-//    [MagicalRecordHelpers setupCoreDataStackWithStoreNamed:@"DataImportTests.sqlite"];
     
     if ([self respondsToSelector:@selector(setupTestData)])
     {
@@ -33,14 +32,6 @@
 - (void) tearDown
 {
     [MagicalRecordHelpers cleanUp];
-//    
-//    NSURL *tempStoreURL = [NSPersistentStore MR_urlForStoreName:@"DataImportTests.sqlite"];
-//    NSError *error = nil;
-//    [[NSFileManager defaultManager] removeItemAtPath:[tempStoreURL path] error:&error];
-//    if (error)
-//    {
-//        NSLog(@"Unable to delete temporary store at %@: %@", tempStoreURL, error);
-//    }
 }
 
 - (Class) testEntityClass;

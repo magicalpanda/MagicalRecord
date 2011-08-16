@@ -9,6 +9,11 @@
     <entity name="EntityWithDiffernentClassName" representedClassName="DifferentClassNameMapping"/>
     <entity name="MappedEntity" representedClassName="MappedEntity">
         <attribute name="mappedEntityID" optional="YES" attributeType="Integer 16" defaultValueString="0"/>
+        <attribute name="nestedAttribute" optional="YES" attributeType="String">
+            <userInfo>
+                <entry key="mappedKeyName" value="attributeValue.nestedValue"/>
+            </userInfo>
+        </attribute>
         <attribute name="sampleAttribute" optional="YES" attributeType="String"/>
         <attribute name="testMappedEntityID" optional="YES" attributeType="Integer 64" defaultValueString="0">
             <userInfo>
@@ -33,6 +38,9 @@
                 <entry key="primaryRelationshipKey" value="testMappedEntityID"/>
             </userInfo>
         </relationship>
+    </entity>
+    <entity name="SingleEntityRelatedToMappedEntityWithNestedMappedAttributes" representedClassName="SingleEntityRelatedToMappedEntityWithNestedMappedAttributes">
+        <relationship name="mappedEntity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MappedEntity"/>
     </entity>
     <entity name="SingleEntityWithNoRelationships" representedClassName="SingleEntityWithNoRelationships">
         <attribute name="booleanTestAttribute" optional="YES" attributeType="Boolean"/>
@@ -66,11 +74,12 @@
         <element name="AbstractRelatedEntity" positionX="115" positionY="126" width="128" height="60"/>
         <element name="ConcreteRelatedEntity" positionX="153" positionY="375" width="171" height="60"/>
         <element name="EntityWithDiffernentClassName" positionX="-135" positionY="135" width="198" height="45"/>
-        <element name="MappedEntity" positionX="306" positionY="609" width="128" height="90"/>
-        <element name="SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey" positionX="495" positionY="756" width="351" height="60"/>
-        <element name="SingleEntityRelatedToMappedEntityUsingDefaults" positionX="493" positionY="441" width="272" height="60"/>
-        <element name="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" positionX="495" positionY="549" width="342" height="60"/>
+        <element name="MappedEntity" positionX="421" positionY="558" width="128" height="105"/>
+        <element name="SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey" positionX="657" positionY="450" width="351" height="60"/>
+        <element name="SingleEntityRelatedToMappedEntityUsingDefaults" positionX="621" positionY="333" width="272" height="60"/>
+        <element name="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" positionX="612" positionY="738" width="342" height="60"/>
         <element name="SingleEntityWithNoRelationships" positionX="-135" positionY="318" width="180" height="210"/>
         <element name="SingleRelatedEntity" positionX="333" positionY="198" width="189" height="120"/>
+        <element name="SingleEntityRelatedToMappedEntityWithNestedMappedAttributes" positionX="664" positionY="597" width="470" height="60"/>
     </elements>
 </model>
