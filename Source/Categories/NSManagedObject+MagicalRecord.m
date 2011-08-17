@@ -151,13 +151,58 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 #pragma mark -
 #pragma mark Number of Entities
 
-+ (NSNumber *) numberOfEntitiesWithContext:(NSManagedObjectContext *)context
++ (NSUInteger) countOfEntities;
+{
+    return [self countOfEntitiesWithContext:[NSManagedObjectContext defaultContext]];
+}
+
++ (NSUInteger) countOfEntitiesWithContext:(NSManagedObjectContext *)context;
 {
 	NSError *error = nil;
 	NSUInteger count = [context countForFetchRequest:[self createFetchRequestInContext:context] error:&error];
 	[MagicalRecordHelpers handleErrors:error];
 	
-	return [NSNumber numberWithUnsignedInteger:count];	
+    return count;
+}
+
++ (NSUInteger) countOfEntitiesWithPredicate:(NSPredicate *)searchFilter;
+{
+    return [self countOfEntitiesWithPredicate:searchFilter inContext:[NSManagedObjectContext defaultContext]];
+}
+
++ (NSUInteger) countOfEntitiesWithPredicate:(NSPredicate *)searchFilter inContext:(NSManagedObjectContext *)context;
+{
+	NSError *error = nil;
+	NSFetchRequest *request = [self createFetchRequestInContext:context];
+	[request setPredicate:searchFilter];
+	
+	NSUInteger count = [context countForFetchRequest:request error:&error];
+	[MagicalRecordHelpers handleErrors:error];
+ 
+    return count;
+}
+
++ (NSUInteger) countOfUniqueEntitiesByAttribute:(NSString *)attributeName;
+{
+    return [self countOfUniqueEntitiesByAttribute:attributeName withContext:[NSManagedObjectContext defaultContext]];
+}
+
++ (NSUInteger) countOfUniqueEntitiesByAttribute:(NSString *)attributeName withContext:(NSManagedObjectContext *)context;
+{
+    NSError *error = nil;
+    NSFetchRequest *request = [self createFetchRequestInContext:context];
+    [request setReturnsDistinctResults:YES];
+    [request setPropertiesToFetch:[NSArray arrayWithObject:attributeName]];
+    
+    NSUInteger count = [context countForFetchRequest:request error:&error];
+    [MagicalRecordHelpers handleErrors:error];
+    
+    return count;
+}
+
++ (NSNumber *) numberOfEntitiesWithContext:(NSManagedObjectContext *)context
+{
+	return [NSNumber numberWithUnsignedInteger:[self countOfEntitiesWithContext:context]];
 }
 
 + (NSNumber *)numberOfEntities
@@ -167,14 +212,8 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (NSNumber *) numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
 {
-	NSError *error = nil;
-	NSFetchRequest *request = [self createFetchRequestInContext:context];
-	[request setPredicate:searchTerm];
-	
-	NSUInteger count = [context countForFetchRequest:request error:&error];
-	[MagicalRecordHelpers handleErrors:error];
-	
-	return [NSNumber numberWithUnsignedInteger:count];	
+
+	return [NSNumber numberWithUnsignedInteger:[self countOfEntitiesWithPredicate:searchTerm inContext:context]];
 }
 																				  
 + (NSNumber *) numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm;
@@ -183,40 +222,14 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 									 inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
-+ (NSNumber *) numberOfUniqueEntities
++ (NSNumber *) numberOfUniqueEntitiesByAttribute:(NSString *)attributeName
 {
-    return [self numberOfUniqueEntitiesWithContext:[NSManagedObjectContext defaultContext]];
+    return [self numberOfUniqueEntitiesByAttribute:attributeName withContext:[NSManagedObjectContext defaultContext]];
 }
 
-+ (NSNumber *) numberOfUniqueEntitiesWithContext:(NSManagedObjectContext *)context;
++ (NSNumber *) numberOfUniqueEntitiesByAttribute:(NSString *)attributeName withContext:(NSManagedObjectContext *)context;
 {
-    NSError *error = nil;
-    NSFetchRequest *request = [self createFetchRequestInContext:context];
-    [request setReturnsDistinctResults:YES];
-    
-    NSUInteger count = [context countForFetchRequest:request error:&error];
-    [MagicalRecordHelpers handleErrors:error];
-    
-    return [NSNumber numberWithUnsignedInteger:count];    
-}
-
-+ (NSNumber *) numberOfUniqueEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
-{
-	NSError *error = nil;
-	NSFetchRequest *request = [self createFetchRequestInContext:context];
-	[request setPredicate:searchTerm];
-    [request setReturnsDistinctResults:YES];
-	
-	NSUInteger count = [context countForFetchRequest:request error:&error];
-	[MagicalRecordHelpers handleErrors:error];
-	
-	return [NSNumber numberWithUnsignedInteger:count];	   
-}
-
-+ (NSNumber *) numberOfUniqueEntitiesWithPredicate:(NSPredicate *)searchTerm;
-{
-    return [self numberOfEntitiesWithPredicate:searchTerm 
-                                     inContext:[NSManagedObjectContext contextForCurrentThread]];
+    return [NSNumber numberWithUnsignedInteger:[self countOfUniqueEntitiesByAttribute:attributeName withContext:context]];    
 }
 
 + (BOOL) hasAtLeastOneEntity

@@ -41,10 +41,15 @@
 + (NSNumber *) numberOfEntitiesWithContext:(NSManagedObjectContext *)context;
 + (NSNumber *) numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm;
 + (NSNumber *) numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
-+ (NSNumber *) numberOfUniqueEntities;
-+ (NSNumber *) numberOfUniqueEntitiesWithContext:(NSManagedObjectContext *)context;
-+ (NSNumber *) numberOfUniqueEntitiesWithPredicate:(NSPredicate *)searchTerm;
-+ (NSNumber *) numberOfUniqueEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
++ (NSNumber *) numberOfUniqueEntitiesByAttribute:(NSString *)attributeName;
++ (NSNumber *) numberOfUniqueEntitiesByAttribute:(NSString *)attributeName withContext:(NSManagedObjectContext *)context;
+
++ (NSUInteger) countOfEntities;
++ (NSUInteger) countOfEntitiesWithContext:(NSManagedObjectContext *)context;
++ (NSUInteger) countOfEntitiesWithPredicate:(NSPredicate *)searchFilter;
++ (NSUInteger) countOfEntitiesWithPredicate:(NSPredicate *)searchFilter inContext:(NSManagedObjectContext *)context;
++ (NSUInteger) countOfUniqueEntitiesByAttribute:(NSString *)attributeName;
++ (NSUInteger) countOfUniqueEntitiesByAttribute:(NSString *)attributeName withContext:(NSManagedObjectContext *)context;
 
 + (BOOL) hasAtLeastOneEntity;
 + (BOOL) hasAtLeastOneEntityInContext:(NSManagedObjectContext *)context;
