@@ -181,56 +181,49 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
  
     return count;
 }
-
-+ (NSUInteger) countOfUniqueEntitiesByAttribute:(NSString *)attributeName;
-{
-    return [self countOfUniqueEntitiesByAttribute:attributeName withContext:[NSManagedObjectContext defaultContext]];
-}
-
-+ (NSUInteger) countOfUniqueEntitiesByAttribute:(NSString *)attributeName withContext:(NSManagedObjectContext *)context;
-{
-    NSError *error = nil;
-    NSFetchRequest *request = [self createFetchRequestInContext:context];
-    [request setReturnsDistinctResults:YES];
-    [request setPropertiesToFetch:[NSArray arrayWithObject:attributeName]];
-    
-    NSUInteger count = [context countForFetchRequest:request error:&error];
-    [MagicalRecordHelpers handleErrors:error];
-    
-    return count;
-}
-
-+ (NSNumber *) numberOfEntitiesWithContext:(NSManagedObjectContext *)context
-{
-	return [NSNumber numberWithUnsignedInteger:[self countOfEntitiesWithContext:context]];
-}
-
-+ (NSNumber *)numberOfEntities
-{
-	return [self numberOfEntitiesWithContext:[NSManagedObjectContext contextForCurrentThread]];
-}
-
-+ (NSNumber *) numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
-{
-
-	return [NSNumber numberWithUnsignedInteger:[self countOfEntitiesWithPredicate:searchTerm inContext:context]];
-}
 																				  
 + (NSNumber *) numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm;
 {
 	return [self numberOfEntitiesWithPredicate:searchTerm 
 									 inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
-
-+ (NSNumber *) numberOfUniqueEntitiesByAttribute:(NSString *)attributeName
-{
-    return [self numberOfUniqueEntitiesByAttribute:attributeName withContext:[NSManagedObjectContext defaultContext]];
-}
-
-+ (NSNumber *) numberOfUniqueEntitiesByAttribute:(NSString *)attributeName withContext:(NSManagedObjectContext *)context;
-{
-    return [NSNumber numberWithUnsignedInteger:[self countOfUniqueEntitiesByAttribute:attributeName withContext:context]];    
-}
+//
+//+ (NSNumber *) numberOfUniqueEntitiesByAttribute:(NSString *)attributeName;
+//{
+//    return [self numberOfUniqueEntitiesByAttribute:attributeName withContext:[NSManagedObjectContext defaultContext]];
+//}
+//
+//+ (NSNumber *) numberOfUniqueEntitiesByAttribute:(NSString *)attributeName withContext:(NSManagedObjectContext *)context;
+//{
+//    NSError *error = nil;
+//    NSFetchRequest *request = [self createFetchRequestInContext:context];
+//    [request setReturnsDistinctResults:YES];
+//    [request setPropertiesToFetch:[NSArray arrayWithObject:attributeName]];
+//    
+//    NSUInteger count = [context countForFetchRequest:request error:&error];
+//    [MagicalRecordHelpers handleErrors:error];
+//    
+//    return [NSNumber numberWithUnsignedInteger:count];    
+//}
+//
+//+ (NSNumber *) numberOfUniqueEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
+//{
+//	NSError *error = nil;
+//	NSFetchRequest *request = [self createFetchRequestInContext:context];
+//	[request setPredicate:searchTerm];
+//    [request setReturnsDistinctResults:YES];
+//	
+//	NSUInteger count = [context countForFetchRequest:request error:&error];
+//	[MagicalRecordHelpers handleErrors:error];
+//	
+//	return [NSNumber numberWithUnsignedInteger:count];	   
+//}
+//
+//+ (NSNumber *) numberOfUniqueEntitiesWithPredicate:(NSPredicate *)searchTerm;
+//{
+//    return [self numberOfEntitiesWithPredicate:searchTerm 
+//                                     inContext:[NSManagedObjectContext contextForCurrentThread]];
+//}
 
 + (BOOL) hasAtLeastOneEntity
 {

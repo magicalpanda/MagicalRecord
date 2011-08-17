@@ -8,16 +8,13 @@
 
 #import "MappedEntity.h"
 #import "SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.h"
+#import "MagicalDataImportTestCase.h"
 
-@interface ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests : GHTestCase
-
-@property (nonatomic, retain) SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey *testEntity;
+@interface ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests : MagicalDataImportTestCase
 
 @end
 
 @implementation ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests
-
-@synthesize testEntity;
 
 - (void) setupTestData
 {
@@ -30,29 +27,18 @@
     [context save];
 }
 
-- (void) setUp
+- (Class) testEntityClass
 {
-    [NSManagedObjectModel setDefaultManagedObjectModel:[NSManagedObjectModel managedObjectModelNamed:@"TestModel.momd"]];
-    [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
-    
-    [self setupTestData];
-    
-    id singleEntity = [self dataFromJSONFixture];
-    
-    self.testEntity = [SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_importFromDictionary:singleEntity];
-}
-
-- (void) tearDown
-{
-    [MagicalRecordHelpers cleanUp];
+    return [SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey class];
 }
 
 - (void) testImportMappedEntityRelatedViaToOneRelationship
 {
-    id testRelatedEntity = testEntity.mappedEntity;
+    SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey *entity = (SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey *)self.testEntity;
+    id testRelatedEntity = entity.mappedEntity;
     
     //verify mapping in relationship description userinfo
-    NSEntityDescription *mappedEntity = [testEntity entity];
+    NSEntityDescription *mappedEntity = [entity entity];
     NSRelationshipDescription *testRelationship = [[mappedEntity propertiesByName] valueForKey:@"mappedEntity"];
     assertThat([[testRelationship userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey], is(equalTo(@"someRandomAttributeName")));
     
@@ -63,10 +49,11 @@
 
 - (void) testImportMappedEntityUsingPrimaryRelationshipKey
 {
-    id testRelatedEntity = testEntity.mappedEntity;
+    SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey *entity = (SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey *)self.testEntity;
+    id testRelatedEntity = entity.mappedEntity;
     
     //verify mapping in relationship description userinfo
-    NSEntityDescription *mappedEntity = [testEntity entity];
+    NSEntityDescription *mappedEntity = [entity entity];
     NSRelationshipDescription *testRelationship = [[mappedEntity propertiesByName] valueForKey:@"mappedEntity"];
     assertThat([[testRelationship userInfo] valueForKey:kMagicalRecordImportRelationshipPrimaryKey], is(equalTo(@"testMappedEntityID")));
     

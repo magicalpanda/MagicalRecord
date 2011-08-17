@@ -13,10 +13,23 @@
 
 - (void) setUpClass
 {
-    [NSManagedObjectModel MR_setDefaultManagedObjectModel:[NSManagedObjectModel MR_managedObjectModelNamed:@"TestModel.momd"]];
+    [NSManagedObjectModel MR_setDefaultManagedObjectModel:[NSManagedObjectModel MR_managedObjectModelNamed:@"TestModel.momd"]];   
+}
+
+- (void) setUp
+{
     [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
 }
 
+- (void) tearDown
+{
+    [MagicalRecordHelpers cleanUp];
+}
+
+-(BOOL)shouldRunOnMainThread
+{
+    return YES;
+}
 //Test Request Creation
 
 - (void) testCreateFetchRequestForEntity
@@ -81,7 +94,7 @@
 
 - (void) createSampleData:(NSInteger)numberOfTestEntitiesToCreate
 {
-    for (NSInteger i = 1; i < numberOfTestEntitiesToCreate; i++) 
+    for (NSInteger i = 0; i < numberOfTestEntitiesToCreate; i++) 
     {
         SingleRelatedEntity *testEntity = [SingleRelatedEntity createEntity];
         testEntity.mappedStringAttribute = [NSString stringWithFormat:@"%d", i / 5];
@@ -98,29 +111,14 @@
     assertThat([SingleRelatedEntity numberOfEntities], is(equalToInteger(numberOfTestEntitiesToCreate)));
 }
 
-- (void) testCanSearchForNumberOfAllUniqueEntities
+- (void) testCanSearchForNumberOfEntitiesWithPredicate
 {
     NSInteger numberOfTestEntitiesToCreate = 20;
     [self createSampleData:numberOfTestEntitiesToCreate];
 
-    assertThat([SingleRelatedEntity numberOfUniqueEntities], is(equalToInteger(4)));
-}
+    NSPredicate *searchFilter = [NSPredicate predicateWithFormat:@"mappedStringAttribute = '1'"];
+    assertThat([SingleRelatedEntity numberOfEntitiesWithPredicate:searchFilter], is(equalToInteger(5)));
 
-- (void) testCanSearchForNumberOfEntitesWithPredicate
-{
-    NSInteger numberOfTestEntitiesToCreate = 20;
-    [self createSampleData:numberOfTestEntitiesToCreate];
-    
-    assertThat([SingleRelatedEntity numberOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"mappedStringAttribute = 0"]], is(equalToInteger(1)));
 }
-
-- (void) testCanSearchForNumberOfUniqueEntitiesWithPredicate
-{
-    NSInteger numberOfTestEntitiesToCreate = 20;
-    [self createSampleData:numberOfTestEntitiesToCreate];
-    
-    assertThat([SingleRelatedEntity numberOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"mappedStringAttribute = 0"]], is(equalToInteger(4)));
-}
-
 
 @end

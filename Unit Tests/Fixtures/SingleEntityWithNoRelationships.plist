@@ -15,7 +15,7 @@
 	<key>doubleTestAttribute</key>
 	<real>124.3</real>
 	<key>floatTestAttribute</key>
-	<integer>100000000000</integer>
+	<integer>10000000000</integer>
 	<key>booleanTestAttribute</key>
 	<false/>
 	<key>dateTestAttribute</key>

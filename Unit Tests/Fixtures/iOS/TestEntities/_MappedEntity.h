@@ -9,6 +9,7 @@
 
 
 
+
 @interface MappedEntityID : NSManagedObjectID {}
 @end
 
@@ -29,6 +30,14 @@
 - (void)setMappedEntityIDValue:(short)value_;
 
 //- (BOOL)validateMappedEntityID:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, retain) NSString *nestedAttribute;
+
+
+//- (BOOL)validateNestedAttribute:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -68,6 +77,12 @@
 
 - (short)primitiveMappedEntityIDValue;
 - (void)setPrimitiveMappedEntityIDValue:(short)value_;
+
+
+
+
+- (NSString*)primitiveNestedAttribute;
+- (void)setPrimitiveNestedAttribute:(NSString*)value;
 
 
 

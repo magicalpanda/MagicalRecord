@@ -70,6 +70,13 @@
 
 
 
+@dynamic nestedAttribute;
+
+
+
+
+
+
 @dynamic sampleAttribute;
 
 

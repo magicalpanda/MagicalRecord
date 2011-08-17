@@ -66,6 +66,15 @@
 		C77E5FBB13D0D2AE00298F87 /* FixtureHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FBA13D0D2AE00298F87 /* FixtureHelpers.m */; };
 		C784349013F0FEE000463CEE /* _MappedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C784348C13F0FEE000463CEE /* _MappedEntity.m */; };
 		C784349213F0FEE000463CEE /* MappedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C784348E13F0FEE000463CEE /* MappedEntity.m */; };
+		C7913B9513FAEDE9007E09CC /* _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m in Sources */ = {isa = PBXBuildFile; fileRef = C7913B9413FAEDE9007E09CC /* _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m */; };
+		C7913B9913FAEDF8007E09CC /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m in Sources */ = {isa = PBXBuildFile; fileRef = C7913B9813FAEDF8007E09CC /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m */; };
+		C7913B9A13FAEF0F007E09CC /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json in Resources */ = {isa = PBXBuildFile; fileRef = C7B7379913FAE5D500EE4940 /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json */; };
+		C7913B9D13FAFC14007E09CC /* MagicalDataImportTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C7913B9C13FAFC13007E09CC /* MagicalDataImportTestCase.m */; };
+		C7913BA613FB1D17007E09CC /* _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = C7913BA513FB1D17007E09CC /* _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m */; };
+		C7913BA913FB1D2A007E09CC /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = C7913BA813FB1D2A007E09CC /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m */; };
+		C7913BAD13FB1DF9007E09CC /* ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7913BAC13FB1DF9007E09CC /* ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m */; };
+		C7913BAF13FB1E11007E09CC /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json in Resources */ = {isa = PBXBuildFile; fileRef = C7913BAE13FB1E11007E09CC /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json */; };
+		C7B7379E13FAE6D000EE4940 /* ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B7379D13FAE6D000EE4940 /* ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests.m */; };
 		C7BD886813DBF88F00274567 /* _AbstractRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD885313DBF88F00274567 /* _AbstractRelatedEntity.m */; };
 		C7BD886913DBF88F00274567 /* _ConcreteRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD885513DBF88F00274567 /* _ConcreteRelatedEntity.m */; };
 		C7BD886A13DBF88F00274567 /* _DifferentClassNameMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD885713DBF88F00274567 /* _DifferentClassNameMapping.m */; };
@@ -202,6 +211,20 @@
 		C784348C13F0FEE000463CEE /* _MappedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MappedEntity.m; sourceTree = "<group>"; };
 		C784348D13F0FEE000463CEE /* MappedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MappedEntity.h; sourceTree = "<group>"; };
 		C784348E13F0FEE000463CEE /* MappedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MappedEntity.m; sourceTree = "<group>"; };
+		C7913B9313FAEDE9007E09CC /* _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.h; sourceTree = "<group>"; };
+		C7913B9413FAEDE9007E09CC /* _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m; sourceTree = "<group>"; };
+		C7913B9713FAEDF8007E09CC /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.h; sourceTree = "<group>"; };
+		C7913B9813FAEDF8007E09CC /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m; sourceTree = "<group>"; };
+		C7913B9B13FAFC13007E09CC /* MagicalDataImportTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MagicalDataImportTestCase.h; path = "Unit Tests/MagicalDataImportTestCase.h"; sourceTree = "<group>"; };
+		C7913B9C13FAFC13007E09CC /* MagicalDataImportTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MagicalDataImportTestCase.m; path = "Unit Tests/MagicalDataImportTestCase.m"; sourceTree = "<group>"; };
+		C7913BA413FB1D17007E09CC /* _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.h; sourceTree = "<group>"; };
+		C7913BA513FB1D17007E09CC /* _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m; sourceTree = "<group>"; };
+		C7913BA713FB1D2A007E09CC /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.h; sourceTree = "<group>"; };
+		C7913BA813FB1D2A007E09CC /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m; sourceTree = "<group>"; };
+		C7913BAC13FB1DF9007E09CC /* ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m; path = "Unit Tests/ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m"; sourceTree = "<group>"; };
+		C7913BAE13FB1E11007E09CC /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json; path = "Unit Tests/Fixtures/SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json"; sourceTree = "<group>"; };
+		C7B7379913FAE5D500EE4940 /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json; path = "Unit Tests/Fixtures/SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json"; sourceTree = "<group>"; };
+		C7B7379D13FAE6D000EE4940 /* ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests.m; path = "Unit Tests/ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests.m"; sourceTree = "<group>"; };
 		C7BD885213DBF88F00274567 /* _AbstractRelatedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _AbstractRelatedEntity.h; sourceTree = "<group>"; };
 		C7BD885313DBF88F00274567 /* _AbstractRelatedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _AbstractRelatedEntity.m; sourceTree = "<group>"; };
 		C7BD885413DBF88F00274567 /* _ConcreteRelatedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ConcreteRelatedEntity.h; sourceTree = "<group>"; };
@@ -481,10 +504,14 @@
 		C76AF7F513DBC6E900CE2E05 /* Data Import Tests */ = {
 			isa = PBXGroup;
 			children = (
+				C7913B9B13FAFC13007E09CC /* MagicalDataImportTestCase.h */,
+				C7913B9C13FAFC13007E09CC /* MagicalDataImportTestCase.m */,
 				C77E5FB713D0D25100298F87 /* ImportSingleEntityWithNoRelationshipsTests.m */,
 				C76AF7FA13DBEB5500CE2E05 /* ImportSingleRelatedEntityTests.m */,
 				C7C9A37513F44A3C002C5B0C /* ImportSingleEntityRelatedToMappedEntityUsingDefaultsTests.m */,
 				C7C9A38C13F45438002C5B0C /* ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests.m */,
+				C7B7379D13FAE6D000EE4940 /* ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests.m */,
+				C7913BAC13FB1DF9007E09CC /* ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m */,
 			);
 			name = "Data Import Tests";
 			sourceTree = "<group>";
@@ -538,8 +565,37 @@
 				C76AF82913DBEE5A00CE2E05 /* SingleRelatedEntity.json */,
 				C7C9A37C13F44B08002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.json */,
 				C7C9A37E13F44B29002C5B0C /* SingleEntityRelatedToMappedEntityUsingDefaults.json */,
+				C7B7379913FAE5D500EE4940 /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json */,
+				C7913BAE13FB1E11007E09CC /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json */,
 			);
 			name = "Sample Data Files";
+			sourceTree = "<group>";
+		};
+		C7913BAA13FB1D36007E09CC /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				C7BD887813DBFA6200274567 /* _AbstractRelatedEntity.h */,
+				C7BD887913DBFA6200274567 /* _AbstractRelatedEntity.m */,
+				C7BD887A13DBFA6200274567 /* _ConcreteRelatedEntity.h */,
+				C7BD887B13DBFA6200274567 /* _ConcreteRelatedEntity.m */,
+				C7BD887C13DBFA6200274567 /* _DifferentClassNameMapping.h */,
+				C7BD887D13DBFA6200274567 /* _DifferentClassNameMapping.m */,
+				C7BD887E13DBFA6200274567 /* _SingleEntityWithNoRelationships.h */,
+				C7BD887F13DBFA6200274567 /* _SingleEntityWithNoRelationships.m */,
+				C7913B9313FAEDE9007E09CC /* _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.h */,
+				C7913B9413FAEDE9007E09CC /* _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m */,
+				C7BD888013DBFA6200274567 /* _SingleRelatedEntity.h */,
+				C7BD888113DBFA6200274567 /* _SingleRelatedEntity.m */,
+				C784348B13F0FEE000463CEE /* _MappedEntity.h */,
+				C784348C13F0FEE000463CEE /* _MappedEntity.m */,
+				C7C9A38013F45240002C5B0C /* _SingleEntityRelatedToMappedEntityUsingDefaults.h */,
+				C7C9A38113F45240002C5B0C /* _SingleEntityRelatedToMappedEntityUsingDefaults.m */,
+				C7C9A38213F45240002C5B0C /* _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.h */,
+				C7C9A38313F45240002C5B0C /* _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m */,
+				C7913BA413FB1D17007E09CC /* _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.h */,
+				C7913BA513FB1D17007E09CC /* _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m */,
+			);
+			name = Generated;
 			sourceTree = "<group>";
 		};
 		C7BD884F13DBF7FC00274567 /* Mac */ = {
@@ -591,22 +647,7 @@
 		C7BD887713DBFA6200274567 /* TestEntities */ = {
 			isa = PBXGroup;
 			children = (
-				C7BD887813DBFA6200274567 /* _AbstractRelatedEntity.h */,
-				C7BD887913DBFA6200274567 /* _AbstractRelatedEntity.m */,
-				C7BD887A13DBFA6200274567 /* _ConcreteRelatedEntity.h */,
-				C7BD887B13DBFA6200274567 /* _ConcreteRelatedEntity.m */,
-				C7BD887C13DBFA6200274567 /* _DifferentClassNameMapping.h */,
-				C7BD887D13DBFA6200274567 /* _DifferentClassNameMapping.m */,
-				C7BD887E13DBFA6200274567 /* _SingleEntityWithNoRelationships.h */,
-				C7BD887F13DBFA6200274567 /* _SingleEntityWithNoRelationships.m */,
-				C7BD888013DBFA6200274567 /* _SingleRelatedEntity.h */,
-				C7BD888113DBFA6200274567 /* _SingleRelatedEntity.m */,
-				C784348B13F0FEE000463CEE /* _MappedEntity.h */,
-				C784348C13F0FEE000463CEE /* _MappedEntity.m */,
-				C7C9A38013F45240002C5B0C /* _SingleEntityRelatedToMappedEntityUsingDefaults.h */,
-				C7C9A38113F45240002C5B0C /* _SingleEntityRelatedToMappedEntityUsingDefaults.m */,
-				C7C9A38213F45240002C5B0C /* _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.h */,
-				C7C9A38313F45240002C5B0C /* _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m */,
+				C7913BAA13FB1D36007E09CC /* Generated */,
 				C784348D13F0FEE000463CEE /* MappedEntity.h */,
 				C784348E13F0FEE000463CEE /* MappedEntity.m */,
 				C7BD888213DBFA6200274567 /* AbstractRelatedEntity.h */,
@@ -623,6 +664,10 @@
 				C7C9A38713F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingDefaults.m */,
 				C7C9A38813F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.h */,
 				C7C9A38913F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m */,
+				C7913B9713FAEDF8007E09CC /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.h */,
+				C7913B9813FAEDF8007E09CC /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m */,
+				C7913BA713FB1D2A007E09CC /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.h */,
+				C7913BA813FB1D2A007E09CC /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m */,
 			);
 			name = TestEntities;
 			path = "Unit Tests/Fixtures/iOS/TestEntities";
@@ -728,6 +773,8 @@
 				C76AF82B13DBEE5A00CE2E05 /* SingleRelatedEntity.json in Resources */,
 				C7C9A37D13F44B08002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.json in Resources */,
 				C7C9A37F13F44B29002C5B0C /* SingleEntityRelatedToMappedEntityUsingDefaults.json in Resources */,
+				C7913B9A13FAEF0F007E09CC /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json in Resources */,
+				C7913BAF13FB1E11007E09CC /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -843,6 +890,13 @@
 				C7C9A38A13F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingDefaults.m in Sources */,
 				C7C9A38B13F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m in Sources */,
 				C7C9A38D13F45438002C5B0C /* ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests.m in Sources */,
+				C7B7379E13FAE6D000EE4940 /* ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests.m in Sources */,
+				C7913B9513FAEDE9007E09CC /* _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m in Sources */,
+				C7913B9913FAEDF8007E09CC /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m in Sources */,
+				C7913B9D13FAFC14007E09CC /* MagicalDataImportTestCase.m in Sources */,
+				C7913BA613FB1D17007E09CC /* _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m in Sources */,
+				C7913BA913FB1D2A007E09CC /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m in Sources */,
+				C7913BAD13FB1DF9007E09CC /* ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -984,7 +1038,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1035,7 +1089,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (

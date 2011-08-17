@@ -8,15 +8,18 @@
 
 #import "MappedEntity.h"
 #import "SingleEntityRelatedToMappedEntityUsingDefaults.h"
+#import "MagicalDataImportTestCase.h"
 
-@interface ImportSingleEntityRelatedToMappedEntityUsingDefaultsTests : GHTestCase
+@interface ImportSingleEntityRelatedToMappedEntityUsingDefaultsTests : MagicalDataImportTestCase
 
-@property (nonatomic, retain) SingleEntityRelatedToMappedEntityUsingDefaults *testEntity;
 @end
 
 @implementation ImportSingleEntityRelatedToMappedEntityUsingDefaultsTests
 
-@synthesize testEntity;
+-(Class) testEntityClass
+{
+    return [SingleEntityRelatedToMappedEntityUsingDefaults class];
+}
 
 - (void) setupTestData
 {
@@ -29,33 +32,15 @@
     [context save];
 }
 
-- (void) setUp
-{
-    [NSManagedObjectModel setDefaultManagedObjectModel:[NSManagedObjectModel managedObjectModelNamed:@"TestModel.momd"]];
-    [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
-    
-    [self setupTestData];
-    
-    id singleEntity = [self dataFromJSONFixture];
-    
-    self.testEntity = [SingleEntityRelatedToMappedEntityUsingDefaults MR_importFromDictionary:singleEntity];
-    
-    [[NSManagedObjectContext defaultContext] save];
-}
-
-- (void) tearDown
-{
-    [MagicalRecordHelpers cleanUp];
-}
-
 - (void) testImportMappedEntityViaToOneRelationship
 {
-    id testRelatedEntity = testEntity.mappedEntity;
-    
-    assertThat([MappedEntity numberOfEntities], is(equalToInteger(1)));
+    SingleEntityRelatedToMappedEntityUsingDefaults *entity = (SingleEntityRelatedToMappedEntityUsingDefaults *)self.testEntity;
+    id testRelatedEntity = entity.mappedEntity;
     
     assertThat(testRelatedEntity, is(notNilValue()));
     assertThat([testRelatedEntity sampleAttribute], containsString(@"sample json file"));
+    
+    assertThat([MappedEntity numberOfEntities], is(equalToInteger(1)));
 }
 
 @end
