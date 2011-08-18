@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="858" systemVersion="11A511" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="858" systemVersion="11B26" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AbstractRelatedEntity" representedClassName="AbstractRelatedEntity" isAbstract="YES">
         <attribute name="sampleBaseAttribute" optional="YES" attributeType="String"/>
     </entity>
@@ -42,6 +42,22 @@
     <entity name="SingleEntityRelatedToMappedEntityWithNestedMappedAttributes" representedClassName="SingleEntityRelatedToMappedEntityWithNestedMappedAttributes">
         <relationship name="mappedEntity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MappedEntity"/>
     </entity>
+    <entity name="SingleEntityRelatedToMappedEntityWithSecondaryMappings" representedClassName="SingleEntityRelatedToMappedEntityWithSecondaryMappings">
+        <attribute name="secondaryMappedAttribute" optional="YES" attributeType="String">
+            <userInfo>
+                <entry key="mappedKeyName" value="no_in_use"/>
+                <entry key="mappedKeyName.1" value="getting_warmer"/>
+                <entry key="mappedKeyName.2" value="actualMappedKey"/>
+            </userInfo>
+        </attribute>
+        <relationship name="mappedRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MappedEntity">
+            <userInfo>
+                <entry key="mappedKeyName" value="not_in_use"/>
+                <entry key="mappedKeyName.1" value="almost_there"/>
+                <entry key="mappedKeyName.2" value="actualRelatedObject"/>
+            </userInfo>
+        </relationship>
+    </entity>
     <entity name="SingleEntityWithNoRelationships" representedClassName="SingleEntityWithNoRelationships">
         <attribute name="booleanTestAttribute" optional="YES" attributeType="Boolean"/>
         <attribute name="colorTestAttribute" optional="YES" attributeType="Transformable">
@@ -50,6 +66,11 @@
             </userInfo>
         </attribute>
         <attribute name="dateTestAttribute" optional="YES" attributeType="Date"/>
+        <attribute name="dateWithCustomFormat" optional="YES" attributeType="Date">
+            <userInfo>
+                <entry key="dateFormat" value="M/d/yyyy H-mm-ss a"/>
+            </userInfo>
+        </attribute>
         <attribute name="decimalTestAttribute" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
         <attribute name="doubleTestAttribute" optional="YES" attributeType="Double" defaultValueString="0.0"/>
         <attribute name="floatTestAttribute" optional="YES" attributeType="Float" defaultValueString="0"/>
@@ -77,9 +98,10 @@
         <element name="MappedEntity" positionX="421" positionY="558" width="128" height="105"/>
         <element name="SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey" positionX="657" positionY="450" width="351" height="60"/>
         <element name="SingleEntityRelatedToMappedEntityUsingDefaults" positionX="621" positionY="333" width="272" height="60"/>
-        <element name="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" positionX="612" positionY="738" width="342" height="60"/>
-        <element name="SingleEntityWithNoRelationships" positionX="-135" positionY="318" width="180" height="210"/>
-        <element name="SingleRelatedEntity" positionX="333" positionY="198" width="189" height="120"/>
+        <element name="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" positionX="603" positionY="702" width="342" height="60"/>
         <element name="SingleEntityRelatedToMappedEntityWithNestedMappedAttributes" positionX="664" positionY="597" width="470" height="60"/>
+        <element name="SingleEntityWithNoRelationships" positionX="-135" positionY="327" width="180" height="225"/>
+        <element name="SingleRelatedEntity" positionX="333" positionY="198" width="189" height="120"/>
+        <element name="SingleEntityRelatedToMappedEntityWithSecondaryMappings" positionX="-63" positionY="738" width="344" height="75"/>
     </elements>
 </model>

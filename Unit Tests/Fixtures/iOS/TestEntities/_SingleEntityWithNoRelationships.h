@@ -17,6 +17,7 @@
 
 
 
+
 @interface SingleEntityWithNoRelationshipsID : NSManagedObjectID {}
 @end
 
@@ -53,6 +54,14 @@
 
 
 //- (BOOL)validateDateTestAttribute:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, retain) NSDate *dateWithCustomFormat;
+
+
+//- (BOOL)validateDateWithCustomFormat:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -168,6 +177,12 @@
 
 - (NSDate*)primitiveDateTestAttribute;
 - (void)setPrimitiveDateTestAttribute:(NSDate*)value;
+
+
+
+
+- (NSDate*)primitiveDateWithCustomFormat;
+- (void)setPrimitiveDateWithCustomFormat:(NSDate*)value;
 
 
 

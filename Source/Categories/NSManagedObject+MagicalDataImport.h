@@ -8,6 +8,7 @@
 
 #import <CoreData/CoreData.h>
 
+extern NSString * const kMagicalRecordImportCustomDateFormatKey;
 extern NSString * const kMagicalRecordImportDefaultDateFormatString;
 extern NSString * const kMagicalRecordImportAttributeKeyMapKey;
 extern NSString * const kMagicalRecordImportAttributeValueClassNameKey;
@@ -22,6 +23,9 @@ extern NSString * const kMagicalRecordImportRelationshipTypeKey;
 
 + (id) MR_importFromDictionary:(NSDictionary *)data;
 + (id) MR_importFromDictionary:(NSDictionary *)data inContext:(NSManagedObjectContext *)context;
+
++ (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData;
++ (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context;
 
 @end
 

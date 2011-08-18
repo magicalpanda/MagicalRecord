@@ -64,7 +64,8 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
 
 //Helper Functions
-NSDate * dateFromString(NSString *value);
+NSDate * adjustDateForDST(NSDate *date);
+NSDate * dateFromString(NSString *value, NSString *format);
 NSString * attributeNameFromString(NSString *value);
 NSString * primaryKeyNameFromString(NSString *value);
 

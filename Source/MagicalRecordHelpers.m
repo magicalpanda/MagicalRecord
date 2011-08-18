@@ -210,12 +210,24 @@ NSString * primaryKeyNameFromString(NSString *value)
     return [firstCharacter stringByAppendingString:[value substringFromIndex:1]];
 }
 
-NSDate * dateFromString(NSString *value)
+NSDate * adjustDateForDST(NSDate *date)
 {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:kMagicalRecordImportDefaultDateFormatString];
+    NSTimeInterval dstOffset = [[NSTimeZone localTimeZone] daylightSavingTimeOffsetForDate:date];
+    NSDate *actualDate = [date dateByAddingTimeInterval:dstOffset];
+
+    return actualDate;
+}
+
+NSDate * dateFromString(NSString *value, NSString *format)
+{
+    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    [formatter setLocale:[NSLocale currentLocale]];
+    [formatter setDateFormat:format];
     
-    return [formatter dateFromString:value];
+    NSDate *parsedDate = [formatter dateFromString:value];
+    
+    return adjustDateForDST(parsedDate);
 }
 
 NSInteger* newColorComponentsFromString(NSString *serializedColor);

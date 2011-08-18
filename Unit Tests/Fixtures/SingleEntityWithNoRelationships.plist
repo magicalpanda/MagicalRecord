@@ -24,5 +24,7 @@
 	<string>rgba(64,128,225,1)</string>
 	<key>mappedAttributeWithStringValue</key>
 	<string>Mapped value</string>
+	<key>dateWithCustomFormat</key>
+	<string>8/5/2011 1-56-04 AM</string>
 </dict>
 </plist>

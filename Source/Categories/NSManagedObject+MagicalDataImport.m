@@ -8,7 +8,8 @@
 
 #import "CoreData+MagicalRecord.h"
 
-NSString * const kMagicalRecordImportDefaultDateFormatString = @"YYYY-MM-dd'T'HH:mm:ss'Z'";
+NSString * const kMagicalRecordImportCustomDateFormatKey = @"dateFormat";
+NSString * const kMagicalRecordImportDefaultDateFormatString = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
 NSString * const kMagicalRecordImportAttributeKeyMapKey = @"mappedKeyName";
 NSString * const kMagicalRecordImportAttributeValueClassNameKey = @"attributeValueClassName";
 
@@ -41,7 +42,20 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     
     if (value == nil || [value isEqual:[NSNull null]])
     {
-        return nil;
+        for (int i=1; i < 10 && value == nil; i++)
+        {
+            NSString *userInfoKey = [NSString stringWithFormat:@"%@.%d", kMagicalRecordImportAttributeKeyMapKey, i];
+            NSString *dataLookup = [[attributeInfo userInfo] valueForKey:userInfoKey];
+            if (dataLookup == nil) 
+            {
+                return nil;
+            }
+            value = [jsonData valueForKeyPath:dataLookup];
+        }
+        if (value == nil)
+        {
+            return nil;
+        }
     }
     
     NSAttributeType attributeType = [attributeInfo attributeType];
@@ -57,7 +71,15 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     {
         if (attributeType == NSDateAttributeType)
         {
-            value = dateFromString([value description]);
+            if (![value isKindOfClass:[NSDate class]]) 
+            {
+                NSString *dateFormat = [[attributeInfo userInfo] valueForKey:kMagicalRecordImportCustomDateFormatKey];
+                value = dateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
+            }
+            else
+            {
+                value = adjustDateForDST(value);
+            }
         }
     }
     
@@ -224,6 +246,37 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 + (id) MR_updateFromDictionary:(NSDictionary *)objectData
 {
     return [self MR_updateFromDictionary:objectData inContext:[NSManagedObjectContext defaultContext]];    
+}
+
+
++ (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData
+{
+    return [self MR_importFromArray:listOfObjectData inContext:[NSManagedObjectContext context]];
+}
+
++ (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context
+{
+    NSMutableArray *objectIDs = [NSMutableArray array];
+    [MRCoreDataAction saveDataWithBlock:^(NSManagedObjectContext *localContext) 
+     {    
+         [listOfObjectData enumerateObjectsWithOptions:0 usingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
+          {
+              NSDictionary *objectData = (NSDictionary *)obj;
+              
+              NSManagedObject *dataObject = [self MR_importFromDictionary:objectData inContext:localContext];
+              
+              if ([context obtainPermanentIDsForObjects:[NSArray arrayWithObject:dataObject] error:nil])
+              {
+                  [objectIDs addObject:[dataObject objectID]];
+              }
+          }];
+         
+         //        NSError *error = nil;
+         //        [context obtainPermanentIDsForObjects:objectIDs error:&error];
+         //        NSLog(@"Error: %@", error);
+     }];
+    
+    return [self findAllWithPredicate:[NSPredicate predicateWithFormat:@"self IN %@", objectIDs] inContext:context];
 }
 
 @end

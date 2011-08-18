@@ -62,4 +62,5 @@
     assertThat([testRelatedEntity sampleAttribute], containsString(@"sample json file"));
 }
 
+
 @end

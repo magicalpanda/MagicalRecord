@@ -100,6 +100,13 @@
 
 
 
+@dynamic dateWithCustomFormat;
+
+
+
+
+
+
 @dynamic decimalTestAttribute;
 
 
