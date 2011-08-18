@@ -160,7 +160,7 @@ NSString * attributeNameFromString(NSString *value)
 
 NSDate * dateFromString(NSString *value)
 {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
     [formatter setDateFormat:kMagicalRecordImportDefaultDateFormatString];
     
     return [formatter dateFromString:value];
