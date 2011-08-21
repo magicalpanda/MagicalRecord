@@ -22,6 +22,8 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
 + (void) cleanUp;
 
++ (void) defaultErrorHandler:(NSError *)error;
+
 + (void) handleErrors:(NSError *)error;
 - (void) handleErrors:(NSError *)error;
 
