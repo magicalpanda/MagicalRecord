@@ -162,8 +162,9 @@ NSDate * dateFromString(NSString *value)
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:kMagicalRecordImportDefaultDateFormatString];
-    
-    return [formatter dateFromString:value];
+    NSDate * date = [formatter dateFromString:value];
+    [formatter release];
+    return date;
 }
 
 NSInteger* newColorComponentsFromString(NSString *serializedColor);
