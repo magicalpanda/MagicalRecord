@@ -22,8 +22,8 @@
 {
     [NSManagedObjectModel MR_setDefaultManagedObjectModel:[NSManagedObjectModel MR_managedObjectModelNamed:@"TestModel.momd"]];
     [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
-    
-    id singleEntity = [FixtureHelpers dataFromPListFixtureNamed:@"SingleEntityWithNoRelationships"];
+
+    id singleEntity = [self dataFromJSONFixture];
     
     testEntity = [SingleEntityWithNoRelationships MR_importFromDictionary:singleEntity];
 }
@@ -81,6 +81,16 @@
 - (void) testImportMappedStringAttributeToEntity
 {
     assertThat(testEntity.mappedStringAttribute, is(equalTo(@"Mapped value")));
+}
+
+- (void) testImportStringAttributeWithNullValue
+{
+    assertThat(testEntity.nullTestAttribute, is(nilValue()));
+}
+
+- (void) testImportAttributeNotInJsonData
+{
+    assertThat(testEntity.notInJsonAttribute, containsString(@"Core Data Model"));
 }
 
 #if TARGET_OS_IPHONE 

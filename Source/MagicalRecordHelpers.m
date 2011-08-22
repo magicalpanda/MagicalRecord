@@ -207,7 +207,7 @@ NSString * attributeNameFromString(NSString *value)
 NSString * primaryKeyNameFromString(NSString *value)
 {
     NSString *firstCharacter = [[value substringToIndex:1] lowercaseString];
-    return [firstCharacter stringByAppendingString:[value substringFromIndex:1]];
+    return [firstCharacter stringByAppendingFormat:@"%@ID", [value substringFromIndex:1]];
 }
 
 NSDate * adjustDateForDST(NSDate *date)
@@ -227,7 +227,7 @@ NSDate * dateFromString(NSString *value, NSString *format)
     
     NSDate *parsedDate = [formatter dateFromString:value];
     
-    return adjustDateForDST(parsedDate);
+    return parsedDate;
 }
 
 NSInteger* newColorComponentsFromString(NSString *serializedColor);

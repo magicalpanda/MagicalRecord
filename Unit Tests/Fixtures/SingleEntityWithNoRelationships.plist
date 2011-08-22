@@ -26,5 +26,7 @@
 	<string>Mapped value</string>
 	<key>dateWithCustomFormat</key>
 	<string>8/5/2011 1-56-04 AM</string>
+	<key>nullTestAttribte</key>
+	<string></string>
 </dict>
 </plist>

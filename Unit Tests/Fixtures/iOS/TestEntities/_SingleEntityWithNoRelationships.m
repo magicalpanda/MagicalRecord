@@ -53,6 +53,10 @@
 		NSSet *affectingKey = [NSSet setWithObject:@"int64TestAttribute"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 	}
+	if ([key isEqualToString:@"nullTestAttributeValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"nullTestAttribute"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
 
 	return keyPaths;
 }
@@ -246,6 +250,39 @@
 
 @dynamic mappedStringAttribute;
 
+
+
+
+
+
+@dynamic notInJsonAttribute;
+
+
+
+
+
+
+@dynamic nullTestAttribute;
+
+
+
+- (long long)nullTestAttributeValue {
+	NSNumber *result = [self nullTestAttribute];
+	return [result longLongValue];
+}
+
+- (void)setNullTestAttributeValue:(long long)value_ {
+	[self setNullTestAttribute:[NSNumber numberWithLongLong:value_]];
+}
+
+- (long long)primitiveNullTestAttributeValue {
+	NSNumber *result = [self primitiveNullTestAttribute];
+	return [result longLongValue];
+}
+
+- (void)setPrimitiveNullTestAttributeValue:(long long)value_ {
+	[self setPrimitiveNullTestAttribute:[NSNumber numberWithLongLong:value_]];
+}
 
 
 

@@ -110,6 +110,7 @@
 		C7C9A38A13F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C9A38713F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingDefaults.m */; };
 		C7C9A38B13F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C9A38913F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m */; };
 		C7C9A38D13F45438002C5B0C /* ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C9A38C13F45438002C5B0C /* ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests.m */; };
+		C7E736DF1402FE64005657C9 /* SingleEntityWithNoRelationships.json in Resources */ = {isa = PBXBuildFile; fileRef = C7E736DE1402FE64005657C9 /* SingleEntityWithNoRelationships.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -291,6 +292,7 @@
 		C7C9A38813F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.h; sourceTree = "<group>"; };
 		C7C9A38913F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m; sourceTree = "<group>"; };
 		C7C9A38C13F45438002C5B0C /* ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests.m; path = "Unit Tests/ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests.m"; sourceTree = "<group>"; };
+		C7E736DE1402FE64005657C9 /* SingleEntityWithNoRelationships.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityWithNoRelationships.json; path = "Unit Tests/Fixtures/SingleEntityWithNoRelationships.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -572,6 +574,7 @@
 			isa = PBXGroup;
 			children = (
 				C77E5FB213D0D1D100298F87 /* SingleEntityWithNoRelationships.plist */,
+				C7E736DE1402FE64005657C9 /* SingleEntityWithNoRelationships.json */,
 				C77E5FB413D0D1EC00298F87 /* SampleJSONDataForImport.json */,
 				C76AF82913DBEE5A00CE2E05 /* SingleRelatedEntity.json */,
 				C7C9A37C13F44B08002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.json */,
@@ -792,6 +795,7 @@
 				C7913B9A13FAEF0F007E09CC /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json in Resources */,
 				C7913BAF13FB1E11007E09CC /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json in Resources */,
 				C78F8FD313FDC2B600549DD8 /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.json in Resources */,
+				C7E736DF1402FE64005657C9 /* SingleEntityWithNoRelationships.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

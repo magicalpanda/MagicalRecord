@@ -16,47 +16,38 @@ NSString * const kMagicalRecordImportAttributeValueClassNameKey = @"attributeVal
 NSString * const kMagicalRecordImportRelationshipMapKey = @"mappedKeyName";
 NSString * const kMagicalRecordImportRelationshipPrimaryKey = @"primaryRelationshipKey";
 NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
+NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
 
+@implementation NSDictionary (NSManagedObject_DataImport)
 
-@implementation NSManagedObject (NSManagedObject_DataImport)
-
-//- (NSCache *) MR_requestCache
-//{
-//    static dispatch_once_t pred;
-//    static NSCache *mr_requestCache = nil;
-//    
-//    dispatch_once(&pred, ^{
-//        mr_requestCache = [[NSCache alloc] init];
-//        mr_requestCache.name = @"com.magicalpanda.magicalrecord.requestcache";
-//        mr_requestCache.totalCostLimit = 100;
-//    });
-//    return mr_requestCache;
-//}
-
-- (id) MR_attributeValueFromDictionary:(NSDictionary *)jsonData forAttribute:(NSAttributeDescription *)attributeInfo
+- (NSString *) MR_lookupKeyForAttribute:(NSAttributeDescription *)attributeInfo;
 {
     NSString *attributeName = [attributeInfo name];
     NSString *lookupKey = [[attributeInfo userInfo] valueForKey:kMagicalRecordImportAttributeKeyMapKey] ?: attributeName;
-
-    id value = [jsonData valueForKeyPath:lookupKey];
     
-    if (value == nil || [value isEqual:[NSNull null]])
+    id value = [self valueForKeyPath:lookupKey];
+    
+    for (int i = 1; i < kMagicalRecordImportMaximumAttributeFailoverDepth && value == nil; i++)
     {
-        for (int i=1; i < 10 && value == nil; i++)
-        {
-            NSString *userInfoKey = [NSString stringWithFormat:@"%@.%d", kMagicalRecordImportAttributeKeyMapKey, i];
-            NSString *dataLookup = [[attributeInfo userInfo] valueForKey:userInfoKey];
-            if (dataLookup == nil) 
-            {
-                return nil;
-            }
-            value = [jsonData valueForKeyPath:dataLookup];
-        }
-        if (value == nil)
+        attributeName = [NSString stringWithFormat:@"%@.%d", kMagicalRecordImportAttributeKeyMapKey, i];
+        lookupKey = [[attributeInfo userInfo] valueForKey:attributeName];
+        if (lookupKey == nil) 
         {
             return nil;
         }
+        value = [self valueForKeyPath:lookupKey];
     }
+
+    return value != nil ? lookupKey : nil;
+}
+
+@end
+
+@implementation NSManagedObject (NSManagedObject_DataImport)
+
+- (id) MR_valueForAttribute:(NSAttributeDescription *)attributeInfo fromObjectData:(NSDictionary *)objectData forKeyPath:(NSString *)keyPath
+{
+    id value = [objectData valueForKeyPath:keyPath];
     
     NSAttributeType attributeType = [attributeInfo attributeType];
     NSString *desiredAttributeType = [[attributeInfo userInfo] valueForKey:kMagicalRecordImportAttributeValueClassNameKey];
@@ -76,14 +67,11 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
                 NSString *dateFormat = [[attributeInfo userInfo] valueForKey:kMagicalRecordImportCustomDateFormatKey];
                 value = dateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
             }
-            else
-            {
-                value = adjustDateForDST(value);
-            }
+            value = adjustDateForDST(value);
         }
     }
     
-    return value;
+    return value == [NSNull null] ? nil : value;
 }
 
 - (void) MR_setAttributes:(NSDictionary *)attributes forKeysWithDictionary:(NSDictionary *)objectData
@@ -91,8 +79,13 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     for (NSString *attributeName in attributes) 
     {
         NSAttributeDescription *attributeInfo = [attributes valueForKey:attributeName];
-        id value = [self MR_attributeValueFromDictionary:objectData forAttribute:attributeInfo];
-        [self setValue:value forKey:attributeName];
+        NSString *lookupKeyPath = [objectData MR_lookupKeyForAttribute:attributeInfo];
+        
+        if (lookupKeyPath) 
+        {
+            id value = [self MR_valueForAttribute:attributeInfo fromObjectData:objectData forKeyPath:lookupKeyPath];
+            [self setValue:value forKey:attributeName];
+        }
     }
 }
 
@@ -116,7 +109,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     }
 
     NSString *primaryKeyName = [[relationshipInfo userInfo] valueForKey:kMagicalRecordImportRelationshipPrimaryKey] ?: 
-                                    [NSString stringWithFormat:@"%@ID", primaryKeyNameFromString([destinationEntity name])];
+                                    primaryKeyNameFromString([destinationEntity name]);
     
     NSAttributeDescription *primaryKeyAttribute = [[destinationEntity attributesByName] valueForKey:primaryKeyName];
     NSString *lookupKey = [[primaryKeyAttribute userInfo] valueForKey:kMagicalRecordImportAttributeKeyMapKey] ?: [primaryKeyAttribute name];
@@ -224,8 +217,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 
 + (id) MR_importFromDictionary:(NSDictionary *)objectData inContext:(NSManagedObjectContext *)context;
 {
-    NSManagedObject *managedObject = [NSEntityDescription insertNewObjectForEntityForName:[[self entityDescription] name] 
-                                                                   inManagedObjectContext:context];
+    NSManagedObject *managedObject = [self createInContext:context];
     [managedObject MR_setValuesForKeysWithJSONDictionary:objectData];
     return managedObject;
 }
@@ -270,10 +262,6 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
                   [objectIDs addObject:[dataObject objectID]];
               }
           }];
-         
-         //        NSError *error = nil;
-         //        [context obtainPermanentIDsForObjects:objectIDs error:&error];
-         //        NSLog(@"Error: %@", error);
      }];
     
     return [self findAllWithPredicate:[NSPredicate predicateWithFormat:@"self IN %@", objectIDs] inContext:context];
