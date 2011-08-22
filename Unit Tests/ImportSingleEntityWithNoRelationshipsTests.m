@@ -108,7 +108,7 @@
 {
     NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
     formatter.dateFormat = @"MMM d, yyyy hh:mm:ss a zzz";
-    formatter.timeZone = [NSTimeZone timeZoneWithName:@"GMT"];
+//    formatter.timeZone = [NSTimeZone timeZoneWithName:@"GMT"];
     formatter.locale = [NSLocale currentLocale];
     
     NSDate *expectedDate = [formatter dateFromString:date];
@@ -144,7 +144,7 @@
 
 - (void) testImportDataAttributeWithCustomFormat
 {
-    NSDate *expectedDate = [self dateFromString:@"Aug 5, 2011 01:56:04 AM MST"];
+    NSDate *expectedDate = [self dateFromString:@"Aug 5, 2011 01:56:04 AM MDT"];
     assertThat(testEntity.dateWithCustomFormat, is(equalTo(expectedDate)));
     
 }
