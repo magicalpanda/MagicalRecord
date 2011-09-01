@@ -18,7 +18,27 @@ NSString * const kMagicalRecordImportRelationshipPrimaryKey = @"primaryRelations
 NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
 
-@implementation NSDictionary (NSManagedObject_DataImport)
+@implementation NSAttributeDescription (MagicalRecord_DataImport)
+
+- (NSString *) MR_primaryKey;
+{
+    return nil;
+}
+
+@end
+@implementation NSRelationshipDescription (MagicalRecord_DataImport)
+
+- (NSString *) MR_primaryKey;
+{
+    NSString *primaryKeyName = [[self userInfo] valueForKey:kMagicalRecordImportRelationshipPrimaryKey] ?: 
+    primaryKeyNameFromString([[self destinationEntity] name]);
+    
+    return primaryKeyName;
+}
+
+@end
+
+@implementation NSDictionary (MagicalRecord_DataImport)
 
 - (NSString *) MR_lookupKeyForAttribute:(NSAttributeDescription *)attributeInfo;
 {
@@ -41,9 +61,47 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
     return value != nil ? lookupKey : nil;
 }
 
+- (NSString *) MR_lookupKeyForRelationship:(NSRelationshipDescription *)relationshipInfo
+{
+    NSEntityDescription *destinationEntity = [relationshipInfo destinationEntity];
+    if (destinationEntity == nil) 
+    {
+        ARLog(@"Unable to find entity for type '%@'", [self valueForKey:kMagicalRecordImportRelationshipTypeKey]);
+        return nil;
+    }
+
+    NSString *primaryKeyName = [relationshipInfo MR_primaryKey];
+    
+    NSAttributeDescription *primaryKeyAttribute = [[destinationEntity attributesByName] valueForKey:primaryKeyName];
+    NSString *lookupKey = [[primaryKeyAttribute userInfo] valueForKey:kMagicalRecordImportAttributeKeyMapKey] ?: [primaryKeyAttribute name];
+
+    return lookupKey;
+}
+
+- (id) MR_relatedValueForRelationship:(NSRelationshipDescription *)relationshipInfo
+{
+    NSString *lookupKey = [self MR_lookupKeyForRelationship:relationshipInfo];
+    return lookupKey ? [self valueForKeyPath:lookupKey] : nil;
+}
+
 @end
 
-@implementation NSManagedObject (NSManagedObject_DataImport)
+@implementation NSNumber (MagicalRecord_DataImport)
+
+- (id) MR_relatedValueForRelationship:(NSRelationshipDescription *)relationshipInfo
+{
+    return self;
+}
+
+- (NSString *) MR_lookupKeyForAttribute:(NSAttributeDescription *)attributeInfo
+{
+    return nil;
+}
+
+@end
+
+
+@implementation NSManagedObject (MagicalRecord_DataImport)
 
 - (id) MR_valueForAttribute:(NSAttributeDescription *)attributeInfo fromObjectData:(NSDictionary *)objectData forKeyPath:(NSString *)keyPath
 {
@@ -102,29 +160,16 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
 - (NSManagedObject *) MR_findObjectForRelationship:(NSRelationshipDescription *)relationshipInfo withData:(id)singleRelatedObjectData
 {
     NSEntityDescription *destinationEntity = [relationshipInfo destinationEntity];
-    if (destinationEntity == nil) 
-    {
-        ARLog(@"Unable to find entity for type '%@'", [singleRelatedObjectData valueForKey:kMagicalRecordImportRelationshipTypeKey]);
-        return nil;
-    }
-
-    NSString *primaryKeyName = [[relationshipInfo userInfo] valueForKey:kMagicalRecordImportRelationshipPrimaryKey] ?: 
-                                    primaryKeyNameFromString([destinationEntity name]);
-    
-    NSAttributeDescription *primaryKeyAttribute = [[destinationEntity attributesByName] valueForKey:primaryKeyName];
-    NSString *lookupKey = [[primaryKeyAttribute userInfo] valueForKey:kMagicalRecordImportAttributeKeyMapKey] ?: [primaryKeyAttribute name];
-    
     NSManagedObject *objectForRelationship = nil;
-    if (lookupKey) 
+    id relatedValue = [singleRelatedObjectData MR_relatedValueForRelationship:relationshipInfo];
+
+    if (relatedValue) 
     {
-        id lookupValue = [singleRelatedObjectData valueForKeyPath:lookupKey];
-        
-        if (lookupValue) 
-        {
-            NSManagedObjectContext *context = [self managedObjectContext];
-            Class managedObjectClass = NSClassFromString([destinationEntity managedObjectClassName]);
-            objectForRelationship = [managedObjectClass findFirstByAttribute:primaryKeyName withValue:lookupValue inContext:context];
-        }
+        NSManagedObjectContext *context = [self managedObjectContext];
+        Class managedObjectClass = NSClassFromString([destinationEntity managedObjectClassName]);
+        objectForRelationship = [managedObjectClass findFirstByAttribute:[relationshipInfo MR_primaryKey]
+                                                               withValue:relatedValue
+                                                               inContext:context];
     }
 
     return objectForRelationship;
@@ -170,7 +215,7 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
             continue;
         }
 
-        if ([relationshipInfo isToMany]) 
+        if ([relationshipInfo isToMany] ) //|| [relatedObjectData isKindOfClass:[NSArray class]]) 
         {
             for (id singleRelatedObjectData in relatedObjectData) 
             {
@@ -239,7 +284,6 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
 {
     return [self MR_updateFromDictionary:objectData inContext:[NSManagedObjectContext defaultContext]];    
 }
-
 
 + (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData
 {
