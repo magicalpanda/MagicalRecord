@@ -21,6 +21,8 @@ static NSPersistentStore *defaultPersistentStore_ = nil;
 
 + (void) MR_setDefaultPersistentStore:(NSPersistentStore *) store
 {
+    [store retain];
+    [defaultPersistentStore_ release];
 	defaultPersistentStore_ = store;
 }
 

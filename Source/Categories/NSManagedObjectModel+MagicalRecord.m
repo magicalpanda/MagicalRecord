@@ -18,19 +18,27 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 {
 	if (defaultManagedObjectModel_ == nil && [MagicalRecordHelpers shouldAutoCreateManagedObjectModel])
 	{
-		defaultManagedObjectModel_ = [self MR_newManagedObjectModel];
+        [self MR_setDefaultManagedObjectModel:[self MR_mergedObjectModelFromMainBundle]];
 	}
 	return defaultManagedObjectModel_;
 }
 
 + (void) MR_setDefaultManagedObjectModel:(NSManagedObjectModel *)newDefaultModel
 {
+    [newDefaultModel retain];
+    [defaultManagedObjectModel_ release];
 	defaultManagedObjectModel_ = newDefaultModel;
 }
 
++ (NSManagedObjectModel *) MR_mergedObjectModelFromMainBundle;
+{
+    return [self mergedModelFromBundles:nil];
+}
+
+//deprecated
 + (NSManagedObjectModel *) MR_newManagedObjectModel 
 {
-    return [NSManagedObjectModel mergedModelFromBundles:nil];
+    return [self MR_mergedObjectModelFromMainBundle];
 }
 
 + (NSManagedObjectModel *) MR_newModelNamed:(NSString *) modelName inBundleNamed:(NSString *) bundleName
@@ -54,7 +62,7 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 
 + (NSManagedObjectModel *) MR_managedObjectModelNamed:(NSString *)modelFileName
 {
-	return [self MR_newManagedObjectModelNamed:modelFileName];
+	return [[self MR_newManagedObjectModelNamed:modelFileName] autorelease];
 }
 
 @end

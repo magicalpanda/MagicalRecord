@@ -17,6 +17,7 @@
 + (NSManagedObjectModel *) MR_newManagedObjectModelNamed:(NSString *)modelFileName;
 + (NSManagedObjectModel *) MR_managedObjectModelNamed:(NSString *)modelFileName;
 + (NSManagedObjectModel *) MR_newModelNamed:(NSString *) modelName inBundleNamed:(NSString *) bundleName;
++ (NSManagedObjectModel *) MR_mergedObjectModelFromMainBundle;
 
 @end
 

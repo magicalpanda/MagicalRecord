@@ -23,6 +23,8 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
 
 + (void) setDefaultContext:(NSManagedObjectContext *)moc
 {
+    [moc retain];
+    [defaultManageObjectContext_ release];
     defaultManageObjectContext_ = moc;
 }
 
@@ -148,7 +150,7 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
 
 - (void) saveWrapper
 {
-#if __IPHONE_5_0
+#if __IPHONE_OS_VERSION_MAX_ALLOWED == __IPHONE_5_0
     @autoreleasepool
     {
         [self save];

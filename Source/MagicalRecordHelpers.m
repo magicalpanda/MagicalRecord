@@ -266,7 +266,7 @@ UIColor * UIColorFromString(NSString *serializedColor)
     free(componentValues);
     return color;
 }
-id (*ColorFromString)(NSString *) = UIColorFromString;
+id (*colorFromString)(NSString *) = UIColorFromString;
 
 #else
 
@@ -280,7 +280,7 @@ NSColor * NSColorFromString(NSString *serializedColor)
     free(componentValues);
     return color;
 }
-id (*ColorFromString)(NSString *) = NSColorFromString;
+id (*colorFromString)(NSString *) = NSColorFromString;
 
 
 #endif

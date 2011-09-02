@@ -95,7 +95,7 @@
 
 #if TARGET_OS_IPHONE 
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_5_0
+#if defined(__IPHONE_5_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_5_0
 
 - (void) testImportUIColorAttributeToEntity
 {

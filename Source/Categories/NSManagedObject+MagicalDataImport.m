@@ -113,7 +113,7 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
     {
         if ([desiredAttributeType hasSuffix:@"Color"])
         {
-            value = ColorFromString(value);
+            value = colorFromString(value);
         }
     }
     else 
