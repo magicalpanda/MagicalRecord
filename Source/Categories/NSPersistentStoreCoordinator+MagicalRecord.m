@@ -23,6 +23,14 @@ static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
 + (void) MR_setDefaultStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
 	defaultCoordinator_ = coordinator;
+    if ([NSPersistentStore MR_defaultPersistentStore] == nil)
+    {
+        NSArray *persistentStores = [defaultCoordinator_ persistentStores];
+        if ([persistentStores count])
+        {
+            [NSPersistentStore MR_setDefaultPersistentStore:[persistentStores objectAtIndex:0]];
+        }
+    }
 }
 
 - (void) MR_createPathToStoreFileIfNeccessary:(NSURL *)urlForStore
@@ -112,6 +120,8 @@ static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
 {
 	NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
 	NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+
+    [psc MR_addInMemoryStore];
 
     return [psc autorelease];
 }

@@ -29,7 +29,7 @@
     {
         MappedEntity *testMappedEntity = [MappedEntity createInContext:context];
         testMappedEntity.testMappedEntityIDValue = i;
-        testMappedEntity.sampleAttribute = @"This attribute created as part of the test case setup";
+        testMappedEntity.sampleAttribute = [NSString stringWithFormat:@"test attribute %d", i];
     }
     [context save];
 }
@@ -39,5 +39,12 @@
     SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey *testEntity = (SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey *)self.testEntity;
     
     assertThat(testEntity.mappedEntities, hasCountOf(4));
+    for (MappedEntity *relatedEntity in testEntity.mappedEntities)
+    {
+        assertThat(relatedEntity.sampleAttribute, containsString(@"test attribute"));
+    }
+    
+    assertThat([SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey numberOfEntities], is(equalToInteger(1)));
+    assertThat([MappedEntity numberOfEntities], is(equalToInteger(10)));
 }
 @end
