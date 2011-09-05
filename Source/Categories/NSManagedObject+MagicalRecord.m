@@ -175,7 +175,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (NSUInteger) countOfEntities;
 {
-    return [self countOfEntitiesWithContext:[NSManagedObjectContext defaultContext]];
+    return [self countOfEntitiesWithContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
 + (NSUInteger) countOfEntitiesWithContext:(NSManagedObjectContext *)context;
