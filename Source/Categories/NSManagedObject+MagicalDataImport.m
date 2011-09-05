@@ -149,6 +149,8 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 
 - (void) MR_importValuesForKeysWithDictionary:(NSDictionary *)objectData
 {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
     NSDictionary *attributes = [[self entity] attributesByName];
     [self MR_setAttributes:attributes forKeysWithDictionary:objectData];
     
@@ -170,10 +172,14 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 
          [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
      }];
+    
+    [pool drain];
 }
 
 - (void) MR_updateValuesForKeysWithDictionary:(NSDictionary *)objectData
 {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
     NSDictionary *attributes = [[self entity] attributesByName];
     [self MR_setAttributes:attributes forKeysWithDictionary:objectData];
     
@@ -196,6 +202,8 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
          
          [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
      }];
+    
+    [pool drain];
 }
 
 + (id) MR_importFromDictionary:(NSDictionary *)objectData inContext:(NSManagedObjectContext *)context;

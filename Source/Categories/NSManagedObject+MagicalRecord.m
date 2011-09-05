@@ -140,7 +140,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
 	[request setEntity:[self entityDescriptionInContext:context]];
 	
-	return request;	
+	return [request autorelease];	
 }
 
 + (NSFetchRequest *)createFetchRequest

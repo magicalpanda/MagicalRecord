@@ -53,7 +53,7 @@ static NSPersistentStore *defaultPersistentStore_ = nil;
 + (NSURL *) MR_urlForStoreName:(NSString *)storeFileName
 {
 	NSArray *paths = [NSArray arrayWithObjects:[self MR_applicationDocumentsDirectory], [self MR_applicationLibraryDirectory], nil];
-    NSFileManager *fm = [[NSFileManager alloc] init];
+    NSFileManager *fm = [[[NSFileManager alloc] init] autorelease];
 
     for (NSString *path in paths) 
     {
@@ -63,7 +63,7 @@ static NSPersistentStore *defaultPersistentStore_ = nil;
             return [NSURL fileURLWithPath:filepath];
         }
     }
-    
+
     //set default url
     return [NSURL fileURLWithPath:[[self MR_applicationLibraryDirectory] stringByAppendingPathComponent:storeFileName]];
 }
