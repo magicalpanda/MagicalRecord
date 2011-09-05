@@ -7,6 +7,7 @@
 @class MappedEntity;
 
 
+
 @interface SingleEntityRelatedToMappedEntityUsingDefaultsID : NSManagedObjectID {}
 @end
 
@@ -15,6 +16,18 @@
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (SingleEntityRelatedToMappedEntityUsingDefaultsID*)objectID;
+
+
+
+
+@property (nonatomic, retain) NSNumber *singleEntityRelatedToMappedEntityUsingDefaultsID;
+
+
+@property short singleEntityRelatedToMappedEntityUsingDefaultsIDValue;
+- (short)singleEntityRelatedToMappedEntityUsingDefaultsIDValue;
+- (void)setSingleEntityRelatedToMappedEntityUsingDefaultsIDValue:(short)value_;
+
+//- (BOOL)validateSingleEntityRelatedToMappedEntityUsingDefaultsID:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -34,6 +47,15 @@
 @end
 
 @interface _SingleEntityRelatedToMappedEntityUsingDefaults (CoreDataGeneratedPrimitiveAccessors)
+
+
+- (NSNumber*)primitiveSingleEntityRelatedToMappedEntityUsingDefaultsID;
+- (void)setPrimitiveSingleEntityRelatedToMappedEntityUsingDefaultsID:(NSNumber*)value;
+
+- (short)primitiveSingleEntityRelatedToMappedEntityUsingDefaultsIDValue;
+- (void)setPrimitiveSingleEntityRelatedToMappedEntityUsingDefaultsIDValue:(short)value_;
+
+
 
 
 

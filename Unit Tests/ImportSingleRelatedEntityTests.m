@@ -10,8 +10,9 @@
 #import "AbstractRelatedEntity.h"
 #import "ConcreteRelatedEntity.h"
 #import "MappedEntity.h"
+#import "MagicalDataImportTestCase.h"
 
-@interface ImportSingleRelatedEntityTests : GHTestCase
+@interface ImportSingleRelatedEntityTests : MagicalDataImportTestCase
 
 @property (nonatomic, retain) SingleRelatedEntity *testEntity;
 
@@ -32,21 +33,28 @@
     [context save];
 }
 
-- (void) setUpClass
-{
-    [NSManagedObjectModel setDefaultManagedObjectModel:[NSManagedObjectModel managedObjectModelNamed:@"TestModel.momd"]];
-    [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
-    
-    [self setupTestData];
-    
-    id singleEntity = [self dataFromJSONFixture];
-    
-    self.testEntity = [SingleRelatedEntity MR_importFromDictionary:singleEntity];
-}
+//- (void) setUpClass
+//{
+//    [NSManagedObjectModel setDefaultManagedObjectModel:[NSManagedObjectModel managedObjectModelNamed:@"TestModel.momd"]];
+//    [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
+//    
+//    [self setupTestData];
+//    
+//    id singleEntity = [self dataFromJSONFixture];
+//    
+//    self.testEntity = [SingleRelatedEntity MR_importFromDictionary:singleEntity];
+//}
 
-- (void) tearDownClass
+//- (void) tearDownClass
+//{
+//    [MagicalRecordHelpers cleanUp];
+//}
+
+- (void) setUp
 {
-    [MagicalRecordHelpers cleanUp];
+    [super setUp];
+    self.testEntity = [SingleRelatedEntity MR_importFromDictionary:self.testEntityData];
+    [[NSManagedObjectContext defaultContext] save];
 }
 
 - (void) testImportAnEntityRelatedToAbstractEntityViaToOneRelationshop

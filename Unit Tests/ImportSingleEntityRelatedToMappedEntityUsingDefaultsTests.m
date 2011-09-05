@@ -29,18 +29,37 @@
     testMappedEntity.mappedEntityIDValue = 42;
     testMappedEntity.sampleAttribute = @"This attribute created as part of the test case setup";
     
+    SingleEntityRelatedToMappedEntityUsingDefaults *entity = [SingleEntityRelatedToMappedEntityUsingDefaults createInContext:context];
+    entity.singleEntityRelatedToMappedEntityUsingDefaultsIDValue = 24;
+    
     [context save];
 }
 
 - (void) testImportMappedEntityViaToOneRelationship
 {
-    SingleEntityRelatedToMappedEntityUsingDefaults *entity = (SingleEntityRelatedToMappedEntityUsingDefaults *)self.testEntity;
+    SingleEntityRelatedToMappedEntityUsingDefaults *entity = [[self testEntityClass] MR_importFromDictionary:self.testEntityData];
+    
+    [[NSManagedObjectContext defaultContext] save];
+
     id testRelatedEntity = entity.mappedEntity;
     
     assertThat(testRelatedEntity, is(notNilValue()));
     assertThat([testRelatedEntity sampleAttribute], containsString(@"sample json file"));
     
+    assertThat([MappedEntity numberOfEntities], is(equalToInteger(2)));
+}
+
+- (void) testUpdateMappedEntity
+{
+    SingleEntityRelatedToMappedEntityUsingDefaults *testEntity = 
+    [SingleEntityRelatedToMappedEntityUsingDefaults findFirstByAttribute:@"singleEntityRelatedToMappedEntityUsingDefaultsID" withValue:[NSNumber numberWithInt:24]];
+    
+    [testEntity MR_updateValuesForKeysWithDictionary:self.testEntityData];
+    
     assertThat([MappedEntity numberOfEntities], is(equalToInteger(1)));
+    
+    assertThat(testEntity, is(notNilValue()));
+    
 }
 
 @end

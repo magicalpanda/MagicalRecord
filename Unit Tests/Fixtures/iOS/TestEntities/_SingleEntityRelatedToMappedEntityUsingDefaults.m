@@ -29,9 +29,39 @@
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
+	if ([key isEqualToString:@"singleEntityRelatedToMappedEntityUsingDefaultsIDValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"singleEntityRelatedToMappedEntityUsingDefaultsID"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
 
 	return keyPaths;
 }
+
+
+
+
+@dynamic singleEntityRelatedToMappedEntityUsingDefaultsID;
+
+
+
+- (short)singleEntityRelatedToMappedEntityUsingDefaultsIDValue {
+	NSNumber *result = [self singleEntityRelatedToMappedEntityUsingDefaultsID];
+	return [result shortValue];
+}
+
+- (void)setSingleEntityRelatedToMappedEntityUsingDefaultsIDValue:(short)value_ {
+	[self setSingleEntityRelatedToMappedEntityUsingDefaultsID:[NSNumber numberWithShort:value_]];
+}
+
+- (short)primitiveSingleEntityRelatedToMappedEntityUsingDefaultsIDValue {
+	NSNumber *result = [self primitiveSingleEntityRelatedToMappedEntityUsingDefaultsID];
+	return [result shortValue];
+}
+
+- (void)setPrimitiveSingleEntityRelatedToMappedEntityUsingDefaultsIDValue:(short)value_ {
+	[self setPrimitiveSingleEntityRelatedToMappedEntityUsingDefaultsID:[NSNumber numberWithShort:value_]];
+}
+
 
 
 

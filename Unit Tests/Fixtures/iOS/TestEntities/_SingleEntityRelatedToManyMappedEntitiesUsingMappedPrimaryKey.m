@@ -29,9 +29,39 @@
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
+	if ([key isEqualToString:@"testPrimaryKeyValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"testPrimaryKey"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
 
 	return keyPaths;
 }
+
+
+
+
+@dynamic testPrimaryKey;
+
+
+
+- (short)testPrimaryKeyValue {
+	NSNumber *result = [self testPrimaryKey];
+	return [result shortValue];
+}
+
+- (void)setTestPrimaryKeyValue:(short)value_ {
+	[self setTestPrimaryKey:[NSNumber numberWithShort:value_]];
+}
+
+- (short)primitiveTestPrimaryKeyValue {
+	NSNumber *result = [self primitiveTestPrimaryKey];
+	return [result shortValue];
+}
+
+- (void)setPrimitiveTestPrimaryKeyValue:(short)value_ {
+	[self setPrimitiveTestPrimaryKey:[NSNumber numberWithShort:value_]];
+}
+
 
 
 

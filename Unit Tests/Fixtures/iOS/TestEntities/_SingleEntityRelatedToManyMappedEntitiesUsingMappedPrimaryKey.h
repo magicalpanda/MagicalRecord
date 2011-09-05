@@ -7,6 +7,7 @@
 @class MappedEntity;
 
 
+
 @interface SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyID : NSManagedObjectID {}
 @end
 
@@ -15,6 +16,18 @@
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyID*)objectID;
+
+
+
+
+@property (nonatomic, retain) NSNumber *testPrimaryKey;
+
+
+@property short testPrimaryKeyValue;
+- (short)testPrimaryKeyValue;
+- (void)setTestPrimaryKeyValue:(short)value_;
+
+//- (BOOL)validateTestPrimaryKey:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -39,6 +52,15 @@
 @end
 
 @interface _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey (CoreDataGeneratedPrimitiveAccessors)
+
+
+- (NSNumber*)primitiveTestPrimaryKey;
+- (void)setPrimitiveTestPrimaryKey:(NSNumber*)value;
+
+- (short)primitiveTestPrimaryKeyValue;
+- (void)setPrimitiveTestPrimaryKeyValue:(short)value_;
+
+
 
 
 

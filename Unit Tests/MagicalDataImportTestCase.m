@@ -10,6 +10,7 @@
 
 @implementation MagicalDataImportTestCase
 
+@synthesize testEntityData = testEntityData__;
 @synthesize testEntity = testEntity__;
 
 - (void) setUp
@@ -22,11 +23,7 @@
         [self performSelector:@selector(setupTestData)];
     }
     
-    id singleEntity = [self dataFromJSONFixture];
-    
-    self.testEntity = [[self testEntityClass] MR_importFromDictionary:singleEntity];
-    
-    [[NSManagedObjectContext defaultContext] save];
+    self.testEntityData = [self dataFromJSONFixture];
 }
 
 - (void) tearDown

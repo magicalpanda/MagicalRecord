@@ -24,3 +24,8 @@
 #import "NSPersistentStore+MagicalRecord.h"
 
 #import "NSManagedObject+MagicalDataImport.h"
+#import "NSNumber+MagicalDataImport.h"
+#import "NSDictionary+MagicalDataImport.h"
+#import "NSAttributeDescription+MagicalDataImport.h"
+#import "NSRelationshipDescription+MagicalDataImport.h"
+#import "NSEntityDescription+MagicalDataImport.h"

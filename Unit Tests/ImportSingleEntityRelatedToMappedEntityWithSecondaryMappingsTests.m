@@ -22,8 +22,9 @@
 
 - (void) testImportMappedAttributeUsingSecondaryMappedKeyName
 {
-    SingleEntityRelatedToMappedEntityWithSecondaryMappings *entity = (SingleEntityRelatedToMappedEntityWithSecondaryMappings *)self.testEntity;
-
+    SingleEntityRelatedToMappedEntityWithSecondaryMappings *entity = [[self testEntityClass] MR_importFromDictionary:self.testEntityData];
+    [[NSManagedObjectContext defaultContext] save];
+    
     assertThat(entity, is(notNilValue()));
     assertThat([entity secondaryMappedAttribute], containsString(@"sample json file"));
 }

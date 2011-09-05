@@ -10,7 +10,8 @@
 
 @interface MagicalDataImportTestCase : GHTestCase
 
-@property (nonatomic, retain) NSManagedObject *testEntity;
+@property (nonatomic, retain) id testEntityData;
+@property (nonatomic, retain) id testEntity;
 
 - (Class) testEntityClass;
 

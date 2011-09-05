@@ -16,89 +16,7 @@ NSString * const kMagicalRecordImportAttributeValueClassNameKey = @"attributeVal
 NSString * const kMagicalRecordImportRelationshipMapKey = @"mappedKeyName";
 NSString * const kMagicalRecordImportRelationshipPrimaryKey = @"primaryRelationshipKey";
 NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
-NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
 
-@implementation NSAttributeDescription (MagicalRecord_DataImport)
-
-- (NSString *) MR_primaryKey;
-{
-    return nil;
-}
-
-@end
-@implementation NSRelationshipDescription (MagicalRecord_DataImport)
-
-- (NSString *) MR_primaryKey;
-{
-    NSString *primaryKeyName = [[self userInfo] valueForKey:kMagicalRecordImportRelationshipPrimaryKey] ?: 
-    primaryKeyNameFromString([[self destinationEntity] name]);
-    
-    return primaryKeyName;
-}
-
-@end
-
-@implementation NSDictionary (MagicalRecord_DataImport)
-
-- (NSString *) MR_lookupKeyForAttribute:(NSAttributeDescription *)attributeInfo;
-{
-    NSString *attributeName = [attributeInfo name];
-    NSString *lookupKey = [[attributeInfo userInfo] valueForKey:kMagicalRecordImportAttributeKeyMapKey] ?: attributeName;
-    
-    id value = [self valueForKeyPath:lookupKey];
-    
-    for (int i = 1; i < kMagicalRecordImportMaximumAttributeFailoverDepth && value == nil; i++)
-    {
-        attributeName = [NSString stringWithFormat:@"%@.%d", kMagicalRecordImportAttributeKeyMapKey, i];
-        lookupKey = [[attributeInfo userInfo] valueForKey:attributeName];
-        if (lookupKey == nil) 
-        {
-            return nil;
-        }
-        value = [self valueForKeyPath:lookupKey];
-    }
-
-    return value != nil ? lookupKey : nil;
-}
-
-- (NSString *) MR_lookupKeyForRelationship:(NSRelationshipDescription *)relationshipInfo
-{
-    NSEntityDescription *destinationEntity = [relationshipInfo destinationEntity];
-    if (destinationEntity == nil) 
-    {
-        ARLog(@"Unable to find entity for type '%@'", [self valueForKey:kMagicalRecordImportRelationshipTypeKey]);
-        return nil;
-    }
-
-    NSString *primaryKeyName = [relationshipInfo MR_primaryKey];
-    
-    NSAttributeDescription *primaryKeyAttribute = [[destinationEntity attributesByName] valueForKey:primaryKeyName];
-    NSString *lookupKey = [[primaryKeyAttribute userInfo] valueForKey:kMagicalRecordImportAttributeKeyMapKey] ?: [primaryKeyAttribute name];
-
-    return lookupKey;
-}
-
-- (id) MR_relatedValueForRelationship:(NSRelationshipDescription *)relationshipInfo
-{
-    NSString *lookupKey = [self MR_lookupKeyForRelationship:relationshipInfo];
-    return lookupKey ? [self valueForKeyPath:lookupKey] : nil;
-}
-
-@end
-
-@implementation NSNumber (MagicalRecord_DataImport)
-
-- (id) MR_relatedValueForRelationship:(NSRelationshipDescription *)relationshipInfo
-{
-    return self;
-}
-
-- (NSString *) MR_lookupKeyForAttribute:(NSAttributeDescription *)attributeInfo
-{
-    return nil;
-}
-
-@end
 
 
 @implementation NSManagedObject (MagicalRecord_DataImport)
@@ -152,7 +70,7 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
     NSManagedObject *relatedObject = [NSEntityDescription insertNewObjectForEntityForName:[entityDescription name] 
                                                                    inManagedObjectContext:[self managedObjectContext]];
     
-    [relatedObject MR_setValuesForKeysWithJSONDictionary:objectData];
+    [relatedObject MR_importValuesForKeysWithDictionary:objectData];
     
     return relatedObject;
 }
@@ -200,7 +118,7 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
     }
 }
 
-- (void) MR_setRelationships:(NSDictionary *)relationships forKeysWithDictionary:(NSDictionary *)relationshipData withBlock:(void(^)(NSRelationshipDescription *,NSDictionary *))setRelationshipBlock
+- (void) MR_setRelationships:(NSDictionary *)relationships forKeysWithDictionary:(NSDictionary *)relationshipData withBlock:(void(^)(NSRelationshipDescription *,id))setRelationshipBlock
 {
     for (NSString *relationshipName in relationships) 
     {
@@ -215,7 +133,7 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
             continue;
         }
 
-        if ([relationshipInfo isToMany] ) //|| [relatedObjectData isKindOfClass:[NSArray class]]) 
+        if ([relationshipInfo isToMany])
         {
             for (id singleRelatedObjectData in relatedObjectData) 
             {
@@ -229,11 +147,40 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
     }
 }
 
-- (void) MR_setRelationships:(NSDictionary *)relationships forKeysWithDictionary:(NSDictionary *)relationshipData
+- (void) MR_importValuesForKeysWithDictionary:(NSDictionary *)objectData
 {
+    NSDictionary *attributes = [[self entity] attributesByName];
+    [self MR_setAttributes:attributes forKeysWithDictionary:objectData];
+    
+    NSDictionary *relationships = [[self entity] relationshipsByName];
     [self MR_setRelationships:relationships
-        forKeysWithDictionary:relationshipData 
-                    withBlock:^(NSRelationshipDescription *relationshipInfo, NSDictionary *objectData)
+        forKeysWithDictionary:objectData 
+                    withBlock:^(NSRelationshipDescription *relationshipInfo, id objectData)
+     {
+         NSManagedObject *relatedObject = nil;
+         if ([objectData isKindOfClass:[NSDictionary class]]) 
+         {
+             relatedObject = [self MR_createInstanceForEntity:[relationshipInfo destinationEntity] withDictionary:objectData];
+         }
+         else
+         {
+             relatedObject = [self MR_findObjectForRelationship:relationshipInfo withData:objectData];
+         }
+         [relatedObject MR_importValuesForKeysWithDictionary:objectData];
+
+         [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
+     }];
+}
+
+- (void) MR_updateValuesForKeysWithDictionary:(NSDictionary *)objectData
+{
+    NSDictionary *attributes = [[self entity] attributesByName];
+    [self MR_setAttributes:attributes forKeysWithDictionary:objectData];
+    
+    NSDictionary *relationships = [[self entity] relationshipsByName];
+    [self MR_setRelationships:relationships
+        forKeysWithDictionary:objectData 
+                    withBlock:^(NSRelationshipDescription *relationshipInfo, id objectData)
      {
          NSManagedObject *relatedObject = [self MR_findObjectForRelationship:relationshipInfo
                                                                     withData:objectData];
@@ -244,26 +191,17 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
          }
          else
          {
-             [relatedObject MR_setValuesForKeysWithJSONDictionary:objectData];
+             [relatedObject MR_importValuesForKeysWithDictionary:objectData];
          }
          
          [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
      }];
 }
 
-- (void) MR_setValuesForKeysWithJSONDictionary:(NSDictionary *)objectData
-{
-    NSDictionary *attributes = [[self entity] attributesByName];
-    [self MR_setAttributes:attributes forKeysWithDictionary:objectData];
-    
-    NSDictionary *relationships = [[self entity] relationshipsByName];
-    [self MR_setRelationships:relationships forKeysWithDictionary:objectData];
-}
-
 + (id) MR_importFromDictionary:(NSDictionary *)objectData inContext:(NSManagedObjectContext *)context;
 {
     NSManagedObject *managedObject = [self createInContext:context];
-    [managedObject MR_setValuesForKeysWithJSONDictionary:objectData];
+    [managedObject MR_importValuesForKeysWithDictionary:objectData];
     return managedObject;
 }
 
@@ -274,10 +212,21 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
 
 + (id) MR_updateFromDictionary:(NSDictionary *)objectData inContext:(NSManagedObjectContext *)context
 {
-    //find object
-    //create if not exists
-    //apply dictionary updates
-    return nil;
+    NSAttributeDescription *primaryAttribute = [[self entityDescription] MR_primaryKeyAttribute];
+    
+    id value = [objectData MR_valueForAttribute:primaryAttribute];
+    
+    NSManagedObject *manageObject = [self findFirstByAttribute:[primaryAttribute name] withValue:value inContext:context];
+    if (!manageObject) 
+    {
+        manageObject = [self createInContext:context];
+        [manageObject MR_importValuesForKeysWithDictionary:objectData];
+    }
+    else
+    {
+        [manageObject MR_updateValuesForKeysWithDictionary:objectData];
+    }
+    return manageObject;
 }
 
 + (id) MR_updateFromDictionary:(NSDictionary *)objectData
@@ -287,7 +236,7 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
 
 + (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData
 {
-    return [self MR_importFromArray:listOfObjectData inContext:[NSManagedObjectContext context]];
+    return [self MR_importFromArray:listOfObjectData inContext:[NSManagedObjectContext defaultContext]];
 }
 
 + (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context
