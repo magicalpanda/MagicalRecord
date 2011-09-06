@@ -12,12 +12,17 @@
 
 - (void) testCanCreateContextForCurrentThead
 {
-    GHFail(@"Test Not Implemented");
+    NSManagedObjectContext *firstContext = [NSManagedObjectContext contextForCurrentThread];
+    NSManagedObjectContext *secondContext = [NSManagedObjectContext contextForCurrentThread];
+    
+    assertThat(firstContext, is(equalTo(secondContext)));
 }
 
 - (void) testCanNotifyDefaultContextOnSave
 {
-    GHFail(@"Test Not Implemented");
+    NSManagedObjectContext *testContext = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
+
+    assertThatBool(testContext.notifiesMainContextOnSave, is(equalToBool(YES)));
 }
 
 
