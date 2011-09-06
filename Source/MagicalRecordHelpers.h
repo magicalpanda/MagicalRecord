@@ -9,8 +9,6 @@
 #define MAC_PLATFORM_ONLY YES
 #endif
 
-
-
 #ifdef NS_BLOCKS_AVAILABLE
 
 @class NSManagedObjectContext;

@@ -122,6 +122,8 @@
 		C7C9A38A13F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C9A38713F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingDefaults.m */; };
 		C7C9A38B13F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C9A38913F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m */; };
 		C7C9A38D13F45438002C5B0C /* ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C9A38C13F45438002C5B0C /* ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests.m */; };
+		C7E37A78141577B800CE9BF5 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C83B13D0C6390097AB6F /* libOCMock.a */; };
+		C7E37A7C14157BFE00CE9BF5 /* libOCMock.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = C721C83B13D0C6390097AB6F /* libOCMock.a */; };
 		C7E736DF1402FE64005657C9 /* SingleEntityWithNoRelationships.json in Resources */ = {isa = PBXBuildFile; fileRef = C7E736DE1402FE64005657C9 /* SingleEntityWithNoRelationships.json */; };
 /* End PBXBuildFile section */
 
@@ -146,6 +148,16 @@
 				C76AF7F413DBC34300CE2E05 /* OCHamcrest.framework in Copy OCHamcrest into App Bundle */,
 			);
 			name = "Copy OCHamcrest into App Bundle";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7E37A7B14157BE600CE9BF5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(BUILT_PRODUCTS_DIR)";
+			dstSubfolderSpec = 0;
+			files = (
+				C7E37A7C14157BFE00CE9BF5 /* libOCMock.a in CopyFiles */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -341,6 +353,7 @@
 				C77E5F9B13D0CA0A00298F87 /* CoreData.framework in Frameworks */,
 				C721C83C13D0C6390097AB6F /* GHUnitIOS.framework in Frameworks */,
 				C721C83D13D0C6390097AB6F /* OCHamcrestIOS.framework in Frameworks */,
+				C7E37A78141577B800CE9BF5 /* libOCMock.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -774,6 +787,7 @@
 			buildPhases = (
 				C7BD887613DBF8FA00274567 /* Regenerate Core Data Entities */,
 				C721C7F913D0C3CD0097AB6F /* Sources */,
+				C7E37A7B14157BE600CE9BF5 /* CopyFiles */,
 				C721C7FA13D0C3CD0097AB6F /* Frameworks */,
 				C721C7FB13D0C3CD0097AB6F /* Resources */,
 			);
@@ -1142,6 +1156,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/iOS App Unit Tests/Frameworks/OCMockLibrary/Headers/OCMock\"",
 					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
 				);
 				INFOPLIST_FILE = "iOS App Unit Tests/iOS App Unit Tests-Info.plist";
@@ -1186,6 +1201,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/iOS App Unit Tests/Frameworks/OCMockLibrary/Headers/OCMock\"",
 					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
 				);
 				INFOPLIST_FILE = "iOS App Unit Tests/iOS App Unit Tests-Info.plist";
