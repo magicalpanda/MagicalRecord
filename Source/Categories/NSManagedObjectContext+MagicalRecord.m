@@ -215,14 +215,14 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
     return context;
 }
 
-+ (NSManagedObjectContext *) context
++ (NSManagedObjectContext *) newContext
 {
 	return [self contextWithStoreCoordinator:[NSPersistentStoreCoordinator MR_defaultStoreCoordinator]];
 }
 
 + (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThread
 {
-    NSManagedObjectContext *context = [self context];
+    NSManagedObjectContext *context = [self newContext];
     context.notifiesMainContextOnSave = YES;
     return context;
 }

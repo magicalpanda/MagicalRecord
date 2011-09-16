@@ -115,8 +115,9 @@ static BOOL shouldAutoCreateDefaultPersistentStoreCoordinator_;
 
 + (void) setupCoreDataStack
 {
-    NSManagedObjectContext *context = [NSManagedObjectContext context];
+    NSManagedObjectContext *context = [NSManagedObjectContext newContext];
 	[NSManagedObjectContext setDefaultContext:context];
+	[context release];
 }
 
 + (void) setupAutoMigratingCoreDataStack
