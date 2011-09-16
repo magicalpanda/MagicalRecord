@@ -29,13 +29,4 @@
     assertThat([entity secondaryMappedAttribute], containsString(@"sample json file"));
 }
 
-//- (void) testImportMappedEntityUsingThirdPriorityMappedKeyName
-//{
-//    SingleEntityRelatedToMappedEntityWithSecondaryMappings *entity = (SingleEntityRelatedToMappedEntityWithSecondaryMappings *)self.testEntity;
-//    id testRelatedEntity = entity.mappedRelationship;
-//    
-//    assertThat(testRelatedEntity, is(notNilValue()));
-//    assertThat([testRelatedEntity sampleAttribute], containsString(@"sample json file"));
-//}
-
 @end

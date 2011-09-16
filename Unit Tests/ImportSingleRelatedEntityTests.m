@@ -33,23 +33,6 @@
     [context save];
 }
 
-//- (void) setUpClass
-//{
-//    [NSManagedObjectModel setDefaultManagedObjectModel:[NSManagedObjectModel managedObjectModelNamed:@"TestModel.momd"]];
-//    [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
-//    
-//    [self setupTestData];
-//    
-//    id singleEntity = [self dataFromJSONFixture];
-//    
-//    self.testEntity = [SingleRelatedEntity MR_importFromDictionary:singleEntity];
-//}
-
-//- (void) tearDownClass
-//{
-//    [MagicalRecordHelpers cleanUp];
-//}
-
 - (void) setUp
 {
     [super setUp];
