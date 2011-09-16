@@ -11,14 +11,14 @@
 
 typedef enum
 {
-    ARCoreDataSaveOptionInBackground        = 1 << 0,
-    ARCoreDataSaveOptionWithNewContext      = 1 << 1
-} ARCoreDataSaveOption;
+    MRCoreDataSaveOptionInBackground        = 1 << 0,
+    MRCoreDataSaveOptionWithNewContext      = 1 << 1
+} MRCoreDataSaveOption;
 
 typedef enum
 {
-    ARCoreDataLookupOptionWithNewContext    = 1 << 0
-} ARCoreDataLookupOption;
+    MRCoreDataLookupOptionWithNewContext    = 1 << 0
+} MRCoreDataLookupOption;
 
 @interface MRCoreDataAction : NSObject {}
 
@@ -31,8 +31,8 @@ typedef enum
 + (void) saveDataInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
 + (void) saveDataInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))callback;
 
-+ (void) saveDataWithOptions:(ARCoreDataSaveOption)options withBlock:(void(^)(NSManagedObjectContext *localContext))block;
-+ (void) saveDataWithOptions:(ARCoreDataSaveOption)options withBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))callback;
++ (void) saveDataWithOptions:(MRCoreDataSaveOption)options withBlock:(void(^)(NSManagedObjectContext *localContext))block;
++ (void) saveDataWithOptions:(MRCoreDataSaveOption)options withBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))callback;
 
 + (void) lookupWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
 
