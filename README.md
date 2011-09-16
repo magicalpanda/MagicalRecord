@@ -14,30 +14,32 @@ Magical Record for Core Data was inspired by the ease of Ruby on Rails' Active R
 
 # Installation
 
-- In your XCode Project, add all the .h and .m files from the Source folder into your project. 
-- Add *CoreData+MagicalRecord.h* file to your PCH file or your AppDelegate file.
-- Start writing code! ... There is no step 3!
+1. In your XCode Project, add all the .h and .m files from the Source folder into your project. 
+2. Add *CoreData+MagicalRecord.h* file to your PCH file or your AppDelegate file.
+3. Start writing code! ... There is no step 3!
 
 # ARC Support
 
-As of tag 1.5, ARC is supported. I am not aware of any way to provide a backward compatible solution and still maintain only 1 codebase, so MagicalRecord will be ARC compliant from here on in.
+MagicalRecord will not directly support ARC at this time. However, MagicalRecord will work with ARC enabled, by adding the *-fno-objc-arc* flag to the following files:
+
+* NSManagedObjectContext+MagicalRecord.m
+* NSManagedObject+MagicalDataImport.m
+* MagicalRecordHelpers.m
 
 # Usage
 
 ## Setting up the Core Data Stack
 
 To get started, first, import the header file *CoreData+MagicalRecord.h* in your project's pch file. This will allow a global include of all the required headers.
-Next, somewhere in your app's startup, say in the applicationDidFinishLaunching:(UIApplication *) withOptions:(NSDictionary *) method, use one of the following setup calls with the MagicalRecordHelpers class:
+Next, somewhere in your app delegate, in either the applicationDidFinishLaunching:(UIApplication *) withOptions:(NSDictionary *) method, or awakeFromNib, use **one** of the following setup calls with the MagicalRecordHelpers class:
 
 	+ (void) setupCoreDataStack;
 	+ (void) setupAutoMigratingDefaultCoreDataStack;
 	+ (void) setupCoreDataStackWithInMemoryStore;
 	+ (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName;
 	+ (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName;
-	
- - or -
 
-Simply start creating, fetching and updating objects. A default stack will be created for you automatically if one does not already exist. It's magical :)
+Each call instantiates one of each piece of the Core Data stack, and provides getter and setter methods for these instances. These well known instances to MagicalRecord, and are recognized as "defaults".
 
 And, before your app exits, you can use the clean up method:
 
@@ -45,7 +47,7 @@ And, before your app exits, you can use the clean up method:
 
 ### Default Managed Object Context 
 
-When using Core Data, you will deal with two types of objects the most: NSManagedObject and NSManagedObjectContext. MagicalRecord for Core Data gives you a place for a default NSManagedObjectContext for use within your app. This is great for single threaded apps. If you need to create a new Managed Object Context for use in other threads, based on your single persistent store, use:
+When using Core Data, you will deal with two types of objects the most: *NSManagedObject* and *NSManagedObjectContext*. MagicalRecord for Core Data gives you a place for a default NSManagedObjectContext for use within your app. This is great for single threaded apps. If you need to create a new Managed Object Context for use in other threads, based on your single persistent store, use:
 
 	NSManagedObjectContext *myNewContext = [NSManagedObjectContext context];
 
@@ -53,17 +55,19 @@ When using Core Data, you will deal with two types of objects the most: NSManage
 This default context will be used for all fetch requests, unless otherwise specified in the methods ending with **inContext:**.
 If you want to make *myNewContext* the default for all fetch requests on the main thread:
 
+
 	[NSManagedObjectContext setDefaultContext:myNewContext];
 
 
 This will use the same object model and persistent store, but create an entirely new context for use with threads other than the main thread. 
 
-**It is recommended that the default context is created and set using the main thread**
+**It is *highly* recommended that the default context is created and set using the main thread**
 
 ### Fetching
 
 #### Basic Finding
-Most methods in the MagicalRecord for Core Data library return an NSArray of results. So, if you have an Entity called Person, related to a Department (as seen in various Apple Core Data documentation), to get all the Person entities from your Persistent Store:
+
+Most methods in MagicalRecord return an NSArray of results. So, if you have an Entity called Person, related to a Department (as seen in various Apple Core Data documentation), to get all the Person entities from your Persistent Store:
 
 
 	NSArray *people = [Person findAll];
@@ -87,7 +91,7 @@ If you want to be more specific with your search, you can send in a predicate:
 
 	NSArray *people = [Person findAllWithPredicate:peopleFilter];
 
-Returning an NSFetchRequest
+#### Returning an NSFetchRequest
 
 	NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"Department IN %@", departments];
 
@@ -95,7 +99,7 @@ Returning an NSFetchRequest
 
 For each of these single line calls, the full stack of NSFetchRequest, NSSortDescriptors and a simple default error handling scheme (ie. logging to the console) is created.
 
-Customizing the Request
+#### Customizing the Request
 
 	NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"Department IN %@", departments];
 
@@ -110,11 +114,18 @@ Customizing the Request
 
 You can also perform a count of entities in your Store, that will be performed on the Store
 
-	NSUInteger count = [Person numberOfEntities];
+	NSNumber *count = [Person numberOfEntities];
 
 Or, if you're looking for a count of entities based on a predicate or some filter:
 
-	NSUInteger count = [Person numberOfEntitiesWithPredicate:...];
+	NSNumber *count = [Person numberOfEntitiesWithPredicate:...];
+	
+There are also counterpart methods which return NSUInteger rather than NSNumbers:
+
+* countOfEntities
+* countOfEntitiesWithContext:(NSManagedObjectContext *)
+* countOfEntitiesWithPredicate:(NSPredicate *)
+* countOfEntitiesWithPredicate:(NSPredicate *) inContext:(NSManagedObjectContext *)
 
 #### Finding from a different context
 
