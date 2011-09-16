@@ -202,7 +202,7 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
     if (coordinator != nil)
 	{
         ARLog(@"Creating MOContext %@", [NSThread isMainThread] ? @" *** On Main Thread ***" : @"");
-        context = [[NSManagedObjectContext alloc] init];
+        context = [[[NSManagedObjectContext alloc] init] autorelease];
         [context setPersistentStoreCoordinator:coordinator];
     }
     return context;

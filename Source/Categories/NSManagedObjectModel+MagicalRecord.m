@@ -38,7 +38,7 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 //deprecated
 + (NSManagedObjectModel *) MR_newManagedObjectModel 
 {
-    return [self MR_mergedObjectModelFromMainBundle];
+    return [[self MR_mergedObjectModelFromMainBundle] retain];
 }
 
 + (NSManagedObjectModel *) MR_newModelNamed:(NSString *) modelName inBundleNamed:(NSString *) bundleName
@@ -48,7 +48,9 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
                                                 inDirectory:bundleName];
     NSURL *modelUrl = [NSURL fileURLWithPath:path];
     
-    return [[NSManagedObjectModel alloc] initWithContentsOfURL:modelUrl];
+    NSManagedObjectModel *mom = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelUrl];
+    
+    return mom;
 }
 
 + (NSManagedObjectModel *) MR_newManagedObjectModelNamed:(NSString *)modelFileName

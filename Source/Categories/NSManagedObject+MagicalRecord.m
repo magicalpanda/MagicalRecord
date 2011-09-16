@@ -118,7 +118,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     
     for (NSString *attributeName in attributesToSortBy) 
     {
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:attributeName ascending:ascending];
+        NSSortDescriptor *sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:attributeName ascending:ascending] autorelease];
         [attributes addObject:sortDescriptor];
     }
     
@@ -285,7 +285,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 {
 	NSFetchRequest *request = [self requestAllInContext:context];
 	
-	NSSortDescriptor *sortBy = [[NSSortDescriptor alloc] initWithKey:sortTerm ascending:ascending];
+	NSSortDescriptor *sortBy = [[[NSSortDescriptor alloc] initWithKey:sortTerm ascending:ascending] autorelease];
 	[request setSortDescriptors:[NSArray arrayWithObject:sortBy]];
 	
 	return request;
@@ -305,7 +305,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	[request setIncludesSubentities:NO];
 	[request setFetchBatchSize:[self defaultBatchSize]];
 	
-	NSSortDescriptor *sortBy = [[NSSortDescriptor alloc] initWithKey:sortTerm ascending:ascending];
+	NSSortDescriptor *sortBy = [[[NSSortDescriptor alloc] initWithKey:sortTerm ascending:ascending] autorelease];
 	[request setSortDescriptors:[NSArray arrayWithObject:sortBy]];
 	
 	return request;
@@ -387,7 +387,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 																				 managedObjectContext:context
 																				   sectionNameKeyPath:group
 																							cacheName:cacheName];
-	return controller;
+	return [controller autorelease];
 }
 
 + (NSFetchedResultsController *) fetchRequestAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending 
@@ -432,7 +432,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 											  sectionNameKeyPath:group
 													   cacheName:cacheName];
     [self performFetch:controller];
-	return controller;
+	return [controller autorelease];
 }
 
 + (NSFetchedResultsController *) fetchRequest:(NSFetchRequest *)request groupedBy:(NSString *)group
