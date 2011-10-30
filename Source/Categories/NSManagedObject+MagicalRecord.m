@@ -593,7 +593,13 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     }
     else
     {
-        NSString *entityName = NSStringFromClass([self class]);
+        NSString *entityName = nil;
+        
+        if ([self respondsToSelector:@selector(entityName)])
+            entityName = [self performSelector:@selector(entityName)];
+        else
+            entityName = NSStringFromClass([self class]);
+        
         return [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:context];
     }
 }
