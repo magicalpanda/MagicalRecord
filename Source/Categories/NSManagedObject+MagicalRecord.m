@@ -617,6 +617,27 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	return YES;
 }
 
++ (BOOL) deleteAllMatchingPredicate:(NSPredicate *)predicate
+{
+    return [self deleteAllMatchingPredicate:predicate inContext:[NSManagedObjectContext defaultContext]];
+}
+
++ (BOOL) deleteAllMatchingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context
+{
+    NSFetchRequest *request = [self requestAllWithPredicate:predicate inContext:context];
+	[request setIncludesSubentities:NO];
+	[request setIncludesPropertyValues:NO];
+    
+	NSArray *objectsToTruncate = [self executeFetchRequest:request inContext:context];
+    
+	for (id objectToTruncate in objectsToTruncate) 
+    {
+		[objectToTruncate deleteInContext:context];
+	}
+    
+	return YES;
+}
+
 + (BOOL) truncateAllInContext:(NSManagedObjectContext *)context
 {
     NSArray *allEntities = [self findAllInContext:context];
