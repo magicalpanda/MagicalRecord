@@ -11,6 +11,13 @@
 static NSManagedObjectContext *defaultManageObjectContext_ = nil;
 static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_NSManagedObjectContextForThreadKey";
 
+@interface NSManagedObjectContext ()
+
+- (void) mergeChangesFromNotification:(NSNotification *)notification;
+- (void) mergeChangesOnMainThread:(NSNotification *)notification;
+
+@end
+
 @implementation NSManagedObjectContext (MagicalRecord)
 
 + (NSManagedObjectContext *)defaultContext
