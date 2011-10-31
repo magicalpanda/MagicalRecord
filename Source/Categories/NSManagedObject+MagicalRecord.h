@@ -31,6 +31,9 @@
 - (BOOL) deleteEntity;
 - (BOOL) deleteInContext:(NSManagedObjectContext *)context;
 
++ (BOOL) deleteAllMatchingPredicate:(NSPredicate *)predicate;
++ (BOOL) deleteAllMatchingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
+
 + (BOOL) truncateAll;
 + (BOOL) truncateAllInContext:(NSManagedObjectContext *)context;
 
