@@ -21,6 +21,12 @@
 + (NSPersistentStoreCoordinator *) coordinatorWithSqliteStoreNamed:(NSString *)storeFileName;
 + (NSPersistentStoreCoordinator *) coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *) storeFileName;
 + (NSPersistentStoreCoordinator *) coordinatorWithPersitentStore:(NSPersistentStore *)persistentStore;
++ (NSPersistentStoreCoordinator *) coordinatorWithiCloudSqliteStoreNamed:(NSString *) storeFileName;
+
+
+- (NSURL*)applicationDocumentsDirectoryURL;
+- (void)mergeiCloudChanges:(NSNotification*)note forContext:(NSManagedObjectContext*)moc;
+- (void)mergeChangesFrom_iCloud:(NSNotification *)notification;
 
 - (NSPersistentStore *) addInMemoryStore;
 

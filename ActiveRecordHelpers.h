@@ -28,7 +28,10 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 + (void) setupAutoMigratingCoreDataStack;
 
 + (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName;
++ (void) setupiCloudCoreDataStackWithStoreNamed:(NSString *)storeName;
 + (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName;
+
++ (void)flushUnsavedChanges;
 
 #ifdef NS_BLOCKS_AVAILABLE
 #pragma mark DEPRECATED_METHOD

@@ -32,8 +32,8 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
 {
 	if (defaultManageObjectContext != moc) 
 	{
-		[defaultManageObjectContext release];
-		defaultManageObjectContext = [moc retain];
+		defaultManageObjectContext = nil;
+		defaultManageObjectContext = moc;
 	}
 }
 
@@ -160,9 +160,9 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
 
 - (void) saveWrapper
 {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	[self save];
-	[pool drain];
+    @autoreleasepool {
+        [self save];
+    }
 }
 
 - (BOOL) saveOnBackgroundThread
@@ -195,7 +195,10 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
     {
         SEL selector = enabled ? @selector(observeContextOnMainThread:) : @selector(stopObservingContext:);
         objc_setAssociatedObject(self, @"notifiesMainContext", [NSNumber numberWithBool:enabled], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [mainContext performSelector:selector withObject:self];
+#pragma clang diagnostic pop
     }
 }
 
@@ -208,7 +211,7 @@ static NSString const * kActiveRecordManagedObjectContextKey = @"ActiveRecord_NS
         context = [[NSManagedObjectContext alloc] init];
         [context setPersistentStoreCoordinator:coordinator];
     }
-    return [context autorelease];
+    return context;
 }
 
 + (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;

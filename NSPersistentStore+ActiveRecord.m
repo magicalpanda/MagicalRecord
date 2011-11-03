@@ -18,8 +18,7 @@ static NSPersistentStore *defaultPersistentStore = nil;
 
 + (void) setDefaultPersistentStore:(NSPersistentStore *) store
 {
-	[defaultPersistentStore release];
-	defaultPersistentStore = [store retain];
+	defaultPersistentStore = store;
 }
 
 + (NSString *) directory:(int) type
@@ -53,7 +52,7 @@ static NSPersistentStore *defaultPersistentStore = nil;
 + (NSURL *) urlForStoreName:(NSString *)storeFileName
 {
 	NSArray *paths = [NSArray arrayWithObjects:[self applicationDocumentsDirectory], [self applicationLibraryDirectory], nil];
-    NSFileManager *fm = [[[NSFileManager alloc] init] autorelease];
+    NSFileManager *fm = [[NSFileManager alloc] init];
 
     for (NSString *path in paths) 
     {

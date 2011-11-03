@@ -12,6 +12,9 @@
     #define ARLog(...) ((void)0)
 #endif
 
+#define kiCloudDatabaseUpdated @"kiCloudDatabaseUpdateReceived"
+#define kiCloudDatabaseMerged @"kiCloudDatabaseMergeExecuted"
+
 #import "ActiveRecordHelpers.h"
 #import "ARCoreDataAction.h"
 #import "NSManagedObject+ActiveRecord.h"

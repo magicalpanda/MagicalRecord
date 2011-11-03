@@ -62,7 +62,10 @@ static SEL errorHandlerAction = nil;
         // If a custom error handler is set, call that
         if (errorHandlerTarget != nil && errorHandlerAction != nil) 
 		{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             [errorHandlerTarget performSelector:errorHandlerAction withObject:error];
+#pragma clang diagnostic pop
         }
 		else
 		{
@@ -103,6 +106,21 @@ static SEL errorHandlerAction = nil;
 	[NSManagedObjectContext setDefaultContext:context];
 }
 
++ (void) setupiCloudCoreDataStackWithStoreNamed:(NSString *)storeName {
+    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator coordinatorWithiCloudSqliteStoreNamed:storeName];
+	[NSPersistentStoreCoordinator setDefaultStoreCoordinator:coordinator];
+	
+    NSManagedObjectContext* moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    
+    [moc performBlockAndWait:^{
+        [moc setPersistentStoreCoordinator: coordinator];
+        [[NSNotificationCenter defaultCenter]addObserver:coordinator selector:@selector(mergeChangesFrom_iCloud:) name:NSPersistentStoreDidImportUbiquitousContentChangesNotification object:coordinator];
+    }];
+    
+	NSManagedObjectContext *context = [NSManagedObjectContext contextWithStoreCoordinator:coordinator];
+	[NSManagedObjectContext setDefaultContext:context];
+}
+
 + (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName
 {
     NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator coordinatorWithAutoMigratingSqliteStoreNamed:storeName];
@@ -119,6 +137,19 @@ static SEL errorHandlerAction = nil;
 	
 	NSManagedObjectContext *context = [NSManagedObjectContext contextWithStoreCoordinator:coordinator];
 	[NSManagedObjectContext setDefaultContext:context];
+}
+
+#pragma mark - helpers
+
++ (void)flushUnsavedChanges {
+    NSError *error = nil;
+    NSManagedObjectContext* context = [NSManagedObjectContext defaultContext];
+    if (context != nil) {
+        if ([context hasChanges] && ![context save:&error]) {
+			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+			abort();
+        } 
+    }
 }
 
 #ifdef NS_BLOCKS_AVAILABLE

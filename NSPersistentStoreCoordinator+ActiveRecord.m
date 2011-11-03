@@ -27,8 +27,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
 
 + (void) setDefaultStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
-	[defaultCoordinator release];
-	defaultCoordinator = [coordinator retain];
+	defaultCoordinator = coordinator;
 }
 
 - (void) setupSqliteStoreNamed:(id)storeFileName withOptions:(NSDictionary *)options
@@ -54,7 +53,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
     
     [psc setupSqliteStoreNamed:[persistentStore URL] withOptions:nil];
     
-    return [psc autorelease];
+    return psc;
 }
 
 + (NSPersistentStoreCoordinator *) coordinatorWithSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *)options
@@ -64,7 +63,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
 
     [psc setupSqliteStoreNamed:storeFileName withOptions:options];
     
-    return [psc autorelease];
+    return psc;
 }
 
 + (NSPersistentStoreCoordinator *) coordinatorWithSqliteStoreNamed:(NSString *)storeFileName
@@ -94,7 +93,33 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
     {
         [coordinator performSelector:@selector(setupAutoMigratingSqliteStoreNamed:) withObject:storeFileName afterDelay:0.5];
     }
-    return [coordinator autorelease];
+    return coordinator;
+}
+
++ (NSPersistentStoreCoordinator *) coordinatorWithiCloudSqliteStoreNamed:(NSString *) storeFileName {
+    NSPersistentStoreCoordinator* coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[NSManagedObjectModel defaultManagedObjectModel]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSURL* url = [NSURL fileURLWithPath:[[[coordinator applicationDocumentsDirectoryURL] URLByAppendingPathComponent:storeFileName] absoluteString]];
+        NSURL *cloudURL = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+        NSString* coreDataCloudContent = [[cloudURL path] stringByAppendingPathComponent:storeFileName];
+        cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
+        NSDictionary* options = [NSDictionary dictionaryWithObjectsAndKeys:@"activeRecord.database", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil];
+        NSError* error = nil;
+        [coordinator lock];
+        if (![coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error]) {
+            [[NSFileManager defaultManager] removeItemAtURL:url error:nil];
+            [[NSFileManager defaultManager] removeItemAtURL:cloudURL error:nil];
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+        [coordinator unlock];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"asynchronously added persistent store!");
+            [[NSNotificationCenter defaultCenter] postNotificationName:kiCloudDatabaseUpdated object:self userInfo:nil];
+        });
+    });
+    
+    return coordinator;
 }
 
 + (NSPersistentStoreCoordinator *) coordinatorWithInMemoryStore
@@ -103,7 +128,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
 	NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
 	
     [NSPersistentStore setDefaultPersistentStore:[psc addInMemoryStore]];
-	return [psc autorelease];
+	return psc;
 }
 
 - (NSPersistentStore *) addInMemoryStore
@@ -123,7 +148,30 @@ static NSPersistentStoreCoordinator *defaultCoordinator = nil;
 
 + (NSPersistentStoreCoordinator *) newPersistentStoreCoordinator
 {
-	return [[self coordinatorWithSqliteStoreNamed:kActiveRecordDefaultStoreFileName] retain];
+	return [self coordinatorWithSqliteStoreNamed:kActiveRecordDefaultStoreFileName];
+}
+
+- (NSURL *)applicationDocumentsDirectoryURL {
+    NSString* path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+	return [NSURL URLWithString:path];
+}
+
+- (void)mergeiCloudChanges:(NSNotification*)note forContext:(NSManagedObjectContext*)moc {
+    [moc mergeChangesFromContextDidSaveNotification:note]; 
+    
+    NSNotification* refreshNotification = [NSNotification notificationWithName:kiCloudDatabaseMerged object:self  userInfo:[note userInfo]];
+    
+    [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+}
+
+- (void)mergeChangesFrom_iCloud:(NSNotification *)notification {
+	NSManagedObjectContext* moc = [NSManagedObjectContext defaultContext];
+    
+    // this only works if you used NSMainQueueConcurrencyType
+    // otherwise use a dispatch_async back to the main thread yourself
+    [moc performBlock:^{
+        [self mergeiCloudChanges:notification forContext:moc];
+    }];
 }
 
 @end
