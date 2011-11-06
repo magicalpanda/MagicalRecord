@@ -49,7 +49,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
 
 - (void) MR_setupSqliteStoreNamed:(id)storeFileName withOptions:(NSDictionary *)options
 {
-    NSURL *url = [storeFileName isKindOfClass:[NSURL class]] ? storeFileName : [NSPersistentStore MR_urlForStoreName:storeFileName];
+    NSURL *url = [storeFileName isKindOfClass:[NSURL class]] ? storeFileName : [NSPersistentStore MR_URLForStoreName:storeFileName];
     NSError *error = nil;
     
     [self MR_createPathToStoreFileIfNeccessary:url];

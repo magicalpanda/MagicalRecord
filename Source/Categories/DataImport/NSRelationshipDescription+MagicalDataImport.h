@@ -8,6 +8,10 @@
 
 #import <CoreData/CoreData.h>
 
+#ifdef MR_SHORTHAND
+	#define MR_primaryKey primaryKey
+#endif
+
 @interface NSRelationshipDescription (MagicalRecord_DataImport)
 
 - (NSString *) MR_primaryKey;
