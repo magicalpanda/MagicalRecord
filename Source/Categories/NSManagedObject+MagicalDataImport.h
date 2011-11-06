@@ -17,6 +17,13 @@ extern NSString * const kMagicalRecordImportRelationshipMapKey;
 extern NSString * const kMagicalRecordImportRelationshipPrimaryKey;
 extern NSString * const kMagicalRecordImportRelationshipTypeKey;
 
+#ifdef MR_SHORTHAND
+	#define MR_importValuesForKeysWithDictionary importValuesForKeysWithDictionary
+	#define MR_importFromDictionary importFromDictionary
+	#define MR_importFromArray importFromArray
+	#define MR_updateFromDictionary updateFromDictionary
+#endif
+
 @interface NSManagedObject (NSManagedObject_DataImport)
 
 - (void) MR_importValuesForKeysWithDictionary:(NSDictionary *)objectData;
@@ -32,9 +39,3 @@ extern NSString * const kMagicalRecordImportRelationshipTypeKey;
 + (id) MR_updateFromDictionary:(NSDictionary *)objectData inContext:(NSManagedObjectContext *)context;
 
 @end
-
-
-#ifdef MR_SHORTHAND
-    #define importFromDictionary                    MR_importFromDictionary
-    #define setValuesForKeysWithJSDONDictionary     MR_setValuesForKeysWithJSONDictionary
-#endif

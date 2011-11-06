@@ -12,7 +12,7 @@
 
 - (void) setUp
 {
-    NSURL *testStoreURL = [NSPersistentStore MR_urlForStoreName:@"TestStore.sqlite"];
+    NSURL *testStoreURL = [NSPersistentStore MR_URLForStoreName:@"TestStore.sqlite"];
     [[NSFileManager defaultManager] removeItemAtPath:[testStoreURL path] error:nil];
 }
 

@@ -8,6 +8,14 @@
 #import <Foundation/Foundation.h>
 #import "MagicalRecordHelpers.h"
 
+#ifdef MR_SHORTHAND
+	#define defaultManagedObjectModel MR_defaultManagedObjectModel
+	#define managedObjectModelNamed MR_managedObjectModelNamed
+	#define newManagedObjectModel MR_newManagedObjectModel
+	#define newModelNamed MR_newModelNamed
+	#define setDefaultManagedObjectModel MR_setDefaultManagedObjectModel
+#endif
+
 @interface NSManagedObjectModel (MagicalRecord)
 
 + (NSManagedObjectModel *)MR_defaultManagedObjectModel;
@@ -20,14 +28,3 @@
 + (NSManagedObjectModel *) MR_mergedObjectModelFromMainBundle;
 
 @end
-
-
-#ifdef MR_SHORTHAND
-
-#define defaultManagedObjectModel               MR_defaultManagedObjectModel
-#define setDefaultManagedObjectModel            MR_setDefaultManagedObjectModel
-#define newManagedObjectModel                   MR_newManagedObjectModel
-#define managedObjectModelNamed                 MR_managedObjectModelNamed
-#define newModelNamed                           MR_newModelNamed
-
-#endif

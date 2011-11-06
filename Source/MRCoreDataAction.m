@@ -43,17 +43,17 @@ void cleanup_save_queue()
 
 + (void) saveDataWithBlock:(void (^)(NSManagedObjectContext *localContext))block errorHandler:(void (^)(NSError *))errorHandler
 {
-    NSManagedObjectContext *mainContext  = [NSManagedObjectContext defaultContext];
+    NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
     NSManagedObjectContext *localContext = mainContext;
     
     if (![NSThread isMainThread]) 
     {
         
 #if kCreateNewCoordinatorOnBackgroundOperations == 1
-        NSPersistentStoreCoordinator *localCoordinator = [NSPersistentStoreCoordinator coordinatorWithPersitentStore:[NSPersistentStore defaultPersistentStore]];
-        localContext = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:localCoordinator];
+        NSPersistentStoreCoordinator *localCoordinator = [NSPersistentStoreCoordinator MR_coordinatorWithPersitentStore:[NSPersistentStore defaultPersistentStore]];
+        localContext = [NSManagedObjectContext MR_contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:localCoordinator];
 #else
-        localContext = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
+        localContext = [NSManagedObjectContext MR_contextThatNotifiesDefaultContextOnMainThread];
 #endif
         
         [mainContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
@@ -64,10 +64,10 @@ void cleanup_save_queue()
     
     if ([localContext hasChanges]) 
     {
-        [localContext saveWithErrorHandler:errorHandler];
+        [localContext MR_saveWithErrorHandler:errorHandler];
     }
     
-    localContext.notifiesMainContextOnSave = NO;
+    localContext.MR_notifiesMainContextOnSave = NO;
     [mainContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
 }
 
@@ -109,7 +109,7 @@ void cleanup_save_queue()
 
 + (void) lookupWithBlock:(void(^)(NSManagedObjectContext *localContext))block
 {
-    NSManagedObjectContext *context = [NSManagedObjectContext contextForCurrentThread];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_contextForCurrentThread];
 
     if (block)
     {

@@ -5,8 +5,8 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#if TARGET_OS_IPHONE == 0
-#define MAC_PLATFORM_ONLY YES
+#ifdef __MAC_OS_X_VERSION_MIN_REQUIRED
+	#define MAC_PLATFORM_ONLY YES
 #endif
 
 #ifdef NS_BLOCKS_AVAILABLE
@@ -16,7 +16,7 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
 #endif
 
-@interface MagicalRecordHelpers : NSObject {}
+@interface MagicalRecordHelpers : NSObject
 
 + (NSString *) currentStack;
 
@@ -59,15 +59,13 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
 @end
 
-
-
 //Helper Functions
 NSDate * adjustDateForDST(NSDate *date);
 NSDate * dateFromString(NSString *value, NSString *format);
 NSString * attributeNameFromString(NSString *value);
 NSString * primaryKeyNameFromString(NSString *value);
 
-#if TARGET_OS_IPHONE
+#ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
 
 UIColor * UIColorFromString(NSString *serializedColor);
 
@@ -76,5 +74,5 @@ UIColor * UIColorFromString(NSString *serializedColor);
 NSColor * NSColorFromString(NSString *serializedColor);
 
 #endif
-id (*colorFromString)(NSString *);
 
+id (*colorFromString)(NSString *);

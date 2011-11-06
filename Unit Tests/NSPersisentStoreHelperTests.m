@@ -19,7 +19,7 @@
     
     NSURL *expectedStoreUrl = [NSURL fileURLWithPath:[applicationLibraryDirectory stringByAppendingPathComponent:defaultStoreName]];
     
-    NSURL *defaultStoreUrl = [NSPersistentStore defaultLocalStoreUrl];
+    NSURL *defaultStoreUrl = [NSPersistentStore defaultLocalStoreURL];
     
     assertThat(defaultStoreUrl, is(equalTo(expectedStoreUrl)));
 }
@@ -36,7 +36,7 @@
     assertThatBool(fileWasCreated, is(equalToBool(YES)));
     
     NSURL *expectedFoundStoreUrl = [NSURL fileURLWithPath:testStorePath];
-    NSURL *foundStoreUrl = [NSPersistentStore urlForStoreName:storeFileName];
+    NSURL *foundStoreUrl = [NSPersistentStore URLForStoreName:storeFileName];
     
     assertThat(foundStoreUrl, is(equalTo(expectedFoundStoreUrl)));
     
@@ -54,7 +54,7 @@
     assertThatBool(fileWasCreated, is(equalToBool(YES)));
     
     NSURL *expectedFoundStoreUrl = [NSURL fileURLWithPath:testStorePath];
-    NSURL *foundStoreUrl = [[NSPersistentStore urlForStoreName:storeFileName] retain];
+    NSURL *foundStoreUrl = [[NSPersistentStore URLForStoreName:storeFileName] retain];
     
     assertThat(foundStoreUrl, is(equalTo(expectedFoundStoreUrl)));
     [foundStoreUrl release];

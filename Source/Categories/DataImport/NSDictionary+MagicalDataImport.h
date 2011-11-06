@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+#ifdef MR_SHORTHAND
+	#define MR_lookupKeyForAttribute lookupKeyForAttribute
+	#define MR_lookupKeyForRelationship lookupKeyForRelationship
+	#define MR_relatedValueForRelationship relatedValueForRelationship
+	#define MR_valueForAttribute valueForAttribute
+#endif
+
 @interface NSDictionary (MagicalRecord_DataImport)
 
 - (NSString *) MR_lookupKeyForAttribute:(NSAttributeDescription *)attributeInfo;

@@ -20,7 +20,7 @@ static BOOL shouldAutoCreateDefaultPersistentStoreCoordinator_;
     errorHandlerTarget = nil;
     errorHandlerAction = nil;
 	[MRCoreDataAction cleanUp];
-	[NSManagedObjectContext setDefaultContext:nil];
+	[NSManagedObjectContext MR_setDefaultContext:nil];
 	[NSManagedObjectModel MR_setDefaultManagedObjectModel:nil];
 	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:nil];
 	[NSPersistentStore MR_setDefaultPersistentStore:nil];
@@ -30,7 +30,7 @@ static BOOL shouldAutoCreateDefaultPersistentStoreCoordinator_;
 {
     NSMutableString *status = [NSMutableString stringWithString:@"Current Default Core Data Stack: ---- \n"];
     
-    [status appendFormat:@"Context:     %@\n", [NSManagedObjectContext defaultContext]];
+    [status appendFormat:@"Context:     %@\n", [NSManagedObjectContext MR_defaultContext]];
     [status appendFormat:@"Model:       %@\n", [NSManagedObjectModel MR_defaultManagedObjectModel]];
     [status appendFormat:@"Coordinator: %@\n", [NSPersistentStoreCoordinator MR_defaultStoreCoordinator]];
     [status appendFormat:@"Store:       %@\n", [NSPersistentStore MR_defaultPersistentStore]];
@@ -115,8 +115,8 @@ static BOOL shouldAutoCreateDefaultPersistentStoreCoordinator_;
 
 + (void) setupCoreDataStack
 {
-    NSManagedObjectContext *context = [NSManagedObjectContext context];
-	[NSManagedObjectContext setDefaultContext:context];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
+	[NSManagedObjectContext MR_setDefaultContext:context];
 }
 
 + (void) setupAutoMigratingCoreDataStack
@@ -129,8 +129,8 @@ static BOOL shouldAutoCreateDefaultPersistentStoreCoordinator_;
 	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreNamed:storeName];
 	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
 	
-	NSManagedObjectContext *context = [NSManagedObjectContext contextWithStoreCoordinator:coordinator];
-	[NSManagedObjectContext setDefaultContext:context];
+	NSManagedObjectContext *context = [NSManagedObjectContext MR_contextWithStoreCoordinator:coordinator];
+	[NSManagedObjectContext MR_setDefaultContext:context];
 }
 
 + (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName
@@ -138,8 +138,8 @@ static BOOL shouldAutoCreateDefaultPersistentStoreCoordinator_;
     NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithAutoMigratingSqliteStoreNamed:storeName];
     [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
     
-    NSManagedObjectContext *context = [NSManagedObjectContext contextWithStoreCoordinator:coordinator];
-    [NSManagedObjectContext setDefaultContext:context];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_contextWithStoreCoordinator:coordinator];
+    [NSManagedObjectContext MR_setDefaultContext:context];
 }
 
 + (void) setupCoreDataStackWithInMemoryStore
@@ -147,8 +147,8 @@ static BOOL shouldAutoCreateDefaultPersistentStoreCoordinator_;
 	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithInMemoryStore];
 	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
 	
-	NSManagedObjectContext *context = [NSManagedObjectContext contextWithStoreCoordinator:coordinator];
-	[NSManagedObjectContext setDefaultContext:context];
+	NSManagedObjectContext *context = [NSManagedObjectContext MR_contextWithStoreCoordinator:coordinator];
+	[NSManagedObjectContext MR_setDefaultContext:context];
 }
 
 + (BOOL) shouldAutoCreateManagedObjectModel;
@@ -253,7 +253,7 @@ NSInteger* newColorComponentsFromString(NSString *serializedColor)
     return componentValues;
 }
 
-#if TARGET_OS_IPHONE
+#ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
 
 UIColor * UIColorFromString(NSString *serializedColor)
 {

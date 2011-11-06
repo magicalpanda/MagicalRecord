@@ -50,7 +50,7 @@ static NSPersistentStore *defaultPersistentStore_ = nil;
 #endif
 }
 
-+ (NSURL *) MR_urlForStoreName:(NSString *)storeFileName
++ (NSURL *) MR_URLForStoreName:(NSString *)storeFileName
 {
 	NSArray *paths = [NSArray arrayWithObjects:[self MR_applicationDocumentsDirectory], [self MR_applicationLibraryDirectory], nil];
     NSFileManager *fm = [[[NSFileManager alloc] init] autorelease];
@@ -64,13 +64,13 @@ static NSPersistentStore *defaultPersistentStore_ = nil;
         }
     }
 
-    //set default url
+    //set default URL
     return [NSURL fileURLWithPath:[[self MR_applicationLibraryDirectory] stringByAppendingPathComponent:storeFileName]];
 }
 
-+ (NSURL *)MR_defaultLocalStoreUrl
++ (NSURL *)MR_defaultLocalStoreURL
 {
-    return [self MR_urlForStoreName:kMagicalRecordDefaultStoreFileName];
+    return [self MR_URLForStoreName:kMagicalRecordDefaultStoreFileName];
 }
 
 @end

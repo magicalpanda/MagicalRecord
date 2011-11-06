@@ -7,27 +7,22 @@
 
 #import "MagicalRecordHelpers.h"
 
-// option to autodelete store if it already exists
-
 extern NSString * const kMagicalRecordDefaultStoreFileName;
+
+#ifdef MR_SHORTHAND
+	#define defaultLocalStoreURL MR_defaultLocalStoreURL
+	#define defaultPersistentStore MR_defaultPersistentStore
+	#define setDefaultPersistentStore MR_setDefaultPersistentStore
+	#define URLForStoreName MR_URLForStoreName
+#endif
 
 @interface NSPersistentStore (MagicalRecord)
 
-+ (NSURL *) MR_defaultLocalStoreUrl;
++ (NSURL *) MR_defaultLocalStoreURL;
 
 + (NSPersistentStore *) MR_defaultPersistentStore;
 + (void) MR_setDefaultPersistentStore:(NSPersistentStore *) store;
 
-+ (NSURL *) MR_urlForStoreName:(NSString *)storeFileName;
++ (NSURL *) MR_URLForStoreName:(NSString *)storeFileName;
 
 @end
-
-
-#ifdef MR_SHORTHAND
-
-#define defaultLocalStoreUrl            MR_defaultLocalStoreUrl
-#define defaultPersistentStore          MR_defaultPersistentStore
-#define setDefaultPersistentStore       MR_setDefaultPersistentStore
-#define urlForStoreName                 MR_urlForStoreName
-
-#endif
