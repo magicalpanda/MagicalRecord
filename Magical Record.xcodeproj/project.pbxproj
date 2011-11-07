@@ -382,13 +382,13 @@
 		C721C7A013D0A3750097AB6F = {
 			isa = PBXGroup;
 			children = (
-				C7C9A37013F43D3E002C5B0C /* Third Party */,
+				C721C85513D0C7030097AB6F /* Source */,
+				C77E5FA513D0CBA600298F87 /* Unit Tests */,
 				C721C7E413D0C3A00097AB6F /* Mac App Unit Tests */,
 				C721C80213D0C3CD0097AB6F /* iOS App Unit Tests */,
+				C7C9A37013F43D3E002C5B0C /* Third Party */,
 				C721C7B313D0A3AF0097AB6F /* Frameworks */,
 				C721C7B113D0A3AF0097AB6F /* Products */,
-				C77E5FA513D0CBA600298F87 /* Unit Tests */,
-				C721C85513D0C7030097AB6F /* Source */,
 				C76AF7F813DBE8D300CE2E05 /* README.md */,
 			);
 			sourceTree = "<group>";
