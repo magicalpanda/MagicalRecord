@@ -20,7 +20,7 @@ typedef enum
     MRCoreDataLookupOptionWithNewContext    = 1 << 0
 } MRCoreDataLookupOption;
 
-@interface MRCoreDataAction : NSObject {}
+@interface MRCoreDataAction : NSObject
 
 + (void) cleanUp;
 

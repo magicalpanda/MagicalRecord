@@ -16,7 +16,7 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
 #endif
 
-@interface MagicalRecordHelpers : NSObject {}
+@interface MagicalRecordHelpers : NSObject
 
 + (NSString *) currentStack;
 
@@ -66,6 +66,10 @@ NSDate * adjustDateForDST(NSDate *date);
 NSDate * dateFromString(NSString *value, NSString *format);
 NSString * attributeNameFromString(NSString *value);
 NSString * primaryKeyNameFromString(NSString *value);
+
+//Dynamic shorthand method helpers
+BOOL addMagicalRecordClassMethod(Class class, SEL selector);
+BOOL addMagicalRecordInstanceMethod(Class klass, SEL originalSelector);
 
 #if TARGET_OS_IPHONE
 

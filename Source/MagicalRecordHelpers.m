@@ -6,6 +6,9 @@
 //
 
 #import "CoreData+MagicalRecord.h"
+#import <objc/runtime.h>
+
+static NSString * const magicalRecordCategoryPrefix = @"MR_";
 
 static id errorHandlerTarget = nil;
 static SEL errorHandlerAction = nil;
@@ -197,6 +200,44 @@ static BOOL shouldAutoCreateDefaultPersistentStoreCoordinator_;
 #endif
 
 @end
+
+BOOL addMagicalRecordInstanceMethod(Class klass, SEL originalSelector)
+{
+    NSString *originalSelectorString = NSStringFromSelector(originalSelector);
+    if (![originalSelectorString hasPrefix:magicalRecordCategoryPrefix]) 
+    {
+        NSString *prefixedSelector = [magicalRecordCategoryPrefix stringByAppendingString:originalSelectorString];
+        Method existingMethod = class_getInstanceMethod(klass, NSSelectorFromString(prefixedSelector));
+        
+        BOOL methodWasAdded = class_addMethod(klass, 
+                                              originalSelector, 
+                                              method_getImplementation(existingMethod), 
+                                              method_getTypeEncoding(existingMethod));
+        
+        return methodWasAdded;
+    }
+    return NO;
+}
+                                    
+
+BOOL addMagicalRecordClassMethod(Class klass, SEL originalSelector)
+{
+    NSString *originalSelectorString = NSStringFromSelector(originalSelector);
+    if (![originalSelectorString hasPrefix:magicalRecordCategoryPrefix]) 
+    {
+        NSString *prefixedSelector = [magicalRecordCategoryPrefix stringByAppendingString:originalSelectorString];
+        Method existingMethod = class_getClassMethod(klass, NSSelectorFromString(prefixedSelector));
+        
+        Class metaClass = objc_getMetaClass([NSStringFromClass(klass) cStringUsingEncoding:NSUTF8StringEncoding]);
+        BOOL methodWasAdded = class_addMethod(metaClass, 
+                                              originalSelector, 
+                                              method_getImplementation(existingMethod), 
+                                              method_getTypeEncoding(existingMethod));
+        
+        return methodWasAdded;
+    }
+    return NO;
+}
 
 NSString * attributeNameFromString(NSString *value)
 {
