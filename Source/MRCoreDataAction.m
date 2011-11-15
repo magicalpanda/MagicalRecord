@@ -30,6 +30,7 @@ void cleanup_save_queue()
 	if (coredata_background_save_queue != NULL)
 	{
 		dispatch_release(coredata_background_save_queue);
+        coredata_background_save_queue = NULL;
 	}
 }
 
