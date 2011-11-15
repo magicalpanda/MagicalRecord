@@ -13,13 +13,13 @@
 - (NSString *) applicationStorageDirectory
 {
     NSString *appSupportDirectory = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject];
-    appSupportDirectory = [[appSupportDirectory stringByAppendingPathComponent:@"iOS App Unit Tests"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    appSupportDirectory = [appSupportDirectory stringByAppendingPathComponent:@"iOS App Unit Tests"];
     return appSupportDirectory;
 }
 
 #if TARGET_OS_IPHONE
 
-- (void) testDefaultStoreFolderForiOSDevicesIsTheLibraryFolder
+- (void) testDefaultStoreFolderForiOSDevicesIsTheApplicationSupportFolder
 {
     NSString *applicationLibraryDirectory = [self applicationStorageDirectory];
     NSString *defaultStoreName = kMagicalRecordDefaultStoreFileName;
