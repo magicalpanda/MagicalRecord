@@ -10,5 +10,6 @@
 @interface NSEntityDescription (MagicalRecord_DataImport)
 
 - (NSAttributeDescription *) MR_primaryKeyAttribute;
+- (NSManagedObject *) MR_createInstanceFromDictionary:(id)objectData inContext:(NSManagedObjectContext *)context;
 
 @end

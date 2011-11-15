@@ -65,16 +65,6 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     }
 }
 
-- (NSManagedObject *) MR_createInstanceForEntity:(NSEntityDescription *)entityDescription withDictionary:(id)objectData
-{
-    NSManagedObject *relatedObject = [NSEntityDescription insertNewObjectForEntityForName:[entityDescription name] 
-                                                                   inManagedObjectContext:[self managedObjectContext]];
-    
-    [relatedObject MR_importValuesForKeysWithDictionary:objectData];
-    
-    return relatedObject;
-}
-
 - (NSManagedObject *) MR_findObjectForRelationship:(NSRelationshipDescription *)relationshipInfo withData:(id)singleRelatedObjectData
 {
     NSEntityDescription *destinationEntity = [relationshipInfo destinationEntity];
@@ -162,7 +152,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
          NSManagedObject *relatedObject = nil;
          if ([objectData isKindOfClass:[NSDictionary class]]) 
          {
-             relatedObject = [self MR_createInstanceForEntity:[relationshipInfo destinationEntity] withDictionary:objectData];
+             relatedObject = [[relationshipInfo destinationEntity] MR_createInstanceFromDictionary:objectData inContext:[self managedObjectContext]];
          }
          else
          {
@@ -192,8 +182,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
                                                                     withData:objectData];
          if (relatedObject == nil)
          {
-             relatedObject = [self MR_createInstanceForEntity:[relationshipInfo destinationEntity]
-                                               withDictionary:objectData];
+             relatedObject = [[relationshipInfo destinationEntity] MR_createInstanceFromDictionary:objectData inContext:[self managedObjectContext]];
          }
          else
          {
@@ -224,17 +213,17 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     
     id value = [objectData MR_valueForAttribute:primaryAttribute];
     
-    NSManagedObject *manageObject = [self findFirstByAttribute:[primaryAttribute name] withValue:value inContext:context];
-    if (!manageObject) 
+    NSManagedObject *managedObject = [self findFirstByAttribute:[primaryAttribute name] withValue:value inContext:context];
+    if (!managedObject) 
     {
-        manageObject = [self createInContext:context];
-        [manageObject MR_importValuesForKeysWithDictionary:objectData];
+        managedObject = [self createInContext:context];
+        [managedObject MR_importValuesForKeysWithDictionary:objectData];
     }
     else
     {
-        [manageObject MR_updateValuesForKeysWithDictionary:objectData];
+        [managedObject MR_updateValuesForKeysWithDictionary:objectData];
     }
-    return manageObject;
+    return managedObject;
 }
 
 + (id) MR_updateFromDictionary:(NSDictionary *)objectData
