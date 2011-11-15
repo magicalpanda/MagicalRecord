@@ -12,6 +12,7 @@ NSString * const kMagicalRecordDefaultStoreFileName = @"CoreDataStore.sqlite";
 
 static NSPersistentStore *defaultPersistentStore_ = nil;
 
+
 @implementation NSPersistentStore (MagicalRecord)
 
 + (NSPersistentStore *) MR_defaultPersistentStore
@@ -60,7 +61,7 @@ static NSPersistentStore *defaultPersistentStore_ = nil;
     return [NSURL fileURLWithPath:[[self MR_applicationStorageDirectory] stringByAppendingPathComponent:storeFileName]];
 }
 
-+ (NSURL *)MR_defaultLocalStoreUrl
++ (NSURL *) MR_defaultLocalStoreUrl
 {
     return [self MR_urlForStoreName:kMagicalRecordDefaultStoreFileName];
 }

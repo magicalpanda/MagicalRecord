@@ -21,7 +21,6 @@
 
 - (BOOL) saveOnMainThread;
 - (BOOL) saveOnBackgroundThread;
-//- (void) setNotifiesMainContextOnSave:(BOOL)enabled;
 
 + (void) resetDefaultContext;
 + (NSManagedObjectContext *) defaultContext;
@@ -39,29 +38,4 @@
 
 @end
 
-/*
-#ifdef MR_SHORTHAND
 
-#define observeContext              MR_observeContext
-#define stopObservingContext        MR_stopObservingContext
-#define observeContextOnMainThread  MR_observeContextOnMainThread
-
-#define save                        MR_save
-
-#define saveWithErrorHandler        MR_saveWithErrorHandler
-
-#define saveOnMainThread            MR_saveOnMainThread
-#define saveOnBackgroundThread      MR_saveOnBackgroundThread
-
-#define setNotifiesMainContextOnSave    MR_setNotifiesMainContextOnSave
-#define notifiesMainContextonSave       MR_notifiesMainContextonSave
-
-//#define context]                    MR_context]
-#define contextForCurrentThread     MR_contextForCurrentThread
-
-#define contextThatNotifiesDefaultContextOnMainThread       MR_contextThatNotifiesDefaultContextOnMainThread
-#define contextWithStoreCoordinator                         MR_contextWithStoreCoodinator
-
-#endif
-
-*/

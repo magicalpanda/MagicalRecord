@@ -10,7 +10,7 @@
 
 @interface NSManagedObjectModel (MagicalRecord)
 
-+ (NSManagedObjectModel *)MR_defaultManagedObjectModel;
++ (NSManagedObjectModel *) MR_defaultManagedObjectModel;
 + (void) MR_setDefaultManagedObjectModel:(NSManagedObjectModel *)newDefaultModel;
 
 + (NSManagedObjectModel *) MR_newManagedObjectModel NS_RETURNS_RETAINED;
@@ -21,13 +21,16 @@
 
 @end
 
-
-#ifdef MR_SHORTHAND
-
-#define defaultManagedObjectModel               MR_defaultManagedObjectModel
-#define setDefaultManagedObjectModel            MR_setDefaultManagedObjectModel
-#define newManagedObjectModel                   MR_newManagedObjectModel
-#define managedObjectModelNamed                 MR_managedObjectModelNamed
-#define newModelNamed                           MR_newModelNamed
-
-#endif
+//
+//@interface NSManagedObjectModel (MagicalRecordShortHandHeaders)
+//
+//+ (NSManagedObjectModel *) defaultManagedObjectModel;
+//+ (void) setDefaultManagedObjectModel:(NSManagedObjectModel *)newDefaultModel;
+//
+//+ (NSManagedObjectModel *) newManagedObjectModel NS_RETURNS_RETAINED;
+//+ (NSManagedObjectModel *) newManagedObjectModelNamed:(NSString *)modelFileName NS_RETURNS_RETAINED;
+//+ (NSManagedObjectModel *) managedObjectModelNamed:(NSString *)modelFileName;
+//+ (NSManagedObjectModel *) newModelNamed:(NSString *) modelName inBundleNamed:(NSString *) bundleName NS_RETURNS_RETAINED;
+//+ (NSManagedObjectModel *) mergedObjectModelFromMainBundle;
+//
+//@end
