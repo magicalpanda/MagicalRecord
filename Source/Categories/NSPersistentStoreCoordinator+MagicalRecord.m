@@ -11,6 +11,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
 
 @implementation NSPersistentStoreCoordinator (MagicalRecord)
 
+
 + (NSPersistentStoreCoordinator *) MR_defaultStoreCoordinator
 {
     if (defaultCoordinator_ == nil && [MagicalRecordHelpers shouldAutoCreateDefaultPersistentStoreCoordinator])
@@ -22,8 +23,11 @@ static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
 
 + (void) MR_setDefaultStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
+    [coordinator retain];
+    [defaultCoordinator_ release];
 	defaultCoordinator_ = coordinator;
-    if ([NSPersistentStore MR_defaultPersistentStore] == nil)
+    
+    if (defaultCoordinator_ != nil && [NSPersistentStore MR_defaultPersistentStore] == nil)
     {
         NSArray *persistentStores = [defaultCoordinator_ persistentStores];
         if ([persistentStores count])
