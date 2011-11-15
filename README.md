@@ -79,6 +79,9 @@ Or, to have the results sorted by a property:
 
 	NSArray *peopleSorted = [Person findAllSortedByProperty:@"LastName" ascending:YES];
 
+Or, to have the results sorted by multiple properties:
+
+    NSArray *peopleSorted = [Person findAllSortedByProperty:@"LastName,FirstName" ascending:YES];
 
 If you have a unique way of retrieving a single object from your data store, you can get that object directly:
 
@@ -129,6 +132,12 @@ There are also counterpart methods which return NSUInteger rather than NSNumbers
 * countOfEntitiesWithPredicate:(NSPredicate *)
 * countOfEntitiesWithPredicate:(NSPredicate *) inContext:(NSManagedObjectContext *)
 
+#### Aggregate Operations
+
+    NSPredicate *prediate = [NSPredicate predicateWithFormat:@"diaryEntry.date == %@", today];
+    int totalFat = [[CTFoodDiaryEntry aggregateOperation:@"sum:" onAttribute:@"fatColories" withPredicate:predicate] intValue];
+    int fattest  = [[CTFoodDiaryEntry aggregateOperation:@"max:" onAttribute:@"fatColories" withPredicate:predicate] intValue];
+    
 #### Finding from a different context
 
 All find, fetch and request methods have an inContext: method parameter
