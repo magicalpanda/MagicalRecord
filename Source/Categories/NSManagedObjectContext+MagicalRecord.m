@@ -160,7 +160,7 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
 #if __IPHONE_OS_VERSION_MAX_ALLOWED == __IPHONE_5_0
     @autoreleasepool
     {
-        [self save];
+        [self MR_save];
     }
 #else
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];

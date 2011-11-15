@@ -103,7 +103,8 @@
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext;
 - (id) MR_inThreadContext;
 
-#ifndef TARGET_OS_MAC
+
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
 + (void) MR_performFetch:(NSFetchedResultsController *)controller;
 
@@ -119,9 +120,7 @@
 + (NSFetchedResultsController *) MR_fetchRequestAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending delegate:(id)delegate;
 + (NSFetchedResultsController *) MR_fetchRequestAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending delegate:(id)delegate inContext:(NSManagedObjectContext *)context;
 
-
 #endif
-
 
 @end
 
