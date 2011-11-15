@@ -9,6 +9,7 @@
 #import <objc/runtime.h>
 
 static NSString * const kMagicalRecordCategoryPrefix = @"MR_";
+static BOOL methodsHaveBeenSwizzled = NO;
 
 static id errorHandlerTarget = nil;
 static SEL errorHandlerAction = nil;
@@ -117,6 +118,12 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
 	[[self class] handleErrors:error];
 }
 
++ (void) setDefaultModelNamed:(NSString *)modelName;
+{
+    NSManagedObjectModel *model = [NSManagedObjectModel MR_managedObjectModelNamed:modelName];
+    [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
+}
+
 + (void) setupCoreDataStack
 {
     NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
@@ -201,6 +208,8 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
 
 #endif
 
+#pragma mark - Support methods for shorthand methods
+
 + (BOOL) MR_resolveClassMethod:(SEL)originalSelector
 {
     BOOL resolvedClassMethod = [self MR_resolveClassMethod:originalSelector];
@@ -221,6 +230,7 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
     return resolvedClassMethod;
 }
 
+//In order to add support for non-prefixed AND prefixed methods, we need to swap the existing resolveClassMethod: and resolveInstanceMethod: implementations with the one in this class.
 + (void) updateResolveMethodsForClass:(Class)klass
 {
     replaceSelectorForTargetWithSourceImpAndSwizzle(self, @selector(MR_resolveClassMethod:), klass, @selector(resolveClassMethod:));
@@ -229,6 +239,8 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
 
 + (void) swizzleShorthandMethods;
 {
+    if (methodsHaveBeenSwizzled) return;
+    
     NSArray *classes = [NSArray arrayWithObjects:
                         [NSManagedObject class],
                         [NSManagedObjectContext class], 
@@ -241,7 +253,10 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
         
         [self updateResolveMethodsForClass:klass];
     }];
+    methodsHaveBeenSwizzled = YES;
 }
+
+#pragma mark - initialize
 
 + (void) initialize;
 {
@@ -255,6 +270,7 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
 
 @end
 
+#pragma mark - Support functions for runtime shorthand Method calling
 
 void replaceSelectorForTargetWithSourceImpAndSwizzle(Class sourceClass, SEL sourceSelector, Class targetClass, SEL targetSelector)
 {
@@ -273,26 +289,7 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class sourceClass, SEL sour
                             method_getImplementation(sourceClassMethod), 
                             method_getTypeEncoding(sourceClassMethod));
     }
-//    else
-//    {
-//        method_exchangeImplementations(sourceClassMethod, targetClassMethod);
-//    }
 }
-
-//void swizzleInstanceMethods(Class originalClass, SEL originalSelector, Class targetClass, SEL newSelector)
-//{
-//    Method originalInstanceMethod = class_getInstanceMethod(originalClass, originalSelector);
-//    Method overrideInstanceMethod = class_getInstanceMethod(targetClass, newSelector);
-//    
-//    if (class_addMethod(originalClass, originalSelector, method_getImplementation(overrideInstanceMethod), method_getTypeEncoding(overrideInstanceMethod)))
-//    {
-//        class_replaceMethod(targetClass, newSelector, method_getImplementation(originalInstanceMethod), method_getTypeEncoding(originalInstanceMethod));
-//    }
-//    else
-//    {
-//        method_exchangeImplementations(originalInstanceMethod, overrideInstanceMethod);
-//    }
-//}
 
 BOOL addMagicalRecordShorthandMethodToPrefixedInstanceMethod(Class klass, SEL originalSelector)
 {
@@ -339,6 +336,8 @@ BOOL addMagicalRecordShortHandMethodToPrefixedClassMethod(Class klass, SEL origi
     }
     return NO;
 }
+
+#pragma mark - Data import helper functions
 
 NSString * attributeNameFromString(NSString *value)
 {
@@ -395,6 +394,8 @@ NSInteger* newColorComponentsFromString(NSString *serializedColor)
             componentValue++;
         }
     }
+    //else if ([colorType hasPrefix:@"hsba"])
+    //else if ([colorType hasPrefix:@""])
     return componentValues;
 }
 

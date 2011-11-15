@@ -15,8 +15,7 @@
 
 - (void) setUp
 {
-    [MagicalRecordHelpers initialize];
-    [NSManagedObjectModel setDefaultManagedObjectModel:[NSManagedObjectModel managedObjectModelNamed:@"TestModel.momd"]];
+    [MagicalRecordHelpers setDefaultModelNamed:@"TestModel.momd"];
     [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
     
     if ([self respondsToSelector:@selector(setupTestData)])

@@ -29,6 +29,8 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 + (SEL) errorHandlerAction;
 + (id) errorHandlerTarget;
 
++ (void) setDefaultModelNamed:(NSString *)modelName;
+
 //global options
 // enable/disable logging
 // add logging provider
@@ -76,5 +78,5 @@ UIColor * UIColorFromString(NSString *serializedColor);
 NSColor * NSColorFromString(NSString *serializedColor);
 
 #endif
-id (*colorFromString)(NSString *);
+extern id (*colorFromString)(NSString *);
 
