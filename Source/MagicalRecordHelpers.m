@@ -83,7 +83,10 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
         // If a custom error handler is set, call that
         if (errorHandlerTarget != nil && errorHandlerAction != nil) 
 		{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             [errorHandlerTarget performSelector:errorHandlerAction withObject:error];
+#pragma clang diagnostic pop
         }
 		else
 		{
@@ -359,12 +362,15 @@ NSDate * adjustDateForDST(NSDate *date)
 
 NSDate * dateFromString(NSString *value, NSString *format)
 {
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setTimeZone:[NSTimeZone localTimeZone]];
     [formatter setLocale:[NSLocale currentLocale]];
     [formatter setDateFormat:format];
     
     NSDate *parsedDate = [formatter dateFromString:value];
+#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
+    [formatter autorelease];
+#endif
     
     return parsedDate;
 }

@@ -30,8 +30,10 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
 
 + (void) MR_setDefaultContext:(NSManagedObjectContext *)moc
 {
+#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
     [moc retain];
     [defaultManageObjectContext_ release];
+#endif
     defaultManageObjectContext_ = moc;
 }
 
@@ -199,7 +201,11 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
     {
         SEL selector = enabled ? @selector(MR_observeContextOnMainThread:) : @selector(MR_stopObservingContext:);
         objc_setAssociatedObject(self, @"notifiesMainContext", [NSNumber numberWithBool:enabled], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"        
         [mainContext performSelector:selector withObject:self];
+#pragma clang diagnostic pop
     }
 }
 
@@ -209,8 +215,12 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
     if (coordinator != nil)
 	{
         ARLog(@"Creating MOContext %@", [NSThread isMainThread] ? @" *** On Main Thread ***" : @"");
-        context = [[[NSManagedObjectContext alloc] init] autorelease];
+        context = [[NSManagedObjectContext alloc] init];
         [context setPersistentStoreCoordinator:coordinator];
+
+#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
+        [context autorelease];
+#endif
     }
     return context;
 }
