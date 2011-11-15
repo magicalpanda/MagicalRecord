@@ -64,7 +64,7 @@
 }
 
 
-#pragma - Subentity tests
+#pragma mark - Subentity tests
 
 
 - (void) testImportAnEntityRelatedToAConcreteSubEntityViaToOneRelationship

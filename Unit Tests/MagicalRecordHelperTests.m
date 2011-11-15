@@ -62,8 +62,6 @@
 
 - (void) testCreateSqliteStackWithCustomName
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
     NSString *testStoreName = @"MyTestDataStore.sqlite";
     
     NSURL *testStoreURL = [NSPersistentStore MR_urlForStoreName:testStoreName];
@@ -76,8 +74,6 @@
     NSPersistentStore *defaultStore = [NSPersistentStore MR_defaultPersistentStore];
     assertThat([defaultStore type], is(equalTo(NSSQLiteStoreType)));
     assertThat([[defaultStore URL] absoluteString], endsWith(testStoreName));
-    
-    [pool drain];
 }
 
 

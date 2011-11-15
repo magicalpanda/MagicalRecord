@@ -116,7 +116,7 @@
 
 - (NSDate *) dateFromString:(NSString *)date
 {
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"MMM d, yyyy hh:mm:ss a zzz";
 //    formatter.timeZone = [NSTimeZone timeZoneWithName:@"GMT"];
     formatter.locale = [NSLocale currentLocale];

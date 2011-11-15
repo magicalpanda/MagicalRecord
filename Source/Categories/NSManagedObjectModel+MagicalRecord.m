@@ -55,7 +55,8 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 
 + (NSManagedObjectModel *) MR_newManagedObjectModelNamed:(NSString *)modelFileName
 {
-	NSString *path = [[NSBundle mainBundle] pathForResource:[modelFileName stringByDeletingPathExtension] ofType:[modelFileName pathExtension]];
+	NSString *path = [[NSBundle mainBundle] pathForResource:[modelFileName stringByDeletingPathExtension] 
+                                                     ofType:[modelFileName pathExtension]];
 	NSURL *momURL = [NSURL fileURLWithPath:path];
 	
 	NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:momURL];
