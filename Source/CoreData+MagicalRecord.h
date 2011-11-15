@@ -14,6 +14,10 @@
 
 #import <CoreData/CoreData.h>
 
+#ifdef MR_SHORTHAND
+#import "MagicalRecordShorthand.h"
+#endif
+
 #import "MagicalRecordHelpers.h"
 #import "MRCoreDataAction.h"
 

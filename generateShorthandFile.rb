@@ -1,3 +1,4 @@
+#!/usr/local/Cellar/ruby/1.9.2-p290/bin/ruby
 #
 #  ProcessHeader.rb
 #  Magical Record
@@ -21,13 +22,20 @@ def processHeader(headerFile)
     lines = File.readlines(headerFile)
     non_prefixed_methods = []
     processed_methods_count = 0
+    objects_to_process = ["NSManagedObject", "NSManagedObjectContext", "NSManagedObjectModel", "NSPersistentStoreCoordinator", "NSPersistentStore"]
     
     lines.each { |line|
         
         processed_line = nil
         if line.start_with?("@interface")
             matches = category_match_expression.match(line)
-            processed_line = "#{matches[:Interface]} #{matches[:ObjectName]} (#{matches[:Category]}ShortHand)"
+            if objects_to_process.include?(matches[:ObjectName])
+                processed_line = "#{matches[:Interface]} #{matches[:ObjectName]} (#{matches[:Category]}ShortHand)"
+            else
+                puts "Skipping #{headerFile}"
+                non_prefixed_methods = nil
+                return
+            end
         end
         
         if processed_line == nil
@@ -40,6 +48,7 @@ def processHeader(headerFile)
                     processed_line = "#{matches[:Start]}#{methodName}#{matches[:End]}"
 
                 else
+                    puts "Skipping #{headerFile}"
                     non_prefixed_methods = nil
                     return
                 end
@@ -58,37 +67,67 @@ def processHeader(headerFile)
         end
     }
     
-    non_prefixed_methods #unless processed_methods_count == 0
+    non_prefixed_methods 
 end
 
 def processDirectory(path)
 
     headers = File.join(path, "**", "*+*.h")
+    processedHeaders = []
+    
     Dir.glob(headers).each { |file|
-#        puts "Processing #{file}"
+        puts "Processing #{file}"
         
         processDirectory(file) if File.directory?(file)
         if file.end_with?(".h")
-            processedInterface = processHeader(file)
-            
-            puts processedInterface
+            processedHeaders << processHeader(file)
         end
     }
 
+    processedHeaders
 end
 
-if ARGV[0]
-    path = "#{Dir.pwd}/#{ARGV[0]}"
-    
-    if path.end_with?(".h")
-        processedInterface = processHeader(path)
+def generateHeaders(startingPoint)
+
+    processedHeaders = []
+    if startingPoint
+        path = File.expand_path(startingPoint)
         
-        puts processedInterface
+        if path.end_with?(".h")
+            processedHeaders << processHeader(path)
+        else
+            puts "Processing Headers in #{path}"
+            processedHeaders << processDirectory(path)
+        end
 
     else
-        processDirectory(path)
+        processedHeaders << processDirectory(startingPoint || Dir.getwd())
     end
-
-else
-    processDirectory(ARGV[0] || Dir.getwd())
+        
+    processedHeaders
 end
+
+
+puts "Input dir: #{File.expand_path(ARGV[0])}"
+
+output_file = ARGV[1]
+puts "Output file: #{File.expand_path(output_file)}"
+
+unless output_file
+    puts "Need an output file specified"
+    return
+else
+    puts "Genrating shorthand headers"
+end
+
+headers = generateHeaders(ARGV[0])
+
+File.open(output_file, "w") { |file|
+    file.write("#ifdef MR_SHORTHAND\n\n")
+    file.write(headers.join("\n"))
+    file.write("#endif\n\n")
+}
+
+
+
+

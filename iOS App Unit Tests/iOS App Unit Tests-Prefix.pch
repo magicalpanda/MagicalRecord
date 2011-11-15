@@ -19,7 +19,7 @@
     #define HC_SHORTHAND
     #import <OCHamcrestIOS/OCHamcrestIOS.h>
 
-    #define MR_SHORTHAND
+//    #define MR_SHORTHAND
     #import "CoreData+MagicalRecord.h"
     #import "FixtureHelpers.h"
 #endif
