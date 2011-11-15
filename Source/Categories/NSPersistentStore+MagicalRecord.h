@@ -14,7 +14,6 @@ extern NSString * const kMagicalRecordDefaultStoreFileName;
 
 @interface NSPersistentStore (MagicalRecord)
 
-
 + (NSURL *) MR_defaultLocalStoreUrl;
 
 + (NSPersistentStore *) MR_defaultPersistentStore;
@@ -24,18 +23,4 @@ extern NSString * const kMagicalRecordDefaultStoreFileName;
 
 @end
 
-//#ifdef MR_SHORTHAND
-//
-//@interface NSPersistentStore (MagicalRecordShortHandHeaders)
-//
-//+ (NSURL *) defaultLocalStoreUrl;
-//
-//+ (NSPersistentStore *) defaultPersistentStore;
-//+ (void) setDefaultPersistentStore:(NSPersistentStore *) store;
-//
-//+ (NSURL *) urlForStoreName:(NSString *)storeFileName;
-//
-//
-//@end
 
-//#endif

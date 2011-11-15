@@ -26,24 +26,3 @@
 
 @end
 
-//
-//#ifdef MR_SHORTHAND
-//
-//@interface NSPersistentStoreCoordinator (MagicalRecordShortHandHeaders)
-//
-//+ (NSPersistentStoreCoordinator *) defaultStoreCoordinator;
-//+ (void) setDefaultStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
-//
-//+ (NSPersistentStoreCoordinator *) coordinatorWithInMemoryStore;
-//
-//+ (NSPersistentStoreCoordinator *) newPersistentStoreCoordinator NS_RETURNS_RETAINED;
-//
-//+ (NSPersistentStoreCoordinator *) coordinatorWithSqliteStoreNamed:(NSString *)storeFileName;
-//+ (NSPersistentStoreCoordinator *) coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *) storeFileName;
-//+ (NSPersistentStoreCoordinator *) coordinatorWithPersitentStore:(NSPersistentStore *)persistentStore;
-//
-//- (NSPersistentStore *) addInMemoryStore;
-//
-//@end
-//
-// #endif
