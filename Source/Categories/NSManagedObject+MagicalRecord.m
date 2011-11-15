@@ -319,7 +319,6 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 {
 	NSFetchRequest *request = [self MR_requestAllInContext:context];
 	[request setPredicate:searchTerm];
-	[request setIncludesSubentities:NO];
 	[request setFetchBatchSize:[self MR_defaultBatchSize]];
 	
 	NSSortDescriptor *sortBy = [[NSSortDescriptor alloc] initWithKey:sortTerm ascending:ascending];
