@@ -18,13 +18,13 @@
 
 - (void) setupTestData
 {
-    NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
     
     MappedEntity *testMappedEntity = [MappedEntity createInContext:context];
     testMappedEntity.testMappedEntityIDValue = 42;
     testMappedEntity.sampleAttribute = @"This attribute created as part of the test case setup";
     
-    [context save];
+    [context MR_save];
 }
 
 - (Class) testEntityClass
@@ -35,7 +35,7 @@
 - (void) testImportMappedEntityRelatedViaToOneRelationship
 {
     SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey *entity = [[self testEntityClass] MR_importFromDictionary:self.testEntityData];
-    [[NSManagedObjectContext defaultContext] save];
+    [[NSManagedObjectContext MR_defaultContext] MR_save];
     
     id testRelatedEntity = entity.mappedEntity;
     
@@ -54,7 +54,7 @@
 {
     SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey *entity = [SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey createEntity];
     [entity MR_updateValuesForKeysWithDictionary:self.testEntityData];
-    [[NSManagedObjectContext defaultContext] save];
+    [[NSManagedObjectContext MR_defaultContext] MR_save];
     
     id testRelatedEntity = entity.mappedEntity;
     
@@ -72,7 +72,7 @@
 - (void) testImportMappedEntityUsingPrimaryRelationshipKey
 {
     SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey *entity = [[self testEntityClass] MR_importFromDictionary:self.testEntityData];
-    [[NSManagedObjectContext defaultContext] save];
+    [[NSManagedObjectContext MR_defaultContext] MR_save];
     
     id testRelatedEntity = entity.mappedEntity;
     
@@ -91,7 +91,7 @@
 {
     SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey *entity = [SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey createEntity];
     [entity MR_updateValuesForKeysWithDictionary:self.testEntityData];
-    [[NSManagedObjectContext defaultContext] save];
+    [[NSManagedObjectContext MR_defaultContext] MR_save];
     
     id testRelatedEntity = entity.mappedEntity;
     

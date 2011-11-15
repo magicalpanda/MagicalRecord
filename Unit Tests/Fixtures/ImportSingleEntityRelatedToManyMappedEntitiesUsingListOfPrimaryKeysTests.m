@@ -23,7 +23,7 @@
 
 - (void) setupTestData
 {
-    NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
 
     MappedEntity *related = nil;
     for (int i = 0; i < 10; i++) 
@@ -38,13 +38,13 @@
     entity.testPrimaryKeyValue = 84;
     [entity addMappedEntitiesObject:related];
     
-    [context save];
+    [context MR_save];
 }
 
 - (void) testDataImport
 {
     SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey *testEntity = [[self testEntityClass] MR_importFromDictionary:self.testEntityData];
-    [[NSManagedObjectContext defaultContext] save];
+    [[NSManagedObjectContext MR_defaultContext] MR_save];
     
     assertThat(testEntity.mappedEntities, hasCountOf(4));
     for (MappedEntity *relatedEntity in testEntity.mappedEntities)
@@ -59,7 +59,7 @@
 - (void) testDataUpdateWithLookupInfoInDataSet
 {
     SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey *testEntity = [[self testEntityClass] MR_updateFromDictionary:self.testEntityData];
-    [[NSManagedObjectContext defaultContext] save];
+    [[NSManagedObjectContext MR_defaultContext] MR_save];
 
     assertThat([SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey numberOfEntities], is(equalToInteger(1)));
     assertThat([MappedEntity numberOfEntities], is(equalToInteger(10)));

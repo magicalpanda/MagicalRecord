@@ -23,7 +23,7 @@
 - (void) testImportData
 {
     SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey *entity = [[self testEntityClass] MR_importFromDictionary:self.testEntityData];
-    [[NSManagedObjectContext defaultContext] save];
+    [[NSManagedObjectContext MR_defaultContext] MR_save];
     
     assertThat(entity, is(notNilValue()));
     assertThat(entity.mappedEntities, hasCountOf(4));

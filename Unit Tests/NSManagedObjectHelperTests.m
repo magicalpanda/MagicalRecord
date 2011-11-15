@@ -80,11 +80,11 @@
 - (void) testCanDeleteEntityInstance
 {
     id testEntity = [SingleRelatedEntity createEntity];
-    [[NSManagedObjectContext defaultContext] save];
+    [[NSManagedObjectContext MR_defaultContext] MR_save];
     
     assertThatBool([testEntity isDeleted], is(equalToBool(NO)));
     
-    [testEntity deleteEntity];
+    [testEntity MR_deleteEntity];
     
     assertThat(testEntity, is(notNilValue()));
     assertThatBool([testEntity isDeleted], is(equalToBool(YES)));
@@ -100,7 +100,7 @@
         testEntity.mappedStringAttribute = [NSString stringWithFormat:@"%d", i / 5];
     }
     
-    [[NSManagedObjectContext defaultContext] save];
+    [[NSManagedObjectContext MR_defaultContext] MR_save];
 }
 
 - (void) testCanSearchForNumberOfAllEntities

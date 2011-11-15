@@ -23,7 +23,7 @@
 
 - (void) setupTestData
 {
-    NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
     
     MappedEntity *testMappedEntity = [MappedEntity createInContext:context];
     testMappedEntity.mappedEntityIDValue = 42;
@@ -32,14 +32,14 @@
     SingleEntityRelatedToMappedEntityUsingDefaults *entity = [SingleEntityRelatedToMappedEntityUsingDefaults createInContext:context];
     entity.singleEntityRelatedToMappedEntityUsingDefaultsIDValue = 24;
     
-    [context save];
+    [context MR_save];
 }
 
 - (void) testImportMappedEntityViaToOneRelationship
 {
     SingleEntityRelatedToMappedEntityUsingDefaults *entity = [[self testEntityClass] MR_importFromDictionary:self.testEntityData];
     
-    [[NSManagedObjectContext defaultContext] save];
+    [[NSManagedObjectContext MR_defaultContext] MR_save];
 
     id testRelatedEntity = entity.mappedEntity;
     

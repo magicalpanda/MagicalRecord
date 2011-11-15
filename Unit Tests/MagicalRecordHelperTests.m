@@ -30,7 +30,7 @@
 
 - (void) assertDefaultStack
 {
-    assertThat([NSManagedObjectContext defaultContext], is(notNilValue()));
+    assertThat([NSManagedObjectContext MR_defaultContext], is(notNilValue()));
     assertThat([NSManagedObjectModel MR_defaultManagedObjectModel], is(notNilValue()));
     assertThat([NSPersistentStoreCoordinator MR_defaultStoreCoordinator], is(notNilValue()));
     assertThat([NSPersistentStore MR_defaultPersistentStore], is(notNilValue()));    

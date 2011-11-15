@@ -24,20 +24,20 @@
 
 - (void) setupTestData
 {
-    NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
     
     MappedEntity *testMappedEntity = [MappedEntity createInContext:context];
     testMappedEntity.testMappedEntityIDValue = 42;
     testMappedEntity.sampleAttribute = @"This attribute created as part of the test case setup";
     
-    [context save];
+    [context MR_save];
 }
 
 - (void) setUp
 {
     [super setUp];
     self.testEntity = [SingleRelatedEntity MR_importFromDictionary:self.testEntityData];
-    [[NSManagedObjectContext defaultContext] save];
+    [[NSManagedObjectContext MR_defaultContext] MR_save];
 }
 
 - (void) testImportAnEntityRelatedToAbstractEntityViaToOneRelationshop

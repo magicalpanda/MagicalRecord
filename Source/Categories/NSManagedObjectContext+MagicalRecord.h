@@ -9,32 +9,32 @@
 
 @interface NSManagedObjectContext (MagicalRecord)
 
-- (void) observeContext:(NSManagedObjectContext *)otherContext;
-- (void) stopObservingContext:(NSManagedObjectContext *)otherContext;
-- (void) observeContextOnMainThread:(NSManagedObjectContext *)otherContext;
+- (void) MR_observeContext:(NSManagedObjectContext *)otherContext;
+- (void) MR_stopObservingContext:(NSManagedObjectContext *)otherContext;
+- (void) MR_observeContextOnMainThread:(NSManagedObjectContext *)otherContext;
 
-- (BOOL) save;
+- (BOOL) MR_save;
 
 #ifdef NS_BLOCKS_AVAILABLE
-- (BOOL) saveWithErrorHandler:(void(^)(NSError *))errorCallback;
+- (BOOL) MR_saveWithErrorHandler:(void (^)(NSError *))errorCallback;
 #endif
 
-- (BOOL) saveOnMainThread;
-- (BOOL) saveOnBackgroundThread;
+- (BOOL) MR_saveOnMainThread;
+- (BOOL) MR_saveOnBackgroundThread;
 
-+ (void) resetDefaultContext;
-+ (NSManagedObjectContext *) defaultContext;
-+ (void) setDefaultContext:(NSManagedObjectContext *)moc;
-+ (void) resetContextForCurrentThread;
++ (void) MR_resetDefaultContext;
++ (NSManagedObjectContext *)MR_defaultContext;
++ (void) MR_setDefaultContext:(NSManagedObjectContext *)moc;
++ (void) MR_resetContextForCurrentThread;
 
-+ (NSManagedObjectContext *) context;
-+ (NSManagedObjectContext *) contextForCurrentThread;
++ (NSManagedObjectContext *) MR_context;
++ (NSManagedObjectContext *) MR_contextForCurrentThread;
 
-+ (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThread;
-+ (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
-+ (NSManagedObjectContext *) contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
++ (NSManagedObjectContext *) MR_contextThatNotifiesDefaultContextOnMainThread;
++ (NSManagedObjectContext *) MR_contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
++ (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 
-@property (nonatomic, assign) BOOL notifiesMainContextOnSave;
+@property (nonatomic, assign) BOOL MR_notifiesMainContextOnSave;
 
 @end
 

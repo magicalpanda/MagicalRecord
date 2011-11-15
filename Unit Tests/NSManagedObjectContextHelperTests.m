@@ -12,17 +12,17 @@
 
 - (void) testCanCreateContextForCurrentThead
 {
-    NSManagedObjectContext *firstContext = [NSManagedObjectContext contextForCurrentThread];
-    NSManagedObjectContext *secondContext = [NSManagedObjectContext contextForCurrentThread];
+    NSManagedObjectContext *firstContext = [NSManagedObjectContext MR_contextForCurrentThread];
+    NSManagedObjectContext *secondContext = [NSManagedObjectContext MR_contextForCurrentThread];
     
     assertThat(firstContext, is(equalTo(secondContext)));
 }
 
 - (void) testCanNotifyDefaultContextOnSave
 {
-    NSManagedObjectContext *testContext = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
+    NSManagedObjectContext *testContext = [NSManagedObjectContext MR_contextThatNotifiesDefaultContextOnMainThread];
 
-    assertThatBool(testContext.notifiesMainContextOnSave, is(equalToBool(YES)));
+    assertThatBool(testContext.MR_notifiesMainContextOnSave, is(equalToBool(YES)));
 }
 
 
