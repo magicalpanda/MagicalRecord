@@ -68,7 +68,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 #endif
 
-+ (NSEntityDescription *)entityDescriptionInContext:(NSManagedObjectContext *)context
++ (NSEntityDescription *) entityDescriptionInContext:(NSManagedObjectContext *)context
 {
     if ([self respondsToSelector:@selector(entityInManagedObjectContext:)]) 
     {
@@ -82,12 +82,12 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     }
 }
 
-+ (NSEntityDescription *)entityDescription
++ (NSEntityDescription *) entityDescription
 {
 	return [self entityDescriptionInContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
-+ (NSArray *)propertiesNamed:(NSArray *)properties
++ (NSArray *) propertiesNamed:(NSArray *)properties
 {
 	NSEntityDescription *description = [self entityDescription];
 	NSMutableArray *propertiesWanted = [NSMutableArray array];
@@ -371,11 +371,11 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 #if TARGET_OS_IPHONE
 
-+ (NSFetchedResultsController *) fetchRequestAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
++ (NSFetchedResultsController *) fetchRequestAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending delegate:(id)delegate inContext:(NSManagedObjectContext *)context
 {
 	NSString *cacheName = nil;
 	#ifdef STORE_USE_CACHE
-	cacheName = [NSString stringWithFormat:@"MagicalRecord-Cache-%@", NSStringFromClass(self)];
+	cacheName = [NSString stringWithFormat:@"MagicalRecord-Cache-%@", [self entityDescription]];
 	#endif
 	
 	NSFetchRequest *request = [self requestAllSortedBy:sortTerm 
@@ -387,36 +387,81 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 																				 managedObjectContext:context
 																				   sectionNameKeyPath:group
 																							cacheName:cacheName];
+    controller.delegate = delegate;
 	return [controller autorelease];
 }
 
-+ (NSFetchedResultsController *) fetchRequestAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending 
++ (NSFetchedResultsController *) fetchRequestAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending delegate:(id)delegate
 {
 	return [self fetchRequestAllGroupedBy:group
 							withPredicate:searchTerm
 								 sortedBy:sortTerm
 								ascending:ascending
+                                 delegate:delegate
 								inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
++ (NSFetchedResultsController *) fetchRequestAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
+{
+    return [self fetchRequestAllGroupedBy:group 
+                            withPredicate:searchTerm
+                                 sortedBy:sortTerm
+                                ascending:ascending
+                                 delegate:nil
+                                inContext:context];
+}
+
++ (NSFetchedResultsController *) fetchRequestAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending 
+{
+    return [self fetchRequestAllGroupedBy:group 
+                            withPredicate:searchTerm
+                                 sortedBy:sortTerm
+                                ascending:ascending
+                                inContext:[NSManagedObjectContext defaultContext]];
+}
+
+
 + (NSFetchedResultsController *) fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath inContext:(NSManagedObjectContext *)context
+{
+    NSFetchedResultsController *controller = [self fetchAllSortedBy:sortTerm
+                                                          ascending:ascending
+                                                      withPredicate:searchTerm 
+                                                            groupBy:groupingKeyPath 
+                                                          inContext:context];
+    
+    [self performFetch:controller];
+    return controller;
+}
+
++ (NSFetchedResultsController *) fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath;
+{
+    return [self fetchAllSortedBy:sortTerm
+                        ascending:ascending
+                    withPredicate:searchTerm
+                          groupBy:groupingKeyPath
+                        inContext:[NSManagedObjectContext defaultContext]];
+}
+
++ (NSFetchedResultsController *) fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id)delegate inContext:(NSManagedObjectContext *)context
 {
 	NSFetchedResultsController *controller = [self fetchRequestAllGroupedBy:groupingKeyPath 
 															  withPredicate:searchTerm
 																   sortedBy:sortTerm 
 																  ascending:ascending
+                                                                   delegate:delegate
 																  inContext:context];
 	
 	[self performFetch:controller];
 	return controller;
 }
 
-+ (NSFetchedResultsController *) fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath
++ (NSFetchedResultsController *) fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id)delegate
 {
 	return [self fetchAllSortedBy:sortTerm 
 						ascending:ascending
 					withPredicate:searchTerm 
 						  groupBy:groupingKeyPath 
+                         delegate:delegate
 						inContext:[NSManagedObjectContext contextForCurrentThread]];
 }
 
