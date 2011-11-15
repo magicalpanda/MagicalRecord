@@ -193,7 +193,7 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
 
 + (void) performSaveDataOperationInBackgroundWithBlock:(CoreDataBlock)block;
 {
-    [MRCoreDataAction saveDataWithBlock:block];
+    [MRCoreDataAction saveDataInBackgroundWithBlock:block];
 }
 
 + (void) performLookupOperationWithBlock:(CoreDataBlock)block;
