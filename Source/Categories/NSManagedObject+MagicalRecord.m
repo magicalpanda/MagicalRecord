@@ -128,9 +128,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     {
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:attributeName ascending:ascending];
         [attributes addObject:sortDescriptor];
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
-        [sortDescriptor release];
-#endif
+        MR_RELEASE(sortDescriptor);
     }
     
 	return attributes;
@@ -150,10 +148,8 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 {
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
 	[request setEntity:[self MR_entityDescriptionInContext:context]];
-	
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
-    [request autorelease];
-#endif
+    MR_AUTORELEASE(request);
+
     return request;
 }
 
@@ -301,9 +297,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	
 	NSSortDescriptor *sortBy = [[NSSortDescriptor alloc] initWithKey:sortTerm ascending:ascending];
 	[request setSortDescriptors:[NSArray arrayWithObject:sortBy]];
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
-    [sortBy autorelease];
-#endif
+    MR_AUTORELEASE(sortBy);
 	
 	return request;
 }
@@ -321,12 +315,18 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	[request setPredicate:searchTerm];
 	[request setFetchBatchSize:[self MR_defaultBatchSize]];
 	
-	NSSortDescriptor *sortBy = [[NSSortDescriptor alloc] initWithKey:sortTerm ascending:ascending];
-	[request setSortDescriptors:[NSArray arrayWithObject:sortBy]];
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
-    [sortBy release];
-#endif
-
+    NSMutableArray* sortDescriptors = [[NSMutableArray alloc] init];
+    NSArray* sortKeys = [sortTerm componentsSeparatedByString:@","];
+    for (NSString* sortKey in sortKeys) 
+    {
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
+        [sortDescriptors addObject:sortDescriptor];
+        MR_AUTORELEASE(sortDescriptor);
+    }
+    
+	[request setSortDescriptors:sortDescriptors];
+    MR_AUTORELEASE(sortDescriptors);
+    
 	return request;
 }
 
@@ -400,10 +400,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
                                           sectionNameKeyPath:groupKeyPath
                                                    cacheName:cacheName];
     controller.delegate = delegate;
-
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
-    [controller autorelease];
-#endif
+    MR_AUTORELEASE(controller);
     
     return controller;
 }

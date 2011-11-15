@@ -41,9 +41,7 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 + (NSManagedObjectModel *) MR_newManagedObjectModel 
 {
     NSManagedObjectModel *model = [self MR_mergedObjectModelFromMainBundle];
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
-    [model autorelease];
-#endif
+    MR_AUTORELEASE(model);
     return model;
 }
 
@@ -72,9 +70,7 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 + (NSManagedObjectModel *) MR_managedObjectModelNamed:(NSString *)modelFileName
 {
     NSManagedObjectModel *model = [self MR_newManagedObjectModelNamed:modelFileName];
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
-    [model autorelease];
-#endif
+    MR_AUTORELEASE(model);
 	return model;
 }
 

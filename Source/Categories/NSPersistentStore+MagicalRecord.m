@@ -49,10 +49,7 @@ static NSPersistentStore *defaultPersistentStore_ = nil;
 {
 	NSArray *paths = [NSArray arrayWithObjects:[self MR_applicationDocumentsDirectory], [self MR_applicationStorageDirectory], nil];
     NSFileManager *fm = [[NSFileManager alloc] init];
-
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
-    [fm autorelease];
-#endif
+    MR_AUTORELEASE(fm);
     
     for (NSString *path in paths) 
     {

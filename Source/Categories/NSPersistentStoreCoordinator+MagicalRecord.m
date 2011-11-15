@@ -78,10 +78,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
     NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
     
     [psc MR_setupSqliteStoreNamed:[persistentStore URL] withOptions:nil];
-    
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
-    [psc autorelease];
-#endif
+    MR_AUTORELEASE(psc);
     return psc;
 }
 
@@ -91,10 +88,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
     NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
 
     [psc MR_setupSqliteStoreNamed:storeFileName withOptions:options];
-    
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
-    [psc autorelease];
-#endif
+    MR_AUTORELEASE(psc);
     return psc;
 }
 
@@ -125,11 +119,8 @@ static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
     {
         [coordinator performSelector:@selector(MR_setupAutoMigratingSqliteStoreNamed:) withObject:storeFileName afterDelay:0.5];
     }
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
-    [coordinator autorelease];
-#endif
+    MR_AUTORELEASE(coordinator);
     return coordinator;
-
 }
 
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithInMemoryStore
@@ -138,12 +129,9 @@ static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
 	NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
 
     [psc MR_addInMemoryStore];
+    MR_AUTORELEASE(coordinator);
 
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
-    [psc autorelease];
-#endif
     return psc;
-
 }
 
 - (NSPersistentStore *) MR_addInMemoryStore
@@ -164,9 +152,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
 + (NSPersistentStoreCoordinator *) MR_newPersistentStoreCoordinator
 {
 	NSPersistentStoreCoordinator *coordinator = [self MR_coordinatorWithSqliteStoreNamed:kMagicalRecordDefaultStoreFileName];
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
-    [coordinator retain];
-#endif
+    MR_RETAIN(coordinator);
     return coordinator;
 
 }
