@@ -14,17 +14,13 @@ Magical Record for Core Data was inspired by the ease of Ruby on Rails' Active R
 
 # Installation
 
-1. In your XCode Project, add all the .h and .m files from the Source folder into your project. 
+1. In your XCode Project, add all the .h and .m files from the *Source* folder into your project. 
 2. Add *CoreData+MagicalRecord.h* file to your PCH file or your AppDelegate file.
 3. Start writing code! ... There is no step 3!
 
 # ARC Support
 
-MagicalRecord will not directly support ARC at this time. However, MagicalRecord will work with ARC enabled, by adding the *-fno-objc-arc* flag to the following files:
-
-* NSManagedObjectContext+MagicalRecord.m
-* NSManagedObject+MagicalDataImport.m
-* MagicalRecordHelpers.m
+MagicalRecord fully supports ARC *and* non-ARC modes out of the box, there is no configuration necessary. This is great for legacy applications or projects that still need to compile with GCC.  ARC support has been tested with the Apple LLVM 3.0 compiler.
 
 # Usage
 
@@ -47,19 +43,25 @@ And, before your app exits, you can use the clean up method:
 
 ### Default Managed Object Context 
 
-When using Core Data, you will deal with two types of objects the most: *NSManagedObject* and *NSManagedObjectContext*. MagicalRecord for Core Data gives you a place for a default NSManagedObjectContext for use within your app. This is great for single threaded apps. If you need to create a new Managed Object Context for use in other threads, based on your single persistent store, use:
+When using Core Data, you will deal with two types of objects the most: *NSManagedObject* and *NSManagedObjectContext*. MagicalRecord gives you a place for a default NSManagedObjectContext for use within your app. This is great for single threaded apps. You can easily get to this default context by calling:
+
+    [NSManagedObjectContext MR_defaultContext];
+
+This context will be used if a find or request method (described below) is not specifying a specific context using the **inContext:** method overload.
+
+If you need to create a new Managed Object Context for use in other threads, based on the default persistent store that was creating using one of the setup methods, use:
 
 	NSManagedObjectContext *myNewContext = [NSManagedObjectContext context];
+	
+This will use the same object model and persistent store, but create an entirely new context for use with threads other than the main thread. 
 
-
-This default context will be used for all fetch requests, unless otherwise specified in the methods ending with **inContext:**.
-If you want to make *myNewContext* the default for all fetch requests on the main thread:
-
+And, if you want to make *myNewContext* the default for all fetch requests on the main thread:
 
 	[NSManagedObjectContext setDefaultContext:myNewContext];
 
+Magical Record also has a helper method to hold on to a Managed Object Context in a thread's threadDictionary. This lets you access the correct NSManagedObjectContext instance no matter which thread you're calling from. This methods is:
 
-This will use the same object model and persistent store, but create an entirely new context for use with threads other than the main thread. 
+	[NSManagedObjectContext MR_contextForCurrentThread];
 
 **It is *highly* recommended that the default context is created and set using the main thread**
 
@@ -211,13 +213,29 @@ All the boilerplate operations that need to be done when saving are done in thes
 	
 In this method, the CoreDataBlock provides you with the proper context in which to perform your operations, you don't need to worry about setting up the context so that it tells the Default Context that it's done, and should update because changes were performed on another thread.
 
+To perform an action after this save block is completed, you can fill in a completion block:
+
+	Person *person = ...;
+	[MRCoreDataAction saveDataInBackgroundWithBlock:^(NSManagedObjectContext *localContext){
+		Person *localPerson = [person inContext:localContext];
+
+		localPerson.firstName = @"Chuck";
+		localPerson.lastName = @"Smith";
+	} completion:^{
+	
+		self.everyoneInTheDepartment = [Person findAll];
+	}];
+	
+This completion block is called on the main thread (queue), so this is also safe for triggering UI updates.	
+
 All MRCoreDataActions have a dedicated GCD queue on which they operate. This means that throughout your app, you only really have 2 queues (sort of like threads) performing Core Data actions at any one time: one on the main queue, and another on this dedicated GCD queue.
 
 # Data Import
 
 *Experimental*
 
-MagicalRecord will now import data from NSDictionaries into your Core Data store. This feature is currently under development, and is undergoing updates. Feel free to try it out, add tests and send in your feedback.
+MagicalRecord will now import data from NSDictionaries into your Core Data store. [Documentation](https://github.com/magicalpanda/MagicalRecord/wiki/Data-Import) for this feature will be added to the wiki.
+This feature is currently under development, and is undergoing updates. Feel free to try it out, add tests and send in your feedback.
 	
 # Extra Bits
 This Code is released under the MIT License by [Magical Panda Software, LLC.](http://www.magicalpanda.com)
