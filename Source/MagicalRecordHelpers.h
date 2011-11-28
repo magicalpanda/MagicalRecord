@@ -63,7 +63,6 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 @end
 
 
-
 //Helper Functions
 NSDate * adjustDateForDST(NSDate *date);
 NSDate * dateFromString(NSString *value, NSString *format);
