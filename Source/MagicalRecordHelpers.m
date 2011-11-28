@@ -124,6 +124,21 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
     [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
 }
 
++ (NSString *) defaultStoreName;
+{
+    NSString *defaultName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(id)kCFBundleNameKey];
+    if (defaultName == nil)
+    {
+        defaultName = kMagicalRecordDefaultStoreFileName;
+    }
+    if (![defaultName hasSuffix:@"sqlite"]) 
+    {
+        defaultName = [defaultName stringByAppendingPathExtension:@"sqlite"];
+    }
+
+    return defaultName;
+}
+
 + (void) setupCoreDataStack
 {
     NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
@@ -132,7 +147,7 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
 
 + (void) setupAutoMigratingCoreDataStack
 {
-    [self setupCoreDataStackWithAutoMigratingSqliteStoreNamed:kMagicalRecordDefaultStoreFileName];
+    [self setupCoreDataStackWithAutoMigratingSqliteStoreNamed:[self defaultStoreName]];
 }
 
 + (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName
@@ -153,7 +168,7 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
     [NSManagedObjectContext MR_setDefaultContext:context];
 }
 
-+ (void) setupCoreDataStackWithInMemoryStore
++ (void) setupCoreDataStackWithInMemoryStore;
 {
 	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithInMemoryStore];
 	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];

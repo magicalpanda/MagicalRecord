@@ -30,6 +30,7 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 + (id) errorHandlerTarget;
 
 + (void) setDefaultModelNamed:(NSString *)modelName;
++ (NSString *) defaultStoreName;
 
 //global options
 // enable/disable logging

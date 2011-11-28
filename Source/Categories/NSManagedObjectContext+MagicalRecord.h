@@ -34,7 +34,7 @@
 + (NSManagedObjectContext *) MR_contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 + (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 
-@property (nonatomic, assign) BOOL MR_notifiesMainContextOnSave;
+@property (nonatomic, assign, setter=MR_setNotifiesMainContextOnSave:) BOOL MR_notifiesMainContextOnSave;
 
 @end
 

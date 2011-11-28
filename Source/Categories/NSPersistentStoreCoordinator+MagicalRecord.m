@@ -11,7 +11,6 @@ static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
 
 @implementation NSPersistentStoreCoordinator (MagicalRecord)
 
-
 + (NSPersistentStoreCoordinator *) MR_defaultStoreCoordinator
 {
     if (defaultCoordinator_ == nil && [MagicalRecordHelpers shouldAutoCreateDefaultPersistentStoreCoordinator])
@@ -151,7 +150,7 @@ static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
 
 + (NSPersistentStoreCoordinator *) MR_newPersistentStoreCoordinator
 {
-	NSPersistentStoreCoordinator *coordinator = [self MR_coordinatorWithSqliteStoreNamed:kMagicalRecordDefaultStoreFileName];
+	NSPersistentStoreCoordinator *coordinator = [self MR_coordinatorWithSqliteStoreNamed:[MagicalRecordHelpers defaultStoreName]];
     MR_RETAIN(coordinator);
     return coordinator;
 

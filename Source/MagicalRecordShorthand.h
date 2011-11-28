@@ -6,8 +6,8 @@
 
 
 @interface NSManagedObject (NSManagedObject_DataImportShortHand)
-- (void) importValuesForKeysWithDictionary:(NSDictionary *)objectData;
-- (void) updateValuesForKeysWithDictionary:(NSDictionary *)objectData;
+- (void) importValuesForKeysWithDictionary:(id)objectData;
+- (void) updateValuesForKeysWithDictionary:(id)objectData;
 + (id) importFromDictionary:(NSDictionary *)data;
 + (id) importFromDictionary:(NSDictionary *)data inContext:(NSManagedObjectContext *)context;
 + (NSArray *) importFromArray:(NSArray *)listOfObjectData;

@@ -17,7 +17,15 @@ NSString * const kMagicalRecordImportRelationshipMapKey = @"mappedKeyName";
 NSString * const kMagicalRecordImportRelationshipPrimaryKey = @"primaryRelationshipKey";
 NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 
+@implementation NSString (MagicalRecord_DataImport)
 
+- (NSString *) MR_capitalizedFirstCharaterString;
+{
+    NSString *firstChar = [[self substringToIndex:1] capitalizedString];
+    return [firstChar stringByAppendingString:[self substringFromIndex:1]];
+}
+
+@end
 
 @implementation NSManagedObject (MagicalRecord_DataImport)
 
@@ -50,6 +58,18 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     return value == [NSNull null] ? nil : value;
 }
 
+- (BOOL) MR_importValue:(id)value forKey:(NSString *)key
+{
+    NSString *selectorString = [NSString stringWithFormat:@"import%@:", [key MR_capitalizedFirstCharaterString]];
+    SEL selector = NSSelectorFromString(selectorString);
+    if ([self respondsToSelector:selector])
+    {
+        [self performSelector:selector withObject:value];
+        return YES;
+    }
+    return NO;
+}
+
 - (void) MR_setAttributes:(NSDictionary *)attributes forKeysWithDictionary:(NSDictionary *)objectData
 {    
     for (NSString *attributeName in attributes) 
@@ -60,7 +80,10 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
         if (lookupKeyPath) 
         {
             id value = [self MR_valueForAttribute:attributeInfo fromObjectData:objectData forKeyPath:lookupKeyPath];
-            [self setValue:value forKey:attributeName];
+            if (![self MR_importValue:value forKey:attributeName])
+            {
+                [self setValue:value forKey:attributeName];
+            }
         }
     }
 }
@@ -125,23 +148,32 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
         {
             continue;
         }
-
-        if ([relationshipInfo isToMany])
+        
+        if (![self MR_importValue:relatedObjectData forKey:relationshipName])
         {
-            for (id singleRelatedObjectData in relatedObjectData) 
+            if ([relationshipInfo isToMany])
             {
-                setRelationshipBlock(relationshipInfo, singleRelatedObjectData);
+                for (id singleRelatedObjectData in relatedObjectData) 
+                {
+                    setRelationshipBlock(relationshipInfo, singleRelatedObjectData);
+                }
             }
-        }
-        else
-        {
-            setRelationshipBlock(relationshipInfo, relatedObjectData);
+            else
+            {
+                setRelationshipBlock(relationshipInfo, relatedObjectData);
+            }
         }
     }
 }
 
-- (void) MR_importValuesForKeysWithDictionary:(NSDictionary *)objectData
+- (void) MR_importValuesForKeysWithDictionary:(id)objectData
 {
+    //swizzle MR_valueForUndefinedKey, [self valueForUndefinedKey]
+    if ([self respondsToSelector:@selector(willImport)])
+    {
+        [self performSelector:@selector(willImport)];
+    }
+    
     NSDictionary *attributes = [[self entity] attributesByName];
     [self MR_setAttributes:attributes forKeysWithDictionary:objectData];
     
@@ -163,9 +195,15 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 
          [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
      }];
+    //swizzle back
+    
+    if ([self respondsToSelector:@selector(didImport)])
+    {
+        [self performSelector:@selector(didImport)];
+    }
 }
 
-- (void) MR_updateValuesForKeysWithDictionary:(NSDictionary *)objectData
+- (void) MR_updateValuesForKeysWithDictionary:(id)objectData
 {
     NSDictionary *attributes = [[self entity] attributesByName];
     [self MR_setAttributes:attributes forKeysWithDictionary:objectData];
@@ -190,19 +228,19 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
      }];
 }
 
-+ (id) MR_importFromDictionary:(NSDictionary *)objectData inContext:(NSManagedObjectContext *)context;
++ (id) MR_importFromDictionary:(id)objectData inContext:(NSManagedObjectContext *)context;
 {
     NSManagedObject *managedObject = [self MR_createInContext:context];
     [managedObject MR_importValuesForKeysWithDictionary:objectData];
     return managedObject;
 }
 
-+ (id) MR_importFromDictionary:(NSDictionary *)objectData
++ (id) MR_importFromDictionary:(id)objectData
 {
     return [self MR_importFromDictionary:objectData inContext:[NSManagedObjectContext MR_defaultContext]];
 }
 
-+ (id) MR_updateFromDictionary:(NSDictionary *)objectData inContext:(NSManagedObjectContext *)context
++ (id) MR_updateFromDictionary:(id)objectData inContext:(NSManagedObjectContext *)context
 {
     NSAttributeDescription *primaryAttribute = [[self MR_entityDescription] MR_primaryKeyAttribute];
     
@@ -221,7 +259,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     return managedObject;
 }
 
-+ (id) MR_updateFromDictionary:(NSDictionary *)objectData
++ (id) MR_updateFromDictionary:(id)objectData
 {
     return [self MR_updateFromDictionary:objectData inContext:[NSManagedObjectContext MR_defaultContext]];
 }

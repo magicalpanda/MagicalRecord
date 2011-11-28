@@ -71,7 +71,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 #endif
 
-+ (NSString *) entityName
++ (NSString *) MR_entityName
 {
     return NSStringFromClass(self);
 }
@@ -85,7 +85,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     }
     else
     {
-        NSString *entityName = [self entityName];
+        NSString *entityName = [self MR_entityName];
         return [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
     }
 }
@@ -166,7 +166,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	return [NSNumber numberWithUnsignedInteger:[self MR_countOfEntitiesWithContext:context]];
 }
 
-+ (NSNumber *)MR_numberOfEntities
++ (NSNumber *) MR_numberOfEntities
 {
 	return [self MR_numberOfEntitiesWithContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
@@ -224,8 +224,8 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     return [[self MR_numberOfEntitiesWithContext:context] intValue] > 0;
 }
 
-#pragma mark -
-#pragma mark Reqest Helpers
+#pragma mark - Reqest Helpers
+
 + (NSFetchRequest *) MR_requestAll
 {
 	return [self MR_createFetchRequestInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
@@ -653,7 +653,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     }
     else
     {
-        return [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
+        return [NSEntityDescription insertNewObjectForEntityForName:[self MR_entityName] inManagedObjectContext:context];
     }
 }
 

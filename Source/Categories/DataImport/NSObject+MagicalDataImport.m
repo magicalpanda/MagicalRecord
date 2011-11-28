@@ -6,12 +6,17 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import "NSDictionary+MagicalDataImport.h"
+#import "NSObject+MagicalDataImport.h"
 
 NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
 
 
-@implementation NSDictionary (MagicalRecord_DataImport)
+@implementation NSObject (MagicalRecord_DataImport)
+
+- (id) valueForUndefinedKey:(NSString *)key
+{
+    return nil;
+}
 
 - (NSString *) MR_lookupKeyForAttribute:(NSAttributeDescription *)attributeInfo;
 {
