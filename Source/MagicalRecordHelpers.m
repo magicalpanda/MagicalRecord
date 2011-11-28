@@ -60,21 +60,21 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
             {
                 if ([e respondsToSelector:@selector(userInfo)])
                 {
-                    ARLog(@"Error Details: %@", [e userInfo]);
+                    MRLog(@"Error Details: %@", [e userInfo]);
                 }
                 else
                 {
-                    ARLog(@"Error Details: %@", e);
+                    MRLog(@"Error Details: %@", e);
                 }
             }
         }
         else
         {
-            ARLog(@"Error: %@", detailedError);
+            MRLog(@"Error: %@", detailedError);
         }
     }
-    ARLog(@"Error Domain: %@", [error domain]);
-    ARLog(@"Recovery Suggestion: %@", [error localizedRecoverySuggestion]);
+    MRLog(@"Error Domain: %@", [error domain]);
+    MRLog(@"Recovery Suggestion: %@", [error localizedRecoverySuggestion]);
 }
 
 + (void) handleErrors:(NSError *)error

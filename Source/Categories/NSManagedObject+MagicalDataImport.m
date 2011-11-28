@@ -126,11 +126,11 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     }
     @catch (NSException *exception) 
     {
-        ARLog(@"Adding object for relationship failed: %@\n", relationshipInfo);
-        ARLog(@"relatedObject.entity %@", [relatedObject entity]);
-        ARLog(@"relationshipInfo.destinationEntity %@", [relationshipInfo destinationEntity]);
+        MRLog(@"Adding object for relationship failed: %@\n", relationshipInfo);
+        MRLog(@"relatedObject.entity %@", [relatedObject entity]);
+        MRLog(@"relationshipInfo.destinationEntity %@", [relationshipInfo destinationEntity]);
         
-        ARLog(@"perform selector error: %@", exception);
+        MRLog(@"perform selector error: %@", exception);
     }
 }
 

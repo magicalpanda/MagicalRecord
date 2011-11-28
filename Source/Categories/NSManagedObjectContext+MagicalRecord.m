@@ -61,7 +61,7 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
 
 - (void) MR_observeContextOnMainThread:(NSManagedObjectContext *)otherContext
 {
-    //	ARLog(@"Start Observing on Main Thread");
+    //	MRLog(@"Start Observing on Main Thread");
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(mergeChangesOnMainThread:)
 												 name:NSManagedObjectContextDidSaveNotification
@@ -70,7 +70,7 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
 
 - (void) MR_stopObservingContext:(NSManagedObjectContext *)otherContext
 {
-    //	ARLog(@"Stop Observing Context");
+    //	MRLog(@"Stop Observing Context");
 	[[NSNotificationCenter defaultCenter] removeObserver:self
 													name:NSManagedObjectContextDidSaveNotification
 												  object:otherContext];
@@ -80,7 +80,7 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
 
 - (void) mergeChangesFromNotification:(NSNotification *)notification
 {
-	ARLog(@"Merging changes to %@context%@", 
+	MRLog(@"Merging changes to %@context%@", 
           self == [NSManagedObjectContext MR_defaultContext] ? @"*** DEFAULT *** " : @"",
           ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
     
@@ -124,7 +124,7 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
 	
 	@try
 	{
-		ARLog(@"Saving %@Context%@", 
+		MRLog(@"Saving %@Context%@", 
               self == [[self class] MR_defaultContext] ? @" *** Default *** ": @"",
               ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
         
@@ -132,7 +132,7 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
 	}
 	@catch (NSException *exception)
 	{
-		ARLog(@"Problem saving: %@", (id)[exception userInfo] ?: (id)[exception reason]);	
+		MRLog(@"Problem saving: %@", (id)[exception userInfo] ?: (id)[exception reason]);	
 	}
 	@finally 
     {
@@ -232,7 +232,7 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
 	NSManagedObjectContext *context = nil;
     if (coordinator != nil)
 	{
-        ARLog(@"Creating MOContext %@", [NSThread isMainThread] ? @" *** On Main Thread ***" : @"");
+        MRLog(@"Creating MOContext %@", [NSThread isMainThread] ? @" *** On Main Thread ***" : @"");
         context = [[NSManagedObjectContext alloc] init];
         [context setPersistentStoreCoordinator:coordinator];
         MR_AUTORELEASE(context);
