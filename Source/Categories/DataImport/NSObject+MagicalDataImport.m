@@ -13,12 +13,12 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
 
 @implementation NSObject (MagicalRecord_DataImport)
 
-#warning If you implement valueForUndefinedKey: in any NSObject in your code, this may be the problem if something broke
+//#warning If you implement valueForUndefinedKey: in any NSObject in your code, this may be the problem if something broke
 //TODO: This method needs to be:
 // 1) Renamed to MR_valueForUndefinedKey:
 // 2) swizzled in and out only when importing data.
 // This will be done in a really short update...stay tuned
-- (id) valueForUndefinedKey:(NSString *)key
+- (id) MR_valueForUndefinedKey:(NSString *)key
 {
     return nil;
 }

@@ -7,6 +7,9 @@
 //
 
 #import "CoreData+MagicalRecord.h"
+#import <objc/runtime.h>
+
+void swizzle(Class c, SEL orig, SEL new);
 
 NSString * const kMagicalRecordImportCustomDateFormatKey = @"dateFormat";
 NSString * const kMagicalRecordImportDefaultDateFormatString = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
@@ -168,7 +171,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 
 - (void) MR_importValuesForKeysWithDictionary:(id)objectData
 {
-    //swizzle MR_valueForUndefinedKey, [self valueForUndefinedKey]
+    swizzle([objectData class], @selector(valueForUndefinedKey:), @selector(MR_valueForUndefinedKey:));
     if ([self respondsToSelector:@selector(willImport)])
     {
         [self performSelector:@selector(willImport)];
@@ -180,8 +183,8 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     NSDictionary *relationships = [[self entity] relationshipsByName];
     [self MR_setRelationships:relationships
         forKeysWithDictionary:objectData 
-                    withBlock:^(NSRelationshipDescription *relationshipInfo, id objectData)
-     {
+                    withBlock:^(NSRelationshipDescription *relationshipInfo, id objectData){
+
          NSManagedObject *relatedObject = nil;
          if ([objectData isKindOfClass:[NSDictionary class]]) 
          {
@@ -194,8 +197,8 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
          [relatedObject MR_importValuesForKeysWithDictionary:objectData];
 
          [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
-     }];
-    //swizzle back
+    }];
+    swizzle([objectData class], @selector(valueForUndefinedKey:), @selector(MR_valueForUndefinedKey:));
     
     if ([self respondsToSelector:@selector(didImport)])
     {
@@ -205,14 +208,20 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 
 - (void) MR_updateValuesForKeysWithDictionary:(id)objectData
 {
+    swizzle([objectData class], @selector(valueForUndefinedKey:), @selector(MR_valueForUndefinedKey:));
+    if ([self respondsToSelector:@selector(willImport)])
+    {
+        [self performSelector:@selector(willImport)];
+    }
+    
     NSDictionary *attributes = [[self entity] attributesByName];
     [self MR_setAttributes:attributes forKeysWithDictionary:objectData];
     
     NSDictionary *relationships = [[self entity] relationshipsByName];
     [self MR_setRelationships:relationships
         forKeysWithDictionary:objectData 
-                    withBlock:^(NSRelationshipDescription *relationshipInfo, id objectData)
-     {
+                    withBlock:^(NSRelationshipDescription *relationshipInfo, id objectData) {
+                        
          NSManagedObject *relatedObject = [self MR_findObjectForRelationship:relationshipInfo
                                                                     withData:objectData];
          if (relatedObject == nil)
@@ -225,7 +234,14 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
          }
          
          [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
-     }];
+    }];
+    
+    swizzle([objectData class], @selector(valueForUndefinedKey:), @selector(MR_valueForUndefinedKey:));
+    
+    if ([self respondsToSelector:@selector(didImport)])
+    {
+        [self performSelector:@selector(didImport)];
+    }
 }
 
 + (id) MR_importFromDictionary:(id)objectData inContext:(NSManagedObjectContext *)context;
@@ -291,3 +307,18 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 }
 
 @end
+
+
+void swizzle(Class c, SEL orig, SEL new)
+{
+    Method origMethod = class_getInstanceMethod(c, orig);
+    Method newMethod = class_getInstanceMethod(c, new);
+    if (class_addMethod(c, orig, method_getImplementation(newMethod), method_getTypeEncoding(newMethod)))
+    {
+        class_replaceMethod(c, new, method_getImplementation(origMethod), method_getTypeEncoding(origMethod));
+    }
+    else
+    {
+        method_exchangeImplementations(origMethod, newMethod);
+    }
+}

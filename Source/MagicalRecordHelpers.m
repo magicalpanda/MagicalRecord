@@ -9,7 +9,9 @@
 #import <objc/runtime.h>
 
 static NSString * const kMagicalRecordCategoryPrefix = @"MR_";
+#ifdef MR_SHORTHAND
 static BOOL methodsHaveBeenSwizzled = NO;
+#endif
 
 static id errorHandlerTarget = nil;
 static SEL errorHandlerAction = nil;
