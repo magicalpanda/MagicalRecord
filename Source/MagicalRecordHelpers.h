@@ -50,6 +50,12 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 + (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName;
 + (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName;
 
+#pragma mark - iCloud Support
+
++ (BOOL) isICloudEnabled;
++ (void) setupCoreDataStackWithiCloudContainer:(NSString *)icloudBucket localStoreNamed:(NSString *)localStore;
++ (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent;
+
 #ifdef NS_BLOCKS_AVAILABLE
 #pragma mark DEPRECATED_METHOD
 
