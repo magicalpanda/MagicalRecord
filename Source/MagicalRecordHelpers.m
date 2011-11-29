@@ -225,6 +225,7 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
 
 #pragma mark - Support methods for shorthand methods
 
+#ifdef MR_SHORTHAND
 + (BOOL) MR_resolveClassMethod:(SEL)originalSelector
 {
     BOOL resolvedClassMethod = [self MR_resolveClassMethod:originalSelector];
@@ -270,6 +271,7 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
     }];
     methodsHaveBeenSwizzled = YES;
 }
+#endif
 
 #pragma mark - initialize
 
@@ -277,7 +279,9 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
 {
     if (self == [MagicalRecordHelpers class]) 
     {
+#ifdef MR_SHORTHAND
         [self swizzleShorthandMethods];
+#endif
         [self setShouldAutoCreateManagedObjectModel:YES];
         [self setShouldAutoCreateDefaultPersistentStoreCoordinator:YES];
     }
