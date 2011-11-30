@@ -115,16 +115,30 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     NSAssert2([relatedObject entity] == [relationshipInfo destinationEntity], @"related object entity %@ not same as destination entity %@", [relatedObject entity], [relationshipInfo destinationEntity]);
 
     //add related object to set
-    NSString *addRelationMessageFormat = [relationshipInfo isToMany] ? @"add%@Object:" : @"set%@:";
+    NSString *addRelationMessageFormat = @"set%@:";
+    id relationshipSource = self;
+    if ([relationshipInfo isToMany]) 
+    {
+        addRelationMessageFormat = @"add%@Object:";
+        if ([relationshipInfo isOrdered])
+        {
+            //Need to get the ordered set
+            NSString *selectorName = [[relationshipInfo name] stringByAppendingString:@"Set"];
+            relationshipSource = [self performSelector:NSSelectorFromString(selectorName)];
+            addRelationMessageFormat = @"addObject:";
+        }
+    }
+
     NSString *addRelatedObjectToSetMessage = [NSString stringWithFormat:addRelationMessageFormat, attributeNameFromString([relationshipInfo name])];
  
     SEL selector = NSSelectorFromString(addRelatedObjectToSetMessage);
+    MRLog(@"add selector: %@", addRelatedObjectToSetMessage);
     
     @try 
     {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [self performSelector:selector withObject:relatedObject];        
+        [relationshipSource performSelector:selector withObject:relatedObject];        
 #pragma clang diagnostic pop
     }
     @catch (NSException *exception) 
@@ -152,18 +166,28 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
             continue;
         }
         
+        SEL shouldImportSelector = @selector(shouldImport:);
+        BOOL implementsShouldImport = [self respondsToSelector:shouldImportSelector];
+
         if (![self MR_importValue:relatedObjectData forKey:relationshipName])
         {
             if ([relationshipInfo isToMany])
             {
                 for (id singleRelatedObjectData in relatedObjectData) 
                 {
+                    if (implementsShouldImport && !(BOOL)[self performSelector:shouldImportSelector withObject:singleRelatedObjectData]) 
+                    {
+                        continue;
+                    }
                     setRelationshipBlock(relationshipInfo, singleRelatedObjectData);
                 }
             }
             else
             {
-                setRelationshipBlock(relationshipInfo, relatedObjectData);
+                if (!(implementsShouldImport && !(BOOL)[self performSelector:shouldImportSelector withObject:relatedObjectData]))
+                {
+                    setRelationshipBlock(relationshipInfo, relatedObjectData);
+                }
             }
         }
     }
