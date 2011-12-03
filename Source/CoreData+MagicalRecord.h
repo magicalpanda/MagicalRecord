@@ -4,21 +4,23 @@
 
 #define kCreateNewCoordinatorOnBackgroundOperations     0
 
+#ifndef ENABLE_ACTIVE_RECORD_LOGGING
 #define ENABLE_ACTIVE_RECORD_LOGGING
+#endif
 
 #ifdef ENABLE_ACTIVE_RECORD_LOGGING
 #ifdef LOG_VERBOSE
-    #define MRLog(...)  DDLogVerbose(__VA_ARGS__)
+#define MRLog(...)  DDLogVerbose(__VA_ARGS__)
 #else
-    #define MRLog(...) NSLog(@"%s(%p) %@", __PRETTY_FUNCTION__, self, [NSString stringWithFormat:__VA_ARGS__])
+#define MRLog(...) NSLog(@"%s(%p) %@", __PRETTY_FUNCTION__, self, [NSString stringWithFormat:__VA_ARGS__])
 #endif
 #else
-    #define MRLog(...) ((void)0)
+#define MRLog(...) ((void)0)
 #endif
 
 #import <CoreData/CoreData.h>
 
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
+#ifdef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
 #define MR_RETAIN(xx)           [xx retain];
 #define MR_RELEASE(xx)          [xx release];
 #define MR_AUTORELEASE(xx)      [xx autorelease];
