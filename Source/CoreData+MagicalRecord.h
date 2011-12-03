@@ -4,7 +4,9 @@
 
 #define kCreateNewCoordinatorOnBackgroundOperations     0
 
+#ifndef ENABLE_ACTIVE_RECORD_LOGGING
 #define ENABLE_ACTIVE_RECORD_LOGGING
+#endif
 
 #ifdef ENABLE_ACTIVE_RECORD_LOGGING
 #ifdef LOG_VERBOSE
@@ -18,7 +20,7 @@
 
 #import <CoreData/CoreData.h>
 
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
+#ifdef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
 #define MR_RETAIN(xx)           [xx retain];
 #define MR_RELEASE(xx)          [xx release];
 #define MR_AUTORELEASE(xx)      [xx autorelease];
