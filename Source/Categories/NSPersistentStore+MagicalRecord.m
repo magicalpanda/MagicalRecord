@@ -64,6 +64,14 @@ static NSPersistentStore *defaultPersistentStore_ = nil;
     return [NSURL fileURLWithPath:[[self MR_applicationStorageDirectory] stringByAppendingPathComponent:storeFileName]];
 }
 
++ (NSURL *) MR_cloudURLForUbiqutiousContainer:(NSString *)bucketName;
+{
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    NSURL *cloudURL = [fileManager URLForUbiquityContainerIdentifier:bucketName];
+
+    return cloudURL;
+}
+
 + (NSURL *) MR_defaultLocalStoreUrl
 {
     return [self MR_urlForStoreName:kMagicalRecordDefaultStoreFileName];

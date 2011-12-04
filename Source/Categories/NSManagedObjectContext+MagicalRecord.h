@@ -7,11 +7,14 @@
 
 #import "MagicalRecordHelpers.h"
 
+extern NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification;
+
 @interface NSManagedObjectContext (MagicalRecord)
 
 - (void) MR_observeContext:(NSManagedObjectContext *)otherContext;
 - (void) MR_stopObservingContext:(NSManagedObjectContext *)otherContext;
 - (void) MR_observeContextOnMainThread:(NSManagedObjectContext *)otherContext;
+- (void) MR_observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 
 - (BOOL) MR_save;
 
@@ -34,7 +37,7 @@
 + (NSManagedObjectContext *) MR_contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 + (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 
-@property (nonatomic, assign) BOOL MR_notifiesMainContextOnSave;
+@property (nonatomic, assign, setter=MR_setNotifiesMainContextOnSave:) BOOL MR_notifiesMainContextOnSave;
 
 @end
 

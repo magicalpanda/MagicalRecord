@@ -17,10 +17,7 @@ NSString * const kMagicalRecordImportPrimaryAttributeKey = @"primaryAttributeKey
     NSString *lookupKey = [[self userInfo] valueForKey:kMagicalRecordImportPrimaryAttributeKey] ?: primaryKeyNameFromString([self name]);
     NSAttributeDescription *primaryAttribute = [[self attributesByName] valueForKey:lookupKey];
     
-    if (primaryAttribute == nil)
-    {
-        NSAssert3(primaryAttribute != nil, @"Unable to determine primary attribute for %@. Specify either an attribute named %@ or the primary key in userInfo named '%@'", [self name], primaryKeyNameFromString([self name]), kMagicalRecordImportPrimaryAttributeKey);
-    }
+    NSAssert3(primaryAttribute != nil, @"Unable to determine primary attribute for %@. Specify either an attribute named %@ or the primary key in userInfo named '%@'", [self name], primaryKeyNameFromString([self name]), kMagicalRecordImportPrimaryAttributeKey);
 
     return primaryAttribute;
 }

@@ -9,7 +9,9 @@
 #import <objc/runtime.h>
 
 static NSString * const kMagicalRecordCategoryPrefix = @"MR_";
+#ifdef MR_SHORTHAND
 static BOOL methodsHaveBeenSwizzled = NO;
+#endif
 
 static id errorHandlerTarget = nil;
 static SEL errorHandlerAction = nil;
@@ -60,21 +62,21 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
             {
                 if ([e respondsToSelector:@selector(userInfo)])
                 {
-                    ARLog(@"Error Details: %@", [e userInfo]);
+                    MRLog(@"Error Details: %@", [e userInfo]);
                 }
                 else
                 {
-                    ARLog(@"Error Details: %@", e);
+                    MRLog(@"Error Details: %@", e);
                 }
             }
         }
         else
         {
-            ARLog(@"Error: %@", detailedError);
+            MRLog(@"Error: %@", detailedError);
         }
     }
-    ARLog(@"Error Domain: %@", [error domain]);
-    ARLog(@"Recovery Suggestion: %@", [error localizedRecoverySuggestion]);
+    MRLog(@"Error Domain: %@", [error domain]);
+    MRLog(@"Recovery Suggestion: %@", [error localizedRecoverySuggestion]);
 }
 
 + (void) handleErrors:(NSError *)error
@@ -124,6 +126,21 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
     [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
 }
 
++ (NSString *) defaultStoreName;
+{
+    NSString *defaultName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(id)kCFBundleNameKey];
+    if (defaultName == nil)
+    {
+        defaultName = kMagicalRecordDefaultStoreFileName;
+    }
+    if (![defaultName hasSuffix:@"sqlite"]) 
+    {
+        defaultName = [defaultName stringByAppendingPathExtension:@"sqlite"];
+    }
+
+    return defaultName;
+}
+
 + (void) setupCoreDataStack
 {
     NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
@@ -132,7 +149,7 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
 
 + (void) setupAutoMigratingCoreDataStack
 {
-    [self setupCoreDataStackWithAutoMigratingSqliteStoreNamed:kMagicalRecordDefaultStoreFileName];
+    [self setupCoreDataStackWithAutoMigratingSqliteStoreNamed:[self defaultStoreName]];
 }
 
 + (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName
@@ -153,7 +170,7 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
     [NSManagedObjectContext MR_setDefaultContext:context];
 }
 
-+ (void) setupCoreDataStackWithInMemoryStore
++ (void) setupCoreDataStackWithInMemoryStore;
 {
 	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithInMemoryStore];
 	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
@@ -161,6 +178,35 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
 	NSManagedObjectContext *context = [NSManagedObjectContext MR_contextWithStoreCoordinator:coordinator];
 	[NSManagedObjectContext MR_setDefaultContext:context];
 }
+
+#pragma mark - iCloud Methods
+
++ (BOOL) isICloudEnabled;
+{
+    NSURL *cloudURL = [NSPersistentStore MR_cloudURLForUbiqutiousContainer:nil];
+    return cloudURL != nil;
+}
+
++ (void) setupCoreDataStackWithiCloudContainer:(NSString *)icloudBucket localStoreNamed:(NSString *)localStore;
+{
+    [self setupCoreDataStackWithiCloudContainer:icloudBucket contentNameKey:nil localStoreNamed:localStore cloudStorePathComponent:nil];
+}
+
++ (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent;
+{
+    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithiCloudContainerID:containerID
+                                                                                                   contentNameKey:contentNameKey 
+                                                                                                  localStoreNamed:localStoreName 
+                                                                                          cloudStorePathComponent:pathSubcomponent];
+    [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
+    
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_contextWithStoreCoordinator:coordinator];
+    [NSManagedObjectContext MR_setDefaultContext:context];
+    
+    [context MR_observeiCloudChangesInCoordinator:coordinator];    
+}
+
+#pragma mark - Options
 
 + (BOOL) shouldAutoCreateManagedObjectModel;
 {
@@ -210,6 +256,7 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
 
 #pragma mark - Support methods for shorthand methods
 
+#ifdef MR_SHORTHAND
 + (BOOL) MR_resolveClassMethod:(SEL)originalSelector
 {
     BOOL resolvedClassMethod = [self MR_resolveClassMethod:originalSelector];
@@ -255,6 +302,7 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
     }];
     methodsHaveBeenSwizzled = YES;
 }
+#endif
 
 #pragma mark - initialize
 
@@ -262,7 +310,9 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
 {
     if (self == [MagicalRecordHelpers class]) 
     {
+#ifdef MR_SHORTHAND
         [self swizzleShorthandMethods];
+#endif
         [self setShouldAutoCreateManagedObjectModel:YES];
         [self setShouldAutoCreateDefaultPersistentStoreCoordinator:YES];
     }
