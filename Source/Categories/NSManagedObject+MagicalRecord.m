@@ -71,7 +71,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 #endif
 
-+ (NSString *) entityName
++ (NSString *) MR_entityName
 {
     return NSStringFromClass(self);
 }
@@ -85,7 +85,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     }
     else
     {
-        NSString *entityName = [self entityName];
+        NSString *entityName = [self MR_entityName];
         return [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
     }
 }
@@ -113,7 +113,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 			}
 			else
 			{
-				ARLog(@"Property '%@' not found in %@ properties for %@", propertyName, [propDict count], NSStringFromClass(self));
+				MRLog(@"Property '%@' not found in %@ properties for %@", propertyName, [propDict count], NSStringFromClass(self));
 			}
 		}
 	}
@@ -166,7 +166,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	return [NSNumber numberWithUnsignedInteger:[self MR_countOfEntitiesWithContext:context]];
 }
 
-+ (NSNumber *)MR_numberOfEntities
++ (NSNumber *) MR_numberOfEntities
 {
 	return [self MR_numberOfEntitiesWithContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
@@ -224,8 +224,8 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     return [[self MR_numberOfEntitiesWithContext:context] intValue] > 0;
 }
 
-#pragma mark -
-#pragma mark Reqest Helpers
+#pragma mark - Reqest Helpers
+
 + (NSFetchRequest *) MR_requestAll
 {
 	return [self MR_createFetchRequestInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
@@ -418,7 +418,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
                                                             groupedBy:group
                                                             inContext:context];
     
-    [self performFetch:controller];
+    [self MR_performFetch:controller];
     return controller;
 }
 
@@ -653,7 +653,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     }
     else
     {
-        return [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
+        return [NSEntityDescription insertNewObjectForEntityForName:[self MR_entityName] inManagedObjectContext:context];
     }
 }
 
@@ -747,16 +747,16 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     [ed setExpression:ex];
     
     // determine the type of attribute, required to set the expression return type    
-    NSAttributeDescription *attributeDescription = [[[self entityDescription] attributesByName] objectForKey:attributeName];
+    NSAttributeDescription *attributeDescription = [[[self MR_entityDescription] attributesByName] objectForKey:attributeName];
     [ed setExpressionResultType:[attributeDescription attributeType]];    
     NSArray *properties = [NSArray arrayWithObject:ed];
     MR_RELEASE(ed);
     
-    NSFetchRequest *request = [self requestAllWithPredicate:predicate inContext:context];
+    NSFetchRequest *request = [self MR_requestAllWithPredicate:predicate inContext:context];
     [request setPropertiesToFetch:properties];
     [request setResultType:NSDictionaryResultType];    
     
-    NSDictionary *resultsDictionary = [self executeFetchRequestAndReturnFirstObject:request];
+    NSDictionary *resultsDictionary = [self MR_executeFetchRequestAndReturnFirstObject:request];
     NSNumber *resultValue = [resultsDictionary objectForKey:@"result"];
     
     return resultValue;    
@@ -767,7 +767,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     return [self aggregateOperation:function 
                         onAttribute:attributeName 
                       withPredicate:predicate
-                          inContext:[NSManagedObjectContext defaultContext]];    
+                          inContext:[NSManagedObjectContext MR_defaultContext]];    
 }
 
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext

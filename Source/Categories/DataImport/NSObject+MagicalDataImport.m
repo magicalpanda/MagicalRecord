@@ -6,12 +6,22 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import "NSDictionary+MagicalDataImport.h"
+#import "NSObject+MagicalDataImport.h"
 
 NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
 
 
-@implementation NSDictionary (MagicalRecord_DataImport)
+@implementation NSObject (MagicalRecord_DataImport)
+
+//#warning If you implement valueForUndefinedKey: in any NSObject in your code, this may be the problem if something broke
+//TODO: This method needs to be:
+// 1) Renamed to MR_valueForUndefinedKey:
+// 2) swizzled in and out only when importing data.
+// This will be done in a really short update...stay tuned
+- (id) MR_valueForUndefinedKey:(NSString *)key
+{
+    return nil;
+}
 
 - (NSString *) MR_lookupKeyForAttribute:(NSAttributeDescription *)attributeInfo;
 {
@@ -45,7 +55,7 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
     NSEntityDescription *destinationEntity = [relationshipInfo destinationEntity];
     if (destinationEntity == nil) 
     {
-        ARLog(@"Unable to find entity for type '%@'", [self valueForKey:kMagicalRecordImportRelationshipTypeKey]);
+        MRLog(@"Unable to find entity for type '%@'", [self valueForKey:kMagicalRecordImportRelationshipTypeKey]);
         return nil;
     }
     

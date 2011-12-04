@@ -19,16 +19,16 @@ extern NSString * const kMagicalRecordImportRelationshipTypeKey;
 
 @interface NSManagedObject (NSManagedObject_DataImport)
 
-- (void) MR_importValuesForKeysWithDictionary:(NSDictionary *)objectData;
-- (void) MR_updateValuesForKeysWithDictionary:(NSDictionary *)objectData;
+- (void) MR_importValuesForKeysWithDictionary:(id)objectData;
+- (void) MR_updateValuesForKeysWithDictionary:(id)objectData;
 
-+ (id) MR_importFromDictionary:(NSDictionary *)data;
-+ (id) MR_importFromDictionary:(NSDictionary *)data inContext:(NSManagedObjectContext *)context;
++ (id) MR_importFromDictionary:(id)data;
++ (id) MR_importFromDictionary:(id)data inContext:(NSManagedObjectContext *)context;
 
 + (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData;
 + (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context;
 
-+ (id) MR_updateFromDictionary:(NSDictionary *)objectData;
-+ (id) MR_updateFromDictionary:(NSDictionary *)objectData inContext:(NSManagedObjectContext *)context;
++ (id) MR_updateFromDictionary:(id)objectData;
++ (id) MR_updateFromDictionary:(id)objectData inContext:(NSManagedObjectContext *)context;
 
 @end

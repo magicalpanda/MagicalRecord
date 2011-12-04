@@ -25,10 +25,8 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 
 + (void) MR_setDefaultManagedObjectModel:(NSManagedObjectModel *)newDefaultModel
 {
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
-    [newDefaultModel retain];
-    [defaultManagedObjectModel_ release];
-#endif
+  MR_RELEASE(newDefaultModel);
+  MR_RELEASE(defaultManagedObjectModel_);
 	defaultManagedObjectModel_ = newDefaultModel;
 }
 
@@ -41,7 +39,7 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 + (NSManagedObjectModel *) MR_newManagedObjectModel 
 {
     NSManagedObjectModel *model = [self MR_mergedObjectModelFromMainBundle];
-    MR_AUTORELEASE(model);
+    MR_RETAIN(model);
     return model;
 }
 
