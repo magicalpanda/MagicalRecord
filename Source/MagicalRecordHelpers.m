@@ -417,9 +417,7 @@ NSDate * dateFromString(NSString *value, NSString *format)
     [formatter setDateFormat:format];
     
     NSDate *parsedDate = [formatter dateFromString:value];
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
-    [formatter autorelease];
-#endif
+    MR_AUTORELEASE(formatter);
     
     return parsedDate;
 }

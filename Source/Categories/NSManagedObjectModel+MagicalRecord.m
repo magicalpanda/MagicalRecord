@@ -25,10 +25,8 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 
 + (void) MR_setDefaultManagedObjectModel:(NSManagedObjectModel *)newDefaultModel
 {
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
-    [newDefaultModel retain];
-    [defaultManagedObjectModel_ release];
-#endif
+    MR_RETAIN(newDefaultModel);
+    MR_RELEASE(defaultManagedObjectModel_);
 	defaultManagedObjectModel_ = newDefaultModel;
 }
 
