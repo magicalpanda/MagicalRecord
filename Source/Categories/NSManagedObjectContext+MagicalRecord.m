@@ -31,10 +31,8 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 
 + (void) MR_setDefaultContext:(NSManagedObjectContext *)moc
 {
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
-    [moc retain];
-    [defaultManageObjectContext_ release];
-#endif
+    MR_RETAIN(moc);
+    MR_RELEASE(defaultManageObjectContext_);
     defaultManageObjectContext_ = moc;
 }
 
