@@ -18,7 +18,7 @@
 
 #import <CoreData/CoreData.h>
 
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
+#ifndef MR_USE_ARC
 #define MR_RETAIN(xx)           [xx retain];
 #define MR_RELEASE(xx)          [xx release];
 #define MR_AUTORELEASE(xx)      [xx autorelease];
