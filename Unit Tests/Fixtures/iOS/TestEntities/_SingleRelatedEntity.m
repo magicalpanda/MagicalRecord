@@ -48,7 +48,9 @@
 	
 - (NSMutableSet*)testAbstractToManyRelationshipSet {
 	[self willAccessValueForKey:@"testAbstractToManyRelationship"];
+  
 	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"testAbstractToManyRelationship"];
+  
 	[self didAccessValueForKey:@"testAbstractToManyRelationship"];
 	return result;
 }
@@ -63,7 +65,9 @@
 	
 - (NSMutableSet*)testConcreteToManyRelationshipSet {
 	[self willAccessValueForKey:@"testConcreteToManyRelationship"];
+  
 	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"testConcreteToManyRelationship"];
+  
 	[self didAccessValueForKey:@"testConcreteToManyRelationship"];
 	return result;
 }
