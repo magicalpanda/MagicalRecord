@@ -19,13 +19,17 @@
 #import <CoreData/CoreData.h>
 
 #ifndef MR_USE_ARC
-#define MR_RETAIN(xx)           [xx retain];
-#define MR_RELEASE(xx)          [xx release];
-#define MR_AUTORELEASE(xx)      [xx autorelease];
-#else
+#define MR_USE_ARC 1
+#endif
+
+#if MR_USE_ARC
 #define MR_RETAIN(xx)  ((void)0)
 #define MR_RELEASE(xx)  ((void)0)
 #define MR_AUTORELEASE(xx)  ((void)0)
+#else
+#define MR_RETAIN(xx)           [xx retain];
+#define MR_RELEASE(xx)          [xx release];
+#define MR_AUTORELEASE(xx)      [xx autorelease];
 #endif
 
 #ifdef MR_SHORTHAND

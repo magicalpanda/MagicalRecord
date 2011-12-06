@@ -165,7 +165,7 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 
 - (void) MR_saveWrapper;
 {
-#ifdef MR_USE_ARC
+#if MR_USE_ARC
     @autoreleasepool
     {
         [self MR_save];
