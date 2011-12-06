@@ -60,7 +60,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     }
 }
 
-- (void) MR_addSqliteStoreNamed:(id)storeFileName withOptions:(__autoreleasing NSDictionary *)options
+- (NSPersistentStore *) MR_addSqliteStoreNamed:(id)storeFileName withOptions:(__autoreleasing NSDictionary *)options
 {
     NSURL *url = [storeFileName isKindOfClass:[NSURL class]] ? storeFileName : [NSPersistentStore MR_urlForStoreName:storeFileName];
     NSError *error = nil;
@@ -76,6 +76,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     {
         [MagicalRecordHelpers handleErrors:error];
     }
+    return store;
 }
 
 
@@ -105,10 +106,10 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     return options;
 }
 
-- (void) MR_addAutoMigratingSqliteStoreNamed:(NSString *) storeFileName
+- (NSPersistentStore *) MR_addAutoMigratingSqliteStoreNamed:(NSString *) storeFileName;
 {
     NSDictionary *options = [[self class] MR_autoMigrationOptions];
-    [self MR_addSqliteStoreNamed:storeFileName withOptions:options];
+    return [self MR_addSqliteStoreNamed:storeFileName withOptions:options];
 }
 
 
@@ -151,6 +152,15 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 
 - (void) MR_addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent;
 {
+    [self MR_addiCloudContainerID:containerID 
+                   contentNameKey:contentNameKey 
+                  localStoreNamed:localStoreName
+          cloudStorePathComponent:subPathComponent
+                       completion:nil];
+}
+
+- (void) MR_addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent completion:(void(^)(void))completionBlock;
+{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         NSURL *cloudURL = [NSPersistentStore MR_cloudURLForUbiqutiousContainer:containerID];
@@ -158,7 +168,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
         {
             cloudURL = [cloudURL URLByAppendingPathComponent:subPathComponent];
         }
-        
+
         NSDictionary *options = [[self class] MR_autoMigrationOptions];
         if (cloudURL)   //iCloud is available
         {
@@ -171,12 +181,20 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
         {
             MRLog(@"iCloud is not enabled");
         }
+        
         [self lock];
         [self MR_addSqliteStoreNamed:localStoreName withOptions:options];
         [self unlock];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            MRLog(@"iCloud Store Enabled: %@", [MagicalRecordHelpers currentStack]);
+            if ([NSPersistentStore MR_defaultPersistentStore] == nil)
+            {
+                [NSPersistentStore MR_setDefaultPersistentStore:[[self persistentStores] objectAtIndex:0]];
+            }
+            if (completionBlock)
+            {
+                completionBlock();
+            }
             [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCDidCompleteiCloudSetupNotification object:nil]; 
         });
     });   
@@ -187,13 +205,27 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
                                                        localStoreNamed:(NSString *)localStoreName
                                                cloudStorePathComponent:(NSString *)subPathComponent;
 {
+    return [self MR_coordinatorWithiCloudContainerID:containerID 
+                                      contentNameKey:contentNameKey
+                                     localStoreNamed:localStoreName
+                             cloudStorePathComponent:subPathComponent
+                                          completion:nil];
+}
+
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithiCloudContainerID:(NSString *)containerID 
+                                                        contentNameKey:(NSString *)contentNameKey
+                                                       localStoreNamed:(NSString *)localStoreName
+                                               cloudStorePathComponent:(NSString *)subPathComponent
+                                                            completion:(void(^)(void))completionHandler;
+{
     NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
     NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
     
     [psc MR_addiCloudContainerID:containerID 
                   contentNameKey:contentNameKey
                  localStoreNamed:localStoreName
-         cloudStorePathComponent:subPathComponent];
+         cloudStorePathComponent:subPathComponent
+                      completion:completionHandler];
     
     MR_AUTORELEASE(psc);
     return psc;
