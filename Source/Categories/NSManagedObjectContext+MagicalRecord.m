@@ -34,11 +34,9 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
     NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_defaultStoreCoordinator];
     [defaultManageObjectContext_ MR_stopObservingiCloudChangesInCoordinator:coordinator];
 
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
-    [moc retain];
-    [defaultManageObjectContext_ release];
-#endif
-    
+    MR_RETAIN(moc);
+    MR_RELEASE(defaultManageObjectContext_);
+
     defaultManageObjectContext_ = moc;
     [defaultManageObjectContext_ MR_observeiCloudChangesInCoordinator:coordinator];
 }
@@ -182,7 +180,7 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 
 - (void) MR_saveWrapper;
 {
-#ifdef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
+#if MR_USE_ARC
     @autoreleasepool
     {
         [self MR_save];
