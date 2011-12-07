@@ -67,6 +67,7 @@ static NSPersistentStore *defaultPersistentStore_ = nil;
     NSFileManager *fileManager = [[NSFileManager alloc] init];
     NSURL *cloudURL = [fileManager URLForUbiquityContainerIdentifier:bucketName];
 
+    MR_AUTORELEASE(fileManager);
     return cloudURL;
 }
 

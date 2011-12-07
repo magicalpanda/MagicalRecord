@@ -39,7 +39,7 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 + (NSManagedObjectModel *) MR_newManagedObjectModel 
 {
     NSManagedObjectModel *model = [self MR_mergedObjectModelFromMainBundle];
-    MR_AUTORELEASE(model);
+    MR_RETAIN(model);
     return model;
 }
 
