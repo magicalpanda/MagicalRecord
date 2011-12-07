@@ -23,9 +23,9 @@
 #endif
 
 #if MR_USE_ARC
-#define MR_RETAIN(xx)  ((void)0)
-#define MR_RELEASE(xx)  ((void)0)
-#define MR_AUTORELEASE(xx)  ((void)0)
+#define MR_RETAIN(xx)
+#define MR_RELEASE(xx)
+#define MR_AUTORELEASE(xx)
 #else
 #define MR_RETAIN(xx)           [xx retain];
 #define MR_RELEASE(xx)          [xx release];
