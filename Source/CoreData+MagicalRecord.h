@@ -18,7 +18,7 @@
 
 #import <CoreData/CoreData.h>
 
-#define MR_USE_ARC __has_feature(objc_arr)
+#define MR_USE_ARC __has_feature(objc_arc)
 
 #if MR_USE_ARC
 #define MR_RETAIN(xx)  ((void)0)
