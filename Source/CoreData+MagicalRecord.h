@@ -18,8 +18,10 @@
 
 #import <CoreData/CoreData.h>
 
-#ifndef MR_USE_ARC
+#if __has_feature(objc_arr)
 #define MR_USE_ARC 1
+#else
+#define MR_USE_ARC 0
 #endif
 
 #if MR_USE_ARC
