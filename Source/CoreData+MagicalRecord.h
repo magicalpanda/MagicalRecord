@@ -24,11 +24,7 @@
 
 #import <CoreData/CoreData.h>
 
-#if __has_feature(objc_arr)
-#define MR_USE_ARC 1
-#else
-#define MR_USE_ARC 0
-#endif
+#define MR_USE_ARC __has_feature(objc_arr)
 
 #if MR_USE_ARC
 #define MR_RETAIN(xx)
