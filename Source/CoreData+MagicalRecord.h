@@ -4,9 +4,15 @@
 
 #define kCreateNewCoordinatorOnBackgroundOperations     0
 
-#define ENABLE_ACTIVE_RECORD_LOGGING
+#ifndef MR_ENABLE_ACTIVE_RECORD_LOGGING
+  #ifdef DEBUG
+    #define MR_ENABLE_ACTIVE_RECORD_LOGGING 1
+  #else
+    #define MR_ENABLE_ACTIVE_RECORD_LOGGING 0
+  #endif
+#endif
 
-#ifdef ENABLE_ACTIVE_RECORD_LOGGING
+#if MR_ENABLE_ACTIVE_RECORD_LOGGING
 #ifdef LOG_VERBOSE
     #define MRLog(...)  DDLogVerbose(__VA_ARGS__)
 #else
