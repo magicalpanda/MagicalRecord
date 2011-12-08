@@ -4,11 +4,7 @@
 
 #define kCreateNewCoordinatorOnBackgroundOperations     0
 
-#ifndef ENABLE_ACTIVE_RECORD_LOGGING
-#define ENABLE_ACTIVE_RECORD_LOGGING
-#endif
-
-#ifdef ENABLE_ACTIVE_RECORD_LOGGING
+#ifdef MR_ENABLE_LOGGING
 #ifdef LOG_VERBOSE
     #define MRLog(...)  DDLogVerbose(__VA_ARGS__)
 #else
@@ -24,11 +20,22 @@
 #define MR_USE_ARC 1
 #endif
 
-#if MR_USE_ARC
+#define PRIVATE_QUEUES_ENABLED(...) \
+    if (NSCoreDataVersionNumber >= NSCoreDataVersionNumber_iPhoneOS_4_0) \
+    { \
+        __VA_ARGS__ \
+    }
 
-#define MR_RETAIN(xx)  			
-#define MR_RELEASE(xx)  		
-#define MR_AUTORELEASE(xx)  	
+#define THREAD_ISOLATION_ENABLED(...) \
+    if (NSCoreDataVersionNumber < NSCoreDataVersionNumber_iPhoneOS_4_0) \
+    { \
+        __VA_ARGS__ \
+    }
+
+#if MR_USE_ARC
+#define MR_RETAIN(xx)
+#define MR_RELEASE(xx)
+#define MR_AUTORELEASE(xx)
 #else
 #define MR_RETAIN(xx)           [xx retain];
 #define MR_RELEASE(xx)          [xx release];

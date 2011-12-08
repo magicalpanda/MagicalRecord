@@ -38,6 +38,7 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
     MR_RELEASE(defaultManageObjectContext_);
 
     defaultManageObjectContext_ = moc;
+    
     [defaultManageObjectContext_ MR_observeiCloudChangesInCoordinator:coordinator];
 }
 
@@ -259,10 +260,16 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
     if (coordinator != nil)
 	{
         MRLog(@"Creating MOContext %@", [NSThread isMainThread] ? @" *** On Main Thread ***" : @"");
-        context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-        [context performBlockAndWait:^{
-            [context setPersistentStoreCoordinator:coordinator];
-        }];
+        THREAD_ISOLATION_ENABLED(
+                                 context = [[NSManagedObjectContext alloc] init];
+                                 [context setPersistentStoreCoordinator:coordinator];
+                                 )
+        PRIVATE_QUEUES_ENABLED(
+            context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+            [context performBlockAndWait:^{
+                [context setPersistentStoreCoordinator:coordinator];
+            }];
+        )
 
         MR_AUTORELEASE(context);
     }
@@ -283,8 +290,22 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 
 + (NSManagedObjectContext *) MR_contextThatNotifiesDefaultContextOnMainThread;
 {
-    NSManagedObjectContext *context = [self MR_context];
-    context.MR_notifiesMainContextOnSave = YES;
+    NSManagedObjectContext *context = nil;
+    
+    THREAD_ISOLATION_ENABLED
+    (
+         context = [self MR_context];
+         context.MR_notifiesMainContextOnSave = YES;
+    )
+    
+    PRIVATE_QUEUES_ENABLED
+    (
+       context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+       [context performBlockAndWait:^{
+            [context setPersistentStoreCoordinator:[NSPersistentStoreCoordinator MR_defaultStoreCoordinator]];
+        }];
+    )
+    
     return context;
 }
 
