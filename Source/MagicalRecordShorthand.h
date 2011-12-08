@@ -8,12 +8,12 @@
 @interface NSManagedObject (NSManagedObject_DataImportShortHand)
 - (void) importValuesForKeysWithDictionary:(id)objectData;
 - (void) updateValuesForKeysWithDictionary:(id)objectData;
-+ (id) importFromDictionary:(NSDictionary *)data;
-+ (id) importFromDictionary:(NSDictionary *)data inContext:(NSManagedObjectContext *)context;
++ (id) importFromDictionary:(id)data;
++ (id) importFromDictionary:(id)data inContext:(NSManagedObjectContext *)context;
 + (NSArray *) importFromArray:(NSArray *)listOfObjectData;
 + (NSArray *) importFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context;
-+ (id) updateFromDictionary:(NSDictionary *)objectData;
-+ (id) updateFromDictionary:(NSDictionary *)objectData inContext:(NSManagedObjectContext *)context;
++ (id) updateFromDictionary:(id)objectData;
++ (id) updateFromDictionary:(id)objectData inContext:(NSManagedObjectContext *)context;
 @end
 @interface NSManagedObject (MagicalRecordShortHand)
 + (NSUInteger) defaultBatchSize;
@@ -89,7 +89,6 @@
 + (NSArray *) findByAttribute:(NSString *)attribute withValue:(id)searchValue andOrderBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
 - (id) inContext:(NSManagedObjectContext *)otherContext;
 - (id) inThreadContext;
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 + (void) performFetch:(NSFetchedResultsController *)controller;
 + (NSFetchedResultsController *) fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate;
 + (NSFetchedResultsController *) fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context;
@@ -97,12 +96,13 @@
 + (NSFetchedResultsController *) fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
 + (NSFetchedResultsController *) fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending delegate:(id<NSFetchedResultsControllerDelegate>)delegate;
 + (NSFetchedResultsController *) fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending delegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context;
-#endif
 @end
 @interface NSManagedObjectContext (MagicalRecordShortHand)
 - (void) observeContext:(NSManagedObjectContext *)otherContext;
 - (void) stopObservingContext:(NSManagedObjectContext *)otherContext;
 - (void) observeContextOnMainThread:(NSManagedObjectContext *)otherContext;
+- (void) observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
+- (void) stopObservingiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 - (BOOL) save;
 - (BOOL) saveWithErrorHandler:(void (^)(NSError *))errorCallback;
 - (BOOL) saveOnMainThread;
@@ -131,6 +131,7 @@
 + (NSPersistentStore *) defaultPersistentStore;
 + (void) setDefaultPersistentStore:(NSPersistentStore *) store;
 + (NSURL *) urlForStoreName:(NSString *)storeFileName;
++ (NSURL *) cloudURLForUbiqutiousContainer:(NSString *)bucketName;
 @end
 @interface NSPersistentStoreCoordinator (MagicalRecordShortHand)
 + (NSPersistentStoreCoordinator *) defaultStoreCoordinator;
@@ -138,9 +139,15 @@
 + (NSPersistentStoreCoordinator *) coordinatorWithInMemoryStore;
 + (NSPersistentStoreCoordinator *) newPersistentStoreCoordinator NS_RETURNS_RETAINED;
 + (NSPersistentStoreCoordinator *) coordinatorWithSqliteStoreNamed:(NSString *)storeFileName;
-+ (NSPersistentStoreCoordinator *) coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *) storeFileName;
++ (NSPersistentStoreCoordinator *) coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *)storeFileName;
 + (NSPersistentStoreCoordinator *) coordinatorWithPersitentStore:(NSPersistentStore *)persistentStore;
++ (NSPersistentStoreCoordinator *) coordinatorWithiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent;
++ (NSPersistentStoreCoordinator *) coordinatorWithiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent completion:(void(^)(void))completionHandler;
 - (NSPersistentStore *) addInMemoryStore;
+- (NSPersistentStore *) addAutoMigratingSqliteStoreNamed:(NSString *) storeFileName;
+- (NSPersistentStore *) addSqliteStoreNamed:(id)storeFileName withOptions:(__autoreleasing NSDictionary *)options;
+- (void) addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent;
+- (void) addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent completion:(void(^)(void))completionBlock;
 @end
 #endif
 

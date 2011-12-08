@@ -44,7 +44,7 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
     NSMutableString *status = [NSMutableString stringWithString:@"Current Default Core Data Stack: ---- \n"];
     
     [status appendFormat:@"Context:     %@\n", [NSManagedObjectContext MR_defaultContext]];
-    [status appendFormat:@"Model:       %@\n", [NSManagedObjectModel MR_defaultManagedObjectModel]];
+    [status appendFormat:@"Model:       %@\n", [[NSManagedObjectModel MR_defaultManagedObjectModel] entityVersionHashesByName]];
     [status appendFormat:@"Coordinator: %@\n", [NSPersistentStoreCoordinator MR_defaultStoreCoordinator]];
     [status appendFormat:@"Store:       %@\n", [NSPersistentStore MR_defaultPersistentStore]];
     
@@ -194,16 +194,20 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
 
 + (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent;
 {
+    [self setupCoreDataStackWithiCloudContainer:containerID contentNameKey:contentNameKey localStoreNamed:localStoreName cloudStorePathComponent:pathSubcomponent completion:nil];
+}
+
++ (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent completion:(void(^)(void))completion;
+{
     NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithiCloudContainerID:containerID
                                                                                                    contentNameKey:contentNameKey 
                                                                                                   localStoreNamed:localStoreName 
-                                                                                          cloudStorePathComponent:pathSubcomponent];
+                                                                                          cloudStorePathComponent:pathSubcomponent
+                                                                                                       completion:completion];
     [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
     
     NSManagedObjectContext *context = [NSManagedObjectContext MR_contextWithStoreCoordinator:coordinator];
     [NSManagedObjectContext MR_setDefaultContext:context];
-    
-    [context MR_observeiCloudChangesInCoordinator:coordinator];    
 }
 
 #pragma mark - Options
@@ -417,9 +421,7 @@ NSDate * dateFromString(NSString *value, NSString *format)
     [formatter setDateFormat:format];
     
     NSDate *parsedDate = [formatter dateFromString:value];
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
-    [formatter autorelease];
-#endif
+    MR_AUTORELEASE(formatter);
     
     return parsedDate;
 }

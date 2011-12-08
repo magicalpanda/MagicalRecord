@@ -31,11 +31,14 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 
 + (void) MR_setDefaultContext:(NSManagedObjectContext *)moc
 {
-#ifndef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
-    [moc retain];
-    [defaultManageObjectContext_ release];
-#endif
+    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_defaultStoreCoordinator];
+    [defaultManageObjectContext_ MR_stopObservingiCloudChangesInCoordinator:coordinator];
+
+    MR_RETAIN(moc);
+    MR_RELEASE(defaultManageObjectContext_);
+
     defaultManageObjectContext_ = moc;
+    [defaultManageObjectContext_ MR_observeiCloudChangesInCoordinator:coordinator];
 }
 
 + (void)MR_resetDefaultContext
@@ -88,11 +91,21 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
     
 }
 
+- (void) MR_stopObservingiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:NSPersistentStoreDidImportUbiquitousContentChangesNotification 
+                                                  object:coordinator];
+}
+
 - (void) MR_mergeChangesFromiCloud:(NSNotification *)notification;
 {
     [self performBlock:^{
         
-        MRLog(@"Merging Changes from iCloud");
+        MRLog(@"Merging changes From iCloud %@context%@", 
+              self == [NSManagedObjectContext MR_defaultContext] ? @"*** DEFAULT *** " : @"",
+              ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
+
         [self mergeChangesFromContextDidSaveNotification:notification];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordDidMergeChangesFromiCloudNotification
@@ -167,7 +180,7 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 
 - (void) MR_saveWrapper;
 {
-#ifdef NS_AUTOMATED_REFCOUNT_UNAVAILABLE
+#if MR_USE_ARC
     @autoreleasepool
     {
         [self MR_save];
@@ -246,8 +259,11 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
     if (coordinator != nil)
 	{
         MRLog(@"Creating MOContext %@", [NSThread isMainThread] ? @" *** On Main Thread ***" : @"");
-        context = [[NSManagedObjectContext alloc] init];
-        [context setPersistentStoreCoordinator:coordinator];
+        context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+        [context performBlockAndWait:^{
+            [context setPersistentStoreCoordinator:coordinator];
+        }];
+
         MR_AUTORELEASE(context);
     }
     return context;
