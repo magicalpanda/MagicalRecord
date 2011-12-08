@@ -21,13 +21,13 @@
 #endif
 
 #define PRIVATE_QUEUES_ENABLED(...) \
-    if (NSCoreDataVersionNumber >= NSCoreDataVersionNumber_iPhoneOS_4_0) \
+    if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iPhoneOS_5_0) \
     { \
         __VA_ARGS__ \
     }
 
 #define THREAD_ISOLATION_ENABLED(...) \
-    if (NSCoreDataVersionNumber < NSCoreDataVersionNumber_iPhoneOS_4_0) \
+    if (kCFCoreFoundationVersionNumber < kCFCoreFoundationVersionNumber_iPhoneOS_5_0) \
     { \
         __VA_ARGS__ \
     }

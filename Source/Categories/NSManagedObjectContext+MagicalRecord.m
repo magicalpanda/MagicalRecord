@@ -32,14 +32,20 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 + (void) MR_setDefaultContext:(NSManagedObjectContext *)moc
 {
     NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_defaultStoreCoordinator];
-    [defaultManageObjectContext_ MR_stopObservingiCloudChangesInCoordinator:coordinator];
-
+    if ([MagicalRecordHelpers isICloudEnabled]) 
+    {
+        [defaultManageObjectContext_ MR_stopObservingiCloudChangesInCoordinator:coordinator];
+    }
+    
     MR_RETAIN(moc);
     MR_RELEASE(defaultManageObjectContext_);
 
     defaultManageObjectContext_ = moc;
     
-    [defaultManageObjectContext_ MR_observeiCloudChangesInCoordinator:coordinator];
+    if ([MagicalRecordHelpers isICloudEnabled]) 
+    {
+        [defaultManageObjectContext_ MR_observeiCloudChangesInCoordinator:coordinator];
+    }
 }
 
 + (void)MR_resetDefaultContext
