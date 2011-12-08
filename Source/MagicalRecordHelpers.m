@@ -422,7 +422,7 @@ NSDate * dateFromString(NSString *value, NSString *format)
     
     NSDate *parsedDate = [formatter dateFromString:value];
     MR_AUTORELEASE(formatter);
-    
+
     return parsedDate;
 }
 
