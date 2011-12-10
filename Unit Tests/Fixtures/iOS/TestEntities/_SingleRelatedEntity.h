@@ -4,6 +4,20 @@
 #import <CoreData/CoreData.h>
 
 
+extern const struct SingleRelatedEntityAttributes {
+	 NSString *mappedStringAttribute;
+} SingleRelatedEntityAttributes;
+
+extern const struct SingleRelatedEntityRelationships {
+	 NSString *testAbstractToManyRelationship;
+	 NSString *testAbstractToOneRelationship;
+	 NSString *testConcreteToManyRelationship;
+	 NSString *testConcreteToOneRelationship;
+} SingleRelatedEntityRelationships;
+
+extern const struct SingleRelatedEntityFetchedProperties {
+} SingleRelatedEntityFetchedProperties;
+
 @class AbstractRelatedEntity;
 @class AbstractRelatedEntity;
 @class ConcreteRelatedEntity;

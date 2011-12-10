@@ -4,6 +4,16 @@
 #import <CoreData/CoreData.h>
 
 
+extern const struct SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyAttributes {
+} SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyAttributes;
+
+extern const struct SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyRelationships {
+	 NSString *mappedEntity;
+} SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyRelationships;
+
+extern const struct SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyFetchedProperties {
+} SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyFetchedProperties;
+
 @class MappedEntity;
 
 

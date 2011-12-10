@@ -4,6 +4,29 @@
 #import <CoreData/CoreData.h>
 
 
+extern const struct SingleEntityWithNoRelationshipsAttributes {
+	 NSString *booleanTestAttribute;
+	 NSString *colorTestAttribute;
+	 NSString *dateTestAttribute;
+	 NSString *dateWithCustomFormat;
+	 NSString *decimalTestAttribute;
+	 NSString *doubleTestAttribute;
+	 NSString *floatTestAttribute;
+	 NSString *int16TestAttribute;
+	 NSString *int32TestAttribute;
+	 NSString *int64TestAttribute;
+	 NSString *mappedStringAttribute;
+	 NSString *notInJsonAttribute;
+	 NSString *nullTestAttribute;
+	 NSString *stringTestAttribute;
+} SingleEntityWithNoRelationshipsAttributes;
+
+extern const struct SingleEntityWithNoRelationshipsRelationships {
+} SingleEntityWithNoRelationshipsRelationships;
+
+extern const struct SingleEntityWithNoRelationshipsFetchedProperties {
+} SingleEntityWithNoRelationshipsFetchedProperties;
+
 
 
 @class UIColor;

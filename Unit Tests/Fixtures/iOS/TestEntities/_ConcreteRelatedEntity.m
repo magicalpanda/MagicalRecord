@@ -3,6 +3,16 @@
 
 #import "_ConcreteRelatedEntity.h"
 
+const struct ConcreteRelatedEntityAttributes ConcreteRelatedEntityAttributes = {
+	.sampleConcreteAttribute = @"sampleConcreteAttribute",
+};
+
+const struct ConcreteRelatedEntityRelationships ConcreteRelatedEntityRelationships = {
+};
+
+const struct ConcreteRelatedEntityFetchedProperties ConcreteRelatedEntityFetchedProperties = {
+};
+
 @implementation ConcreteRelatedEntityID
 @end
 

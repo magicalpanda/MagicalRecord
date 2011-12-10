@@ -3,6 +3,17 @@
 
 #import "_SingleEntityRelatedToMappedEntityWithSecondaryMappings.h"
 
+const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsAttributes SingleEntityRelatedToMappedEntityWithSecondaryMappingsAttributes = {
+	.secondaryMappedAttribute = @"secondaryMappedAttribute",
+};
+
+const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsRelationships SingleEntityRelatedToMappedEntityWithSecondaryMappingsRelationships = {
+	.mappedRelationship = @"mappedRelationship",
+};
+
+const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsFetchedProperties SingleEntityRelatedToMappedEntityWithSecondaryMappingsFetchedProperties = {
+};
+
 @implementation SingleEntityRelatedToMappedEntityWithSecondaryMappingsID
 @end
 

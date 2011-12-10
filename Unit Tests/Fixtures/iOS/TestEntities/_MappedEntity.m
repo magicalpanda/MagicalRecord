@@ -3,6 +3,19 @@
 
 #import "_MappedEntity.h"
 
+const struct MappedEntityAttributes MappedEntityAttributes = {
+	.mappedEntityID = @"mappedEntityID",
+	.nestedAttribute = @"nestedAttribute",
+	.sampleAttribute = @"sampleAttribute",
+	.testMappedEntityID = @"testMappedEntityID",
+};
+
+const struct MappedEntityRelationships MappedEntityRelationships = {
+};
+
+const struct MappedEntityFetchedProperties MappedEntityFetchedProperties = {
+};
+
 @implementation MappedEntityID
 @end
 

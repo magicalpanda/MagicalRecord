@@ -4,6 +4,19 @@
 #import <CoreData/CoreData.h>
 
 
+extern const struct MappedEntityAttributes {
+	 NSString *mappedEntityID;
+	 NSString *nestedAttribute;
+	 NSString *sampleAttribute;
+	 NSString *testMappedEntityID;
+} MappedEntityAttributes;
+
+extern const struct MappedEntityRelationships {
+} MappedEntityRelationships;
+
+extern const struct MappedEntityFetchedProperties {
+} MappedEntityFetchedProperties;
+
 
 
 

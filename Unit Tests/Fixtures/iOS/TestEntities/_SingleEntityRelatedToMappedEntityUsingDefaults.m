@@ -3,6 +3,17 @@
 
 #import "_SingleEntityRelatedToMappedEntityUsingDefaults.h"
 
+const struct SingleEntityRelatedToMappedEntityUsingDefaultsAttributes SingleEntityRelatedToMappedEntityUsingDefaultsAttributes = {
+	.singleEntityRelatedToMappedEntityUsingDefaultsID = @"singleEntityRelatedToMappedEntityUsingDefaultsID",
+};
+
+const struct SingleEntityRelatedToMappedEntityUsingDefaultsRelationships SingleEntityRelatedToMappedEntityUsingDefaultsRelationships = {
+	.mappedEntity = @"mappedEntity",
+};
+
+const struct SingleEntityRelatedToMappedEntityUsingDefaultsFetchedProperties SingleEntityRelatedToMappedEntityUsingDefaultsFetchedProperties = {
+};
+
 @implementation SingleEntityRelatedToMappedEntityUsingDefaultsID
 @end
 

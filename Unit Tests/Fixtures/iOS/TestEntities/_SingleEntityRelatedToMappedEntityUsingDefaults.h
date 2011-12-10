@@ -4,6 +4,17 @@
 #import <CoreData/CoreData.h>
 
 
+extern const struct SingleEntityRelatedToMappedEntityUsingDefaultsAttributes {
+	 NSString *singleEntityRelatedToMappedEntityUsingDefaultsID;
+} SingleEntityRelatedToMappedEntityUsingDefaultsAttributes;
+
+extern const struct SingleEntityRelatedToMappedEntityUsingDefaultsRelationships {
+	 NSString *mappedEntity;
+} SingleEntityRelatedToMappedEntityUsingDefaultsRelationships;
+
+extern const struct SingleEntityRelatedToMappedEntityUsingDefaultsFetchedProperties {
+} SingleEntityRelatedToMappedEntityUsingDefaultsFetchedProperties;
+
 @class MappedEntity;
 
 
