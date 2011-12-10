@@ -17,7 +17,7 @@
 #import <CoreData/CoreData.h>
 
 #ifndef MR_USE_ARC
-#define MR_USE_ARC 1
+#define MR_USE_ARC __has_feature(objc_arc)
 #endif
 
 #ifndef kCFCoreFoundationVersionNumber_iPhoneOS_5_0
@@ -62,6 +62,7 @@
 #import "NSManagedObject+MagicalDataImport.h"
 #import "NSNumber+MagicalDataImport.h"
 #import "NSObject+MagicalDataImport.h"
+#import "NSString+MagicalDataImport.h"
 #import "NSAttributeDescription+MagicalDataImport.h"
 #import "NSRelationshipDescription+MagicalDataImport.h"
 #import "NSEntityDescription+MagicalDataImport.h"

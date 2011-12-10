@@ -5,7 +5,8 @@
 
 
 
-@interface NSManagedObject (NSManagedObject_DataImportShortHand)
+
+@interface NSManagedObject (MagicalRecord_DataImportShortHand)
 - (void) importValuesForKeysWithDictionary:(id)objectData;
 - (void) updateValuesForKeysWithDictionary:(id)objectData;
 + (id) importFromDictionary:(id)data;
