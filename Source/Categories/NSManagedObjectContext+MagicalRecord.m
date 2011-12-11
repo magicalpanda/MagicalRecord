@@ -92,6 +92,7 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 
 - (void) MR_observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 {
+    if (![MagicalRecordHelpers isICloudEnabled]) return;
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(MR_mergeChangesFromiCloud:)
                                                  name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
@@ -101,6 +102,7 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 
 - (void) MR_stopObservingiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 {
+    if (![MagicalRecordHelpers isICloudEnabled]) return;
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:NSPersistentStoreDidImportUbiquitousContentChangesNotification 
                                                   object:coordinator];
@@ -246,7 +248,10 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 #pragma clang diagnostic pop
                                  )
         PRIVATE_QUEUES_ENABLED(
-                               [self setParentContext:mainContext];
+                               if (enabled)
+                               {
+                                   [self setParentContext:mainContext];
+                               }
                                )
     }
 }
