@@ -5,11 +5,11 @@
 
 
 extern const struct SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyAttributes {
-	 NSString *testPrimaryKey;
+	__unsafe_unretained NSString *testPrimaryKey;
 } SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyAttributes;
 
 extern const struct SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyRelationships {
-	 NSString *mappedEntities;
+	__unsafe_unretained NSString *mappedEntities;
 } SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyRelationships;
 
 extern const struct SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyFetchedProperties {
@@ -31,7 +31,7 @@ extern const struct SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey
 
 
 
-@property (nonatomic, retain) NSNumber *testPrimaryKey;
+@property (nonatomic, strong) NSNumber *testPrimaryKey;
 
 
 @property short testPrimaryKeyValue;
@@ -44,7 +44,7 @@ extern const struct SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey
 
 
 
-@property (nonatomic, retain) NSSet* mappedEntities;
+@property (nonatomic, strong) NSSet* mappedEntities;
 
 - (NSMutableSet*)mappedEntitiesSet;
 

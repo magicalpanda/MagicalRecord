@@ -5,11 +5,11 @@
 
 
 extern const struct SingleEntityRelatedToMappedEntityUsingDefaultsAttributes {
-	 NSString *singleEntityRelatedToMappedEntityUsingDefaultsID;
+	__unsafe_unretained NSString *singleEntityRelatedToMappedEntityUsingDefaultsID;
 } SingleEntityRelatedToMappedEntityUsingDefaultsAttributes;
 
 extern const struct SingleEntityRelatedToMappedEntityUsingDefaultsRelationships {
-	 NSString *mappedEntity;
+	__unsafe_unretained NSString *mappedEntity;
 } SingleEntityRelatedToMappedEntityUsingDefaultsRelationships;
 
 extern const struct SingleEntityRelatedToMappedEntityUsingDefaultsFetchedProperties {
@@ -31,7 +31,7 @@ extern const struct SingleEntityRelatedToMappedEntityUsingDefaultsFetchedPropert
 
 
 
-@property (nonatomic, retain) NSNumber *singleEntityRelatedToMappedEntityUsingDefaultsID;
+@property (nonatomic, strong) NSNumber *singleEntityRelatedToMappedEntityUsingDefaultsID;
 
 
 @property short singleEntityRelatedToMappedEntityUsingDefaultsIDValue;
@@ -44,7 +44,7 @@ extern const struct SingleEntityRelatedToMappedEntityUsingDefaultsFetchedPropert
 
 
 
-@property (nonatomic, retain) MappedEntity* mappedEntity;
+@property (nonatomic, strong) MappedEntity* mappedEntity;
 
 //- (BOOL)validateMappedEntity:(id*)value_ error:(NSError**)error_;
 

@@ -5,11 +5,11 @@
 
 
 extern const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsAttributes {
-	 NSString *secondaryMappedAttribute;
+	__unsafe_unretained NSString *secondaryMappedAttribute;
 } SingleEntityRelatedToMappedEntityWithSecondaryMappingsAttributes;
 
 extern const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsRelationships {
-	 NSString *mappedRelationship;
+	__unsafe_unretained NSString *mappedRelationship;
 } SingleEntityRelatedToMappedEntityWithSecondaryMappingsRelationships;
 
 extern const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsFetchedProperties {
@@ -31,7 +31,7 @@ extern const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsFetche
 
 
 
-@property (nonatomic, retain) NSString *secondaryMappedAttribute;
+@property (nonatomic, strong) NSString *secondaryMappedAttribute;
 
 
 //- (BOOL)validateSecondaryMappedAttribute:(id*)value_ error:(NSError**)error_;
@@ -40,7 +40,7 @@ extern const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsFetche
 
 
 
-@property (nonatomic, retain) MappedEntity* mappedRelationship;
+@property (nonatomic, strong) MappedEntity* mappedRelationship;
 
 //- (BOOL)validateMappedRelationship:(id*)value_ error:(NSError**)error_;
 

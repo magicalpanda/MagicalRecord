@@ -115,7 +115,7 @@
 		C7BD889313DBFA6200274567 /* DifferentClassNameMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD888713DBFA6200274567 /* DifferentClassNameMapping.m */; };
 		C7BD889413DBFA6200274567 /* SingleEntityWithNoRelationships.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD888913DBFA6200274567 /* SingleEntityWithNoRelationships.m */; };
 		C7BD889513DBFA6200274567 /* SingleRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD888B13DBFA6200274567 /* SingleRelatedEntity.m */; };
-		C7C9A37313F43D93002C5B0C /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C9A37213F43D93002C5B0C /* JSONKit.m */; };
+		C7C9A37313F43D93002C5B0C /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C9A37213F43D93002C5B0C /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C7C9A37613F44A3C002C5B0C /* ImportSingleEntityRelatedToMappedEntityUsingDefaultsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C9A37513F44A3C002C5B0C /* ImportSingleEntityRelatedToMappedEntityUsingDefaultsTests.m */; };
 		C7C9A37D13F44B08002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.json in Resources */ = {isa = PBXBuildFile; fileRef = C7C9A37C13F44B08002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.json */; };
 		C7C9A37F13F44B29002C5B0C /* SingleEntityRelatedToMappedEntityUsingDefaults.json in Resources */ = {isa = PBXBuildFile; fileRef = C7C9A37E13F44B29002C5B0C /* SingleEntityRelatedToMappedEntityUsingDefaults.json */; };
@@ -930,7 +930,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"Unit Tests/Fixtures/iOS\" && mogenerator -m TestModel.xcdatamodeld/TestModel.xcdatamodel -O TestEntities";
+			shellScript = "cd \"Unit Tests/Fixtures/iOS\" && mogenerator -m TestModel.xcdatamodeld/TestModel.xcdatamodel -O TestEntities --template-var arc=true";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1181,7 +1181,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -1239,7 +1239,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (

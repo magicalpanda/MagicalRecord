@@ -8,7 +8,7 @@ extern const struct SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyAttrib
 } SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyAttributes;
 
 extern const struct SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyRelationships {
-	 NSString *mappedEntity;
+	__unsafe_unretained NSString *mappedEntity;
 } SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyRelationships;
 
 extern const struct SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyFetchedProperties {
@@ -30,7 +30,7 @@ extern const struct SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyFetche
 
 
 
-@property (nonatomic, retain) MappedEntity* mappedEntity;
+@property (nonatomic, strong) MappedEntity* mappedEntity;
 
 //- (BOOL)validateMappedEntity:(id*)value_ error:(NSError**)error_;
 

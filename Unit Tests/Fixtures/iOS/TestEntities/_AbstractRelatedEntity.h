@@ -5,7 +5,7 @@
 
 
 extern const struct AbstractRelatedEntityAttributes {
-	 NSString *sampleBaseAttribute;
+	__unsafe_unretained NSString *sampleBaseAttribute;
 } AbstractRelatedEntityAttributes;
 
 extern const struct AbstractRelatedEntityRelationships {
@@ -29,7 +29,7 @@ extern const struct AbstractRelatedEntityFetchedProperties {
 
 
 
-@property (nonatomic, retain) NSString *sampleBaseAttribute;
+@property (nonatomic, strong) NSString *sampleBaseAttribute;
 
 
 //- (BOOL)validateSampleBaseAttribute:(id*)value_ error:(NSError**)error_;
