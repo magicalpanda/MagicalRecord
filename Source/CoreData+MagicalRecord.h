@@ -16,9 +16,7 @@
 
 #import <CoreData/CoreData.h>
 
-#ifndef MR_USE_ARC
-#define MR_USE_ARC 1
-#endif
+#define MR_USE_ARC __has_feature(objc_arc)
 
 #ifndef kCFCoreFoundationVersionNumber_iPhoneOS_5_0
 #define kCFCoreFoundationVersionNumber_iPhoneOS_5_0 674.0
