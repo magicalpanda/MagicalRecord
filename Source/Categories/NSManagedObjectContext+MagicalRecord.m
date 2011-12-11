@@ -37,9 +37,6 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
     {
         [defaultManageObjectContext_ MR_stopObservingiCloudChangesInCoordinator:coordinator];
     }
-    
-    MR_RETAIN(moc);
-    MR_RELEASE(defaultManageObjectContext_);
 
     defaultManageObjectContext_ = moc;
     
@@ -92,6 +89,7 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 
 - (void) MR_observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 {
+    if (![MagicalRecordHelpers isICloudEnabled]) return;
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(MR_mergeChangesFromiCloud:)
                                                  name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
@@ -101,6 +99,7 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 
 - (void) MR_stopObservingiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 {
+    if (![MagicalRecordHelpers isICloudEnabled]) return;
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:NSPersistentStoreDidImportUbiquitousContentChangesNotification 
                                                   object:coordinator];
@@ -188,16 +187,10 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 
 - (void) MR_saveWrapper;
 {
-#if MR_USE_ARC
     @autoreleasepool
     {
         [self MR_save];
     }
-#else
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    [self MR_save];
-    [pool drain];
-#endif
 }
 
 #pragma mark - Threading Helpers
@@ -221,14 +214,7 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 
 - (BOOL) MR_notifiesMainContextOnSave;
 {
-    THREAD_ISOLATION_ENABLED(
-    NSNumber *notifies = objc_getAssociatedObject(self, kMagicalRecordNotifiesMainContextAssociatedValueKey);
-    return notifies ? [notifies boolValue] : NO;
-                             )
-    PRIVATE_QUEUES_ENABLED(
-                           return [self parentContext] == [[self class] MR_defaultContext];
-                           )
-    return NO;
+   return [self parentContext] == [[self class] MR_defaultContext];
 }
 
 - (void) MR_setNotifiesMainContextOnSave:(BOOL)enabled;
@@ -236,18 +222,10 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
     NSManagedObjectContext *mainContext = [[self class] MR_defaultContext];
     if (self != mainContext) 
     {
-        THREAD_ISOLATION_ENABLED(
-        SEL selector = enabled ? @selector(MR_observeContextOnMainThread:) : @selector(MR_stopObservingContext:);
-        objc_setAssociatedObject(self, kMagicalRecordNotifiesMainContextAssociatedValueKey, [NSNumber numberWithBool:enabled], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"        
-        [mainContext performSelector:selector withObject:self];
-#pragma clang diagnostic pop
-                                 )
-        PRIVATE_QUEUES_ENABLED(
-                               [self setParentContext:mainContext];
-                               )
+        if (enabled)
+        {
+            [self setParentContext:mainContext];
+        }
     }
 }
 
@@ -278,20 +256,11 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
     if (coordinator != nil)
 	{
         MRLog(@"Creating MOContext %@", [NSThread isMainThread] ? @" *** On Main Thread ***" : @"");
-        THREAD_ISOLATION_ENABLED(
-                         MRLog(@"Creating context in Thread Isolation Mode");
-                         context = [[NSManagedObjectContext alloc] init];
-                         [context setPersistentStoreCoordinator:coordinator];
-                                 )
-        PRIVATE_QUEUES_ENABLED(
-            MRLog(@"Creating context in Context Private Queue Mode");
-            context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-            [context performBlockAndWait:^{
-                [context setPersistentStoreCoordinator:coordinator];
-            }];
-        )
-
-        MR_AUTORELEASE(context);
+        
+        context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+        [context performBlockAndWait:^{
+            [context setPersistentStoreCoordinator:coordinator];
+        }];
     }
     return context;
 }
@@ -311,21 +280,9 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 + (NSManagedObjectContext *) MR_contextThatNotifiesDefaultContextOnMainThread;
 {
     NSManagedObjectContext *context = nil;
-    
-    THREAD_ISOLATION_ENABLED
-    (
-         MRLog(@"Using Thread Isolation Mode");
-         context = [self MR_context];
-         context.MR_notifiesMainContextOnSave = YES;
-    )
-    
-    PRIVATE_QUEUES_ENABLED
-    (
-         MRLog(@"Using Private queue mode");
-       context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-     [context setParentContext:[NSManagedObjectContext MR_defaultContext]];
 
-    )
+    context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    context.MR_notifiesMainContextOnSave = YES;
     
     return context;
 }
