@@ -323,9 +323,8 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
     (
          MRLog(@"Using Private queue mode");
        context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-       [context performBlockAndWait:^{
-            [context setPersistentStoreCoordinator:[NSPersistentStoreCoordinator MR_defaultStoreCoordinator]];
-        }];
+     [context setParentContext:[NSManagedObjectContext MR_defaultContext]];
+
     )
     
     return context;
