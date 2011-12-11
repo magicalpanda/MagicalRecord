@@ -1196,11 +1196,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS App Unit Tests/iOS App Unit Tests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"MR_SHORTHAND=1",
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
@@ -1218,7 +1219,7 @@
 				);
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
 				MOMC_NO_WARNINGS = YES;
-				OTHER_CFLAGS = "-DMR_SHORTHAND";
+				OTHER_CFLAGS = "-DMR_ENABLE_LOGGING";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -1249,7 +1250,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS App Unit Tests/iOS App Unit Tests-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
