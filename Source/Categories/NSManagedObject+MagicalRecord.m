@@ -680,7 +680,6 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 {
     NSFetchRequest *request = [self MR_requestAllWithPredicate:predicate inContext:context];
     [request setReturnsObjectsAsFaults:YES];
-	[request setIncludesSubentities:NO];
 	[request setIncludesPropertyValues:NO];
     
 	NSArray *objectsToTruncate = [self MR_executeFetchRequest:request inContext:context];
