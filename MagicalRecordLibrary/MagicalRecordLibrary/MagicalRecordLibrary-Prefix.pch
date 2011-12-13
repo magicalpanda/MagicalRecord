@@ -1,0 +1,4 @@
+#ifdef __OBJC__
+   #import <CoreData/CoreData.h>
+   #import <Foundation/Foundation.h>
+#endif
