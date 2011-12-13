@@ -5,6 +5,8 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 #if TARGET_OS_IPHONE == 0
 #define MAC_PLATFORM_ONLY YES
 #endif
@@ -15,6 +17,8 @@
 typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
 #endif
+
+@class UIColor;
 
 @interface MagicalRecordHelpers : NSObject
 

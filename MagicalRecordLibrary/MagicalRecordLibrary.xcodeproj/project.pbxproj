@@ -56,6 +56,8 @@
 		531291EE1497AF8F00E52E45 /* MRCoreDataAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 531291A31497AEBD00E52E45 /* MRCoreDataAction.m */; };
 		531291F01497AFC700E52E45 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531291EF1497AFC700E52E45 /* CoreData.framework */; };
 		531291F11497AFCF00E52E45 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531291EF1497AFC700E52E45 /* CoreData.framework */; };
+		531291F31497B2FB00E52E45 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531291F21497B2FB00E52E45 /* UIKit.framework */; };
+		531291F41497B30100E52E45 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531291F21497B2FB00E52E45 /* UIKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,6 +99,7 @@
 		531291C61497AF1D00E52E45 /* libMagicalRecord.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMagicalRecord.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		531291CA1497AF1D00E52E45 /* MagicalRecord-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MagicalRecord-Prefix.pch"; sourceTree = "<group>"; };
 		531291EF1497AFC700E52E45 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		531291F21497B2FB00E52E45 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				531291F31497B2FB00E52E45 /* UIKit.framework in Frameworks */,
 				531291F11497AFCF00E52E45 /* CoreData.framework in Frameworks */,
 				531291761497AE9D00E52E45 /* Foundation.framework in Frameworks */,
 			);
@@ -113,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				531291F41497B30100E52E45 /* UIKit.framework in Frameworks */,
 				531291F01497AFC700E52E45 /* CoreData.framework in Frameworks */,
 				531291C71497AF1D00E52E45 /* Foundation.framework in Frameworks */,
 			);
@@ -124,6 +129,7 @@
 		531291641497AE9C00E52E45 = {
 			isa = PBXGroup;
 			children = (
+				531291F21497B2FB00E52E45 /* UIKit.framework */,
 				531291771497AE9D00E52E45 /* MagicalRecordLibrary */,
 				531291C81497AF1D00E52E45 /* MagicalRecord */,
 				531291741497AE9D00E52E45 /* Frameworks */,

@@ -8,6 +8,9 @@
 
 #import "NSRelationshipDescription+MagicalDataImport.h"
 
+#import "MagicalRecordHelpers.h"
+#import "NSManagedObject+MagicalDataImport.h"
+
 @implementation NSRelationshipDescription (MagicalRecord_DataImport)
 
 - (NSString *) MR_primaryKey;
