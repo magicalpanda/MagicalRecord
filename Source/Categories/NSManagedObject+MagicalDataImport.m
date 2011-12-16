@@ -8,6 +8,7 @@
 
 #import "CoreData+MagicalRecord.h"
 #import <objc/runtime.h>
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 
 void swizzle(Class c, SEL orig, SEL new);
 
