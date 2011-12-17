@@ -737,6 +737,8 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	return [self MR_objectWithMinValueFor:property inContext:[self  managedObjectContext]];
 }
 
+#ifdef __IPHONE_5_0
+
 + (NSArray *) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString*)groupingKeyPath inContext:(NSManagedObjectContext *)context 
 {
     NSExpression *ex = [NSExpression expressionForFunction:function 
@@ -761,11 +763,14 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     return results;    
 }
 
+
+
 + (NSArray *) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString*)groupingKeyPath
 {
     return [self MR_aggregateOperation:function onAttribute:attributeName withPredicate:predicate groupBy:groupingKeyPath inContext:[NSManagedObjectContext MR_defaultContext]];
 }
 
+#endif
 
 + (NSNumber *) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context 
 {
