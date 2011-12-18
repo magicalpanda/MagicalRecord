@@ -8,7 +8,6 @@
 
 #import "CoreData+MagicalRecord.h"
 #import <objc/runtime.h>
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 
 void swizzle(Class c, SEL orig, SEL new);
 
@@ -68,7 +67,10 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     SEL selector = NSSelectorFromString(selectorString);
     if ([self respondsToSelector:selector])
     {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [self performSelector:selector withObject:value];
+#pragma clang diagnostic pop
         return YES;
     }
     return NO;
@@ -125,7 +127,10 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
         {
             //Need to get the ordered set
             NSString *selectorName = [[relationshipInfo name] stringByAppendingString:@"Set"];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             relationshipSource = [self performSelector:NSSelectorFromString(selectorName)];
+#pragma clang diagnostic pop
             addRelationMessageFormat = @"addObject:";
         }
     }
@@ -169,6 +174,8 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
         SEL shouldImportSelector = @selector(shouldImport:);
         BOOL implementsShouldImport = [self respondsToSelector:shouldImportSelector];
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         if (![self MR_importValue:relatedObjectData forKey:relationshipName])
         {
             if ([relationshipInfo isToMany])
@@ -190,6 +197,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
                 }
             }
         }
+#pragma clang diagnostic pop
     }
 }
 
