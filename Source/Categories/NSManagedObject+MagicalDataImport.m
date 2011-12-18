@@ -57,7 +57,10 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     SEL selector = NSSelectorFromString(selectorString);
     if ([self respondsToSelector:selector])
     {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [self performSelector:selector withObject:value];
+#pragma clang diagnostic pop
         return YES;
     }
     return NO;
@@ -114,7 +117,10 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
         {
             //Need to get the ordered set
             NSString *selectorName = [[relationshipInfo name] stringByAppendingString:@"Set"];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             relationshipSource = [self performSelector:NSSelectorFromString(selectorName)];
+#pragma cland diagnostic pop
             addRelationMessageFormat = @"addObject:";
         }
     }
@@ -164,7 +170,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
             {
                 for (id singleRelatedObjectData in relatedObjectData) 
                 {
-                    if (implementsShouldImport && !(BOOL)[self performSelector:shouldImportSelector withObject:singleRelatedObjectData]) 
+                    if (implementsShouldImport && ![[self performSelector:shouldImportSelector withObject:singleRelatedObjectData] boolValue]) 
                     {
                         continue;
                     }
@@ -301,13 +307,41 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 + (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context
 {
     NSMutableArray *objectIDs = [NSMutableArray array];
+    
+    [MRCoreDataAction saveDataWithBlock:^(NSManagedObjectContext *localContext) 
+    {    
+        [listOfObjectData enumerateObjectsWithOptions:0 usingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
+        {
+            NSDictionary *objectData = (NSDictionary *)obj;
+
+            NSManagedObject *dataObject = [self MR_importFromDictionary:objectData inContext:localContext];
+
+            if ([context obtainPermanentIDsForObjects:[NSArray arrayWithObject:dataObject] error:nil])
+            {
+              [objectIDs addObject:[dataObject objectID]];
+            }
+        }];
+    }];
+    
+    return [self MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"self IN %@", objectIDs] inContext:context];
+}
+
++ (NSArray *) MR_updateFromArray:(NSArray *)listOfObjectData;
+{
+    return [self MR_updateFromArray:listOfObjectData inContext:[NSManagedObjectContext MR_defaultContext]];
+}
+
++ (NSArray *) MR_updateFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context;
+{
+    NSMutableArray *objectIDs = [NSMutableArray array];
+    
     [MRCoreDataAction saveDataWithBlock:^(NSManagedObjectContext *localContext) 
      {    
          [listOfObjectData enumerateObjectsWithOptions:0 usingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
           {
               NSDictionary *objectData = (NSDictionary *)obj;
               
-              NSManagedObject *dataObject = [self MR_importFromDictionary:objectData inContext:localContext];
+              NSManagedObject *dataObject = [self MR_updateFromDictionary:objectData inContext:localContext];
               
               if ([context obtainPermanentIDsForObjects:[NSArray arrayWithObject:dataObject] error:nil])
               {

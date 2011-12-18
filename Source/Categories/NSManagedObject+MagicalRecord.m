@@ -285,7 +285,6 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 {
     NSFetchRequest *request = [self MR_createFetchRequestInContext:context];
     [request setFetchLimit:1];
-    [request setPropertiesToFetch:[NSArray arrayWithObject:attribute]];
     [request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", attribute, searchValue]];
     
     return request;
@@ -535,7 +534,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 + (id) MR_findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context
 {	
 	NSFetchRequest *request = [self MR_requestFirstByAttribute:attribute withValue:searchValue inContext:context];
-    [request setPropertiesToFetch:[NSArray arrayWithObject:attribute]];
+    //    [request setPropertiesToFetch:[NSArray arrayWithObject:attribute]];
     
 	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
 }

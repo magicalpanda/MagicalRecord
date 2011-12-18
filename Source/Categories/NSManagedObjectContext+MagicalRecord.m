@@ -172,6 +172,10 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 	}
 	@finally 
     {
+        if (saved && [self respondsToSelector:@selector(parentContext)] && [self performSelector:@selector(parentContext)])
+        {
+            [[self parentContext] MR_saveWithErrorHandler:errorCallback];
+        }
         if (!saved)
         {
             if (errorCallback)
@@ -320,17 +324,19 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
     
     THREAD_ISOLATION_ENABLED
     (
-         MRLog(@"Using Thread Isolation Mode");
+         MRLog(@"Creating Context - Using Thread Isolation Mode");
          context = [self MR_context];
          context.MR_notifiesMainContextOnSave = YES;
     )
     
     PRIVATE_QUEUES_ENABLED
     (
-         MRLog(@"Using Private queue mode");
-       context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-     [context setParentContext:[NSManagedObjectContext MR_defaultContext]];
-
+        MRLog(@"Creating Context - Using Private queue mode");
+        context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        if (context != [self MR_defaultContext])
+        {
+            [context setParentContext:[NSManagedObjectContext MR_defaultContext]];
+        }
     )
     
     return context;
