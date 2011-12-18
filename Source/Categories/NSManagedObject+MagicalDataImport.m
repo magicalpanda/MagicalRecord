@@ -337,8 +337,8 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     
     [MRCoreDataAction saveDataWithBlock:^(NSManagedObjectContext *localContext) 
      {    
-         [listOfObjectData enumerateObjectsWithOptions:0 usingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
-          {
+         [listOfObjectData enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+             
               NSDictionary *objectData = (NSDictionary *)obj;
               
               NSManagedObject *dataObject = [self MR_updateFromDictionary:objectData inContext:localContext];
