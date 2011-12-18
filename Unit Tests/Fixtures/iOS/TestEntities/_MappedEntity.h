@@ -4,6 +4,19 @@
 #import <CoreData/CoreData.h>
 
 
+extern const struct MappedEntityAttributes {
+	__unsafe_unretained NSString *mappedEntityID;
+	__unsafe_unretained NSString *nestedAttribute;
+	__unsafe_unretained NSString *sampleAttribute;
+	__unsafe_unretained NSString *testMappedEntityID;
+} MappedEntityAttributes;
+
+extern const struct MappedEntityRelationships {
+} MappedEntityRelationships;
+
+extern const struct MappedEntityFetchedProperties {
+} MappedEntityFetchedProperties;
+
 
 
 
@@ -22,7 +35,7 @@
 
 
 
-@property (nonatomic, retain) NSNumber *mappedEntityID;
+@property (nonatomic, strong) NSNumber *mappedEntityID;
 
 
 @property short mappedEntityIDValue;
@@ -34,7 +47,7 @@
 
 
 
-@property (nonatomic, retain) NSString *nestedAttribute;
+@property (nonatomic, strong) NSString *nestedAttribute;
 
 
 //- (BOOL)validateNestedAttribute:(id*)value_ error:(NSError**)error_;
@@ -42,7 +55,7 @@
 
 
 
-@property (nonatomic, retain) NSString *sampleAttribute;
+@property (nonatomic, strong) NSString *sampleAttribute;
 
 
 //- (BOOL)validateSampleAttribute:(id*)value_ error:(NSError**)error_;
@@ -50,7 +63,7 @@
 
 
 
-@property (nonatomic, retain) NSNumber *testMappedEntityID;
+@property (nonatomic, strong) NSNumber *testMappedEntityID;
 
 
 @property long long testMappedEntityIDValue;

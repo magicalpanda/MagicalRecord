@@ -4,6 +4,15 @@
 #import <CoreData/CoreData.h>
 
 
+extern const struct DifferentClassNameMappingAttributes {
+} DifferentClassNameMappingAttributes;
+
+extern const struct DifferentClassNameMappingRelationships {
+} DifferentClassNameMappingRelationships;
+
+extern const struct DifferentClassNameMappingFetchedProperties {
+} DifferentClassNameMappingFetchedProperties;
+
 
 
 @interface DifferentClassNameMappingID : NSManagedObjectID {}

@@ -14,13 +14,13 @@
 
 @interface ImportSingleRelatedEntityTests : MagicalDataImportTestCase
 
-@property (nonatomic, retain) SingleRelatedEntity *testEntity;
+@property (nonatomic, retain) SingleRelatedEntity *singleTestEntity;
 
 @end
 
 @implementation ImportSingleRelatedEntityTests
 
-@synthesize testEntity;
+@synthesize singleTestEntity = _singleTestEntity;;
 
 - (void) setupTestData
 {
@@ -36,15 +36,15 @@
 - (void) setUp
 {
     [super setUp];
-    self.testEntity = [SingleRelatedEntity MR_importFromDictionary:self.testEntityData];
+    self.singleTestEntity = [SingleRelatedEntity MR_importFromDictionary:self.testEntityData];
     [[NSManagedObjectContext MR_defaultContext] MR_save];
 }
 
 - (void) testImportAnEntityRelatedToAbstractEntityViaToOneRelationshop
 {
-    assertThat(testEntity, is(notNilValue()));
+    assertThat(self.singleTestEntity, is(notNilValue()));
 
-    id testRelatedEntity = testEntity.testAbstractToOneRelationship;
+    id testRelatedEntity = self.singleTestEntity.testAbstractToOneRelationship;
     
     assertThat(testRelatedEntity, is(notNilValue()));
     assertThat([testRelatedEntity sampleBaseAttribute], containsString(@"BASE"));
@@ -53,10 +53,10 @@
 
 - (void) testImportAnEntityRelatedToAbstractEntityViaToManyRelationship
 {
-    assertThat(testEntity, is(notNilValue()));
-    assertThatInteger([testEntity.testAbstractToManyRelationship count], is(equalToInteger(2)));
+    assertThat(self.singleTestEntity, is(notNilValue()));
+    assertThatInteger([self.singleTestEntity.testAbstractToManyRelationship count], is(equalToInteger(2)));
     
-    id testRelatedEntity = [testEntity.testAbstractToManyRelationship anyObject];
+    id testRelatedEntity = [self.singleTestEntity.testAbstractToManyRelationship anyObject];
     
     assertThat(testRelatedEntity, is(notNilValue()));
     assertThat([testRelatedEntity sampleBaseAttribute], containsString(@"BASE"));
@@ -69,7 +69,7 @@
 
 - (void) testImportAnEntityRelatedToAConcreteSubEntityViaToOneRelationship
 {
-    id testRelatedEntity = testEntity.testConcreteToOneRelationship;
+    id testRelatedEntity = self.singleTestEntity.testConcreteToOneRelationship;
     assertThat(testRelatedEntity, is(notNilValue()));
     
     assertThat([testRelatedEntity sampleBaseAttribute], containsString(@"BASE"));
@@ -78,9 +78,9 @@
 
 - (void) testImportAnEntityRelatedToASubEntityViaToManyRelationship
 {
-    assertThatInteger([testEntity.testConcreteToManyRelationship count], is(equalToInteger(3)));
+    assertThatInteger([self.singleTestEntity.testConcreteToManyRelationship count], is(equalToInteger(3)));
     
-    id testRelatedEntity = [testEntity.testConcreteToManyRelationship anyObject];
+    id testRelatedEntity = [self.singleTestEntity.testConcreteToManyRelationship anyObject];
     assertThat(testRelatedEntity, is(notNilValue()));
     
     assertThat([testRelatedEntity sampleBaseAttribute], containsString(@"BASE"));

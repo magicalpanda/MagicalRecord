@@ -3,6 +3,15 @@
 
 #import "_DifferentClassNameMapping.h"
 
+const struct DifferentClassNameMappingAttributes DifferentClassNameMappingAttributes = {
+};
+
+const struct DifferentClassNameMappingRelationships DifferentClassNameMappingRelationships = {
+};
+
+const struct DifferentClassNameMappingFetchedProperties DifferentClassNameMappingFetchedProperties = {
+};
+
 @implementation DifferentClassNameMappingID
 @end
 

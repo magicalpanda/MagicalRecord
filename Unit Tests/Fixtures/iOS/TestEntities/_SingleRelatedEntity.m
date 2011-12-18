@@ -3,6 +3,20 @@
 
 #import "_SingleRelatedEntity.h"
 
+const struct SingleRelatedEntityAttributes SingleRelatedEntityAttributes = {
+	.mappedStringAttribute = @"mappedStringAttribute",
+};
+
+const struct SingleRelatedEntityRelationships SingleRelatedEntityRelationships = {
+	.testAbstractToManyRelationship = @"testAbstractToManyRelationship",
+	.testAbstractToOneRelationship = @"testAbstractToOneRelationship",
+	.testConcreteToManyRelationship = @"testConcreteToManyRelationship",
+	.testConcreteToOneRelationship = @"testConcreteToOneRelationship",
+};
+
+const struct SingleRelatedEntityFetchedProperties SingleRelatedEntityFetchedProperties = {
+};
+
 @implementation SingleRelatedEntityID
 @end
 

@@ -4,6 +4,16 @@
 #import <CoreData/CoreData.h>
 
 
+extern const struct SingleEntityRelatedToMappedEntityWithNestedMappedAttributesAttributes {
+} SingleEntityRelatedToMappedEntityWithNestedMappedAttributesAttributes;
+
+extern const struct SingleEntityRelatedToMappedEntityWithNestedMappedAttributesRelationships {
+	__unsafe_unretained NSString *mappedEntity;
+} SingleEntityRelatedToMappedEntityWithNestedMappedAttributesRelationships;
+
+extern const struct SingleEntityRelatedToMappedEntityWithNestedMappedAttributesFetchedProperties {
+} SingleEntityRelatedToMappedEntityWithNestedMappedAttributesFetchedProperties;
+
 @class MappedEntity;
 
 
@@ -20,7 +30,7 @@
 
 
 
-@property (nonatomic, retain) MappedEntity* mappedEntity;
+@property (nonatomic, strong) MappedEntity* mappedEntity;
 
 //- (BOOL)validateMappedEntity:(id*)value_ error:(NSError**)error_;
 

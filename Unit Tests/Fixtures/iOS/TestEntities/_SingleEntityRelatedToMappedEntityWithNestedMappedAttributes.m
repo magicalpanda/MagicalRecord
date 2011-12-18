@@ -3,6 +3,16 @@
 
 #import "_SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.h"
 
+const struct SingleEntityRelatedToMappedEntityWithNestedMappedAttributesAttributes SingleEntityRelatedToMappedEntityWithNestedMappedAttributesAttributes = {
+};
+
+const struct SingleEntityRelatedToMappedEntityWithNestedMappedAttributesRelationships SingleEntityRelatedToMappedEntityWithNestedMappedAttributesRelationships = {
+	.mappedEntity = @"mappedEntity",
+};
+
+const struct SingleEntityRelatedToMappedEntityWithNestedMappedAttributesFetchedProperties SingleEntityRelatedToMappedEntityWithNestedMappedAttributesFetchedProperties = {
+};
+
 @implementation SingleEntityRelatedToMappedEntityWithNestedMappedAttributesID
 @end
 

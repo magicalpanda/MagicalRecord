@@ -3,6 +3,29 @@
 
 #import "_SingleEntityWithNoRelationships.h"
 
+const struct SingleEntityWithNoRelationshipsAttributes SingleEntityWithNoRelationshipsAttributes = {
+	.booleanTestAttribute = @"booleanTestAttribute",
+	.colorTestAttribute = @"colorTestAttribute",
+	.dateTestAttribute = @"dateTestAttribute",
+	.dateWithCustomFormat = @"dateWithCustomFormat",
+	.decimalTestAttribute = @"decimalTestAttribute",
+	.doubleTestAttribute = @"doubleTestAttribute",
+	.floatTestAttribute = @"floatTestAttribute",
+	.int16TestAttribute = @"int16TestAttribute",
+	.int32TestAttribute = @"int32TestAttribute",
+	.int64TestAttribute = @"int64TestAttribute",
+	.mappedStringAttribute = @"mappedStringAttribute",
+	.notInJsonAttribute = @"notInJsonAttribute",
+	.nullTestAttribute = @"nullTestAttribute",
+	.stringTestAttribute = @"stringTestAttribute",
+};
+
+const struct SingleEntityWithNoRelationshipsRelationships SingleEntityWithNoRelationshipsRelationships = {
+};
+
+const struct SingleEntityWithNoRelationshipsFetchedProperties SingleEntityWithNoRelationshipsFetchedProperties = {
+};
+
 @implementation SingleEntityWithNoRelationshipsID
 @end
 

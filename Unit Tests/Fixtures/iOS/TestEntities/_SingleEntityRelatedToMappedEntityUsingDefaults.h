@@ -4,6 +4,17 @@
 #import <CoreData/CoreData.h>
 
 
+extern const struct SingleEntityRelatedToMappedEntityUsingDefaultsAttributes {
+	__unsafe_unretained NSString *singleEntityRelatedToMappedEntityUsingDefaultsID;
+} SingleEntityRelatedToMappedEntityUsingDefaultsAttributes;
+
+extern const struct SingleEntityRelatedToMappedEntityUsingDefaultsRelationships {
+	__unsafe_unretained NSString *mappedEntity;
+} SingleEntityRelatedToMappedEntityUsingDefaultsRelationships;
+
+extern const struct SingleEntityRelatedToMappedEntityUsingDefaultsFetchedProperties {
+} SingleEntityRelatedToMappedEntityUsingDefaultsFetchedProperties;
+
 @class MappedEntity;
 
 
@@ -20,7 +31,7 @@
 
 
 
-@property (nonatomic, retain) NSNumber *singleEntityRelatedToMappedEntityUsingDefaultsID;
+@property (nonatomic, strong) NSNumber *singleEntityRelatedToMappedEntityUsingDefaultsID;
 
 
 @property short singleEntityRelatedToMappedEntityUsingDefaultsIDValue;
@@ -33,7 +44,7 @@
 
 
 
-@property (nonatomic, retain) MappedEntity* mappedEntity;
+@property (nonatomic, strong) MappedEntity* mappedEntity;
 
 //- (BOOL)validateMappedEntity:(id*)value_ error:(NSError**)error_;
 

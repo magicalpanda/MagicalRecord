@@ -47,6 +47,8 @@
 		C738127B141039900054EEF0 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json in Resources */ = {isa = PBXBuildFile; fileRef = C7381275141037E80054EEF0 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json */; };
 		C753897413DB61CE002B2F57 /* GHUnitTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = C753897313DB61CE002B2F57 /* GHUnitTestMain.m */; };
 		C753897613DB6322002B2F57 /* GHUnit.framework in Copy GHUnit into App Bundle */ = {isa = PBXBuildFile; fileRef = C721C84113D0C6460097AB6F /* GHUnit.framework */; };
+		C758AFD51493C6DC0051E570 /* NSString+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = C758AFD41493C6DC0051E570 /* NSString+MagicalDataImport.m */; };
+		C758AFD61493C6DC0051E570 /* NSString+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = C758AFD41493C6DC0051E570 /* NSString+MagicalDataImport.m */; };
 		C75A4E7313D0D88D00790CEB /* NSManagedObject+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = C75A4E7213D0D88D00790CEB /* NSManagedObject+MagicalDataImport.m */; };
 		C75C7D6A147220D400D0C2FE /* generateShorthandFile.rb in Resources */ = {isa = PBXBuildFile; fileRef = C75C7D69147220D300D0C2FE /* generateShorthandFile.rb */; };
 		C75C7D6B147220D400D0C2FE /* generateShorthandFile.rb in Resources */ = {isa = PBXBuildFile; fileRef = C75C7D69147220D300D0C2FE /* generateShorthandFile.rb */; };
@@ -246,6 +248,8 @@
 		C7381275141037E80054EEF0 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json; path = "Unit Tests/Fixtures/SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json"; sourceTree = "<group>"; };
 		C73812781410383B0054EEF0 /* ImportSingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeysTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImportSingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeysTests.m; path = "Unit Tests/Fixtures/ImportSingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeysTests.m"; sourceTree = "<group>"; };
 		C753897313DB61CE002B2F57 /* GHUnitTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUnitTestMain.m; sourceTree = "<group>"; };
+		C758AFD31493C6DC0051E570 /* NSString+MagicalDataImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MagicalDataImport.h"; path = "DataImport/NSString+MagicalDataImport.h"; sourceTree = "<group>"; };
+		C758AFD41493C6DC0051E570 /* NSString+MagicalDataImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+MagicalDataImport.m"; path = "DataImport/NSString+MagicalDataImport.m"; sourceTree = "<group>"; };
 		C75A4E7113D0D88D00790CEB /* NSManagedObject+MagicalDataImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+MagicalDataImport.h"; sourceTree = "<group>"; };
 		C75A4E7213D0D88D00790CEB /* NSManagedObject+MagicalDataImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+MagicalDataImport.m"; sourceTree = "<group>"; };
 		C75C7D69147220D300D0C2FE /* generateShorthandFile.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = generateShorthandFile.rb; sourceTree = "<group>"; };
@@ -382,6 +386,8 @@
 			children = (
 				C7F5EEB0148DC76700964607 /* NSObject+MagicalDataImport.h */,
 				C7F5EEB1148DC76700964607 /* NSObject+MagicalDataImport.m */,
+				C758AFD31493C6DC0051E570 /* NSString+MagicalDataImport.h */,
+				C758AFD41493C6DC0051E570 /* NSString+MagicalDataImport.m */,
 				C75A4E7113D0D88D00790CEB /* NSManagedObject+MagicalDataImport.h */,
 				C75A4E7213D0D88D00790CEB /* NSManagedObject+MagicalDataImport.m */,
 				C7005F1014140F9B0061B9F4 /* NSNumber+MagicalDataImport.h */,
@@ -924,7 +930,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"Unit Tests/Fixtures/iOS\" && mogenerator -m TestModel.xcdatamodeld/TestModel.xcdatamodel -O TestEntities";
+			shellScript = "cd \"Unit Tests/Fixtures/iOS\" && mogenerator -m TestModel.xcdatamodeld/TestModel.xcdatamodel -O TestEntities --template-var arc=true";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -967,6 +973,7 @@
 				C7005F1A14140FD30061B9F4 /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
 				C7005F2214153A060061B9F4 /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				C7F5EEB2148DC76700964607 /* NSObject+MagicalDataImport.m in Sources */,
+				C758AFD51493C6DC0051E570 /* NSString+MagicalDataImport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1028,6 +1035,7 @@
 				C7005F1B14140FD30061B9F4 /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
 				C7005F2314153A060061B9F4 /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				C7F5EEB3148DC76700964607 /* NSObject+MagicalDataImport.m in Sources */,
+				C758AFD61493C6DC0051E570 /* NSString+MagicalDataImport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1173,7 +1181,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -1188,11 +1196,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS App Unit Tests/iOS App Unit Tests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"MR_SHORTHAND=1",
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
@@ -1210,7 +1219,7 @@
 				);
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
 				MOMC_NO_WARNINGS = YES;
-				OTHER_CFLAGS = "-DMR_SHORTHAND";
+				OTHER_CFLAGS = "-DMR_ENABLE_LOGGING";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -1230,7 +1239,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1241,7 +1250,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS App Unit Tests/iOS App Unit Tests-Prefix.pch";
-				GCC_VERSION = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;

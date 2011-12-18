@@ -58,7 +58,6 @@ void cleanup_save_queue()
         localContext = [NSManagedObjectContext MR_contextThatNotifiesDefaultContextOnMainThread];
         [localContext MR_observeiCloudChangesInCoordinator:defaultCoordinator];
 #endif
-        
         [mainContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
         [localContext setMergePolicy:NSOverwriteMergePolicy];
     }

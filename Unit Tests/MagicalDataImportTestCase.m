@@ -17,6 +17,7 @@
 {
     [MagicalRecordHelpers setDefaultModelNamed:@"TestModel.momd"];
     [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
+    //[MagicalRecordHelpers setupCoreDataStack];
     
     if ([self respondsToSelector:@selector(setupTestData)])
     {

@@ -10,7 +10,8 @@
 
 static NSManagedObjectContext *defaultManageObjectContext_ = nil;
 static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_NSManagedObjectContextForThreadKey";
-NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalRecordDidMergeChangesFromiCloudNotification";
+static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMagicalRecordNotifiesMainContextOnSave";
+       NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalRecordDidMergeChangesFromiCloudNotification";
 
 @interface NSManagedObjectContext (MagicalRecordPrivate)
 
@@ -91,6 +92,7 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 
 - (void) MR_observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 {
+    if (![MagicalRecordHelpers isICloudEnabled]) return;
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(MR_mergeChangesFromiCloud:)
                                                  name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
@@ -100,6 +102,7 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 
 - (void) MR_stopObservingiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 {
+    if (![MagicalRecordHelpers isICloudEnabled]) return;
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:NSPersistentStoreDidImportUbiquitousContentChangesNotification 
                                                   object:coordinator];
@@ -169,6 +172,10 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 	}
 	@finally 
     {
+        if (saved && [self respondsToSelector:@selector(parentContext)] && [self performSelector:@selector(parentContext)])
+        {
+            [[self parentContext] MR_saveWithErrorHandler:errorCallback];
+        }
         if (!saved)
         {
             if (errorCallback)
@@ -220,8 +227,14 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 
 - (BOOL) MR_notifiesMainContextOnSave;
 {
-    NSNumber *notifies = objc_getAssociatedObject(self, @"notifiesMainContext");
+    THREAD_ISOLATION_ENABLED(
+    NSNumber *notifies = objc_getAssociatedObject(self, kMagicalRecordNotifiesMainContextAssociatedValueKey);
     return notifies ? [notifies boolValue] : NO;
+                             )
+    PRIVATE_QUEUES_ENABLED(
+                           return [self parentContext] == [[self class] MR_defaultContext];
+                           )
+    return NO;
 }
 
 - (void) MR_setNotifiesMainContextOnSave:(BOOL)enabled;
@@ -229,13 +242,22 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
     NSManagedObjectContext *mainContext = [[self class] MR_defaultContext];
     if (self != mainContext) 
     {
-        SEL selector = enabled ? @selector(MR_observeContextOnMainThread:) : @selector(MR_stopObservingContext:);
-        objc_setAssociatedObject(self, @"notifiesMainContext", [NSNumber numberWithBool:enabled], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        
 #pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"        
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        THREAD_ISOLATION_ENABLED(
+        SEL selector = enabled ? @selector(MR_observeContextOnMainThread:) : @selector(MR_stopObservingContext:);
+        objc_setAssociatedObject(self, kMagicalRecordNotifiesMainContextAssociatedValueKey, [NSNumber numberWithBool:enabled], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
         [mainContext performSelector:selector withObject:self];
+                                 )
 #pragma clang diagnostic pop
+
+        PRIVATE_QUEUES_ENABLED(
+                               if (enabled)
+                               {
+                                   [self setParentContext:mainContext];
+                               }
+                               )
     }
 }
 
@@ -267,10 +289,12 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 	{
         MRLog(@"Creating MOContext %@", [NSThread isMainThread] ? @" *** On Main Thread ***" : @"");
         THREAD_ISOLATION_ENABLED(
-                                 context = [[NSManagedObjectContext alloc] init];
-                                 [context setPersistentStoreCoordinator:coordinator];
+                         MRLog(@"Creating context in Thread Isolation Mode");
+                         context = [[NSManagedObjectContext alloc] init];
+                         [context setPersistentStoreCoordinator:coordinator];
                                  )
         PRIVATE_QUEUES_ENABLED(
+            MRLog(@"Creating context in Context Private Queue Mode");
             context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
             [context performBlockAndWait:^{
                 [context setPersistentStoreCoordinator:coordinator];
@@ -300,16 +324,19 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
     
     THREAD_ISOLATION_ENABLED
     (
+         MRLog(@"Creating Context - Using Thread Isolation Mode");
          context = [self MR_context];
          context.MR_notifiesMainContextOnSave = YES;
     )
     
     PRIVATE_QUEUES_ENABLED
     (
-       context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-       [context performBlockAndWait:^{
-            [context setPersistentStoreCoordinator:[NSPersistentStoreCoordinator MR_defaultStoreCoordinator]];
-        }];
+        MRLog(@"Creating Context - Using Private queue mode");
+        context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        if (context != [self MR_defaultContext])
+        {
+            [context setParentContext:[NSManagedObjectContext MR_defaultContext]];
+        }
     )
     
     return context;

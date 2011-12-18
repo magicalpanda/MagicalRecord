@@ -4,6 +4,20 @@
 #import <CoreData/CoreData.h>
 
 
+extern const struct SingleRelatedEntityAttributes {
+	__unsafe_unretained NSString *mappedStringAttribute;
+} SingleRelatedEntityAttributes;
+
+extern const struct SingleRelatedEntityRelationships {
+	__unsafe_unretained NSString *testAbstractToManyRelationship;
+	__unsafe_unretained NSString *testAbstractToOneRelationship;
+	__unsafe_unretained NSString *testConcreteToManyRelationship;
+	__unsafe_unretained NSString *testConcreteToOneRelationship;
+} SingleRelatedEntityRelationships;
+
+extern const struct SingleRelatedEntityFetchedProperties {
+} SingleRelatedEntityFetchedProperties;
+
 @class AbstractRelatedEntity;
 @class AbstractRelatedEntity;
 @class ConcreteRelatedEntity;
@@ -23,7 +37,7 @@
 
 
 
-@property (nonatomic, retain) NSString *mappedStringAttribute;
+@property (nonatomic, strong) NSString *mappedStringAttribute;
 
 
 //- (BOOL)validateMappedStringAttribute:(id*)value_ error:(NSError**)error_;
@@ -32,28 +46,28 @@
 
 
 
-@property (nonatomic, retain) NSSet* testAbstractToManyRelationship;
+@property (nonatomic, strong) NSSet* testAbstractToManyRelationship;
 
 - (NSMutableSet*)testAbstractToManyRelationshipSet;
 
 
 
 
-@property (nonatomic, retain) AbstractRelatedEntity* testAbstractToOneRelationship;
+@property (nonatomic, strong) AbstractRelatedEntity* testAbstractToOneRelationship;
 
 //- (BOOL)validateTestAbstractToOneRelationship:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, retain) NSSet* testConcreteToManyRelationship;
+@property (nonatomic, strong) NSSet* testConcreteToManyRelationship;
 
 - (NSMutableSet*)testConcreteToManyRelationshipSet;
 
 
 
 
-@property (nonatomic, retain) ConcreteRelatedEntity* testConcreteToOneRelationship;
+@property (nonatomic, strong) ConcreteRelatedEntity* testConcreteToOneRelationship;
 
 //- (BOOL)validateTestConcreteToOneRelationship:(id*)value_ error:(NSError**)error_;
 

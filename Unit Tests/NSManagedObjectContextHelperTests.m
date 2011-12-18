@@ -10,6 +10,16 @@
 
 @implementation NSManagedObjectContextHelperTests
 
+- (void) setUp
+{
+    [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
+}
+
+- (void) tearDown
+{
+    [MagicalRecordHelpers cleanUp];
+}
+
 - (void) testCanCreateContextForCurrentThead
 {
     NSManagedObjectContext *firstContext = [NSManagedObjectContext MR_contextForCurrentThread];
@@ -22,7 +32,12 @@
 {
     NSManagedObjectContext *testContext = [NSManagedObjectContext MR_contextThatNotifiesDefaultContextOnMainThread];
 
-    assertThatBool(testContext.MR_notifiesMainContextOnSave, is(equalToBool(YES)));
+    THREAD_ISOLATION_ENABLED(
+    assertThatBool([testContext MR_notifiesMainContextOnSave], is(equalToBool(YES)));
+                             )
+    PRIVATE_QUEUES_ENABLED(
+               assertThat([testContext parentContext], is(equalTo([NSManagedObjectContext MR_defaultContext])));
+    )
 }
 
 

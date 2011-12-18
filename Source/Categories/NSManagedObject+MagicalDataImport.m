@@ -20,16 +20,6 @@ NSString * const kMagicalRecordImportRelationshipMapKey = @"mappedKeyName";
 NSString * const kMagicalRecordImportRelationshipPrimaryKey = @"primaryRelationshipKey";
 NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 
-@implementation NSString (MagicalRecord_DataImport)
-
-- (NSString *) MR_capitalizedFirstCharaterString;
-{
-    NSString *firstChar = [[self substringToIndex:1] capitalizedString];
-    return [firstChar stringByAppendingString:[self substringFromIndex:1]];
-}
-
-@end
-
 @implementation NSManagedObject (MagicalRecord_DataImport)
 
 - (id) MR_valueForAttribute:(NSAttributeDescription *)attributeInfo fromObjectData:(NSDictionary *)objectData forKeyPath:(NSString *)keyPath
@@ -123,14 +113,14 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     if ([relationshipInfo isToMany]) 
     {
         addRelationMessageFormat = @"add%@Object:";
-        if ([relationshipInfo isOrdered])
+        if ([relationshipInfo respondsToSelector:@selector(isOrdered)] && [relationshipInfo isOrdered])
         {
             //Need to get the ordered set
             NSString *selectorName = [[relationshipInfo name] stringByAppendingString:@"Set"];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             relationshipSource = [self performSelector:NSSelectorFromString(selectorName)];
-#pragma clang diagnostic pop
+#pragma cland diagnostic pop
             addRelationMessageFormat = @"addObject:";
         }
     }
@@ -182,7 +172,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
             {
                 for (id singleRelatedObjectData in relatedObjectData) 
                 {
-                    if (implementsShouldImport && !(BOOL)[self performSelector:shouldImportSelector withObject:singleRelatedObjectData]) 
+                    if (implementsShouldImport && ![[self performSelector:shouldImportSelector withObject:singleRelatedObjectData] boolValue]) 
                     {
                         continue;
                     }
@@ -320,13 +310,41 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 + (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context
 {
     NSMutableArray *objectIDs = [NSMutableArray array];
+    
+    [MRCoreDataAction saveDataWithBlock:^(NSManagedObjectContext *localContext) 
+    {    
+        [listOfObjectData enumerateObjectsWithOptions:0 usingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
+        {
+            NSDictionary *objectData = (NSDictionary *)obj;
+
+            NSManagedObject *dataObject = [self MR_importFromDictionary:objectData inContext:localContext];
+
+            if ([context obtainPermanentIDsForObjects:[NSArray arrayWithObject:dataObject] error:nil])
+            {
+              [objectIDs addObject:[dataObject objectID]];
+            }
+        }];
+    }];
+    
+    return [self MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"self IN %@", objectIDs] inContext:context];
+}
+
++ (NSArray *) MR_updateFromArray:(NSArray *)listOfObjectData;
+{
+    return [self MR_updateFromArray:listOfObjectData inContext:[NSManagedObjectContext MR_defaultContext]];
+}
+
++ (NSArray *) MR_updateFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context;
+{
+    NSMutableArray *objectIDs = [NSMutableArray array];
+    
     [MRCoreDataAction saveDataWithBlock:^(NSManagedObjectContext *localContext) 
      {    
-         [listOfObjectData enumerateObjectsWithOptions:0 usingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
-          {
+         [listOfObjectData enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+             
               NSDictionary *objectData = (NSDictionary *)obj;
               
-              NSManagedObject *dataObject = [self MR_importFromDictionary:objectData inContext:localContext];
+              NSManagedObject *dataObject = [self MR_updateFromDictionary:objectData inContext:localContext];
               
               if ([context obtainPermanentIDsForObjects:[NSArray arrayWithObject:dataObject] error:nil])
               {

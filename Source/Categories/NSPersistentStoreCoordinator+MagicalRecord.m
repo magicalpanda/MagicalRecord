@@ -22,7 +22,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 {
     if (defaultCoordinator_ == nil && [MagicalRecordHelpers shouldAutoCreateDefaultPersistentStoreCoordinator])
     {
-        defaultCoordinator_ = [self MR_newPersistentStoreCoordinator];
+        [self MR_setDefaultStoreCoordinator:[self MR_newPersistentStoreCoordinator]];
     }
 	return defaultCoordinator_;
 }

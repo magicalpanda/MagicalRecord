@@ -3,6 +3,16 @@
 
 #import "_SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.h"
 
+const struct SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyAttributes SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyAttributes = {
+};
+
+const struct SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyRelationships SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyRelationships = {
+	.mappedEntity = @"mappedEntity",
+};
+
+const struct SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyFetchedProperties SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyFetchedProperties = {
+};
+
 @implementation SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyID
 @end
 

@@ -4,7 +4,15 @@
 
 #define kCreateNewCoordinatorOnBackgroundOperations     0
 
-#ifdef MR_ENABLE_LOGGING
+#ifndef MR_ENABLE_ACTIVE_RECORD_LOGGING
+  #ifdef DEBUG
+    #define MR_ENABLE_ACTIVE_RECORD_LOGGING 1
+  #else
+    #define MR_ENABLE_ACTIVE_RECORD_LOGGING 0
+  #endif
+#endif
+
+#if MR_ENABLE_ACTIVE_RECORD_LOGGING
 #ifdef LOG_VERBOSE
     #define MRLog(...)  DDLogVerbose(__VA_ARGS__)
 #else
@@ -17,7 +25,7 @@
 #import <CoreData/CoreData.h>
 
 #ifndef MR_USE_ARC
-#define MR_USE_ARC 1
+#define MR_USE_ARC __has_feature(objc_arc)
 #endif
 
 #ifndef kCFCoreFoundationVersionNumber_iPhoneOS_5_0
@@ -62,6 +70,7 @@
 #import "NSManagedObject+MagicalDataImport.h"
 #import "NSNumber+MagicalDataImport.h"
 #import "NSObject+MagicalDataImport.h"
+#import "NSString+MagicalDataImport.h"
 #import "NSAttributeDescription+MagicalDataImport.h"
 #import "NSRelationshipDescription+MagicalDataImport.h"
 #import "NSEntityDescription+MagicalDataImport.h"

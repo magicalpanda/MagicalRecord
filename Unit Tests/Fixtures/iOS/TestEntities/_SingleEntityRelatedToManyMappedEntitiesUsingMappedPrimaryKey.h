@@ -4,6 +4,17 @@
 #import <CoreData/CoreData.h>
 
 
+extern const struct SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyAttributes {
+	__unsafe_unretained NSString *testPrimaryKey;
+} SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyAttributes;
+
+extern const struct SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyRelationships {
+	__unsafe_unretained NSString *mappedEntities;
+} SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyRelationships;
+
+extern const struct SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyFetchedProperties {
+} SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyFetchedProperties;
+
 @class MappedEntity;
 
 
@@ -20,7 +31,7 @@
 
 
 
-@property (nonatomic, retain) NSNumber *testPrimaryKey;
+@property (nonatomic, strong) NSNumber *testPrimaryKey;
 
 
 @property short testPrimaryKeyValue;
@@ -33,7 +44,7 @@
 
 
 
-@property (nonatomic, retain) NSSet* mappedEntities;
+@property (nonatomic, strong) NSSet* mappedEntities;
 
 - (NSMutableSet*)mappedEntitiesSet;
 
