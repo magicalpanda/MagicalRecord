@@ -120,7 +120,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             relationshipSource = [self performSelector:NSSelectorFromString(selectorName)];
-#pragma cland diagnostic pop
+#pragma clang diagnostic pop
             addRelationMessageFormat = @"addObject:";
         }
     }
