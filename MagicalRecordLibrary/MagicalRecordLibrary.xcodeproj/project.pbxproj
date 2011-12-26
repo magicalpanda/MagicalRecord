@@ -219,7 +219,7 @@
 				531291A31497AEBD00E52E45 /* MRCoreDataAction.m */,
 			);
 			name = Source;
-			path = ../../Source;
+			path = ../../MagicalRecord;
 			sourceTree = "<group>";
 		};
 		531291841497AEBD00E52E45 /* Categories */ = {
