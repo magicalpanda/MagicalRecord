@@ -3,11 +3,13 @@
 *~.nib
 
 build/
+*.framework
 
 *.pbxuser
 *.perspective
 *.perspectivev3
 
+.svn
 .hg
 .hgtags
 
