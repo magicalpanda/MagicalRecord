@@ -895,7 +895,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"Unit Tests/Fixtures/iOS\" && mogenerator -m TestModel.xcdatamodeld/TestModel.xcdatamodel -O TestEntities --template-var arc=true";
+			shellScript = "cd \"Unit Tests/Fixtures/iOS\" && mogenerator -m TestModel.xcdatamodeld/TestModel.xcdatamodel -O TestEntities --template-var arc=true\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
