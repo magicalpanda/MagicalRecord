@@ -5,8 +5,8 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "MagicalRecordHelpers.h"
-#import "NSPersistentStore+MagicalRecord.h"
+#import <MagicalRecord/MagicalRecordHelpers.h>
+#import <MagicalRecord//Categories/NSPersistentStore+MagicalRecord.h>
 
 extern NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification;
 

@@ -55,22 +55,22 @@
 #endif
 
 #ifdef MR_SHORTHAND
-#import "MagicalRecordShorthand.h"
+#import <MagicalRecord/MagicalRecordShorthand.h>
 #endif
 
-#import "MagicalRecordHelpers.h"
-#import "MRCoreDataAction.h"
+#import <MagicalRecord/MagicalRecordHelpers.h>
+#import <MagicalRecord/MRCoreDataAction.h>
 
-#import "NSManagedObject+MagicalRecord.h"
-#import "NSManagedObjectContext+MagicalRecord.h"
-#import "NSPersistentStoreCoordinator+MagicalRecord.h"
-#import "NSManagedObjectModel+MagicalRecord.h"
-#import "NSPersistentStore+MagicalRecord.h"
+#import <MagicalRecord/Categories/NSManagedObject+MagicalRecord.h>
+#import <MagicalRecord/Categories/NSManagedObjectContext+MagicalRecord.h>
+#import <MagicalRecord/Categories/NSPersistentStoreCoordinator+MagicalRecord.h>
+#import <MagicalRecord/Categories/NSManagedObjectModel+MagicalRecord.h>
+#import <MagicalRecord/Categories/NSPersistentStore+MagicalRecord.h>
 
-#import "NSManagedObject+MagicalDataImport.h"
-#import "NSNumber+MagicalDataImport.h"
-#import "NSObject+MagicalDataImport.h"
-#import "NSString+MagicalDataImport.h"
-#import "NSAttributeDescription+MagicalDataImport.h"
-#import "NSRelationshipDescription+MagicalDataImport.h"
-#import "NSEntityDescription+MagicalDataImport.h"
+#import <MagicalRecord/Categories/NSManagedObject+MagicalDataImport.h>
+#import <MagicalRecord/Categories/DataImport/NSNumber+MagicalDataImport.h>
+#import <MagicalRecord/Categories/DataImport/NSObject+MagicalDataImport.h>
+#import <MagicalRecord/Categories/DataImport/NSString+MagicalDataImport.h>
+#import <MagicalRecord/Categories/DataImport/NSAttributeDescription+MagicalDataImport.h>
+#import <MagicalRecord/Categories/DataImport/NSRelationshipDescription+MagicalDataImport.h>
+#import <MagicalRecord/Categories/DataImport/NSEntityDescription+MagicalDataImport.h>
