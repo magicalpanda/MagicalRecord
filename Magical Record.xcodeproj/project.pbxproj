@@ -139,12 +139,12 @@
 			remoteGlobalIDString = 531291C51497AF1D00E52E45;
 			remoteInfo = MagicalRecord;
 		};
-		5B6C1E7C14A8779100B77851 /* PBXContainerItemProxy */ = {
+		5BAAAD4814A8A087003ADE50 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 531291FA1497B3B800E52E45 /* MagicalRecordLibrary.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 5B93A2CF149BAECE00925EED;
-			remoteInfo = MagicalRecordLib;
+			remoteGlobalIDString = 5B6C1EC014A8997000B77851;
+			remoteInfo = "MagicalRecord-clang";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -362,7 +362,7 @@
 			children = (
 				531292031497B3B800E52E45 /* MagicalRecordLibrary */,
 				531292051497B3B800E52E45 /* libMagicalRecord.a */,
-				5B6C1E7D14A8779100B77851 /* MagicalRecordLib.framework */,
+				5BAAAD4914A8A087003ADE50 /* libMagicalRecord-clang.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -810,11 +810,11 @@
 			remoteRef = 531292041497B3B800E52E45 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		5B6C1E7D14A8779100B77851 /* MagicalRecordLib.framework */ = {
+		5BAAAD4914A8A087003ADE50 /* libMagicalRecord-clang.a */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.framework.static;
-			path = MagicalRecordLib.framework;
-			remoteRef = 5B6C1E7C14A8779100B77851 /* PBXContainerItemProxy */;
+			fileType = archive.ar;
+			path = "libMagicalRecord-clang.a";
+			remoteRef = 5BAAAD4814A8A087003ADE50 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
