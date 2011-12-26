@@ -139,6 +139,13 @@
 			remoteGlobalIDString = 531291C51497AF1D00E52E45;
 			remoteInfo = MagicalRecord;
 		};
+		5B6C1E7C14A8779100B77851 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 531291FA1497B3B800E52E45 /* MagicalRecordLibrary.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5B93A2CF149BAECE00925EED;
+			remoteInfo = MagicalRecordLib;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -353,8 +360,9 @@
 		531291FB1497B3B800E52E45 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				531292031497B3B800E52E45 /* MagicalRecordLibrary.framework */,
+				531292031497B3B800E52E45 /* MagicalRecordLibrary */,
 				531292051497B3B800E52E45 /* libMagicalRecord.a */,
+				5B6C1E7D14A8779100B77851 /* MagicalRecordLib.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -787,9 +795,10 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		531292031497B3B800E52E45 /* MagicalRecordLibrary.framework */ = {
+		531292031497B3B800E52E45 /* MagicalRecordLibrary */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.framework.static;
+			fileType = wrapper.framework;
+			name = MagicalRecordLibrary;
 			path = MagicalRecordLibrary.framework;
 			remoteRef = 531292021497B3B800E52E45 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -799,6 +808,13 @@
 			fileType = archive.ar;
 			path = libMagicalRecord.a;
 			remoteRef = 531292041497B3B800E52E45 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5B6C1E7D14A8779100B77851 /* MagicalRecordLib.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework.static;
+			path = MagicalRecordLib.framework;
+			remoteRef = 5B6C1E7C14A8779100B77851 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1002,7 +1018,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = ./MagicalRecord;
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = "";
@@ -1013,7 +1029,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = ./MagicalRecord;
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = "";
@@ -1118,8 +1134,10 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/iOS App Unit Tests/Frameworks/OCMockLibrary/Headers/OCMock\"",
 					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
-					"\"$(SRCROOT)/iOS App Unit Tests/Frameworks\"",
+					.,
+					"$(SRCROOT)/Categories",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1141,6 +1159,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/iOS App Unit Tests/Frameworks/OCMockLibrary/Headers/OCMock\"",
 					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+					.,
+					"$(SRCROOT)/Categories",
 				);
 				INFOPLIST_FILE = "iOS App Unit Tests/iOS App Unit Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -1161,6 +1181,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SRCROOT)/iOS App Unit Tests/Frameworks/OCMockLibrary/Headers/OCMock\" \"$(DEVELOPER_FRAMEWORKS_DIR)\"";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1175,8 +1196,10 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/iOS App Unit Tests/Frameworks/OCMockLibrary/Headers/OCMock\"",
 					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
-					"\"$(SRCROOT)/iOS App Unit Tests/Frameworks\"",
+					.,
+					"$(SRCROOT)/Categories",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1190,6 +1213,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/iOS App Unit Tests/Frameworks/OCMockLibrary/Headers/OCMock\"",
 					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+					.,
+					"$(SRCROOT)/Categories",
 				);
 				INFOPLIST_FILE = "iOS App Unit Tests/iOS App Unit Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -1211,6 +1236,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SRCROOT)/iOS App Unit Tests/Frameworks/OCMockLibrary/Headers/OCMock\" \"$(DEVELOPER_FRAMEWORKS_DIR)\"";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
