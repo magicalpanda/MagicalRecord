@@ -33,7 +33,7 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
     
     id value = [self valueForKeyPath:lookupKey];
     
-    for (int i = 1; i < kMagicalRecordImportMaximumAttributeFailoverDepth && value == nil; i++)
+    for ( NSUInteger i = 1; i < kMagicalRecordImportMaximumAttributeFailoverDepth && value == nil; i++)
     {
         attributeName = [NSString stringWithFormat:@"%@.%d", kMagicalRecordImportAttributeKeyMapKey, i];
         lookupKey = [[attributeInfo userInfo] valueForKey:attributeName];

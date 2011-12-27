@@ -57,7 +57,8 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     SEL selector = NSSelectorFromString(selectorString);
     if ([self respondsToSelector:selector])
     {
-        [self performSelector:selector withObject:value];
+       objc_msgSend( self, selector, value );
+
         return YES;
     }
     return NO;
@@ -114,7 +115,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
         {
             //Need to get the ordered set
             NSString *selectorName = [[relationshipInfo name] stringByAppendingString:@"Set"];
-            relationshipSource = [self performSelector:NSSelectorFromString(selectorName)];
+            relationshipSource = objc_msgSend( self, NSSelectorFromString(selectorName) );
             addRelationMessageFormat = @"addObject:";
         }
     }
@@ -164,19 +165,16 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
             {
                 for (id singleRelatedObjectData in relatedObjectData) 
                 {
-                    if (implementsShouldImport && !(BOOL)[self performSelector:shouldImportSelector withObject:singleRelatedObjectData]) 
+                    if (implementsShouldImport && !(BOOL)objc_msgSend(self, shouldImportSelector, singleRelatedObjectData ) )
                     {
                         continue;
                     }
                     setRelationshipBlock(relationshipInfo, singleRelatedObjectData);
                 }
             }
-            else
+            else if (!(implementsShouldImport && !(BOOL)objc_msgSend( self, shouldImportSelector, relatedObjectData )) )
             {
-                if (!(implementsShouldImport && !(BOOL)[self performSelector:shouldImportSelector withObject:relatedObjectData]))
-                {
-                    setRelationshipBlock(relationshipInfo, relatedObjectData);
-                }
+              setRelationshipBlock(relationshipInfo, relatedObjectData);
             }
         }
     }

@@ -456,9 +456,9 @@ NSInteger* newColorComponentsFromString(NSString *serializedColor)
 UIColor * UIColorFromString(NSString *serializedColor)
 {
     NSInteger *componentValues = newColorComponentsFromString(serializedColor);
-    UIColor *color = [UIColor colorWithRed:(componentValues[0] / 255.)
-                                     green:(componentValues[1] / 255.)
-                                      blue:(componentValues[2] / 255.)
+    UIColor *color = [UIColor colorWithRed:(componentValues[0] / 255.f)
+                                     green:(componentValues[1] / 255.f)
+                                      blue:(componentValues[2] / 255.f)
                                      alpha:componentValues[3]];
     
     free(componentValues);
