@@ -118,6 +118,7 @@
 + (NSManagedObjectContext *)defaultContext;
 + (void) setDefaultContext:(NSManagedObjectContext *)moc;
 + (void) resetContextForCurrentThread;
++ (void) setContextForCurrentThread:(NSManagedObjectContext *)context;
 + (NSManagedObjectContext *) context;
 + (NSManagedObjectContext *) contextForCurrentThread;
 + (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThread;

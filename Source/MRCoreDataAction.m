@@ -53,13 +53,14 @@ void cleanup_save_queue()
         
 #if kCreateNewCoordinatorOnBackgroundOperations == 1
         NSPersistentStoreCoordinator *localCoordinator = [NSPersistentStoreCoordinator coordinatorWithPersitentStore:[NSPersistentStore defaultPersistentStore]];
-        localContext = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:localCoordinator];
+        localContext = [NSManagedObjectContext MR_contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:localCoordinator];
 #else
         localContext = [NSManagedObjectContext MR_contextThatNotifiesDefaultContextOnMainThread];
         [localContext MR_observeiCloudChangesInCoordinator:defaultCoordinator];
 #endif
         [mainContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
         [localContext setMergePolicy:NSOverwriteMergePolicy];
+        [NSManagedObjectContext MR_setContextForCurrentThread:localContext];
     }
     
     block(localContext);

@@ -282,6 +282,19 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 	}
 }
 
++ (void) MR_setContextForCurrentThread:(NSManagedObjectContext *)context;
+{
+    if ([NSThread isMainThread])
+	{
+		[self MR_setDefaultContext:context];
+	}
+	else
+	{
+		NSMutableDictionary *threadDict = [[NSThread currentThread] threadDictionary];
+        [threadDict setObject:context forKey:kMagicalRecordManagedObjectContextKey];
+	}
+}
+
 + (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 {
 	NSManagedObjectContext *context = nil;
