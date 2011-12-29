@@ -267,4 +267,4 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     return mutDict; 
 } 
 
-@end 
+@end

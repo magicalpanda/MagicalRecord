@@ -8,7 +8,7 @@
 
 #import "NSObject+MagicalDataImport.h"
 
-NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
+int const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
 
 
 @implementation NSObject (MagicalRecord_DataImport)

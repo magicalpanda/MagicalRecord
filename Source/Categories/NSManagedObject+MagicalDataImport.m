@@ -120,7 +120,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             relationshipSource = [self performSelector:NSSelectorFromString(selectorName)];
-#pragma cland diagnostic pop
+#pragma clang diagnostic pop
             addRelationMessageFormat = @"addObject:";
         }
     }
@@ -202,18 +202,18 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     NSDictionary *relationships = [[self entity] relationshipsByName];
     [self MR_setRelationships:relationships
         forKeysWithDictionary:objectData 
-                    withBlock:^(NSRelationshipDescription *relationshipInfo, id objectData){
+                    withBlock:^(NSRelationshipDescription *relationshipInfo, id localObjectData){
 
          NSManagedObject *relatedObject = nil;
-         if ([objectData isKindOfClass:[NSDictionary class]]) 
+         if ([localObjectData isKindOfClass:[NSDictionary class]]) 
          {
-             relatedObject = [[relationshipInfo destinationEntity] MR_createInstanceFromDictionary:objectData inContext:[self managedObjectContext]];
+             relatedObject = [[relationshipInfo destinationEntity] MR_createInstanceFromDictionary:localObjectData inContext:[self managedObjectContext]];
          }
          else
          {
-             relatedObject = [self MR_findObjectForRelationship:relationshipInfo withData:objectData];
+             relatedObject = [self MR_findObjectForRelationship:relationshipInfo withData:localObjectData];
          }
-         [relatedObject MR_importValuesForKeysWithDictionary:objectData];
+         [relatedObject MR_importValuesForKeysWithDictionary:localObjectData];
 
          [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
     }];
@@ -239,17 +239,17 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     NSDictionary *relationships = [[self entity] relationshipsByName];
     [self MR_setRelationships:relationships
         forKeysWithDictionary:objectData 
-                    withBlock:^(NSRelationshipDescription *relationshipInfo, id objectData) {
+                    withBlock:^(NSRelationshipDescription *relationshipInfo, id localObjectData) {
                         
          NSManagedObject *relatedObject = [self MR_findObjectForRelationship:relationshipInfo
-                                                                    withData:objectData];
+                                                                    withData:localObjectData];
          if (relatedObject == nil)
          {
-             relatedObject = [[relationshipInfo destinationEntity] MR_createInstanceFromDictionary:objectData inContext:[self managedObjectContext]];
+             relatedObject = [[relationshipInfo destinationEntity] MR_createInstanceFromDictionary:localObjectData inContext:[self managedObjectContext]];
          }
          else
          {
-             [relatedObject MR_importValuesForKeysWithDictionary:objectData];
+             [relatedObject MR_importValuesForKeysWithDictionary:localObjectData];
          }
          
          [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
