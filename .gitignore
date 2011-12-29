@@ -13,3 +13,7 @@ build/
 
 *.mode1v3
 *.mode2v3
+
+UserInterfaceState.xcuserstate
+/Magical Record.xcodeproj/project.xcworkspace/xcuserdata/saul.xcuserdatad/UserInterfaceState.xcuserstate
+/Magical Record.xcodeproj/xcuserdata/saul.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist
