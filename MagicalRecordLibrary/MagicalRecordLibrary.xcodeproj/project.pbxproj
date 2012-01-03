@@ -9,35 +9,35 @@
 /* Begin PBXBuildFile section */
 		531291761497AE9D00E52E45 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531291751497AE9D00E52E45 /* Foundation.framework */; };
 		5312917C1497AE9D00E52E45 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5312917A1497AE9D00E52E45 /* InfoPlist.strings */; };
-		531291A41497AEBD00E52E45 /* NSAttributeDescription+MagicalDataImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 531291861497AEBD00E52E45 /* NSAttributeDescription+MagicalDataImport.h */; };
+		531291A41497AEBD00E52E45 /* NSAttributeDescription+MagicalDataImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 531291861497AEBD00E52E45 /* NSAttributeDescription+MagicalDataImport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		531291A51497AEBD00E52E45 /* NSAttributeDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 531291871497AEBD00E52E45 /* NSAttributeDescription+MagicalDataImport.m */; };
-		531291A61497AEBD00E52E45 /* NSEntityDescription+MagicalDataImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 531291881497AEBD00E52E45 /* NSEntityDescription+MagicalDataImport.h */; };
+		531291A61497AEBD00E52E45 /* NSEntityDescription+MagicalDataImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 531291881497AEBD00E52E45 /* NSEntityDescription+MagicalDataImport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		531291A71497AEBD00E52E45 /* NSEntityDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 531291891497AEBD00E52E45 /* NSEntityDescription+MagicalDataImport.m */; };
-		531291A81497AEBD00E52E45 /* NSNumber+MagicalDataImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 5312918A1497AEBD00E52E45 /* NSNumber+MagicalDataImport.h */; };
+		531291A81497AEBD00E52E45 /* NSNumber+MagicalDataImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 5312918A1497AEBD00E52E45 /* NSNumber+MagicalDataImport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		531291A91497AEBD00E52E45 /* NSNumber+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 5312918B1497AEBD00E52E45 /* NSNumber+MagicalDataImport.m */; };
-		531291AA1497AEBD00E52E45 /* NSObject+MagicalDataImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 5312918C1497AEBD00E52E45 /* NSObject+MagicalDataImport.h */; };
+		531291AA1497AEBD00E52E45 /* NSObject+MagicalDataImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 5312918C1497AEBD00E52E45 /* NSObject+MagicalDataImport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		531291AB1497AEBD00E52E45 /* NSObject+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 5312918D1497AEBD00E52E45 /* NSObject+MagicalDataImport.m */; };
-		531291AC1497AEBD00E52E45 /* NSRelationshipDescription+MagicalDataImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 5312918E1497AEBD00E52E45 /* NSRelationshipDescription+MagicalDataImport.h */; };
+		531291AC1497AEBD00E52E45 /* NSRelationshipDescription+MagicalDataImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 5312918E1497AEBD00E52E45 /* NSRelationshipDescription+MagicalDataImport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		531291AD1497AEBD00E52E45 /* NSRelationshipDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 5312918F1497AEBD00E52E45 /* NSRelationshipDescription+MagicalDataImport.m */; };
-		531291AE1497AEBD00E52E45 /* NSString+MagicalDataImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 531291901497AEBD00E52E45 /* NSString+MagicalDataImport.h */; };
+		531291AE1497AEBD00E52E45 /* NSString+MagicalDataImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 531291901497AEBD00E52E45 /* NSString+MagicalDataImport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		531291AF1497AEBD00E52E45 /* NSString+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 531291911497AEBD00E52E45 /* NSString+MagicalDataImport.m */; };
-		531291B01497AEBD00E52E45 /* NSManagedObject+MagicalDataImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 531291921497AEBD00E52E45 /* NSManagedObject+MagicalDataImport.h */; };
+		531291B01497AEBD00E52E45 /* NSManagedObject+MagicalDataImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 531291921497AEBD00E52E45 /* NSManagedObject+MagicalDataImport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		531291B11497AEBD00E52E45 /* NSManagedObject+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 531291931497AEBD00E52E45 /* NSManagedObject+MagicalDataImport.m */; };
-		531291B21497AEBD00E52E45 /* NSManagedObject+MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 531291941497AEBD00E52E45 /* NSManagedObject+MagicalRecord.h */; };
+		531291B21497AEBD00E52E45 /* NSManagedObject+MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 531291941497AEBD00E52E45 /* NSManagedObject+MagicalRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		531291B31497AEBD00E52E45 /* NSManagedObject+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 531291951497AEBD00E52E45 /* NSManagedObject+MagicalRecord.m */; };
-		531291B41497AEBD00E52E45 /* NSManagedObjectContext+MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 531291961497AEBD00E52E45 /* NSManagedObjectContext+MagicalRecord.h */; };
+		531291B41497AEBD00E52E45 /* NSManagedObjectContext+MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 531291961497AEBD00E52E45 /* NSManagedObjectContext+MagicalRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		531291B51497AEBD00E52E45 /* NSManagedObjectContext+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 531291971497AEBD00E52E45 /* NSManagedObjectContext+MagicalRecord.m */; };
-		531291B61497AEBD00E52E45 /* NSManagedObjectModel+MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 531291981497AEBD00E52E45 /* NSManagedObjectModel+MagicalRecord.h */; };
+		531291B61497AEBD00E52E45 /* NSManagedObjectModel+MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 531291981497AEBD00E52E45 /* NSManagedObjectModel+MagicalRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		531291B71497AEBD00E52E45 /* NSManagedObjectModel+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 531291991497AEBD00E52E45 /* NSManagedObjectModel+MagicalRecord.m */; };
-		531291B81497AEBD00E52E45 /* NSPersistentStore+MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 5312919A1497AEBD00E52E45 /* NSPersistentStore+MagicalRecord.h */; };
+		531291B81497AEBD00E52E45 /* NSPersistentStore+MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 5312919A1497AEBD00E52E45 /* NSPersistentStore+MagicalRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		531291B91497AEBD00E52E45 /* NSPersistentStore+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 5312919B1497AEBD00E52E45 /* NSPersistentStore+MagicalRecord.m */; };
-		531291BA1497AEBD00E52E45 /* NSPersistentStoreCoordinator+MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 5312919C1497AEBD00E52E45 /* NSPersistentStoreCoordinator+MagicalRecord.h */; };
+		531291BA1497AEBD00E52E45 /* NSPersistentStoreCoordinator+MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 5312919C1497AEBD00E52E45 /* NSPersistentStoreCoordinator+MagicalRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		531291BB1497AEBD00E52E45 /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 5312919D1497AEBD00E52E45 /* NSPersistentStoreCoordinator+MagicalRecord.m */; };
-		531291BC1497AEBD00E52E45 /* CoreData+MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 5312919E1497AEBD00E52E45 /* CoreData+MagicalRecord.h */; };
-		531291BD1497AEBD00E52E45 /* MagicalRecordHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 5312919F1497AEBD00E52E45 /* MagicalRecordHelpers.h */; };
+		531291BC1497AEBD00E52E45 /* CoreData+MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 5312919E1497AEBD00E52E45 /* CoreData+MagicalRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		531291BD1497AEBD00E52E45 /* MagicalRecordHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 5312919F1497AEBD00E52E45 /* MagicalRecordHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		531291BE1497AEBD00E52E45 /* MagicalRecordHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 531291A01497AEBD00E52E45 /* MagicalRecordHelpers.m */; };
-		531291BF1497AEBD00E52E45 /* MagicalRecordShorthand.h in Headers */ = {isa = PBXBuildFile; fileRef = 531291A11497AEBD00E52E45 /* MagicalRecordShorthand.h */; };
-		531291C01497AEBD00E52E45 /* MRCoreDataAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 531291A21497AEBD00E52E45 /* MRCoreDataAction.h */; };
+		531291BF1497AEBD00E52E45 /* MagicalRecordShorthand.h in Headers */ = {isa = PBXBuildFile; fileRef = 531291A11497AEBD00E52E45 /* MagicalRecordShorthand.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		531291C01497AEBD00E52E45 /* MRCoreDataAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 531291A21497AEBD00E52E45 /* MRCoreDataAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		531291C11497AEBD00E52E45 /* MRCoreDataAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 531291A31497AEBD00E52E45 /* MRCoreDataAction.m */; };
 		531291C71497AF1D00E52E45 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531291751497AE9D00E52E45 /* Foundation.framework */; };
 		531291D21497AF8F00E52E45 /* NSAttributeDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 531291871497AEBD00E52E45 /* NSAttributeDescription+MagicalDataImport.m */; };
@@ -347,8 +347,8 @@
 				5312916D1497AE9D00E52E45 /* Frameworks */,
 				5312916E1497AE9D00E52E45 /* Headers */,
 				5312916F1497AE9D00E52E45 /* Resources */,
-				531291701497AE9D00E52E45 /* Framework template end */,
 				5B93A2B7149BA89300925EED /* Fix framework headers */,
+				531291701497AE9D00E52E45 /* Framework template end */,
 			);
 			buildRules = (
 			);
