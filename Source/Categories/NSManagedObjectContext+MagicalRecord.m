@@ -24,10 +24,15 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 
 + (NSManagedObjectContext *)MR_defaultContext
 {
-	@synchronized (self)
-	{
-        return defaultManageObjectContext_;
-	}
+    if (!defaultManageObjectContext_)
+    {
+        @synchronized (self)
+        {
+            if (!defaultManageObjectContext_)
+                [MagicalRecordHelpers setupCoreDataStack];
+        }
+    }
+    return defaultManageObjectContext_;
 }
 
 + (void) MR_setDefaultContext:(NSManagedObjectContext *)moc
