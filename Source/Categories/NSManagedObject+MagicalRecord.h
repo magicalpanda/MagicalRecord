@@ -28,6 +28,8 @@
 
 + (id) MR_createEntity;
 + (id) MR_createInContext:(NSManagedObjectContext *)context;
++ (id) MR_createUnassociatedEntity;
+
 - (BOOL) MR_deleteEntity;
 - (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context;
 

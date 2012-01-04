@@ -30,6 +30,7 @@
 + (NSArray *) propertiesNamed:(NSArray *)properties;
 + (id) createEntity;
 + (id) createInContext:(NSManagedObjectContext *)context;
++ (id) createUnassociatedEntity;
 - (BOOL) deleteEntity;
 - (BOOL) deleteInContext:(NSManagedObjectContext *)context;
 + (BOOL) deleteAllMatchingPredicate:(NSPredicate *)predicate;
