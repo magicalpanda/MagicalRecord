@@ -9,6 +9,7 @@
 //#import "ARCoreDataAction.h"
 #import "CoreData+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
+#import "NSPersistentStoreCoordinator+MagicalRecord.h"
 #import <dispatch/dispatch.h>
 
 dispatch_queue_t background_save_queue(void);
@@ -43,7 +44,9 @@ void cleanup_save_queue()
 
 #ifdef NS_BLOCKS_AVAILABLE
 
-+ (void) saveDataWithBlock:(void (^)(NSManagedObjectContext *localContext))block errorHandler:(void (^)(NSError *))errorHandler
++ (void) saveDataWithBlock:(void (^)(NSManagedObjectContext *))block
+              errorHandler:(void (^)(NSError *))errorHandler
+      savesParentContext:(BOOL)shouldSaveParentContext
 {
     NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
     NSManagedObjectContext *localContext = mainContext;
@@ -68,6 +71,11 @@ void cleanup_save_queue()
     if ([localContext hasChanges]) 
     {
         [localContext MR_saveWithErrorHandler:errorHandler];
+        if (localContext.parentContext != nil && shouldSaveParentContext) {
+            [localContext.parentContext performBlock:^{
+                [localContext.parentContext MR_saveWithErrorHandler:errorHandler];
+            }];
+        }
     }
     
     localContext.MR_notifiesMainContextOnSave = NO;
@@ -75,22 +83,36 @@ void cleanup_save_queue()
     [mainContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
 }
 
++ (void) saveDataWithBlock:(void (^)(NSManagedObjectContext *))block
+      saveParentContext:(BOOL)shouldSaveParentContext
+{
+    [self saveDataWithBlock:block errorHandler:NULL savesParentContext:shouldSaveParentContext];
+}
+
 + (void) saveDataWithBlock:(void(^)(NSManagedObjectContext *localContext))block
 {   
-    [self saveDataWithBlock:block errorHandler:NULL];
+    [self saveDataWithBlock:block errorHandler:NULL savesParentContext:YES];
+}
+
++ (void) saveDataInBackgroundWithBlock:(void (^)(NSManagedObjectContext *))block
+                  saveParentContext:(BOOL)shouldSaveParentContext
+{
+    dispatch_async(background_save_queue(), ^{
+        [self saveDataWithBlock:block saveParentContext:shouldSaveParentContext];
+    });
 }
 
 + (void) saveDataInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block
 {
-    dispatch_async(background_save_queue(), ^{
-        [self saveDataWithBlock:block];
-    });
+    [self saveDataInBackgroundWithBlock:block saveParentContext:YES];
 }
 
-+ (void) saveDataInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))callback
++ (void) saveDataInBackgroundWithBlock:(void (^)(NSManagedObjectContext *))block
+                            completion:(void (^)())callback
+                   saveParentContext:(BOOL)shouldSaveParentContext
 {
     dispatch_async(background_save_queue(), ^{
-        [self saveDataWithBlock:block];
+        [self saveDataWithBlock:block saveParentContext:shouldSaveParentContext];
         
         if (callback) 
         {
@@ -99,10 +121,19 @@ void cleanup_save_queue()
     });
 }
 
-+ (void) saveDataInBackgroundWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))callback errorHandler:(void (^)(NSError *))errorHandler
++ (void) saveDataInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block
+                            completion:(void(^)(void))callback
+{
+    [self saveDataInBackgroundWithBlock:block completion:callback saveParentContext:YES];
+}
+
++ (void) saveDataInBackgroundWithBlock:(void (^)(NSManagedObjectContext *localContext))block
+                            completion:(void (^)(void))callback
+                          errorHandler:(void (^)(NSError *))errorHandler
+                  updatesParentContext:(BOOL)shouldUpdateParentContext
 {
     dispatch_async(background_save_queue(), ^{
-        [self saveDataWithBlock:block errorHandler:errorHandler];
+        [self saveDataWithBlock:block errorHandler:errorHandler savesParentContext:shouldUpdateParentContext];
         
         if (callback)
         {

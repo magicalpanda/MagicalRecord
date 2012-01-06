@@ -27,9 +27,13 @@ typedef enum
 #ifdef NS_BLOCKS_AVAILABLE
 
 + (void) saveDataWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
++ (void) saveDataWithBlock:(void (^)(NSManagedObjectContext *))block saveParentContext:(BOOL)shouldSaveParentContext;
 
 + (void) saveDataInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
++ (void) saveDataInBackgroundWithBlock:(void (^)(NSManagedObjectContext *))block saveParentContext:(BOOL)shouldSaveParentContext;
+
 + (void) saveDataInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))callback;
++ (void) saveDataInBackgroundWithBlock:(void (^)(NSManagedObjectContext *))block completion:(void (^)())callback saveParentContext:(BOOL)shouldSaveParentContext;
 
 + (void) saveDataWithOptions:(MRCoreDataSaveOption)options withBlock:(void(^)(NSManagedObjectContext *localContext))block;
 + (void) saveDataWithOptions:(MRCoreDataSaveOption)options withBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))callback;
