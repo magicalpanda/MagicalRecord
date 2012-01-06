@@ -230,6 +230,12 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 }
 
 #pragma mark - Creation Helpers
+- (NSManagedObjectContext *) MR_createChildContext
+{
+    NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    context.parentContext = self;
+    return context;
+}
 
 + (NSManagedObjectContext *) MR_contextForCurrentThread;
 {

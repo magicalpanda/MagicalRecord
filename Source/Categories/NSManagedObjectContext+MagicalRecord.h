@@ -33,6 +33,10 @@ extern NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification;
 + (void) MR_resetContextForCurrentThread;
 
 + (NSManagedObjectContext *) MR_context;
+
+/* Creates a NSManagedObjectContext that has the target context as a parent */
+- (NSManagedObjectContext *)MR_createChildContext;
+
 + (NSManagedObjectContext *) MR_contextForCurrentThread;
 
 + (NSManagedObjectContext *) MR_contextThatNotifiesDefaultContextOnMainThread;
