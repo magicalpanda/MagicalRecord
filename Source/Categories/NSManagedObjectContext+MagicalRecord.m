@@ -152,36 +152,45 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 #ifdef NS_BLOCKS_AVAILABLE
 - (BOOL) MR_saveWithErrorHandler:(void (^)(NSError *))errorCallback;
 {
-	NSError *error = nil;
-	BOOL saved = NO;
-	
-	@try
-	{
-		MRLog(@"Saving %@Context%@", 
-              self == [[self class] MR_defaultContext] ? @" *** Default *** ": @"",
-              ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
+    __block BOOL outerSaved = NO;
+    [self performBlockAndWait:^{
+        NSError *error = nil;
+        BOOL saved = NO;
         
-		saved = [self save:&error];
-	}
-	@catch (NSException *exception)
-	{
-		MRLog(@"Problem saving: %@", (id)[exception userInfo] ?: (id)[exception reason]);	
-	}
-	@finally 
-    {
-        if (!saved)
+        @try
         {
-            if (errorCallback)
-            {
-                errorCallback(error);
-            }
-            else if (error)
-            {
-                [MagicalRecordHelpers handleErrors:error];
-            }
+            MRLog(@"Saving %@Context%@", 
+                  self == [[self class] MR_defaultContext] ? @" *** Default *** ": @"",
+                  ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
+            
+                saved = [self save:&error];            
+
         }
-    }
-	return saved && error == nil;
+        @catch (NSException *exception)
+        {
+            MRLog(@"Problem saving: %@", (id)[exception userInfo] ?: (id)[exception reason]);	
+        }
+        @finally 
+        {
+            if (saved && [self respondsToSelector:@selector(parentContext)] && [self performSelector:@selector(parentContext)])
+            {
+                saved &= [[self parentContext] MR_saveWithErrorHandler:errorCallback];
+            }
+            if (!saved)
+            {
+                if (errorCallback)
+                {
+                    errorCallback(error);
+                }
+                else if (error)
+                {
+                    [MagicalRecordHelpers handleErrors:error];
+                }
+            }
+            outerSaved = saved;
+        }
+    }];
+	return outerSaved;
 }
 #endif
 
