@@ -75,6 +75,7 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
             MRLog(@"Error: %@", detailedError);
         }
     }
+    MRLog(@"Error Message: %@", [error localizedDescription]);
     MRLog(@"Error Domain: %@", [error domain]);
     MRLog(@"Recovery Suggestion: %@", [error localizedRecoverySuggestion]);
 }
@@ -123,6 +124,13 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
 + (void) setDefaultModelNamed:(NSString *)modelName;
 {
     NSManagedObjectModel *model = [NSManagedObjectModel MR_managedObjectModelNamed:modelName];
+    [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
+}
+
++ (void) setDefaultModelForTestCase:(Class)class;
+{
+    NSBundle *bundle = [NSBundle bundleForClass:class];
+    NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:[NSArray arrayWithObject:bundle]];
     [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
 }
 
