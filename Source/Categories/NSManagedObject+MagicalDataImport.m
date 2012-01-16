@@ -202,18 +202,18 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     NSDictionary *relationships = [[self entity] relationshipsByName];
     [self MR_setRelationships:relationships
         forKeysWithDictionary:objectData 
-                    withBlock:^(NSRelationshipDescription *relationshipInfo, id objectData){
+                    withBlock:^(NSRelationshipDescription *relationshipInfo, id blockObjectData){
 
          NSManagedObject *relatedObject = nil;
          if ([objectData isKindOfClass:[NSDictionary class]]) 
          {
-             relatedObject = [[relationshipInfo destinationEntity] MR_createInstanceFromDictionary:objectData inContext:[self managedObjectContext]];
+             relatedObject = [[relationshipInfo destinationEntity] MR_createInstanceFromDictionary:blockObjectData inContext:[self managedObjectContext]];
          }
          else
          {
-             relatedObject = [self MR_findObjectForRelationship:relationshipInfo withData:objectData];
+             relatedObject = [self MR_findObjectForRelationship:relationshipInfo withData:blockObjectData];
          }
-         [relatedObject MR_importValuesForKeysWithDictionary:objectData];
+         [relatedObject MR_importValuesForKeysWithDictionary:blockObjectData];
 
          [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
     }];
@@ -239,17 +239,17 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     NSDictionary *relationships = [[self entity] relationshipsByName];
     [self MR_setRelationships:relationships
         forKeysWithDictionary:objectData 
-                    withBlock:^(NSRelationshipDescription *relationshipInfo, id objectData) {
+                    withBlock:^(NSRelationshipDescription *relationshipInfo, id blockObjectData) {
                         
          NSManagedObject *relatedObject = [self MR_findObjectForRelationship:relationshipInfo
-                                                                    withData:objectData];
+                                                                    withData:blockObjectData];
          if (relatedObject == nil)
          {
-             relatedObject = [[relationshipInfo destinationEntity] MR_createInstanceFromDictionary:objectData inContext:[self managedObjectContext]];
+             relatedObject = [[relationshipInfo destinationEntity] MR_createInstanceFromDictionary:blockObjectData inContext:[self managedObjectContext]];
          }
          else
          {
-             [relatedObject MR_importValuesForKeysWithDictionary:objectData];
+             [relatedObject MR_importValuesForKeysWithDictionary:blockObjectData];
          }
          
          [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
