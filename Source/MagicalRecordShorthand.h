@@ -7,8 +7,8 @@
 
 
 @interface NSManagedObject (MagicalRecord_DataImportShortHand)
-- (void) importValuesForKeysWithDictionary:(id)objectData;
-- (void) updateValuesForKeysWithDictionary:(id)objectData;
+- (void) importValuesForKeysWithObject:(id)objectData;
+- (void) updateValuesForKeysWithObject:(id)objectData;
 + (id) importFromDictionary:(id)data;
 + (id) importFromDictionary:(id)data inContext:(NSManagedObjectContext *)context;
 + (NSArray *) importFromArray:(NSArray *)listOfObjectData;
