@@ -9,7 +9,7 @@
 #import "CoreData+MagicalRecord.h"
 #import <objc/runtime.h>
 
-void swizzle(Class c, SEL orig, SEL new);
+void MR_swizzle(Class c, SEL orig, SEL new);
 
 NSString * const kMagicalRecordImportCustomDateFormatKey = @"dateFormat";
 NSString * const kMagicalRecordImportDefaultDateFormatString = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
@@ -149,10 +149,14 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 {
     for (NSString *relationshipName in relationships) 
     {
+        if ([self MR_importValue:relationshipData forKey:relationshipName]) 
+        {
+            continue;
+        }
+        
         NSRelationshipDescription *relationshipInfo = [relationships valueForKey:relationshipName];
         
         NSString *lookupKey = [[relationshipInfo userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey] ?: relationshipName;
-        
         id relatedObjectData = [relationshipData valueForKey:lookupKey];
         
         if (relatedObjectData == nil || [relatedObjectData isEqual:[NSNull null]]) 
@@ -160,29 +164,26 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
             continue;
         }
         
-        SEL shouldImportSelector = @selector(shouldImport:);
+        SEL shouldImportSelector = NSSelectorFromString([NSString stringWithFormat:@"shouldImport%@:", [relationshipName MR_capitalizedFirstCharaterString]]);
         BOOL implementsShouldImport = (BOOL)[self respondsToSelector:shouldImportSelector];
-
-        if (![self MR_importValue:relatedObjectData forKey:relationshipName])
+        void (^establishRelationship)(NSRelationshipDescription *, id) = ^(NSRelationshipDescription *blockInfo, id blockData)
         {
-            if ([relationshipInfo isToMany])
+            if (!(implementsShouldImport && !(BOOL)[self performSelector:shouldImportSelector withObject:relatedObjectData]))
             {
-                for (id singleRelatedObjectData in relatedObjectData) 
-                {
-                    if (implementsShouldImport && !(BOOL)[self performSelector:shouldImportSelector withObject:singleRelatedObjectData]) 
-                    {
-                        continue;
-                    }
-                    setRelationshipBlock(relationshipInfo, singleRelatedObjectData);
-                }
+                setRelationshipBlock(blockInfo, blockData);
             }
-            else
+        };
+        
+        if ([relationshipInfo isToMany])
+        {
+            for (id singleRelatedObjectData in relatedObjectData) 
             {
-                if (!(implementsShouldImport && !(BOOL)[self performSelector:shouldImportSelector withObject:relatedObjectData]))
-                {
-                    setRelationshipBlock(relationshipInfo, relatedObjectData);
-                }
+                establishRelationship(relationshipInfo, singleRelatedObjectData);
             }
+        }
+        else
+        {
+            establishRelationship(relationshipInfo, relatedObjectData);
         }
     }
 }
@@ -203,13 +204,13 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     {
         [self performSelector:@selector(willImport:) withObject:objectData];
     }
-    swizzle([objectData class], @selector(valueForUndefinedKey:), @selector(MR_valueForUndefinedKey:));
+    MR_swizzle([objectData class], @selector(valueForUndefinedKey:), @selector(MR_valueForUndefinedKey:));
     return YES;
 }
 
 - (BOOL) MR_postImport:(id)objectData;
 {
-    swizzle([objectData class], @selector(valueForUndefinedKey:), @selector(MR_valueForUndefinedKey:));
+    MR_swizzle([objectData class], @selector(valueForUndefinedKey:), @selector(MR_valueForUndefinedKey:));
     if ([self respondsToSelector:@selector(didImport:)])
     {
         [self performSelector:@selector(didImport:) withObject:objectData];
@@ -370,7 +371,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 @end
 
 
-void swizzle(Class c, SEL orig, SEL new)
+void MR_swizzle(Class c, SEL orig, SEL new)
 {
     Method origMethod = class_getInstanceMethod(c, orig);
     Method newMethod = class_getInstanceMethod(c, new);
