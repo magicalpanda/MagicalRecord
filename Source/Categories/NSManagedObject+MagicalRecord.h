@@ -28,6 +28,10 @@
 
 + (id) MR_createEntity;
 + (id) MR_createInContext:(NSManagedObjectContext *)context;
+
++ (id) MR_findOrCreateByAttribute:(NSString *)attribute withValue:(id)value;
++ (id) MR_findOrCreateByAttribute:(NSString *)attribute withValue:(id)value inContext:(NSManagedObjectContext *)context;
+
 - (BOOL) MR_deleteEntity;
 - (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context;
 

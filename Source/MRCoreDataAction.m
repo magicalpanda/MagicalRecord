@@ -55,7 +55,7 @@ void cleanup_save_queue()
         NSPersistentStoreCoordinator *localCoordinator = [NSPersistentStoreCoordinator coordinatorWithPersitentStore:[NSPersistentStore defaultPersistentStore]];
         localContext = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:localCoordinator];
 #else
-        localContext = [NSManagedObjectContext MR_contextThatNotifiesDefaultContextOnMainThread];
+        localContext = [NSManagedObjectContext MR_contextForCurrentThread];
         [localContext MR_observeiCloudChangesInCoordinator:defaultCoordinator];
 #endif
         

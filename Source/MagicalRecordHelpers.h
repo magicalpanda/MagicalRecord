@@ -23,7 +23,8 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 + (void) cleanUp;
 
 + (void) handleErrors:(NSError *)error;
-- (void) handleErrors:(NSError *)error;
++ (void) handleErrors:(NSError *)error callback:(void(^)(NSError *))callback;
+- (void) handleErrors:(NSError *)error callback:(void(^)(NSError *))callback;
 
 + (void) setErrorHandlerTarget:(id)target action:(SEL)action;
 + (SEL) errorHandlerAction;

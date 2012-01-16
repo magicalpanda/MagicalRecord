@@ -22,6 +22,11 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 
 @implementation NSManagedObject (MagicalRecord_DataImport)
 
+- (NSString *) MR_primaryKeyAttributeName;
+{
+    return [[[self entity] MR_primaryKeyAttribute] name];
+}
+
 - (id) MR_valueForAttribute:(NSAttributeDescription *)attributeInfo fromObjectData:(NSDictionary *)objectData forKeyPath:(NSString *)keyPath
 {
     id value = [objectData valueForKeyPath:keyPath];
@@ -187,7 +192,12 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     swizzle([objectData class], @selector(valueForUndefinedKey:), @selector(MR_valueForUndefinedKey:));
     if ([self respondsToSelector:@selector(willImport)])
     {
-        [self performSelector:@selector(willImport)];
+        BOOL shouldImport = (BOOL)[self performSelector:@selector(shouldImport:) withObject:objectData];
+        if (!shouldImport) 
+        {
+            //            NSLog(@"Not importing: %@", objectData);
+            return NO;
+        }
     }
     
     NSDictionary *attributes = [[self entity] attributesByName];

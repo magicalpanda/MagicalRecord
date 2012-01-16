@@ -51,7 +51,7 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
     return status;
 }
 
-+ (void) defaultErrorHandler:(NSError *)error
++ (void) defaultErrorHandler:(NSError *)error callback:(void(^)(NSError *))errorCallback;
 {
     NSDictionary *userInfo = [error userInfo];
     for (NSArray *detailedError in [userInfo allValues])
@@ -77,9 +77,19 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
     }
     MRLog(@"Error Domain: %@", [error domain]);
     MRLog(@"Recovery Suggestion: %@", [error localizedRecoverySuggestion]);
+    
+    if (errorCallback)
+    {
+        errorCallback(error);
+    }
 }
 
-+ (void) handleErrors:(NSError *)error
++ (void) defaultErrorHandler:(NSError *)error;
+{
+    [self defaultErrorHandler:error callback:NULL];
+}
+
++ (void) handleErrors:(NSError *)error callback:(void(^)(NSError *))callback
 {
 	if (error)
 	{
@@ -90,13 +100,23 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             [errorHandlerTarget performSelector:errorHandlerAction withObject:error];
 #pragma clang diagnostic pop
+            
+            if (callback)
+            {
+                callback(error);
+            }
         }
 		else
 		{
 	        // Otherwise, fall back to the default error handling
-	        [self defaultErrorHandler:error];			
+	        [self defaultErrorHandler:error callback:callback];			
 		}
     }
+}
+
++ (void) handleErrors:(NSError *)error;
+{
+    [self handleErrors:error callback:NULL];
 }
 
 + (id) errorHandlerTarget
@@ -115,9 +135,9 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
     errorHandlerAction = action;
 }
 
-- (void) handleErrors:(NSError *)error
+- (void) handleErrors:(NSError *)error callback:(void (^)(NSError *))callback;
 {
-	[[self class] handleErrors:error];
+	[[self class] handleErrors:error callback:callback];
 }
 
 + (void) setDefaultModelNamed:(NSString *)modelName;

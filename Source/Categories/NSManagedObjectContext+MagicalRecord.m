@@ -152,45 +152,35 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 #ifdef NS_BLOCKS_AVAILABLE
 - (BOOL) MR_saveWithErrorHandler:(void (^)(NSError *))errorCallback;
 {
-    __block BOOL outerSaved = NO;
-    [self performBlockAndWait:^{
-        NSError *error = nil;
-        BOOL saved = NO;
-        
-        @try
-        {
+	__block NSError *error = nil;
+	__block BOOL saved = NO;
+	
+	@try
+	{
+        [self performBlockAndWait:^{
             MRLog(@"Saving %@Context%@", 
                   self == [[self class] MR_defaultContext] ? @" *** Default *** ": @"",
                   ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
-            
-                saved = [self save:&error];            
 
+            saved = [self save:&error];
+        }];
+	}
+	@catch (NSException *exception)
+	{
+		MRLog(@"Problem saving: %@", (id)[exception userInfo] ?: (id)[exception reason]);
+	}
+	@finally 
+    {
+        if (saved && [self respondsToSelector:@selector(parentContext)] && [self performSelector:@selector(parentContext)])
+        {
+            return saved && [[self parentContext] MR_saveWithErrorHandler:errorCallback];
         }
         @catch (NSException *exception)
         {
-            MRLog(@"Problem saving: %@", (id)[exception userInfo] ?: (id)[exception reason]);	
+            [MagicalRecordHelpers handleErrors:error callback:errorCallback];
         }
-        @finally 
-        {
-            if (saved && [self respondsToSelector:@selector(parentContext)] && [self performSelector:@selector(parentContext)])
-            {
-                saved &= [[self parentContext] MR_saveWithErrorHandler:errorCallback];
-            }
-            if (!saved)
-            {
-                if (errorCallback)
-                {
-                    errorCallback(error);
-                }
-                else if (error)
-                {
-                    [MagicalRecordHelpers handleErrors:error];
-                }
-            }
-            outerSaved = saved;
-        }
-    }];
-	return outerSaved;
+        return saved;
+    }
 }
 #endif
 

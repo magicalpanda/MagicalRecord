@@ -25,15 +25,20 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
 {
-	NSError *error = nil;
-	
-	NSArray *results = [context executeFetchRequest:request error:&error];
-    
-    if (results == nil) 
-    {
-        [MagicalRecordHelpers handleErrors:error];
-    }
-	return results;	
+    __block NSArray *results = nil;
+    [context performBlockAndWait:^{
+        
+        NSError *error = nil;
+
+        NSArray *innerResults = [context executeFetchRequest:request error:&error];
+        
+        if (innerResults == nil) 
+        {
+            [MagicalRecordHelpers handleErrors:error];
+        }
+        results = innerResults;
+    }];
+    return results;
 }
 
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request
@@ -189,11 +194,14 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (NSUInteger) MR_countOfEntitiesWithContext:(NSManagedObjectContext *)context;
 {
-	NSError *error = nil;
-	NSUInteger count = [context countForFetchRequest:[self MR_createFetchRequestInContext:context] error:&error];
-	[MagicalRecordHelpers handleErrors:error];
-	
-    return count;
+    __block NSUInteger blockCount = -1;
+    [context performBlockAndWait:^{
+        NSError *error = nil;
+        blockCount = [context countForFetchRequest:[self MR_createFetchRequestInContext:context] error:&error];
+        [MagicalRecordHelpers handleErrors:error];
+    }];
+    
+    return blockCount;
 }
 
 + (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter;
@@ -203,14 +211,17 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter inContext:(NSManagedObjectContext *)context;
 {
-	NSError *error = nil;
 	NSFetchRequest *request = [self MR_createFetchRequestInContext:context];
 	[request setPredicate:searchFilter];
 	
-	NSUInteger count = [context countForFetchRequest:request error:&error];
-	[MagicalRecordHelpers handleErrors:error];
- 
-    return count;
+    __block NSUInteger blockCount = -1;
+    [context performBlockAndWait:^{
+        
+        NSError *error = nil;
+        blockCount = [context countForFetchRequest:request error:&error];
+        [MagicalRecordHelpers handleErrors:error];
+    }]; 
+    return blockCount;
 }
 
 + (BOOL) MR_hasAtLeastOneEntity
@@ -500,6 +511,23 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 #pragma mark -
 
++ (id) MR_findOrCreateByAttribute:(NSString *)attribute withValue:(id)value;
+{
+    return [self MR_findOrCreateByAttribute:attribute withValue:attribute inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+}
+
++ (id) MR_findOrCreateByAttribute:(NSString *)attribute withValue:(id)value inContext:(NSManagedObjectContext *)context;
+{
+    NSAssert([attribute rangeOfString:@"."].location == NSNotFound, @"Cannot autocreate an object using Key Value Coding");
+    NSManagedObject *managedObject = [self findFirstByAttribute:attribute withValue:value inContext:context];
+    if (managedObject == nil)
+    {
+        managedObject = [self createInContext:context];
+        [managedObject setValue:value forKey:attribute];
+    }
+    return managedObject;
+}
+
 + (NSArray *) MR_findAllWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
 {
 	NSFetchRequest *request = [self MR_createFetchRequestInContext:context];
@@ -767,7 +795,10 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 {
     NSError *error = nil;
     NSManagedObject *inContext = [otherContext existingObjectWithID:[self objectID] error:&error];
-    [MagicalRecordHelpers handleErrors:error];
+    if (inContext == nil)
+    {
+        [MagicalRecordHelpers handleErrors:error];
+    }
     
     return inContext;
 }
