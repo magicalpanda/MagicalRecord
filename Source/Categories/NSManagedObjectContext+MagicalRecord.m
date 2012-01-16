@@ -171,11 +171,12 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 	}
 	@finally 
     {
-        if (saved && [self respondsToSelector:@selector(parentContext)] && [self performSelector:@selector(parentContext)])
+        NSManagedObjectContext *parentContext = [self respondsToSelector:@selector(parentContext)] ? [self performSelector:@selector(parentContext)] : nil;
+        if (saved && parentContext != nil)
         {
-            return saved && [[self parentContext] MR_saveWithErrorHandler:errorCallback];
+            return saved && [parentContext MR_saveWithErrorHandler:errorCallback];
         }
-        @catch (NSException *exception)
+        if (!saved)
         {
             [MagicalRecordHelpers handleErrors:error callback:errorCallback];
         }

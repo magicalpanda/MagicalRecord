@@ -28,7 +28,7 @@ NSString * const kMagicalRecordImportPrimaryAttributeKey = @"primaryAttributeKey
     NSManagedObject *relatedObject = [[self class] insertNewObjectForEntityForName:[self name] 
                                                             inManagedObjectContext:context];
     
-    [relatedObject MR_importValuesForKeysWithDictionary:objectData];
+    [relatedObject MR_importValuesForKeysWithObject:objectData];
     
     return relatedObject;
 }

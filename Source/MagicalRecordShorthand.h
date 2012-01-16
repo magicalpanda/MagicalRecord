@@ -13,6 +13,8 @@
 + (id) importFromDictionary:(id)data inContext:(NSManagedObjectContext *)context;
 + (NSArray *) importFromArray:(NSArray *)listOfObjectData;
 + (NSArray *) importFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context;
++ (NSArray *) updateFromArray:(NSArray *)listOfObjectData;
++ (NSArray *) updateFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context;
 + (id) updateFromDictionary:(id)objectData;
 + (id) updateFromDictionary:(id)objectData inContext:(NSManagedObjectContext *)context;
 @end
