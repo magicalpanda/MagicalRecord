@@ -142,6 +142,7 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 	}
 	else
 	{
+    //    [self performSelectorOnMainThread:@selector(MR_mergeChangesFromNotification:) withObject:notification waitUntilDone:YES];
     [self runOnMainQueueWithoutDeadlocking:^{
       [self MR_mergeChangesFromNotification:notification];
     }];
@@ -222,6 +223,7 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 {
 	@synchronized(self)
 	{
+    //    [self performSelectorOnMainThread:@selector(MR_saveWrapper) withObject:nil waitUntilDone:YES];
     [self runOnMainQueueWithoutDeadlocking:^{
       [self MR_saveWrapper];
     }];    
