@@ -3,6 +3,16 @@
 
 #import "_SingleRelatedEntity.h"
 
+const struct SingleRelatedEntityAttributes SingleRelatedEntityAttributes = {
+};
+
+const struct SingleRelatedEntityRelationships SingleRelatedEntityRelationships = {
+	.testRelationship = @"testRelationship",
+};
+
+const struct SingleRelatedEntityFetchedProperties SingleRelatedEntityFetchedProperties = {
+};
+
 @implementation SingleRelatedEntityID
 @end
 

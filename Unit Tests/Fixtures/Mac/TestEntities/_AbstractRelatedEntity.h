@@ -4,6 +4,17 @@
 #import <CoreData/CoreData.h>
 
 
+extern const struct AbstractRelatedEntityAttributes {
+	 NSString *sampleBaseAttribute;
+} AbstractRelatedEntityAttributes;
+
+extern const struct AbstractRelatedEntityRelationships {
+	 NSString *mainTestEntity;
+} AbstractRelatedEntityRelationships;
+
+extern const struct AbstractRelatedEntityFetchedProperties {
+} AbstractRelatedEntityFetchedProperties;
+
 @class SingleRelatedEntity;
 
 

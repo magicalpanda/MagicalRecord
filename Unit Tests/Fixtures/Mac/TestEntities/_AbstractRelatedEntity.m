@@ -3,6 +3,17 @@
 
 #import "_AbstractRelatedEntity.h"
 
+const struct AbstractRelatedEntityAttributes AbstractRelatedEntityAttributes = {
+	.sampleBaseAttribute = @"sampleBaseAttribute",
+};
+
+const struct AbstractRelatedEntityRelationships AbstractRelatedEntityRelationships = {
+	.mainTestEntity = @"mainTestEntity",
+};
+
+const struct AbstractRelatedEntityFetchedProperties AbstractRelatedEntityFetchedProperties = {
+};
+
 @implementation AbstractRelatedEntityID
 @end
 
