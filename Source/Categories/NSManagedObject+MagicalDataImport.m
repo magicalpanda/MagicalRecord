@@ -20,6 +20,10 @@ NSString * const kMagicalRecordImportRelationshipMapKey = @"mappedKeyName";
 NSString * const kMagicalRecordImportRelationshipPrimaryKey = @"primaryRelationshipKey";
 NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+
 @implementation NSManagedObject (MagicalRecord_DataImport)
 
 - (NSString *) MR_primaryKeyAttributeName;
@@ -130,10 +134,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     
     @try 
     {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [relationshipSource performSelector:selector withObject:relatedObject];        
-#pragma clang diagnostic pop
     }
     @catch (NSException *exception) 
     {
@@ -363,6 +364,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 
 @end
 
+#pragma clang diagnostic pop
 
 void MR_swizzle(Class c, SEL orig, SEL new)
 {
