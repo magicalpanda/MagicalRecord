@@ -140,6 +140,13 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
 	[[self class] handleErrors:error callback:callback];
 }
 
++ (void) setDefaultModelFromClass:(Class)class;
+{
+    NSBundle *bundle = [NSBundle bundleForClass:class];
+    NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:[NSArray arrayWithObject:bundle]];
+    [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
+}
+
 + (void) setDefaultModelNamed:(NSString *)modelName;
 {
     NSManagedObjectModel *model = [NSManagedObjectModel MR_managedObjectModelNamed:modelName];

@@ -232,14 +232,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
                     withBlock:^(NSRelationshipDescription *relationshipInfo, id objectData){
 
          NSManagedObject *relatedObject = nil;
-         if ([objectData isKindOfClass:[NSDictionary class]]) 
-         {
-             relatedObject = [[relationshipInfo destinationEntity] MR_createInstanceFromDictionary:objectData inContext:[self managedObjectContext]];
-         }
-         else
-         {
-             relatedObject = [self MR_findObjectForRelationship:relationshipInfo withData:objectData];
-         }
+         relatedObject = [[relationshipInfo destinationEntity] MR_createInstanceFromObject:objectData inContext:[self managedObjectContext]];
          [relatedObject MR_importValuesForKeysWithObject:objectData];
 
          [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
@@ -265,7 +258,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
                                                                     withData:objectData];
          if (relatedObject == nil)
          {
-             relatedObject = [[relationshipInfo destinationEntity] MR_createInstanceFromDictionary:objectData inContext:[self managedObjectContext]];
+             relatedObject = [[relationshipInfo destinationEntity] MR_createInstanceFromObject:objectData inContext:[self managedObjectContext]];
          }
          else
          {
@@ -278,19 +271,19 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     return [self MR_postImport:objectData];
 }
 
-+ (id) MR_importFromDictionary:(id)objectData inContext:(NSManagedObjectContext *)context;
++ (id) MR_importFromObject:(id)objectData inContext:(NSManagedObjectContext *)context;
 {
     NSManagedObject *managedObject = [self MR_createInContext:context];
     [managedObject MR_importValuesForKeysWithObject:objectData];
     return managedObject;
 }
 
-+ (id) MR_importFromDictionary:(id)objectData
++ (id) MR_importFromObject:(id)objectData
 {
-    return [self MR_importFromDictionary:objectData inContext:[NSManagedObjectContext MR_defaultContext]];
+    return [self MR_importFromObject:objectData inContext:[NSManagedObjectContext MR_defaultContext]];
 }
 
-+ (id) MR_updateFromDictionary:(id)objectData inContext:(NSManagedObjectContext *)context
++ (id) MR_updateFromObject:(id)objectData inContext:(NSManagedObjectContext *)context
 {
     NSAttributeDescription *primaryAttribute = [[self MR_entityDescription] MR_primaryKeyAttribute];
     
@@ -309,9 +302,9 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     return managedObject;
 }
 
-+ (id) MR_updateFromDictionary:(id)objectData
++ (id) MR_updateFromObject:(id)objectData
 {
-    return [self MR_updateFromDictionary:objectData inContext:[NSManagedObjectContext MR_defaultContext]];
+    return [self MR_updateFromObject:objectData inContext:[NSManagedObjectContext MR_defaultContext]];
 }
 
 + (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData
@@ -328,7 +321,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
           {
               NSDictionary *objectData = (NSDictionary *)obj;
               
-              NSManagedObject *dataObject = [self MR_importFromDictionary:objectData inContext:localContext];
+              NSManagedObject *dataObject = [self MR_importFromObject:objectData inContext:localContext];
               
               if ([context obtainPermanentIDsForObjects:[NSArray arrayWithObject:dataObject] error:nil])
               {
@@ -356,7 +349,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
              
              NSDictionary *objectData = (NSDictionary *)obj;
              
-             NSManagedObject *dataObject = [self MR_updateFromDictionary:objectData inContext:localContext];
+             NSManagedObject *dataObject = [self MR_updateFromObject:objectData inContext:localContext];
              
              if ([context obtainPermanentIDsForObjects:[NSArray arrayWithObject:dataObject] error:nil])
              {
