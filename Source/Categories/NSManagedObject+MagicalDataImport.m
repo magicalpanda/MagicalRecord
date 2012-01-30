@@ -72,7 +72,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     return NO;
 }
 
-- (void) MR_setAttributes:(NSDictionary *)attributes forKeysWithDictionary:(NSDictionary *)objectData
+- (void) MR_setAttributes:(NSDictionary *)attributes forKeysWithDictionary:(id)objectData
 {    
     for (NSString *attributeName in attributes) 
     {
