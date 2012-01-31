@@ -518,10 +518,10 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 + (id) MR_findOrCreateByAttribute:(NSString *)attribute withValue:(id)value inContext:(NSManagedObjectContext *)context;
 {
     NSAssert([attribute rangeOfString:@"."].location == NSNotFound, @"Cannot autocreate an object using Key Value Coding");
-    NSManagedObject *managedObject = [self findFirstByAttribute:attribute withValue:value inContext:context];
+    NSManagedObject *managedObject = [self MR_findFirstByAttribute:attribute withValue:value inContext:context];
     if (managedObject == nil)
     {
-        managedObject = [self createInContext:context];
+        managedObject = [self MR_createInContext:context];
         [managedObject setValue:value forKey:attribute];
     }
     return managedObject;
