@@ -36,6 +36,8 @@ typedef enum
 
 + (void) lookupWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
 
++ (dispatch_queue_t) backgroundSaveQueue;
+
 #endif
 
 @end

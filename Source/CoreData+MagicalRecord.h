@@ -32,17 +32,39 @@
 #define kCFCoreFoundationVersionNumber_iPhoneOS_5_0 674.0
 #endif
 
+#ifndef kCFCoreFoundationVersionNumber10_7
+#define kCFCoreFoundationVersionNumber10_7 600
+#endif
+
+
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+
 #define PRIVATE_QUEUES_ENABLED(...) \
     if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iPhoneOS_5_0) \
     { \
         __VA_ARGS__ \
     }
-
 #define THREAD_ISOLATION_ENABLED(...) \
     if (kCFCoreFoundationVersionNumber < kCFCoreFoundationVersionNumber_iPhoneOS_5_0) \
     { \
         __VA_ARGS__ \
     }
+
+#else
+
+#define PRIVATE_QUEUES_ENABLED(...) \
+    if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber10_7) \
+    { \
+    __VA_ARGS__ \
+    }
+#define THREAD_ISOLATION_ENABLED(...) \
+    if (kCFCoreFoundationVersionNumber < kCFCoreFoundationVersionNumber10_7) \
+    { \
+    __VA_ARGS__ \
+    }
+
+#endif
+
 
 #if MR_USE_ARC
 #define MR_RETAIN(xx)

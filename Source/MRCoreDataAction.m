@@ -136,6 +136,11 @@ void cleanup_save_queue()
     
 }
 
++ (dispatch_queue_t) backgroundSaveQueue
+{
+    return background_save_queue();
+}
+
 #endif
 
 @end
