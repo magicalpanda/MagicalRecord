@@ -170,19 +170,25 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
             {
                 for (id singleRelatedObjectData in relatedObjectData) 
                 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
                     if (implementsShouldImport && ![[self performSelector:shouldImportSelector withObject:singleRelatedObjectData] boolValue]) 
                     {
                         continue;
                     }
+#pragma clang diagnostic pop
                     setRelationshipBlock(relationshipInfo, singleRelatedObjectData);
                 }
             }
             else
             {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
                 if (!(implementsShouldImport && !(BOOL)[self performSelector:shouldImportSelector withObject:relatedObjectData]))
                 {
                     setRelationshipBlock(relationshipInfo, relatedObjectData);
                 }
+#pragma clang diagnostic pop	
             }
         }
     }
