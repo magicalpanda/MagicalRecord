@@ -7,6 +7,7 @@
 //
 
 #import "NSObject+MagicalDataImport.h"
+#import "CoreData+MagicalRecord.h"
 
 int const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
 
