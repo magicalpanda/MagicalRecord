@@ -32,38 +32,27 @@
 #define kCFCoreFoundationVersionNumber_iPhoneOS_5_0 674.0
 #endif
 
-#ifndef kCFCoreFoundationVersionNumber10_7
-#define kCFCoreFoundationVersionNumber10_7 600
+#ifndef kCFCoreFoundationVersionNumber_10_7
+#define kCFCoreFoundationVersionNumber_10_7 635.0
 #endif
 
-
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
-
-#define PRIVATE_QUEUES_ENABLED(...) \
-    if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iPhoneOS_5_0) \
-    { \
-        __VA_ARGS__ \
-    }
-#define THREAD_ISOLATION_ENABLED(...) \
-    if (kCFCoreFoundationVersionNumber < kCFCoreFoundationVersionNumber_iPhoneOS_5_0) \
-    { \
-        __VA_ARGS__ \
-    }
-
+#if TARGET_OS_IPHONE == 0
+#define MR_MINIMUM_PRIVATE_QUEUE_CF_VERSION kCFCoreFoundationVersionNumber_10_7
 #else
+#define MR_MINIMUM_PRIVATE_QUEUE_CF_VERSION kCFCoreFoundationVersionNumber_iPhoneOS_5_0
+#endif
 
 #define PRIVATE_QUEUES_ENABLED(...) \
-    if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber10_7) \
+    if (kCFCoreFoundationVersionNumber >= MR_MINIMUM_PRIVATE_QUEUE_CF_VERSION) \
     { \
-    __VA_ARGS__ \
-    }
-#define THREAD_ISOLATION_ENABLED(...) \
-    if (kCFCoreFoundationVersionNumber < kCFCoreFoundationVersionNumber10_7) \
-    { \
-    __VA_ARGS__ \
+        __VA_ARGS__ \
     }
 
-#endif
+#define THREAD_ISOLATION_ENABLED(...) \
+    if (kCFCoreFoundationVersionNumber < MR_MINIMUM_PRIVATE_QUEUE_CF_VERSION) \
+    { \
+        __VA_ARGS__ \
+    }
 
 
 #if MR_USE_ARC
