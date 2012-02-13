@@ -48,8 +48,8 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 + (void) setupCoreDataStackWithInMemoryStore;
 + (void) setupAutoMigratingCoreDataStack;
 
-+ (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName;
-+ (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName;
++ (void) setupCoreDataStackWithStoreNamed:(id)storeName;
++ (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(id)storeName;
 
 #pragma mark - iCloud Support
 
