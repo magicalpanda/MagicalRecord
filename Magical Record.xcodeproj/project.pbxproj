@@ -129,6 +129,11 @@
 		C7E736DF1402FE64005657C9 /* SingleEntityWithNoRelationships.json in Resources */ = {isa = PBXBuildFile; fileRef = C7E736DE1402FE64005657C9 /* SingleEntityWithNoRelationships.json */; };
 		C7F5EEB2148DC76700964607 /* NSObject+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F5EEB1148DC76700964607 /* NSObject+MagicalDataImport.m */; };
 		C7F5EEB3148DC76700964607 /* NSObject+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F5EEB1148DC76700964607 /* NSObject+MagicalDataImport.m */; };
+		FD73E53F14AC462F00922CA4 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C84313D0C6460097AB6F /* OCMock.framework */; };
+		FD73E54214AC484100922CA4 /* MappedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = FD73E54114AC484100922CA4 /* MappedEntity.m */; };
+		FD73E54514AC485300922CA4 /* _MappedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = FD73E54414AC485300922CA4 /* _MappedEntity.m */; };
+		FD73E54614AC4AC700922CA4 /* MagicalDataImportTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C7913B9C13FAFC13007E09CC /* MagicalDataImportTestCase.m */; };
+		FD73E54914AC4D9A00922CA4 /* OCMock.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FD73E54814AC4D9A00922CA4 /* OCMock.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -174,6 +179,16 @@
 			dstSubfolderSpec = 0;
 			files = (
 				C7E37A7C14157BFE00CE9BF5 /* libOCMock.a in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FD73E54714AC4D5200922CA4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FD73E54914AC4D9A00922CA4 /* OCMock.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +365,11 @@
 		C7E736DE1402FE64005657C9 /* SingleEntityWithNoRelationships.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityWithNoRelationships.json; path = "Unit Tests/Fixtures/SingleEntityWithNoRelationships.json"; sourceTree = "<group>"; };
 		C7F5EEB0148DC76700964607 /* NSObject+MagicalDataImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+MagicalDataImport.h"; path = "DataImport/NSObject+MagicalDataImport.h"; sourceTree = "<group>"; };
 		C7F5EEB1148DC76700964607 /* NSObject+MagicalDataImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+MagicalDataImport.m"; path = "DataImport/NSObject+MagicalDataImport.m"; sourceTree = "<group>"; };
+		FD73E54014AC484100922CA4 /* MappedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MappedEntity.h; sourceTree = "<group>"; };
+		FD73E54114AC484100922CA4 /* MappedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MappedEntity.m; sourceTree = "<group>"; };
+		FD73E54314AC485300922CA4 /* _MappedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MappedEntity.h; sourceTree = "<group>"; };
+		FD73E54414AC485300922CA4 /* _MappedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MappedEntity.m; sourceTree = "<group>"; };
+		FD73E54814AC4D9A00922CA4 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = "Mac App Unit Tests/Frameworks/OCMock.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -361,6 +381,7 @@
 				C721C82413D0C45E0097AB6F /* Foundation.framework in Frameworks */,
 				C76AF7F213DBC12500CE2E05 /* OCHamcrest.framework in Frameworks */,
 				C721C84E13D0C6460097AB6F /* GHUnit.framework in Frameworks */,
+				FD73E53F14AC462F00922CA4 /* OCMock.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +426,7 @@
 		C721C7A013D0A3750097AB6F = {
 			isa = PBXGroup;
 			children = (
+				FD73E54814AC4D9A00922CA4 /* OCMock.framework */,
 				C75C7D69147220D300D0C2FE /* generateShorthandFile.rb */,
 				C721C85513D0C7030097AB6F /* Source */,
 				C77E5FA513D0CBA600298F87 /* Unit Tests */,
@@ -718,6 +740,10 @@
 		C7BD885113DBF88F00274567 /* TestEntities */ = {
 			isa = PBXGroup;
 			children = (
+				FD73E54314AC485300922CA4 /* _MappedEntity.h */,
+				FD73E54414AC485300922CA4 /* _MappedEntity.m */,
+				FD73E54014AC484100922CA4 /* MappedEntity.h */,
+				FD73E54114AC484100922CA4 /* MappedEntity.m */,
 				C7BD885213DBF88F00274567 /* _AbstractRelatedEntity.h */,
 				C7BD885313DBF88F00274567 /* _AbstractRelatedEntity.m */,
 				C7BD885413DBF88F00274567 /* _ConcreteRelatedEntity.h */,
@@ -796,6 +822,7 @@
 				C721C7DA13D0C3A00097AB6F /* Resources */,
 				C753897513DB6310002B2F57 /* Copy GHUnit into App Bundle */,
 				C76AF7F313DBC33100CE2E05 /* Copy OCHamcrest into App Bundle */,
+				FD73E54714AC4D5200922CA4 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -902,7 +929,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"Unit Tests/Fixtures/Mac\" && mogenerator -m TestModel.xcdatamodeld/TestModel.xcdatamodel -O TestEntities";
+			shellScript = "cd \"Unit Tests/Fixtures/Mac\" && /usr/local/bin/mogenerator -m TestModel.xcdatamodeld/TestModel.xcdatamodel -O TestEntities";
 		};
 		C7B8733A1472CFA20046776C /* Generate Shorthand Headers */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -946,6 +973,7 @@
 				C721C87213D0C7030097AB6F /* NSPersistentStore+MagicalRecord.m in Sources */,
 				C721C87413D0C7030097AB6F /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
 				C76AF7F713DBD63E00CE2E05 /* NSManagedObject+MagicalDataImport.m in Sources */,
+				FD73E54614AC4AC700922CA4 /* MagicalDataImportTestCase.m in Sources */,
 				C721C87613D0C7030097AB6F /* MagicalRecordHelpers.m in Sources */,
 				C753897413DB61CE002B2F57 /* GHUnitTestMain.m in Sources */,
 				C76AF7E513DBC08F00CE2E05 /* FixtureHelpers.m in Sources */,
@@ -974,6 +1002,8 @@
 				C7005F2214153A060061B9F4 /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				C7F5EEB2148DC76700964607 /* NSObject+MagicalDataImport.m in Sources */,
 				C758AFD51493C6DC0051E570 /* NSString+MagicalDataImport.m in Sources */,
+				FD73E54214AC484100922CA4 /* MappedEntity.m in Sources */,
+				FD73E54514AC485300922CA4 /* _MappedEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
