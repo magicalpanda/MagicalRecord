@@ -127,9 +127,9 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
     [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
 }
 
-+ (void) setDefaultModelForTestCase:(Class)class;
++ (void) setDefaultModelForTestCase:(Class)aClass;
 {
-    NSBundle *bundle = [NSBundle bundleForClass:class];
+    NSBundle *bundle = [NSBundle bundleForClass:aClass];
     NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:[NSArray arrayWithObject:bundle]];
     [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
 }
