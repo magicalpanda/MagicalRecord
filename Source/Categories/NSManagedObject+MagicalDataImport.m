@@ -260,7 +260,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
          }
          else
          {
-             [relatedObject MR_importValuesForKeysWithDictionary:objectData];
+             [relatedObject MR_updateValuesForKeysWithDictionary:objectData];
          }
          
          [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
