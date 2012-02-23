@@ -165,18 +165,31 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
         BOOL implementsShouldImport = [self respondsToSelector:shouldImportSelector];
 
         if (![self MR_importValue:relatedObjectData forKey:relationshipName])
-        {
+		{
             if ([relationshipInfo isToMany])
-            {
-                for (id singleRelatedObjectData in relatedObjectData) 
-                {
-                    if (implementsShouldImport && ![[self performSelector:shouldImportSelector withObject:singleRelatedObjectData] boolValue]) 
-                    {
-                        continue;
-                    }
-                    setRelationshipBlock(relationshipInfo, singleRelatedObjectData);
-                }
-            }
+			{
+				// If this is a dictionary, then just set the single object into the collection
+				if ([relatedObjectData isKindOfClass:[NSDictionary class]]) 
+				{
+					if (implementsShouldImport && ![[self performSelector:shouldImportSelector withObject:relatedObjectData] boolValue]) 
+					{
+						continue;
+					}
+					setRelationshipBlock(relationshipInfo, relatedObjectData);
+				} 
+				// this is a collection object so loop through the elements
+				else 
+				{
+					for (id singleRelatedObjectData in relatedObjectData) 
+					{
+						if (implementsShouldImport && ![[self performSelector:shouldImportSelector withObject:singleRelatedObjectData] boolValue]) 
+						{
+							continue;
+						}
+						setRelationshipBlock(relationshipInfo, singleRelatedObjectData);
+					}
+				}
+			}
             else
             {
                 if (!(implementsShouldImport && !(BOOL)[self performSelector:shouldImportSelector withObject:relatedObjectData]))
