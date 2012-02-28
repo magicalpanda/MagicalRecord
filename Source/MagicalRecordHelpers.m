@@ -197,7 +197,8 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
 
 + (void) setupCoreDataStackWithiCloudContainer:(NSString *)icloudBucket localStoreNamed:(NSString *)localStore;
 {
-    [self setupCoreDataStackWithiCloudContainer:icloudBucket contentNameKey:nil localStoreNamed:localStore cloudStorePathComponent:nil];
+    NSString *contentNameKey = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
+    [self setupCoreDataStackWithiCloudContainer:icloudBucket contentNameKey:contentNameKey localStoreNamed:localStore cloudStorePathComponent:nil];
 }
 
 + (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent;
