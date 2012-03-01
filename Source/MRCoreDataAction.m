@@ -64,10 +64,11 @@ void cleanup_save_queue()
     
     block(localContext);
     
-    if ([localContext hasChanges]) 
-    {
+    // https://github.com/magicalpanda/MagicalRecord/issues/147
+//    if ([localContext hasChanges]) 
+//    {
         [localContext MR_saveWithErrorHandler:errorHandler];
-    }
+//    }
     
     localContext.MR_notifiesMainContextOnSave = NO;
     [localContext MR_stopObservingiCloudChangesInCoordinator:defaultCoordinator];
