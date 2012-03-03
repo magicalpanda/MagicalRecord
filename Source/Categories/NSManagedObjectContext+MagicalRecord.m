@@ -179,7 +179,13 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
     {
         if (saved && [self respondsToSelector:@selector(parentContext)] && [self performSelector:@selector(parentContext)])
         {
-            [[self parentContext] MR_saveWithErrorHandler:errorCallback];
+            if ([[self parentContext] isEqual:[[self class] MR_defaultContext]]) {
+                [[self parentContext] performSelectorOnMainThread:@selector(MR_saveWithErrorHandler:)
+                                                       withObject:errorCallback
+                                                    waitUntilDone:YES];
+            } else {
+                [[self parentContext] MR_saveWithErrorHandler:errorCallback];
+            }
         }
         if (!saved)
         {
