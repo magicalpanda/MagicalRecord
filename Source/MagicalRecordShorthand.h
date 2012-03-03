@@ -30,6 +30,7 @@
 + (NSArray *) propertiesNamed:(NSArray *)properties;
 + (id) createEntity;
 + (id) createInContext:(NSManagedObjectContext *)context;
++ (id) createUnassociatedEntity;
 - (BOOL) deleteEntity;
 - (BOOL) deleteInContext:(NSManagedObjectContext *)context;
 + (BOOL) deleteAllMatchingPredicate:(NSPredicate *)predicate;
@@ -118,6 +119,7 @@
 + (NSManagedObjectContext *)defaultContext;
 + (void) setDefaultContext:(NSManagedObjectContext *)moc;
 + (void) resetContextForCurrentThread;
++ (void) setContextForCurrentThread:(NSManagedObjectContext *)context;
 + (NSManagedObjectContext *) context;
 + (NSManagedObjectContext *) contextForCurrentThread;
 + (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThread;
@@ -145,13 +147,13 @@
 + (void) setDefaultStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 + (NSPersistentStoreCoordinator *) coordinatorWithInMemoryStore;
 + (NSPersistentStoreCoordinator *) newPersistentStoreCoordinator NS_RETURNS_RETAINED;
-+ (NSPersistentStoreCoordinator *) coordinatorWithSqliteStoreNamed:(NSString *)storeFileName;
-+ (NSPersistentStoreCoordinator *) coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *)storeFileName;
++ (NSPersistentStoreCoordinator *) coordinatorWithSqliteStoreNamed:(id)storeFileName;
++ (NSPersistentStoreCoordinator *) coordinatorWithAutoMigratingSqliteStoreNamed:(id)storeFileName;
 + (NSPersistentStoreCoordinator *) coordinatorWithPersitentStore:(NSPersistentStore *)persistentStore;
 + (NSPersistentStoreCoordinator *) coordinatorWithiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent;
 + (NSPersistentStoreCoordinator *) coordinatorWithiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent completion:(void(^)(void))completionHandler;
 - (NSPersistentStore *) addInMemoryStore;
-- (NSPersistentStore *) addAutoMigratingSqliteStoreNamed:(NSString *) storeFileName;
+- (NSPersistentStore *) addAutoMigratingSqliteStoreNamed:(id) storeFileName;
 - (NSPersistentStore *) addSqliteStoreNamed:(id)storeFileName withOptions:(__autoreleasing NSDictionary *)options;
 - (void) addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent;
 - (void) addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent completion:(void(^)(void))completionBlock;

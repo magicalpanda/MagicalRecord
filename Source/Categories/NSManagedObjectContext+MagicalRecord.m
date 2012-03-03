@@ -24,10 +24,15 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 
 + (NSManagedObjectContext *)MR_defaultContext
 {
-	@synchronized (self)
-	{
-        return defaultManageObjectContext_;
-	}
+    if (!defaultManageObjectContext_)
+    {
+        @synchronized (self)
+        {
+            if (!defaultManageObjectContext_)
+                [MagicalRecordHelpers setupCoreDataStack];
+        }
+    }
+    return defaultManageObjectContext_;
 }
 
 + (void) MR_setDefaultContext:(NSManagedObjectContext *)moc
@@ -174,7 +179,13 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
     {
         if (saved && [self respondsToSelector:@selector(parentContext)] && [self performSelector:@selector(parentContext)])
         {
-            [[self parentContext] MR_saveWithErrorHandler:errorCallback];
+            if ([[self parentContext] isEqual:[[self class] MR_defaultContext]]) {
+                [[self parentContext] performSelectorOnMainThread:@selector(MR_saveWithErrorHandler:)
+                                                       withObject:errorCallback
+                                                    waitUntilDone:YES];
+            } else {
+                [[self parentContext] MR_saveWithErrorHandler:errorCallback];
+            }
         }
         if (!saved)
         {
@@ -279,6 +290,19 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 			[threadDict setObject:threadContext forKey:kMagicalRecordManagedObjectContextKey];
 		}
 		return threadContext;
+	}
+}
+
++ (void) MR_setContextForCurrentThread:(NSManagedObjectContext *)context;
+{
+    if ([NSThread isMainThread])
+	{
+		[self MR_setDefaultContext:context];
+	}
+	else
+	{
+		NSMutableDictionary *threadDict = [[NSThread currentThread] threadDictionary];
+        [threadDict setObject:context forKey:kMagicalRecordManagedObjectContextKey];
 	}
 }
 

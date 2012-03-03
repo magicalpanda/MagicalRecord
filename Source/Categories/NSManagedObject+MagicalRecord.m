@@ -660,6 +660,13 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	return newEntity;
 }
 
++ (id) MR_createUnassociatedEntity
+{
+    NSManagedObject *newEntity = [[self alloc] initWithEntity:[self MR_entityDescription] insertIntoManagedObjectContext:nil];
+    
+    return newEntity;
+}
+
 - (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context
 {
 	[context deleteObject:self];

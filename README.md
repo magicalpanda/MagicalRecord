@@ -31,7 +31,7 @@ To get started, first, import the header file *CoreData+MagicalRecord.h* in your
 Next, somewhere in your app delegate, in either the applicationDidFinishLaunching:(UIApplication *) withOptions:(NSDictionary *) method, or awakeFromNib, use **one** of the following setup calls with the MagicalRecordHelpers class:
 
 	+ (void) setupCoreDataStack;
-	+ (void) setupAutoMigratingDefaultCoreDataStack;
+	+ (void) setupAutoMigratingCoreDataStack;
 	+ (void) setupCoreDataStackWithInMemoryStore;
 	+ (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName;
 	+ (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName;
@@ -62,8 +62,6 @@ When using Core Data, you will deal with two types of objects the most: *NSManag
 
     [NSManagedObjectContext MR_defaultContext];
 
-This context will be used if a find or request method (described below) is not specifying a specific context using the **inContext:** method overload.
-
 If you need to create a new Managed Object Context for use in other threads, based on the default persistent store that was creating using one of the setup methods, use:
 
 	NSManagedObjectContext *myNewContext = [NSManagedObjectContext context];
@@ -77,6 +75,8 @@ And, if you want to make *myNewContext* the default for all fetch requests on th
 Magical Record also has a helper method to hold on to a Managed Object Context in a thread's threadDictionary. This lets you access the correct NSManagedObjectContext instance no matter which thread you're calling from. This methods is:
 
 	[NSManagedObjectContext MR_contextForCurrentThread];
+	
+The context for the current thread will be used if a find or request method (described below) is not specifying a specific context using the **inContext:** method overload.
 
 **It is *highly* recommended that the default context is created and set using the main thread**
 
