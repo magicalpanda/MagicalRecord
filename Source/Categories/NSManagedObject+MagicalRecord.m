@@ -292,10 +292,18 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 + (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
 {
 	NSFetchRequest *request = [self MR_requestAllInContext:context];
-	
-	NSSortDescriptor *sortBy = [[NSSortDescriptor alloc] initWithKey:sortTerm ascending:ascending];
-	[request setSortDescriptors:[NSArray arrayWithObject:sortBy]];
-    MR_AUTORELEASE(sortBy);
+    
+    NSMutableArray* sortDescriptors = [[NSMutableArray alloc] init];
+    NSArray* sortKeys = [sortTerm componentsSeparatedByString:@","];
+    for (NSString* sortKey in sortKeys) 
+    {
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
+        [sortDescriptors addObject:sortDescriptor];
+        MR_AUTORELEASE(sortDescriptor);
+    }
+    
+	[request setSortDescriptors:sortDescriptors];
+    MR_AUTORELEASE(sortDescriptors);
 	
 	return request;
 }
@@ -311,7 +319,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 {
 	NSFetchRequest *request = [self MR_requestAllInContext:context];
 	[request setPredicate:searchTerm];
-	[request setFetchBatchSize:[self MR_defaultBatchSize]];
+//	[request setFetchBatchSize:[self MR_defaultBatchSize]];
 	
     NSMutableArray* sortDescriptors = [[NSMutableArray alloc] init];
     NSArray* sortKeys = [sortTerm componentsSeparatedByString:@","];
