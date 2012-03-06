@@ -30,6 +30,8 @@
 //! @cond DEV
 
 #import "GHTestGroup.h"
+#import "GHTestSuite.h"
+#import "GHTestRunner.h"
 
 @class GHTestNode;
 

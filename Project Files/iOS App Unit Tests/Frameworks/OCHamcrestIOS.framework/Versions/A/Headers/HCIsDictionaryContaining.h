@@ -1,6 +1,6 @@
 //
 //  OCHamcrest - HCIsDictionaryContaining.h
-//  Copyright 2011 hamcrest.org. See LICENSE.txt
+//  Copyright 2012 hamcrest.org. See LICENSE.txt
 //
 //  Created by: Jon Reid
 //
@@ -8,12 +8,6 @@
 #import <OCHamcrestIOS/HCBaseMatcher.h>
 
 
-/**
-    Matches dictionaries containing a key-value pair satisfying a given pair of matchers.
-
-    @b Factory: @ref hasEntry
-    @ingroup collection_matchers
- */
 @interface HCIsDictionaryContaining : HCBaseMatcher
 {
     id<HCMatcher> keyMatcher;
@@ -29,27 +23,28 @@
 @end
 
 
-#pragma mark -
-
-/**
-    Matches dictionaries containing a key-value pair satisfying a given pair of matchers.
- 
-    @b Synonym: @ref hasEntry
-    @param keyMatcher    A matcher - or a value for @ref equalTo matching - for the key.
-    @param valueMatcher  A matcher - or a value for @ref equalTo matching - for the value.
-    @see HCIsDictionaryContaining
-    @ingroup collection_matchers
- */
-OBJC_EXPORT id<HCMatcher> HC_hasEntry(id keyMatcher, id valueMatcher);
+OBJC_EXPORT id<HCMatcher> HC_hasEntry(id keyMatch, id valueMatch);
 
 /**
     hasEntry(keyMatcher, valueMatcher) -
-    Matches dictionaries containing a key-value pair satisfying a given pair of matchers.
+    Matches if dictionary contains key-value entry satisfying a given pair of matchers.
+    
+    @param keyMatcher    The matcher to satisfy for the key, or an expected value for @ref equalTo matching.
+    @param valueMatcher  The matcher to satisfy for the value, or an expected value for @ref equalTo matching.
+    
+    This matcher iterates the evaluated dictionary, searching for any key-value entry that satisfies
+    @a keyMatcher and @a valueMatcher. If a matching entry is found, @c hasEntry is satisfied.
+    
+    Any argument that is not a matcher is implicitly wrapped in an @ref equalTo matcher to check for
+    equality.
+    
+    Examples:
+    @li @ref hasEntry(@ref equalTo(@"foo"), equalTo(@"bar"))
+    @li @ref hasEntry(@"foo", @"bar")
 
-    Synonym for @ref HC_hasEntry, available if @c HC_SHORTHAND is defined.
-    @param keyMatcher    A matcher - or a value for @ref equalTo matching - for the key.
-    @param valueMatcher  A matcher - or a value for @ref equalTo matching - for the value.
-    @see HCIsDictionaryContaining
+    (In the event of a name clash, don't \#define @c HC_SHORTHAND and use the synonym
+    @c HC_hasEntry instead.)
+
     @ingroup collection_matchers
  */
 #ifdef HC_SHORTHAND

@@ -35,7 +35,7 @@
 
 /*!
  Return test results in JUnit XML format for external parsing use
- (such as a Continuous Integration system like Hudson)
+ (such as a Continuous Integration system like Jenkins).
  */
 - (NSString *)JUnitXML;
 

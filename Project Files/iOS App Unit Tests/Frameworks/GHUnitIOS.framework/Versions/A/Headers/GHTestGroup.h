@@ -32,31 +32,42 @@
 #import "GHTestCase.h"
 
 /*!
- @brief Interface for a group of tests.
+ Interface for a group of tests.
 
  This group conforms to the GHTest protocol as well (see Composite pattern).
  */
 @protocol GHTestGroup <GHTest>
+
+/*!
+ Name.
+ */
 - (NSString *)name;
+
+/*!
+ Parent for test group.
+ */
 - (id<GHTestGroup>)parent;
+
+/*!
+ Children for test group.
+ */
 - (NSArray *)children;
+
 @end
 
 /*!
- @brief A collection of tests (or test groups).
+ A collection of tests (or test groups).
 
- A test group is a collection of id<GHTest>, that may represent a set of test case methods. 
+ A test group is a collection of `id<GHTest>`, that may represent a set of test case methods. 
  
  For example, if you had the following GHTestCase.
 
- @code
- @interface FooTest : GHTestCase {}
- - (void)testFoo;
- - (void)testBar;
- @end
- @endcode
+     @interface FooTest : GHTestCase {}
+     - (void)testFoo;
+     - (void)testBar;
+     @end
  
- The GHTestGroup would consist of and array of GHTest, [FooTest#testFoo and FooTest#testBar], 
+ The GHTestGroup would consist of and array of GHTest: FooTest#testFoo, FooTest#testBar, 
  each test being a target and selector pair.
 
  A test group may also consist of a group of groups (since GHTestGroup conforms to GHTest),
@@ -108,9 +119,9 @@
 
 /*!
  Create test group from a single test.
- @param testCase
+ @param testCase Test case, could be a subclass of SenTestCase or GHTestCase
  @param selector Test to run 
- @param delegate
+ @param delegate Delegate, notifies of test start and end
  */
 - (id)initWithTestCase:(id)testCase selector:(SEL)selector delegate:(id<GHTestDelegate>)delegate;
 

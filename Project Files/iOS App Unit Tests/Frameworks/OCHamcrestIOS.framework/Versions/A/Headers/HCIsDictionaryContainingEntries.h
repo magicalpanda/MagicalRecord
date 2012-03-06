@@ -1,6 +1,6 @@
 //
 //  OCHamcrest - HCIsDictionaryContainingEntries.h
-//  Copyright 2011 hamcrest.org. See LICENSE.txt
+//  Copyright 2012 hamcrest.org. See LICENSE.txt
 //
 //  Created by: Jon Reid
 //
@@ -8,13 +8,6 @@
 #import <OCHamcrestIOS/HCBaseMatcher.h>
 
 
-/**
-    Matches dictionaries containing key-value pairs satisfying given lists of keys and value
-    matchers.
- 
-    @b Factory: @ref hasEntries
-    @ingroup collection_matchers
- */
 @interface HCIsDictionaryContainingEntries : HCBaseMatcher
 {
     NSArray *keys;
@@ -30,27 +23,27 @@
 @end
 
 
-#pragma mark -
+OBJC_EXPORT id<HCMatcher> HC_hasEntries(id keysAndValueMatch, ...) NS_REQUIRES_NIL_TERMINATION;
 
 /**
-    Matches dictionaries containing key-value pairs satisfying a given lists of alternating keys and
-    value matchers.
- 
-    @b Synonym: @ref hasEntries
-    @param keysAndValueMatchers  Alternating pairs of keys and value matchers - or straight values for @ref equalTo matching.
-    @see HCIsDictionaryContainingEntries
-    @ingroup collection_matchers
- */
-OBJC_EXPORT id<HCMatcher> HC_hasEntries(id keysAndValueMatchers, ...);
+    hasEntries(firstKey, valueMatcher, ...) -
+    Matches if dictionary contains entries satisfying a list of alternating keys and their value
+    matchers.
+    
+    @param firstKey  A key (not a matcher) to look up.
+    @param valueMatcher,...  The matcher to satisfy for the value, or an expected value for @ref equalTo matching.
+    
+    Note that the keys must be actual keys, not matchers. Any value argument that is not a matcher
+    is implicitly wrapped in an @ref equalTo matcher to check for equality. The list must end with
+    @c nil.
 
-/**
-    HC_hasEntries(id keysAndValueMatchers, ...) -
-    Matches dictionaries containing key-value pairs satisfying a given lists of alternating keys and
-    value matchers.
+    Examples:
+    @li @ref hasEntries(@"first", equalTo(@"Jon"), @"last", equalTo(@"Reid"), nil)
+    @li @ref hasEntries(@"first", @"Jon", @"last", @"Reid", nil)
+    
+    (In the event of a name clash, don't \#define @c HC_SHORTHAND and use the synonym
+    @c HC_hasEntry instead.)
 
-    Synonym for @ref HC_hasEntries, available if @c HC_SHORTHAND is defined.
-    @param keysAndValueMatchers  Alternating pairs of keys and value matchers - or straight values for @ref equalTo matching.
-    @see HCIsDictionaryContainingEntries
     @ingroup collection_matchers
  */
 #ifdef HC_SHORTHAND

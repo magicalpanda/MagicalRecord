@@ -1,6 +1,6 @@
 //
 //  OCHamcrest - HCIsDictionaryContainingValue.h
-//  Copyright 2011 hamcrest.org. See LICENSE.txt
+//  Copyright 2012 hamcrest.org. See LICENSE.txt
 //
 //  Created by: Jon Reid
 //
@@ -8,12 +8,6 @@
 #import <OCHamcrest/HCBaseMatcher.h>
 
 
-/**
-    Matches dictionaries containing a value satisfying a given matcher.
-
-    @b Factory: @ref hasValue
-    @ingroup collection_matchers
- */
 @interface HCIsDictionaryContainingValue : HCBaseMatcher
 {
     id<HCMatcher> valueMatcher;
@@ -25,25 +19,27 @@
 @end
 
 
-#pragma mark -
+OBJC_EXPORT id<HCMatcher> HC_hasValue(id valueMatch);
 
 /**
-    Matches dictionaries containing a value satisfying a given matcher.
- 
-    @b Synonym: @ref hasValue
-    @param matcherOrValue  A matcher, or a value for @ref equalTo matching.
-    @see HCIsDictionaryContainingValue
-    @ingroup collection_matchers
- */
-OBJC_EXPORT id<HCMatcher> HC_hasValue(id matcherOrValue);
+    hasValue(valueMatcher) -
+    Matches if dictionary contains an entry whose value satisfies a given matcher.
+    
+    @param valueMatcher  The matcher to satisfy for the value, or an expected value for @ref equalTo matching.
+    
+    This matcher iterates the evaluated dictionary, searching for any key-value entry whose value
+    satisfies the given matcher. If a matching entry is found, @c hasValue is satisfied.
+    
+    Any argument that is not a matcher is implicitly wrapped in an @ref equalTo matcher to check for
+    equality.
+    
+    Examples:
+    @li @ref hasValue(equalTo(@"bar"))
+    @li @ref hasValue(@"bar")
+    
+    (In the event of a name clash, don't \#define @c HC_SHORTHAND and use the synonym
+    @c HC_hasValue instead.)
 
-/**
-    hasValue(matcherOrValue) -
-    Matches dictionaries containing a value satisfying a given matcher.
-
-    Synonym for @ref HC_hasValue, available if @c HC_SHORTHAND is defined.
-    @param matcherOrValue  A matcher, or a value for @ref equalTo matching.
-    @see HCIsDictionaryContainingValue
     @ingroup collection_matchers
  */
 #ifdef HC_SHORTHAND

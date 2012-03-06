@@ -1,6 +1,6 @@
 //
 //  OCHamcrest - HCAllOf.h
-//  Copyright 2011 hamcrest.org. See LICENSE.txt
+//  Copyright 2012 hamcrest.org. See LICENSE.txt
 //
 //  Created by: Jon Reid
 //
@@ -8,15 +8,6 @@
 #import <OCHamcrestIOS/HCBaseMatcher.h>
 
 
-/**
-    Calculates the logical conjunction of multiple matchers.
-
-    Evaluation is shortcut, so subsequent matchers are not called if an earlier matcher returns
-    @c NO.
-
-    @b Factory: @ref allOf
-    @ingroup core_matchers
- */
 @interface HCAllOf : HCBaseMatcher
 {
     NSArray *matchers;
@@ -28,26 +19,24 @@
 @end
 
 
-#pragma mark -
+OBJC_EXPORT id<HCMatcher> HC_allOf(id match, ...) NS_REQUIRES_NIL_TERMINATION;
 
 /**
-    Evaluates to @c YES only if @em all of the given matchers evaluate to @c YES.
- 
-    @b Synonym: @ref allOf
-    @param matcherOrValue1  Comma-separated list of matchers - or values for @ref equalTo matching - ending with @c nil.
-    @see HCAllOf
-    @ingroup core_matchers
- */
-OBJC_EXPORT id<HCMatcher> HC_allOf(id matcherOrValue1, ...);
-
-/**
-    allOf(matcherOrValue1, ...) -
-    Evaluates to @c YES only if @em all of the given matchers evaluate to @c YES.
-
-    Synonym for @ref HC_allOf, available if @c HC_SHORTHAND is defined.
-    @param matcherOrValue1  Comma-separated list of matchers - or values for @ref equalTo matching - ending with @c nil.
-    @see HCAllOf
-    @ingroup core_matchers
+    allOf(firstMatcher, ...) -
+    Matches if all of the given matchers evaluate to @c YES.
+    
+    @param firstMatcher,...  A comma-separated list of matchers ending with @c nil.
+    
+    The matchers are evaluated from left to right using short-circuit evaluation, so evaluation
+    stops as soon as a matcher returns @c NO.
+    
+    Any argument that is not a matcher is implicitly wrapped in an @ref equalTo matcher to check for
+    equality.
+    
+    (In the event of a name clash, don't \#define @c HC_SHORTHAND and use the synonym
+    @c HC_allOf instead.)
+    
+    @ingroup logical_matchers
  */
 #ifdef HC_SHORTHAND
     #define allOf HC_allOf

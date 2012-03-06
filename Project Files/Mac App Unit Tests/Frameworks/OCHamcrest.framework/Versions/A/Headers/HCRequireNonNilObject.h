@@ -1,6 +1,6 @@
 //
 //  OCHamcrest - HCRequireNonNilObject.h
-//  Copyright 2011 hamcrest.org. See LICENSE.txt
+//  Copyright 2012 hamcrest.org. See LICENSE.txt
 //
 //  Created by: Jon Reid
 //
@@ -11,6 +11,7 @@
 
 /**
     Throws an NSException if @a obj is @c nil.
+    
     @ingroup helpers
 */
 OBJC_EXPORT void HCRequireNonNilObject(id obj);

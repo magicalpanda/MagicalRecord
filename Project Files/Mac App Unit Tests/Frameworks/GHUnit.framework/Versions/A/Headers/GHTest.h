@@ -29,6 +29,9 @@
 
 //! @cond DEV
 
+#import <Foundation/Foundation.h>
+
+
 /*!
  Test status.
  */

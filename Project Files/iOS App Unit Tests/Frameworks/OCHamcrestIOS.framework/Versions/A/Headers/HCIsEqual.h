@@ -1,6 +1,6 @@
 //
 //  OCHamcrest - HCIsEqual.h
-//  Copyright 2011 hamcrest.org. See LICENSE.txt
+//  Copyright 2012 hamcrest.org. See LICENSE.txt
 //
 //  Created by: Jon Reid
 //
@@ -8,14 +8,6 @@
 #import <OCHamcrestIOS/HCBaseMatcher.h>
 
 
-/**
-    Is the object equal to another object, as tested by the @c -isEqual: method?
- 
-    If the given object is @c nil, the matcher will match @c nil.
- 
-    @b Factory: @ref equalTo
-    @ingroup core_matchers
- */
 @interface HCIsEqual : HCBaseMatcher
 {
     id object;
@@ -27,28 +19,23 @@
 @end
 
 
-#pragma mark -
-
-/**
-    Is the object equal to another object, as tested by the @c -isEqual: method?
- 
-    If the given object is @c nil, the matcher will match @c nil.
- 
-    @b Synonym: @ref equalTo
-    @see HCIsEqual
-    @ingroup core_matchers
- */
 OBJC_EXPORT id<HCMatcher> HC_equalTo(id object);
 
 /**
-    equalTo(object) -
-    Is the object equal to another object, as tested by the @c -isEqual: method?
+    equalTo(anObject) -
+    Matches if object is equal to a given object.
+    
+    @param anObject  The object to compare against as the expected value.
+    
+    This matcher compares the evaluated object to @a anObject for equality, as determined by the
+    @c -isEqual: method.
+    
+    If @a anObject is @c nil, the matcher will successfully match @c nil.
 
-    If the given object is @c nil, the matcher will match @c nil.
+    (In the event of a name clash, don't \#define @c HC_SHORTHAND and use the synonym
+    @c HC_equalTo instead.)
 
-    Synonym for @ref HC_equalTo, available if @c HC_SHORTHAND is defined.
-    @see HCIsEqual
-    @ingroup core_matchers
+    @ingroup object_matchers
  */
 #ifdef HC_SHORTHAND
     #define equalTo HC_equalTo

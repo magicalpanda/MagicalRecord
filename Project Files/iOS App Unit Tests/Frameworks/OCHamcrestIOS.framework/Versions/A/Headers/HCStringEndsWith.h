@@ -1,6 +1,6 @@
 //
 //  OCHamcrest - HCStringEndsWith.h
-//  Copyright 2011 hamcrest.org. See LICENSE.txt
+//  Copyright 2012 hamcrest.org. See LICENSE.txt
 //
 //  Created by: Jon Reid
 //
@@ -8,12 +8,6 @@
 #import <OCHamcrestIOS/HCSubstringMatcher.h>
 
 
-/**
-    Tests if the argument is a string that ends with a substring.
-
-    @b Factory: @ref endsWith
-    @ingroup text_matchers
- */
 @interface HCStringEndsWith : HCSubstringMatcher
 
 + (id)stringEndsWith:(NSString *)aSubstring;
@@ -21,23 +15,27 @@
 @end
 
 
-#pragma mark -
-
-/**
-    Tests if the argument is a string that ends with a substring.
-    
-    @b Synonym: @ref endsWith
-    @see HCStringEndsWith
-    @ingroup text_matchers
- */
 OBJC_EXPORT id<HCMatcher> HC_endsWith(NSString *aSubstring);
 
 /**
-    endsWith(substring) -
-    Tests if the argument is a string that ends with a substring.
+    endsWith(aString) -
+    Matches if object is a string ending with a given string.
 
-    Synonym for @ref HC_endsWith, available if @c HC_SHORTHAND is defined.
-    @see HCStringEndsWith
+    @param aString  The string to search for. This value must not be @c nil.
+    
+    This matcher first checks whether the evaluated object is a string. If so, it checks if
+    @a aString matches the ending characters of the evaluated object.
+    
+    Example:
+    
+    @par
+    @ref endsWith(@"bar")
+    
+    will match "foobar".
+
+    (In the event of a name clash, don't \#define @c HC_SHORTHAND and use the synonym
+    @c HC_endsWith instead.)
+
     @ingroup text_matchers
  */
 #ifdef HC_SHORTHAND

@@ -7,7 +7,6 @@
 //
 
 #import "MagicalRecordHelperTests.h"
-#import "OCMockObject.h"
 
 
 @protocol MagicalRecordErrorHandlerProtocol <NSObject>

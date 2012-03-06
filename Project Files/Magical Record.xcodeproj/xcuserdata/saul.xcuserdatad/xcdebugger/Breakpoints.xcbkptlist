@@ -9,13 +9,13 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Unit Tests/MagicalRecordHelperTests.m"
-         timestampString = "345230806.637405"
+         timestampString = "352752273.007371"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "79"
-         endingLineNumber = "79"
-         landmarkName = "-testCanSetAUserSpecifiedErrorHandler"
-         landmarkType = "5">
+         startingLineNumber = "78"
+         endingLineNumber = "78"
+         landmarkName = "@implementation MagicalRecordHelperTests"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -23,11 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Unit Tests/MagicalRecordHelperTests.m"
-         timestampString = "345230806.637405"
+         timestampString = "352752273.007371"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "35"
-         endingLineNumber = "35"
+         startingLineNumber = "34"
+         endingLineNumber = "34"
          landmarkName = "-assertDefaultStack"
          landmarkType = "5">
       </FileBreakpoint>

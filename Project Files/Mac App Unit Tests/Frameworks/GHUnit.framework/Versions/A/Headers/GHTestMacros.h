@@ -82,6 +82,8 @@
  @brief Assert macros for testing.
  */
 
+#import <Foundation/Foundation.h>
+
 #import "NSException+GHTestFailureExceptions.h"
 #import "NSValue+GHValueFormatter.h"
 

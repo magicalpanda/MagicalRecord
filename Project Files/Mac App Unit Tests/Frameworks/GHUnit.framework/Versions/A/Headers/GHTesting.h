@@ -48,6 +48,9 @@
 //  the License.
 //
 
+#import <Foundation/Foundation.h>
+#import "GHUnit.h"
+
 #ifdef __cplusplus
 extern "C" NSString *GHUStackTraceFromException(NSException *e);
 #else

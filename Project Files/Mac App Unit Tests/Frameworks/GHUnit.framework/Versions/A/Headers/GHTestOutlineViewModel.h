@@ -6,9 +6,11 @@
 //  Copyright 2009. All rights reserved.
 //
 
+#import <Cocoa/Cocoa.h>
 #import "GHTestViewModel.h"
 @class GHTestOutlineViewModel;
 
+#define MIN_WINDOW_WIDTH (635.0)
 
 @protocol GHTestOutlineViewModelDelegate <NSObject>
 - (void)testOutlineViewModelDidChangeSelection:(GHTestOutlineViewModel *)testOutlineViewModel;

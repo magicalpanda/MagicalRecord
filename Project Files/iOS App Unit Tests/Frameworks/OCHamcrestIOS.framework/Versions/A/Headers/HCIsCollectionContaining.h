@@ -1,6 +1,6 @@
 //
 //  OCHamcrest - HCIsCollectionContaining.h
-//  Copyright 2011 hamcrest.org. See LICENSE.txt
+//  Copyright 2012 hamcrest.org. See LICENSE.txt
 //
 //  Created by: Jon Reid
 //
@@ -8,12 +8,6 @@
 #import <OCHamcrestIOS/HCBaseMatcher.h>
 
 
-/**
-    Matches a collection if any element satisfies a given matcher.
-
-    @b Factory: @ref hasItem, @ref hasItems
-    @ingroup collection_matchers
- */
 @interface HCIsCollectionContaining : HCBaseMatcher
 {
     id<HCMatcher> elementMatcher;
@@ -25,25 +19,23 @@
 @end
 
 
-#pragma mark -
+OBJC_EXPORT id<HCMatcher> HC_hasItem(id itemMatch);
 
 /**
-    Matches a collection if any element satifies a given matcher.
- 
-    @b Synonym: @ref hasItem
-    @param matcherOrValue  A matcher, or a value for @ref equalTo matching.
-    @see HCIsCollectionContaining
-    @ingroup collection_matchers
- */
-OBJC_EXPORT id<HCMatcher> HC_hasItem(id matcherOrValue);
+    hasItem(aMatcher) -
+    Matches if any element of collection satisfies a given matcher.
+    
+    @param aMatcher  The matcher to satisfy, or an expected value for @ref equalTo matching.
+    
+    This matcher iterates the evaluated collection, searching for any element that satisfies a
+    given matcher. If a matching element is found, @c hasItem is satisfied.
+    
+    If the @a aMatcher argument is not a matcher, it is implicitly wrapped in an @ref equalTo
+    matcher to check for equality.
+    
+    (In the event of a name clash, don't \#define @c HC_SHORTHAND and use the synonym
+    @c HC_hasItem instead.)
 
-/**
-    hasItem(matcherOrValue) -
-    Matches a collection if any element satifies a given matcher.
-
-    Synonym for @ref HC_hasItem, available if @c HC_SHORTHAND is defined.
-    @param matcherOrValue  A matcher, or a value for @ref equalTo matching.
-    @see HCIsCollectionContaining
     @ingroup collection_matchers
  */
 #ifdef HC_SHORTHAND
@@ -51,23 +43,23 @@ OBJC_EXPORT id<HCMatcher> HC_hasItem(id matcherOrValue);
 #endif
 
 
-/**
-    Matches a collection if all matchers are satisfied by any of the collection's elements.
- 
-    @b Synonym: @ref hasItems
-    @param matcherOrValue1  Comma-separated list of matchers - or values for @ref equalTo matching - ending with @c nil.
-    @see HCIsCollectionContaining
-    @ingroup collection_matchers
- */
-OBJC_EXPORT id<HCMatcher> HC_hasItems(id matcherOrValue1, ...);
+OBJC_EXPORT id<HCMatcher> HC_hasItems(id itemMatch, ...) NS_REQUIRES_NIL_TERMINATION;
 
 /**
-    hasItems(matcherOrValue1, ...) -
-    Matches a collection if all matchers are satisfied by any of the collection's elements.
+    hasItems(firstMatcher, ...) -
+    Matches if all of the given matchers are satisfied by any elements of the collection.
+    
+    @param firstMatcher,...  A comma-separated list of matchers ending with @c nil.
+    
+    This matcher iterates the given matchers, searching for any elements in the evaluated collection
+    that satisfy them. If each matcher is satisfied, then @c hasItems is satisfied.
+    
+    Any argument that is not a matcher is implicitly wrapped in an @ref equalTo matcher to check for
+    equality.
+    
+    (In the event of a name clash, don't \#define @c HC_SHORTHAND and use the synonym
+    @c hasItems instead.)
 
-    Synonym for @ref HC_hasItems, available if @c HC_SHORTHAND is defined.
-    @param matcherOrValue1  Comma-separated list of matchers - or values for @ref equalTo matching - ending with @c nil.
-    @see HCIsCollectionContaining
     @ingroup collection_matchers
  */
 #ifdef HC_SHORTHAND

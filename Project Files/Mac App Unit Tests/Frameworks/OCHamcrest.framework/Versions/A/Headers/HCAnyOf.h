@@ -1,6 +1,6 @@
 //
 //  OCHamcrest - HCAnyOf.h
-//  Copyright 2011 hamcrest.org. See LICENSE.txt
+//  Copyright 2012 hamcrest.org. See LICENSE.txt
 //
 //  Created by: Jon Reid
 //
@@ -8,15 +8,6 @@
 #import <OCHamcrest/HCBaseMatcher.h>
 
 
-/**
-    Calculates the logical disjunction of multiple matchers.
-
-    Evaluation is shortcut, so the subsequent matchers are not called if an earlier matcher returns
-    @c YES.
-
-    @b Factory: @ref anyOf
-    @ingroup core_matchers
- */
 @interface HCAnyOf : HCBaseMatcher
 {
     NSArray *matchers;
@@ -28,26 +19,24 @@
 @end
 
 
-#pragma mark -
+OBJC_EXPORT id<HCMatcher> HC_anyOf(id match, ...) NS_REQUIRES_NIL_TERMINATION;
 
 /**
-    Evaluates to @c YES if @em any of the given matchers evaluate to @c YES.
- 
-    @b Synonym: @ref anyOf
-    @param matcherOrValue1  Comma-separated list of matchers - or values for @ref equalTo matching - ending with @c nil.
-    @see HCAnyOf
-    @ingroup core_matchers
- */
-OBJC_EXPORT id<HCMatcher> HC_anyOf(id matcherOrValue1, ...);
+    anyOf(firstMatcher, ...) -
+    Matches if any of the given matchers evaluate to @c YES.
+    
+    @param firstMatcher,...  A comma-separated list of matchers ending with @c nil.
+    
+    The matchers are evaluated from left to right using short-circuit evaluation, so evaluation
+    stops as soon as a matcher returns @c YES.
+    
+    Any argument that is not a matcher is implicitly wrapped in an @ref equalTo matcher to check for
+    equality.
+    
+    (In the event of a name clash, don't \#define @c HC_SHORTHAND and use the synonym
+    @c HC_anyOf instead.)
 
-/**
-    anyOf(matcherOrValue1, ...) -
-    Evaluates to @c YES if @em any of the given matchers evaluate to @c YES.
- 
-    Synonym for @ref HC_anyOf, available if @c HC_SHORTHAND is defined.
-    @param matcherOrValue1  Comma-separated list of matchers - or values for @ref equalTo matching - ending with @c nil.
-    @see HCAnyOf
-    @ingroup core_matchers
+    @ingroup logical_matchers
  */
 #ifdef HC_SHORTHAND
     #define anyOf HC_anyOf

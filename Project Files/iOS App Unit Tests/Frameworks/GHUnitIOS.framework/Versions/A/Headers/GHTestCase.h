@@ -50,53 +50,50 @@
 #import "GHTest.h"
 
 /*!
- Log to your test case logger.
- For example,
- @code
- GHTestLog(@"Some debug info, %@", obj);
- @endcode
+ Log to your test case logger. For example,
+
+    GHTestLog(@"Some debug info, %@", obj);
+
  */
 #define GHTestLog(...) [self log:[NSString stringWithFormat:__VA_ARGS__, nil]]
 
 /*!
  The base class for a test case. 
  
- @code
- @interface MyTest : GHTestCase {}
- @end
- 
- @implementation MyTest
- 
- // Run before each test method
- - (void)setUp { }
+     @interface MyTest : GHTestCase {}
+     @end
+     
+     @implementation MyTest
+     
+     // Run before each test method
+     - (void)setUp { }
 
- // Run after each test method
- - (void)tearDown { }
+     // Run after each test method
+     - (void)tearDown { }
 
- // Run before the tests are run for this class
- - (void)setUpClass { }
+     // Run before the tests are run for this class
+     - (void)setUpClass { }
 
- // Run before the tests are run for this class
- - (void)tearDownClass { }
- 
- // Tests are prefixed by 'test' and contain no arguments and no return value
- - (void)testA { 
-   GHTestLog(@"Log with a test with the GHTestLog(...) for test specific logging.");
- }
+     // Run before the tests are run for this class
+     - (void)tearDownClass { }
+     
+     // Tests are prefixed by 'test' and contain no arguments and no return value
+     - (void)testA { 
+       GHTestLog(@"Log with a test with the GHTestLog(...) for test specific logging.");
+     }
 
- // Another test; Tests are run in lexical order
- - (void)testB { }
- 
- // Override any exceptions; By default exceptions are raised, causing a test failure
- - (void)failWithException:(NSException *)exception { }
- 
- @end
- @endcode
+     // Another test; Tests are run in lexical order
+     - (void)testB { }
+     
+     // Override any exceptions; By default exceptions are raised, causing a test failure
+     - (void)failWithException:(NSException *)exception { }
+     
+     @end
 
  */
 @interface GHTestCase : NSObject {
   id<GHTestCaseLogWriter> logWriter_; // weak
-  
+
   SEL currentSelector_;
 }
 
@@ -113,33 +110,42 @@
 
 /*! 
  By default exceptions are raised, causing a test failure
- @brief Override any exceptions
+
  @param exception Exception that was raised by test
  */
 - (void)failWithException:(NSException*)exception;
 // GTM_END
 
-//! Run before the tests (once per test case)
+/*! 
+ Run before the tests (once per test case).
+ */
 - (void)setUpClass;
 
-//! Run after the tests (once per test case)
+/*! 
+ Run after the tests (once per test case).
+ */
 - (void)tearDownClass;
 
 /*!
  Whether to run the tests on a separate thread. Override this method in your
  test case to override the default.
  Default is NO, tests are run on a separate thread by default.
- @result If YES runs on the main thread
+
+ @result If YES, the test will run on the main thread
  */
 - (BOOL)shouldRunOnMainThread;
 
-//! Any special handling of exceptions after they are thrown; By default logs stack trace to standard out.
+/*! 
+ Any special handling of exceptions after they are thrown; By default logs stack trace to standard out.
+ @param exception Exception
+ */
 - (void)handleException:(NSException *)exception;
 
 /*!
  Log a message, which notifies the log delegate.
  This is not meant to be used directly, see GHTestLog(...) macro.
- @param message
+
+ @param message Message to log
  */
 - (void)log:(NSString *)message;
 

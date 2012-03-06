@@ -1,6 +1,6 @@
 //
 //  OCHamcrest - HCIsCloseTo.h
-//  Copyright 2011 hamcrest.org. See LICENSE.txt
+//  Copyright 2012 hamcrest.org. See LICENSE.txt
 //
 //  Created by: Jon Reid
 //
@@ -8,12 +8,6 @@
 #import <OCHamcrestIOS/HCBaseMatcher.h>
 
 
-/**
-    Is the argument a number close to a value, within some delta?
-
-    @b Factory: @ref closeTo
-    @ingroup number_matchers
- */
 @interface HCIsCloseTo : HCBaseMatcher
 {
     double value;
@@ -26,23 +20,24 @@
 @end
 
 
-#pragma mark -
-
-/**
-    Is the argument a number close to a value, within some delta?
- 
-    @b Synonym: @ref closeTo
-    @see HCIsCloseTo
-    @ingroup number_matchers
-*/
 OBJC_EXPORT id<HCMatcher> HC_closeTo(double aValue, double aDelta);
 
 /**
-    closeTo(value, delta) -
-    Is the argument a number close to a value, within some delta?
+    closeTo(aValue, aDelta) -
+    Matches if object is a number close to a given value, within a given delta.
+    
+    @param aValue   The @c double value to compare against as the expected value.
+    @param aDelta   The @c double maximum delta between the values for which the numbers are considered close.
+    
+    This matcher invokes @c -doubleValue on the evaluated object to get its value as a @c double.
+    The result is compared against @a aValue to see if the difference is within a positive @a aDelta.
+    
+    Example:
+    @li @ref closeTo(3.0, 0.25)
 
-    Synonym for @ref HC_closeTo, available if @c HC_SHORTHAND is defined.
-    @see HCIsCloseTo
+    (In the event of a name clash, don't \#define @c HC_SHORTHAND and use the synonym
+    @c HC_closeTo instead.)
+
     @ingroup number_matchers
  */
 #ifdef HC_SHORTHAND

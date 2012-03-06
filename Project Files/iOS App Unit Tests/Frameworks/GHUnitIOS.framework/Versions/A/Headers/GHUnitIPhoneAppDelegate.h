@@ -1,9 +1,8 @@
 //
 //  GHUnitIPhoneAppDelegate.h
-//  GHUnitIPhone
+//  GHUnitIOS
 //
-//  Created by Gabriel Handford on 1/25/09.
-//  Copyright 2009. All rights reserved.
+//  Created by Gabriel Handford on 6/28/11.
 //
 //  Permission is hereby granted, free of charge, to any person
 //  obtaining a copy of this software and associated documentation
@@ -27,13 +26,11 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
+#import "GHUnitIOSAppDelegate.h"
 
-@interface GHUnitIPhoneAppDelegate : NSObject <UIApplicationDelegate> {
-  UIWindow *window_;
-  
-  UINavigationController *navigationController_;  
+// For backwards compatibility (see GHUnitIOSAppDelegate)
+@interface GHUnitIPhoneAppDelegate : GHUnitIOSAppDelegate {
+    
 }
 
 @end
-

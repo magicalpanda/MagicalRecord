@@ -1,6 +1,6 @@
 //
 //  OCHamcrest - HCIsIn.h
-//  Copyright 2011 hamcrest.org. See LICENSE.txt
+//  Copyright 2012 hamcrest.org. See LICENSE.txt
 //
 //  Created by: Jon Reid
 //
@@ -8,12 +8,6 @@
 #import <OCHamcrest/HCBaseMatcher.h>
 
 
-/**
-    Is the object present in the given collection?
-
-    @b Factory: @ref isIn
-    @ingroup collection_matchers
- */
 @interface HCIsIn : HCBaseMatcher
 {
     id collection;
@@ -25,25 +19,22 @@
 @end
 
 
-#pragma mark -
-
-/**
-    Is the object present in the given collection?
- 
-    @b Synonym: @ref isIn
-    @see HCIsIn
-    @ingroup collection_matchers
- */
 OBJC_EXPORT id<HCMatcher> HC_isIn(id aCollection);
 
 /**
-    isIn(collection) -
-    Is the object present in the given collection?
+    isIn(aCollection) -
+    Matches if evaluated object is present in a given collection.
 
-    Synonym for @ref HC_isIn, available if @c HC_SHORTHAND is defined.
-    @see HCIsIn
+    @param aCollection  The collection to search.
+    
+    This matcher invokes @c -containsObject: on @a aCollection to determine if the evaluated object
+    is an element of the collection.
+    
+    (In the event of a name clash, don't \#define @c HC_SHORTHAND and use the synonym
+    @c HC_isIn instead.)
+
     @ingroup collection_matchers
  */
 #ifdef HC_SHORTHAND
-    #define isIn  HC_isIn
+    #define isIn HC_isIn
 #endif

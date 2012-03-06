@@ -29,6 +29,8 @@
 
 //! @cond DEV
 
+#import <Foundation/Foundation.h>
+
 /*!
  Category for overriding the current locale at runtime.
 
