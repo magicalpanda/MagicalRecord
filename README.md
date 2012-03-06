@@ -1,8 +1,8 @@
-# MagicalRecord for Core Data
+# ![Awesome](https://github.com/magicalpanda/magicalpanda.github.com/blob/master/images/awesome_logo_small.png?raw=true) MagicalRecord
 
 In software engineering, the active record pattern is a design pattern found in software that stores its data in relational databases. It was named by Martin Fowler in his book Patterns of Enterprise Application Architecture. The interface to such an object would include functions such as Insert, Update, and Delete, plus properties that correspond more-or-less directly to the columns in the underlying database table.
 
->	Active record is an approach to accessing data in a database. A database table or view is wrapped into a class; thus an object 	instance is tied to a single row in the table. After creation of an object, a new row is added to the table upon save. Any object	loaded gets its information from the database; when an object is updated, the corresponding row in the table is also updated. The	wrapper class implements accessor methods or properties for each column in the table or view.
+>	Active record is an approach to accessing data in a database. A database table or view is wrapped into a class; thus an object instance is tied to a single row in the table. After creation of an object, a new row is added to the table upon save. Any object loaded gets its information from the database; when an object is updated, the corresponding row in the table is also updated. The	wrapper class implements accessor methods or properties for each column in the table or view.
 
 >	*- [Wikipedia]("http://en.wikipedia.org/wiki/Active_record_pattern")*
 
@@ -16,12 +16,18 @@ Magical Record for Core Data was inspired by the ease of Ruby on Rails' Active R
 
 1. In your XCode Project, add all the .h and .m files from the *Source* folder into your project. 
 2. Add *CoreData+MagicalRecord.h* file to your PCH file or your AppDelegate file.
-    * Optionally add `#define MR_SHORTHAND` to your PCH file if you want to use shorthand like `findAll` instead of `MR_findAll`
-4. Start writing code! ... There is no step 3!
+3. Optionally add `#define MR_SHORTHAND` to your PCH file if you want to use shorthand like `findAll` instead of `MR_findAll`
+4. Start writing code!
 
-# ARC Support
+# Notes
+## ARC Support
 
-MagicalRecord fully supports ARC *and* non-ARC modes out of the box, there is no configuration necessary. This is great for legacy applications or projects that still need to compile with GCC.  ARC support has been tested with the Apple LLVM 3.0 compiler.
+MagicalRecord fully supports ARC out of the box, there is no configuration necessary. 
+The last version to support manually managed memory is 1.9, and is available from the downloads page, or by switching to the 1.9 tag in the source.
+
+## Nested Contexts
+
+New in Core Data is support for related contexts. This is a super neat, and super fast feature. However, writing a wrapper that supports both is, frankly, more work that it's worth. However, the 1.9 version will be the last version that has dual support, and going forward, MagicalRecord will only work with the version of Core Data that has this feature.
 
 # Usage
 
@@ -66,13 +72,13 @@ This context will be used if a find or request method (described below) is not s
 
 If you need to create a new Managed Object Context for use in other threads, based on the default persistent store that was creating using one of the setup methods, use:
 
-	NSManagedObjectContext *myNewContext = [NSManagedObjectContext context];
+	NSManagedObjectContext *myNewContext = [NSManagedObjectContext MR_context];
 	
 This will use the same object model and persistent store, but create an entirely new context for use with threads other than the main thread. 
 
 And, if you want to make *myNewContext* the default for all fetch requests on the main thread:
 
-	[NSManagedObjectContext setDefaultContext:myNewContext];
+	[NSManagedObjectContext MR_setDefaultContext:myNewContext];
 
 Magical Record also has a helper method to hold on to a Managed Object Context in a thread's threadDictionary. This lets you access the correct NSManagedObjectContext instance no matter which thread you're calling from. This methods is:
 
@@ -87,22 +93,22 @@ Magical Record also has a helper method to hold on to a Managed Object Context i
 Most methods in MagicalRecord return an NSArray of results. So, if you have an Entity called Person, related to a Department (as seen in various Apple Core Data documentation), to get all the Person entities from your Persistent Store:
 
 	//In order for this to work you need to add "#define MR_SHORTHAND" to your PCH file
-	NSArray *people = [Person findAll];
+	NSArray *people = [Person MR_findAll];
 
 	// Otherwise you can use the longer, namespaced version
 	NSArray *people = [Person MR_findAll];
 
 Or, to have the results sorted by a property:
 
-	NSArray *peopleSorted = [Person findAllSortedByProperty:@"LastName" ascending:YES];
+	NSArray *peopleSorted = [Person MR_findAllSortedByProperty:@"LastName" ascending:YES];
 
 Or, to have the results sorted by multiple properties:
 
-    NSArray *peopleSorted = [Person findAllSortedByProperty:@"LastName,FirstName" ascending:YES];
+    NSArray *peopleSorted = [Person MR_findAllSortedByProperty:@"LastName,FirstName" ascending:YES];
 
 If you have a unique way of retrieving a single object from your data store, you can get that object directly:
 
-	Person *person = [Person findFirstByAttribute:@"FirstName" withValue:@"Forrest"];
+	Person *person = [Person MR_findFirstByAttribute:@"FirstName" withValue:@"Forrest"];
 
 #### Advanced Finding
 
@@ -111,13 +117,13 @@ If you want to be more specific with your search, you can send in a predicate:
 	NSArray *departments = [NSArray arrayWithObjects:dept1, dept2, ..., nil];
 	NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"Department IN %@", departments];
 
-	NSArray *people = [Person findAllWithPredicate:peopleFilter];
+	NSArray *people = [Person MR_findAllWithPredicate:peopleFilter];
 
 #### Returning an NSFetchRequest
 
 	NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"Department IN %@", departments];
 
-	NSArray *people = [Person fetchAllWithPredicate:peopleFilter];
+	NSArray *people = [Person MR_fetchAllWithPredicate:peopleFilter];
 
 For each of these single line calls, the full stack of NSFetchRequest, NSSortDescriptors and a simple default error handling scheme (ie. logging to the console) is created.
 
@@ -125,22 +131,22 @@ For each of these single line calls, the full stack of NSFetchRequest, NSSortDes
 
 	NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"Department IN %@", departments];
 
-	NSFetchRequest *peopleRequest = [Person requestAllWithPredicate:peopleFilter];
+	NSFetchRequest *peopleRequest = [Person MR_requestAllWithPredicate:peopleFilter];
 	[peopleRequest setReturnsDistinctResults:NO];
 	[peopleRequest setReturnPropertiesNamed:[NSArray arrayWithObjects:@"FirstName", @"LastName", nil]];
 	...
 
-	NSArray *people = [Person executeFetchRequest:peopleRequest];
+	NSArray *people = [Person MR_executeFetchRequest:peopleRequest];
 
 #### Find the number of entities
 
 You can also perform a count of entities in your Store, that will be performed on the Store
 
-	NSNumber *count = [Person numberOfEntities];
+	NSNumber *count = [Person MR_numberOfEntities];
 
 Or, if you're looking for a count of entities based on a predicate or some filter:
 
-	NSNumber *count = [Person numberOfEntitiesWithPredicate:...];
+	NSNumber *count = [Person MR_numberOfEntitiesWithPredicate:...];
 	
 There are also counterpart methods which return NSUInteger rather than NSNumbers:
 
@@ -152,8 +158,8 @@ There are also counterpart methods which return NSUInteger rather than NSNumbers
 #### Aggregate Operations
 
     NSPredicate *prediate = [NSPredicate predicateWithFormat:@"diaryEntry.date == %@", today];
-    int totalFat = [[CTFoodDiaryEntry aggregateOperation:@"sum:" onAttribute:@"fatColories" withPredicate:predicate] intValue];
-    int fattest  = [[CTFoodDiaryEntry aggregateOperation:@"max:" onAttribute:@"fatColories" withPredicate:predicate] intValue];
+    int totalFat = [[CTFoodDiaryEntry MR_aggregateOperation:@"sum:" onAttribute:@"fatColories" withPredicate:predicate] intValue];
+    int fattest  = [[CTFoodDiaryEntry MR_aggregateOperation:@"max:" onAttribute:@"fatColories" withPredicate:predicate] intValue];
     
 #### Finding from a different context
 
@@ -161,28 +167,28 @@ All find, fetch and request methods have an inContext: method parameter
 
 	NSManagedObjectContext *someOtherContext = ...;
 
-	NSArray *peopleFromAnotherContext = [Person findAllInContext:someOtherContext];
+	NSArray *peopleFromAnotherContext = [Person MR_findAllInContext:someOtherContext];
 
 	...
 
-	Person *personFromContext = [Person findFirstByAttribute:@"lastName" withValue:@"Gump" inContext:someOtherContext];
+	Person *personFromContext = [Person MR_findFirstByAttribute:@"lastName" withValue:@"Gump" inContext:someOtherContext];
 
 	...
 
-	NSUInteger count = [Person numberOfEntitiesWithContext:someOtherContext];
+	NSUInteger count = [Person MR_numberOfEntitiesWithContext:someOtherContext];
 
 
 ## Creating new Entities
 
 When you need to create a new instance of an Entity, use:
 
-	Person *myNewPersonInstance = [Person createEntity];
+	Person *myNewPersonInstance = [Person MR_createEntity];
 
 or, to specify a context:
 
 	NSManagedObjectContext *otherContext = ...;
 
-	Person *myPerson = [Person createInContext:otherContext];
+	Person *myPerson = [Person MR_createInContext:otherContext];
 
 
 ## Deleting Entities
@@ -190,23 +196,23 @@ or, to specify a context:
 To delete a single entity:
 
 	Person *p = ...;
-	[p  deleteEntity];
+	[p  MR_deleteEntity];
 
 or, to specify a context:
 
 	NSManagedObjectContext *otherContext = ...;
 	Person *deleteMe = ...;
 
-	[deleteMe deleteInContext:otherContext];
+	[deleteMe MR_deleteInContext:otherContext];
 
 There is no delete *All Entities* or *truncate* operation in core data, so one is provided for you with Active Record for Core Data:
 
-	[Person truncateAll];
+	[Person MR_truncateAll];
 
 or, with a specific context:
 
 	NSManagedObjectContext *otherContext = ...;
-	[Person truncateAllInContext:otherContext];
+	[Person MR_truncateAllInContext:otherContext];
 
 ## Performing Core Data operations on Threads
 
@@ -260,8 +266,9 @@ All MRCoreDataActions have a dedicated GCD queue on which they operate. This mea
 
 *Experimental*
 
-MagicalRecord will now import data from NSDictionaries into your Core Data store. [Documentation](https://github.com/magicalpanda/MagicalRecord/wiki/Data-Import) for this feature will be added to the wiki.
+MagicalRecord will now import data from NSObjects into your Core Data store. [Documentation](https://github.com/magicalpanda/MagicalRecord/wiki/Data-Import) for this feature will be added to the wiki.
 This feature is currently under development, and is undergoing updates. Feel free to try it out, add tests and send in your feedback.
 	
 # Extra Bits
-This Code is released under the MIT License by [Magical Panda Software, LLC.](http://www.magicalpanda.com)
+This Code is released under the MIT License by [Magical Panda Software, LLC](http://www.magicalpanda.com).  
+There is no charge for Awesome.
