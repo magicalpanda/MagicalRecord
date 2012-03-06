@@ -207,7 +207,18 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
          NSManagedObject *relatedObject = nil;
          if ([objectData isKindOfClass:[NSDictionary class]]) 
          {
-             relatedObject = [[relationshipInfo destinationEntity] MR_createInstanceFromDictionary:objectData inContext:[self managedObjectContext]];
+		 // Changed to fix nested updates changing to import operation half way through
+		     relatedObject = [self MR_findObjectForRelationship:relationshipInfo withData:objectData];
+		 
+		     if (!relatedObject)
+			 {
+			     relatedObject = [[relationshipInfo destinationEntity] MR_createInstanceFromDictionary:objectData inContext:[self managedObjectContext]];
+			 }
+			 else 
+		     {
+			     [relatedObject MR_updateValuesForKeysWithDictionary:objectData];
+			 }
+		
          }
          else
          {
@@ -249,7 +260,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
          }
          else
          {
-             [relatedObject MR_importValuesForKeysWithDictionary:objectData];
+             [relatedObject MR_updateValuesForKeysWithDictionary:objectData];
          }
          
          [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
