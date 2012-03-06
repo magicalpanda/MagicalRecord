@@ -83,6 +83,8 @@
 
 + (id) MR_findFirst;
 + (id) MR_findFirstInContext:(NSManagedObjectContext *)context;
++ (id) MR_findWithObjectID:(NSManagedObjectID*)objectID;
++ (id) MR_findWithObjectID:(NSManagedObjectID*)objectID inContext:(NSManagedObjectContext*)context;
 + (id) MR_findFirstWithPredicate:(NSPredicate *)searchTerm;
 + (id) MR_findFirstWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
 + (id) MR_findFirstWithPredicate:(NSPredicate *)searchterm sortedBy:(NSString *)property ascending:(BOOL)ascending;

@@ -74,6 +74,8 @@
 - (id) objectWithMinValueFor:(NSString *)property inContext:(NSManagedObjectContext *)context;
 + (id) findFirst;
 + (id) findFirstInContext:(NSManagedObjectContext *)context;
++ (id) findWithObjectID:(NSManagedObjectID*)objectID;
++ (id) findWithObjectID:(NSManagedObjectID*)objectID inContext:(NSManagedObjectContext*)context;
 + (id) findFirstWithPredicate:(NSPredicate *)searchTerm;
 + (id) findFirstWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
 + (id) findFirstWithPredicate:(NSPredicate *)searchterm sortedBy:(NSString *)property ascending:(BOOL)ascending;
