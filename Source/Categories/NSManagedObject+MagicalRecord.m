@@ -732,6 +732,41 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	return [self MR_objectWithMinValueFor:property inContext:[self  managedObjectContext]];
 }
 
+#ifdef __IPHONE_5_0
+
++ (NSArray *) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString*)groupingKeyPath inContext:(NSManagedObjectContext *)context 
+{
+    NSExpression *ex = [NSExpression expressionForFunction:function 
+                                                 arguments:[NSArray arrayWithObject:[NSExpression expressionForKeyPath:attributeName]]];
+    
+    NSExpressionDescription *ed = [[NSExpressionDescription alloc] init];
+    [ed setName:@"result"];
+    [ed setExpression:ex];
+    
+    // determine the type of attribute, required to set the expression return type    
+    NSAttributeDescription *attributeDescription = [[[self MR_entityDescription] attributesByName] objectForKey:attributeName];
+    [ed setExpressionResultType:[attributeDescription attributeType]];    
+    NSArray *properties = [NSArray arrayWithObjects:groupingKeyPath, ed, nil];
+    MR_RELEASE(ed);
+    
+    NSFetchRequest *request = [self MR_requestAllWithPredicate:predicate inContext:context];
+    [request setPropertiesToFetch:properties];
+    [request setResultType:NSDictionaryResultType];
+    [request setPropertiesToGroupBy:[NSArray arrayWithObject:groupingKeyPath]];
+    
+    NSArray *results = [self MR_executeFetchRequest:request];
+    return results;    
+}
+
+
+
++ (NSArray *) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString*)groupingKeyPath
+{
+    return [self MR_aggregateOperation:function onAttribute:attributeName withPredicate:predicate groupBy:groupingKeyPath inContext:[NSManagedObjectContext MR_defaultContext]];
+}
+
+#endif
+
 + (NSNumber *) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context 
 {
     NSExpression *ex = [NSExpression expressionForFunction:function 

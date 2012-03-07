@@ -154,6 +154,7 @@ There are also counterpart methods which return NSUInteger rather than NSNumbers
     NSPredicate *prediate = [NSPredicate predicateWithFormat:@"diaryEntry.date == %@", today];
     int totalFat = [[CTFoodDiaryEntry aggregateOperation:@"sum:" onAttribute:@"fatColories" withPredicate:predicate] intValue];
     int fattest  = [[CTFoodDiaryEntry aggregateOperation:@"max:" onAttribute:@"fatColories" withPredicate:predicate] intValue];
+    NSArray* caloriesByMonth = [CTFoodDiaryEntry aggregateOperation:@"sum:" onAttribute:@"fatColories" withPredicate:predicate groupBy:@"month"];
     
 #### Finding from a different context
 

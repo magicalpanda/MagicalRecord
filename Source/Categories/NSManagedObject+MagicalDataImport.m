@@ -164,6 +164,8 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
         SEL shouldImportSelector = @selector(shouldImport:);
         BOOL implementsShouldImport = [self respondsToSelector:shouldImportSelector];
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         if (![self MR_importValue:relatedObjectData forKey:relationshipName])
         {
             if ([relationshipInfo isToMany])
@@ -185,6 +187,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
                 }
             }
         }
+#pragma clang diagnostic pop
     }
 }
 
