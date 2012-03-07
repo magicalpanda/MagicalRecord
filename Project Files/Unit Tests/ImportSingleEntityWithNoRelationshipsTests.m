@@ -21,7 +21,7 @@
 - (void) setUpClass
 {
     [NSManagedObjectModel MR_setDefaultManagedObjectModel:[NSManagedObjectModel MR_managedObjectModelNamed:@"TestModel.momd"]];
-    [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
+    [MagicalRecord setupCoreDataStackWithInMemoryStore];
 
     id singleEntity = [self dataFromJSONFixture];
     
@@ -30,7 +30,7 @@
 
 - (void) tearDownClass
 {
-    [MagicalRecordHelpers cleanUp];
+    [MagicalRecord cleanUp];
 }
 
 - (void) testImportASingleEntity
@@ -130,12 +130,12 @@
 
 - (void) testImportNSColorAttributeToEntity
 {
-    NSColor *actualColor = testEntity.colorTestAttribute;
+    id actualColor = [testEntity colorTestAttribute];
     
-    assertThatFloat(actualColor.alphaComponent, is(equalToFloat(255./255.)));
-    assertThatFloat(actualColor.redComponent, is(equalToFloat(64./255.)));
-    assertThatFloat(actualColor.greenComponent, is(equalToFloat(128./255.)));
-    assertThatFloat(actualColor.blueComponent, is(equalToFloat(225./255.)));
+    assertThatFloat([actualColor alphaComponent], is(equalToFloat(255./255.)));
+    assertThatFloat([actualColor redComponent], is(equalToFloat(64./255.)));
+    assertThatFloat([actualColor greenComponent], is(equalToFloat(128./255.)));
+    assertThatFloat([actualColor blueComponent], is(equalToFloat(225./255.)));
 }
 
 - (NSDate *) dateFromString:(NSString *)date
@@ -148,13 +148,13 @@
 
 - (void) testImportDateAttributeToEntity
 {
-    NSDate *expectedDate = [self dateFromString:@"Jul 23, 2011 10:30:40 PM MST"];
+    NSDate *expectedDate = [self dateFromString:@"2011-07-23 10:30:40 +0000"];
     assertThat(testEntity.dateTestAttribute, is(equalTo(expectedDate)));
 }
 
 - (void) testImportDataAttributeWithCustomFormat
 {
-    NSDate *expectedDate = [self dateFromString:@"Aug 5, 2011 01:56:04 AM MDT"];
+    NSDate *expectedDate = [self dateFromString:@"2011-08-04 01:56:04 +0000"];
     assertThat(testEntity.dateWithCustomFormat, is(equalTo(expectedDate)));
     
 }

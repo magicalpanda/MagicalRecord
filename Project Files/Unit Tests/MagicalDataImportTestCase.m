@@ -15,9 +15,9 @@
 
 - (void) setUp
 {
-    [MagicalRecordHelpers setDefaultModelNamed:@"TestModel.momd"];
-    [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
-    //[MagicalRecordHelpers setupCoreDataStack];
+    [MagicalRecord setDefaultModelNamed:@"TestModel.momd"];
+    [MagicalRecord setupCoreDataStackWithInMemoryStore];
+    //[MagicalRecord setupCoreDataStack];
     
     if ([self respondsToSelector:@selector(setupTestData)])
     {
@@ -29,7 +29,7 @@
 
 - (void) tearDown
 {
-    [MagicalRecordHelpers cleanUp];
+    [MagicalRecord cleanUp];
 }
 
 - (Class) testEntityClass;

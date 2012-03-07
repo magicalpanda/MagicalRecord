@@ -20,7 +20,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 
 + (NSPersistentStoreCoordinator *) MR_defaultStoreCoordinator
 {
-    if (defaultCoordinator_ == nil && [MagicalRecordHelpers shouldAutoCreateDefaultPersistentStoreCoordinator])
+    if (defaultCoordinator_ == nil && [MagicalRecord shouldAutoCreateDefaultPersistentStoreCoordinator])
     {
         [self MR_setDefaultStoreCoordinator:[self MR_newPersistentStoreCoordinator]];
     }
@@ -29,8 +29,6 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 
 + (void) MR_setDefaultStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
-    MR_RETAIN(coordinator);
-    MR_RELEASE(defaultCoordinator_);
 	defaultCoordinator_ = coordinator;
     
     if (defaultCoordinator_ != nil)
@@ -54,7 +52,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 
     if (!pathWasCreated) 
     {
-        [MagicalRecordHelpers handleErrors:error];
+        [MagicalRecord handleErrors:error];
     }
 }
 
@@ -72,7 +70,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
                                                          error:&error];
     if (!store) 
     {
-        [MagicalRecordHelpers handleErrors:error];
+        [MagicalRecord handleErrors:error];
     }
     return store;
 }
@@ -90,7 +88,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
                                                           error:&error];
     if (!store)
     {
-        [MagicalRecordHelpers handleErrors:error];
+        [MagicalRecord handleErrors:error];
     }
     return store;
 }
@@ -126,7 +124,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     {
         [coordinator performSelector:@selector(MR_addAutoMigratingSqliteStoreNamed:) withObject:storeFileName afterDelay:0.5];
     }
-    MR_AUTORELEASE(coordinator);
+
     return coordinator;
 }
 
@@ -136,15 +134,14 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 	NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
 
     [coordinator MR_addInMemoryStore];
-    MR_AUTORELEASE(coordinator);
 
     return coordinator;
 }
 
 + (NSPersistentStoreCoordinator *) MR_newPersistentStoreCoordinator
 {
-	NSPersistentStoreCoordinator *coordinator = [self MR_coordinatorWithSqliteStoreNamed:[MagicalRecordHelpers defaultStoreName]];
-    MR_RETAIN(coordinator);
+	NSPersistentStoreCoordinator *coordinator = [self MR_coordinatorWithSqliteStoreNamed:[MagicalRecord defaultStoreName]];
+
     return coordinator;
 }
 
@@ -225,7 +222,6 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
          cloudStorePathComponent:subPathComponent
                       completion:completionHandler];
     
-    MR_AUTORELEASE(psc);
     return psc;
 }
 
@@ -235,7 +231,6 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
     
     [psc MR_addSqliteStoreNamed:[persistentStore URL] withOptions:nil];
-    MR_AUTORELEASE(psc);
     return psc;
 }
 
@@ -245,7 +240,6 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
     
     [psc MR_addSqliteStoreNamed:storeFileName withOptions:options];
-    MR_AUTORELEASE(psc);
     return psc;
 }
 
@@ -263,7 +257,6 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 {
     NSMutableDictionary *mutDict = [self mutableCopy];
     [mutDict addEntriesFromDictionary:d];
-    MR_AUTORELEASE(mutDict);
     return mutDict; 
 } 
 

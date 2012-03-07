@@ -31,7 +31,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     
     if (results == nil) 
     {
-        [MagicalRecordHelpers handleErrors:error];
+        [MagicalRecord handleErrors:error];
     }
 	return results;	
 }
@@ -65,7 +65,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	NSError *error = nil;
 	if (![controller performFetch:&error])
 	{
-		[MagicalRecordHelpers handleErrors:error];
+		[MagicalRecord handleErrors:error];
 	}
 }
 
@@ -128,7 +128,6 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     {
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:attributeName ascending:ascending];
         [attributes addObject:sortDescriptor];
-        MR_RELEASE(sortDescriptor);
     }
     
 	return attributes;
@@ -148,7 +147,6 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 {
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
 	[request setEntity:[self MR_entityDescriptionInContext:context]];
-    MR_AUTORELEASE(request);
 
     return request;
 }
@@ -192,7 +190,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 {
 	NSError *error = nil;
 	NSUInteger count = [context countForFetchRequest:[self MR_createFetchRequestInContext:context] error:&error];
-	[MagicalRecordHelpers handleErrors:error];
+	[MagicalRecord handleErrors:error];
 	
     return count;
 }
@@ -209,7 +207,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	[request setPredicate:searchFilter];
 	
 	NSUInteger count = [context countForFetchRequest:request error:&error];
-	[MagicalRecordHelpers handleErrors:error];
+	[MagicalRecord handleErrors:error];
  
     return count;
 }
@@ -295,7 +293,6 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	
 	NSSortDescriptor *sortBy = [[NSSortDescriptor alloc] initWithKey:sortTerm ascending:ascending];
 	[request setSortDescriptors:[NSArray arrayWithObject:sortBy]];
-    MR_AUTORELEASE(sortBy);
 	
 	return request;
 }
@@ -319,11 +316,9 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     {
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
         [sortDescriptors addObject:sortDescriptor];
-        MR_AUTORELEASE(sortDescriptor);
     }
     
 	[request setSortDescriptors:sortDescriptors];
-    MR_AUTORELEASE(sortDescriptors);
     
 	return request;
 }
@@ -398,7 +393,6 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
                                           sectionNameKeyPath:groupKeyPath
                                                    cacheName:cacheName];
     controller.delegate = delegate;
-    MR_AUTORELEASE(controller);
     
     return controller;
 }
@@ -745,7 +739,6 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     NSAttributeDescription *attributeDescription = [[[self MR_entityDescription] attributesByName] objectForKey:attributeName];
     [ed setExpressionResultType:[attributeDescription attributeType]];    
     NSArray *properties = [NSArray arrayWithObject:ed];
-    MR_RELEASE(ed);
     
     NSFetchRequest *request = [self MR_requestAllWithPredicate:predicate inContext:context];
     [request setPropertiesToFetch:properties];
@@ -769,7 +762,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 {
     NSError *error = nil;
     NSManagedObject *inContext = [otherContext existingObjectWithID:[self objectID] error:&error];
-    [MagicalRecordHelpers handleErrors:error];
+    [MagicalRecord handleErrors:error];
     
     return inContext;
 }

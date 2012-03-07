@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="562" systemVersion="11B26" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1170" systemVersion="11D50d" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AbstractRelatedEntity" representedClassName="AbstractRelatedEntity" isAbstract="YES">
         <attribute name="sampleBaseAttribute" optional="YES" attributeType="String"/>
     </entity>
@@ -68,11 +68,7 @@
     </entity>
     <entity name="SingleEntityWithNoRelationships" representedClassName="SingleEntityWithNoRelationships">
         <attribute name="booleanTestAttribute" optional="YES" attributeType="Boolean"/>
-        <attribute name="colorTestAttribute" optional="YES" attributeType="Transformable">
-            <userInfo>
-                <entry key="attributeValueClassName" value="UIColor"/>
-            </userInfo>
-        </attribute>
+        <attribute name="colorTestAttribute" optional="YES" attributeType="Transformable"/>
         <attribute name="dateTestAttribute" optional="YES" attributeType="Date"/>
         <attribute name="dateWithCustomFormat" optional="YES" attributeType="Date">
             <userInfo>

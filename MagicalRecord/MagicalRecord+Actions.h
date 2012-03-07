@@ -20,9 +20,7 @@ typedef enum
     MRCoreDataLookupOptionWithNewContext    = 1 << 0
 } MRCoreDataLookupOption;
 
-@interface MRCoreDataAction : NSObject
-
-+ (void) cleanUp;
+@interface MagicalRecord (Actions)
 
 #ifdef NS_BLOCKS_AVAILABLE
 
@@ -39,3 +37,5 @@ typedef enum
 #endif
 
 @end
+
+void cleanup_save_queue();

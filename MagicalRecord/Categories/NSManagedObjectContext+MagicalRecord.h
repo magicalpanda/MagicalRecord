@@ -5,7 +5,7 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "MagicalRecordHelpers.h"
+#import "MagicalRecord.h"
 
 extern NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification;
 

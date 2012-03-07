@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MagicalRecordHelpers.h"
+#import "MagicalRecord.h"
 
 
 @interface NSManagedObjectModel (MagicalRecord)

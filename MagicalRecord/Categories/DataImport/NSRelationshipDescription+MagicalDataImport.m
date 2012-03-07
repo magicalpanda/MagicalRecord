@@ -8,7 +8,7 @@
 
 #import "NSRelationshipDescription+MagicalDataImport.h"
 #import "NSManagedObject+MagicalDataImport.h"
-#import "MagicalRecordHelpers.h"
+#import "MagicalRecord.h"
 
 @implementation NSRelationshipDescription (MagicalRecord_DataImport)
 

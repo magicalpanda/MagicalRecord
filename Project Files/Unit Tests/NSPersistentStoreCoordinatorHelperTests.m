@@ -18,7 +18,7 @@
 
 - (void) testCreateCoodinatorWithSqlitePersistentStore
 {
-    NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator coordinatorWithSqliteStoreNamed:@"TestStore.sqlite"];
+    NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreNamed:@"TestStore.sqlite"];
     
     assertThatUnsignedInteger([[testCoordinator persistentStores] count], is(equalToUnsignedInteger(1)));
 
@@ -28,7 +28,7 @@
 
 - (void) testCreateCoordinatorWithInMemoryStore
 {
-    NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator coordinatorWithInMemoryStore];
+    NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator MR_coordinatorWithInMemoryStore];
 
     assertThatUnsignedInteger([[testCoordinator persistentStores] count], is(equalToUnsignedInteger(1)));
     
@@ -38,14 +38,14 @@
 
 - (void) testCanAddAnInMemoryStoreToAnExistingCoordinator
 {
-    NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator coordinatorWithSqliteStoreNamed:@"TestStore.sqlite"];
+    NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreNamed:@"TestStore.sqlite"];
     
     assertThatUnsignedInteger([[testCoordinator persistentStores] count], is(equalToUnsignedInteger(1)));
     
     NSPersistentStore *firstStore = [[testCoordinator persistentStores] objectAtIndex:0];
     assertThat([firstStore type], is(equalTo(NSSQLiteStoreType)));
     
-    [testCoordinator addInMemoryStore];
+    [testCoordinator MR_addInMemoryStore];
     
     assertThatUnsignedInteger([[testCoordinator persistentStores] count], is(equalToUnsignedInteger(2)));
     

@@ -6,7 +6,6 @@
 //  Copyright 2011 Magical Panda Software. All rights reserved.
 //
 
-//#import "ARCoreDataAction.h"
 #import "CoreData+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
 #import <dispatch/dispatch.h>
@@ -34,12 +33,7 @@ void cleanup_save_queue()
 	}
 }
 
-@implementation MRCoreDataAction
-
-+ (void) cleanUp
-{
-	cleanup_save_queue();
-}
+@implementation MagicalRecord (Actions)
 
 #ifdef NS_BLOCKS_AVAILABLE
 

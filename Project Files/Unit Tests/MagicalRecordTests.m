@@ -6,7 +6,7 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import "MagicalRecordHelperTests.h"
+#import "MagicalRecordTests.h"
 
 
 @protocol MagicalRecordErrorHandlerProtocol <NSObject>
@@ -15,16 +15,16 @@
 
 @end
 
-@implementation MagicalRecordHelperTests
+@implementation MagicalRecordTests
 
 - (void) setUp
 {
-    [MagicalRecordHelpers setDefaultModelNamed:@"TestModel.momd"];
+    [MagicalRecord setDefaultModelNamed:@"TestModel.momd"];
 }
 
 - (void) tearDown
 {
-    [MagicalRecordHelpers cleanUp];
+    [MagicalRecord cleanUp];
 }
 
 - (void) assertDefaultStack
@@ -40,7 +40,7 @@
     NSURL *testStoreURL = [NSPersistentStore MR_urlForStoreName:kMagicalRecordDefaultStoreFileName];
     [[NSFileManager defaultManager] removeItemAtPath:[testStoreURL path] error:nil];
     
-    [MagicalRecordHelpers setupCoreDataStack];
+    [MagicalRecord setupCoreDataStack];
     
     [self assertDefaultStack];
     
@@ -51,7 +51,7 @@
 
 - (void) testCreateInMemoryCoreDataStack
 {
-    [MagicalRecordHelpers setupCoreDataStackWithInMemoryStore];
+    [MagicalRecord setupCoreDataStackWithInMemoryStore];
     
     [self assertDefaultStack];
     
@@ -66,7 +66,7 @@
     NSURL *testStoreURL = [NSPersistentStore MR_urlForStoreName:testStoreName];
     [[NSFileManager defaultManager] removeItemAtPath:[testStoreURL path] error:nil];
     
-    [MagicalRecordHelpers setupCoreDataStackWithStoreNamed:testStoreName];
+    [MagicalRecord setupCoreDataStackWithStoreNamed:testStoreName];
     
     [self assertDefaultStack];
     
@@ -78,10 +78,10 @@
 
 - (void) testCanSetAUserSpecifiedErrorHandler
 {
-    [MagicalRecordHelpers setErrorHandlerTarget:self action:@selector(customErrorHandler:)];
+    [MagicalRecord setErrorHandlerTarget:self action:@selector(customErrorHandler:)];
     
-    assertThat([MagicalRecordHelpers errorHandlerTarget], is(equalTo(self)));
-    assertThat(NSStringFromSelector([MagicalRecordHelpers errorHandlerAction]), is(equalTo(NSStringFromSelector(@selector(customErrorHandler:)))));
+    assertThat([MagicalRecord errorHandlerTarget], is(equalTo(self)));
+    assertThat(NSStringFromSelector([MagicalRecord errorHandlerAction]), is(equalTo(NSStringFromSelector(@selector(customErrorHandler:)))));
 }
 
 - (void) magicalRecordErrorHandlerTest:(NSError *)error
@@ -95,10 +95,10 @@
 - (void) testUserSpecifiedErrorHandlersAreTriggeredOnError
 {
     errorHandlerWasCalled_ = NO;
-    [MagicalRecordHelpers setErrorHandlerTarget:self action:@selector(magicalRecordErrorHandlerTest:)];
+    [MagicalRecord setErrorHandlerTarget:self action:@selector(magicalRecordErrorHandlerTest:)];
     
     NSError *testError = [NSError errorWithDomain:@"MRTests" code:1000 userInfo:nil];
-    [MagicalRecordHelpers handleErrors:testError];
+    [MagicalRecord handleErrors:testError];
     
     assertThatBool(errorHandlerWasCalled_, is(equalToBool(YES)));
 }
@@ -111,8 +111,8 @@
     
     //    [[mockErrorHandler expect] performSelector:@selector(testErrorHandler:) withObject:[OCMArg any]];
     
-    [MagicalRecordHelpers setErrorHandlerTarget:mockErrorHandler action:@selector(testHandlingError:)];
-    [MagicalRecordHelpers handleErrors:testError];
+    [MagicalRecord setErrorHandlerTarget:mockErrorHandler action:@selector(testHandlingError:)];
+    [MagicalRecord handleErrors:testError];
 
     [mockErrorHandler verify];
 }

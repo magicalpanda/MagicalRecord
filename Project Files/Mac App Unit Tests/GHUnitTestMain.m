@@ -58,8 +58,9 @@ int main(int argc, char *argv[]) {
    */
   NSSetUncaughtExceptionHandler(&exceptionHandler);
   
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  
+    @autoreleasepool {
+        
+    
   // Register any special test case classes
   //[[GHTesting sharedInstance] registerClassName:@"GHSpecialTestCase"];  
   
@@ -70,15 +71,16 @@ int main(int argc, char *argv[]) {
     retVal = [GHTestRunner run];
   } else {
     // To run all tests (from ENV)
-    GHTestApp *app = [[GHTestApp alloc] init];
+      [[GHTestApp alloc] init];
     // To run a different test suite:
     //GHTestSuite *suite = [GHTestSuite suiteWithTestFilter:@"GHSlowTest,GHAsyncTestCaseTest"];
     //GHTestApp *app = [[GHTestApp alloc] initWithSuite:suite];
     // Or set global:
     //GHUnitTest = @"GHSlowTest";
     [NSApp run];
-    [app release];    
+
   }
-  [pool release];
+    
   return retVal;
+    }
 }

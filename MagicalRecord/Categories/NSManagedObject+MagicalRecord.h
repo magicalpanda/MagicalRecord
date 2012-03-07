@@ -5,7 +5,7 @@
 //
 
 #import <CoreData/CoreData.h>
-#import "MagicalRecordHelpers.h"
+#import "MagicalRecord.h"
 
 #define kMagicalRecordDefaultBatchSize 20
 
