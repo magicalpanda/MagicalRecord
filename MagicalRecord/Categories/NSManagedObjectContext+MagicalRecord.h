@@ -11,6 +11,14 @@ extern NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification;
 
 @interface NSManagedObjectContext (MagicalRecord)
 
++ (NSManagedObjectContext *) MR_context;
++ (NSManagedObjectContext *) MR_contextForCurrentThread;
+
++ (NSManagedObjectContext *) MR_contextThatNotifiesDefaultContextOnMainThread;
++ (NSManagedObjectContext *) MR_contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
++ (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
+
+
 - (void) MR_observeContext:(NSManagedObjectContext *)otherContext;
 - (void) MR_stopObservingContext:(NSManagedObjectContext *)otherContext;
 - (void) MR_observeContextOnMainThread:(NSManagedObjectContext *)otherContext;
@@ -28,19 +36,8 @@ extern NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification;
 - (BOOL) MR_saveOnBackgroundThread;
 
 + (void) MR_resetDefaultContext;
-+ (NSManagedObjectContext *)MR_defaultContext;
++ (NSManagedObjectContext *) MR_defaultContext;
 + (void) MR_setDefaultContext:(NSManagedObjectContext *)moc;
 + (void) MR_resetContextForCurrentThread;
 
-+ (NSManagedObjectContext *) MR_context;
-+ (NSManagedObjectContext *) MR_contextForCurrentThread;
-
-+ (NSManagedObjectContext *) MR_contextThatNotifiesDefaultContextOnMainThread;
-+ (NSManagedObjectContext *) MR_contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
-+ (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
-
-@property (nonatomic, assign, setter=MR_setNotifiesMainContextOnSave:) BOOL MR_notifiesMainContextOnSave;
-
 @end
-
-

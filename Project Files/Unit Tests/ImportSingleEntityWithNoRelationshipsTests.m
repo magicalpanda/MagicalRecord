@@ -25,7 +25,7 @@
 
     id singleEntity = [self dataFromJSONFixture];
     
-    testEntity = [SingleEntityWithNoRelationships MR_importFromDictionary:singleEntity];
+    testEntity = [SingleEntityWithNoRelationships MR_importFromObject:singleEntity];
 }
 
 - (void) tearDownClass
@@ -117,8 +117,8 @@
 - (NSDate *) dateFromString:(NSString *)date
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"MMM d, yyyy hh:mm:ss a zzz";
-//    formatter.timeZone = [NSTimeZone timeZoneWithName:@"GMT"];
+    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss ZZZ";
+    formatter.timeZone = [NSTimeZone timeZoneWithName:@"GMT"];
     formatter.locale = [NSLocale currentLocale];
     
     NSDate *expectedDate = [formatter dateFromString:date];
@@ -148,13 +148,13 @@
 
 - (void) testImportDateAttributeToEntity
 {
-    NSDate *expectedDate = [self dateFromString:@"2011-07-23 10:30:40 +0000"];
+    NSDate *expectedDate = [self dateFromString:@"2011-07-23 21:30:40 +0000"];
     assertThat(testEntity.dateTestAttribute, is(equalTo(expectedDate)));
 }
 
 - (void) testImportDataAttributeWithCustomFormat
 {
-    NSDate *expectedDate = [self dateFromString:@"2011-08-04 01:56:04 +0000"];
+    NSDate *expectedDate = [self dateFromString:@"2011-08-04 23:56:04 +0000"];
     assertThat(testEntity.dateWithCustomFormat, is(equalTo(expectedDate)));
     
 }

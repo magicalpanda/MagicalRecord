@@ -37,7 +37,7 @@
 
 - (void) testImportMappedEntityViaToOneRelationship
 {
-    SingleEntityRelatedToMappedEntityUsingDefaults *entity = [[self testEntityClass] MR_importFromDictionary:self.testEntityData];
+    SingleEntityRelatedToMappedEntityUsingDefaults *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
     
     [[NSManagedObjectContext MR_defaultContext] MR_save];
 
@@ -46,7 +46,7 @@
     assertThat(testRelatedEntity, is(notNilValue()));
     assertThat([testRelatedEntity sampleAttribute], containsString(@"sample json file"));
     
-    assertThat([MappedEntity numberOfEntities], is(equalToInteger(2)));
+    assertThat([MappedEntity numberOfEntities], is(equalToInteger(1)));
 }
 
 - (void) testUpdateMappedEntity
@@ -54,7 +54,7 @@
     SingleEntityRelatedToMappedEntityUsingDefaults *testEntity = 
     [SingleEntityRelatedToMappedEntityUsingDefaults findFirstByAttribute:@"singleEntityRelatedToMappedEntityUsingDefaultsID" withValue:[NSNumber numberWithInt:24]];
     
-    [testEntity MR_updateValuesForKeysWithDictionary:self.testEntityData];
+    [testEntity MR_updateValuesForKeysWithObject:self.testEntityData];
     
     assertThat([MappedEntity numberOfEntities], is(equalToInteger(1)));
     

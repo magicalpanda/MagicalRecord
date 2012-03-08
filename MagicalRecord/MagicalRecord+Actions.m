@@ -63,7 +63,6 @@ void cleanup_save_queue()
         [localContext MR_saveWithErrorHandler:errorHandler];
     }
     
-    localContext.MR_notifiesMainContextOnSave = NO;
     [localContext MR_stopObservingiCloudChangesInCoordinator:defaultCoordinator];
     [mainContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
 }

@@ -43,6 +43,9 @@
     #import "MagicalRecord+iCloud.h"
 
     #import "NSManagedObject+MagicalRecord.h"
+    #import "NSManagedObject+MagicalRequests.h"
+    #import "NSManagedObject+MagicalFinders.h"
+    #import "NSManagedObject+MagicalAggregation.h"
     #import "NSManagedObjectContext+MagicalRecord.h"
     #import "NSPersistentStoreCoordinator+MagicalRecord.h"
     #import "NSManagedObjectModel+MagicalRecord.h"

@@ -24,7 +24,7 @@
 
 - (void) testDataImport
 {
-    SingleEntityRelatedToMappedEntityWithNestedMappedAttributes *entity = [[self testEntityClass] MR_importFromDictionary:self.testEntityData];
+    SingleEntityRelatedToMappedEntityWithNestedMappedAttributes *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
     [[NSManagedObjectContext MR_defaultContext] MR_save];
     
     assertThat(entity.mappedEntity, is(notNilValue()));
