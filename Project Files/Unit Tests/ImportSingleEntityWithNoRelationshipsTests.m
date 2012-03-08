@@ -130,7 +130,7 @@
 
 - (void) testImportNSColorAttributeToEntity
 {
-    id actualColor = [testEntity colorTestAttribute];
+    NSColor *actualColor = [testEntity colorTestAttribute];
     
     assertThatFloat([actualColor alphaComponent], is(equalToFloat(255./255.)));
     assertThatFloat([actualColor redComponent], is(equalToFloat(64./255.)));

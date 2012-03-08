@@ -323,7 +323,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 {
     NSMutableArray *objectIDs = [NSMutableArray array];
     
-    [MagicalRecord saveDataWithBlock:^(NSManagedObjectContext *localContext) 
+    [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) 
     {    
         [listOfObjectData enumerateObjectsWithOptions:0 usingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
         {
@@ -350,7 +350,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 {
     NSMutableArray *objectIDs = [NSMutableArray array];
     
-    [MagicalRecord saveDataWithBlock:^(NSManagedObjectContext *localContext) 
+    [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) 
      {    
          [listOfObjectData enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
              

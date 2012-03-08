@@ -15,6 +15,7 @@
 // add logging provider
 // autocreate new PSC per Store
 // autoassign new instances to default store
+
 + (BOOL) shouldAutoCreateManagedObjectModel;
 + (void) setShouldAutoCreateManagedObjectModel:(BOOL)shouldAutoCreate;
 + (BOOL) shouldAutoCreateDefaultPersistentStoreCoordinator;

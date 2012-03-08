@@ -9,30 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "NSManagedObjectContext+MagicalRecord.h"
 
-typedef enum
-{
-    MRCoreDataSaveOptionInBackground        = 1 << 0,
-    MRCoreDataSaveOptionWithNewContext      = 1 << 1
-} MRCoreDataSaveOption;
-
-typedef enum
-{
-    MRCoreDataLookupOptionWithNewContext    = 1 << 0
-} MRCoreDataLookupOption;
-
 @interface MagicalRecord (Actions)
 
 #ifdef NS_BLOCKS_AVAILABLE
 
-+ (void) saveDataWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
++ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
 
-+ (void) saveDataInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
-+ (void) saveDataInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))callback;
-
-+ (void) saveDataWithOptions:(MRCoreDataSaveOption)options withBlock:(void(^)(NSManagedObjectContext *localContext))block;
-+ (void) saveDataWithOptions:(MRCoreDataSaveOption)options withBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))callback;
-
-+ (void) lookupWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
++ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
++ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))callback;
 
 #endif
 

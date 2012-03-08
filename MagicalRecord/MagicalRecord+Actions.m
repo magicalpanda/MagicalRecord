@@ -37,7 +37,7 @@ void cleanup_save_queue()
 
 #ifdef NS_BLOCKS_AVAILABLE
 
-+ (void) saveDataWithBlock:(void (^)(NSManagedObjectContext *localContext))block errorHandler:(void (^)(NSError *))errorHandler
++ (void) saveWithBlock:(void (^)(NSManagedObjectContext *localContext))block errorHandler:(void (^)(NSError *))errorHandler
 {
     NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
     NSManagedObjectContext *localContext = mainContext;
@@ -67,22 +67,22 @@ void cleanup_save_queue()
     [mainContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
 }
 
-+ (void) saveDataWithBlock:(void(^)(NSManagedObjectContext *localContext))block
++ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block
 {   
-    [self saveDataWithBlock:block errorHandler:NULL];
+    [self saveWithBlock:block errorHandler:NULL];
 }
 
-+ (void) saveDataInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block
++ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block
 {
     dispatch_async(background_save_queue(), ^{
-        [self saveDataWithBlock:block];
+        [self saveWithBlock:block];
     });
 }
 
-+ (void) saveDataInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))callback
++ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))callback
 {
     dispatch_async(background_save_queue(), ^{
-        [self saveDataWithBlock:block];
+        [self saveWithBlock:block];
         
         if (callback) 
         {
@@ -91,41 +91,16 @@ void cleanup_save_queue()
     });
 }
 
-+ (void) saveDataInBackgroundWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))callback errorHandler:(void (^)(NSError *))errorHandler
++ (void) saveInBackgroundWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))callback errorHandler:(void (^)(NSError *))errorHandler
 {
     dispatch_async(background_save_queue(), ^{
-        [self saveDataWithBlock:block errorHandler:errorHandler];
+        [self saveWithBlock:block errorHandler:errorHandler];
         
         if (callback)
         {
             dispatch_async(dispatch_get_main_queue(), callback);
         }
     });
-}
-
-+ (void) lookupWithBlock:(void(^)(NSManagedObjectContext *localContext))block
-{
-    NSManagedObjectContext *context = [NSManagedObjectContext MR_contextForCurrentThread];
-
-    if (block)
-    {
-        block(context);
-    }
-}
-
-+ (void) saveDataWithOptions:(MRCoreDataSaveOption)options withBlock:(void(^)(NSManagedObjectContext *localContext))block;
-{
-    [self saveDataWithOptions:options withBlock:block completion:NULL];
-}
-
-+ (void) saveDataWithOptions:(MRCoreDataSaveOption)options withBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))callback;
-{
-    //TODO: add implementation    
-}
-
-+ (void) saveDataWithOptions:(MRCoreDataSaveOption)options withBlock:(void (^)(NSManagedObjectContext *))block completion:(void (^)(void))callback errorHandler:(void(^)(NSError *))errorCallback
-{
-    
 }
 
 #endif
