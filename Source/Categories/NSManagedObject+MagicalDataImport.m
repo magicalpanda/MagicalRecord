@@ -336,15 +336,19 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     {    
         [listOfObjectData enumerateObjectsWithOptions:0 usingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
         {
-            NSDictionary *objectData = (NSDictionary *)obj;
-
-            NSManagedObject *dataObject = [self MR_importFromDictionary:objectData inContext:localContext];
-
-            if ([context obtainPermanentIDsForObjects:[NSArray arrayWithObject:dataObject] error:nil])
-            {
-              [objectIDs addObject:[dataObject objectID]];
-            }
-        }];
+			NSDictionary *objectData = (NSDictionary *)obj;
+			
+			NSManagedObject *dataObject = [self MR_importFromDictionary:objectData inContext:localContext];
+			
+			NSError* err = nil;
+			
+			if ([context obtainPermanentIDsForObjects:[NSArray arrayWithObject:dataObject] error:&err])
+				{
+				[objectIDs addObject:[dataObject objectID]];
+				}
+			
+			[MagicalRecordHelpers handleErrors:err];
+		}];
     }];
     
     return [self MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"self IN %@", objectIDs] inContext:context];
@@ -367,10 +371,14 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
               
               NSManagedObject *dataObject = [self MR_updateFromDictionary:objectData inContext:localContext];
               
-              if ([context obtainPermanentIDsForObjects:[NSArray arrayWithObject:dataObject] error:nil])
+			  NSError* err = nil;
+			 
+              if ([context obtainPermanentIDsForObjects:[NSArray arrayWithObject:dataObject] error:&err])
               {
                   [objectIDs addObject:[dataObject objectID]];
               }
+			 
+			 [MagicalRecordHelpers handleErrors:err];
           }];
      }];
     
