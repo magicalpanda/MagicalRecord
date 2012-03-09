@@ -24,6 +24,11 @@
     #define MRLog(...) ((void)0)
 #endif
 
+
+#ifndef NS_BLOCKS_AVAILABLE
+#warning MagicalRecord requires blocks
+#endif
+
 //    #if !( __has_feature(objc_arc) && __has_feature(objc_arc_weak) )
 //        #error MagicalRecord now requires ARC to be enabled
 //    #endif

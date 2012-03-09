@@ -8,74 +8,80 @@
 
 #import "NSManagedObjectContext+MagicalSaves.h"
 
+@interface NSManagedObjectContext (InternalMagicalSaves)
+
+- (void) MR_saveErrorCallback:(void(^)(NSError *))errorCallback;
+
+@end
+
+
 @implementation NSManagedObjectContext (MagicalSaves)
 
-- (BOOL) MR_saveNestedContexts:(BOOL)saveParents errorHandler:(void(^)(NSError *))errorCallback;
+- (void) MR_saveErrorCallback:(void(^)(NSError *))errorCallback;
 {
-	__block NSError *error = nil;
-	__block BOOL saved = NO;
-	
+    MRLog(@"Saving %@Context%@", self == [[self class] MR_defaultContext] ? @" *** Default *** ": @"", ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
+
+    NSError *error = nil;
+	BOOL saved = NO;
 	@try
 	{
-        [self performBlockAndWait:^{
-            MRLog(@"Saving %@Context%@", 
-                  self == [[self class] MR_defaultContext] ? @" *** Default *** ": @"",
-                  ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
-            
-            saved = [self save:&error];
-        }];
+        saved = [self save:&error];
 	}
 	@catch (NSException *exception)
 	{
-		MRLog(@"Problem saving: %@", (id)[exception userInfo] ?: (id)[exception reason]);
+		MRLog(@"Unable to perform save: %@", (id)[exception userInfo] ?: (id)[exception reason]);
 	}
 	@finally 
     {
-        NSManagedObjectContext *parentContext = [self parentContext];
-        if (saved && saveParents)
-        {
-            return saved && [parentContext MR_saveNestedContexts:saveParents errorHandler:errorCallback];
-        }
         if (!saved)
         {
-            [MagicalRecord handleErrors:error];
+            if (errorCallback)
+            {
+                errorCallback(error);
+            }
+            else
+            {
+                [MagicalRecord handleErrors:error];
+            }
         }
-        return saved;
     }
 }
 
-- (BOOL) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback;
+- (void) MR_saveNestedContexts;
 {
-    return [self MR_saveNestedContexts:YES errorHandler:errorCallback];
+    [self MR_saveNestedContextsErrorHandler:nil];
 }
 
-- (BOOL) MR_saveWithErrorHandler:(void (^)(NSError *))errorCallback;
+- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback;
 {
-    return [self MR_saveNestedContexts:NO errorHandler:errorCallback];
+    [self performBlockAndWait:^{
+        [self MR_saveErrorCallback:errorCallback];
+    }];
+    [[self parentContext] MR_saveNestedContextsErrorHandler:errorCallback];
 }
 
-- (BOOL) MR_save;
+- (void) MR_save;
 {
-    return [self MR_saveNestedContexts:NO errorHandler:nil];
+    [self MR_saveErrorCallback:nil];
 }
 
-#pragma mark - Threading Save Helpers
-
-- (BOOL) MR_saveOnBackgroundThread;
+- (void) MR_saveErrorHandler:(void (^)(NSError *))errorCallback;
 {
-	[self performSelectorInBackground:@selector(MR_save) withObject:nil];
-    
-	return YES;
+    [self performBlockAndWait:^{
+        [self MR_saveErrorCallback:errorCallback];
+    }];
 }
 
-- (BOOL) MR_saveOnMainThread;
+- (void) MR_saveInBackground;
 {
-	@synchronized(self)
-	{
-		[self performSelectorOnMainThread:@selector(MR_save) withObject:nil waitUntilDone:YES];
-	}
-    
-	return YES;
+    [self MR_saveInBackgroundErrorHandler:nil];
+}
+
+- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback;
+{
+    [self performBlock:^{
+        [self MR_saveErrorCallback:errorCallback];
+    }];
 }
 
 @end

@@ -11,15 +11,9 @@
 
 @interface MagicalRecord (Actions)
 
-#ifdef NS_BLOCKS_AVAILABLE
-
 + (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
 
 + (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
 + (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))callback;
 
-#endif
-
 @end
-
-void cleanup_save_queue();

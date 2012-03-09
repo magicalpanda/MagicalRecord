@@ -18,7 +18,6 @@
 
 + (void) cleanUp
 {
-    cleanup_save_queue();
     [self cleanUpErrorHanding];
     [self cleanUpStack];
 }

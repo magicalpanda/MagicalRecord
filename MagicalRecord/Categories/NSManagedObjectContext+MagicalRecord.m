@@ -21,7 +21,7 @@ static NSManagedObjectContext *defaultManageObjectContext_ = nil;
 
 @implementation NSManagedObjectContext (MagicalRecord)
 
-+ (NSManagedObjectContext *)MR_defaultContext
++ (NSManagedObjectContext *) MR_defaultContext
 {
 	@synchronized (self)
 	{
@@ -29,7 +29,7 @@ static NSManagedObjectContext *defaultManageObjectContext_ = nil;
 	}
 }
 
-+ (void)MR_setDefaultContext:(NSManagedObjectContext *)moc
++ (void) MR_setDefaultContext:(NSManagedObjectContext *)moc
 {
     NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_defaultStoreCoordinator];
     if ([MagicalRecord isICloudEnabled]) 
@@ -45,7 +45,21 @@ static NSManagedObjectContext *defaultManageObjectContext_ = nil;
     }
 }
 
-+ (void)MR_resetDefaultContext
++ (void) MR_initializeDefaultContextWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
+{
+    if ([self MR_defaultContext] == nil)
+    {
+        NSManagedObjectContext *context = [self MR_context];
+        
+        [context performBlockAndWait:^{
+            [context setPersistentStoreCoordinator:coordinator];
+        }];
+        
+        [self MR_setDefaultContext:context];
+    }
+}
+
++ (void) MR_resetDefaultContext
 {
     void (^resetBlock)(void) = ^{
         [[NSManagedObjectContext MR_defaultContext] reset];
@@ -60,18 +74,18 @@ static NSManagedObjectContext *defaultManageObjectContext_ = nil;
     return context;
 }
 
-+ (void) MR_initializeDefaultContextWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
++ (NSManagedObjectContext *) MR_newMainQueueContext;
 {
-    if ([self MR_defaultContext] == nil)
-    {
-        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    return context;    
+}
 
-        [context performBlockAndWait:^{
-            [context setPersistentStoreCoordinator:coordinator];
-        }];
-
-        [self MR_setDefaultContext:context];
-    }
++ (NSManagedObjectContext *) MR_contextThatPushesChangesToDefaultContext;
+{
+    NSManagedObjectContext *context = [self MR_defaultContext];
+    NSManagedObjectContext *childContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    [childContext setParentContext:context];
+    return childContext;
 }
 
 + (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;

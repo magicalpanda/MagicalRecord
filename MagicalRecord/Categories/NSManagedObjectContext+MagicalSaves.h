@@ -10,14 +10,13 @@
 
 @interface NSManagedObjectContext (MagicalSaves)
 
-- (BOOL) MR_save;
+- (void) MR_save;
+- (void) MR_saveErrorHandler:(void (^)(NSError *))errorCallback;
 
-#ifdef NS_BLOCKS_AVAILABLE
-- (BOOL) MR_saveWithErrorHandler:(void (^)(NSError *))errorCallback;
-#endif
+- (void) MR_saveInBackground;
+- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback;
 
-- (BOOL) MR_saveOnMainThread;
-- (BOOL) MR_saveOnBackgroundThread;
-
+- (void) MR_saveNestedContexts;
+- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback;
 
 @end
