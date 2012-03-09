@@ -13,8 +13,12 @@
 
 - (NSString *) MR_capitalizedFirstCharaterString;
 {
-    NSString *firstChar = [[self substringToIndex:1] capitalizedString];
-    return [firstChar stringByAppendingString:[self substringFromIndex:1]];
+    if ([self length] > 0)
+    {
+        NSString *firstChar = [[self substringToIndex:1] capitalizedString];
+        return [firstChar stringByAppendingString:[self substringFromIndex:1]];
+    }
+    return self;
 }
 
 @end

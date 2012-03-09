@@ -368,34 +368,6 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     return [self MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"self IN %@", objectIDs] inContext:context];
 }
 
-
-+ (NSArray *) MR_updateFromArray:(NSArray *)listOfObjectData;
-{
-    return [self MR_updateFromArray:listOfObjectData inContext:[NSManagedObjectContext MR_defaultContext]];
-}
-
-+ (NSArray *) MR_updateFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context;
-{
-    NSMutableArray *objectIDs = [NSMutableArray array];
-    
-    [MRCoreDataAction saveDataWithBlock:^(NSManagedObjectContext *localContext) 
-     {    
-         [listOfObjectData enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-             
-             NSDictionary *objectData = (NSDictionary *)obj;
-             
-             NSManagedObject *dataObject = [self MR_updateFromObject:objectData inContext:localContext];
-             
-             if ([context obtainPermanentIDsForObjects:[NSArray arrayWithObject:dataObject] error:nil])
-             {
-                 [objectIDs addObject:[dataObject objectID]];
-             }
-         }];
-     }];
-    
-    return [self MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"self IN %@", objectIDs] inContext:context];
-}
-
 @end
 
 #pragma clang diagnostic pop

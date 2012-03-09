@@ -12,8 +12,7 @@
 
 + (void) setupCoreDataStack
 {
-    NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
-	[NSManagedObjectContext MR_setDefaultContext:context];
+    [self setupCoreDataStackWithStoreNamed:[self defaultStoreName]];
 }
 
 + (void) setupAutoMigratingCoreDataStack
@@ -23,29 +22,32 @@
 
 + (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName
 {
+    if ([NSPersistentStoreCoordinator MR_defaultStoreCoordinator] != nil) return;
+    
 	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreNamed:storeName];
-	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
+    [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
 	
-	NSManagedObjectContext *context = [NSManagedObjectContext MR_contextWithStoreCoordinator:coordinator];
-	[NSManagedObjectContext MR_setDefaultContext:context];
+    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
 }
 
 + (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName
 {
+    if ([NSPersistentStoreCoordinator MR_defaultStoreCoordinator] != nil) return;
+    
     NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithAutoMigratingSqliteStoreNamed:storeName];
     [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
     
-    NSManagedObjectContext *context = [NSManagedObjectContext MR_contextWithStoreCoordinator:coordinator];
-    [NSManagedObjectContext MR_setDefaultContext:context];
+    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
 }
 
 + (void) setupCoreDataStackWithInMemoryStore;
 {
+    if ([NSPersistentStoreCoordinator MR_defaultStoreCoordinator] != nil) return;
+    
 	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithInMemoryStore];
 	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
 	
-	NSManagedObjectContext *context = [NSManagedObjectContext MR_contextWithStoreCoordinator:coordinator];
-	[NSManagedObjectContext MR_setDefaultContext:context];
+    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
 }
 
 @end

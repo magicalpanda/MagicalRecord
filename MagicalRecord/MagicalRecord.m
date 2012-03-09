@@ -82,7 +82,7 @@
         [self swizzleShorthandMethods];
 #endif
         [self setShouldAutoCreateManagedObjectModel:YES];
-        [self setShouldAutoCreateDefaultPersistentStoreCoordinator:YES];
+        [self setShouldAutoCreateDefaultPersistentStoreCoordinator:NO];
     }
 }
 
