@@ -231,6 +231,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
     
     [psc MR_addSqliteStoreNamed:[persistentStore URL] withOptions:nil];
+
     return psc;
 }
 

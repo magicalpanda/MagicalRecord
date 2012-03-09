@@ -7,14 +7,16 @@
 
 
 @interface NSManagedObject (MagicalRecord_DataImportShortHand)
-- (void) importValuesForKeysWithDictionary:(id)objectData;
-- (void) updateValuesForKeysWithDictionary:(id)objectData;
-+ (id) importFromDictionary:(id)data;
-+ (id) importFromDictionary:(id)data inContext:(NSManagedObjectContext *)context;
+- (void) importValuesForKeysWithObject:(id)objectData;
+- (void) updateValuesForKeysWithObject:(id)objectData;
++ (id) importFromObject:(id)data;
++ (id) importFromObject:(id)data inContext:(NSManagedObjectContext *)context;
 + (NSArray *) importFromArray:(NSArray *)listOfObjectData;
 + (NSArray *) importFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context;
-+ (id) updateFromDictionary:(id)objectData;
-+ (id) updateFromDictionary:(id)objectData inContext:(NSManagedObjectContext *)context;
++ (NSArray *) updateFromArray:(NSArray *)listOfObjectData;
++ (NSArray *) updateFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context;
++ (id) updateFromObject:(id)objectData;
++ (id) updateFromObject:(id)objectData inContext:(NSManagedObjectContext *)context;
 @end
 @interface NSManagedObject (MagicalRecordShortHand)
 + (NSUInteger) defaultBatchSize;
