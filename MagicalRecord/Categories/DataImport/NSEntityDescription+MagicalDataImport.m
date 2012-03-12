@@ -22,14 +22,22 @@ NSString * const kMagicalRecordImportPrimaryAttributeKey = @"primaryAttributeKey
     return primaryAttribute;
 }
 
-
-- (NSManagedObject *) MR_createInstanceFromObject:(id)objectData inContext:(NSManagedObjectContext *)context
+- (NSManagedObject *) MR_createInstanceInContext:(NSManagedObjectContext *)context;
 {
-    NSManagedObject *relatedObject = [[self class] insertNewObjectForEntityForName:[self name] 
-                                                            inManagedObjectContext:context];
-    
-    [relatedObject MR_importValuesForKeysWithObject:objectData];
-    
-    return relatedObject;
+    Class relatedClass = NSClassFromString([self managedObjectClassName]);
+    NSManagedObject *newInstance = [relatedClass MR_createInContext:context];
+   
+    return newInstance;
 }
+
+//- (NSManagedObject *) MR_createInstanceFromObject:(id)objectData inContext:(NSManagedObjectContext *)context
+//{
+//    NSManagedObject *relatedObject = [[self class] insertNewObjectForEntityForName:[self name] 
+//                                                            inManagedObjectContext:context];
+//    
+//    [relatedObject MR_importValuesForKeysWithObject:objectData];
+//    
+//    return relatedObject;
+//}
+
 @end

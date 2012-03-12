@@ -9,7 +9,7 @@
 #import "CoreData+MagicalRecord.h"
 #import <objc/runtime.h>
 
-void MR_swizzle(Class c, SEL orig, SEL new);
+void MR_swapMethodsFromClass(Class c, SEL orig, SEL new);
 
 NSString * const kMagicalRecordImportCustomDateFormatKey = @"dateFormat";
 NSString * const kMagicalRecordImportDefaultDateFormatString = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
@@ -26,10 +26,10 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 
 @implementation NSManagedObject (MagicalRecord_DataImport)
 
-- (NSString *) MR_primaryKeyAttributeName;
-{
-    return [[[self entity] MR_primaryKeyAttribute] name];
-}
+//- (NSString *) MR_primaryKeyAttributeName;
+//{
+//    return [[[self entity] MR_primaryKeyAttribute] name];
+//}
 
 - (id) MR_valueForAttribute:(NSAttributeDescription *)attributeInfo fromObjectData:(NSDictionary *)objectData forKeyPath:(NSString *)keyPath
 {
@@ -211,13 +211,13 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     {
         [self performSelector:@selector(willImport:) withObject:objectData];
     }
-    MR_swizzle([objectData class], @selector(valueForUndefinedKey:), @selector(MR_valueForUndefinedKey:));
+    MR_swapMethodsFromClass([objectData class], @selector(valueForUndefinedKey:), @selector(MR_valueForUndefinedKey:));
     return YES;
 }
 
 - (BOOL) MR_postImport:(id)objectData;
 {
-    MR_swizzle([objectData class], @selector(valueForUndefinedKey:), @selector(MR_valueForUndefinedKey:));
+    MR_swapMethodsFromClass([objectData class], @selector(valueForUndefinedKey:), @selector(MR_valueForUndefinedKey:));
     if ([self respondsToSelector:@selector(didImport:)])
     {
         [self performSelector:@selector(didImport:) withObject:objectData];
@@ -225,7 +225,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     return YES;
 }
 
-- (BOOL) MR_importValuesForKeysWithObject:(id)objectData
+- (BOOL) MR_performDataImportFromObject:(id)objectData relationshipBlock:(void(^)(NSRelationshipDescription*, id))relationshipBlock;
 {
     BOOL didStartimporting = [self MR_preImport:objectData];
     if (!didStartimporting) return NO;
@@ -236,46 +236,43 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     NSDictionary *relationships = [[self entity] relationshipsByName];
     [self MR_setRelationships:relationships
         forKeysWithDictionary:objectData 
-                    withBlock:^(NSRelationshipDescription *relationshipInfo, id objectData){
+                    withBlock:relationshipBlock];
+    
+    return [self MR_postImport:objectData];  
+}
 
-         NSManagedObject *relatedObject = nil;
-         relatedObject = [[relationshipInfo destinationEntity] MR_createInstanceFromObject:objectData inContext:[self managedObjectContext]];
+- (BOOL) MR_importValuesForKeysWithObject:(id)objectData
+{
+    void (^importRelationshipLogic)(NSRelationshipDescription *, id) = ^(NSRelationshipDescription *relationshipInfo, id objectData){
+
+         NSEntityDescription *targetEntity = [relationshipInfo destinationEntity];
+         NSManagedObject *relatedObject = [targetEntity MR_createInstanceInContext:[self managedObjectContext]];
+        //[object MR_applyDataToManagedObject:relatedObject]
          [relatedObject MR_importValuesForKeysWithObject:objectData];
 
          [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
-    }];
+    };
 
-    return [self MR_postImport:objectData];
+    return [self MR_performDataImportFromObject:objectData relationshipBlock:importRelationshipLogic];
 }
 
 - (BOOL) MR_updateValuesForKeysWithObject:(id)objectData
 {
-    BOOL didStartimporting = [self MR_preImport:objectData];
-    if (!didStartimporting) return NO;
+    void (^updateRelationshipLogic)(NSRelationshipDescription *, id) = ^(NSRelationshipDescription *relationshipInfo, id objectData) {
+        
+        NSManagedObject *relatedObject = [self MR_findObjectForRelationship:relationshipInfo withData:objectData];
+        
+        if (relatedObject == nil)
+        {
+            NSEntityDescription *entityDescription = [relationshipInfo destinationEntity];
+            relatedObject = [entityDescription MR_createInstanceInContext:[self managedObjectContext]];
+        }
+        [relatedObject MR_updateValuesForKeysWithObject:objectData];
+        
+        [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
+    };
     
-    NSDictionary *attributes = [[self entity] attributesByName];
-    [self MR_setAttributes:attributes forKeysWithDictionary:objectData];
-    
-    NSDictionary *relationships = [[self entity] relationshipsByName];
-    [self MR_setRelationships:relationships
-        forKeysWithDictionary:objectData 
-                    withBlock:^(NSRelationshipDescription *relationshipInfo, id objectData) {
-                        
-         NSManagedObject *relatedObject = [self MR_findObjectForRelationship:relationshipInfo
-                                                                    withData:objectData];
-         if (relatedObject == nil)
-         {
-             relatedObject = [[relationshipInfo destinationEntity] MR_createInstanceFromObject:objectData inContext:[self managedObjectContext]];
-         }
-         else
-         {
-             [relatedObject MR_importValuesForKeysWithObject:objectData];
-         }
-         
-         [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
-    }];
-    
-    return [self MR_postImport:objectData];
+    return [self MR_performDataImportFromObject:objectData relationshipBlock:updateRelationshipLogic];
 }
 
 + (id) MR_importFromObject:(id)objectData inContext:(NSManagedObjectContext *)context;
@@ -297,15 +294,12 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
     id value = [objectData MR_valueForAttribute:primaryAttribute];
     
     NSManagedObject *managedObject = [self MR_findFirstByAttribute:[primaryAttribute name] withValue:value inContext:context];
-    if (!managedObject) 
+    if (managedObject == nil) 
     {
         managedObject = [self MR_createInContext:context];
-        [managedObject MR_importValuesForKeysWithObject:objectData];
     }
-    else
-    {
-        [managedObject MR_updateValuesForKeysWithObject:objectData];
-    }
+    [managedObject MR_updateValuesForKeysWithObject:objectData];
+
     return managedObject;
 }
 
@@ -356,7 +350,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
              
               NSDictionary *objectData = (NSDictionary *)obj;
               
-              NSManagedObject *dataObject = [self MR_importFromObject:objectData inContext:localContext];
+              NSManagedObject *dataObject = [self MR_updateFromObject:objectData inContext:localContext];
               
               if ([context obtainPermanentIDsForObjects:[NSArray arrayWithObject:dataObject] error:nil])
               {
@@ -372,7 +366,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 
 #pragma clang diagnostic pop
 
-void MR_swizzle(Class c, SEL orig, SEL new)
+void MR_swapMethodsFromClass(Class c, SEL orig, SEL new)
 {
     Method origMethod = class_getInstanceMethod(c, orig);
     Method newMethod = class_getInstanceMethod(c, new);

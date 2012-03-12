@@ -46,7 +46,7 @@
     assertThat(testRelatedEntity, is(notNilValue()));
     assertThat([testRelatedEntity sampleAttribute], containsString(@"sample json file"));
     
-    assertThat([MappedEntity numberOfEntities], is(equalToInteger(1)));
+    assertThat([MappedEntity numberOfEntities], is(equalToInteger(2)));
 }
 
 - (void) testUpdateMappedEntity

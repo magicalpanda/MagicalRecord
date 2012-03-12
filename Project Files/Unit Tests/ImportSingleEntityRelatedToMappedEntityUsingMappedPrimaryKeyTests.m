@@ -45,7 +45,7 @@
     assertThat([[testRelationship userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey], is(equalTo(@"someRandomAttributeName")));
     
     assertThat([SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey numberOfEntities], is(equalToInteger(1)));
-    assertThat([MappedEntity numberOfEntities], is(equalToInteger(1)));
+    assertThat([MappedEntity numberOfEntities], is(equalToInteger(2)));
     assertThat(testRelatedEntity, is(notNilValue()));
     assertThat([testRelatedEntity sampleAttribute], is(containsString(@"sample json file")));    
 }
@@ -82,7 +82,7 @@
     assertThat([[testRelationship userInfo] valueForKey:kMagicalRecordImportRelationshipPrimaryKey], is(equalTo(@"testMappedEntityID")));
     
     assertThat([SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey numberOfEntities], is(equalToInteger(1)));
-    assertThat([MappedEntity numberOfEntities], is(equalToInteger(1)));
+    assertThat([MappedEntity numberOfEntities], is(equalToInteger(2)));
     assertThat([testRelatedEntity testMappedEntityID], is(equalToInteger(42)));
     assertThat([testRelatedEntity sampleAttribute], containsString(@"sample json file"));    
 }
