@@ -45,7 +45,9 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
 
 + (NSManagedObjectContext *) MR_contextThatNotifiesDefaultContextOnMainThread;
 {    
-    __block NSManagedObjectContext *(^findLastContext)(NSManagedObjectContext *) = nil;
+    typedef NSManagedObjectContext *(^RecursiveCallback)(NSManagedObjectContext *);
+    
+    __weak RecursiveCallback findLastContext = nil;
     findLastContext = ^NSManagedObjectContext *(NSManagedObjectContext *context)
     {
         if ([context parentContext] == nil)
