@@ -47,7 +47,7 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
 {    
     typedef NSManagedObjectContext *(^RecursiveCallback)(NSManagedObjectContext *);
     
-    __weak RecursiveCallback findLastContext = nil;
+    __block RecursiveCallback findLastContext = nil;
     findLastContext = ^NSManagedObjectContext *(NSManagedObjectContext *context)
     {
         if ([context parentContext] == nil)
