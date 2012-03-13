@@ -144,3 +144,4 @@ BOOL addMagicalRecordShortHandMethodToPrefixedClassMethod(Class klass, SEL origi
     }
     return NO;
 }
+
