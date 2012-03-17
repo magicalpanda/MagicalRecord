@@ -16,7 +16,7 @@ Magical Record for Core Data was inspired by the ease of Ruby on Rails' Active R
 
 1. In your XCode Project, add all the .h and .m files from the *Source* folder into your project. 
 2. Add *CoreData+MagicalRecord.h* file to your PCH file or your AppDelegate file.
-    * Optionally add `#define MR_SHORTHAND` to your PCH file if you want to use shorthand like `findAll` instead of `MR_findAll`
+    * Optionally add `#define MR_SHORTHAND` to your PCH file before you import CoreData+MagicalRecord.h if you want to use shorthand like `findAll` instead of `MR_findAll`
 4. Start writing code! ... There is no step 3!
 
 # ARC Support
