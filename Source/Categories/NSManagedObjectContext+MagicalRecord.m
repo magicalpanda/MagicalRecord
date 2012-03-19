@@ -17,6 +17,7 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 
 - (void) MR_mergeChangesFromNotification:(NSNotification *)notification;
 - (void) MR_mergeChangesOnMainThread:(NSNotification *)notification;
+- (void) runOnMainQueueWithoutDeadlocking:(void (^)(void))block;
 
 @end
 
@@ -141,7 +142,10 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 	}
 	else
 	{
-		[self performSelectorOnMainThread:@selector(MR_mergeChangesFromNotification:) withObject:notification waitUntilDone:YES];
+    //    [self performSelectorOnMainThread:@selector(MR_mergeChangesFromNotification:) withObject:notification waitUntilDone:YES];
+    [self runOnMainQueueWithoutDeadlocking:^{
+      [self MR_mergeChangesFromNotification:notification];
+    }];
 	}
 }
 
@@ -219,7 +223,10 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 {
 	@synchronized(self)
 	{
-		[self performSelectorOnMainThread:@selector(MR_saveWrapper) withObject:nil waitUntilDone:YES];
+    //    [self performSelectorOnMainThread:@selector(MR_saveWrapper) withObject:nil waitUntilDone:YES];
+    [self runOnMainQueueWithoutDeadlocking:^{
+      [self MR_saveWrapper];
+    }];    
 	}
 
 	return YES;
@@ -292,6 +299,7 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
                          MRLog(@"Creating context in Thread Isolation Mode");
                          context = [[NSManagedObjectContext alloc] init];
                          [context setPersistentStoreCoordinator:coordinator];
+                         MR_AUTORELEASE(context);
                                  )
         PRIVATE_QUEUES_ENABLED(
             MRLog(@"Creating context in Context Private Queue Mode");
@@ -299,9 +307,8 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
             [context performBlockAndWait:^{
                 [context setPersistentStoreCoordinator:coordinator];
             }];
+            MR_AUTORELEASE(context);
         )
-
-        MR_AUTORELEASE(context);
     }
     return context;
 }
@@ -332,7 +339,7 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
     PRIVATE_QUEUES_ENABLED
     (
         MRLog(@"Creating Context - Using Private queue mode");
-        context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        context = [[[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType] autorelease];
         if (context != [self MR_defaultContext])
         {
             [context setParentContext:[NSManagedObjectContext MR_defaultContext]];
@@ -340,6 +347,18 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
     )
     
     return context;
+}
+
+#pragma mark -
+
+- (void) runOnMainQueueWithoutDeadlocking:(void (^)(void))block {
+  if ([NSThread isMainThread]) {
+    MXLog(@"Running MR block from main thread");
+    block();
+  } else {
+    MXLog(@"Running MR block through dispatch_sync to main queue");
+    dispatch_sync(dispatch_get_main_queue(), block);
+  }
 }
 
 @end

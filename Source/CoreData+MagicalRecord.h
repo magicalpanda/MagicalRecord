@@ -29,7 +29,10 @@
 #endif
 
 #ifndef kCFCoreFoundationVersionNumber_iPhoneOS_5_0
-#define kCFCoreFoundationVersionNumber_iPhoneOS_5_0 674.0
+// Replacing this because encoutnering deadlocks. See https://github.com/magicalpanda/MagicalRecord/pull/114 for similar discussion
+// TODO figure out how to get iOS5 supported properly
+//#define kCFCoreFoundationVersionNumber_iPhoneOS_5_0 674.0
+#define kCFCoreFoundationVersionNumber_iPhoneOS_5_0 9999.0
 #endif
 
 #ifndef kCFCoreFoundationVersionNumber_10_7
