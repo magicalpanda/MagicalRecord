@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="851" systemVersion="11A511" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="878" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AbstractRelatedEntity" representedClassName="AbstractRelatedEntity" isAbstract="YES">
         <attribute name="sampleBaseAttribute" optional="YES" attributeType="String"/>
         <relationship name="mainTestEntity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="SingleRelatedEntity" inverseName="testRelationship" inverseEntity="SingleRelatedEntity"/>
@@ -8,6 +8,23 @@
         <attribute name="sampleConcreteAttribute" optional="YES" attributeType="String"/>
     </entity>
     <entity name="EntityWithDiffernentClassName" representedClassName="DifferentClassNameMapping"/>
+    <entity name="MappedEntity" representedClassName="MappedEntity">
+        <attribute name="mappedEntityID" optional="YES" attributeType="Integer 16" defaultValueString="0"/>
+        <attribute name="nestedAttribute" optional="YES" attributeType="String">
+            <userInfo>
+                <entry key="mappedKeyName" value="attributeValue.nestedValue"/>
+            </userInfo>
+        </attribute>
+        <attribute name="sampleAttribute" optional="YES" attributeType="String"/>
+        <attribute name="testMappedEntityID" optional="YES" attributeType="Integer 64" defaultValueString="0">
+            <userInfo>
+                <entry key="mappedKeyName" value="id"/>
+            </userInfo>
+        </attribute>
+        <userInfo>
+            <entry key="primaryAttributeKey" value="mapped"/>
+        </userInfo>
+    </entity>
     <entity name="SingleEntityWithNoRelationships" representedClassName="SingleEntityWithNoRelationships">
         <attribute name="booleanTestAttribute" optional="YES" attributeType="Boolean"/>
         <attribute name="colorTestAttribute" optional="YES" attributeType="Transformable">
@@ -33,5 +50,6 @@
         <element name="EntityWithDiffernentClassName" positionX="-540" positionY="-1665" width="173" height="45"/>
         <element name="SingleEntityWithNoRelationships" positionX="-108" positionY="-1521" width="180" height="195"/>
         <element name="SingleRelatedEntity" positionX="-362" positionY="-149631" width="128" height="60"/>
+        <element name="MappedEntity" positionX="160" positionY="192" width="128" height="105"/>
     </elements>
 </model>
