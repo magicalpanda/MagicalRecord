@@ -11,5 +11,6 @@
 @interface NSAttributeDescription (MagicalRecord_DataImport)
 
 - (NSString *) MR_primaryKey;
+- (id) MR_valueForKeyPath:(NSString *)keyPath fromObjectData:(id)objectData;
 
 @end

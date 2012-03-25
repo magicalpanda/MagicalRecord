@@ -26,35 +26,6 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 
 @implementation NSManagedObject (MagicalRecord_DataImport)
 
-- (id) MR_valueForAttribute:(NSAttributeDescription *)attributeInfo fromObjectData:(NSDictionary *)objectData forKeyPath:(NSString *)keyPath
-{
-    id value = [objectData valueForKeyPath:keyPath];
-    
-    NSAttributeType attributeType = [attributeInfo attributeType];
-    NSString *desiredAttributeType = [[attributeInfo userInfo] valueForKey:kMagicalRecordImportAttributeValueClassNameKey];
-    if (desiredAttributeType) 
-    {
-        if ([desiredAttributeType hasSuffix:@"Color"])
-        {
-            value = colorFromString(value);
-        }
-    }
-    else 
-    {
-        if (attributeType == NSDateAttributeType)
-        {
-            if (![value isKindOfClass:[NSDate class]]) 
-            {
-                NSString *dateFormat = [[attributeInfo userInfo] valueForKey:kMagicalRecordImportCustomDateFormatKey];
-                value = dateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
-            }
-            value = adjustDateForDST(value);
-        }
-    }
-    
-    return value == [NSNull null] ? nil : value;
-}
-
 - (BOOL) MR_importValue:(id)value forKey:(NSString *)key
 {
     NSString *selectorString = [NSString stringWithFormat:@"import%@:", [key MR_capitalizedFirstCharaterString]];
@@ -79,7 +50,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
         
         if (lookupKeyPath) 
         {
-            id value = [self MR_valueForAttribute:attributeInfo fromObjectData:objectData forKeyPath:lookupKeyPath];
+            id value = [attributeInfo MR_valueForKeyPath:lookupKeyPath fromObjectData:objectData];
             if (![self MR_importValue:value forKey:attributeName])
             {
                 [self setValue:value forKey:attributeName];
