@@ -33,13 +33,6 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
     return [self mergedModelFromBundles:nil];
 }
 
-//deprecated
-+ (NSManagedObjectModel *) MR_newManagedObjectModel 
-{
-    NSManagedObjectModel *model = [self MR_mergedObjectModelFromMainBundle];
-    return model;
-}
-
 + (NSManagedObjectModel *) MR_newModelNamed:(NSString *) modelName inBundleNamed:(NSString *) bundleName
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:[modelName stringByDeletingPathExtension] 

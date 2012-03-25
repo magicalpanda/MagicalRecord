@@ -72,16 +72,26 @@
     }];
 }
 
-- (void) MR_saveInBackground;
+- (void) MR_saveInBackgroundCompletion:(void (^)(void))completion;
 {
-    [self MR_saveInBackgroundErrorHandler:nil];
+    [self MR_saveInBackgroundErrorHandler:nil completion:completion];
+}
+
+- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion;
+{
+    [self performBlock:^{
+        [self MR_saveInBackgroundErrorHandler:errorCallback];
+        
+        if (completion) 
+        {
+            completion();
+        }
+    }];
 }
 
 - (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback;
 {
-    [self performBlock:^{
-        [self MR_saveErrorCallback:errorCallback];
-    }];
+    [self MR_saveInBackgroundErrorHandler:errorCallback completion:nil];
 }
 
 @end

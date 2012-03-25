@@ -27,14 +27,14 @@
     
     if ([localContext hasChanges]) 
     {
-        [localContext MR_saveInBackgroundErrorHandler:errorHandler];
-    }
-    
-    [mainContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
-    
-    if (completion)
-    {
-        completion();
+        [localContext MR_saveInBackgroundErrorHandler:errorHandler completion:^{
+            [mainContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
+            
+            if (completion)
+            {
+                completion();
+            }            
+        }];
     }
 }
                                     
