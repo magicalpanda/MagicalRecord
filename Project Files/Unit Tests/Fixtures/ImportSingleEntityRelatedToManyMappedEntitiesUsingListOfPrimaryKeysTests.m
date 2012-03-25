@@ -46,42 +46,42 @@
     SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey *testEntity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
     [[NSManagedObjectContext MR_defaultContext] MR_save];
     
-    assertThat([SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey numberOfEntities], is(equalToInteger(2)));
-    assertThat([MappedEntity numberOfEntities], is(equalToInteger(14)));
-
-    assertThat(testEntity.mappedEntities, hasCountOf(4));
-    for (MappedEntity *relatedEntity in testEntity.mappedEntities)
-    {
-        assertThat(relatedEntity.sampleAttribute, containsString(@"test attribute"));
-    }
-}
-
-- (void) testDataUpdateWithLookupInfoInDataSet
-{
-    SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey *testEntity = [[self testEntityClass] MR_updateFromObject:self.testEntityData];
-    [[NSManagedObjectContext MR_defaultContext] MR_save];
-
     assertThat([SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey numberOfEntities], is(equalToInteger(1)));
     assertThat([MappedEntity numberOfEntities], is(equalToInteger(10)));
-               
-    assertThat(testEntity, is(notNilValue()));
-    assertThat(testEntity.testPrimaryKey, is(equalToInteger(84)));
-    assertThat(testEntity.mappedEntities, hasCountOf(5));
 
+    assertThat(testEntity.mappedEntities, hasCountOf(5));
     for (MappedEntity *relatedEntity in testEntity.mappedEntities)
     {
         assertThat(relatedEntity.sampleAttribute, containsString(@"test attribute"));
     }
 }
 
-- (void) testDataUpdateWithoutLookupData
-{
-    SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey *testEntity =
-    [SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey findFirstByAttribute:@"testPrimaryKey" withValue:[NSNumber numberWithInt:84]];
-    
-    assertThat(testEntity, is(notNilValue()));
-    
-    [testEntity MR_updateValuesForKeysWithObject:self.testEntityData];
-}
+//- (void) testDataUpdateWithLookupInfoInDataSet
+//{
+//    SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey *testEntity = [[self testEntityClass] MR_updateFromObject:self.testEntityData];
+//    [[NSManagedObjectContext MR_defaultContext] MR_save];
+//
+//    assertThat([SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey numberOfEntities], is(equalToInteger(1)));
+//    assertThat([MappedEntity numberOfEntities], is(equalToInteger(10)));
+//               
+//    assertThat(testEntity, is(notNilValue()));
+//    assertThat(testEntity.testPrimaryKey, is(equalToInteger(84)));
+//    assertThat(testEntity.mappedEntities, hasCountOf(5));
+//
+//    for (MappedEntity *relatedEntity in testEntity.mappedEntities)
+//    {
+//        assertThat(relatedEntity.sampleAttribute, containsString(@"test attribute"));
+//    }
+//}
+
+//- (void) testDataUpdateWithoutLookupData
+//{
+//    SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey *testEntity =
+//    [SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey findFirstByAttribute:@"testPrimaryKey" withValue:[NSNumber numberWithInt:84]];
+//    
+//    assertThat(testEntity, is(notNilValue()));
+//    
+//    [testEntity MR_updateValuesForKeysWithObject:self.testEntityData];
+//}
 
 @end

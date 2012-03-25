@@ -8,16 +8,16 @@
 
 #import "CoreData+MagicalRecord.h"
 
-NSString * const kMagicalRecordImportPrimaryAttributeKey = @"primaryAttributeKey";
-
 @implementation NSEntityDescription (MagicalRecord_DataImport)
 
-- (NSAttributeDescription *) MR_primaryKeyAttribute;
+- (NSAttributeDescription *) MR_primaryAttributeToRelateBy;
 {
-    NSString *lookupKey = [[self userInfo] valueForKey:kMagicalRecordImportPrimaryAttributeKey] ?: primaryKeyNameFromString([self name]);
-    NSAttributeDescription *primaryAttribute = [[self attributesByName] valueForKey:lookupKey];
+    NSString *lookupKey = [[self userInfo] valueForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: primaryKeyNameFromString([self name]);
+    NSDictionary *attributesByName = [self attributesByName];
+                                    
+    if ([attributesByName count] == 0) return nil;
     
-    NSAssert3(primaryAttribute != nil, @"Unable to determine primary attribute for %@. Specify either an attribute named %@ or the primary key in userInfo named '%@'", [self name], primaryKeyNameFromString([self name]), kMagicalRecordImportPrimaryAttributeKey);
+    NSAttributeDescription *primaryAttribute = [attributesByName objectForKey:lookupKey];
 
     return primaryAttribute;
 }
@@ -30,14 +30,5 @@ NSString * const kMagicalRecordImportPrimaryAttributeKey = @"primaryAttributeKey
     return newInstance;
 }
 
-//- (NSManagedObject *) MR_createInstanceFromObject:(id)objectData inContext:(NSManagedObjectContext *)context
-//{
-//    NSManagedObject *relatedObject = [[self class] insertNewObjectForEntityForName:[self name] 
-//                                                            inManagedObjectContext:context];
-//    
-//    [relatedObject MR_importValuesForKeysWithObject:objectData];
-//    
-//    return relatedObject;
-//}
 
 @end

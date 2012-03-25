@@ -20,13 +20,20 @@
 
 + (void) setupCoreDataStackWithiCloudContainer:(NSString *)icloudBucket localStoreNamed:(NSString *)localStore;
 {
-    NSString *contentNameKey = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
-    [self setupCoreDataStackWithiCloudContainer:icloudBucket contentNameKey:contentNameKey localStoreNamed:localStore cloudStorePathComponent:nil];
+    NSString *contentNameKey = [[[NSBundle mainBundle] infoDictionary] objectForKey:(id)kCFBundleIdentifierKey];
+    [self setupCoreDataStackWithiCloudContainer:icloudBucket
+                                 contentNameKey:contentNameKey
+                                localStoreNamed:localStore
+                        cloudStorePathComponent:nil];
 }
 
 + (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent;
 {
-    [self setupCoreDataStackWithiCloudContainer:containerID contentNameKey:contentNameKey localStoreNamed:localStoreName cloudStorePathComponent:pathSubcomponent completion:nil];
+    [self setupCoreDataStackWithiCloudContainer:containerID 
+                                 contentNameKey:contentNameKey
+                                localStoreNamed:localStoreName
+                        cloudStorePathComponent:pathSubcomponent
+                                     completion:nil];
 }
 
 + (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent completion:(void(^)(void))completion;

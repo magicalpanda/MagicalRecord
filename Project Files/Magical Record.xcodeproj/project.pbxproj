@@ -32,7 +32,6 @@
 		C738127B141039900054EEF0 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json in Resources */ = {isa = PBXBuildFile; fileRef = C7381275141037E80054EEF0 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json */; };
 		C753897413DB61CE002B2F57 /* GHUnitTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = C753897313DB61CE002B2F57 /* GHUnitTestMain.m */; };
 		C753897613DB6322002B2F57 /* GHUnit.framework in Copy GHUnit into App Bundle */ = {isa = PBXBuildFile; fileRef = C721C84113D0C6460097AB6F /* GHUnit.framework */; };
-		C75C7D6A147220D400D0C2FE /* generateShorthandFile.rb in Resources */ = {isa = PBXBuildFile; fileRef = C75C7D69147220D300D0C2FE /* generateShorthandFile.rb */; };
 		C75C7D6B147220D400D0C2FE /* generateShorthandFile.rb in Resources */ = {isa = PBXBuildFile; fileRef = C75C7D69147220D300D0C2FE /* generateShorthandFile.rb */; };
 		C763783213E10BEC0009A6CA /* GHUnitIOSTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = C763783113E10BEC0009A6CA /* GHUnitIOSTestMain.m */; };
 		C76AF7E513DBC08F00CE2E05 /* FixtureHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FBA13D0D2AE00298F87 /* FixtureHelpers.m */; };
@@ -599,20 +598,9 @@
 		C77E5FA513D0CBA600298F87 /* Unit Tests */ = {
 			isa = PBXGroup;
 			children = (
+				C7DD764B1512021B00216827 /* Core Tests */,
 				C76AF7F513DBC6E900CE2E05 /* Data Import Tests */,
 				C77E5FA913D0CBE300298F87 /* Fixtures */,
-				C77E5FA613D0CBDE00298F87 /* MagicalRecordTests.h */,
-				C77E5FA713D0CBDE00298F87 /* MagicalRecordTests.m */,
-				C70B6E6F13D0F62500709450 /* NSPersisentStoreHelperTests.h */,
-				C70B6E7013D0F62500709450 /* NSPersisentStoreHelperTests.m */,
-				C70B6E7213D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.h */,
-				C70B6E7313D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.m */,
-				C70B6E7513D0F66000709450 /* NSManagedObjectModelHelperTests.h */,
-				C70B6E7613D0F66000709450 /* NSManagedObjectModelHelperTests.m */,
-				C70B6E7813D0F68400709450 /* NSManagedObjectContextHelperTests.h */,
-				C70B6E7913D0F68400709450 /* NSManagedObjectContextHelperTests.m */,
-				C70B6E7B13D0F69A00709450 /* NSManagedObjectHelperTests.h */,
-				C70B6E7C13D0F69A00709450 /* NSManagedObjectHelperTests.m */,
 			);
 			name = "Unit Tests";
 			sourceTree = "<group>";
@@ -755,16 +743,16 @@
 			children = (
 				C7DD729C150F832A00216827 /* MagicalImportFunctions.h */,
 				C7DD729D150F832A00216827 /* MagicalImportFunctions.m */,
-				C7DD729E150F832A00216827 /* NSAttributeDescription+MagicalDataImport.h */,
-				C7DD729F150F832A00216827 /* NSAttributeDescription+MagicalDataImport.m */,
 				C7DD72A0150F832A00216827 /* NSEntityDescription+MagicalDataImport.h */,
 				C7DD72A1150F832A00216827 /* NSEntityDescription+MagicalDataImport.m */,
+				C7DD729E150F832A00216827 /* NSAttributeDescription+MagicalDataImport.h */,
+				C7DD729F150F832A00216827 /* NSAttributeDescription+MagicalDataImport.m */,
+				C7DD72A6150F832A00216827 /* NSRelationshipDescription+MagicalDataImport.h */,
+				C7DD72A7150F832A00216827 /* NSRelationshipDescription+MagicalDataImport.m */,
 				C7DD72A2150F832A00216827 /* NSNumber+MagicalDataImport.h */,
 				C7DD72A3150F832A00216827 /* NSNumber+MagicalDataImport.m */,
 				C7DD72A4150F832A00216827 /* NSObject+MagicalDataImport.h */,
 				C7DD72A5150F832A00216827 /* NSObject+MagicalDataImport.m */,
-				C7DD72A6150F832A00216827 /* NSRelationshipDescription+MagicalDataImport.h */,
-				C7DD72A7150F832A00216827 /* NSRelationshipDescription+MagicalDataImport.m */,
 				C7DD72A8150F832A00216827 /* NSString+MagicalDataImport.h */,
 				C7DD72A9150F832A00216827 /* NSString+MagicalDataImport.m */,
 			);
@@ -806,6 +794,8 @@
 		C7DD72C4150F832A00216827 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				C7DD72D1150F832A00216827 /* MagicalRecord.h */,
+				C7DD72D2150F832A00216827 /* MagicalRecord.m */,
 				C7DD72C5150F832A00216827 /* MagicalRecord+Actions.h */,
 				C7DD72C6150F832A00216827 /* MagicalRecord+Actions.m */,
 				C7DD72C7150F832A00216827 /* MagicalRecord+ErrorHandling.h */,
@@ -818,11 +808,28 @@
 				C7DD72CE150F832A00216827 /* MagicalRecord+Setup.m */,
 				C7DD72CF150F832A00216827 /* MagicalRecord+ShorthandSupport.h */,
 				C7DD72D0150F832A00216827 /* MagicalRecord+ShorthandSupport.m */,
-				C7DD72D1150F832A00216827 /* MagicalRecord.h */,
-				C7DD72D2150F832A00216827 /* MagicalRecord.m */,
 				C7DD72D3150F832A00216827 /* MagicalRecordShorthand.h */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		C7DD764B1512021B00216827 /* Core Tests */ = {
+			isa = PBXGroup;
+			children = (
+				C77E5FA613D0CBDE00298F87 /* MagicalRecordTests.h */,
+				C77E5FA713D0CBDE00298F87 /* MagicalRecordTests.m */,
+				C70B6E6F13D0F62500709450 /* NSPersisentStoreHelperTests.h */,
+				C70B6E7013D0F62500709450 /* NSPersisentStoreHelperTests.m */,
+				C70B6E7213D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.h */,
+				C70B6E7313D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.m */,
+				C70B6E7513D0F66000709450 /* NSManagedObjectModelHelperTests.h */,
+				C70B6E7613D0F66000709450 /* NSManagedObjectModelHelperTests.m */,
+				C70B6E7813D0F68400709450 /* NSManagedObjectContextHelperTests.h */,
+				C70B6E7913D0F68400709450 /* NSManagedObjectContextHelperTests.m */,
+				C70B6E7B13D0F69A00709450 /* NSManagedObjectHelperTests.h */,
+				C70B6E7C13D0F69A00709450 /* NSManagedObjectHelperTests.m */,
+			);
+			name = "Core Tests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -907,7 +914,6 @@
 				C76AF7ED13DBC09800CE2E05 /* SampleJSONDataForImport.json in Resources */,
 				C76AF7EE13DBC09B00CE2E05 /* SingleEntityWithNoRelationships.plist in Resources */,
 				C76AF82A13DBEE5A00CE2E05 /* SingleRelatedEntity.json in Resources */,
-				C75C7D6A147220D400D0C2FE /* generateShorthandFile.rb in Resources */,
 				C70ED6841507A84F00486B6F /* SingleEntityWithNoRelationships.json in Resources */,
 				C70ED6851507A85700486B6F /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.json in Resources */,
 				C70ED6861507A85A00486B6F /* SingleEntityRelatedToMappedEntityUsingDefaults.json in Resources */,
@@ -966,7 +972,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#\"$PROJECT_DIR/generateShorthandFile.rb\" $PROJECT_DIR/Source $PROJECT_DIR/Source/MagicalRecordShorthand.h";
+			shellScript = "#\"$PROJECT_DIR/generateShorthandFile.rb\" $PROJECT_DIR/MagicalRecord $PROJECT_DIR/Source/MagicalRecordShorthand.h";
 		};
 		C7BD887613DBF8FA00274567 /* Regenerate Core Data Entities */ = {
 			isa = PBXShellScriptBuildPhase;

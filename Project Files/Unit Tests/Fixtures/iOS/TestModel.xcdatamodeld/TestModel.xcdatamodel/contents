@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1170" systemVersion="11D50d" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50d" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AbstractRelatedEntity" representedClassName="AbstractRelatedEntity" isAbstract="YES">
         <attribute name="sampleBaseAttribute" optional="YES" attributeType="String"/>
     </entity>
@@ -21,18 +21,18 @@
             </userInfo>
         </attribute>
         <userInfo>
-            <entry key="primaryAttributeKey" value="mapped"/>
+            <entry key="relatedByAttribute" value="mapped"/>
         </userInfo>
     </entity>
     <entity name="SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey" representedClassName="SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey">
         <attribute name="testPrimaryKey" optional="YES" attributeType="Integer 16" defaultValueString="0"/>
         <relationship name="mappedEntities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MappedEntity">
             <userInfo>
-                <entry key="primaryRelationshipKey" value="testMappedEntityID"/>
+                <entry key="relatedByAttribute" value="testMappedEntityID"/>
             </userInfo>
         </relationship>
         <userInfo>
-            <entry key="primaryAttributeKey" value="testPrimaryKey"/>
+            <entry key="relatedByAttribute" value="testPrimaryKey"/>
         </userInfo>
     </entity>
     <entity name="SingleEntityRelatedToMappedEntityUsingDefaults" representedClassName="SingleEntityRelatedToMappedEntityUsingDefaults">
@@ -43,7 +43,7 @@
         <relationship name="mappedEntity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MappedEntity">
             <userInfo>
                 <entry key="mappedKeyName" value="someRandomAttributeName"/>
-                <entry key="primaryRelationshipKey" value="testMappedEntityID"/>
+                <entry key="relatedByAttribute" value="testMappedEntityID"/>
             </userInfo>
         </relationship>
     </entity>
@@ -102,7 +102,7 @@
         <element name="ConcreteRelatedEntity" positionX="153" positionY="375" width="171" height="60"/>
         <element name="EntityWithDiffernentClassName" positionX="-135" positionY="135" width="198" height="45"/>
         <element name="MappedEntity" positionX="421" positionY="558" width="128" height="105"/>
-        <element name="SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey" positionX="657" positionY="450" width="351" height="60"/>
+        <element name="SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey" positionX="657" positionY="450" width="351" height="75"/>
         <element name="SingleEntityRelatedToMappedEntityUsingDefaults" positionX="621" positionY="333" width="297" height="75"/>
         <element name="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" positionX="603" positionY="702" width="342" height="60"/>
         <element name="SingleEntityRelatedToMappedEntityWithNestedMappedAttributes" positionX="664" positionY="597" width="470" height="60"/>
