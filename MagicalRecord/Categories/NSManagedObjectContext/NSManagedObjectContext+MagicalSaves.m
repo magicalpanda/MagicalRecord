@@ -62,7 +62,7 @@
 
 - (void) MR_save;
 {
-    [self MR_saveWithErrorCallback:nil];    
+    [self MR_saveErrorHandler:nil];    
 }
 
 - (void) MR_saveErrorHandler:(void (^)(NSError *))errorCallback;

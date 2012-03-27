@@ -33,6 +33,8 @@ static NSManagedObjectContext *defaultManageObjectContext_ = nil;
 - (NSString *) MR_description;
 {
     NSString *contextName = (self == defaultManageObjectContext_) ? @"*** DEFAULT ***" : @"";
+    contextName = (self == rootSavingContext) ? @"*** BACKGROUND SAVE ***" : contextName;
+    
     NSString *onMainThread = [NSThread isMainThread] ? @"*** MAIN THREAD ***" : @"";
     
     return [NSString stringWithFormat:@"%@: %@ Context %@", [self description], contextName, onMainThread];
