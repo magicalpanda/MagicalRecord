@@ -75,6 +75,9 @@
     assertThat([[defaultStore URL] absoluteString], endsWith(testStoreName));
 }
 
+- (void) customErrorHandler:(id)error;
+{
+}
 
 - (void) testCanSetAUserSpecifiedErrorHandler
 {

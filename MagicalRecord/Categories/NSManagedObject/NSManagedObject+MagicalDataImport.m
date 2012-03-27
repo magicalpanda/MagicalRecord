@@ -209,16 +209,16 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 
 - (BOOL) MR_importValuesForKeysWithObject:(id)objectData
 {
-    void (^importRelationshipLogic)(NSRelationshipDescription *, id) = ^(NSRelationshipDescription *relationshipInfo, id objectData) {
+    void (^importRelationshipLogic)(NSRelationshipDescription *, id) = ^(NSRelationshipDescription *relationshipInfo, id localObjectData) {
         
-        NSManagedObject *relatedObject = [self MR_findObjectForRelationship:relationshipInfo withData:objectData];
+        NSManagedObject *relatedObject = [self MR_findObjectForRelationship:relationshipInfo withData:localObjectData];
         
         if (relatedObject == nil)
         {
             NSEntityDescription *entityDescription = [relationshipInfo destinationEntity];
             relatedObject = [entityDescription MR_createInstanceInContext:[self managedObjectContext]];
         }
-        [relatedObject MR_importValuesForKeysWithObject:objectData];
+        [relatedObject MR_importValuesForKeysWithObject:localObjectData];
         
         [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
     };

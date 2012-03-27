@@ -107,9 +107,9 @@
         [actualColor getRed:&red green:&green blue:&blue alpha:&alpha];
 
         assertThatFloat(alpha, is(equalToFloat(1.)));
-        assertThatFloat(red, is(equalToFloat(64./255.)));
-        assertThatFloat(green, is(equalToFloat(128./255.)));
-        assertThatFloat(blue, is(equalToFloat(225./255.)));
+        assertThatFloat(red, is(equalToFloat(64.0f/255.0f)));
+        assertThatFloat(green, is(equalToFloat(128.0f/255.0f)));
+        assertThatFloat(blue, is(equalToFloat(225.0f/255.0f)));
     }
 }
 #endif

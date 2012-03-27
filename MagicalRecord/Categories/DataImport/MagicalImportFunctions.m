@@ -73,9 +73,9 @@ NSInteger* newColorComponentsFromString(NSString *serializedColor)
 UIColor * UIColorFromString(NSString *serializedColor)
 {
     NSInteger *componentValues = newColorComponentsFromString(serializedColor);
-    UIColor *color = [UIColor colorWithRed:(componentValues[0] / 255.)
-                                     green:(componentValues[1] / 255.)
-                                      blue:(componentValues[2] / 255.)
+    UIColor *color = [UIColor colorWithRed:(componentValues[0] / 255.0f)
+                                     green:(componentValues[1] / 255.0f)
+                                      blue:(componentValues[2] / 255.0f)
                                      alpha:componentValues[3]];
     
     free(componentValues);
@@ -88,9 +88,9 @@ id (*colorFromString)(NSString *) = UIColorFromString;
 NSColor * NSColorFromString(NSString *serializedColor)
 {
     NSInteger *componentValues = newColorComponentsFromString(serializedColor);
-    NSColor *color = [NSColor colorWithDeviceRed:(componentValues[0] / 255.)
-                                           green:(componentValues[1] / 255.)
-                                            blue:(componentValues[2] / 255.)
+    NSColor *color = [NSColor colorWithDeviceRed:(componentValues[0] / 255.0f)
+                                           green:(componentValues[1] / 255.0f)
+                                            blue:(componentValues[2] / 255.0f)
                                            alpha:componentValues[3]];
     free(componentValues);
     return color;

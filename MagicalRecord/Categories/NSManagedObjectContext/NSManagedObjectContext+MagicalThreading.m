@@ -39,33 +39,20 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
 + (NSManagedObjectContext *) MR_contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 {
     NSManagedObjectContext *context = [self MR_contextWithStoreCoordinator:coordinator];
-    MRLog(@"Creating new context");
+    NSManagedObjectContext *defaultContext = [self MR_defaultContext];
+    [context setParentContext:defaultContext];
+    
+    MRLog(@"Creating new context %@, set %@ as parent", context, defaultContext);
+    
     return context;
 }
 
 + (NSManagedObjectContext *) MR_contextThatNotifiesDefaultContextOnMainThread;
 {    
-    typedef NSManagedObjectContext *(^ContextChainBlock)(NSManagedObjectContext *);
-    __unsafe_unretained ContextChainBlock findLastContext = nil;
-    
-    findLastContext = ^NSManagedObjectContext *(NSManagedObjectContext *context)
-    {
-        if ([context parentContext] == nil)
-        {
-            return context;
-        }
-        return findLastContext([context parentContext]);
-    };
-    
     NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
-    NSManagedObjectContext *lastContext = findLastContext(defaultContext);
-    NSManagedObjectContext *context = nil;
+    NSManagedObjectContext *context = [self MR_contextWithParent:defaultContext];
     
-    context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    
-    [context setParentContext:lastContext];
-    
-    MRLog(@"Created context %@: set %@ context as parent [defaultContext: %@]", context, lastContext, defaultContext);
+    MRLog(@"Created context %@: set %@ context as parent", context, defaultContext);
     
     return context;
 }
