@@ -24,7 +24,7 @@
 
 + (void) cleanUpStack;
 {
-	[NSManagedObjectContext MR_setDefaultContext:nil];
+	[NSManagedObjectContext MR_cleanUp];
 	[NSManagedObjectModel MR_setDefaultManagedObjectModel:nil];
 	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:nil];
 	[NSPersistentStore MR_setDefaultPersistentStore:nil];

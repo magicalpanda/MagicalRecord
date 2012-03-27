@@ -10,16 +10,16 @@
 
 @interface NSManagedObjectContext (InternalMagicalSaves)
 
-- (void) MR_saveErrorCallback:(void(^)(NSError *))errorCallback;
+- (void) MR_saveWithErrorCallback:(void(^)(NSError *))errorCallback;
 
 @end
 
 
 @implementation NSManagedObjectContext (MagicalSaves)
 
-- (void) MR_saveErrorCallback:(void(^)(NSError *))errorCallback;
+- (void) MR_saveWithErrorCallback:(void(^)(NSError *))errorCallback;
 {
-    MRLog(@"Saving %@Context%@", self == [[self class] MR_defaultContext] ? @" *** Default *** ": @"", ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
+    MRLog(@"-> Saving %@", [self MR_description]);
 
     NSError *error = nil;
 	BOOL saved = NO;
@@ -55,20 +55,20 @@
 - (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback;
 {
     [self performBlockAndWait:^{
-        [self MR_saveErrorCallback:errorCallback];
+        [self MR_saveWithErrorCallback:errorCallback];
     }];
     [[self parentContext] MR_saveNestedContextsErrorHandler:errorCallback];
 }
 
 - (void) MR_save;
 {
-    [self MR_saveErrorCallback:nil];
+    [self MR_saveWithErrorCallback:nil];
 }
 
 - (void) MR_saveErrorHandler:(void (^)(NSError *))errorCallback;
 {
     [self performBlockAndWait:^{
-        [self MR_saveErrorCallback:errorCallback];
+        [self MR_saveWithErrorCallback:errorCallback];
     }];
 }
 

@@ -44,9 +44,7 @@
                                                                                           cloudStorePathComponent:pathSubcomponent
                                                                                                        completion:completion];
     [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
-    
-    NSManagedObjectContext *context = [NSManagedObjectContext MR_contextWithStoreCoordinator:coordinator];
-    [NSManagedObjectContext MR_setDefaultContext:context];
+    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
 }
 
 @end

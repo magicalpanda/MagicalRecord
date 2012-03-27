@@ -16,16 +16,33 @@ static NSManagedObjectContext *defaultManageObjectContext_ = nil;
 
 - (void) MR_mergeChangesFromNotification:(NSNotification *)notification;
 - (void) MR_mergeChangesOnMainThread:(NSNotification *)notification;
++ (void) MR_setDefaultContext:(NSManagedObjectContext *)moc;
++ (void) MR_setRootSavingContext:(NSManagedObjectContext *)context;
 
 @end
 
 
 @implementation NSManagedObjectContext (MagicalRecord)
 
++ (void) MR_cleanUp;
+{
+    [self MR_setDefaultContext:nil];
+    [self MR_setRootSavingContext:nil];
+}
+
+- (NSString *) MR_description;
+{
+    NSString *contextName = (self == [[self class] MR_defaultContext]) ? @"*** DEFAULT ***" : @"";
+    NSString *onMainThread = [NSThread isMainThread] ? @"*** MAIN THREAD ***" : @"";
+    
+    return [NSString stringWithFormat:@"%@: %@ Context %@", [self description], contextName, onMainThread];
+}
+
 + (NSManagedObjectContext *) MR_defaultContext
 {
 	@synchronized (self)
 	{
+        NSAssert(defaultManageObjectContext_ != nil, @"Default Context is nil! Did you forget to initialize the Core Data Stack?");
         return defaultManageObjectContext_;
 	}
 }
@@ -112,12 +129,12 @@ static NSManagedObjectContext *defaultManageObjectContext_ = nil;
 	NSManagedObjectContext *context = nil;
     if (coordinator != nil)
 	{
-        MRLog(@"Creating MOContext %@", [NSThread isMainThread] ? @" *** On Main Thread ***" : @"");
-        
         context = [self MR_context];
         [context performBlockAndWait:^{
             [context setPersistentStoreCoordinator:coordinator];
         }];
+        
+        MRLog(@"-> Created %@", [context MR_description]);
     }
     return context;
 }
