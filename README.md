@@ -6,7 +6,7 @@ In software engineering, the active record pattern is a design pattern found in 
 
 >	*- [Wikipedia]("http://en.wikipedia.org/wiki/Active_record_pattern")*
 
-Magical Record for Core Data was inspired by the ease of Ruby on Rails' Active Record fetching. The goals of this code are:
+MagicalRecord was inspired by the ease of Ruby on Rails' Active Record fetching. The goals of this code are:
 
 * Clean up my Core Data related code
 * Allow for clear, simple, one-line fetches
@@ -23,18 +23,18 @@ Magical Record for Core Data was inspired by the ease of Ruby on Rails' Active R
 ## ARC Support
 
 MagicalRecord fully supports ARC out of the box, there is no configuration necessary. 
-The last version to support manually managed memory is 1.9, and is available from the downloads page, or by switching to the 1.9 tag in the source.
+The last version to support manually managed memory is 1.8.3, and is available from the downloads page, or by switching to the 1.8.3 tag in the source.
 
 ## Nested Contexts
 
-New in Core Data is support for related contexts. This is a super neat, and super fast feature. However, writing a wrapper that supports both is, frankly, more work that it's worth. However, the 1.9 version will be the last version that has dual support, and going forward, MagicalRecord will only work with the version of Core Data that has this feature.
+New in Core Data is support for related contexts. This is a super neat, and super fast feature. However, writing a wrapper that supports both is, frankly, more work that it's worth. However, the 1.8.3 version will be the last version that has dual support, and going forward, MagicalRecord will only work with the version of Core Data that has this feature.
 
 # Usage
 
 ## Setting up the Core Data Stack
 
 To get started, first, import the header file *CoreData+MagicalRecord.h* in your project's pch file. This will allow a global include of all the required headers.
-Next, somewhere in your app delegate, in either the applicationDidFinishLaunching:(UIApplication *) withOptions:(NSDictionary *) method, or awakeFromNib, use **one** of the following setup calls with the MagicalRecordHelpers class:
+Next, somewhere in your app delegate, in either the applicationDidFinishLaunching:(UIApplication *) withOptions:(NSDictionary *) method, or awakeFromNib, use **one** of the following setup calls with the **MagicalRecord** class:
 
 	+ (void) setupCoreDataStack;
 	+ (void) setupAutoMigratingDefaultCoreDataStack;
@@ -46,11 +46,11 @@ Each call instantiates one of each piece of the Core Data stack, and provides ge
 
 And, before your app exits, you can use the clean up method:
 
-	[MagicalRecordHelpers cleanUp];
+	[MagicalRecord cleanUp];
 	
 ## iCloud Support
 
-  Apps built for iOS5+ and OSX Lion 10.7.2+ can take advantage of iCloud to sync Core Data stores. To implement this functionality with Magical Record, use **one** of the following setup calls instead of those listed in the previous section:
+  Apps built for iOS5+ and OSX Lion 10.7.2+ can take advantage of iCloud to sync Core Data stores. To implement this functionality with MagicalRecord, use **one** of the following setup calls instead of those listed in the previous section:
   
   	+ (void) setupCoreDataStackWithiCloudContainer:(NSString *)icloudBucket localStoreNamed:(NSString *)localStore;
   	+ (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent;
@@ -80,7 +80,7 @@ And, if you want to make *myNewContext* the default for all fetch requests on th
 
 	[NSManagedObjectContext MR_setDefaultContext:myNewContext];
 
-Magical Record also has a helper method to hold on to a Managed Object Context in a thread's threadDictionary. This lets you access the correct NSManagedObjectContext instance no matter which thread you're calling from. This methods is:
+MagicalRecord also has a helper method to hold on to a Managed Object Context in a thread's threadDictionary. This lets you access the correct NSManagedObjectContext instance no matter which thread you're calling from. This methods is:
 
 	[NSManagedObjectContext MR_contextForCurrentThread];
 
@@ -216,51 +216,42 @@ or, with a specific context:
 
 ## Performing Core Data operations on Threads
 
-Available only on iOS 4.0 and Mac OS 10.6
+MagicalRecord also provides some handy methods to set up background context for use with threading. The background saving operations are inspired by the UIView animation block methods, with few minor differences:
 
-Paraphrasing the [Apple documentation on Core Data and Threading]("http://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CoreData/Articles/cdConcurrency.html#//apple_ref/doc/uid/TP40003385-SW1"), you should always do the following:
+* The block in which you add your data saving code will never be on the main thread.
+* a single NSManagedObjectContext is provided for your operations. 
 
-* Use a new, dedicated NSManagedObjectContext instance for every thread
-* Use an instance of your NSManagedObjects that is local for the new NSManagedObjectContext
-* Notify other contexts that the background is updated or saved
-
-The Magical Record library is trying to make these steps more reusable with the following methods:
-
-	+ (void) performSaveDataOperationWithBlock:(CoreDataBlock)block;
-	+ (void) performSaveDataOperationInBackgroundWithBlock:(CoreDataBlock)block;
-
-CoreDataBlock is typedef'd as:
-
-	typedef void (^CoreDataBlock)(NSManagedObjectContext *);
-	
-All the boilerplate operations that need to be done when saving are done in these methods. To use this method from the *main thread*:
+For example, if we have Person entity, and we need to set the firstName and lastName fields, this is how you would use MagicalRecord to setup a background context for your use:
 
 	Person *person = ...;
-	[MRCoreDataAction saveDataInBackgroundWithBlock:^(NSManagedObjectContext *localContext){
-		Person *localPerson = [person inContext:localContext];
+	[MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *localContext){
+	
+		Person *localPerson = [person MR_inContext:localContext];
 
-		localPerson.firstName = @"Chuck";
-		localPerson.lastName = @"Smith";
+		localPerson.firstName = @"John";
+		localPerson.lastName = @"Appleseed";
+		
 	}];
 	
-In this method, the CoreDataBlock provides you with the proper context in which to perform your operations, you don't need to worry about setting up the context so that it tells the Default Context that it's done, and should update because changes were performed on another thread.
+In this method, the specified block provides you with the proper context in which to perform your operations, you don't need to worry about setting up the context so that it tells the Default Context that it's done, and should update because changes were performed on another thread.
 
 To perform an action after this save block is completed, you can fill in a completion block:
 
 	Person *person = ...;
-	[MRCoreDataAction saveDataInBackgroundWithBlock:^(NSManagedObjectContext *localContext){
-		Person *localPerson = [person inContext:localContext];
+	[MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *localContext){
+	
+		Person *localPerson = [person MR_inContext:localContext];
 
-		localPerson.firstName = @"Chuck";
-		localPerson.lastName = @"Smith";
+		localPerson.firstName = @"John";
+		localPerson.lastName = @"Appleseed";
+		
 	} completion:^{
 	
 		self.everyoneInTheDepartment = [Person findAll];
+		
 	}];
 	
 This completion block is called on the main thread (queue), so this is also safe for triggering UI updates.	
-
-All MRCoreDataActions have a dedicated GCD queue on which they operate. This means that throughout your app, you only really have 2 queues (sort of like threads) performing Core Data actions at any one time: one on the main queue, and another on this dedicated GCD queue.
 
 # Data Import
 
