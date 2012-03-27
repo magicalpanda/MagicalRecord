@@ -118,8 +118,10 @@
 + (NSManagedObjectContext *) contextThatPushesChangesToDefaultContext NS_RETURNS_RETAINED;
 + (NSManagedObjectContext *) contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator NS_RETURNS_RETAINED;
 + (void) resetDefaultContext;
++ (NSManagedObjectContext *) rootSavingContext;
 + (NSManagedObjectContext *) defaultContext;
-+ (void) setDefaultContext:(NSManagedObjectContext *)moc;
++ (void) cleanUp;
+- (NSString *) description;
 @end
 @interface NSManagedObjectContext (MagicalSavesShortHand)
 - (void) save;
