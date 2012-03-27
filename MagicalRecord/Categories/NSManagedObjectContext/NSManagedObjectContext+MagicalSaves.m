@@ -62,7 +62,7 @@
 
 - (void) MR_save;
 {
-    [self MR_saveWithErrorCallback:nil];
+    [self MR_saveWithErrorCallback:nil];    
 }
 
 - (void) MR_saveErrorHandler:(void (^)(NSError *))errorCallback;
@@ -70,6 +70,11 @@
     [self performBlockAndWait:^{
         [self MR_saveWithErrorCallback:errorCallback];
     }];
+    
+    if (self == [[self class] MR_defaultContext])
+    {
+        [[[self class] MR_rootSavingContext] MR_saveInBackgroundErrorHandler:errorCallback];
+    }
 }
 
 - (void) MR_saveInBackgroundCompletion:(void (^)(void))completion;
@@ -80,7 +85,7 @@
 - (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion;
 {
     [self performBlock:^{
-        [self MR_saveInBackgroundErrorHandler:errorCallback];
+        [self MR_saveWithErrorCallback:errorCallback];
         
         if (completion) 
         {
