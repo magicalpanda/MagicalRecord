@@ -32,7 +32,7 @@ static NSManagedObjectContext *defaultManageObjectContext_ = nil;
 
 - (NSString *) MR_description;
 {
-    NSString *contextName = (self == [[self class] MR_defaultContext]) ? @"*** DEFAULT ***" : @"";
+    NSString *contextName = (self == defaultManageObjectContext_) ? @"*** DEFAULT ***" : @"";
     NSString *onMainThread = [NSThread isMainThread] ? @"*** MAIN THREAD ***" : @"";
     
     return [NSString stringWithFormat:@"%@: %@ Context %@", [self description], contextName, onMainThread];
@@ -75,7 +75,7 @@ static NSManagedObjectContext *defaultManageObjectContext_ = nil;
 
 + (void) MR_initializeDefaultContextWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 {
-    if ([self MR_defaultContext] == nil)
+    if (defaultManageObjectContext_ == nil)
     {
         NSManagedObjectContext *rootContext = [self MR_contextWithStoreCoordinator:coordinator];
         
