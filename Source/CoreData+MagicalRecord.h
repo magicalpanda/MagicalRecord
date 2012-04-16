@@ -2,7 +2,7 @@
 // enable to use caches for the fetchedResultsControllers (iOS only)
 // #define STORE_USE_CACHE
 
-#define kCreateNewCoordinatorOnBackgroundOperations     0
+#define kCreateNewCoordinatorOnBackgroundOperations     1
 
 #ifndef MR_ENABLE_ACTIVE_RECORD_LOGGING
   #ifdef DEBUG
