@@ -16,6 +16,12 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 
 @end 
 
+@interface MagicalRecord (iCloudPrivate)
+
++ (void) setICloudEnabled:(BOOL)enabled;
+
+@end
+
 @implementation NSPersistentStoreCoordinator (MagicalRecord)
 
 + (NSPersistentStoreCoordinator *) MR_defaultStoreCoordinator
@@ -164,6 +170,8 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
             cloudURL = [cloudURL URLByAppendingPathComponent:subPathComponent];
         }
 
+        [MagicalRecord setICloudEnabled:cloudURL != nil];
+        
         NSDictionary *options = [[self class] MR_autoMigrationOptions];
         if (cloudURL)   //iCloud is available
         {
@@ -180,7 +188,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
         [self lock];
         [self MR_addSqliteStoreNamed:localStoreName withOptions:options];
         [self unlock];
-        
+
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([NSPersistentStore MR_defaultPersistentStore] == nil)
             {

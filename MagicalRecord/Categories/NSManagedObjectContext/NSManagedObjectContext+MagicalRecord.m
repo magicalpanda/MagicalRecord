@@ -9,7 +9,7 @@
 #import <objc/runtime.h>
 
 static NSManagedObjectContext *rootSavingContext = nil;
-static NSManagedObjectContext *defaultManageObjectContext_ = nil;
+static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
 
 
 @interface NSManagedObjectContext (MagicalRecordInternal)
@@ -32,7 +32,7 @@ static NSManagedObjectContext *defaultManageObjectContext_ = nil;
 
 - (NSString *) MR_description;
 {
-    NSString *contextName = (self == defaultManageObjectContext_) ? @"*** DEFAULT ***" : @"";
+    NSString *contextName = (self == defaultManagedObjectContext_) ? @"*** DEFAULT ***" : @"";
     contextName = (self == rootSavingContext) ? @"*** BACKGROUND SAVE ***" : contextName;
     
     NSString *onMainThread = [NSThread isMainThread] ? @"*** MAIN THREAD ***" : @"";
@@ -44,8 +44,8 @@ static NSManagedObjectContext *defaultManageObjectContext_ = nil;
 {
 	@synchronized (self)
 	{
-        NSAssert(defaultManageObjectContext_ != nil, @"Default Context is nil! Did you forget to initialize the Core Data Stack?");
-        return defaultManageObjectContext_;
+        NSAssert(defaultManagedObjectContext_ != nil, @"Default Context is nil! Did you forget to initialize the Core Data Stack?");
+        return defaultManagedObjectContext_;
 	}
 }
 
@@ -54,14 +54,14 @@ static NSManagedObjectContext *defaultManageObjectContext_ = nil;
     NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_defaultStoreCoordinator];
     if ([MagicalRecord isICloudEnabled]) 
     {
-        [defaultManageObjectContext_ MR_stopObservingiCloudChangesInCoordinator:coordinator];
+        [defaultManagedObjectContext_ MR_stopObservingiCloudChangesInCoordinator:coordinator];
     }
 
-    defaultManageObjectContext_ = moc;
+    defaultManagedObjectContext_ = moc;
     
     if ([MagicalRecord isICloudEnabled]) 
     {
-        [defaultManageObjectContext_ MR_observeiCloudChangesInCoordinator:coordinator];
+        [defaultManagedObjectContext_ MR_observeiCloudChangesInCoordinator:coordinator];
     }
 }
 
@@ -77,7 +77,7 @@ static NSManagedObjectContext *defaultManageObjectContext_ = nil;
 
 + (void) MR_initializeDefaultContextWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 {
-    if (defaultManageObjectContext_ == nil)
+    if (defaultManagedObjectContext_ == nil)
     {
         NSManagedObjectContext *rootContext = [self MR_contextWithStoreCoordinator:coordinator];
         
@@ -99,15 +99,22 @@ static NSManagedObjectContext *defaultManageObjectContext_ = nil;
     dispatch_async(dispatch_get_main_queue(), resetBlock);
 }
 
-+ (NSManagedObjectContext *) MR_context;
++ (NSManagedObjectContext *) MR_contextWithoutParent;
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     return context;
 }
 
++ (NSManagedObjectContext *) MR_context;
+{
+    NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    [context setParentContext:[self MR_defaultContext]];
+    return context;
+}
+
 + (NSManagedObjectContext *) MR_contextWithParent:(NSManagedObjectContext *)parentContext;
 {
-    NSManagedObjectContext *context = [self MR_context];
+    NSManagedObjectContext *context = [self MR_contextWithoutParent];
     [context setParentContext:parentContext];
     return context;
 }
@@ -131,7 +138,7 @@ static NSManagedObjectContext *defaultManageObjectContext_ = nil;
 	NSManagedObjectContext *context = nil;
     if (coordinator != nil)
 	{
-        context = [self MR_context];
+        context = [self MR_contextWithoutParent];
         [context performBlockAndWait:^{
             [context setPersistentStoreCoordinator:coordinator];
         }];

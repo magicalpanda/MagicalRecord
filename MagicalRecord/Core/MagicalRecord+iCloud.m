@@ -8,14 +8,23 @@
 
 #import "MagicalRecord+iCloud.h"
 
+static BOOL _iCloudEnabled = NO;
+
 @implementation MagicalRecord (iCloud)
 
 #pragma mark - iCloud Methods
 
 + (BOOL) isICloudEnabled;
 {
-    NSURL *cloudURL = [NSPersistentStore MR_cloudURLForUbiqutiousContainer:nil];
-    return cloudURL != nil;
+    return _iCloudEnabled;
+}
+
++ (void) setICloudEnabled:(BOOL)enabled;
+{
+    @synchronized(self)
+    {
+        _iCloudEnabled = enabled;
+    }
 }
 
 + (void) setupCoreDataStackWithiCloudContainer:(NSString *)icloudBucket localStoreNamed:(NSString *)localStore;
