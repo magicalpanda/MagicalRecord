@@ -9,6 +9,30 @@
 #define MAC_PLATFORM_ONLY YES
 #endif
 
+// enable to use caches for the fetchedResultsControllers (iOS only)
+// #define STORE_USE_CACHE
+
+#define kCreateNewCoordinatorOnBackgroundOperations     0
+
+#ifndef MR_ENABLE_ACTIVE_RECORD_LOGGING
+    #ifdef DEBUG
+        #define MR_ENABLE_ACTIVE_RECORD_LOGGING 1
+    #else
+        #define MR_ENABLE_ACTIVE_RECORD_LOGGING 0
+    #endif
+#endif
+
+#if MR_ENABLE_ACTIVE_RECORD_LOGGING != 0
+    #ifdef LOG_VERBOSE
+        extern int ddLogLevel;
+        #define MRLog(...)  DDLogVerbose(__VA_ARGS__)
+    #else
+        #define MRLog(...) NSLog(@"%s(%p) %@", __PRETTY_FUNCTION__, self, [NSString stringWithFormat:__VA_ARGS__])
+    #endif
+#else
+    #define MRLog(...) ((void)0)
+#endif
+
 #ifdef NS_BLOCKS_AVAILABLE
 
 @class NSManagedObjectContext;

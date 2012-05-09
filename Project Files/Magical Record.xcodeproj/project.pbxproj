@@ -25,13 +25,12 @@
 		C721C80713D0C3CD0097AB6F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C721C80513D0C3CD0097AB6F /* InfoPlist.strings */; };
 		C721C82413D0C45E0097AB6F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C7E313D0C3A00097AB6F /* Foundation.framework */; };
 		C721C82513D0C4660097AB6F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C7E313D0C3A00097AB6F /* Foundation.framework */; };
-		C721C83C13D0C6390097AB6F /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C82F13D0C6390097AB6F /* GHUnitIOS.framework */; };
-		C721C83D13D0C6390097AB6F /* OCHamcrestIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C83013D0C6390097AB6F /* OCHamcrestIOS.framework */; };
-		C721C84E13D0C6460097AB6F /* GHUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C84113D0C6460097AB6F /* GHUnit.framework */; };
 		C738127A1410398A0054EEF0 /* ImportSingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeysTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C73812781410383B0054EEF0 /* ImportSingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeysTests.m */; };
 		C738127B141039900054EEF0 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json in Resources */ = {isa = PBXBuildFile; fileRef = C7381275141037E80054EEF0 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json */; };
+		C74F8E601555E39D0008B054 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C74F8E541555E39D0008B054 /* GHUnitIOS.framework */; };
+		C74F8E611555E39D0008B054 /* OCHamcrestIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C74F8E551555E39D0008B054 /* OCHamcrestIOS.framework */; };
+		C74F8E621555E39D0008B054 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C74F8E5F1555E39D0008B054 /* libOCMock.a */; };
 		C753897413DB61CE002B2F57 /* GHUnitTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = C753897313DB61CE002B2F57 /* GHUnitTestMain.m */; };
-		C753897613DB6322002B2F57 /* GHUnit.framework in Copy GHUnit into App Bundle */ = {isa = PBXBuildFile; fileRef = C721C84113D0C6460097AB6F /* GHUnit.framework */; };
 		C75C7D6B147220D400D0C2FE /* generateShorthandFile.rb in Resources */ = {isa = PBXBuildFile; fileRef = C75C7D69147220D300D0C2FE /* generateShorthandFile.rb */; };
 		C763783213E10BEC0009A6CA /* GHUnitIOSTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = C763783113E10BEC0009A6CA /* GHUnitIOSTestMain.m */; };
 		C76AF7E513DBC08F00CE2E05 /* FixtureHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FBA13D0D2AE00298F87 /* FixtureHelpers.m */; };
@@ -44,8 +43,6 @@
 		C76AF7EC13DBC08F00CE2E05 /* NSManagedObjectHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C70B6E7C13D0F69A00709450 /* NSManagedObjectHelperTests.m */; };
 		C76AF7ED13DBC09800CE2E05 /* SampleJSONDataForImport.json in Resources */ = {isa = PBXBuildFile; fileRef = C77E5FB413D0D1EC00298F87 /* SampleJSONDataForImport.json */; };
 		C76AF7EE13DBC09B00CE2E05 /* SingleEntityWithNoRelationships.plist in Resources */ = {isa = PBXBuildFile; fileRef = C77E5FB213D0D1D100298F87 /* SingleEntityWithNoRelationships.plist */; };
-		C76AF7F213DBC12500CE2E05 /* OCHamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C84213D0C6460097AB6F /* OCHamcrest.framework */; };
-		C76AF7F413DBC34300CE2E05 /* OCHamcrest.framework in Copy OCHamcrest into App Bundle */ = {isa = PBXBuildFile; fileRef = C721C84213D0C6460097AB6F /* OCHamcrest.framework */; };
 		C76AF7FB13DBEB5500CE2E05 /* ImportSingleRelatedEntityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C76AF7FA13DBEB5500CE2E05 /* ImportSingleRelatedEntityTests.m */; };
 		C76AF7FC13DBEB5500CE2E05 /* ImportSingleRelatedEntityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C76AF7FA13DBEB5500CE2E05 /* ImportSingleRelatedEntityTests.m */; };
 		C76AF82A13DBEE5A00CE2E05 /* SingleRelatedEntity.json in Resources */ = {isa = PBXBuildFile; fileRef = C76AF82913DBEE5A00CE2E05 /* SingleRelatedEntity.json */; };
@@ -60,8 +57,6 @@
 		C77E5FBB13D0D2AE00298F87 /* FixtureHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FBA13D0D2AE00298F87 /* FixtureHelpers.m */; };
 		C784349013F0FEE000463CEE /* _MappedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C784348C13F0FEE000463CEE /* _MappedEntity.m */; };
 		C784349213F0FEE000463CEE /* MappedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C784348E13F0FEE000463CEE /* MappedEntity.m */; };
-		C789901B150692140016F493 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD73E54814AC4D9A00922CA4 /* OCMock.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		C789901C150692860016F493 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C83B13D0C6390097AB6F /* libOCMock.a */; };
 		C78990211506937E0016F493 /* MappedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C784348E13F0FEE000463CEE /* MappedEntity.m */; };
 		C7899022150693D50016F493 /* _SingleEntityRelatedToMappedEntityWithSecondaryMappings.m in Sources */ = {isa = PBXBuildFile; fileRef = C78F8FDC13FDC3FD00549DD8 /* _SingleEntityRelatedToMappedEntityWithSecondaryMappings.m */; };
 		C7899023150693D50016F493 /* _AbstractRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD887913DBFA6200274567 /* _AbstractRelatedEntity.m */; };
@@ -176,12 +171,9 @@
 		C7DD7306150F832B00216827 /* MagicalRecord+ShorthandSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72D0150F832A00216827 /* MagicalRecord+ShorthandSupport.m */; };
 		C7DD7307150F832B00216827 /* MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72D2150F832A00216827 /* MagicalRecord.m */; };
 		C7DD7308150F832B00216827 /* MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72D2150F832A00216827 /* MagicalRecord.m */; };
-		C7E37A7C14157BFE00CE9BF5 /* libOCMock.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = C721C83B13D0C6390097AB6F /* libOCMock.a */; };
 		C7E736DF1402FE64005657C9 /* SingleEntityWithNoRelationships.json in Resources */ = {isa = PBXBuildFile; fileRef = C7E736DE1402FE64005657C9 /* SingleEntityWithNoRelationships.json */; };
 		C7F5EEB2148DC76700964607 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		FD73E53F14AC462F00922CA4 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C84313D0C6460097AB6F /* OCMock.framework */; };
 		FD73E54614AC4AC700922CA4 /* MagicalDataImportTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C7913B9C13FAFC13007E09CC /* MagicalDataImportTestCase.m */; };
-		FD73E54914AC4D9A00922CA4 /* OCMock.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FD73E54814AC4D9A00922CA4 /* OCMock.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -204,7 +196,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C753897613DB6322002B2F57 /* GHUnit.framework in Copy GHUnit into App Bundle */,
 			);
 			name = "Copy GHUnit into App Bundle";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,7 +206,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				C76AF7F413DBC34300CE2E05 /* OCHamcrest.framework in Copy OCHamcrest into App Bundle */,
 			);
 			name = "Copy OCHamcrest into App Bundle";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,7 +216,6 @@
 			dstPath = "$(BUILT_PRODUCTS_DIR)";
 			dstSubfolderSpec = 0;
 			files = (
-				C7E37A7C14157BFE00CE9BF5 /* libOCMock.a in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,7 +225,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				FD73E54914AC4D9A00922CA4 /* OCMock.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,12 +253,6 @@
 		C721C80413D0C3CD0097AB6F /* iOS App Unit Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iOS App Unit Tests-Info.plist"; sourceTree = "<group>"; };
 		C721C80613D0C3CD0097AB6F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C721C80A13D0C3CD0097AB6F /* iOS App Unit Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOS App Unit Tests-Prefix.pch"; sourceTree = "<group>"; };
-		C721C82F13D0C6390097AB6F /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GHUnitIOS.framework; sourceTree = "<group>"; };
-		C721C83013D0C6390097AB6F /* OCHamcrestIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCHamcrestIOS.framework; sourceTree = "<group>"; };
-		C721C83B13D0C6390097AB6F /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOCMock.a; sourceTree = "<group>"; };
-		C721C84113D0C6460097AB6F /* GHUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GHUnit.framework; sourceTree = "<group>"; };
-		C721C84213D0C6460097AB6F /* OCHamcrest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCHamcrest.framework; sourceTree = "<group>"; };
-		C721C84313D0C6460097AB6F /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCMock.framework; sourceTree = "<group>"; };
 		C721C84713D0C6460097AB6F /* NSNotificationCenter+OCMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+OCMAdditions.h"; sourceTree = "<group>"; };
 		C721C84813D0C6460097AB6F /* OCMArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMArg.h; sourceTree = "<group>"; };
 		C721C84913D0C6460097AB6F /* OCMConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMConstraint.h; sourceTree = "<group>"; };
@@ -280,6 +262,15 @@
 		C721C84D13D0C6460097AB6F /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOCMock.a; sourceTree = "<group>"; };
 		C7381275141037E80054EEF0 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json; path = "Unit Tests/Fixtures/SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json"; sourceTree = "<group>"; };
 		C73812781410383B0054EEF0 /* ImportSingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeysTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImportSingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeysTests.m; path = "Unit Tests/Fixtures/ImportSingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeysTests.m"; sourceTree = "<group>"; };
+		C74F8E541555E39D0008B054 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GHUnitIOS.framework; sourceTree = "<group>"; };
+		C74F8E551555E39D0008B054 /* OCHamcrestIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCHamcrestIOS.framework; sourceTree = "<group>"; };
+		C74F8E591555E39D0008B054 /* NSNotificationCenter+OCMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+OCMAdditions.h"; sourceTree = "<group>"; };
+		C74F8E5A1555E39D0008B054 /* OCMArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMArg.h; sourceTree = "<group>"; };
+		C74F8E5B1555E39D0008B054 /* OCMConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMConstraint.h; sourceTree = "<group>"; };
+		C74F8E5C1555E39D0008B054 /* OCMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMock.h; sourceTree = "<group>"; };
+		C74F8E5D1555E39D0008B054 /* OCMockObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockObject.h; sourceTree = "<group>"; };
+		C74F8E5E1555E39D0008B054 /* OCMockRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockRecorder.h; sourceTree = "<group>"; };
+		C74F8E5F1555E39D0008B054 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOCMock.a; sourceTree = "<group>"; };
 		C753897313DB61CE002B2F57 /* GHUnitTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUnitTestMain.m; sourceTree = "<group>"; };
 		C75C7D69147220D300D0C2FE /* generateShorthandFile.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = generateShorthandFile.rb; sourceTree = "<group>"; };
 		C763783113E10BEC0009A6CA /* GHUnitIOSTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUnitIOSTestMain.m; sourceTree = "<group>"; };
@@ -408,7 +399,6 @@
 		C7DD72D3150F832A00216827 /* MagicalRecordShorthand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordShorthand.h; sourceTree = "<group>"; };
 		C7DD72D4150F832A00216827 /* CoreData+MagicalRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreData+MagicalRecord.h"; sourceTree = "<group>"; };
 		C7E736DE1402FE64005657C9 /* SingleEntityWithNoRelationships.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityWithNoRelationships.json; path = "Unit Tests/Fixtures/SingleEntityWithNoRelationships.json"; sourceTree = "<group>"; };
-		FD73E54814AC4D9A00922CA4 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = "../../Mac App Unit Tests/Frameworks/OCMock.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -418,9 +408,6 @@
 			files = (
 				C721C7DF13D0C3A00097AB6F /* Cocoa.framework in Frameworks */,
 				C721C82413D0C45E0097AB6F /* Foundation.framework in Frameworks */,
-				C76AF7F213DBC12500CE2E05 /* OCHamcrest.framework in Frameworks */,
-				C721C84E13D0C6460097AB6F /* GHUnit.framework in Frameworks */,
-				FD73E53F14AC462F00922CA4 /* OCMock.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,10 +419,9 @@
 				C77E5F9E13D0CA2100298F87 /* CoreGraphics.framework in Frameworks */,
 				C721C82513D0C4660097AB6F /* Foundation.framework in Frameworks */,
 				C77E5F9B13D0CA0A00298F87 /* CoreData.framework in Frameworks */,
-				C721C83C13D0C6390097AB6F /* GHUnitIOS.framework in Frameworks */,
-				C721C83D13D0C6390097AB6F /* OCHamcrestIOS.framework in Frameworks */,
-				C789901C150692860016F493 /* libOCMock.a in Frameworks */,
-				C789901B150692140016F493 /* OCMock.framework in Frameworks */,
+				C74F8E601555E39D0008B054 /* GHUnitIOS.framework in Frameworks */,
+				C74F8E611555E39D0008B054 /* OCHamcrestIOS.framework in Frameworks */,
+				C74F8E621555E39D0008B054 /* libOCMock.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,31 +504,19 @@
 		C721C82E13D0C6390097AB6F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FD73E54814AC4D9A00922CA4 /* OCMock.framework */,
+				C74F8E541555E39D0008B054 /* GHUnitIOS.framework */,
+				C74F8E551555E39D0008B054 /* OCHamcrestIOS.framework */,
+				C74F8E561555E39D0008B054 /* OCMockLibrary */,
 				C77E5F9F13D0CA2700298F87 /* UIKit.framework */,
 				C77E5F9C13D0CA1800298F87 /* CoreGraphics.framework */,
-				C721C82F13D0C6390097AB6F /* GHUnitIOS.framework */,
-				C721C83013D0C6390097AB6F /* OCHamcrestIOS.framework */,
-				C721C83213D0C6390097AB6F /* OCMockLibrary */,
 			);
 			path = Frameworks;
-			sourceTree = "<group>";
-		};
-		C721C83213D0C6390097AB6F /* OCMockLibrary */ = {
-			isa = PBXGroup;
-			children = (
-				C721C83B13D0C6390097AB6F /* libOCMock.a */,
-			);
-			path = OCMockLibrary;
 			sourceTree = "<group>";
 		};
 		C721C84013D0C6460097AB6F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				C721C7DE13D0C3A00097AB6F /* Cocoa.framework */,
-				C721C84113D0C6460097AB6F /* GHUnit.framework */,
-				C721C84213D0C6460097AB6F /* OCHamcrest.framework */,
-				C721C84313D0C6460097AB6F /* OCMock.framework */,
 				C721C84413D0C6460097AB6F /* OCMockLibrary */,
 			);
 			path = Frameworks;
@@ -574,6 +548,36 @@
 				C721C84A13D0C6460097AB6F /* OCMock.h */,
 				C721C84B13D0C6460097AB6F /* OCMockObject.h */,
 				C721C84C13D0C6460097AB6F /* OCMockRecorder.h */,
+			);
+			path = OCMock;
+			sourceTree = "<group>";
+		};
+		C74F8E561555E39D0008B054 /* OCMockLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				C74F8E571555E39D0008B054 /* Headers */,
+				C74F8E5F1555E39D0008B054 /* libOCMock.a */,
+			);
+			path = OCMockLibrary;
+			sourceTree = "<group>";
+		};
+		C74F8E571555E39D0008B054 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				C74F8E581555E39D0008B054 /* OCMock */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		C74F8E581555E39D0008B054 /* OCMock */ = {
+			isa = PBXGroup;
+			children = (
+				C74F8E591555E39D0008B054 /* NSNotificationCenter+OCMAdditions.h */,
+				C74F8E5A1555E39D0008B054 /* OCMArg.h */,
+				C74F8E5B1555E39D0008B054 /* OCMConstraint.h */,
+				C74F8E5C1555E39D0008B054 /* OCMock.h */,
+				C74F8E5D1555E39D0008B054 /* OCMockObject.h */,
+				C74F8E5E1555E39D0008B054 /* OCMockRecorder.h */,
 			);
 			path = OCMock;
 			sourceTree = "<group>";

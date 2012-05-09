@@ -7,6 +7,8 @@
 //
 
 #import "NSAttributeDescription+MagicalDataImport.h"
+#import "NSManagedObject+MagicalDataImport.h"
+#import "MagicalImportFunctions.h"
 
 @implementation NSAttributeDescription (MagicalRecord_DataImport)
 
@@ -43,4 +45,5 @@
     
     return value == [NSNull null] ? nil : value;   
 }
+
 @end

@@ -7,6 +7,9 @@
 //
 
 #import "NSManagedObjectContext+MagicalObserving.h"
+#import "NSManagedObjectContext+MagicalRecord.h"
+#import "MagicalRecord.h"
+#import "MagicalRecord+iCloud.h"
 
 static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMagicalRecordNotifiesMainContextOnSave";
 NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalRecordDidMergeChangesFromiCloudNotification";

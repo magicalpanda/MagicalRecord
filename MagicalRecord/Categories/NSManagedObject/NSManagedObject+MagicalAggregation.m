@@ -7,6 +7,12 @@
 //
 
 #import "NSManagedObject+MagicalAggregation.h"
+#import "NSManagedObjectContext+MagicalRecord.h"
+#import "NSManagedObjectContext+MagicalThreading.h"
+#import "NSManagedObject+MagicalRequests.h"
+#import "NSManagedObject+MagicalRecord.h"
+#import "NSManagedObject+MagicalFinders.h"
+#import "MagicalRecord+ErrorHandling.h"
 
 @implementation NSManagedObject (MagicalAggregation)
 

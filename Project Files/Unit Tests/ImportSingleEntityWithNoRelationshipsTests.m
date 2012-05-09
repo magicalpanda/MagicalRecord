@@ -152,7 +152,7 @@
     assertThat(testEntity.dateTestAttribute, is(equalTo(expectedDate)));
 }
 
-- (void) testImportDataAttributeWithCustomFormat
+- (void) testImportDateAttributeWithCustomFormat
 {
     NSDate *expectedDate = [self dateFromString:@"2011-08-05 00:56:04 +0000"];
     assertThat(testEntity.dateWithCustomFormat, is(equalTo(expectedDate)));

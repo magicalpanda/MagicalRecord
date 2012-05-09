@@ -7,6 +7,8 @@
 //
 
 #import "MagicalRecord+iCloud.h"
+#import "NSPersistentStoreCoordinator+MagicalRecord.h"
+#import "NSManagedObjectContext+MagicalRecord.h"
 
 static BOOL _iCloudEnabled = NO;
 
