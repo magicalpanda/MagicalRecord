@@ -45,18 +45,3 @@
     #import "NSEntityDescription+MagicalDataImport.h"
 
 #endif
-g.h"
-    #import "NSPersistentStoreCoordinator+MagicalRecord.h"
-    #import "NSManagedObjectModel+MagicalRecord.h"
-    #import "NSPersistentStore+MagicalRecord.h"
-
-    #import "MagicalImportFunctions.h"
-    #import "NSManagedObject+MagicalDataImport.h"
-    #import "NSNumber+MagicalDataImport.h"
-    #import "NSObject+MagicalDataImport.h"
-    #import "NSString+MagicalDataImport.h"
-    #import "NSAttributeDescription+MagicalDataImport.h"
-    #import "NSRelationshipDescription+MagicalDataImport.h"
-    #import "NSEntityDescription+MagicalDataImport.h"
-
-#endif
