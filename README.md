@@ -12,6 +12,9 @@ MagicalRecord was inspired by the ease of Ruby on Rails' Active Record fetching.
 * Allow for clear, simple, one-line fetches
 * Still allow the modification of the NSFetchRequest when request optimizations are needed
 
+# Twitter 
+Follow [@MagicalRecord](http://twitter.com/magicalrecord) on twitter to stay up to date on twitter with the lastest updates to MagicalRecord and for basic support
+
 # Installation
 
 1. In your XCode Project, add all the .h and .m files from the *Source* folder into your project. 
@@ -255,11 +258,8 @@ This completion block is called on the main thread (queue), so this is also safe
 
 # Data Import
 
-*Experimental*
-
-MagicalRecord will now import data from NSObjects into your Core Data store. [Documentation](https://github.com/magicalpanda/MagicalRecord/wiki/Data-Import) for this feature will be added to the wiki.
-This feature is currently under development, and is undergoing updates. Feel free to try it out, add tests and send in your feedback.
+MagicalRecord will now import data from NSObjects into your Core Data store. [Documentation](https://github.com/magicalpanda/MagicalRecord/wiki/Data-Import) for this feature is forthcoming and will be available in full by May 25, 2012.
 	
 # Extra Bits
-This Code is released under the MIT License by [Magical Panda Software, LLC](http://www.magicalpanda.com).  
+This Code is released under the MIT License by [Magical Panda Software, LLC](http://www.magicalpanda.com).  We love working on iOS and Mac apps for you!
 There is no charge for Awesome.
