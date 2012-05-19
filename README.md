@@ -12,17 +12,31 @@ MagicalRecord was inspired by the ease of Ruby on Rails' Active Record fetching.
 * Allow for clear, simple, one-line fetches
 * Still allow the modification of the NSFetchRequest when request optimizations are needed
 
-# Twitter 
-Follow [@MagicalRecord](http://twitter.com/magicalrecord) on twitter to stay up to date on twitter with the lastest updates to MagicalRecord and for basic support
 
 # Installation
 
-1. In your XCode Project, add all the .h and .m files from the *Source* folder into your project. 
+1. In your XCode Project, drag the *MagicalRecord* folder (under the main folder) into your project. 
 2. Add *CoreData+MagicalRecord.h* file to your PCH file or your AppDelegate file.
-3. Optionally add `#define MR_SHORTHAND` to your PCH file if you want to use shorthand like `findAll` instead of `MR_findAll`
+3. Optionally precees the *CoreData+MagicalRecord.h* import with `#define MR_SHORTHAND` to your PCH file if you want to use MagicalRecord methods without the *MR_prefix* like `findAll` instead of `MR_findAll`
 4. Start writing code!
 
 # Notes
+## Third Party Blog Entries
+The following blog entries highlight how to install and use aspects of Magical Record.
+
+* [How to make Programming with Core Data Pleasant](http://yannickloriot.com/2012/03/magicalrecord-how-to-make-programming-with-core-data-pleasant/)
+* [Using Core Data with MagicalRecord](http://ablfx.com/blog/2012/03/using-coredata-magicalrecord/)
+* [Super Happy Easy Fetching in Core Data](http://www.cimgf.com/2011/03/13/super-happy-easy-fetching-in-core-data/)
+* [Core Data and Threads, without the Headache](http://www.cimgf.com/2011/05/04/core-data-and-threads-without-the-headache/)
+* [Unit Testing with Core Data](http://www.cimgf.com/2012/05/15/unit-testing-with-core-data/)
+
+## Twitter 
+Follow [@MagicalRecord](http://twitter.com/magicalrecord) on twitter to stay up to date on twitter with the lastest updates to MagicalRecord and for basic support
+
+## Updating to 2.0
+
+MagicalRecord 2.0 is considered a major update since there were some class and API refactorings that will effect previous installations of MagicalRecord in your code. The most straight forward change is that *MagicalRecordHelpers* and *MRCoreDataAction* have both been replaced with a single class, *MagicalRecord*.
+
 ## ARC Support
 
 MagicalRecord fully supports ARC out of the box, there is no configuration necessary. 
@@ -30,7 +44,7 @@ The last version to support manually managed memory is 1.8.3, and is available f
 
 ## Nested Contexts
 
-New in Core Data is support for related contexts. This is a super neat, and super fast feature. However, writing a wrapper that supports both is, frankly, more work that it's worth. However, the 1.8.3 version will be the last version that has dual support, and going forward, MagicalRecord will only work with the version of Core Data that has this feature.
+New in Core Data is support for related contexts. This is a super neat, and super fast feature. However, writing a wrapper that supports both is, frankly, more work that it's worth. However, the 1.8.3 version will be the last version that has dual support, and going forward, MagicalRecord will only work with the version of Core Data that has supports nested managed object contexts.
 
 # Usage
 
