@@ -51,7 +51,7 @@ New in Core Data is support for related contexts. This is a super neat, and supe
 ## Setting up the Core Data Stack
 
 To get started, first, import the header file *CoreData+MagicalRecord.h* in your project's pch file. This will allow a global include of all the required headers.
-Next, somewhere in your app delegate, in either the applicationDidFinishLaunching:(UIApplication *) withOptions:(NSDictionary *) method, or awakeFromNib, use **one** of the following setup calls with the **MagicalRecord** class:
+Next, somewhere in your app delegate, in either the applicationDidFinishLaunching:(UIApplication \*) withOptions:(NSDictionary \*) method, or awakeFromNib, use **one** of the following setup calls with the **MagicalRecord** class:
 
 	+ (void) setupCoreDataStack;
 	+ (void) setupAutoMigratingDefaultCoreDataStack;
@@ -75,7 +75,7 @@ And, before your app exits, you can use the clean up method:
   
 For further details, and to ensure that your application is suitable for iCloud, please see [Apple's iCloud Notes](https://developer.apple.com/library/ios/#releasenotes/DataManagement/RN-iCloudCoreData/_index.html).
 
-In particular note that the first helper method, + (void) setupCoreDataStackWithiCloudContainer:(NSString *)icloudBucket localStoreNamed:(NSString *)localStore, automatically generates the **NSPersistentStoreUbiquitousContentNameKey** based on your application's Bundle Identifier. 
+In particular note that the first helper method, + (void) setupCoreDataStackWithiCloudContainer:(NSString \*)icloudBucket localStoreNamed:(NSString \*)localStore, automatically generates the **NSPersistentStoreUbiquitousContentNameKey** based on your application's Bundle Identifier. 
 
 If you are managing multiple different iCloud stores it is highly recommended that you use one of the other helper methods to specify your own **contentNameKey**
 
