@@ -10,7 +10,7 @@
 static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
 NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagicalRecordPSCDidCompleteiCloudSetupNotification";
 
-@interface NSDictionary (Merging) 
+@interface NSDictionary (MagicalRecordMerging)
 
 - (NSMutableDictionary*) MR_dictionaryByMergingDictionary:(NSDictionary*)d; 
 

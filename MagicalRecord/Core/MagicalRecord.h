@@ -12,8 +12,6 @@
 // enable to use caches for the fetchedResultsControllers (iOS only)
 // #define STORE_USE_CACHE
 
-#define kCreateNewCoordinatorOnBackgroundOperations     0
-
 #ifndef MR_ENABLE_ACTIVE_RECORD_LOGGING
     #ifdef DEBUG
         #define MR_ENABLE_ACTIVE_RECORD_LOGGING 1
@@ -23,6 +21,7 @@
 #endif
 
 #if MR_ENABLE_ACTIVE_RECORD_LOGGING != 0
+      // First, check if we can use Cocoalumberjack for logging
     #ifdef LOG_VERBOSE
         extern int ddLogLevel;
         #define MRLog(...)  DDLogVerbose(__VA_ARGS__)

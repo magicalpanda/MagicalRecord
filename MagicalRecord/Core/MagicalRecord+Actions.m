@@ -9,21 +9,36 @@
 #import "CoreData+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
 
-static dispatch_queue_t action_queue;
+static dispatch_queue_t background_action_queue;
+
+dispatch_queue_t action_queue(void);
+dispatch_queue_t action_queue(void)
+{
+    if (background_action_queue == NULL)
+    {
+        background_action_queue = dispatch_queue_create("com.magicalpanda.magicalrecord.actionQueue", DISPATCH_QUEUE_SERIAL);
+    }
+    return background_action_queue;
+}
+
+void reset_action_queue(void);
+void reset_action_queue(void)
+{
+    if (background_action_queue != NULL)
+    {
+        dispatch_release(background_action_queue);
+        background_action_queue = NULL;
+    }
+}
 
 @implementation MagicalRecord (Actions)
-
-+ (void) load;
-{
-    action_queue = dispatch_queue_create("com.magicalpanda.magicalrecord.actionQueue", DISPATCH_QUEUE_SERIAL);
-}
 
 + (void) saveInBackgroundWithBlock:(void (^)(NSManagedObjectContext *))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *))errorHandler;
 {
     NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
 
-    dispatch_async(action_queue, ^{
+    dispatch_async(action_queue(), ^{
         block(localContext);
         
         if ([localContext hasChanges]) 
