@@ -11,7 +11,7 @@
 
 @implementation NSString (MagicalRecord_DataImport)
 
-- (NSString *) MR_capitalizedFirstCharaterString;
+- (NSString *) MR_capitalizedFirstCharacterString;
 {
     if ([self length] > 0)
     {

@@ -10,6 +10,6 @@
 
 @interface NSString (MagicalRecord_DataImport)
 
-- (NSString *) MR_capitalizedFirstCharaterString;
+- (NSString *) MR_capitalizedFirstCharacterString;
 
 @end

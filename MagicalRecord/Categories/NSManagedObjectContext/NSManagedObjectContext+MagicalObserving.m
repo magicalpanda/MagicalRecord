@@ -21,25 +21,29 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 
 - (void) MR_observeContext:(NSManagedObjectContext *)otherContext
 {
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(MR_mergeChangesFromNotification:)
-												 name:NSManagedObjectContextDidSaveNotification
-											   object:otherContext];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+	[notificationCenter addObserver:self
+                           selector:@selector(MR_mergeChangesFromNotification:)
+                               name:NSManagedObjectContextDidSaveNotification
+                             object:otherContext];
 }
 
 - (void) MR_observeContextOnMainThread:(NSManagedObjectContext *)otherContext
 {
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(MR_mergeChangesOnMainThread:)
-												 name:NSManagedObjectContextDidSaveNotification
-											   object:otherContext];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+	[notificationCenter addObserver:self
+                           selector:@selector(MR_mergeChangesOnMainThread:)
+                               name:NSManagedObjectContextDidSaveNotification
+                             object:otherContext];
 }
 
 - (void) MR_stopObservingContext:(NSManagedObjectContext *)otherContext
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self
-													name:NSManagedObjectContextDidSaveNotification
-												  object:otherContext];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+
+	[notificationCenter removeObserver:self
+                                  name:NSManagedObjectContextDidSaveNotification
+                                object:otherContext];
 }
 
 #pragma mark - Context iCloud Merge Helpers
@@ -54,9 +58,11 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
         
         [self mergeChangesFromContextDidSaveNotification:notification];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordDidMergeChangesFromiCloudNotification
-                                                            object:self
-                                                          userInfo:[notification userInfo]];
+        NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+
+        [notificationCenter postNotificationName:kMagicalRecordDidMergeChangesFromiCloudNotification
+                                          object:self
+                                        userInfo:[notification userInfo]];
     }];
 }
 
@@ -84,19 +90,21 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 - (void) MR_observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 {
     if (![MagicalRecord isICloudEnabled]) return;
-    [[NSNotificationCenter defaultCenter] addObserver:self 
-                                             selector:@selector(MR_mergeChangesFromiCloud:)
-                                                 name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
-                                               object:coordinator];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self
+                           selector:@selector(MR_mergeChangesFromiCloud:)
+                               name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
+                             object:coordinator];
     
 }
 
 - (void) MR_stopObservingiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 {
     if (![MagicalRecord isICloudEnabled]) return;
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:NSPersistentStoreDidImportUbiquitousContentChangesNotification 
-                                                  object:coordinator];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter removeObserver:self
+                                  name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
+                                object:coordinator];
 }
 
 @end

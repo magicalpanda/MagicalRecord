@@ -11,14 +11,15 @@
 
 void MR_swapMethodsFromClass(Class c, SEL orig, SEL new);
 
-NSString * const kMagicalRecordImportCustomDateFormatKey = @"dateFormat";
-NSString * const kMagicalRecordImportDefaultDateFormatString = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
-NSString * const kMagicalRecordImportAttributeKeyMapKey = @"mappedKeyName";
-NSString * const kMagicalRecordImportAttributeValueClassNameKey = @"attributeValueClassName";
+NSString * const kMagicalRecordImportCustomDateFormatKey            = @"dateFormat";
+NSString * const kMagicalRecordImportDefaultDateFormatString        = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
 
-NSString * const kMagicalRecordImportRelationshipMapKey = @"mappedKeyName";
-NSString * const kMagicalRecordImportRelationshipLinkedByKey = @"relatedByAttribute";
-NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
+NSString * const kMagicalRecordImportAttributeKeyMapKey             = @"mappedKeyName";
+NSString * const kMagicalRecordImportAttributeValueClassNameKey     = @"attributeValueClassName";
+
+NSString * const kMagicalRecordImportRelationshipMapKey             = @"mappedKeyName";
+NSString * const kMagicalRecordImportRelationshipLinkedByKey        = @"relatedByAttribute";
+NSString * const kMagicalRecordImportRelationshipTypeKey            = @"type";  //this needs to be revisited
 
 
 #pragma clang diagnostic push
@@ -28,14 +29,11 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 
 - (BOOL) MR_importValue:(id)value forKey:(NSString *)key
 {
-    NSString *selectorString = [NSString stringWithFormat:@"import%@:", [key MR_capitalizedFirstCharaterString]];
+    NSString *selectorString = [NSString stringWithFormat:@"import%@:", [key MR_capitalizedFirstCharacterString]];
     SEL selector = NSSelectorFromString(selectorString);
     if ([self respondsToSelector:selector])
     {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [self performSelector:selector withObject:value];
-#pragma clang diagnostic pop
         return YES;
     }
     return NO;
@@ -93,10 +91,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
         {
             //Need to get the ordered set
             NSString *selectorName = [[relationshipInfo name] stringByAppendingString:@"Set"];
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             relationshipSource = [self performSelector:NSSelectorFromString(selectorName)];
-#pragma clang diagnostic pop
             addRelationMessageFormat = @"addObject:";
         }
     }
@@ -138,7 +133,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
             continue;
         }
         
-        SEL shouldImportSelector = NSSelectorFromString([NSString stringWithFormat:@"shouldImport%@:", [relationshipName MR_capitalizedFirstCharaterString]]);
+        SEL shouldImportSelector = NSSelectorFromString([NSString stringWithFormat:@"shouldImport%@:", [relationshipName MR_capitalizedFirstCharacterString]]);
         BOOL implementsShouldImport = (BOOL)[self respondsToSelector:shouldImportSelector];
         void (^establishRelationship)(NSRelationshipDescription *, id) = ^(NSRelationshipDescription *blockInfo, id blockData)
         {

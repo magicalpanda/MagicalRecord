@@ -130,12 +130,13 @@
 
 - (void) testImportNSColorAttributeToEntity
 {
-    NSColor *actualColor = [testEntity colorTestAttribute];
+#warning Proper fix is to extract out color tests to seperate mac and iOS specific model files with proper configurations
+    NSColor *actualColor = (NSColor *)[testEntity colorTestAttribute];
     
-    assertThatFloat([actualColor alphaComponent], is(equalToFloat(255./255.)));
-    assertThatFloat([actualColor redComponent], is(equalToFloat(64./255.)));
-    assertThatFloat([actualColor greenComponent], is(equalToFloat(128./255.)));
-    assertThatFloat([actualColor blueComponent], is(equalToFloat(225./255.)));
+    assertThatDouble([actualColor alphaComponent], is(equalToDouble(255.0/255.0)));
+    assertThatDouble([actualColor redComponent], is(equalToFloat(64.0f/255.0f)));
+    assertThatDouble([actualColor greenComponent], is(equalToFloat(128.0f/255.0f)));
+    assertThatDouble([actualColor blueComponent], is(equalToFloat(225.0f/255.0f)));
 }
 
 - (NSDate *) dateFromString:(NSString *)date

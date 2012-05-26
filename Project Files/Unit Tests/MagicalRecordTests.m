@@ -37,7 +37,7 @@
 
 - (void) testCreateDefaultCoreDataStack
 {
-    NSURL *testStoreURL = [NSPersistentStore MR_urlForStoreName:kMagicalRecordDefaultStoreFileName];
+    NSURL *testStoreURL = [NSPersistentStore urlForStoreName:kMagicalRecordDefaultStoreFileName];
     [[NSFileManager defaultManager] removeItemAtPath:[testStoreURL path] error:nil];
     
     [MagicalRecord setupCoreDataStack];

@@ -46,9 +46,9 @@
 		C76AF7FC13DBEB5500CE2E05 /* ImportSingleRelatedEntityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C76AF7FA13DBEB5500CE2E05 /* ImportSingleRelatedEntityTests.m */; };
 		C76AF82A13DBEE5A00CE2E05 /* SingleRelatedEntity.json in Resources */ = {isa = PBXBuildFile; fileRef = C76AF82913DBEE5A00CE2E05 /* SingleRelatedEntity.json */; };
 		C76AF82B13DBEE5A00CE2E05 /* SingleRelatedEntity.json in Resources */ = {isa = PBXBuildFile; fileRef = C76AF82913DBEE5A00CE2E05 /* SingleRelatedEntity.json */; };
+		C76D3EF715718EBC00B2D163 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76D3EF615718EBC00B2D163 /* UIKit.framework */; };
+		C76D3EF915718EC800B2D163 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76D3EF815718EC800B2D163 /* CoreGraphics.framework */; };
 		C77E5F9B13D0CA0A00298F87 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C7E213D0C3A00097AB6F /* CoreData.framework */; };
-		C77E5F9E13D0CA2100298F87 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C77E5F9C13D0CA1800298F87 /* CoreGraphics.framework */; };
-		C77E5FA113D0CA3000298F87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C77E5F9F13D0CA2700298F87 /* UIKit.framework */; };
 		C77E5FA813D0CBDE00298F87 /* MagicalRecordTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FA713D0CBDE00298F87 /* MagicalRecordTests.m */; };
 		C77E5FB313D0D1D100298F87 /* SingleEntityWithNoRelationships.plist in Resources */ = {isa = PBXBuildFile; fileRef = C77E5FB213D0D1D100298F87 /* SingleEntityWithNoRelationships.plist */; };
 		C77E5FB513D0D1EC00298F87 /* SampleJSONDataForImport.json in Resources */ = {isa = PBXBuildFile; fileRef = C77E5FB413D0D1EC00298F87 /* SampleJSONDataForImport.json */; };
@@ -271,8 +271,8 @@
 		C763783113E10BEC0009A6CA /* GHUnitIOSTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUnitIOSTestMain.m; sourceTree = "<group>"; };
 		C76AF7FA13DBEB5500CE2E05 /* ImportSingleRelatedEntityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImportSingleRelatedEntityTests.m; path = "Unit Tests/ImportSingleRelatedEntityTests.m"; sourceTree = "<group>"; };
 		C76AF82913DBEE5A00CE2E05 /* SingleRelatedEntity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleRelatedEntity.json; path = "Unit Tests/Fixtures/SingleRelatedEntity.json"; sourceTree = "<group>"; };
-		C77E5F9C13D0CA1800298F87 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
-		C77E5F9F13D0CA2700298F87 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		C76D3EF615718EBC00B2D163 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		C76D3EF815718EC800B2D163 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		C77E5FA613D0CBDE00298F87 /* MagicalRecordTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MagicalRecordTests.h; path = "Unit Tests/MagicalRecordTests.h"; sourceTree = "<group>"; };
 		C77E5FA713D0CBDE00298F87 /* MagicalRecordTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MagicalRecordTests.m; path = "Unit Tests/MagicalRecordTests.m"; sourceTree = "<group>"; };
 		C77E5FB213D0D1D100298F87 /* SingleEntityWithNoRelationships.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SingleEntityWithNoRelationships.plist; path = "Unit Tests/Fixtures/SingleEntityWithNoRelationships.plist"; sourceTree = "<group>"; };
@@ -418,8 +418,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C77E5FA113D0CA3000298F87 /* UIKit.framework in Frameworks */,
-				C77E5F9E13D0CA2100298F87 /* CoreGraphics.framework in Frameworks */,
+				C76D3EF915718EC800B2D163 /* CoreGraphics.framework in Frameworks */,
+				C76D3EF715718EBC00B2D163 /* UIKit.framework in Frameworks */,
 				C721C82513D0C4660097AB6F /* Foundation.framework in Frameworks */,
 				C77E5F9B13D0CA0A00298F87 /* CoreData.framework in Frameworks */,
 				C74F8E611555E39D0008B054 /* OCHamcrestIOS.framework in Frameworks */,
@@ -508,11 +508,11 @@
 		C721C82E13D0C6390097AB6F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C76D3EF815718EC800B2D163 /* CoreGraphics.framework */,
+				C76D3EF615718EBC00B2D163 /* UIKit.framework */,
 				C7D2DC29155AFE6D00B3A468 /* GHUnitIOS.framework */,
 				C74F8E551555E39D0008B054 /* OCHamcrestIOS.framework */,
 				C74F8E561555E39D0008B054 /* OCMockLibrary */,
-				C77E5F9F13D0CA2700298F87 /* UIKit.framework */,
-				C77E5F9C13D0CA1800298F87 /* CoreGraphics.framework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -1302,7 +1302,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_ENTITLEMENTS = "iOS App Unit Tests/iOS App Unit Tests.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -1362,7 +1361,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_ENTITLEMENTS = "iOS App Unit Tests/iOS App Unit Tests.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (

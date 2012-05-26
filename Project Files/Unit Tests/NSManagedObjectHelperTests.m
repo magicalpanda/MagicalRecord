@@ -94,10 +94,10 @@
 
 - (void) createSampleData:(NSInteger)numberOfTestEntitiesToCreate
 {
-    for (NSInteger i = 0; i < numberOfTestEntitiesToCreate; i++) 
+    for (int i = 0; i < numberOfTestEntitiesToCreate; i++)
     {
         SingleRelatedEntity *testEntity = [SingleRelatedEntity createEntity];
-        testEntity.mappedStringAttribute = [NSString stringWithFormat:@"%ld", i / 5];
+        testEntity.mappedStringAttribute = [NSString stringWithFormat:@"%d", i / 5];
     }
     
     [[NSManagedObjectContext MR_defaultContext] MR_save];

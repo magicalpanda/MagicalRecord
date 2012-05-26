@@ -15,11 +15,11 @@ NSString * attributeNameFromString(NSString *value);
 NSString * primaryKeyNameFromString(NSString *value);
 
 #if TARGET_OS_IPHONE
-
+#import <UIKit/UIKit.h>
 UIColor * UIColorFromString(NSString *serializedColor);
 
 #else
-
+#import <AppKit/AppKit.h>
 NSColor * NSColorFromString(NSString *serializedColor);
 
 #endif

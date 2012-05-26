@@ -13,6 +13,12 @@
 
 @end
 
+@interface NSManagedObjectContext (MagicalRecordInternal)
+
++ (void) MR_cleanUp;
+
+@end
+
 
 @implementation MagicalRecord
 
