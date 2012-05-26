@@ -66,8 +66,6 @@ void reset_action_queue(void)
     {
         [localContext MR_saveErrorHandler:errorHandler];
     }
-
-    [mainContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
     
     if (completion)
     {

@@ -73,6 +73,7 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
 + (void) MR_setRootSavingContext:(NSManagedObjectContext *)context;
 {
     rootSavingContext = context;
+    [rootSavingContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
 }
 
 + (void) MR_initializeDefaultContextWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
@@ -85,7 +86,7 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
         
         NSManagedObjectContext *defaultContext = [self MR_newMainQueueContext];
         [defaultContext setParentContext:rootSavingContext];
-        
+
         [self MR_setDefaultContext:defaultContext];
     }
 }
