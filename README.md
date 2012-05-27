@@ -46,6 +46,15 @@ The last version to support manually managed memory is 1.8.3, and is available f
 
 New in Core Data is support for related contexts. This is a super neat, and super fast feature. However, writing a wrapper that supports both is, frankly, more work that it's worth. However, the 1.8.3 version will be the last version that has dual support, and going forward, MagicalRecord will only work with the version of Core Data that has supports nested managed object contexts.
 
+MagicalRecord provides a background saving queue so that saving all data is performed off the main thread, in the background. This means that it may be necessary to use *MR_saveNestedContexts* rather than the typical *MR_save* method in order to persist your changes all the way to your persistent store;
+
+## Logging
+MagicalRecord has logging built in to every fetch request and other Core Data operation. When errors occur when fetching or saving data, these errors are captured by MagicalRecord. By default, these logs use NSLog to present logging information. However, if you have CocoaLumberjack installed in your project, MagicalRecord will use CocoaLumberjack and it's configuration to send logs to their proper output.
+
+All logging in MagicalRecord can be disabled by placing this define preprocessor statement prior to the main import of CoreData+MagicalRecord.h
+
+    #define MR_ENABLE_ACTIVE_RECORD_LOGGING 0
+
 # Usage
 
 ## Setting up the Core Data Stack
@@ -81,7 +90,7 @@ If you are managing multiple different iCloud stores it is highly recommended th
 
 ### Default Managed Object Context 
 
-When using Core Data, you will deal with two types of objects the most: *NSManagedObject* and *NSManagedObjectContext*. MagicalRecord gives you a place for a default NSManagedObjectContext for use within your app. This is great for single threaded apps. You can easily get to this default context by calling:
+When using Core Data, you will deal with two types of objects the most: *NSManagedObject* and *NSManagedObjectContext*. MagicalRecord provides a single place for a default NSManagedObjectContext for use within your app. This is great for single threaded apps. You can easily get to this default context by calling:
 
     [NSManagedObjectContext MR_defaultContext];
 
@@ -272,7 +281,7 @@ This completion block is called on the main thread (queue), so this is also safe
 
 # Data Import
 
-MagicalRecord will now import data from NSObjects into your Core Data store. [Documentation](https://github.com/magicalpanda/MagicalRecord/wiki/Data-Import) for this feature is forthcoming and will be available in full by May 25, 2012.
+MagicalRecord will now import data from NSObjects into your Core Data store. [Documentation](https://github.com/magicalpanda/MagicalRecord/wiki/Data-Import) for this feature is forthcoming.
 	
 # Extra Bits
 This Code is released under the MIT License by [Magical Panda Software, LLC](http://www.magicalpanda.com).  We love working on iOS and Mac apps for you!
