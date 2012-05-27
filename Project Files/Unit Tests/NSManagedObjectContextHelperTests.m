@@ -30,7 +30,7 @@
 
 - (void) testCanNotifyDefaultContextOnSave
 {
-    NSManagedObjectContext *testContext = [NSManagedObjectContext MR_contextThatNotifiesDefaultContextOnMainThread];
+    NSManagedObjectContext *testContext = [NSManagedObjectContext MR_contextThatPushesChangesToDefaultContext];
 
    assertThat([testContext parentContext], is(equalTo([NSManagedObjectContext MR_defaultContext])));
 }

@@ -11,10 +11,6 @@
 @interface NSManagedObjectContext (MagicalThreading)
 
 + (NSManagedObjectContext *) MR_contextForCurrentThread;
-
-+ (NSManagedObjectContext *) MR_contextThatNotifiesDefaultContextOnMainThread;
-+ (NSManagedObjectContext *) MR_contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
-
 + (void) MR_resetContextForCurrentThread;
 
 @end

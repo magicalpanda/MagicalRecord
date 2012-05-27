@@ -31,32 +31,11 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
 		NSManagedObjectContext *threadContext = [threadDict objectForKey:kMagicalRecordManagedObjectContextKey];
 		if (threadContext == nil)
 		{
-			threadContext = [self MR_contextThatNotifiesDefaultContextOnMainThread];
+			threadContext = [self MR_contextThatPushesChangesToDefaultContext];
 			[threadDict setObject:threadContext forKey:kMagicalRecordManagedObjectContextKey];
 		}
 		return threadContext;
 	}
-}
-
-+ (NSManagedObjectContext *) MR_contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
-{
-    NSManagedObjectContext *context = [self MR_contextWithStoreCoordinator:coordinator];
-    NSManagedObjectContext *defaultContext = [self MR_defaultContext];
-    [context setParentContext:defaultContext];
-    
-    MRLog(@"Creating new context %@, set %@ as parent", context, defaultContext);
-    
-    return context;
-}
-
-+ (NSManagedObjectContext *) MR_contextThatNotifiesDefaultContextOnMainThread;
-{    
-    NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
-    NSManagedObjectContext *context = [self MR_contextWithParent:defaultContext];
-    
-    MRLog(@"Created context %@: set %@ context as parent", context, defaultContext);
-    
-    return context;
 }
 
 @end
