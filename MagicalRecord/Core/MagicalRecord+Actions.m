@@ -40,13 +40,7 @@ void reset_action_queue(void)
         
         if ([localContext hasChanges]) 
         {
-            [localContext MR_saveInBackgroundErrorHandler:errorHandler completion:^{
-                
-                if (completion)
-                {
-                    completion();
-                }            
-            }];
+            [localContext MR_saveInBackgroundErrorHandler:errorHandler completion:completion];
         }
     });
 }
