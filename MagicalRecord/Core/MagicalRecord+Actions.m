@@ -33,18 +33,14 @@ void reset_action_queue(void)
 
 @implementation MagicalRecord (Actions)
 
-+ (void) saveInBackgroundWithBlock:(void (^)(NSManagedObjectContext *))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *))errorHandler;
++ (void) saveInBackgroundUsingContext:(NSManagedObjectContext *)localContext block:(void (^)(NSManagedObjectContext *))block completion:(void(^)(void))completion errorHandler:(void(^)(NSError *))errorHandler;
 {
-    NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
-    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
-
     dispatch_async(action_queue(), ^{
         block(localContext);
         
         if ([localContext hasChanges]) 
         {
             [localContext MR_saveInBackgroundErrorHandler:errorHandler completion:^{
-                [mainContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
                 
                 if (completion)
                 {
@@ -53,6 +49,21 @@ void reset_action_queue(void)
             }];
         }
     });
+}
+
++ (void) saveInBackgroundWithBlock:(void (^)(NSManagedObjectContext *))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *))errorHandler;
+{
+    NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
+    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
+    
+    [self saveInBackgroundUsingContext:localContext block:block completion:completion errorHandler:errorHandler];
+}
+
++ (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *))errorHandler;
+{
+    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
+    
+    [self saveInBackgroundUsingContext:localContext block:block completion:completion errorHandler:errorHandler];
 }
                                     
 + (void) saveWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *))errorHandler;

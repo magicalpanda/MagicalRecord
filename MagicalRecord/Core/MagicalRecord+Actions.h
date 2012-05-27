@@ -20,4 +20,9 @@
 + (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
 + (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))callback;
 
+/*
+ If you want to reuse the context on the current thread, use this method.
+ */
++ (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *))errorHandler;
+
 @end
