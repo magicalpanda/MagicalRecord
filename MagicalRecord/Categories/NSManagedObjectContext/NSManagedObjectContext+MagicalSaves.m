@@ -22,6 +22,12 @@
 
 - (void) MR_saveWithErrorCallback:(void(^)(NSError *))errorCallback;
 {
+    if (![self hasChanges])
+    {
+        MRLog(@"NO CHANGES IN CONTEXT %@ - NOT SAVING", [self MR_description]);
+        return;
+    }
+    
     MRLog(@"-> Saving %@", [self MR_description]);
 
     NSError *error = nil;
@@ -89,7 +95,7 @@
 {
     [self performBlock:^{
         [self MR_saveWithErrorCallback:errorCallback];
-        
+    
         if (completion) 
         {
             completion();
