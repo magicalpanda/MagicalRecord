@@ -38,8 +38,8 @@
 + (NSArray *) MR_findByAttribute:(NSString *)attribute withValue:(id)searchValue andOrderBy:(NSString *)sortTerm ascending:(BOOL)ascending;
 + (NSArray *) MR_findByAttribute:(NSString *)attribute withValue:(id)searchValue andOrderBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
 
-+ (id) MR_findOrCreateByID:(id)value attribute:(NSString *)attribute;
-+ (id) MR_findOrCreateByID:(id)value attribute:(NSString *)attribute inContext:(NSManagedObjectContext *)context;
++ (id) MR_findOrCreateByAttribute:(NSString *)attribute value:(id)value;
++ (id) MR_findOrCreateByAttribute:(NSString *)attribute value:(id)value inContext:(NSManagedObjectContext *)context;
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
