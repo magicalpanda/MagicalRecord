@@ -1,0 +1,24 @@
+//
+// Prefix header for all source files of the 'iOS App Unit Tests' target in the 'iOS App Unit Tests' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iPhone SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+
+    #import <GHUnitIOS/GHUnit.h>
+    #import <SenTestingKit/SenTestingKit.h>
+    #import "OCMock.h"
+    
+    #define HC_SHORTHAND
+    #import <OCHamcrestIOS/OCHamcrestIOS.h>
+
+    #import "CoreData+MagicalRecord.h"
+    #import "FixtureHelpers.h"
+#endif

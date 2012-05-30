@@ -1,0 +1,17 @@
+//
+// Prefix header for all source files of the 'Mac App Unit Tests' target in the 'Mac App Unit Tests' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+    #import <GHUnit/GHUnit.h>
+
+    #import <OCMock/OCMock.h>
+
+    #define HC_SHORTHAND
+    #import <OCHamcrest/OCHamcrest.h>
+
+    #define MR_SHORTHAND
+    #import "CoreData+MagicalRecord.h"
+    #import "FixtureHelpers.h"
+#endif
