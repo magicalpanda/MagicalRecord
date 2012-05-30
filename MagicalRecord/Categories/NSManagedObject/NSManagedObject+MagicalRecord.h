@@ -43,6 +43,9 @@
 + (NSArray *) MR_ascendingSortDescriptors:(NSArray *)attributesToSortBy;
 + (NSArray *) MR_descendingSortDescriptors:(NSArray *)attributesToSortBy;
 
++ (id) MR_findWithObjectID:(NSManagedObjectID*)objectID;
++ (id) MR_findWithObjectID:(NSManagedObjectID*)objectID inContext:(NSManagedObjectContext*)context;
+
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext;
 - (id) MR_inThreadContext;
 

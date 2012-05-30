@@ -219,6 +219,21 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     return YES;
 }
 
++ (id) MR_findWithObjectID:(NSManagedObjectID*)objectID inContext:(NSManagedObjectContext*)context;
+{
+	NSError *error = nil;
+	NSManagedObject *object = [context existingObjectWithID:objectID error:&error];
+	[MagicalRecord handleErrors:error];
+	
+	return object;
+}
+
++ (id) MR_findWithObjectID:(NSManagedObjectID*)objectID
+{
+	NSManagedObjectContext* context = [NSManagedObjectContext MR_contextForCurrentThread];
+	return [self MR_findWithObjectID:objectID inContext:context];
+}
+
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext
 {
     NSError *error = nil;

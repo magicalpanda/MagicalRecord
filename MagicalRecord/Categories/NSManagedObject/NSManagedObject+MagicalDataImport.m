@@ -259,11 +259,15 @@ NSString * const kMagicalRecordImportRelationshipTypeKey            = @"type";  
             NSDictionary *objectData = (NSDictionary *)obj;
 
             NSManagedObject *dataObject = [self MR_importFromObject:objectData inContext:localContext];
+		
+  		   NSError* err = nil;
 
-            if ([context obtainPermanentIDsForObjects:[NSArray arrayWithObject:dataObject] error:nil])
+            if ([context obtainPermanentIDsForObjects:[NSArray arrayWithObject:dataObject] error:&err])
             {
               [objectIDs addObject:[dataObject objectID]];
             }
+		
+		   [MagicalRecord handleErrors:err];
         }];
     }];
     
