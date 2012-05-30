@@ -38,6 +38,9 @@
 + (NSArray *) MR_findByAttribute:(NSString *)attribute withValue:(id)searchValue andOrderBy:(NSString *)sortTerm ascending:(BOOL)ascending;
 + (NSArray *) MR_findByAttribute:(NSString *)attribute withValue:(id)searchValue andOrderBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
 
++ (id) MR_findOrCreateByID:(id)value attribute:(NSString *)attribute;
++ (id) MR_findOrCreateByID:(id)value attribute:(NSString *)attribute inContext:(NSManagedObjectContext *)context;
+
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
 + (NSFetchedResultsController *) MR_fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate;

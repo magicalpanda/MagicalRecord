@@ -195,6 +195,24 @@
                           inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
++ (id) MR_findOrCreateByID:(id)value attribute:(NSString *)attribute
+{
+    return [self MR_findOrCreateByID:value
+                           attribute:attribute
+                           inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+}
+
++ (id) MR_findOrCreateByID:(id)value attribute:(NSString *)attribute inContext:(NSManagedObjectContext *)context
+{
+    id object = [self MR_findFirstByAttribute:attribute withValue:value];
+    
+    if (nil == object) {
+        object = [self MR_createInContext:context];
+    }
+    
+    return object;
+}
+
 
 #pragma mark -
 #pragma mark NSFetchedResultsController helpers
