@@ -99,6 +99,9 @@ NSString * const kMagicalRecordImportRelationshipTypeKey            = @"type";  
     NSString *addRelatedObjectToSetMessage = [NSString stringWithFormat:addRelationMessageFormat, attributeNameFromString([relationshipInfo name])];
  
     SEL selector = NSSelectorFromString(addRelatedObjectToSetMessage);
+	
+	NSError* err = nil;
+	[relatedObject.managedObjectContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:relatedObject] error:&err];
     
     @try 
     {
