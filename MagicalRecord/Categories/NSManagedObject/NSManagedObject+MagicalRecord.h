@@ -49,5 +49,7 @@
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext;
 - (id) MR_inThreadContext;
 
+- (id) MR_obtainPermanentID;
+
 @end
 

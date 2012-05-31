@@ -249,4 +249,14 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     return [weakSelf MR_inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
+- (id) MR_obtainPermanentID {
+	NSError* err = nil;
+	NSArray* objects = [NSArray arrayWithObject:self];
+	[self.managedObjectContext obtainPermanentIDsForObjects:objects error:&err];
+	[MagicalRecord handleErrors:err];
+	return self;
+}
+
+
+
 @end

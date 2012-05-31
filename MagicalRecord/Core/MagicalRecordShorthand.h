@@ -90,6 +90,7 @@
 + (NSArray *) descendingSortDescriptors:(NSArray *)attributesToSortBy;
 - (id) inContext:(NSManagedObjectContext *)otherContext;
 - (id) inThreadContext;
+- (id) obtainPermanentID;
 @end
 @interface NSManagedObject (MagicalRequestsShortHand)
 + (NSFetchRequest *) createFetchRequest;
