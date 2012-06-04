@@ -88,6 +88,8 @@
 
 + (id) MR_findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context
 {	
+	NSParameterAssert(attribute);
+	NSParameterAssert(context);
 	NSFetchRequest *request = [self MR_requestFirstByAttribute:attribute withValue:searchValue inContext:context];
     //    [request setPropertiesToFetch:[NSArray arrayWithObject:attribute]];
     

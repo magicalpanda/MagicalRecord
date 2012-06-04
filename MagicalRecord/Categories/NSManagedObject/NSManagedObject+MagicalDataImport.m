@@ -226,6 +226,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey            = @"type";  
 + (id) MR_importFromObject:(id)objectData inContext:(NSManagedObjectContext *)context;
 {
     NSAttributeDescription *primaryAttribute = [[self MR_entityDescription] MR_primaryAttributeToRelateBy];
+	NSParameterAssert(primaryAttribute);
     
     id value = [objectData MR_valueForAttribute:primaryAttribute];
     
