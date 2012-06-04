@@ -119,7 +119,7 @@ MagicalRecord also has a helper method to hold on to a Managed Object Context in
 Most methods in MagicalRecord return an NSArray of results. So, if you have an Entity called Person, related to a Department (as seen in various Apple Core Data documentation), to get all the Person entities from your Persistent Store:
 
 	//In order for this to work you need to add "#define MR_SHORTHAND" to your PCH file
-	NSArray *people = [Person MR_findAll];
+	NSArray *people = [Person findAll];
 
 	// Otherwise you can use the longer, namespaced version
 	NSArray *people = [Person MR_findAll];
