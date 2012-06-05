@@ -31,6 +31,8 @@
 
 + (id) MR_createEntity;
 + (id) MR_createInContext:(NSManagedObjectContext *)context;
++ (id) MR_createPermanentEntity;
++ (id) MR_createPermanentInContext:(NSManagedObjectContext *)context;
 - (BOOL) MR_deleteEntity;
 - (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context;
 

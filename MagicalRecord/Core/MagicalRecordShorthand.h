@@ -80,6 +80,8 @@
 + (NSArray *) propertiesNamed:(NSArray *)properties;
 + (id) createEntity;
 + (id) createInContext:(NSManagedObjectContext *)context;
++ (id) createPermanentEntity;
++ (id) createPermanentInContext:(NSManagedObjectContext *)context;
 - (BOOL) deleteEntity;
 - (BOOL) deleteInContext:(NSManagedObjectContext *)context;
 + (BOOL) deleteAllMatchingPredicate:(NSPredicate *)predicate;
