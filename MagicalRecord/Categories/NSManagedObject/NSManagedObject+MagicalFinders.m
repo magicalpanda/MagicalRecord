@@ -180,6 +180,38 @@
                           inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
++ (id) MR_findOrCreateByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context creationBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock
+{
+	NSManagedObject* userObject = [self MR_findFirstByAttribute:attribute withValue:searchValue inContext:context];
+	
+	if (!userObject) {
+		__block NSManagedObjectID* objectID = nil;
+		
+		[MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+			NSManagedObject* newObject = [self createPermanentInContext:localContext];
+			
+			[newObject setValue:searchValue forKey:attribute];
+			
+			if (creationBlock) {
+				creationBlock(newObject, localContext);
+			}
+			
+			objectID = [newObject objectID];
+		}];
+		
+		userObject = [self findWithObjectID:objectID];
+	}
+	
+	return userObject;
+}
+
++ (id) MR_findOrCreateByAttribute:(NSString *)attribute withValue:(id)searchValue creationBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock {
+	return [self MR_findOrCreateByAttribute:attribute
+								  withValue:searchValue
+								  inContext:[NSManagedObjectContext MR_contextForCurrentThread]
+							  creationBlock:creationBlock];
+}
+
 + (NSArray *) MR_findByAttribute:(NSString *)attribute withValue:(id)searchValue andOrderBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
 {
 	NSPredicate *searchTerm = [NSPredicate predicateWithFormat:@"%K = %@", attribute, searchValue];
@@ -196,7 +228,6 @@
                           ascending:ascending 
                           inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
-
 
 #pragma mark -
 #pragma mark NSFetchedResultsController helpers

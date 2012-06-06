@@ -52,6 +52,8 @@
 + (id) findFirstWithPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortBy ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context andRetrieveAttributes:(id)attributes, ...;
 + (id) findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue;
 + (id) findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context;
++ (id) findOrCreateByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context creationBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock;
++ (id) findOrCreateByAttribute:(NSString *)attribute withValue:(id)searchValue creationBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock;
 + (NSArray *) findByAttribute:(NSString *)attribute withValue:(id)searchValue;
 + (NSArray *) findByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context;
 + (NSArray *) findByAttribute:(NSString *)attribute withValue:(id)searchValue andOrderBy:(NSString *)sortTerm ascending:(BOOL)ascending;
@@ -93,6 +95,8 @@
 - (id) inContext:(NSManagedObjectContext *)otherContext;
 - (id) inThreadContext;
 - (id) obtainPermanentID;
++ (id) createAndSaveEntityInContext:(NSManagedObjectContext *)context creationBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock;
++ (id) createAndSaveEntityWithBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock ;
 @end
 @interface NSManagedObject (MagicalRequestsShortHand)
 + (NSFetchRequest *) createFetchRequest;

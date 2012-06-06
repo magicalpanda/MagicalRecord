@@ -48,6 +48,9 @@
 + (id) MR_findWithObjectID:(NSManagedObjectID*)objectID;
 + (id) MR_findWithObjectID:(NSManagedObjectID*)objectID inContext:(NSManagedObjectContext*)context;
 
++ (id) MR_createAndSaveEntityInContext:(NSManagedObjectContext *)context creationBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock;
++ (id) MR_createAndSaveEntityWithBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock ;
+
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext;
 - (id) MR_inThreadContext;
 
