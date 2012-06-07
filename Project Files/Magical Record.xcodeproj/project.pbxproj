@@ -91,6 +91,10 @@
 		C7913BA913FB1D2A007E09CC /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = C7913BA813FB1D2A007E09CC /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m */; };
 		C7913BAD13FB1DF9007E09CC /* ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7913BAC13FB1DF9007E09CC /* ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m */; };
 		C7913BAF13FB1E11007E09CC /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json in Resources */ = {isa = PBXBuildFile; fileRef = C7913BAE13FB1E11007E09CC /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json */; };
+		C7967114158133EB0076C553 /* MagicalFactorySepcs.m in Sources */ = {isa = PBXBuildFile; fileRef = C7967113158133EB0076C553 /* MagicalFactorySepcs.m */; };
+		C7967115158133EB0076C553 /* MagicalFactorySepcs.m in Sources */ = {isa = PBXBuildFile; fileRef = C7967113158133EB0076C553 /* MagicalFactorySepcs.m */; };
+		C7967125158152370076C553 /* libSpecta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C796711A158152370076C553 /* libSpecta.a */; };
+		C7967127158152950076C553 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7967126158152950076C553 /* SenTestingKit.framework */; };
 		C7B7379E13FAE6D000EE4940 /* ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B7379D13FAE6D000EE4940 /* ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests.m */; };
 		C7BD887513DBF8A000274567 /* TestModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C7BD887313DBF8A000274567 /* TestModel.xcdatamodeld */; };
 		C7BD888C13DBFA6200274567 /* _AbstractRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD887913DBFA6200274567 /* _AbstractRelatedEntity.m */; };
@@ -303,6 +307,19 @@
 		C7913BAC13FB1DF9007E09CC /* ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m; path = "Unit Tests/ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m"; sourceTree = "<group>"; };
 		C7913BAE13FB1E11007E09CC /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json; path = "Unit Tests/Fixtures/SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json"; sourceTree = "<group>"; };
 		C7962CE11567EF3C00C9A960 /* iOS App Unit Tests.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "iOS App Unit Tests.entitlements"; sourceTree = "<group>"; };
+		C7967113158133EB0076C553 /* MagicalFactorySepcs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MagicalFactorySepcs.m; path = "Unit Tests/FactorySpecs/MagicalFactorySepcs.m"; sourceTree = "<group>"; };
+		C796711A158152370076C553 /* libSpecta.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSpecta.a; sourceTree = "<group>"; };
+		C796711B158152370076C553 /* Specta-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Specta-Prefix.pch"; sourceTree = "<group>"; };
+		C796711C158152370076C553 /* Specta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Specta.h; sourceTree = "<group>"; };
+		C796711D158152370076C553 /* SpectaSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpectaSupport.h; sourceTree = "<group>"; };
+		C796711E158152370076C553 /* SpectaTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpectaTypes.h; sourceTree = "<group>"; };
+		C796711F158152370076C553 /* SPTExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTExample.h; sourceTree = "<group>"; };
+		C7967120158152370076C553 /* SPTExampleGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTExampleGroup.h; sourceTree = "<group>"; };
+		C7967121158152370076C553 /* SPTSenTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTSenTestCase.h; sourceTree = "<group>"; };
+		C7967122158152370076C553 /* SPTSenTestInvocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTSenTestInvocation.h; sourceTree = "<group>"; };
+		C7967123158152370076C553 /* SPTSharedExampleGroups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTSharedExampleGroups.h; sourceTree = "<group>"; };
+		C7967124158152370076C553 /* SPTSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTSpec.h; sourceTree = "<group>"; };
+		C7967126158152950076C553 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		C7B7379913FAE5D500EE4940 /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json; path = "Unit Tests/Fixtures/SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json"; sourceTree = "<group>"; };
 		C7B7379D13FAE6D000EE4940 /* ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests.m; path = "Unit Tests/ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests.m"; sourceTree = "<group>"; };
 		C7BD887413DBF8A000274567 /* TestModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TestModel.xcdatamodel; sourceTree = "<group>"; };
@@ -406,11 +423,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7967127158152950076C553 /* SenTestingKit.framework in Frameworks */,
 				C721C7DF13D0C3A00097AB6F /* Cocoa.framework in Frameworks */,
 				C721C82413D0C45E0097AB6F /* Foundation.framework in Frameworks */,
 				C7D2DC25155AFDF500B3A468 /* GHUnit.framework in Frameworks */,
 				C7D2DC26155AFDF500B3A468 /* OCHamcrest.framework in Frameworks */,
 				C7D2DC27155AFDF500B3A468 /* OCMock.framework in Frameworks */,
+				C7967125158152370076C553 /* libSpecta.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +539,8 @@
 		C721C84013D0C6460097AB6F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C7967119158152370076C553 /* Specta */,
+				C7967126158152950076C553 /* SenTestingKit.framework */,
 				C7D2DC22155AFDF500B3A468 /* GHUnit.framework */,
 				C7D2DC23155AFDF500B3A468 /* OCHamcrest.framework */,
 				C7D2DC24155AFDF500B3A468 /* OCMock.framework */,
@@ -578,6 +599,7 @@
 		C77E5FA513D0CBA600298F87 /* Unit Tests */ = {
 			isa = PBXGroup;
 			children = (
+				C796711115812E7E0076C553 /* Factory Tests */,
 				C7DD764B1512021B00216827 /* Core Tests */,
 				C76AF7F513DBC6E900CE2E05 /* Data Import Tests */,
 				C77E5FA913D0CBE300298F87 /* Fixtures */,
@@ -649,6 +671,33 @@
 				C7913BA513FB1D17007E09CC /* _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m */,
 			);
 			name = Generated;
+			sourceTree = "<group>";
+		};
+		C796711115812E7E0076C553 /* Factory Tests */ = {
+			isa = PBXGroup;
+			children = (
+				C7967113158133EB0076C553 /* MagicalFactorySepcs.m */,
+			);
+			name = "Factory Tests";
+			sourceTree = "<group>";
+		};
+		C7967119158152370076C553 /* Specta */ = {
+			isa = PBXGroup;
+			children = (
+				C796711A158152370076C553 /* libSpecta.a */,
+				C796711B158152370076C553 /* Specta-Prefix.pch */,
+				C796711C158152370076C553 /* Specta.h */,
+				C796711D158152370076C553 /* SpectaSupport.h */,
+				C796711E158152370076C553 /* SpectaTypes.h */,
+				C796711F158152370076C553 /* SPTExample.h */,
+				C7967120158152370076C553 /* SPTExampleGroup.h */,
+				C7967121158152370076C553 /* SPTSenTestCase.h */,
+				C7967122158152370076C553 /* SPTSenTestInvocation.h */,
+				C7967123158152370076C553 /* SPTSharedExampleGroups.h */,
+				C7967124158152370076C553 /* SPTSpec.h */,
+			);
+			name = Specta;
+			path = "../../../Mac App Unit Tests/Frameworks/Specta";
 			sourceTree = "<group>";
 		};
 		C7BD887713DBFA6200274567 /* TestEntities */ = {
@@ -1042,6 +1091,7 @@
 				C7DD7303150F832B00216827 /* MagicalRecord+Setup.m in Sources */,
 				C7DD7305150F832B00216827 /* MagicalRecord+ShorthandSupport.m in Sources */,
 				C7DD7307150F832B00216827 /* MagicalRecord.m in Sources */,
+				C7967114158133EB0076C553 /* MagicalFactorySepcs.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1116,6 +1166,7 @@
 				C7DD7304150F832B00216827 /* MagicalRecord+Setup.m in Sources */,
 				C7DD7306150F832B00216827 /* MagicalRecord+ShorthandSupport.m in Sources */,
 				C7DD7308150F832B00216827 /* MagicalRecord.m in Sources */,
+				C7967115158133EB0076C553 /* MagicalFactorySepcs.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1211,6 +1262,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Mac App Unit Tests/Frameworks\"",
 					"\"$(SRCROOT)/iOS App Unit Tests/Frameworks\"",
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1234,6 +1286,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Mac App Unit Tests/Frameworks/OCMockLibrary\"",
 					"\"$(SRCROOT)/iOS App Unit Tests/Frameworks/OCMockLibrary\"",
+					"\"$(SRCROOT)/../Mac App Unit Tests/Frameworks/Specta\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
@@ -1264,6 +1317,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Mac App Unit Tests/Frameworks\"",
 					"\"$(SRCROOT)/iOS App Unit Tests/Frameworks\"",
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -1280,6 +1334,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Mac App Unit Tests/Frameworks/OCMockLibrary\"",
 					"\"$(SRCROOT)/iOS App Unit Tests/Frameworks/OCMockLibrary\"",
+					"\"$(SRCROOT)/../Mac App Unit Tests/Frameworks/Specta\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
