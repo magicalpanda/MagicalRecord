@@ -10,6 +10,7 @@
 @interface MagicalRecord (Internal)
 
 + (void) cleanUpStack;
++ (void) cleanUpErrorHanding;
 
 @end
 
