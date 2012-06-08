@@ -13,7 +13,8 @@
 - (NSString *) applicationStorageDirectory
 {
     NSString *appSupportDirectory = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject];
-    appSupportDirectory = [appSupportDirectory stringByAppendingPathComponent:@"iOS App Unit Tests"];
+    NSString *bundleName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(id)kCFBundleNameKey];
+    appSupportDirectory = [appSupportDirectory stringByAppendingPathComponent:bundleName];
     return appSupportDirectory;
 }
 
@@ -26,7 +27,7 @@
     
     NSURL *expectedStoreUrl = [NSURL fileURLWithPath:[applicationLibraryDirectory stringByAppendingPathComponent:defaultStoreName]];
     
-    NSURL *defaultStoreUrl = [NSPersistentStore defaultLocalStoreUrl];
+    NSURL *defaultStoreUrl = [NSPersistentStore MR_defaultLocalStoreUrl];
     
     assertThat(defaultStoreUrl, is(equalTo(expectedStoreUrl)));
 }
@@ -43,7 +44,7 @@
     assertThatBool(fileWasCreated, is(equalToBool(YES)));
     
     NSURL *expectedFoundStoreUrl = [NSURL fileURLWithPath:testStorePath];
-    NSURL *foundStoreUrl = [NSPersistentStore urlForStoreName:storeFileName];
+    NSURL *foundStoreUrl = [NSPersistentStore MR_urlForStoreName:storeFileName];
     
     assertThat(foundStoreUrl, is(equalTo(expectedFoundStoreUrl)));
     

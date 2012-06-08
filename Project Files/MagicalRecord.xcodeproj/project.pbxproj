@@ -207,7 +207,6 @@
 		C79671D9158167A50076C553 /* ImportSingleEntityWithNoRelationshipsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportSingleEntityWithNoRelationshipsTests.m; sourceTree = "<group>"; };
 		C79671DA158167A50076C553 /* ImportSingleRelatedEntityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportSingleRelatedEntityTests.m; sourceTree = "<group>"; };
 		C79671DB158167A50076C553 /* MagicalDataImportTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalDataImportTestCase.h; sourceTree = "<group>"; };
-		C79671DC158167A50076C553 /* MagicalDataImportTestCase.h.orig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MagicalDataImportTestCase.h.orig; sourceTree = "<group>"; };
 		C79671DD158167A50076C553 /* MagicalDataImportTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalDataImportTestCase.m; sourceTree = "<group>"; };
 		C79671F315816B370076C553 /* OCHamcrest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCHamcrest.framework; path = Vendor/OCHamcrest.framework; sourceTree = "<group>"; };
 		C79671F515816B400076C553 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = Vendor/OCMock.framework; sourceTree = "<group>"; };
@@ -545,7 +544,6 @@
 				C79671D9158167A50076C553 /* ImportSingleEntityWithNoRelationshipsTests.m */,
 				C79671DA158167A50076C553 /* ImportSingleRelatedEntityTests.m */,
 				C79671DB158167A50076C553 /* MagicalDataImportTestCase.h */,
-				C79671DC158167A50076C553 /* MagicalDataImportTestCase.h.orig */,
 				C79671DD158167A50076C553 /* MagicalDataImportTestCase.m */,
 			);
 			name = DataImport;
