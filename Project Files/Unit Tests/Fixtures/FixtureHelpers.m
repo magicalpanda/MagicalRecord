@@ -7,7 +7,7 @@
 //
 
 #import "FixtureHelpers.h"
-#import "JSONKit.h"
+//#import "JSONKit.h"
 
 @implementation FixtureHelpers
 
@@ -30,16 +30,17 @@
         
         return [NSJSONSerialization JSONObjectWithStream:inputStream options:0 error:nil];
     }
-    else
-    {
-        NSData *jsonData = [NSData dataWithContentsOfFile:resource];
-        return [jsonData objectFromJSONData];
-    }
+    return nil;
+//    else
+//    {
+//        NSData *jsonData = [NSData dataWithContentsOfFile:resource];
+//        return [jsonData objectFromJSONData];
+//    }
 }
 
 @end
 
-@implementation GHTestCase (FixtureHelpers)
+@implementation SenTestCase (FixtureHelpers)
 
 - (id) dataFromJSONFixture;
 {

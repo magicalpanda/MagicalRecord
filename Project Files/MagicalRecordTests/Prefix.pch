@@ -1,0 +1,25 @@
+//
+// Prefix header for all source files of the 'MagicalRecord' target in the 'MagicalRecord' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iPhone SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+
+#define MR_SHORTHAND
+#import "CoreData+MagicalRecord.h"
+
+#define HC_SHORTHAND
+#import <OCHamcrestIOS/OCHamcrestIOS.h>
+
+#import <SenTestingKit/SenTestingKit.h>
+
+#import "FixtureHelpers.h"
+#endif
