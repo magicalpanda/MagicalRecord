@@ -186,13 +186,13 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	__block NSManagedObjectID* objectID = nil;
 	
 	[MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-		NSManagedObject* object = [self MR_createPermanentInContext:localContext];
+		NSManagedObject* newObject = [self createPermanentInContext:localContext];
 		
 		if (creationBlock) {
-			creationBlock(object, localContext);
+			creationBlock(newObject, localContext);
 		}
 		
-		objectID = [object objectID];
+		objectID = [newObject objectID];
 	}];
 	
 	object = [self findWithObjectID:objectID inContext:context];

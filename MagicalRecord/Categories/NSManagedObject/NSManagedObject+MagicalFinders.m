@@ -180,28 +180,44 @@
                           inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
-+ (id) MR_findOrCreateByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context creationBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock
++ (id) MR_findFirstOrCreateByPredicate:(NSPredicate*)predicate inContext:(NSManagedObjectContext*)context creationBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock 
 {
-	NSManagedObject* userObject = [self MR_findFirstByAttribute:attribute withValue:searchValue inContext:context];
+	NSParameterAssert(creationBlock);
+	NSParameterAssert(context);
+	NSParameterAssert(predicate);
+	
+	NSManagedObject* userObject = [self MR_findFirstWithPredicate:predicate];
 	
 	if (!userObject) {
-		__block NSManagedObjectID* objectID = nil;
-		
-		[MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-			NSManagedObject* newObject = [self createPermanentInContext:localContext];
-			
-			[newObject setValue:searchValue forKey:attribute];
-			
-			if (creationBlock) {
-				creationBlock(newObject, localContext);
-			}
-			
-			objectID = [newObject objectID];
-		}];
-		
-		userObject = [self findWithObjectID:objectID];
+		userObject = [self MR_createAndSaveEntityInContext:context creationBlock:creationBlock];
 	}
 	
+	return userObject;
+}
+
++ (id) MR_findFirstOrCreateByPredicate:(NSPredicate*)predicate creationBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock  {
+	return [self MR_findFirstOrCreateByPredicate:predicate
+									   inContext:[NSManagedObjectContext MR_contextForCurrentThread]
+								   creationBlock:creationBlock];
+}
+
++ (id) MR_findOrCreateByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context creationBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock
+{
+	NSPredicate* predicate = [NSPredicate predicateWithFormat:@"%K = %@", attribute, searchValue];
+	
+	id userObject = [self MR_findFirstOrCreateByPredicate:predicate
+												inContext:context
+											creationBlock:^(NSManagedObject* newObject, 
+															NSManagedObjectContext *localContext) 
+					 {
+					 [newObject setValue:searchValue forKey:attribute];
+					 
+					 if (creationBlock)
+						 {
+						 creationBlock(newObject, localContext);
+						 }
+					 }];
+		
 	return userObject;
 }
 
