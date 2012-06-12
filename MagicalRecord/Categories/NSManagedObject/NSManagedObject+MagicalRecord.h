@@ -19,6 +19,9 @@
 + (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request;
 + (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
 
++ (id)existingObjectWithID:(NSManagedObjectID *)objectID;
++ (id)existingObjectWithID:(NSManagedObjectID *)objectID inContext:(NSManagedObjectContext *)context;
+
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
 + (void) MR_performFetch:(NSFetchedResultsController *)controller;

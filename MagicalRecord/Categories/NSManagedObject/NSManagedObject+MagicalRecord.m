@@ -63,6 +63,21 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
++ (id)existingObjectWithID:(NSManagedObjectID *)objectID {
+    [self existingObjectWithID:objectID inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+}
+
++ (id)existingObjectWithID:(NSManagedObjectID *)objectID inContext:(NSManagedObjectContext *)context
+{
+    NSError *error = nil;
+    id object = [context existingObjectWithID:objectID error:&error];
+    if (error)
+	{
+		[MagicalRecord handleErrors:error];
+	}
+    return object;
+}
+
 #if TARGET_OS_IPHONE
 
 + (void) MR_performFetch:(NSFetchedResultsController *)controller
