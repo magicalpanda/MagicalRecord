@@ -203,7 +203,7 @@
 
 + (id) MR_findOrCreateByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context creationBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock
 {
-	NSPredicate* predicate = [NSPredicate predicateWithFormat:@"%K = %@", attribute, searchValue];
+	NSPredicate* predicate = [NSPredicate predicateWithFormat:@"%K == %@", attribute, searchValue];
 	
 	id userObject = [self MR_findFirstOrCreateByPredicate:predicate
 												inContext:context
@@ -217,7 +217,7 @@
 						 creationBlock(newObject, localContext);
 						 }
 					 }];
-		
+	
 	return userObject;
 }
 

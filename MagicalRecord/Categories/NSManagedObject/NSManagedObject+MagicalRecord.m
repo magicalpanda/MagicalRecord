@@ -172,30 +172,23 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (id) MR_createPermanentInContext:(NSManagedObjectContext *)context 
 {
-	return [[self MR_createInContext:context] obtainPermanentID];
+	return [[self MR_createInContext:context] MR_obtainPermanentID];
 }
 
 + (id) MR_createPermanentEntity
 {
-	return [[self MR_createEntity] obtainPermanentID];
+	return [[self MR_createEntity] MR_obtainPermanentID];
 }
 
 + (id) MR_createAndSaveEntityInContext:(NSManagedObjectContext *)context creationBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock 
 {
-	id object = nil;
-	__block NSManagedObjectID* objectID = nil;
+	NSManagedObject* object = [self MR_createPermanentInContext:context];
 	
-	[MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-		NSManagedObject* newObject = [self createPermanentInContext:localContext];
-		
-		if (creationBlock) {
-			creationBlock(newObject, localContext);
-		}
-		
-		objectID = [newObject objectID];
-	}];
+	if (creationBlock) {
+		creationBlock(object, context);
+	}
 	
-	object = [self findWithObjectID:objectID inContext:context];
+	[context save];
 	
 	return object;
 }
