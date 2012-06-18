@@ -100,7 +100,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey            = @"type";  
  
     SEL selector = NSSelectorFromString(addRelatedObjectToSetMessage);
 	
-	[relatedObject MR_obtainPermanentID];
+//	[relatedObject MR_obtainPermanentID];
     
     @try 
     {
@@ -204,7 +204,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey            = @"type";  
     return [self MR_postImport:objectData];  
 }
 
-- (BOOL) MR_importValuesForKeysWithObject:(id)objectData
+- (BOOL) MR_importValuesForKeysWithObject:(id)objectData insertedObjects:(NSMutableArray*)insertedObjects
 {
     void (^importRelationshipLogic)(NSRelationshipDescription *, id) = ^(NSRelationshipDescription *relationshipInfo, id localObjectData) {
         
@@ -215,15 +215,23 @@ NSString * const kMagicalRecordImportRelationshipTypeKey            = @"type";  
             NSEntityDescription *entityDescription = [relationshipInfo destinationEntity];
             relatedObject = [entityDescription MR_createInstanceInContext:[self managedObjectContext]];
         }
-        [relatedObject MR_importValuesForKeysWithObject:localObjectData];
+        [relatedObject MR_importValuesForKeysWithObject:localObjectData insertedObjects:insertedObjects];
         
-        [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
+        [self MR_addObject:relatedObject forRelationship:relationshipInfo];
+		
+		[insertedObjects addObject:relatedObject];
     };
 
     return [self MR_performDataImportFromObject:objectData relationshipBlock:importRelationshipLogic];
 }
 
-+ (id) MR_importFromObject:(id)objectData inContext:(NSManagedObjectContext *)context;
+- (BOOL) MR_importValuesForKeysWithObject:(id)objectData
+{
+	return [self MR_importValuesForKeysWithObject:objectData insertedObjects:nil];
+}
+
+
++ (id) MR_importFromObject:(id)objectData insertedObjects:(NSMutableArray*)insertedObjects inContext:(NSManagedObjectContext *)context;
 {
     NSAttributeDescription *primaryAttribute = [[self MR_entityDescription] MR_primaryAttributeToRelateBy];
 	NSParameterAssert(primaryAttribute);
@@ -235,10 +243,17 @@ NSString * const kMagicalRecordImportRelationshipTypeKey            = @"type";  
     {
         managedObject = [self MR_createInContext:context];
     }
+	
+	[insertedObjects addObject:managedObject];
 
-    [managedObject MR_importValuesForKeysWithObject:objectData];
+    [managedObject MR_importValuesForKeysWithObject:objectData insertedObjects:insertedObjects];
 
     return managedObject;
+}
+
++ (id) MR_importFromObject:(id)data inContext:(NSManagedObjectContext *)context
+{
+	return [self MR_importFromObject:data insertedObjects:nil inContext:context];
 }
 
 + (id) MR_importFromObject:(id)objectData
@@ -253,28 +268,33 @@ NSString * const kMagicalRecordImportRelationshipTypeKey            = @"type";  
 
 + (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context
 {
+	NSMutableArray* insertedObjects = [NSMutableArray array];
+	
     NSMutableArray *objectIDs = [NSMutableArray array];
-    
-    [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) 
-    {    
-        [listOfObjectData enumerateObjectsWithOptions:0 usingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
+
+    [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext)
+    {
+        [listOfObjectData enumerateObjectsWithOptions:0 usingBlock:^(NSDictionary *objectData, NSUInteger idx, BOOL *stop) 
         {
-            NSDictionary *objectData = (NSDictionary *)obj;
-
-            NSManagedObject *dataObject = [self MR_importFromObject:objectData inContext:localContext];
-		
-  		   NSError* err = nil;
-
-            if ([context obtainPermanentIDsForObjects:[NSArray arrayWithObject:dataObject] error:&err])
-            {
-              [objectIDs addObject:[dataObject objectID]];
-            }
-		
-		   [MagicalRecord handleErrors:err];
+            [self MR_importFromObject:objectData insertedObjects:insertedObjects inContext:localContext];
         }];
+	
+		NSError* err = nil;
+		
+		if ([context obtainPermanentIDsForObjects:insertedObjects error:&err])
+			{
+				[insertedObjects enumerateObjectsUsingBlock:^(NSManagedObject* obj, NSUInteger idx, BOOL *stop) {
+					[objectIDs addObject:[obj objectID]];
+				}];
+			}
+		
+		[MagicalRecord handleErrors:err];
+
     }];
-    
-    return [self MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"self IN %@", objectIDs] inContext:context];
+	
+	NSArray* newObjects = [self MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"self IN %@", objectIDs] inContext:context];
+	
+    return newObjects;
 }
 
 @end
