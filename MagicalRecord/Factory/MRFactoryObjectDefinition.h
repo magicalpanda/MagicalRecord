@@ -8,27 +8,38 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol MRFactoryObject <NSObject>
-
-@end
-
-
 @class MRFactoryObjectDefinition;
-
 
 typedef  id(^MRFactoryObjectBuildAction)(MRFactoryObjectDefinition *obj);
 typedef  id(^MRFactoryObjectSequenceBuildAction)(MRFactoryObjectDefinition *obj, NSUInteger sequenceIndex);
 
 
-@interface MRFactoryObjectDefinition : NSObject
+@protocol MRFactoryObject <NSObject>
 
+//- (id) setDynamicValue:(MRFactoryObjectBuildAction)block;
+- (id) setSequence:(MRFactoryObjectSequenceBuildAction)sequence;
+- (id) setValue:(id)value;
+- (id) forProperty;
+
+@end
+
+
+@interface MRFactoryObjectDefinition : NSObject<MRFactoryObject>
+
+@property (nonatomic, copy, readonly) NSString *alias;
 @property (nonatomic, strong, readonly) NSArray *actions;
 
++ (id) factoryWithClass:(Class)klass;
++ (id) factoryWithClass:(Class)klass as:(NSString *)alias;
 - (id) initWithClass:(Class)klass;
 
 - (void) setValue:(id)value forPropertyNamed:(NSString *)propertyName;
 - (void) setAction:(MRFactoryObjectBuildAction)action forPropertyNamed:(NSString *)propertyName;
+- (void) setAssociation:(NSString *)referingFactory forPropertyNamed:(NSString *)propertyName;
 - (void) setSequenceAction:(MRFactoryObjectSequenceBuildAction)action forPropertyNamed:(NSString *)propertyName;
 - (void) setSequenceAction:(MRFactoryObjectSequenceBuildAction)action forPropertyNamed:(NSString *)propertyName withStartingIndex:(NSUInteger)startIndex;
+
+- (id) create;
+- (id) generate;
 
 @end

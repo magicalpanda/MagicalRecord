@@ -9,34 +9,16 @@
 #import "MRFactoryObjectDefinition.h"
 #import <objc/runtime.h>
 
-@interface MRFactoryObject : NSObject
-
-@end
-
-@implementation MRFactoryObject
-
-//+ (BOOL)instancesRespondToSelector:(SEL)aSelector;
-//{
-//    return [super instancesRespondToSelector:aSelector];
-//}
-
-//-(IMP)methodForSelector:(SEL)aSelector;
-//{
-//    if ([self respondsToSelector:aSelector])
-//    {
-//        return [super methodForSelector:aSelector];
-//    }
-//    
-//    //    [self propertyForSelector:aSelector];
-//    return nil;
-//}
-
-@end
 
 @interface MRFactoryObjectDefinition ()
 
-@property (nonatomic, assign) Class factoryClass;
-@property (nonatomic, strong) NSMutableArray *buildActions;
+@property (nonatomic, copy, readwrite) NSString *alias;
+@property (nonatomic, assign, readwrite) Class factoryClass;
+@property (nonatomic, strong, readwrite) NSMutableArray *buildActions;
+@property (nonatomic, assign, readwrite) BOOL generateOnNextAccess;
+@property (nonatomic, strong, readwrite) NSSet *associatedFactories;
+
+@property (nonatomic, strong, readwrite) id cachedValue;
 
 @end
 
@@ -55,13 +37,43 @@
     {
         self.factoryClass = klass;
         self.buildActions = [NSMutableArray array];
+        self.associatedFactories = [NSMutableSet set];
+        self.generateOnNextAccess = NO;
     }
     return self;
+}
+
++ (id) factoryWithClass:(Class)klass;
+{
+    return [[self alloc] initWithClass:klass];
+}
+
++ (id) factoryWithClass:(Class)klass as:(NSString *)alias;
+{
+    return nil;
 }
 
 - (NSArray *) actions;
 {
     return [NSArray arrayWithArray:self.buildActions];
+}
+
+- (id) setValue:(id)value;
+{
+    self.cachedValue = value;
+    return self;
+}
+
+- (id) setSequence:(MRFactoryObjectSequenceBuildAction)sequence;
+{
+    self.cachedValue = sequence;
+    return self;
+}
+
+- (id) forProperty;
+{
+    //time to set cached value
+    return self;
 }
 
 - (void) setValue:(id)value forPropertyNamed:(NSString *)propertyName;
@@ -94,7 +106,12 @@
         id returnValue = nil;
         if (action)
         {
-            returnValue = action(weakSelf, index++);
+            if ([weakSelf generateOnNextAccess])
+            {
+                index++;
+                [weakSelf setGenerateOnNextAccess:NO];
+            }
+            returnValue = action(weakSelf, index);
         }
         return returnValue;
     };
@@ -105,6 +122,25 @@
 - (void) setSequenceAction:(MRFactoryObjectSequenceBuildAction)action forPropertyNamed:(NSString *)propertyName;
 {
     [self setSequenceAction:action forPropertyNamed:propertyName withStartingIndex:1];
+}
+
+- (id) associatedFactoryForClass:(Class)klass;
+{
+    NSPredicate *associationSearch = [NSPredicate predicateWithFormat:@"class = %@", klass];
+    id associatedFactory = [[self.associatedFactories filteredSetUsingPredicate:associationSearch] anyObject];
+
+    if (associatedFactory == nil)
+    {
+        //grab from global factory registry?
+    }
+    return associatedFactory;
+}
+
+- (void) setAssociation:(Class)klass forPropertyNamed:(NSString *)propertyName;
+{
+    id associatedFactory = [self associatedFactoryForClass:klass];
+    
+    [self.buildActions addObject:@{ @"propertyName" : propertyName, @"association" : associatedFactory }];
 }
 
 - (MRFactoryObjectBuildAction) actionForPropertyName:(NSString *)propertyName;
@@ -144,6 +180,17 @@
     [anInvocation setSelector:@selector(performActionNamed:)];
     [anInvocation setArgument:&propertyName atIndex:2];
     [anInvocation invokeWithTarget:self];
+}
+
+- (id) create;
+{
+    return self;
+}
+
+- (id) generate;
+{
+    self.generateOnNextAccess = YES;
+    return self;
 }
 
 //

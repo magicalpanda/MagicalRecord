@@ -51,3 +51,10 @@
 }
 
 @end
+
+
+@implementation User
+@end
+@implementation Address
+@end
+

@@ -19,3 +19,13 @@
 - (id) dataFromJSONFixture;
 
 @end
+
+@interface Address : NSObject
+@end
+
+
+@interface User : NSObject
+@property (nonatomic, strong) Address *userAddress;
+@property (nonatomic, copy) NSString *firstName;
+@property (nonatomic, copy) NSString *lastName;
+@end

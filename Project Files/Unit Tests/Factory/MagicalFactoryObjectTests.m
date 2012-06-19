@@ -7,21 +7,19 @@
 #import <SenTestingKit/SenTestingKit.h>
 #import "MRFactoryObjectDefinition.h"
 
-@interface User : NSObject
-- (NSString *) firstName;
-- (NSString *) lastName;
-@end
-
-@implementation User
-- (NSString *) firstName;
-{
-    return nil;
-}
-- (NSString *) lastName;
-{
-    return nil;
-}
-@end
+//@interface Address : NSObject
+//@end
+//@implementation Address
+//@end
+//
+//@interface User : NSObject
+//@property (nonatomic, strong) Address *userAddress;
+//@property (nonatomic, copy) NSString *firstName;
+//@property (nonatomic, copy) NSString *lastName;
+//@end
+//
+//@implementation User
+//@end
 
 //@class MRFactory;
 
@@ -70,6 +68,14 @@
 {
     MRFactoryObjectDefinition *objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
     assertThat(objectTemplate.actions, isNot(nilValue()));
+}
+
+
+- (void) testCanDefineSameFactoryWithAnAlias;
+{
+    MRFactoryObjectDefinition *objectTemplate = [MRFactoryObjectDefinition factoryWithClass:[User class] as:@"Admin"];
+    
+    assertThat(objectTemplate.alias, is(equalTo(@"Admin")));
 }
 
 - (void) testThrowsAnExceptionWithInitializedWithoutAClass;
@@ -141,7 +147,19 @@
     [objectTemplate setSequenceAction:sequenceAction forPropertyNamed:@"firstName"];
     
     assertThat([objectTemplate firstName], is(equalTo(@"Tom 1")));
-    assertThat([objectTemplate firstName], is(equalTo(@"Tom 2")));
+}
+
+- (void) testCanGenerateNextValueForSequenceAction;
+{
+    id objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
+    MRFactoryObjectSequenceBuildAction sequenceAction = ^id(MRFactoryObjectDefinition *obj, NSUInteger index) {
+        return [NSString stringWithFormat:@"Tom %d", index];
+    };
+    
+    [objectTemplate setSequenceAction:sequenceAction forPropertyNamed:@"firstName"];
+    
+    assertThat([objectTemplate firstName], is(equalTo(@"Tom 1")));
+    assertThat([[objectTemplate generate] firstName], is(equalTo(@"Tom 2")));
 }
 
 - (void) testCanDefineASequenceActionForAnObjectPropertyWithCustomStartingIndex;
@@ -154,7 +172,7 @@
     [objectTemplate setSequenceAction:sequenceAction forPropertyNamed:@"firstName" withStartingIndex:100];
     
     assertThat([objectTemplate firstName], is(equalTo(@"Tom 100")));
-    assertThat([objectTemplate firstName], is(equalTo(@"Tom 101")));
+    assertThat([objectTemplate firstName], is(equalTo(@"Tom 100")));
 }
 
 - (void) testCanDefineMultipleSequenceActionsForAnObjectProperty;
@@ -171,10 +189,21 @@
     [objectTemplate setSequenceAction:lastNameAction forPropertyNamed:@"lastName"];
     
     assertThat([objectTemplate firstName], is(equalTo(@"Timmy 1")));
-    assertThat([objectTemplate firstName], is(equalTo(@"Timmy 2")));
+    assertThat([[objectTemplate generate] firstName], is(equalTo(@"Timmy 2")));
     
     assertThat([objectTemplate lastName], is(equalTo(@"Jones 1")));
-    assertThat([objectTemplate lastName], is(equalTo(@"Jones 2")));
+    assertThat([[objectTemplate generate] lastName], is(equalTo(@"Jones 2")));
+}
+
+- (void) testCanDefineAnAssociationForAnObjectProperty;
+{
+    id objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
+    
+    [objectTemplate setAssociation:@"Address" forPropertyNamed:@"address"];
+    
+    id address = [objectTemplate userAddress];
+    
+    assertThat(address, isNot(nil));
 }
 
 //
