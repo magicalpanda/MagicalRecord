@@ -144,6 +144,19 @@
     assertThat([objectTemplate firstName], is(equalTo(@"Tom 2")));
 }
 
+- (void) testCanDefineASequenceActionForAnObjectPropertyWithCustomStartingIndex;
+{
+    id objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
+    MRFactoryObjectSequenceBuildAction sequenceAction = ^id(MRFactoryObjectDefinition *obj, NSUInteger index) {
+        return [NSString stringWithFormat:@"Tom %d", index];
+    };
+    
+    [objectTemplate setSequenceAction:sequenceAction forPropertyNamed:@"firstName" withStartingIndex:100];
+    
+    assertThat([objectTemplate firstName], is(equalTo(@"Tom 100")));
+    assertThat([objectTemplate firstName], is(equalTo(@"Tom 101")));
+}
+
 - (void) testCanDefineMultipleSequenceActionsForAnObjectProperty;
 {
     id objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];

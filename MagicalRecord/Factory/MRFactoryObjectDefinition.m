@@ -85,12 +85,12 @@
     [self.buildActions addObject:@{ @"propertyName" : propertyName,  @"action": action }];
 }
 
-- (void) setSequenceAction:(MRFactoryObjectSequenceBuildAction)action forPropertyNamed:(NSString *)propertyName;
+- (void) setSequenceAction:(MRFactoryObjectSequenceBuildAction)action forPropertyNamed:(NSString *)propertyName withStartingIndex:(NSUInteger)startIndex;
 {
     __weak id weakSelf = self;
-    __block NSUInteger index = 1;
+    __block NSUInteger index = startIndex;
     MRFactoryObjectBuildAction sequenceActionWrapper = ^id(MRFactoryObjectDefinition *obj){
-
+        
         id returnValue = nil;
         if (action)
         {
@@ -100,6 +100,11 @@
     };
     
     [self.buildActions addObject:@{ @"propertyName" : propertyName, @"action" : sequenceActionWrapper }];
+}
+
+- (void) setSequenceAction:(MRFactoryObjectSequenceBuildAction)action forPropertyNamed:(NSString *)propertyName;
+{
+    [self setSequenceAction:action forPropertyNamed:propertyName withStartingIndex:1];
 }
 
 - (MRFactoryObjectBuildAction) actionForPropertyName:(NSString *)propertyName;
