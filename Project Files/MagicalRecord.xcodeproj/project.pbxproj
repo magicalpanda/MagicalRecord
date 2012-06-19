@@ -19,6 +19,7 @@
 		C76723D01581DDE60039D17D /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json in Resources */ = {isa = PBXBuildFile; fileRef = C7913BAE13FB1E11007E09CC /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json */; };
 		C76723D11581DDE60039D17D /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.json in Resources */ = {isa = PBXBuildFile; fileRef = C78F8FD213FDC2B600549DD8 /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.json */; };
 		C76723D21581DDE60039D17D /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json in Resources */ = {isa = PBXBuildFile; fileRef = C7381275141037E80054EEF0 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json */; };
+		C76723D41581E2290039D17D /* MagicalFactoryObjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C76723D31581E2290039D17D /* MagicalFactoryObjectTests.m */; };
 		C79672371581C0F80076C553 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C7E313D0C3A00097AB6F /* Foundation.framework */; };
 		C79672591581C1050076C553 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C7E213D0C3A00097AB6F /* CoreData.framework */; };
 		C796725D1581C1640076C553 /* MagicalImportFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD729D150F832A00216827 /* MagicalImportFunctions.m */; };
@@ -122,6 +123,8 @@
 		C796731A1581CF310076C553 /* FixtureHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FBA13D0D2AE00298F87 /* FixtureHelpers.m */; };
 		C79673241581D7590076C553 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79673221581D7500076C553 /* CoreGraphics.framework */; };
 		C79673261581D7660076C553 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79673251581D7660076C553 /* UIKit.framework */; };
+		C7D7196E158FFE1A00355EBC /* MRFactoryObjectDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = C7D7196C158FFE1A00355EBC /* MRFactoryObjectDefinition.h */; };
+		C7D7196F158FFE1A00355EBC /* MRFactoryObjectDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D7196D158FFE1A00355EBC /* MRFactoryObjectDefinition.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +143,7 @@
 		C7381275141037E80054EEF0 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json; path = "Unit Tests/Fixtures/SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json"; sourceTree = "<group>"; };
 		C75C7D69147220D300D0C2FE /* generateShorthandFile.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = generateShorthandFile.rb; sourceTree = "<group>"; };
 		C76723C61581DB730039D17D /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		C76723D31581E2290039D17D /* MagicalFactoryObjectTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MagicalFactoryObjectTests.m; path = "Unit Tests/Factory/MagicalFactoryObjectTests.m"; sourceTree = "<group>"; };
 		C76AF82913DBEE5A00CE2E05 /* SingleRelatedEntity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleRelatedEntity.json; path = "Unit Tests/Fixtures/SingleRelatedEntity.json"; sourceTree = "<group>"; };
 		C77E5FB213D0D1D100298F87 /* SingleEntityWithNoRelationships.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SingleEntityWithNoRelationships.plist; path = "Unit Tests/Fixtures/SingleEntityWithNoRelationships.plist"; sourceTree = "<group>"; };
 		C77E5FB413D0D1EC00298F87 /* SampleJSONDataForImport.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SampleJSONDataForImport.json; path = "Unit Tests/Fixtures/SampleJSONDataForImport.json"; sourceTree = "<group>"; };
@@ -262,6 +266,8 @@
 		C7C9A38713F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntityRelatedToMappedEntityUsingDefaults.m; sourceTree = "<group>"; };
 		C7C9A38813F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.h; sourceTree = "<group>"; };
 		C7C9A38913F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m; sourceTree = "<group>"; };
+		C7D7196C158FFE1A00355EBC /* MRFactoryObjectDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRFactoryObjectDefinition.h; sourceTree = "<group>"; };
+		C7D7196D158FFE1A00355EBC /* MRFactoryObjectDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRFactoryObjectDefinition.m; sourceTree = "<group>"; };
 		C7DD729C150F832A00216827 /* MagicalImportFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalImportFunctions.h; sourceTree = "<group>"; };
 		C7DD729D150F832A00216827 /* MagicalImportFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalImportFunctions.m; sourceTree = "<group>"; };
 		C7DD729E150F832A00216827 /* NSAttributeDescription+MagicalDataImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributeDescription+MagicalDataImport.h"; sourceTree = "<group>"; };
@@ -354,6 +360,7 @@
 				C75C7D69147220D300D0C2FE /* generateShorthandFile.rb */,
 				C79671361581550B0076C553 /* MagicalRecord-Prefix.pch */,
 				C7DD7299150F832A00216827 /* MagicalRecord */,
+				C7D7196A158FFDD000355EBC /* Factory */,
 				C77E5FA513D0CBA600298F87 /* Unit Tests */,
 				C7C9A37013F43D3E002C5B0C /* Vendor */,
 				C721C7B313D0A3AF0097AB6F /* Frameworks */,
@@ -470,6 +477,7 @@
 		C796711115812E7E0076C553 /* Factory Tests */ = {
 			isa = PBXGroup;
 			children = (
+				C76723D31581E2290039D17D /* MagicalFactoryObjectTests.m */,
 			);
 			name = "Factory Tests";
 			sourceTree = "<group>";
@@ -656,6 +664,16 @@
 			path = Vendor;
 			sourceTree = "<group>";
 		};
+		C7D7196A158FFDD000355EBC /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				C7D7196C158FFE1A00355EBC /* MRFactoryObjectDefinition.h */,
+				C7D7196D158FFE1A00355EBC /* MRFactoryObjectDefinition.m */,
+			);
+			name = Factory;
+			path = ../MagicalRecord/Factory;
+			sourceTree = "<group>";
+		};
 		C7DD7299150F832A00216827 /* MagicalRecord */ = {
 			isa = PBXGroup;
 			children = (
@@ -793,6 +811,7 @@
 				C79672901581C1D60076C553 /* MagicalRecord+Setup.h in Headers */,
 				C79672911581C1D60076C553 /* MagicalRecord+ShorthandSupport.h in Headers */,
 				C79672921581C1D60076C553 /* MagicalRecordShorthand.h in Headers */,
+				C7D7196E158FFE1A00355EBC /* MRFactoryObjectDefinition.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -912,6 +931,7 @@
 				C79672741581C1640076C553 /* MagicalRecord+Options.m in Sources */,
 				C79672751581C1640076C553 /* MagicalRecord+Setup.m in Sources */,
 				C79672761581C1640076C553 /* MagicalRecord+ShorthandSupport.m in Sources */,
+				C7D7196F158FFE1A00355EBC /* MRFactoryObjectDefinition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -959,6 +979,7 @@
 				C796731A1581CF310076C553 /* FixtureHelpers.m in Sources */,
 				C79672D91581CDFF0076C553 /* GHUnitIOSTestMain.m in Sources */,
 				C76723C81581DBAF0039D17D /* TestModel.xcdatamodeld in Sources */,
+				C76723D41581E2290039D17D /* MagicalFactoryObjectTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
