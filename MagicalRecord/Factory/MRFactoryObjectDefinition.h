@@ -27,6 +27,7 @@ typedef  id(^MRFactoryObjectSequenceBuildAction)(MRFactoryObjectDefinition *obj,
 - (id) initWithClass:(Class)klass;
 
 - (void) setValue:(id)value forPropertyNamed:(NSString *)propertyName;
-- (void) setBuildAction:(MRFactoryObjectBuildAction)action forPropertyNamed:(NSString *)propertyName;
+- (void) setAction:(MRFactoryObjectBuildAction)action forPropertyNamed:(NSString *)propertyName;
+- (void) setSequenceAction:(MRFactoryObjectSequenceBuildAction)action forPropertyNamed:(NSString *)propertyName;
 
 @end

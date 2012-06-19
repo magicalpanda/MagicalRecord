@@ -71,12 +71,35 @@
     {
         return weakValue;
     };
-    [self setBuildAction:action forPropertyNamed:propertyName];
+    [self setAction:action forPropertyNamed:propertyName];
 }
 
-- (void) setBuildAction:(MRFactoryObjectBuildAction)action forPropertyNamed:(NSString *)propertyName;
+- (void) setAction:(MRFactoryObjectBuildAction)action forPropertyNamed:(NSString *)propertyName;
 {
+    BOOL hasProperty = [self.factoryClass instancesRespondToSelector:NSSelectorFromString(propertyName)];
+    if (!hasProperty)
+    {
+        NSString *messsage = [NSString stringWithFormat:@"Cannot define an action on a property that does not exist on %@", NSStringFromClass(self.factoryClass)];
+        @throw [NSException exceptionWithName:@"Builder Property Exception" reason:messsage userInfo:nil];
+    }
     [self.buildActions addObject:@{ @"propertyName" : propertyName,  @"action": action }];
+}
+
+- (void) setSequenceAction:(MRFactoryObjectSequenceBuildAction)action forPropertyNamed:(NSString *)propertyName;
+{
+    __weak id weakSelf = self;
+    __block NSUInteger index = 1;
+    MRFactoryObjectBuildAction sequenceActionWrapper = ^id(MRFactoryObjectDefinition *obj){
+
+        id returnValue = nil;
+        if (action)
+        {
+            returnValue = action(weakSelf, index++);
+        }
+        return returnValue;
+    };
+    
+    [self.buildActions addObject:@{ @"propertyName" : propertyName, @"action" : sequenceActionWrapper }];
 }
 
 - (MRFactoryObjectBuildAction) actionForPropertyName:(NSString *)propertyName;
@@ -99,7 +122,7 @@
     return action != NULL ? action(self) : nil;
 }
 
-- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector;
+- (NSMethodSignature *) methodSignatureForSelector:(SEL)aSelector;
 {
     if ([self hasActionForPropertyName:NSStringFromSelector(aSelector)])
     {

@@ -9,10 +9,15 @@
 
 @interface User : NSObject
 - (NSString *) firstName;
+- (NSString *) lastName;
 @end
 
 @implementation User
 - (NSString *) firstName;
+{
+    return nil;
+}
+- (NSString *) lastName;
 {
     return nil;
 }
@@ -76,9 +81,25 @@
 {
     MRFactoryObjectDefinition *objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
     
-    [objectTemplate setValue:@"Test" forPropertyNamed:@"test"];
+    [objectTemplate setValue:@"Test" forPropertyNamed:@"firstName"];
     
     assertThat(objectTemplate.actions, isNot(empty()));
+}
+
+- (void) testCannotDefineANilProperty;
+{
+    MRFactoryObjectDefinition *objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
+    
+    STAssertThrows([objectTemplate setValue:@"test" forPropertyNamed:nil], nil);
+}
+
+- (void) testCanDefineNilValueForProperty;
+{
+    id objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
+    
+    [objectTemplate setValue:nil forPropertyNamed:@"firstName"];
+    
+    assertThat([objectTemplate firstName], is(equalTo(nil)));
 }
 
 - (void) testCanDefineAnActionForAnObjectProperty;
@@ -88,9 +109,17 @@
         return nil;
     };
     
-    [objectTemplate setBuildAction:action forPropertyNamed:@"test"];
+    [objectTemplate setAction:action forPropertyNamed:@"firstName"];
 
     assertThat(objectTemplate.actions, isNot(empty()));
+}
+
+- (void) testPropertiesCannotBeDefinedForNonExistantProperties;
+{
+    MRFactoryObjectDefinition *objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
+    MRFactoryObjectBuildAction action = ^id(MRFactoryObjectDefinition *obj){ return nil; };
+        
+    STAssertThrows([objectTemplate setAction:action forPropertyNamed:@"test"], nil);
 }
 
 - (void) testCreateInstanceFromBuildTemplate;
@@ -100,6 +129,39 @@
     [objectTemplate setValue:@"Test First Name" forPropertyNamed:@"firstName"];
     
     assertThat([objectTemplate firstName], is(equalTo(@"Test First Name")));
+}
+
+- (void) testCanDefineASequenceActionForAnObjectProperty;
+{
+    id objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
+    MRFactoryObjectSequenceBuildAction sequenceAction = ^id(MRFactoryObjectDefinition *obj, NSUInteger index) {
+        return [NSString stringWithFormat:@"Tom %d", index];
+    };
+    
+    [objectTemplate setSequenceAction:sequenceAction forPropertyNamed:@"firstName"];
+    
+    assertThat([objectTemplate firstName], is(equalTo(@"Tom 1")));
+    assertThat([objectTemplate firstName], is(equalTo(@"Tom 2")));
+}
+
+- (void) testCanDefineMultipleSequenceActionsForAnObjectProperty;
+{
+    id objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
+    MRFactoryObjectSequenceBuildAction firstNameAction = ^id(MRFactoryObjectDefinition *obj, NSUInteger index) {
+        return [NSString stringWithFormat:@"Timmy %d", index];
+    };
+    MRFactoryObjectSequenceBuildAction lastNameAction = ^id(MRFactoryObjectDefinition *obj, NSUInteger index) {
+        return [NSString stringWithFormat:@"Jones %d", index];
+    };
+    
+    [objectTemplate setSequenceAction:firstNameAction forPropertyNamed:@"firstName"];
+    [objectTemplate setSequenceAction:lastNameAction forPropertyNamed:@"lastName"];
+    
+    assertThat([objectTemplate firstName], is(equalTo(@"Timmy 1")));
+    assertThat([objectTemplate firstName], is(equalTo(@"Timmy 2")));
+    
+    assertThat([objectTemplate lastName], is(equalTo(@"Jones 1")));
+    assertThat([objectTemplate lastName], is(equalTo(@"Jones 2")));
 }
 
 //
