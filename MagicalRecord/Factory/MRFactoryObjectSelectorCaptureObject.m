@@ -18,6 +18,12 @@
     return capturer;
 }
 
+//- (id)forwardingTargetForSelector:(SEL)aSelector;
+//{
+//    self.capturedSelector = aSelector;
+//    return self.factory;
+//}
+////
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
 {
     return [[self.factory factoryClass] instanceMethodSignatureForSelector:aSelector];
@@ -25,7 +31,7 @@
 
 - (void)forwardInvocation:(NSInvocation *)anInvocation;
 {
-    //just want to collect the selector, and absorbe the invocation
+    //just want to collect the selector, and absorb the invocation
     self.capturedSelector = anInvocation.selector;
     anInvocation.selector = @selector(completeSelectorCapture);
     [anInvocation invokeWithTarget:self.factory];

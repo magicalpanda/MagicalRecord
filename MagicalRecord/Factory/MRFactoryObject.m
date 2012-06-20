@@ -20,7 +20,7 @@
 @property (nonatomic, strong, readwrite) NSSet *associatedFactories;
 
 @property (nonatomic, strong, readwrite) id cachedValue;
-@property (nonatomic, strong, readwrite) MRFactoryObjectSequenceBuildAction cachedSequence;
+@property (nonatomic, copy, readwrite) MRFactoryObjectSequenceBuildAction cachedSequence;
 @property (nonatomic, strong, readwrite) MRFactoryObjectSelectorCaptureObject *selectorCapturer;
 
 - (void) completeSelectorCapture;
@@ -91,9 +91,7 @@
 //    {
 //        return nil;
 //    }
-    self.selectorCapturer = [MRFactoryObjectSelectorCaptureObject capturerWithFactory:self];
-
-    return self.selectorCapturer;
+    return self.selectorCapturer = [MRFactoryObjectSelectorCaptureObject capturerWithFactory:self];
 }
 
 - (void) completeSelectorCapture;
@@ -139,6 +137,7 @@
 {
     __weak id weakSelf = self;
     __block NSUInteger index = startIndex;
+    
     MRFactoryObjectBuildAction sequenceActionWrapper = ^id(MRFactoryObject *obj){
         
         id returnValue = nil;
