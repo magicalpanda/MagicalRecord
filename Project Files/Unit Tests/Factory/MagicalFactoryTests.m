@@ -20,12 +20,9 @@
 
 - (void) testDefineAFactoryWithAnEmptyDefinitionBlock;
 {
-    [MagicalFactory define:[User class] do:^(id<MRFactoryObject> factoryObj){
-        
-    }];
+    [MagicalFactory define:[User class] do:nil];
     assertThat([MagicalFactory factories], hasCountOf(1));
 }
-
 
 - (void) testCannotDefineSameFactoryMoreThanOnce;
 {
@@ -57,12 +54,18 @@
 
 - (void) testDefineAFactoryWithASequenceBlock;
 {
-    STFail(@"Not Implemented");
     [MagicalFactory define:[User class] do:^(id<MRFactoryObject> factoryObj){
 
-        //        [[[factoryObj setSequence:sequence] forProperty] lastName];
+        MRFactoryObjectSequenceBuildAction sequence = ^id(id<MRFactoryObject> factory, NSUInteger index){
+            return [NSString stringWithFormat:@"Test %u", index];
+        };
+        
+        [[[factoryObj setSequence:sequence] forProperty] lastName];
         
     }];
+    
+    id factory = [[MagicalFactory factories] anyObject];
+    assertThat([factory lastName], is(equalTo(@"Test 1")));
 }
 
 - (void) testDefineAFactoryWithAStringIdentifier;

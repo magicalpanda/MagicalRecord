@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 Magical Panda Software LLC. All rights reserved.
 //
 
-#import "MRFactoryObject.h"
 #import <objc/runtime.h>
+#import "MRFactoryObject.h"
+#import "MRFactoryObjectSelectorCaptureObject.h"
 
-@class MRFactoryObjectSelectorCaptureObject;
 
 @interface MRFactoryObject ()
 
@@ -20,43 +20,10 @@
 @property (nonatomic, strong, readwrite) NSSet *associatedFactories;
 
 @property (nonatomic, strong, readwrite) id cachedValue;
+@property (nonatomic, strong, readwrite) MRFactoryObjectSequenceBuildAction cachedSequence;
 @property (nonatomic, strong, readwrite) MRFactoryObjectSelectorCaptureObject *selectorCapturer;
 
 - (void) completeSelectorCapture;
-
-@end
-
-
-@interface MRFactoryObjectSelectorCaptureObject : NSObject
-
-@property (nonatomic, weak) MRFactoryObject *factory;
-@property (nonatomic, assign) SEL capturedSelector;
-
-+ (id) capturerWithFactory:(MRFactoryObject *)factory;
-
-@end
-
-@implementation MRFactoryObjectSelectorCaptureObject
-
-+ (id) capturerWithFactory:(MRFactoryObject *)factory;
-{
-    MRFactoryObjectSelectorCaptureObject *capturer = [self new];
-    capturer.factory = factory;
-    return capturer;
-}
-
-- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
-{
-    return [[self.factory factoryClass] instanceMethodSignatureForSelector:aSelector];
-}
-
-- (void)forwardInvocation:(NSInvocation *)anInvocation;
-{
-    //just want to collect the selector, and absorbe the invocation
-    self.capturedSelector = anInvocation.selector;
-    anInvocation.selector = @selector(completeSelectorCapture);
-    [anInvocation invokeWithTarget:self.factory];
-}
 
 @end
 
@@ -114,16 +81,16 @@
 
 - (id) setSequence:(MRFactoryObjectSequenceBuildAction)sequence;
 {
-    self.cachedValue = sequence;
+    self.cachedSequence = sequence;
     return self;
 }
 
 - (id) forProperty;
 {
-    if (self.cachedValue == nil)
-    {
-        return nil;
-    }
+//    if (self.cachedValue == nil)
+//    {
+//        return nil;
+//    }
     self.selectorCapturer = [MRFactoryObjectSelectorCaptureObject capturerWithFactory:self];
 
     return self.selectorCapturer;
@@ -131,8 +98,19 @@
 
 - (void) completeSelectorCapture;
 {
-    [self setValue:self.cachedValue forPropertyNamed:NSStringFromSelector(self.selectorCapturer.capturedSelector)];
-    self.cachedValue = nil;
+    NSString *propertyName = NSStringFromSelector(self.selectorCapturer.capturedSelector);
+    
+    //bleh, if statments...clean this up!
+    if (self.cachedValue)
+    {
+        [self setValue:self.cachedValue forPropertyNamed:propertyName];
+        self.cachedValue = nil;
+    }
+    if (self.cachedSequence)
+    {
+        [self setSequenceAction:self.cachedSequence forPropertyNamed:propertyName];
+        self.cachedSequence = nil;
+    }
     self.selectorCapturer = nil;
 }
 

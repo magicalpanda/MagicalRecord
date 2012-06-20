@@ -26,7 +26,8 @@ typedef  id(^MRFactoryObjectSequenceBuildAction)(MRFactoryObject *obj, NSUIntege
 
 @interface MRFactoryObject : NSObject<MRFactoryObject>
 
-@property (nonatomic, copy, readonly) NSString *alias;
+@property (nonatomic, assign, readonly) Class factoryClass;
+@property (nonatomic, strong, readonly) NSString *alias;
 @property (nonatomic, strong, readonly) NSArray *actions;
 
 + (id) factoryWithClass:(Class)klass;
