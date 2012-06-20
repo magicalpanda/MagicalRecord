@@ -126,8 +126,8 @@
 		C796731A1581CF310076C553 /* FixtureHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FBA13D0D2AE00298F87 /* FixtureHelpers.m */; };
 		C79673241581D7590076C553 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79673221581D7500076C553 /* CoreGraphics.framework */; };
 		C79673261581D7660076C553 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79673251581D7660076C553 /* UIKit.framework */; };
-		C7D7196E158FFE1A00355EBC /* MRFactoryObjectDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = C7D7196C158FFE1A00355EBC /* MRFactoryObjectDefinition.h */; };
-		C7D7196F158FFE1A00355EBC /* MRFactoryObjectDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D7196D158FFE1A00355EBC /* MRFactoryObjectDefinition.m */; };
+		C7D7196E158FFE1A00355EBC /* MRFactoryObject.h in Headers */ = {isa = PBXBuildFile; fileRef = C7D7196C158FFE1A00355EBC /* MRFactoryObject.h */; };
+		C7D7196F158FFE1A00355EBC /* MRFactoryObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D7196D158FFE1A00355EBC /* MRFactoryObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -272,8 +272,8 @@
 		C7C9A38713F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntityRelatedToMappedEntityUsingDefaults.m; sourceTree = "<group>"; };
 		C7C9A38813F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.h; sourceTree = "<group>"; };
 		C7C9A38913F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m; sourceTree = "<group>"; };
-		C7D7196C158FFE1A00355EBC /* MRFactoryObjectDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRFactoryObjectDefinition.h; sourceTree = "<group>"; };
-		C7D7196D158FFE1A00355EBC /* MRFactoryObjectDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRFactoryObjectDefinition.m; sourceTree = "<group>"; };
+		C7D7196C158FFE1A00355EBC /* MRFactoryObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRFactoryObject.h; sourceTree = "<group>"; };
+		C7D7196D158FFE1A00355EBC /* MRFactoryObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRFactoryObject.m; sourceTree = "<group>"; };
 		C7DD729C150F832A00216827 /* MagicalImportFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalImportFunctions.h; sourceTree = "<group>"; };
 		C7DD729D150F832A00216827 /* MagicalImportFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalImportFunctions.m; sourceTree = "<group>"; };
 		C7DD729E150F832A00216827 /* NSAttributeDescription+MagicalDataImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributeDescription+MagicalDataImport.h"; sourceTree = "<group>"; };
@@ -674,8 +674,8 @@
 		C7D7196A158FFDD000355EBC /* Factory */ = {
 			isa = PBXGroup;
 			children = (
-				C7D7196C158FFE1A00355EBC /* MRFactoryObjectDefinition.h */,
-				C7D7196D158FFE1A00355EBC /* MRFactoryObjectDefinition.m */,
+				C7D7196C158FFE1A00355EBC /* MRFactoryObject.h */,
+				C7D7196D158FFE1A00355EBC /* MRFactoryObject.m */,
 				C7962CE915904E28009C0CDF /* MagicalFactory.h */,
 				C7962CEA15904E28009C0CDF /* MagicalFactory.m */,
 			);
@@ -820,7 +820,7 @@
 				C79672901581C1D60076C553 /* MagicalRecord+Setup.h in Headers */,
 				C79672911581C1D60076C553 /* MagicalRecord+ShorthandSupport.h in Headers */,
 				C79672921581C1D60076C553 /* MagicalRecordShorthand.h in Headers */,
-				C7D7196E158FFE1A00355EBC /* MRFactoryObjectDefinition.h in Headers */,
+				C7D7196E158FFE1A00355EBC /* MRFactoryObject.h in Headers */,
 				C7962CEB15904E28009C0CDF /* MagicalFactory.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -941,7 +941,7 @@
 				C79672741581C1640076C553 /* MagicalRecord+Options.m in Sources */,
 				C79672751581C1640076C553 /* MagicalRecord+Setup.m in Sources */,
 				C79672761581C1640076C553 /* MagicalRecord+ShorthandSupport.m in Sources */,
-				C7D7196F158FFE1A00355EBC /* MRFactoryObjectDefinition.m in Sources */,
+				C7D7196F158FFE1A00355EBC /* MRFactoryObject.m in Sources */,
 				C7962CEC15904E28009C0CDF /* MagicalFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

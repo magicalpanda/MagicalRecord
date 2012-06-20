@@ -7,10 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MRFactoryObjectDefinition.h"
+#import "MRFactoryObject.h"
 
 @interface MagicalFactory : NSObject
 
-+ (void) define:(Class)klass do:(void(^)(id<MRFactoryObject>))configurationBlock;
++ (void) resetAll;
+
++ (NSSet *) factories;
+
++ (void) define:(id)stringOrClass do:(void(^)(id<MRFactoryObject>))configurationBlock;
++ (void) define:(id)stringOrClass as:(NSString *)alias do:(void (^)(id<MRFactoryObject>))configurationBlock;
 
 @end

@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@class MRFactoryObjectDefinition;
+@class MRFactoryObject;
 
-typedef  id(^MRFactoryObjectBuildAction)(MRFactoryObjectDefinition *obj);
-typedef  id(^MRFactoryObjectSequenceBuildAction)(MRFactoryObjectDefinition *obj, NSUInteger sequenceIndex);
+typedef  id(^MRFactoryObjectBuildAction)(MRFactoryObject *obj);
+typedef  id(^MRFactoryObjectSequenceBuildAction)(MRFactoryObject *obj, NSUInteger sequenceIndex);
 
 
 @protocol MRFactoryObject <NSObject>
@@ -24,7 +24,7 @@ typedef  id(^MRFactoryObjectSequenceBuildAction)(MRFactoryObjectDefinition *obj,
 @end
 
 
-@interface MRFactoryObjectDefinition : NSObject<MRFactoryObject>
+@interface MRFactoryObject : NSObject<MRFactoryObject>
 
 @property (nonatomic, copy, readonly) NSString *alias;
 @property (nonatomic, strong, readonly) NSArray *actions;
@@ -32,6 +32,7 @@ typedef  id(^MRFactoryObjectSequenceBuildAction)(MRFactoryObjectDefinition *obj,
 + (id) factoryWithClass:(Class)klass;
 + (id) factoryWithClass:(Class)klass as:(NSString *)alias;
 - (id) initWithClass:(Class)klass;
+- (id) initWithClass:(Class)klass as:(NSString *)alias;
 
 - (void) setValue:(id)value forPropertyNamed:(NSString *)propertyName;
 - (void) setAction:(MRFactoryObjectBuildAction)action forPropertyNamed:(NSString *)propertyName;

@@ -5,7 +5,7 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
-#import "MRFactoryObjectDefinition.h"
+#import "MRFactoryObject.h"
 
 //@interface Address : NSObject
 //@end
@@ -66,26 +66,26 @@
 
 - (void) testInstatiatingABuilderObject;
 {
-    MRFactoryObjectDefinition *objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
+    MRFactoryObject *objectTemplate = [[MRFactoryObject alloc] initWithClass:[User class]];
     assertThat(objectTemplate.actions, isNot(nilValue()));
 }
 
 
 - (void) testCanDefineSameFactoryWithAnAlias;
 {
-    MRFactoryObjectDefinition *objectTemplate = [MRFactoryObjectDefinition factoryWithClass:[User class] as:@"Admin"];
+    MRFactoryObject *objectTemplate = [MRFactoryObject factoryWithClass:[User class] as:@"Admin"];
     
     assertThat(objectTemplate.alias, is(equalTo(@"Admin")));
 }
 
 - (void) testThrowsAnExceptionWithInitializedWithoutAClass;
 {
-    STAssertThrows([MRFactoryObjectDefinition new], nil);
+    STAssertThrows([MRFactoryObject new], nil);
 }
 
 - (void) testCanDefineAStaticValueForAnObjectProperty;
 {
-    MRFactoryObjectDefinition *objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
+    MRFactoryObject *objectTemplate = [[MRFactoryObject alloc] initWithClass:[User class]];
     
     [objectTemplate setValue:@"Test" forPropertyNamed:@"firstName"];
     
@@ -94,14 +94,14 @@
 
 - (void) testCannotDefineANilProperty;
 {
-    MRFactoryObjectDefinition *objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
+    MRFactoryObject *objectTemplate = [[MRFactoryObject alloc] initWithClass:[User class]];
     
     STAssertThrows([objectTemplate setValue:@"test" forPropertyNamed:nil], nil);
 }
 
 - (void) testCanDefineNilValueForProperty;
 {
-    id objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
+    id objectTemplate = [[MRFactoryObject alloc] initWithClass:[User class]];
     
     [objectTemplate setValue:nil forPropertyNamed:@"firstName"];
     
@@ -110,8 +110,8 @@
 
 - (void) testCanDefineAnActionForAnObjectProperty;
 {
-    MRFactoryObjectDefinition *objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
-    MRFactoryObjectBuildAction action = ^id(MRFactoryObjectDefinition *obj){
+    MRFactoryObject *objectTemplate = [[MRFactoryObject alloc] initWithClass:[User class]];
+    MRFactoryObjectBuildAction action = ^id(MRFactoryObject *obj){
         return nil;
     };
     
@@ -122,15 +122,15 @@
 
 - (void) testPropertiesCannotBeDefinedForNonExistantProperties;
 {
-    MRFactoryObjectDefinition *objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
-    MRFactoryObjectBuildAction action = ^id(MRFactoryObjectDefinition *obj){ return nil; };
+    MRFactoryObject *objectTemplate = [[MRFactoryObject alloc] initWithClass:[User class]];
+    MRFactoryObjectBuildAction action = ^id(MRFactoryObject *obj){ return nil; };
         
     STAssertThrows([objectTemplate setAction:action forPropertyNamed:@"test"], nil);
 }
 
 - (void) testCreateInstanceFromBuildTemplate;
 {
-    id objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
+    id objectTemplate = [[MRFactoryObject alloc] initWithClass:[User class]];
     
     [objectTemplate setValue:@"Test First Name" forPropertyNamed:@"firstName"];
     
@@ -139,8 +139,8 @@
 
 - (void) testCanDefineASequenceActionForAnObjectProperty;
 {
-    id objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
-    MRFactoryObjectSequenceBuildAction sequenceAction = ^id(MRFactoryObjectDefinition *obj, NSUInteger index) {
+    id objectTemplate = [[MRFactoryObject alloc] initWithClass:[User class]];
+    MRFactoryObjectSequenceBuildAction sequenceAction = ^id(MRFactoryObject *obj, NSUInteger index) {
         return [NSString stringWithFormat:@"Tom %d", index];
     };
     
@@ -151,8 +151,8 @@
 
 - (void) testCanGenerateNextValueForSequenceAction;
 {
-    id objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
-    MRFactoryObjectSequenceBuildAction sequenceAction = ^id(MRFactoryObjectDefinition *obj, NSUInteger index) {
+    id objectTemplate = [[MRFactoryObject alloc] initWithClass:[User class]];
+    MRFactoryObjectSequenceBuildAction sequenceAction = ^id(MRFactoryObject *obj, NSUInteger index) {
         return [NSString stringWithFormat:@"Tom %d", index];
     };
     
@@ -164,8 +164,8 @@
 
 - (void) testCanDefineASequenceActionForAnObjectPropertyWithCustomStartingIndex;
 {
-    id objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
-    MRFactoryObjectSequenceBuildAction sequenceAction = ^id(MRFactoryObjectDefinition *obj, NSUInteger index) {
+    id objectTemplate = [[MRFactoryObject alloc] initWithClass:[User class]];
+    MRFactoryObjectSequenceBuildAction sequenceAction = ^id(MRFactoryObject *obj, NSUInteger index) {
         return [NSString stringWithFormat:@"Tom %d", index];
     };
     
@@ -177,11 +177,11 @@
 
 - (void) testCanDefineMultipleSequenceActionsForAnObjectProperty;
 {
-    id objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
-    MRFactoryObjectSequenceBuildAction firstNameAction = ^id(MRFactoryObjectDefinition *obj, NSUInteger index) {
+    id objectTemplate = [[MRFactoryObject alloc] initWithClass:[User class]];
+    MRFactoryObjectSequenceBuildAction firstNameAction = ^id(MRFactoryObject *obj, NSUInteger index) {
         return [NSString stringWithFormat:@"Timmy %d", index];
     };
-    MRFactoryObjectSequenceBuildAction lastNameAction = ^id(MRFactoryObjectDefinition *obj, NSUInteger index) {
+    MRFactoryObjectSequenceBuildAction lastNameAction = ^id(MRFactoryObject *obj, NSUInteger index) {
         return [NSString stringWithFormat:@"Jones %d", index];
     };
     
@@ -197,7 +197,7 @@
 
 - (void) testCanDefineAnAssociationForAnObjectProperty;
 {
-    id objectTemplate = [[MRFactoryObjectDefinition alloc] initWithClass:[User class]];
+    id objectTemplate = [[MRFactoryObject alloc] initWithClass:[User class]];
     
     [objectTemplate setAssociation:@"Address" forPropertyNamed:@"address"];
     

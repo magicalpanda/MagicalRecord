@@ -6,11 +6,12 @@
 //  Copyright (c) 2012 Magical Panda Software LLC. All rights reserved.
 //
 
-#import "MRFactoryObjectDefinition.h"
+#import "MRFactoryObject.h"
 #import <objc/runtime.h>
 
+@class MRFactoryObjectSelectorCaptureObject;
 
-@interface MRFactoryObjectDefinition ()
+@interface MRFactoryObject ()
 
 @property (nonatomic, copy, readwrite) NSString *alias;
 @property (nonatomic, assign, readwrite) Class factoryClass;
@@ -19,11 +20,48 @@
 @property (nonatomic, strong, readwrite) NSSet *associatedFactories;
 
 @property (nonatomic, strong, readwrite) id cachedValue;
+@property (nonatomic, strong, readwrite) MRFactoryObjectSelectorCaptureObject *selectorCapturer;
+
+- (void) completeSelectorCapture;
 
 @end
 
 
-@implementation MRFactoryObjectDefinition
+@interface MRFactoryObjectSelectorCaptureObject : NSObject
+
+@property (nonatomic, weak) MRFactoryObject *factory;
+@property (nonatomic, assign) SEL capturedSelector;
+
++ (id) capturerWithFactory:(MRFactoryObject *)factory;
+
+@end
+
+@implementation MRFactoryObjectSelectorCaptureObject
+
++ (id) capturerWithFactory:(MRFactoryObject *)factory;
+{
+    MRFactoryObjectSelectorCaptureObject *capturer = [self new];
+    capturer.factory = factory;
+    return capturer;
+}
+
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
+{
+    return [[self.factory factoryClass] instanceMethodSignatureForSelector:aSelector];
+}
+
+- (void)forwardInvocation:(NSInvocation *)anInvocation;
+{
+    //just want to collect the selector, and absorbe the invocation
+    self.capturedSelector = anInvocation.selector;
+    anInvocation.selector = @selector(completeSelectorCapture);
+    [anInvocation invokeWithTarget:self.factory];
+}
+
+@end
+
+
+@implementation MRFactoryObject
 
 - (id) init;
 {
@@ -43,6 +81,16 @@
     return self;
 }
 
+- (id) initWithClass:(Class)klass as:(NSString *)alias;
+{
+    self = [self initWithClass:klass];
+    if (self)
+    {
+        self.alias = alias;
+    }
+    return self;
+}
+
 + (id) factoryWithClass:(Class)klass;
 {
     return [[self alloc] initWithClass:klass];
@@ -50,7 +98,7 @@
 
 + (id) factoryWithClass:(Class)klass as:(NSString *)alias;
 {
-    return nil;
+    return [[self alloc] initWithClass:klass as:alias];
 }
 
 - (NSArray *) actions;
@@ -72,14 +120,26 @@
 
 - (id) forProperty;
 {
-    //time to set cached value
-    return self;
+    if (self.cachedValue == nil)
+    {
+        return nil;
+    }
+    self.selectorCapturer = [MRFactoryObjectSelectorCaptureObject capturerWithFactory:self];
+
+    return self.selectorCapturer;
+}
+
+- (void) completeSelectorCapture;
+{
+    [self setValue:self.cachedValue forPropertyNamed:NSStringFromSelector(self.selectorCapturer.capturedSelector)];
+    self.cachedValue = nil;
+    self.selectorCapturer = nil;
 }
 
 - (void) setValue:(id)value forPropertyNamed:(NSString *)propertyName;
 {
     __weak id weakValue = value;
-    MRFactoryObjectBuildAction action = ^id(MRFactoryObjectDefinition *obj)
+    MRFactoryObjectBuildAction action = ^id(MRFactoryObject *obj)
     {
         return weakValue;
     };
@@ -101,7 +161,7 @@
 {
     __weak id weakSelf = self;
     __block NSUInteger index = startIndex;
-    MRFactoryObjectBuildAction sequenceActionWrapper = ^id(MRFactoryObjectDefinition *obj){
+    MRFactoryObjectBuildAction sequenceActionWrapper = ^id(MRFactoryObject *obj){
         
         id returnValue = nil;
         if (action)
@@ -174,6 +234,8 @@
 
 - (void) forwardInvocation:(NSInvocation *)anInvocation;
 {
+    //TODO: need to check for cached value
+    
     SEL propertyAsSelector = anInvocation.selector;
     NSString *propertyName = NSStringFromSelector(propertyAsSelector);
 
@@ -192,28 +254,5 @@
     self.generateOnNextAccess = YES;
     return self;
 }
-
-//
-//- (id) createInstance;
-//{
-//    MRFactoryObject *object = [MRFactoryObject new];
-//    
-//    for (id actionPair in self.buildActions)
-//    {
-//        NSString *propertyName = [[actionPair allKeys] lastObject];
-//        MRFactoryObjectBuildAction action = [actionPair valueForKey:propertyName];
-//        
-//        int (^propertyAction)(id) = ^int(id _self)
-//        {
-//            action(_self);
-//            return 0;
-//        };
-//        
-//        IMP implementation = imp_implementationWithBlock((__bridge void *)(propertyAction));
-//        class_addMethod([self class], NSSelectorFromString(propertyName), implementation, @encode(id));
-//    }
-//    
-//    return object;
-//}
 
 @end
