@@ -118,7 +118,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 			}
 			else
 			{
-				MRLog(@"Property '%@' not found in %u properties for %@", propertyName, [propDict count], NSStringFromClass(self));
+				MRLog(@"Property '%@' not found in %lu properties for %@", propertyName, [propDict count], NSStringFromClass(self));
 			}
 		}
 	}
