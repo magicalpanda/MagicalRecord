@@ -10,6 +10,8 @@
 
 @interface NSManagedObject (MagicalRequests)
 
++(NSPredicate *) MR_findByAttributePredicate;
+
 + (NSFetchRequest *) MR_createFetchRequest;
 + (NSFetchRequest *) MR_createFetchRequestInContext:(NSManagedObjectContext *)context;
 

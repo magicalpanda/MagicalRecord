@@ -11,10 +11,11 @@
 #import "NSManagedObject+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalThreading.h"
 
+
 @implementation NSManagedObject (MagicalFinders)
 
-#pragma mark - Finding Data
 
+#pragma mark - Finding Data
 
 + (NSArray *) MR_findAllInContext:(NSManagedObjectContext *)context
 {
@@ -180,7 +181,12 @@
 
 + (NSArray *) MR_findByAttribute:(NSString *)attribute withValue:(id)searchValue andOrderBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
 {
-	NSPredicate *searchTerm = [NSPredicate predicateWithFormat:@"%K = %@", attribute, searchValue];
+  
+  NSDictionary *searchTerms = [NSDictionary 
+                               dictionaryWithObjectsAndKeys:searchValue, @"VALUE", attribute, @"KEY", nil];
+//  [NSPredicate predicateWithFormat:@"%K = %@", attribute, searchValue];
+	NSPredicate *searchTerm = [[self MR_findByAttributePredicate] predicateWithSubstitutionVariables:searchTerms];
+  ;
 	NSFetchRequest *request = [self MR_requestAllSortedBy:sortTerm ascending:ascending withPredicate:searchTerm inContext:context];
 	
 	return [self MR_executeFetchRequest:request];

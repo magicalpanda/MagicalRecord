@@ -13,6 +13,22 @@
 @implementation NSManagedObject (MagicalRequests)
 
 
+#pragma mark - 
+#pragma mark Predicates
++(NSPredicate *) MR_findByAttributePredicate; {
+  static NSPredicate * findByAttributePredicate_ = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+      findByAttributePredicate_ = [NSPredicate predicateWithFormat:@"$KEY = $VALUE"];
+  });
+  
+  return findByAttributePredicate_;
+}
+
+
+#pragma mark - 
+#pragma mark Requests
+
 + (NSFetchRequest *)MR_createFetchRequestInContext:(NSManagedObjectContext *)context
 {
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -58,8 +74,12 @@
 + (NSFetchRequest *) MR_requestAllWhere:(NSString *)property isEqualTo:(id)value inContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *request = [self MR_createFetchRequestInContext:context];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", property, value]];
-    
+
+    NSDictionary * searchTerms = [NSDictionary 
+                                  dictionaryWithObjectsAndKeys:value, @"VALUE",property, @"KEY",nil];
+  
+    [request setPredicate:[[self MR_findByAttributePredicate] 
+                           predicateWithSubstitutionVariables:searchTerms]];    
     return request;
 }
 

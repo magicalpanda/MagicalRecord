@@ -8,6 +8,8 @@
 
 #import <CoreData/CoreData.h>
 
+
+
 @interface NSManagedObject (MagicalFinders)
 
 + (NSArray *) MR_findAll;
