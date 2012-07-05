@@ -90,7 +90,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey            = @"type";  
         if ([relationshipInfo respondsToSelector:@selector(isOrdered)] && [relationshipInfo isOrdered])
         {
             //Need to get the ordered set
-            NSString *selectorName = [[relationshipInfo name] stringByAppendingString:@"Set"];
+            NSString *selectorName = [relationshipInfo name];
             relationshipSource = [self performSelector:NSSelectorFromString(selectorName)];
             addRelationMessageFormat = @"addObject:";
         }
