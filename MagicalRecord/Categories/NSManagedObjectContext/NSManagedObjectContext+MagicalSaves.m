@@ -98,7 +98,7 @@
 
 - (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion;
 {
-    [self performBlock:^{
+    [self performBlockAndWait:^{
         [self MR_saveWithErrorCallback:errorCallback];
 
         if (self == [[self class] MR_defaultContext])
