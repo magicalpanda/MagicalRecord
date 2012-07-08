@@ -98,7 +98,7 @@
 
 - (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion;
 {
-    [self performBlock:^{
+    [self performBlockAndWait:^{
         [self MR_saveWithErrorCallback:errorCallback];
 
         if (self == [[self class] MR_defaultContext])
@@ -106,7 +106,7 @@
             [[[self class] MR_rootSavingContext] MR_saveInBackgroundErrorHandler:errorCallback completion:completion];
         }
 
-        if (self == [[self class] MR_rootSavingContext])
+        if (completion && self == [[self class] MR_rootSavingContext])
         {
             dispatch_async(dispatch_get_main_queue(), completion);
         }
