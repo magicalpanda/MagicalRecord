@@ -221,6 +221,17 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext
 {
+    NSManagedObjectID *objectID = [self objectID];
+    if ([objectID isTemporaryID]) {
+        MRLog(@"Object (%@) has temporaryID. Attempting to generate permanentID.",[[self class] description]);
+        NSError *error = nil;
+        if ([[self managedObjectContext] obtainPermanentIDsForObjects:[NSArray arrayWithObject:self] error:&error]) {
+            objectID = [self objectID];
+            MRLog(@"Object (%@) was granted a permanentID.",[[self class] description]);
+        } else {
+            [MagicalRecord handleErrors:error];
+        }
+    }
     NSError *error = nil;
     NSManagedObject *inContext = [otherContext existingObjectWithID:[self objectID] error:&error];
     [MagicalRecord handleErrors:error];
