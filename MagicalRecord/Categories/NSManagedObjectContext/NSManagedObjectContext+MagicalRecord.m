@@ -11,6 +11,7 @@
 static NSManagedObjectContext *rootSavingContext = nil;
 static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
 
+#define kNSManagedObjectContextWorkingName @"kNSManagedObjectContextWorkingName"
 
 @interface NSManagedObjectContext (MagicalRecordInternal)
 
@@ -35,9 +36,16 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
     NSString *contextName = (self == defaultManagedObjectContext_) ? @"*** DEFAULT ***" : @"";
     contextName = (self == rootSavingContext) ? @"*** BACKGROUND SAVE ***" : contextName;
     
-    NSString *onMainThread = [NSThread isMainThread] ? @"*** MAIN THREAD ***" : @"";
+    NSString *onMainThread = [NSThread isMainThread] ? @"*** MAIN THREAD ***" : @"*** SECONDARY THREAD ***";
     
-    return [NSString stringWithFormat:@"%@: %@ Context %@", [self description], contextName, onMainThread];
+    NSString *familyTree = [NSString string];
+    NSManagedObjectContext *parentContext = [self parentContext];
+    while (nil != parentContext) {
+        familyTree = [familyTree stringByAppendingFormat:@" ==> %@;",[parentContext MR_contextWorkingName]];
+        parentContext = [parentContext parentContext];
+    }
+
+    return [NSString stringWithFormat:@"%@: %@ Context %@ \nFamilyTree: %@", [self MR_contextWorkingName], contextName, onMainThread,familyTree];
 }
 
 + (NSManagedObjectContext *) MR_defaultContext
@@ -74,6 +82,7 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
 {
     rootSavingContext = context;
     [rootSavingContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
+    [rootSavingContext MR_setContextWorkingName:@"rootSavingsContext"];
 }
 
 + (void) MR_initializeDefaultContextWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
@@ -85,6 +94,7 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
         [self MR_setRootSavingContext:rootContext];
         
         NSManagedObjectContext *defaultContext = [self MR_newMainQueueContext];
+        [defaultContext MR_setContextWorkingName:@"defaultContext"];
         [defaultContext setParentContext:rootSavingContext];
 
         [self MR_setDefaultContext:defaultContext];
@@ -147,6 +157,20 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
         MRLog(@"-> Created %@", [context MR_description]);
     }
     return context;
+}
+
+- (void) MR_setContextWorkingName:(NSString *)workingName;
+{
+    [[self userInfo] setObject:workingName forKey:kNSManagedObjectContextWorkingName];
+}
+
+- (NSString *) MR_contextWorkingName;
+{
+    NSString *workingName = [[self userInfo] objectForKey:kNSManagedObjectContextWorkingName];
+    if (nil == workingName) {
+        workingName = @"UndefinedWorkingContext";
+    }
+    return workingName;
 }
 
 
