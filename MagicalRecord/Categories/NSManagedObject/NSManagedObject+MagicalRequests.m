@@ -94,17 +94,26 @@
 {
 	NSFetchRequest *request = [self MR_requestAllInContext:context];
 	
-	NSSortDescriptor *sortBy = [[NSSortDescriptor alloc] initWithKey:sortTerm ascending:ascending];
-	[request setSortDescriptors:[NSArray arrayWithObject:sortBy]];
-	
+    NSMutableArray* sortDescriptors = [[NSMutableArray alloc] init];
+    NSArray* sortKeys = [sortTerm componentsSeparatedByString:@","];
+    for (NSString* sortKey in sortKeys) 
+    {
+        NSString* firstCharacter = [NSString stringWithFormat:@"%c", [sortKey characterAtIndex:0]];
+        BOOL ascendingForSortTerm = !([firstCharacter isEqualToString:@"-"]);
+        ascendingForSortTerm *= ascending; // Boolean algebra to give the method-level 'ascending' argument proper influence         
+        NSString* trimmedSortKey = [sortKey stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"+-"]]; // Assumes there are no desired '+'/'-' characters in sortKey as those are invalid in Core Data anyhow
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:trimmedSortKey ascending:ascendingForSortTerm];
+        [sortDescriptors addObject:sortDescriptor];
+    }
+	[request setSortDescriptors:sortDescriptors];
 	return request;
 }
 
 + (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending
 {
 	return [self MR_requestAllSortedBy:sortTerm
-                             ascending:ascending
-                             inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+						  ascending:ascending
+						  inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
 + (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
@@ -117,12 +126,14 @@
     NSArray* sortKeys = [sortTerm componentsSeparatedByString:@","];
     for (NSString* sortKey in sortKeys) 
     {
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
+        NSString* firstCharacter = [NSString stringWithFormat:@"%c", [sortKey characterAtIndex:0]];
+        BOOL ascendingForSortTerm = !([firstCharacter isEqualToString:@"-"]);
+        ascendingForSortTerm *= ascending; // Boolean algebra to give the method-level 'ascending' argument proper influence
+        NSString* trimmedSortKey = [sortKey stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"+-"]]; // Assumes there are no desired '+'/'-' characters in sortKey as those are invalid in Core Data anyhow
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:trimmedSortKey ascending:ascendingForSortTerm];
         [sortDescriptors addObject:sortDescriptor];
     }
-    
 	[request setSortDescriptors:sortDescriptors];
-    
 	return request;
 }
 
