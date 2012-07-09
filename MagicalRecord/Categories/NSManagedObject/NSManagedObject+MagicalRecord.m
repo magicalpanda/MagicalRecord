@@ -233,7 +233,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
         }
     }
     NSError *error = nil;
-    NSManagedObject *inContext = [otherContext existingObjectWithID:[self objectID] error:&error];
+    NSManagedObject *inContext = [otherContext existingObjectWithID:objectID error:&error];
     [MagicalRecord handleErrors:error];
     
     return inContext;
