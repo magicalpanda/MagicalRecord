@@ -66,12 +66,12 @@ void reset_action_queue(void)
     
     if ([localContext hasChanges]) 
     {
-        [localContext MR_saveErrorHandler:errorHandler];
+        [localContext MR_saveNestedContextsErrorHandler:errorHandler];
     }
     
     if (completion)
     {
-        completion();
+        dispatch_async(dispatch_get_main_queue(), completion);
     }
 }
 
