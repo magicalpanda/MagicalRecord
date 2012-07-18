@@ -193,10 +193,36 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	return object;
 }
 
++ (NSArray*) MR_createAndSaveEntitiesInContext:(NSManagedObjectContext *)context count:(NSUInteger)count creationBlock:(void (^)(id, NSManagedObjectContext *, NSUInteger))creationBlock {
+	NSMutableArray* result = [[NSMutableArray alloc] initWithCapacity:count];
+	
+	for (NSUInteger idx = 0; idx < count; ++idx) {
+		[result addObject:[self MR_createInContext:context]];
+	}
+	
+	NSError* error = nil;
+	[context obtainPermanentIDsForObjects:result error:&error];
+	
+	if (creationBlock) {
+		NSUInteger index = 0;
+		for (NSManagedObject* object in result) {
+			creationBlock(object, context, index);
+		}
+	}
+	
+	return result;
+}
+
 + (id) MR_createAndSaveEntityWithBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock 
 {
 	return [self MR_createAndSaveEntityInContext:[NSManagedObjectContext contextForCurrentThread]
 								   creationBlock:creationBlock];
+}
+
++ (NSArray*) MR_createAndSaveEntities:(NSUInteger)count withBlock:(void (^)(id object, NSManagedObjectContext* localContext, NSUInteger))creationBlock {
+	return [self MR_createAndSaveEntitiesInContext:[NSManagedObjectContext contextForCurrentThread]
+											 count:count
+									 creationBlock:creationBlock];
 }
 
 - (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context

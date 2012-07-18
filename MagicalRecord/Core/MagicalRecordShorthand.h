@@ -97,6 +97,8 @@
 - (id) obtainPermanentID;
 + (id) createAndSaveEntityInContext:(NSManagedObjectContext *)context creationBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock;
 + (id) createAndSaveEntityWithBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock ;
++ (NSArray*) createAndSaveEntitiesInContext:(NSManagedObjectContext *)context count:(NSUInteger)count creationBlock:(void (^)(id, NSManagedObjectContext *, NSUInteger))creationBlock;
++ (NSArray*) createAndSaveEntities:(NSUInteger)count withBlock:(void (^)(id object, NSManagedObjectContext* localContext, NSUInteger))creationBlock;
 + (id) findFirstOrCreateByPredicate:(NSPredicate*)predicate inContext:(NSManagedObjectContext*)context creationBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock;
 + (id) findFirstOrCreateByPredicate:(NSPredicate*)predicate creationBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock;
 @end
