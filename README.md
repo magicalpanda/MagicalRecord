@@ -17,7 +17,7 @@ MagicalRecord was inspired by the ease of Ruby on Rails' Active Record fetching.
 
 1. In your XCode Project, drag the *MagicalRecord* folder (under the main folder) into your project. 
 2. Add *CoreData+MagicalRecord.h* file to your PCH file or your AppDelegate file.
-3. Optionally precees the *CoreData+MagicalRecord.h* import with `#define MR_SHORTHAND` to your PCH file if you want to use MagicalRecord methods without the *MR_prefix* like `findAll` instead of `MR_findAll`
+3. Optionally preceed the *CoreData+MagicalRecord.h* import with `#define MR_SHORTHAND` to your PCH file if you want to use MagicalRecord methods without the *MR_prefix* like `findAll` instead of `MR_findAll`
 4. Start writing code!
 
 # Notes
