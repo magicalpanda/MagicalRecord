@@ -100,17 +100,21 @@
 {
     [self performBlockAndWait:^{
         [self MR_saveWithErrorCallback:errorCallback];
-
+        
+        // If it's the default context, save the rootSavingContext too, THEN call the completion handler
         if (self == [[self class] MR_defaultContext])
         {
             [[[self class] MR_rootSavingContext] MR_saveInBackgroundErrorHandler:errorCallback completion:completion];
-        }
-
-        if (completion && self == [[self class] MR_rootSavingContext])
-        {
-            dispatch_async(dispatch_get_main_queue(), completion);
+        } else {
+            // If it's a child context, or if we've hit the root context, call the completion block.
+            // Basically, the ONLY time we don't call it's called on the default context, and there is an implied root save
+            if (completion)
+            {
+                dispatch_async(dispatch_get_main_queue(), completion);
+            }
         }
     }];
+
 }
 
 @end
