@@ -221,10 +221,24 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext
 {
-    NSError *error = nil;
+    __block NSError *error;
+    if ([self.objectID isTemporaryID]) {
+        if (otherContext.parentContext == self.managedObjectContext)
+        {
+            // We have a temporary id, which can never be used to lookup accross contexts, but we're trying it from a child context, so we can just get it
+            [self.managedObjectContext performBlockAndWait:^{
+                MRLog(@"Automatically obtaining a permanent Id so we can find it in a child context");
+                [self.managedObjectContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:self] error:nil];
+                [MagicalRecord handleErrors:error];
+                error = nil;
+            }];
+        } else {
+            MRLog(@"Unable to obtain a permanent Id for object. [NSManagedObject MR_inContext:] will not succeed");
+        }
+    }
+
     NSManagedObject *inContext = [otherContext existingObjectWithID:[self objectID] error:&error];
     [MagicalRecord handleErrors:error];
-    
     return inContext;
 }
 
