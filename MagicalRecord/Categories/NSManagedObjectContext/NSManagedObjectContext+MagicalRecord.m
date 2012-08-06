@@ -10,7 +10,7 @@
 
 static NSManagedObjectContext *rootSavingContext = nil;
 static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
-
+static Class managedObjectContextClass = nil;
 
 @interface NSManagedObjectContext (MagicalRecordInternal)
 
@@ -23,6 +23,17 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
 
 
 @implementation NSManagedObjectContext (MagicalRecord)
+
++ (Class) MR_managedObjectContextClass {
+    if (managedObjectContextClass == nil) {
+        managedObjectContextClass = [NSManagedObjectContext class];
+    }
+    return managedObjectContextClass;
+}
+
++ (void) MR_setManagedObjectContextClass:(Class)clazz {
+    managedObjectContextClass = clazz;
+}
 
 + (void) MR_cleanUp;
 {
@@ -102,13 +113,13 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
 
 + (NSManagedObjectContext *) MR_contextWithoutParent;
 {
-    NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    NSManagedObjectContext *context = [[[NSManagedObjectContext MR_managedObjectContextClass] alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     return context;
 }
 
 + (NSManagedObjectContext *) MR_context;
 {
-    NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    NSManagedObjectContext *context = [[[NSManagedObjectContext MR_managedObjectContextClass] alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     [context setParentContext:[self MR_defaultContext]];
     return context;
 }
@@ -122,14 +133,14 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
 
 + (NSManagedObjectContext *) MR_newMainQueueContext;
 {
-    NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    NSManagedObjectContext *context = [[[NSManagedObjectContext MR_managedObjectContextClass] alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     return context;    
 }
 
 + (NSManagedObjectContext *) MR_contextThatPushesChangesToDefaultContext;
 {
     NSManagedObjectContext *defaultContext = [self MR_defaultContext];
-    NSManagedObjectContext *childContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    NSManagedObjectContext *childContext = [[[NSManagedObjectContext MR_managedObjectContextClass] alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     [childContext setParentContext:defaultContext];
     return childContext;
 }
