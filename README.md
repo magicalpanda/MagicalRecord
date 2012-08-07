@@ -20,6 +20,25 @@ MagicalRecord was inspired by the ease of Ruby on Rails' Active Record fetching.
 3. Optionally precees the *CoreData+MagicalRecord.h* import with `#define MR_SHORTHAND` to your PCH file if you want to use MagicalRecord methods without the *MR_prefix* like `findAll` instead of `MR_findAll`
 4. Start writing code!
 
+# Requirements
+
+MagicalRecord Platform Requirements:
+
+* iOS5.0 and newer, or Mac OS 10.7 and newer
+* ARC
+
+An iOS4 compatible version is available for use. Reference [tag 1.8.3](https://github.com/magicalpanda/MagicalRecord/tree/1.8.3).
+
+## Updating to 2.0
+
+MagicalRecord 2.0 is considered a major update since there were some class and API refactorings that will effect previous installations of MagicalRecord in your code. The most straight forward change is that *MagicalRecordHelpers* and *MRCoreDataAction* have both been replaced with a single class, *MagicalRecord*.
+
+## ARC Support
+
+MagicalRecord fully supports ARC out of the box, there is no configuration necessary. 
+The last version to support manually managed memory is 1.8.3, and is available from the downloads page, or by switching to the 1.8.3 tag in the source.
+
+
 # Notes
 ## Third Party Blog Entries
 The following blog entries highlight how to install and use aspects of Magical Record.
@@ -33,14 +52,6 @@ The following blog entries highlight how to install and use aspects of Magical R
 ## Twitter 
 Follow [@MagicalRecord](http://twitter.com/magicalrecord) on twitter to stay up to date on twitter with the lastest updates to MagicalRecord and for basic support
 
-## Updating to 2.0
-
-MagicalRecord 2.0 is considered a major update since there were some class and API refactorings that will effect previous installations of MagicalRecord in your code. The most straight forward change is that *MagicalRecordHelpers* and *MRCoreDataAction* have both been replaced with a single class, *MagicalRecord*.
-
-## ARC Support
-
-MagicalRecord fully supports ARC out of the box, there is no configuration necessary. 
-The last version to support manually managed memory is 1.8.3, and is available from the downloads page, or by switching to the 1.8.3 tag in the source.
 
 ## Nested Contexts
 
