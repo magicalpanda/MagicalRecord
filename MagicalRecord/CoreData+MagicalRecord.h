@@ -26,6 +26,7 @@
     #import "NSManagedObject+MagicalRecord.h"
     #import "NSManagedObject+MagicalRequests.h"
     #import "NSManagedObject+MagicalFinders.h"
+    #import "NSManagedObject+MagicalDynamic.h"
     #import "NSManagedObject+MagicalAggregation.h"
     #import "NSManagedObjectContext+MagicalRecord.h"
     #import "NSManagedObjectContext+MagicalObserving.h"
