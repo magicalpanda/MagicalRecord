@@ -81,7 +81,9 @@ Next, somewhere in your app delegate, in either the applicationDidFinishLaunchin
 
 Each call instantiates one of each piece of the Core Data stack, and provides getter and setter methods for these instances. These well known instances to MagicalRecord, and are recognized as "defaults".
 
-And, before your app exits, you can use the clean up method:
+When using the default sqlite data store, if you change your model without creating a new model version, Magical Record will delete the old store and create a new one automatically. No more uninstall/reinstall every time you make a change!
+
+And finally, before your app exits, you can use the clean up method:
 
 	[MagicalRecord cleanUp];
 	
