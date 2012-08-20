@@ -91,6 +91,7 @@ void reset_action_queue(void);
 #endif
         [self setShouldAutoCreateManagedObjectModel:YES];
         [self setShouldAutoCreateDefaultPersistentStoreCoordinator:NO];
+        [self setShouldDeleteStoreOnModelMismatch:YES];
     }
 }
 
