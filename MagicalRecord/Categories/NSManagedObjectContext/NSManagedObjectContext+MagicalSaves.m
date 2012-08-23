@@ -121,7 +121,10 @@
 
         if (completion && self == [[self class] MR_rootSavingContext])
         {
-            dispatch_async(dispatch_get_main_queue(), completion);
+            if (completion)
+            {
+                dispatch_async(dispatch_get_main_queue(), completion);
+            }
         }
     }];
 }
