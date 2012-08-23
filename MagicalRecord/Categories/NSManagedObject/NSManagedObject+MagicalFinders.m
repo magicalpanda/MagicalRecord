@@ -88,6 +88,8 @@
 
 + (id) MR_findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context
 {	
+	NSParameterAssert(attribute);
+	NSParameterAssert(context);
 	NSFetchRequest *request = [self MR_requestFirstByAttribute:attribute withValue:searchValue inContext:context];
     //    [request setPropertiesToFetch:[NSArray arrayWithObject:attribute]];
     
@@ -178,6 +180,54 @@
                           inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
++ (id) MR_findFirstOrCreateByPredicate:(NSPredicate*)predicate inContext:(NSManagedObjectContext*)context creationBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock 
+{
+	NSParameterAssert(creationBlock);
+	NSParameterAssert(context);
+	NSParameterAssert(predicate);
+	
+	NSManagedObject* userObject = [self MR_findFirstWithPredicate:predicate];
+	
+	if (!userObject) {
+		userObject = [self MR_createAndSaveEntityInContext:context creationBlock:creationBlock];
+	}
+	
+	return userObject;
+}
+
++ (id) MR_findFirstOrCreateByPredicate:(NSPredicate*)predicate creationBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock  {
+	return [self MR_findFirstOrCreateByPredicate:predicate
+									   inContext:[NSManagedObjectContext MR_contextForCurrentThread]
+								   creationBlock:creationBlock];
+}
+
++ (id) MR_findOrCreateByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context creationBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock
+{
+	NSPredicate* predicate = [NSPredicate predicateWithFormat:@"%K == %@", attribute, searchValue];
+	
+	id userObject = [self MR_findFirstOrCreateByPredicate:predicate
+												inContext:context
+											creationBlock:^(NSManagedObject* newObject, 
+															NSManagedObjectContext *localContext) 
+					 {
+					 [newObject setValue:searchValue forKey:attribute];
+					 
+					 if (creationBlock)
+						 {
+						 creationBlock(newObject, localContext);
+						 }
+					 }];
+	
+	return userObject;
+}
+
++ (id) MR_findOrCreateByAttribute:(NSString *)attribute withValue:(id)searchValue creationBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock {
+	return [self MR_findOrCreateByAttribute:attribute
+								  withValue:searchValue
+								  inContext:[NSManagedObjectContext MR_contextForCurrentThread]
+							  creationBlock:creationBlock];
+}
+
 + (NSArray *) MR_findByAttribute:(NSString *)attribute withValue:(id)searchValue andOrderBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
 {
 	NSPredicate *searchTerm = [NSPredicate predicateWithFormat:@"%K = %@", attribute, searchValue];
@@ -194,7 +244,6 @@
                           ascending:ascending 
                           inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
-
 
 #pragma mark -
 #pragma mark NSFetchedResultsController helpers

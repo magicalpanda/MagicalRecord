@@ -170,6 +170,61 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	return newEntity;
 }
 
++ (id) MR_createPermanentInContext:(NSManagedObjectContext *)context 
+{
+	return [[self MR_createInContext:context] MR_obtainPermanentID];
+}
+
++ (id) MR_createPermanentEntity
+{
+	return [[self MR_createEntity] MR_obtainPermanentID];
+}
+
++ (id) MR_createAndSaveEntityInContext:(NSManagedObjectContext *)context creationBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock 
+{
+	NSManagedObject* object = [self MR_createPermanentInContext:context];
+	
+	if (creationBlock) {
+		creationBlock(object, context);
+	}
+	
+	[context save];
+	
+	return object;
+}
+
++ (NSArray*) MR_createAndSaveEntitiesInContext:(NSManagedObjectContext *)context count:(NSUInteger)count creationBlock:(void (^)(id, NSManagedObjectContext *, NSUInteger))creationBlock {
+	NSMutableArray* result = [[NSMutableArray alloc] initWithCapacity:count];
+	
+	for (NSUInteger idx = 0; idx < count; ++idx) {
+		[result addObject:[self MR_createInContext:context]];
+	}
+	
+	NSError* error = nil;
+	[context obtainPermanentIDsForObjects:result error:&error];
+	
+	if (creationBlock) {
+		NSUInteger index = 0;
+		for (NSManagedObject* object in result) {
+			creationBlock(object, context, index);
+		}
+	}
+	
+	return result;
+}
+
++ (id) MR_createAndSaveEntityWithBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock 
+{
+	return [self MR_createAndSaveEntityInContext:[NSManagedObjectContext contextForCurrentThread]
+								   creationBlock:creationBlock];
+}
+
++ (NSArray*) MR_createAndSaveEntities:(NSUInteger)count withBlock:(void (^)(id object, NSManagedObjectContext* localContext, NSUInteger))creationBlock {
+	return [self MR_createAndSaveEntitiesInContext:[NSManagedObjectContext contextForCurrentThread]
+											 count:count
+									 creationBlock:creationBlock];
+}
+
 - (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context
 {
 	[context deleteObject:self];
@@ -219,6 +274,21 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     return YES;
 }
 
++ (id) MR_findWithObjectID:(NSManagedObjectID*)objectID inContext:(NSManagedObjectContext*)context;
+{
+	NSError *error = nil;
+	NSManagedObject *object = [context existingObjectWithID:objectID error:&error];
+	[MagicalRecord handleErrors:error];
+	
+	return object;
+}
+
++ (id) MR_findWithObjectID:(NSManagedObjectID*)objectID
+{
+	NSManagedObjectContext* context = [NSManagedObjectContext MR_contextForCurrentThread];
+	return [self MR_findWithObjectID:objectID inContext:context];
+}
+
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext
 {
     NSError *error = nil;
@@ -233,5 +303,15 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     NSManagedObject *weakSelf = self;
     return [weakSelf MR_inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
+
+- (id) MR_obtainPermanentID {
+	NSError* err = nil;
+	NSArray* objects = [NSArray arrayWithObject:self];
+	[self.managedObjectContext obtainPermanentIDsForObjects:objects error:&err];
+	[MagicalRecord handleErrors:err];
+	return self;
+}
+
+
 
 @end

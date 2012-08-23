@@ -31,6 +31,8 @@
 
 + (id) MR_createEntity;
 + (id) MR_createInContext:(NSManagedObjectContext *)context;
++ (id) MR_createPermanentEntity;
++ (id) MR_createPermanentInContext:(NSManagedObjectContext *)context;
 - (BOOL) MR_deleteEntity;
 - (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context;
 
@@ -43,8 +45,18 @@
 + (NSArray *) MR_ascendingSortDescriptors:(NSArray *)attributesToSortBy;
 + (NSArray *) MR_descendingSortDescriptors:(NSArray *)attributesToSortBy;
 
++ (id) MR_findWithObjectID:(NSManagedObjectID*)objectID;
++ (id) MR_findWithObjectID:(NSManagedObjectID*)objectID inContext:(NSManagedObjectContext*)context;
+
++ (id) MR_createAndSaveEntityInContext:(NSManagedObjectContext *)context creationBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock;
++ (id) MR_createAndSaveEntityWithBlock:(void (^)(id object, NSManagedObjectContext* localContext))creationBlock ;
++ (NSArray*) MR_createAndSaveEntitiesInContext:(NSManagedObjectContext *)context count:(NSUInteger)count creationBlock:(void (^)(id, NSManagedObjectContext *, NSUInteger))creationBlock;
++ (NSArray*) MR_createAndSaveEntities:(NSUInteger)count withBlock:(void (^)(id object, NSManagedObjectContext* localContext, NSUInteger))creationBlock;
+
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext;
 - (id) MR_inThreadContext;
+
+- (id) MR_obtainPermanentID;
 
 @end
 
