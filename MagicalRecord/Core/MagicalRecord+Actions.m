@@ -26,7 +26,7 @@ void reset_action_queue(void)
 {
     if (background_action_queue != NULL)
     {
-        dispatch_release(background_action_queue);
+        //        dispatch_release(background_action_queue);
         background_action_queue = NULL;
     }
 }
@@ -66,12 +66,12 @@ void reset_action_queue(void)
     
     if ([localContext hasChanges]) 
     {
-        [localContext MR_saveErrorHandler:errorHandler];
+        [localContext MR_saveNestedContextsErrorHandler:errorHandler];
     }
     
     if (completion)
     {
-        completion();
+        dispatch_async(dispatch_get_main_queue(), completion);
     }
 }
 

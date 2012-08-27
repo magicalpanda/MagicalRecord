@@ -91,21 +91,29 @@
     [self MR_saveInBackgroundErrorHandler:nil completion:completion];
 }
 
-- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion;
-{
-    [self performBlock:^{
-        [self MR_saveWithErrorCallback:errorCallback];
-    
-        if (completion) 
-        {
-            completion();
-        }
-    }];
-}
-
 - (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback;
 {
     [self MR_saveInBackgroundErrorHandler:errorCallback completion:nil];
+}
+
+- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion;
+{
+    [self performBlockAndWait:^{
+        [self MR_saveWithErrorCallback:errorCallback];
+
+        if (self == [[self class] MR_defaultContext])
+        {
+            [[[self class] MR_rootSavingContext] MR_saveInBackgroundErrorHandler:errorCallback completion:completion];
+        }
+
+        if (completion && self == [[self class] MR_rootSavingContext])
+        {
+            if (completion)
+            {
+                dispatch_async(dispatch_get_main_queue(), completion);
+            }
+        }
+    }];
 }
 
 @end
