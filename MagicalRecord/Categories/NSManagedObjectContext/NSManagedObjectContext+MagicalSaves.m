@@ -34,6 +34,12 @@
 	BOOL saved = NO;
 	@try
 	{
+        // Obtain permanent objectID before saving to workaround the bug
+        // that child MOCs don't give saved objects a permanent objectID.
+        // https://devforums.apple.com/message/566410
+        // Warning: This could affect performance since obtainPermanentIDsForObjects:error:
+        // requires transactional access to persistent stores.
+        [self obtainPermanentIDsForObjects:[[self insertedObjects] allObjects] error:nil];
         saved = [self save:&error];
 	}
 	@catch (NSException *exception)
