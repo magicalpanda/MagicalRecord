@@ -70,12 +70,30 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     [self MR_createPathToStoreFileIfNeccessary:url];
     
     NSPersistentStore *store = [self addPersistentStoreWithType:NSSQLiteStoreType
-                                                 configuration:nil
-                                                           URL:url
-                                                       options:options
-                                                         error:&error];
-    if (!store) 
+                                                  configuration:nil
+                                                            URL:url
+                                                        options:options
+                                                          error:&error];
+    
+    if (!store && [MagicalRecord shouldDeleteStoreOnModelMismatch])
     {
+        if ([error.domain isEqualToString:NSCocoaErrorDomain] &&
+            [error code] == NSMigrationMissingSourceModelError) {
+            // Could not open the database, so... kill it!
+            [[NSFileManager defaultManager] removeItemAtURL:url error:nil];
+            
+            // Try one more time to create the store
+            store = [self addPersistentStoreWithType:NSSQLiteStoreType
+                                       configuration:nil
+                                                 URL:url
+                                             options:options
+                                               error:&error];
+            if (store) {
+                // If we successfully added a store, remove the error that was initially created
+                error = nil;
+            }
+        }
+                
         [MagicalRecord handleErrors:error];
     }
     return store;
