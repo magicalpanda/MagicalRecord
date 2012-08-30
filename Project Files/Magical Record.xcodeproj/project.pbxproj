@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B0454B415F00C5A00BAD2C6 /* MagicalRecordSaveStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0454B315F00C5A00BAD2C6 /* MagicalRecordSaveStrategy.m */; };
+		4B0454B515F00C5A00BAD2C6 /* MagicalRecordSaveStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0454B315F00C5A00BAD2C6 /* MagicalRecordSaveStrategy.m */; };
 		C70B6E7113D0F62500709450 /* NSPersisentStoreHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C70B6E7013D0F62500709450 /* NSPersisentStoreHelperTests.m */; };
 		C70B6E7413D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C70B6E7313D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.m */; };
 		C70B6E7713D0F66000709450 /* NSManagedObjectModelHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C70B6E7613D0F66000709450 /* NSManagedObjectModelHelperTests.m */; };
@@ -234,6 +236,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4B0454B215F00C5A00BAD2C6 /* MagicalRecordSaveStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordSaveStrategy.h; sourceTree = "<group>"; };
+		4B0454B315F00C5A00BAD2C6 /* MagicalRecordSaveStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalRecordSaveStrategy.m; sourceTree = "<group>"; };
 		C70B6E6F13D0F62500709450 /* NSPersisentStoreHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSPersisentStoreHelperTests.h; path = "Unit Tests/NSPersisentStoreHelperTests.h"; sourceTree = "<group>"; };
 		C70B6E7013D0F62500709450 /* NSPersisentStoreHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSPersisentStoreHelperTests.m; path = "Unit Tests/NSPersisentStoreHelperTests.m"; sourceTree = "<group>"; };
 		C70B6E7213D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSPersistentStoreCoordinatorHelperTests.h; path = "Unit Tests/NSPersistentStoreCoordinatorHelperTests.h"; sourceTree = "<group>"; };
@@ -789,6 +793,8 @@
 				C7DD72CF150F832A00216827 /* MagicalRecord+ShorthandSupport.h */,
 				C7DD72D0150F832A00216827 /* MagicalRecord+ShorthandSupport.m */,
 				C7DD72D3150F832A00216827 /* MagicalRecordShorthand.h */,
+				4B0454B215F00C5A00BAD2C6 /* MagicalRecordSaveStrategy.h */,
+				4B0454B315F00C5A00BAD2C6 /* MagicalRecordSaveStrategy.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1042,6 +1048,7 @@
 				C7DD7303150F832B00216827 /* MagicalRecord+Setup.m in Sources */,
 				C7DD7305150F832B00216827 /* MagicalRecord+ShorthandSupport.m in Sources */,
 				C7DD7307150F832B00216827 /* MagicalRecord.m in Sources */,
+				4B0454B415F00C5A00BAD2C6 /* MagicalRecordSaveStrategy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1116,6 +1123,7 @@
 				C7DD7304150F832B00216827 /* MagicalRecord+Setup.m in Sources */,
 				C7DD7306150F832B00216827 /* MagicalRecord+ShorthandSupport.m in Sources */,
 				C7DD7308150F832B00216827 /* MagicalRecord.m in Sources */,
+				4B0454B515F00C5A00BAD2C6 /* MagicalRecordSaveStrategy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

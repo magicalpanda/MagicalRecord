@@ -10,6 +10,7 @@
 
 static NSManagedObjectContext *rootSavingContext = nil;
 static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
+static NSManagedObjectContext *backgroundWorkContext = nil;
 
 
 @interface NSManagedObjectContext (MagicalRecordInternal)
@@ -80,17 +81,64 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
 {
     if (defaultManagedObjectContext_ == nil)
     {
-        NSManagedObjectContext *rootContext = [self MR_contextWithStoreCoordinator:coordinator];
-        
-        [self MR_setRootSavingContext:rootContext];
-        
-        NSManagedObjectContext *defaultContext = [self MR_newMainQueueContext];
-        [defaultContext setParentContext:rootSavingContext];
-
-        [self MR_setDefaultContext:defaultContext];
+        if ([MagicalRecord isRunningiOS6]) {
+            MRLog(@"Wohoo! Running iOS 6, using nested contexts!");
+            NSManagedObjectContext *rootContext = [self MR_contextWithStoreCoordinator:coordinator];
+            
+            [self MR_setRootSavingContext:rootContext];
+            
+            NSManagedObjectContext *defaultContext = [self MR_newMainQueueContext];
+            [defaultContext setParentContext:rootSavingContext];
+            
+            [self MR_setDefaultContext:defaultContext];
+        } else {
+            MRLog(@"On iOS 5, nested contexts are trouble. Using parallel PSC's!");
+            // We can't do nested contexts, so let's create a seperate psc and merge from there to main thread context
+            
+            NSPersistentStoreCoordinator *backgroundCoordinator = [NSPersistentStoreCoordinator MR_coordinatorWithAutoMigratingSqliteStoreNamed:[MagicalRecord defaultStoreName]];
+            NSManagedObjectContext *rootContext = [self MR_contextWithStoreCoordinator:backgroundCoordinator];
+            [self MR_setRootSavingContext:rootContext];
+            rootContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy;
+            // Now set up the UIQueue
+            NSManagedObjectContext *defaultContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+            defaultContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy;
+            // Use the coordinator passed in
+            [defaultContext setPersistentStoreCoordinator:coordinator];
+            [self MR_setDefaultContext:defaultContext];
+            
+            [self MR_makeContext:rootContext mergeChangesToContext:defaultContext];
+            [self MR_makeContext:defaultContext mergeChangesToContext:rootContext];
+        }
     }
 }
 
++ (void)MR_makeContext:(NSManagedObjectContext *)sourceContext mergeChangesToContext:(NSManagedObjectContext *)targetContext
+{
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification
+                                                      object:sourceContext
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *note) {
+                                                      [targetContext performBlock:^{
+                                                          [targetContext mergeChangesFromContextDidSaveNotification:note];
+                                                      }];
+                                                  }];
+}
+
++ (void)MR_makeContextObtainPermanentIDsBeforeSaving:(NSManagedObjectContext *)context
+{
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextWillSaveNotification
+                                                      object:context
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *note) {
+                                                     [context performBlockAndWait:^{
+                                                         NSArray *insertedObjects = [[context insertedObjects] allObjects];
+                                                         NSError *error;
+                                                         if (![context obtainPermanentIDsForObjects:insertedObjects error:&error]) {
+                                                             [MagicalRecord handleErrors:error];
+                                                         }
+                                                     }];
+                                                  }];
+}
 + (void) MR_resetDefaultContext
 {
     void (^resetBlock)(void) = ^{

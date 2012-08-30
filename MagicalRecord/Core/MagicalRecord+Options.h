@@ -28,6 +28,6 @@
  This is extremely useful during development where every model change could potentially require a delete/reinstall of the app.
  */
 + (BOOL) shouldDeleteStoreOnModelMismatch;
-
++ (BOOL)isRunningiOS6;
 
 @end

@@ -46,4 +46,9 @@ static BOOL shouldDeleteStoreOnModelMismatch_;
     shouldDeleteStoreOnModelMismatch_ = shouldDeleteStoreOnModelMismatch;
 }
 
++ (BOOL)isRunningiOS6
+{
+    return NSClassFromString(@"UUID") != nil;
+}
+
 @end

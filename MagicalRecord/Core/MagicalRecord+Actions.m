@@ -35,19 +35,49 @@ void reset_action_queue(void)
 
 + (void) saveInBackgroundUsingContext:(NSManagedObjectContext *)localContext block:(void (^)(NSManagedObjectContext *))block completion:(void(^)(void))completion errorHandler:(void(^)(NSError *))errorHandler;
 {
-    dispatch_async(action_queue(), ^{
-        block(localContext);
+
+//        dispatch_async(action_queue(), ^{
+//            block(localContext);
+//            
+//            [localContext MR_saveInBackgroundErrorHandler:errorHandler completion:completion];
+//        });
         
-        [localContext MR_saveInBackgroundErrorHandler:errorHandler completion:completion];
-    });
+        [localContext performBlock:^{
+            block(localContext);
+            [localContext MR_saveErrorHandler:nil];
+            if (localContext.parentContext) {
+                // If we're doing nested contexs, save parent
+                [localContext.parentContext performBlock:^{
+                    [localContext.parentContext MR_saveErrorHandler:nil];
+                    if (completion) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            completion();
+                        });
+                    }
+                }];
+            } else {
+                // we're not, so just call completion;
+                if (completion) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completion();
+                    });
+                }
+            }
+        }];
+ 
 }
 
 + (void) saveInBackgroundWithBlock:(void (^)(NSManagedObjectContext *))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *))errorHandler;
 {
-    NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
-    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
-    
-    [self saveInBackgroundUsingContext:localContext block:block completion:completion errorHandler:errorHandler];
+    NSManagedObjectContext *savingContext;
+    if ([MagicalRecord isRunningiOS6]) {
+        NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_rootSavingContext];
+        savingContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
+    } else {
+        savingContext = [NSManagedObjectContext MR_rootSavingContext];
+    }
+
+    [self saveInBackgroundUsingContext:savingContext block:block completion:completion errorHandler:errorHandler];
 }
 
 + (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *))errorHandler;
