@@ -44,6 +44,7 @@ void reset_action_queue(void)
         
         [localContext performBlock:^{
             block(localContext);
+            // Save the context we were given
             [localContext MR_saveErrorHandler:nil];
             if (localContext.parentContext) {
                 // If we're doing nested contexs, save parent
