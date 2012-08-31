@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4B0454B415F00C5A00BAD2C6 /* MagicalRecordSaveStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0454B315F00C5A00BAD2C6 /* MagicalRecordSaveStrategy.m */; };
-		4B0454B515F00C5A00BAD2C6 /* MagicalRecordSaveStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0454B315F00C5A00BAD2C6 /* MagicalRecordSaveStrategy.m */; };
+		4B77101A15F139010012BA84 /* MagicalRecordNestedContextsPersistenceStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B77101915F139010012BA84 /* MagicalRecordNestedContextsPersistenceStrategy.m */; };
+		92532281D26EDCFC651B6A42 /* MagicalRecordParallelStoresPersistenceStrategy.h in Copy GHUnit into App Bundle */ = {isa = PBXBuildFile; fileRef = 92532B06CA75D89279CFCE9D /* MagicalRecordParallelStoresPersistenceStrategy.h */; };
+		9253229B67B1CC6FB6730380 /* NSManagedObjectContext+MagicalRecordInternal.h in Copy GHUnit into App Bundle */ = {isa = PBXBuildFile; fileRef = 92532F50522A3A7100EC4807 /* NSManagedObjectContext+MagicalRecordInternal.h */; };
+		92532704EEBC79C06F2C4CC5 /* MagicalRecordParallelStoresPersistenceStrategy.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 92532B06CA75D89279CFCE9D /* MagicalRecordParallelStoresPersistenceStrategy.h */; };
+		92532959E63ED4F01860A8A0 /* MagicalRecordParallelStoresPersistenceStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 92532DB1C04DA06E692A7369 /* MagicalRecordParallelStoresPersistenceStrategy.m */; };
+		92532A368278A76A46A633E6 /* MagicalRecordParallelStoresPersistenceStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 92532DB1C04DA06E692A7369 /* MagicalRecordParallelStoresPersistenceStrategy.m */; };
+		92532B6E7822A81F57C8E20E /* NSManagedObjectContext+MagicalRecordInternal.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 92532F50522A3A7100EC4807 /* NSManagedObjectContext+MagicalRecordInternal.h */; };
 		C70B6E7113D0F62500709450 /* NSPersisentStoreHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C70B6E7013D0F62500709450 /* NSPersisentStoreHelperTests.m */; };
 		C70B6E7413D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C70B6E7313D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.m */; };
 		C70B6E7713D0F66000709450 /* NSManagedObjectModelHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C70B6E7613D0F66000709450 /* NSManagedObjectModelHelperTests.m */; };
@@ -177,7 +182,6 @@
 		C7DD7307150F832B00216827 /* MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72D2150F832A00216827 /* MagicalRecord.m */; };
 		C7DD7308150F832B00216827 /* MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72D2150F832A00216827 /* MagicalRecord.m */; };
 		C7E736DF1402FE64005657C9 /* SingleEntityWithNoRelationships.json in Resources */ = {isa = PBXBuildFile; fileRef = C7E736DE1402FE64005657C9 /* SingleEntityWithNoRelationships.json */; };
-		C7F5EEB2148DC76700964607 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		FD73E54614AC4AC700922CA4 /* MagicalDataImportTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C7913B9C13FAFC13007E09CC /* MagicalDataImportTestCase.m */; };
 /* End PBXBuildFile section */
 
@@ -201,6 +205,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				9253229B67B1CC6FB6730380 /* NSManagedObjectContext+MagicalRecordInternal.h in Copy GHUnit into App Bundle */,
+				92532281D26EDCFC651B6A42 /* MagicalRecordParallelStoresPersistenceStrategy.h in Copy GHUnit into App Bundle */,
 			);
 			name = "Copy GHUnit into App Bundle";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -221,6 +227,8 @@
 			dstPath = "$(BUILT_PRODUCTS_DIR)";
 			dstSubfolderSpec = 0;
 			files = (
+				92532B6E7822A81F57C8E20E /* NSManagedObjectContext+MagicalRecordInternal.h in CopyFiles */,
+				92532704EEBC79C06F2C4CC5 /* MagicalRecordParallelStoresPersistenceStrategy.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,8 +244,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4B0454B215F00C5A00BAD2C6 /* MagicalRecordSaveStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordSaveStrategy.h; sourceTree = "<group>"; };
-		4B0454B315F00C5A00BAD2C6 /* MagicalRecordSaveStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalRecordSaveStrategy.m; sourceTree = "<group>"; };
+		4B77101715F138DA0012BA84 /* MagicalRecordPersistenceStrategy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MagicalRecordPersistenceStrategy.h; sourceTree = "<group>"; };
+		4B77101815F139010012BA84 /* MagicalRecordNestedContextsPersistenceStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordNestedContextsPersistenceStrategy.h; sourceTree = "<group>"; };
+		4B77101915F139010012BA84 /* MagicalRecordNestedContextsPersistenceStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalRecordNestedContextsPersistenceStrategy.m; sourceTree = "<group>"; };
+		92532B06CA75D89279CFCE9D /* MagicalRecordParallelStoresPersistenceStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordParallelStoresPersistenceStrategy.h; sourceTree = "<group>"; };
+		92532DB1C04DA06E692A7369 /* MagicalRecordParallelStoresPersistenceStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalRecordParallelStoresPersistenceStrategy.m; sourceTree = "<group>"; };
+		92532F50522A3A7100EC4807 /* NSManagedObjectContext+MagicalRecordInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+MagicalRecordInternal.h"; sourceTree = "<group>"; };
 		C70B6E6F13D0F62500709450 /* NSPersisentStoreHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSPersisentStoreHelperTests.h; path = "Unit Tests/NSPersisentStoreHelperTests.h"; sourceTree = "<group>"; };
 		C70B6E7013D0F62500709450 /* NSPersisentStoreHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSPersisentStoreHelperTests.m; path = "Unit Tests/NSPersisentStoreHelperTests.m"; sourceTree = "<group>"; };
 		C70B6E7213D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSPersistentStoreCoordinatorHelperTests.h; path = "Unit Tests/NSPersistentStoreCoordinatorHelperTests.h"; sourceTree = "<group>"; };
@@ -763,6 +775,7 @@
 		C7DD72B5150F832A00216827 /* NSManagedObjectContext */ = {
 			isa = PBXGroup;
 			children = (
+				92532F50522A3A7100EC4807 /* NSManagedObjectContext+MagicalRecordInternal.h */,
 				C7DD72B6150F832A00216827 /* NSManagedObjectContext+MagicalObserving.h */,
 				C7DD72B7150F832A00216827 /* NSManagedObjectContext+MagicalObserving.m */,
 				C7DD72B8150F832A00216827 /* NSManagedObjectContext+MagicalRecord.h */,
@@ -778,6 +791,8 @@
 		C7DD72C4150F832A00216827 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				92532B06CA75D89279CFCE9D /* MagicalRecordParallelStoresPersistenceStrategy.h */,
+				92532DB1C04DA06E692A7369 /* MagicalRecordParallelStoresPersistenceStrategy.m */,
 				C7DD72D1150F832A00216827 /* MagicalRecord.h */,
 				C7DD72D2150F832A00216827 /* MagicalRecord.m */,
 				C7DD72C5150F832A00216827 /* MagicalRecord+Actions.h */,
@@ -793,8 +808,9 @@
 				C7DD72CF150F832A00216827 /* MagicalRecord+ShorthandSupport.h */,
 				C7DD72D0150F832A00216827 /* MagicalRecord+ShorthandSupport.m */,
 				C7DD72D3150F832A00216827 /* MagicalRecordShorthand.h */,
-				4B0454B215F00C5A00BAD2C6 /* MagicalRecordSaveStrategy.h */,
-				4B0454B315F00C5A00BAD2C6 /* MagicalRecordSaveStrategy.m */,
+				4B77101715F138DA0012BA84 /* MagicalRecordPersistenceStrategy.h */,
+				4B77101815F139010012BA84 /* MagicalRecordNestedContextsPersistenceStrategy.h */,
+				4B77101915F139010012BA84 /* MagicalRecordNestedContextsPersistenceStrategy.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -992,7 +1008,6 @@
 				C76AF7EB13DBC08F00CE2E05 /* NSManagedObjectContextHelperTests.m in Sources */,
 				C76AF7EC13DBC08F00CE2E05 /* NSManagedObjectHelperTests.m in Sources */,
 				C76AF7FB13DBEB5500CE2E05 /* ImportSingleRelatedEntityTests.m in Sources */,
-				C7F5EEB2148DC76700964607 /* (null) in Sources */,
 				C78990211506937E0016F493 /* MappedEntity.m in Sources */,
 				C7899022150693D50016F493 /* _SingleEntityRelatedToMappedEntityWithSecondaryMappings.m in Sources */,
 				C7899023150693D50016F493 /* _AbstractRelatedEntity.m in Sources */,
@@ -1048,7 +1063,7 @@
 				C7DD7303150F832B00216827 /* MagicalRecord+Setup.m in Sources */,
 				C7DD7305150F832B00216827 /* MagicalRecord+ShorthandSupport.m in Sources */,
 				C7DD7307150F832B00216827 /* MagicalRecord.m in Sources */,
-				4B0454B415F00C5A00BAD2C6 /* MagicalRecordSaveStrategy.m in Sources */,
+				92532A368278A76A46A633E6 /* MagicalRecordParallelStoresPersistenceStrategy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1123,7 +1138,8 @@
 				C7DD7304150F832B00216827 /* MagicalRecord+Setup.m in Sources */,
 				C7DD7306150F832B00216827 /* MagicalRecord+ShorthandSupport.m in Sources */,
 				C7DD7308150F832B00216827 /* MagicalRecord.m in Sources */,
-				4B0454B515F00C5A00BAD2C6 /* MagicalRecordSaveStrategy.m in Sources */,
+				4B77101A15F139010012BA84 /* MagicalRecordNestedContextsPersistenceStrategy.m in Sources */,
+				92532959E63ED4F01860A8A0 /* MagicalRecordParallelStoresPersistenceStrategy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1341,7 +1357,7 @@
 					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
 				);
 				INFOPLIST_FILE = "iOS App Unit Tests/iOS App Unit Tests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/iOS App Unit Tests/Frameworks/OCMockLibrary\"",
@@ -1392,7 +1408,7 @@
 					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
 				);
 				INFOPLIST_FILE = "iOS App Unit Tests/iOS App Unit Tests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/iOS App Unit Tests/Frameworks/OCMockLibrary\"",

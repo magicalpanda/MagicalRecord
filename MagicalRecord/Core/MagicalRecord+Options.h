@@ -8,6 +8,8 @@
 
 #import "MagicalRecord.h"
 
+@protocol MagicalRecordPersistenceStrategy;
+
 @interface MagicalRecord (Options)
 
 //global options
@@ -29,5 +31,8 @@
  */
 + (BOOL) shouldDeleteStoreOnModelMismatch;
 + (BOOL)isRunningiOS6;
+
++ (id <MagicalRecordPersistenceStrategy>)persistenceStrategy;
+
 
 @end

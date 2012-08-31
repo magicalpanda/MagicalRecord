@@ -6,22 +6,11 @@
 //
 
 #import "CoreData+MagicalRecord.h"
+#import "MagicalRecordPersistenceStrategy.h"
 #import <objc/runtime.h>
 
 static NSManagedObjectContext *rootSavingContext = nil;
 static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
-static NSManagedObjectContext *backgroundWorkContext = nil;
-
-
-@interface NSManagedObjectContext (MagicalRecordInternal)
-
-- (void) MR_mergeChangesFromNotification:(NSNotification *)notification;
-- (void) MR_mergeChangesOnMainThread:(NSNotification *)notification;
-+ (void) MR_setDefaultContext:(NSManagedObjectContext *)moc;
-+ (void) MR_setRootSavingContext:(NSManagedObjectContext *)context;
-
-@end
-
 
 @implementation NSManagedObjectContext (MagicalRecord)
 
@@ -79,37 +68,7 @@ static NSManagedObjectContext *backgroundWorkContext = nil;
 
 + (void) MR_initializeDefaultContextWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 {
-    if (defaultManagedObjectContext_ == nil)
-    {
-        if ([MagicalRecord isRunningiOS6]) {
-            MRLog(@"Wohoo! Running iOS 6, using nested contexts!");
-            NSManagedObjectContext *rootContext = [self MR_contextWithStoreCoordinator:coordinator];
-            
-            [self MR_setRootSavingContext:rootContext];
-            
-            NSManagedObjectContext *defaultContext = [self MR_newMainQueueContext];
-            [defaultContext setParentContext:rootSavingContext];
-            
-            [self MR_setDefaultContext:defaultContext];
-        } else {
-            MRLog(@"On iOS 5, nested contexts are trouble. Using parallel PSC's!");
-            // We can't do nested contexts, so let's create a seperate psc and merge from there to main thread context
-            
-            NSPersistentStoreCoordinator *backgroundCoordinator = [NSPersistentStoreCoordinator MR_coordinatorWithAutoMigratingSqliteStoreNamed:[MagicalRecord defaultStoreName]];
-            NSManagedObjectContext *rootContext = [self MR_contextWithStoreCoordinator:backgroundCoordinator];
-            [self MR_setRootSavingContext:rootContext];
-            rootContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy;
-            // Now set up the UIQueue
-            NSManagedObjectContext *defaultContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-            defaultContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy;
-            // Use the coordinator passed in
-            [defaultContext setPersistentStoreCoordinator:coordinator];
-            [self MR_setDefaultContext:defaultContext];
-            
-            [self MR_makeContext:rootContext mergeChangesToContext:defaultContext];
-            [self MR_makeContext:defaultContext mergeChangesToContext:rootContext];
-        }
-    }
+    [[MagicalRecord persistenceStrategy] setUpContextsWithCoordinator:coordinator];
 }
 
 + (void)MR_makeContext:(NSManagedObjectContext *)sourceContext mergeChangesToContext:(NSManagedObjectContext *)targetContext

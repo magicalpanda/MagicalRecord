@@ -7,6 +7,9 @@
 //
 
 #import "MagicalRecord+Options.h"
+#import "MagicalRecordPersistenceStrategy.h"
+#import "MagicalRecordNestedContextsPersistenceStrategy.h"
+#import "MagicalRecordParallelStoresPersistenceStrategy.h"
 
 static BOOL shouldAutoCreateManagedObjectModel_;
 static BOOL shouldAutoCreateDefaultPersistentStoreCoordinator_;
@@ -51,4 +54,19 @@ static BOOL shouldDeleteStoreOnModelMismatch_;
     return NSClassFromString(@"NSUUID") != nil;
 }
 
++ (id<MagicalRecordPersistenceStrategy>)persistenceStrategy
+{
+    static id<MagicalRecordPersistenceStrategy>strategy;
+
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
+        if ([MagicalRecord isRunningiOS6]) {
+            strategy= (id<MagicalRecordPersistenceStrategy>)[[MagicalRecordNestedContextsPersistenceStrategy alloc] init];
+        } else {
+            strategy = (id<MagicalRecordPersistenceStrategy>)[[MagicalRecordParallelStoresPersistenceStrategy alloc] init];
+        }
+    });
+
+    return strategy;
+}
 @end

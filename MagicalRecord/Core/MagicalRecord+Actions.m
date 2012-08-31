@@ -8,6 +8,7 @@
 
 #import "CoreData+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
+#import "MagicalRecordPersistenceStrategy.h"
 
 static dispatch_queue_t background_action_queue;
 
@@ -35,49 +36,38 @@ void reset_action_queue(void)
 
 + (void) saveInBackgroundUsingContext:(NSManagedObjectContext *)localContext block:(void (^)(NSManagedObjectContext *))block completion:(void(^)(void))completion errorHandler:(void(^)(NSError *))errorHandler;
 {
-
-//        dispatch_async(action_queue(), ^{
-//            block(localContext);
-//            
-//            [localContext MR_saveInBackgroundErrorHandler:errorHandler completion:completion];
-//        });
-        
+    dispatch_group_t completionGroup = dispatch_group_create();
         [localContext performBlock:^{
             block(localContext);
             // Save the context we were given
             [localContext MR_saveErrorHandler:nil];
             if (localContext.parentContext) {
                 // If we're doing nested contexs, save parent
+                dispatch_group_enter(completionGroup);
                 [localContext.parentContext performBlock:^{
                     [localContext.parentContext MR_saveErrorHandler:nil];
-                    if (completion) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            completion();
-                        });
-                    }
+                    dispatch_group_leave(completionGroup);
                 }];
-            } else {
-                // we're not, so just call completion;
+            }
+
+            // If the context has a parent context, this code will execute after the save.
+            // If not, it will execute immediately
+            dispatch_group_notify(completionGroup, dispatch_get_main_queue(), ^{
                 if (completion) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         completion();
                     });
                 }
-            }
+
+                dispatch_release(completionGroup);
+            });
         }];
  
 }
 
 + (void) saveInBackgroundWithBlock:(void (^)(NSManagedObjectContext *))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *))errorHandler;
 {
-    NSManagedObjectContext *savingContext;
-    if ([MagicalRecord isRunningiOS6]) {
-        NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_rootSavingContext];
-        savingContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
-    } else {
-        savingContext = [NSManagedObjectContext MR_rootSavingContext];
-    }
-
+    NSManagedObjectContext *savingContext = [[MagicalRecord persistenceStrategy] contextToUseForBackgroundSaves];
     [self saveInBackgroundUsingContext:savingContext block:block completion:completion errorHandler:errorHandler];
 }
 
