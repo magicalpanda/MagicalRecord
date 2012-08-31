@@ -17,6 +17,7 @@
     NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_newMainQueueContext];
     [defaultContext setParentContext:rootContext];
     [NSManagedObjectContext MR_setDefaultContext:defaultContext];
+    [NSManagedObjectContext MR_makeContext:rootContext mergeChangesToContext:defaultContext];
 }
 
 - (NSManagedObjectContext *)contextToUseForBackgroundSaves
