@@ -41,6 +41,27 @@
             }
             value = adjustDateForDST(value);
         }
+        
+    #ifdef MR_SAFE_SET        
+        else if (((attributeType == NSInteger16AttributeType) ||
+                  (attributeType == NSInteger32AttributeType) ||
+                  (attributeType == NSInteger64AttributeType) ||
+                  (attributeType == NSBooleanAttributeType))
+                 && ([value isKindOfClass:[NSString class]]))
+        {
+            value = [NSNumber numberWithInteger:[value  integerValue]];
+        }
+        else if (((attributeType == NSFloatAttributeType) || (attributeType == NSDoubleAttributeType))
+                 && ([value isKindOfClass:[NSString class]]))
+        {
+            value = [NSNumber numberWithDouble:[value doubleValue]];
+        }
+        else if ((attributeType == NSStringAttributeType) && ([value isKindOfClass:[NSNumber class]]))
+        {
+            value = [value stringValue];
+        }        
+    #endif
+        
     }
     
     return value == [NSNull null] ? nil : value;   
