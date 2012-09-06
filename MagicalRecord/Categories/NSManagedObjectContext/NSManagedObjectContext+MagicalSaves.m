@@ -109,7 +109,9 @@
         if (self == [[self class] MR_defaultContext])
         {
             [[[self class] MR_rootSavingContext] MR_saveInBackgroundErrorHandler:errorCallback completion:completion];
-        } else {
+        }
+        else
+        {
             // If we are not the default context (And therefore need to save the root context, do the completion action if one was specified
             if (completion)
             {

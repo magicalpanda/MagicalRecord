@@ -12,6 +12,7 @@
 #import "SingleEntityWithNoRelationships.h"
 
 @implementation SaveTests
+
 - (void) setUpClass
 {
     [NSManagedObjectModel MR_setDefaultManagedObjectModel:[NSManagedObjectModel MR_managedObjectModelNamed:@"TestModel.momd"]];
@@ -29,8 +30,6 @@
     [MagicalRecord cleanUp];
 }
 
-
-
 - (void)testBackgroundSaveCallsCompletionHandler
 {
     __block BOOL didSave = NO;
@@ -42,4 +41,5 @@
     
     expect(didSave).will.beTruthy();
 }
+
 @end
