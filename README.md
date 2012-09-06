@@ -79,7 +79,7 @@ Next, somewhere in your app delegate, in either the applicationDidFinishLaunchin
 	+ (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName;
 	+ (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName;
 
-Each call instantiates one of each piece of the Core Data stack, and provides getter and setter methods for these instances. These well known instances to MagicalRecord, and are recognized as "defaults".
+Each call instantiates one of each pieces of the Core Data stack, and provides getter and setter methods for these instances. These are well known instances to MagicalRecord, and are recognized as "defaults".
 
 And, before your app exits, you can use the clean up method:
 
@@ -107,7 +107,7 @@ When using Core Data, you will deal with two types of objects the most: *NSManag
 
 This context will be used if a find or request method (described below) is not specifying a specific context using the **inContext:** method overload.
 
-If you need to create a new Managed Object Context for use in other threads, based on the default persistent store that was creating using one of the setup methods, use:
+If you need to create a new Managed Object Context for use in other threads, based on the default persistent store that was created using one of the setup methods, use:
 
 	NSManagedObjectContext *myNewContext = [NSManagedObjectContext MR_context];
 	
@@ -117,7 +117,7 @@ And, if you want to make *myNewContext* the default for all fetch requests on th
 
 	[NSManagedObjectContext MR_setDefaultContext:myNewContext];
 
-MagicalRecord also has a helper method to hold on to a Managed Object Context in a thread's threadDictionary. This lets you access the correct NSManagedObjectContext instance no matter which thread you're calling from. This methods is:
+MagicalRecord also has a helper method to hold on to a Managed Object Context in a thread's threadDictionary. This lets you access the correct NSManagedObjectContext instance no matter which thread you're calling from. This method is:
 
 	[NSManagedObjectContext MR_contextForCurrentThread];
 
