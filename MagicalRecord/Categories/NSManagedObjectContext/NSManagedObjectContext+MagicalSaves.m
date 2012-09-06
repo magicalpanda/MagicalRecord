@@ -104,6 +104,8 @@
         if (self == [[self class] MR_defaultContext])
         {
             [[[self class] MR_rootSavingContext] MR_saveInBackgroundErrorHandler:errorCallback completion:completion];
+        } else if (self.parentContext != nil) {
+            [self.parentContext MR_saveInBackgroundErrorHandler:errorCallback completion:completion];
         }
 
         if (completion && self == [[self class] MR_rootSavingContext])
