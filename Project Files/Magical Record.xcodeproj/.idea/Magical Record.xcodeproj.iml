@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="CIDR_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/MagicalImportFunctions.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/MagicalImportFunctions.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/MagicalImportFunctions.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/MagicalImportFunctions.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSAttributeDescription+MagicalDataImport.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSAttributeDescription+MagicalDataImport.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSAttributeDescription+MagicalDataImport.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSAttributeDescription+MagicalDataImport.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSEntityDescription+MagicalDataImport.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSEntityDescription+MagicalDataImport.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSEntityDescription+MagicalDataImport.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSEntityDescription+MagicalDataImport.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSNumber+MagicalDataImport.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSNumber+MagicalDataImport.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSNumber+MagicalDataImport.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSNumber+MagicalDataImport.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSObject+MagicalDataImport.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSObject+MagicalDataImport.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSObject+MagicalDataImport.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSObject+MagicalDataImport.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSRelationshipDescription+MagicalDataImport.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSRelationshipDescription+MagicalDataImport.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSRelationshipDescription+MagicalDataImport.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSRelationshipDescription+MagicalDataImport.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSString+MagicalDataImport.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSString+MagicalDataImport.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSString+MagicalDataImport.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/DataImport/NSString+MagicalDataImport.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalAggregation.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalAggregation.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalAggregation.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalAggregation.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalDataImport.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalDataImport.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalDataImport.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalDataImport.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalFinders.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalFinders.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalFinders.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalFinders.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalRecord.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalRecord.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalRecord.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalRecord.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalRequests.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalRequests.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalRequests.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalRequests.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalObserving.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalObserving.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalObserving.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalObserving.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalRecord.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalRecord.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalRecord.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalRecord.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalSaves.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalSaves.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalSaves.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalSaves.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalThreading.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalThreading.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalThreading.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalThreading.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObjectModel+MagicalRecord.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObjectModel+MagicalRecord.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObjectModel+MagicalRecord.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSManagedObjectModel+MagicalRecord.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSPersistentStore+MagicalRecord.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSPersistentStore+MagicalRecord.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSPersistentStore+MagicalRecord.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSPersistentStore+MagicalRecord.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSPersistentStoreCoordinator+MagicalRecord.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSPersistentStoreCoordinator+MagicalRecord.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSPersistentStoreCoordinator+MagicalRecord.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Categories/NSPersistentStoreCoordinator+MagicalRecord.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+Actions.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+Actions.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+Actions.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+Actions.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+ErrorHandling.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+ErrorHandling.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+ErrorHandling.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+ErrorHandling.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+Options.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+Options.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+Options.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+Options.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+Setup.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+Setup.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+Setup.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+Setup.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+ShorthandSupport.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+ShorthandSupport.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+ShorthandSupport.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+ShorthandSupport.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+iCloud.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+iCloud.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+iCloud.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord+iCloud.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecord.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecordNestedContextsPersistenceStrategy.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecordNestedContextsPersistenceStrategy.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecordNestedContextsPersistenceStrategy.m">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecordNestedContextsPersistenceStrategy.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecordPersistenceStrategy.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecordPersistenceStrategy.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecordShorthand.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/Core/MagicalRecordShorthand.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../MagicalRecord/CoreData+MagicalRecord.h">
+      <sourceFolder url="file://$MODULE_DIR$/../../MagicalRecord/CoreData+MagicalRecord.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/..">
+      <sourceFolder url="file://$MODULE_DIR$/.." isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
+

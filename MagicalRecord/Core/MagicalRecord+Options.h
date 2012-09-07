@@ -8,6 +8,8 @@
 
 #import "MagicalRecord.h"
 
+@protocol MagicalRecordPersistenceStrategy;
+
 @interface MagicalRecord (Options)
 
 //global options
@@ -28,6 +30,9 @@
  This is extremely useful during development where every model change could potentially require a delete/reinstall of the app.
  */
 + (BOOL) shouldDeleteStoreOnModelMismatch;
++ (BOOL)isRunningiOS6;
+
++ (id <MagicalRecordPersistenceStrategy>)persistenceStrategy;
 
 
 @end
