@@ -15,6 +15,7 @@
 
 - (void) setUp
 {
+    NSLog(@"Setting up");
     [MagicalRecord setDefaultModelNamed:@"TestModel.momd"];
     [MagicalRecord setupCoreDataStackWithInMemoryStore];
     //[MagicalRecord setupCoreDataStack];
@@ -29,6 +30,7 @@
 
 - (void) tearDown
 {
+    NSLog(@"Tearing down");
     [MagicalRecord cleanUp];
 }
 

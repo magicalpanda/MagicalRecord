@@ -1,0 +1,6 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Mac App Unit Tests" type="AppleRunConfiguration" factoryName="Application" SCHEME_NAME="Mac App Unit Tests" PROJECT_NAME="Magical Record" TARGET_NAME="Mac App Unit Tests" CONFIG_NAME="Debug" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" RUN_TARGET_PROJECT_NAME="Magical Record" RUN_TARGET_NAME="Mac App Unit Tests" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+    <envs />
+    <method />
+  </configuration>
+</component>
