@@ -123,7 +123,7 @@
     [request setPropertiesToFetch:properties];
     [request setResultType:NSDictionaryResultType];    
     
-    NSDictionary *resultsDictionary = [self MR_executeFetchRequestAndReturnFirstObject:request];
+    NSDictionary *resultsDictionary = [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
     NSNumber *resultValue = [resultsDictionary objectForKey:@"result"];
     
     return resultValue;    
