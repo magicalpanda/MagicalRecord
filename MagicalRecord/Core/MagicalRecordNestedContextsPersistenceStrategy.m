@@ -17,6 +17,8 @@
     NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_newMainQueueContext];
     [defaultContext setParentContext:rootContext];
     [NSManagedObjectContext MR_setDefaultContext:defaultContext];
+    [NSManagedObjectContext MR_makeContextObtainPermanentIDsBeforeSaving:defaultContext];
+        [NSManagedObjectContext MR_makeContextObtainPermanentIDsBeforeSaving:rootContext];
     [NSManagedObjectContext MR_makeContext:rootContext mergeChangesToContext:defaultContext];
 }
 
