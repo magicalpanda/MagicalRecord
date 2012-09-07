@@ -15,15 +15,15 @@
     MRLog(@"On iOS 5, nested contexts are trouble. Using parallel PSC's!");
     // We can't do nested contexts, so let's create a seperate psc and merge from there to main thread context
 
-    NSPersistentStore *store = [[coordinator persistentStores] lastObject];
-    NSPersistentStoreCoordinator *backgroundCoordinator = [[NSPersistentStoreCoordinator alloc]initWithManagedObjectModel:coordinator.managedObjectModel];
-    [backgroundCoordinator addPersistentStoreWithType:store.type
-                                        configuration:nil
-                                                  URL:store.URL
-                                              options:store.options
-                                                error:nil];
+//    NSPersistentStore *store = [[coordinator persistentStores] lastObject];
+//    NSPersistentStoreCoordinator *backgroundCoordinator = [[NSPersistentStoreCoordinator alloc]initWithManagedObjectModel:coordinator.managedObjectModel];
+//    [backgroundCoordinator addPersistentStoreWithType:store.type
+//                                        configuration:nil
+//                                                  URL:store.URL
+//                                              options:store.options
+//                                                error:nil];
     
-    NSManagedObjectContext *rootContext = [NSManagedObjectContext MR_contextWithStoreCoordinator:backgroundCoordinator];
+    NSManagedObjectContext *rootContext = [NSManagedObjectContext MR_contextWithStoreCoordinator:coordinator];
     rootContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy;
     [NSManagedObjectContext MR_setRootSavingContext:rootContext];
 
