@@ -33,7 +33,8 @@
     // Use the coordinator passed in
     [defaultContext setPersistentStoreCoordinator:coordinator];
     [NSManagedObjectContext MR_setDefaultContext:defaultContext];
-
+    [NSManagedObjectContext MR_makeContextObtainPermanentIDsBeforeSaving:defaultContext];
+    [NSManagedObjectContext MR_makeContextObtainPermanentIDsBeforeSaving:rootContext];
     [NSManagedObjectContext MR_makeContext:rootContext mergeChangesToContext:defaultContext];
     [NSManagedObjectContext MR_makeContext:defaultContext mergeChangesToContext:rootContext];
 }
