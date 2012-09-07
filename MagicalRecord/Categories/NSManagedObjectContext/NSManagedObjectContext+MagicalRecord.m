@@ -77,6 +77,9 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
                                                       object:sourceContext
                                                        queue:nil
                                                   usingBlock:^(NSNotification *note) {
+                                                      NSAssert(note.object != nil, nil);
+                                                      NSAssert(targetContext!= nil, nil);
+                                                      
                                                       [targetContext performBlock:^{
                                                           [targetContext mergeChangesFromContextDidSaveNotification:note];
                                                       }];
