@@ -115,7 +115,18 @@
     NSArray* sortKeys = [sortTerm componentsSeparatedByString:@","];
     for (NSString* sortKey in sortKeys) 
     {
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
+        BOOL scopeAscending = ascending;
+        NSString *scopeSortKey = sortKey;
+        if ([sortKey rangeOfString:@" ASC"].location != NSNotFound) {
+            scopeAscending = YES;
+            scopeSortKey = [sortKey stringByReplacingOccurrencesOfString:@" ASC" withString:@""];
+        }
+        else if ([sortKey rangeOfString:@" DESC"].location != NSNotFound) {
+            scopeAscending = NO;
+            scopeSortKey = [sortKey stringByReplacingOccurrencesOfString:@" DESC" withString:@""];
+        }
+        
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:scopeSortKey ascending:scopeAscending];
         [sortDescriptors addObject:sortDescriptor];
     }
     
