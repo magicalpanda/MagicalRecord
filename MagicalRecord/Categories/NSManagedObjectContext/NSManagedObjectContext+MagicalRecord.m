@@ -10,6 +10,7 @@
 
 static NSManagedObjectContext *rootSavingContext = nil;
 static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
+static id iCloudObserver = nil;
 
 
 @interface NSManagedObjectContext (MagicalRecordInternal)
@@ -52,6 +53,10 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
 + (void) MR_setDefaultContext:(NSManagedObjectContext *)moc
 {
     NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_defaultStoreCoordinator];
+    if (iCloudObserver) {
+        [[NSNotificationCenter defaultCenter] removeObserver:iCloudObserver];
+    }
+    
     if ([MagicalRecord isICloudEnabled]) 
     {
         [defaultManagedObjectContext_ MR_stopObservingiCloudChangesInCoordinator:coordinator];
@@ -62,6 +67,16 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
     if ([MagicalRecord isICloudEnabled]) 
     {
         [defaultManagedObjectContext_ MR_observeiCloudChangesInCoordinator:coordinator];
+    }
+    else
+    {
+        // If icloud is NOT enabled at the time of this method being called, listen for it to be setup later, and THEN set up observing cloud changes
+        iCloudObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kMagicalRecordPSCDidCompleteiCloudSetupNotification
+                                                                           object:nil
+                                                                            queue:[NSOperationQueue mainQueue]
+                                                                       usingBlock:^(NSNotification *note) {
+                                                                           [defaultManagedObjectContext_ MR_observeiCloudChangesInCoordinator:coordinator];
+                                                                       }];        
     }
 }
 
