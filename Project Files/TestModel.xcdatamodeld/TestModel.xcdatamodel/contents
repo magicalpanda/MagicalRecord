@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1456" systemVersion="11E53" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1810" systemVersion="12C54" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AbstractRelatedEntity" representedClassName="AbstractRelatedEntity" isAbstract="YES">
         <attribute name="sampleBaseAttribute" optional="YES" attributeType="String">
             <userInfo/>
@@ -40,7 +40,7 @@
         <attribute name="testPrimaryKey" optional="YES" attributeType="Integer 16" defaultValueString="0">
             <userInfo/>
         </attribute>
-        <relationship name="mappedEntities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MappedEntity">
+        <relationship name="mappedEntities" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MappedEntity">
             <userInfo>
                 <entry key="relatedByAttribute" value="testMappedEntityID"/>
             </userInfo>
@@ -53,13 +53,13 @@
         <attribute name="singleEntityRelatedToMappedEntityUsingDefaultsID" optional="YES" attributeType="Integer 16" defaultValueString="0">
             <userInfo/>
         </attribute>
-        <relationship name="mappedEntity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MappedEntity">
+        <relationship name="mappedEntity" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="MappedEntity">
             <userInfo/>
         </relationship>
         <userInfo/>
     </entity>
     <entity name="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" representedClassName="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey">
-        <relationship name="mappedEntity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MappedEntity" syncable="YES">
+        <relationship name="mappedEntity" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="MappedEntity" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="someRandomAttributeName"/>
                 <entry key="relatedByAttribute" value="testMappedEntityID"/>
@@ -68,7 +68,7 @@
         <userInfo/>
     </entity>
     <entity name="SingleEntityRelatedToMappedEntityWithNestedMappedAttributes" representedClassName="SingleEntityRelatedToMappedEntityWithNestedMappedAttributes">
-        <relationship name="mappedEntity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MappedEntity">
+        <relationship name="mappedEntity" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="MappedEntity">
             <userInfo/>
         </relationship>
         <userInfo/>
@@ -81,7 +81,7 @@
                 <entry key="mappedKeyName.2" value="actualMappedKey"/>
             </userInfo>
         </attribute>
-        <relationship name="mappedRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MappedEntity">
+        <relationship name="mappedRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="MappedEntity">
             <userInfo>
                 <entry key="mappedKeyName" value="not_in_use"/>
                 <entry key="mappedKeyName.1" value="almost_there"/>
@@ -143,31 +143,31 @@
         <attribute name="mappedStringAttribute" optional="YES" attributeType="String">
             <userInfo/>
         </attribute>
-        <relationship name="testAbstractToManyRelationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AbstractRelatedEntity">
+        <relationship name="testAbstractToManyRelationship" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AbstractRelatedEntity">
             <userInfo/>
         </relationship>
-        <relationship name="testAbstractToOneRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AbstractRelatedEntity">
+        <relationship name="testAbstractToOneRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="AbstractRelatedEntity">
             <userInfo/>
         </relationship>
-        <relationship name="testConcreteToManyRelationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ConcreteRelatedEntity">
+        <relationship name="testConcreteToManyRelationship" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ConcreteRelatedEntity">
             <userInfo/>
         </relationship>
-        <relationship name="testConcreteToOneRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ConcreteRelatedEntity">
+        <relationship name="testConcreteToOneRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="ConcreteRelatedEntity">
             <userInfo/>
         </relationship>
         <userInfo/>
     </entity>
     <elements>
-        <element name="AbstractRelatedEntity" positionX="115" positionY="126" width="128" height="60"/>
-        <element name="ConcreteRelatedEntity" positionX="153" positionY="375" width="171" height="60"/>
-        <element name="EntityWithDiffernentClassName" positionX="-135" positionY="135" width="198" height="45"/>
-        <element name="MappedEntity" positionX="421" positionY="558" width="128" height="105"/>
-        <element name="SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey" positionX="657" positionY="450" width="351" height="75"/>
-        <element name="SingleEntityRelatedToMappedEntityUsingDefaults" positionX="621" positionY="333" width="297" height="75"/>
-        <element name="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" positionX="603" positionY="702" width="342" height="60"/>
-        <element name="SingleEntityRelatedToMappedEntityWithNestedMappedAttributes" positionX="664" positionY="597" width="470" height="60"/>
-        <element name="SingleEntityRelatedToMappedEntityWithSecondaryMappings" positionX="-63" positionY="738" width="344" height="75"/>
-        <element name="SingleEntityWithNoRelationships" positionX="-135" positionY="327" width="180" height="255"/>
-        <element name="SingleRelatedEntity" positionX="333" positionY="198" width="189" height="120"/>
+        <element name="AbstractRelatedEntity" positionX="160" positionY="192" width="128" height="60"/>
+        <element name="ConcreteRelatedEntity" positionX="160" positionY="192" width="128" height="60"/>
+        <element name="EntityWithDiffernentClassName" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="MappedEntity" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="SingleEntityRelatedToMappedEntityUsingDefaults" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" positionX="160" positionY="192" width="128" height="60"/>
+        <element name="SingleEntityRelatedToMappedEntityWithNestedMappedAttributes" positionX="160" positionY="192" width="128" height="60"/>
+        <element name="SingleEntityRelatedToMappedEntityWithSecondaryMappings" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="SingleEntityWithNoRelationships" positionX="160" positionY="192" width="128" height="255"/>
+        <element name="SingleRelatedEntity" positionX="160" positionY="192" width="128" height="120"/>
     </elements>
 </model>
