@@ -10,7 +10,7 @@
 
 static NSManagedObjectContext *rootSavingContext = nil;
 static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
-static id iCloudObserver = nil;
+static id iCloudSetupNotificationObserver = nil;
 
 
 @interface NSManagedObjectContext (MagicalRecordInternal)
@@ -53,8 +53,9 @@ static id iCloudObserver = nil;
 + (void) MR_setDefaultContext:(NSManagedObjectContext *)moc
 {
     NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_defaultStoreCoordinator];
-    if (iCloudObserver) {
-        [[NSNotificationCenter defaultCenter] removeObserver:iCloudObserver];
+    if (iCloudSetupNotificationObserver) {
+        [[NSNotificationCenter defaultCenter] removeObserver:iCloudSetupNotificationObserver];
+        iCloudSetupNotificationObserver = nil;
     }
     
     if ([MagicalRecord isICloudEnabled]) 
@@ -71,11 +72,11 @@ static id iCloudObserver = nil;
     else
     {
         // If icloud is NOT enabled at the time of this method being called, listen for it to be setup later, and THEN set up observing cloud changes
-        iCloudObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kMagicalRecordPSCDidCompleteiCloudSetupNotification
+        iCloudSetupNotificationObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kMagicalRecordPSCDidCompleteiCloudSetupNotification
                                                                            object:nil
                                                                             queue:[NSOperationQueue mainQueue]
                                                                        usingBlock:^(NSNotification *note) {
-                                                                           [defaultManagedObjectContext_ MR_observeiCloudChangesInCoordinator:coordinator];
+                                                                           [[NSManagedObjectContext MR_defaultContext] MR_observeiCloudChangesInCoordinator:coordinator];
                                                                        }];        
     }
 }
