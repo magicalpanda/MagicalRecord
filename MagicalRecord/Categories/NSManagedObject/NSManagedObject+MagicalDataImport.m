@@ -20,6 +20,7 @@ NSString * const kMagicalRecordImportRelationshipMapKey             = @"mappedKe
 NSString * const kMagicalRecordImportRelationshipLinkedByKey        = @"relatedByAttribute";
 NSString * const kMagicalRecordImportRelationshipTypeKey            = @"type";  //this needs to be revisited
 
+NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"useDefaultValueWhenNotPresent";
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
@@ -51,6 +52,17 @@ NSString * const kMagicalRecordImportRelationshipTypeKey            = @"type";  
             if (![self MR_importValue:value forKey:attributeName])
             {
                 [self setValue:value forKey:attributeName];
+            }
+        } 
+        else 
+        {
+            if ([[[attributeInfo userInfo] objectForKey:kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent] boolValue]) 
+            {
+                id value = [attributeInfo defaultValue];
+                if (![self MR_importValue:value forKey:attributeName])
+                {
+                    [self setValue:value forKey:attributeName];
+                }
             }
         }
     }
