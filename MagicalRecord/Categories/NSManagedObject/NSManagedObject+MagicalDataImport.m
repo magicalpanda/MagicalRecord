@@ -223,6 +223,9 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
         {
             NSEntityDescription *entityDescription = [relationshipInfo destinationEntity];
             relatedObject = [entityDescription MR_createInstanceInContext:[self managedObjectContext]];
+            NSString *primaryKey = [relationshipInfo MR_primaryKey];
+            id relatedValue = [localObjectData MR_relatedValueForRelationship:relationshipInfo];
+            [relatedObject setValue:relatedValue forKey:primaryKey];
         }
         [relatedObject MR_importValuesForKeysWithObject:localObjectData];
         
@@ -242,6 +245,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     if (managedObject == nil) 
     {
         managedObject = [self MR_createInContext:context];
+        [managedObject setValue:value forKey:[primaryAttribute name]];
     }
 
     [managedObject MR_importValuesForKeysWithObject:objectData];
