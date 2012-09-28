@@ -89,6 +89,7 @@ static id iCloudSetupNotificationObserver = nil;
 + (void) MR_setRootSavingContext:(NSManagedObjectContext *)context;
 {
     rootSavingContext = context;
+    [context MR_obtainPermanentIDsBeforeSaving];
     [rootSavingContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
 }
 
@@ -133,6 +134,7 @@ static id iCloudSetupNotificationObserver = nil;
 {
     NSManagedObjectContext *context = [self MR_contextWithoutParent];
     [context setParentContext:parentContext];
+    [context MR_obtainPermanentIDsBeforeSaving];
     return context;
 }
 
@@ -140,14 +142,6 @@ static id iCloudSetupNotificationObserver = nil;
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     return context;    
-}
-
-+ (NSManagedObjectContext *) MR_contextThatPushesChangesToDefaultContext;
-{
-    NSManagedObjectContext *defaultContext = [self MR_defaultContext];
-    NSManagedObjectContext *childContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    [childContext setParentContext:defaultContext];
-    return childContext;
 }
 
 + (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
