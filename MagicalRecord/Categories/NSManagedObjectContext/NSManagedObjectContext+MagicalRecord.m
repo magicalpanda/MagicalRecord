@@ -64,7 +64,7 @@ static id iCloudSetupNotificationObserver = nil;
     }
 
     defaultManagedObjectContext_ = moc;
-    
+    [moc MR_obtainPermanentIDsBeforeSaving];
     if ([MagicalRecord isICloudEnabled]) 
     {
         [defaultManagedObjectContext_ MR_observeiCloudChangesInCoordinator:coordinator];
@@ -165,5 +165,24 @@ static id iCloudSetupNotificationObserver = nil;
     return context;
 }
 
+- (void) MR_obtainPermanentIDsBeforeSaving;
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(contextWillSave:)
+                                                 name:NSManagedObjectContextWillSaveNotification
+                                               object:self];
+}
+
+- (void)contextWillSave:(NSNotification *)notification
+{
+    NSManagedObjectContext *context = (NSManagedObjectContext *)notification.object;
+    if (context.insertedObjects.count > 0) {
+        NSArray *insertedObjects = [[context insertedObjects] allObjects];
+        MRLog(@"Context %@ is about to save. Obtaining permanent IDs for new %d inserted objects", [context MR_description], insertedObjects.count);
+        NSError *error;
+        [context obtainPermanentIDsForObjects:insertedObjects error:&error];
+        [MagicalRecord handleErrors:error];
+    }
+}
 
 @end

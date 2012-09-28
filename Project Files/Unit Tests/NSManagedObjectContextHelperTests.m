@@ -7,7 +7,7 @@
 //
 
 #import "NSManagedObjectContextHelperTests.h"
-
+#import "SingleEntityWithNoRelationships.h";
 @implementation NSManagedObjectContextHelperTests
 
 - (void) setUp
@@ -33,6 +33,15 @@
     NSManagedObjectContext *testContext = [NSManagedObjectContext MR_contextThatPushesChangesToDefaultContext];
 
    assertThat([testContext parentContext], is(equalTo([NSManagedObjectContext MR_defaultContext])));
+}
+
+- (void) testThatSavedObjectsHavePermanentIDs
+{
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
+    SingleEntityWithNoRelationships *entity = [SingleEntityWithNoRelationships MR_createInContext:context];
+    assertThatBool([[entity objectID] isTemporaryID], equalToBool(YES));
+    [context MR_save];
+    assertThatBool([[entity objectID] isTemporaryID], equalToBool(NO));
 }
 
 
