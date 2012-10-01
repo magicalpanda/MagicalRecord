@@ -56,6 +56,7 @@
     #endif
 #else
     #if MAC_OS_X_VERSION_MIN_REQUIRED >= 1080
+        #undef MRDispatchQueueRelease
         #define MRDispatchQueueRelease(q)
     #endif
 #endif
