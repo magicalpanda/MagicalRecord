@@ -39,7 +39,7 @@
                 NSString *dateFormat = [[self userInfo] valueForKey:kMagicalRecordImportCustomDateFormatKey];
                 value = dateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
             }
-            value = adjustDateForDST(value);
+            //            value = adjustDateForDST(value);
         }
     }
     

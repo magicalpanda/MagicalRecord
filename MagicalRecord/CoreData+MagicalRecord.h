@@ -51,10 +51,12 @@
 
 #if TARGET_OS_IPHONE
     #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
+        #undef MRDispatchQueueRelease
         #define MRDispatchQueueRelease(q)
     #endif
 #else
     #if MAC_OS_X_VERSION_MIN_REQUIRED >= 1080
+        #undef MRDispatchQueueRelease
         #define MRDispatchQueueRelease(q)
     #endif
 #endif
