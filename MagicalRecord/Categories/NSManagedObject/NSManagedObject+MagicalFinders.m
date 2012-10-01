@@ -101,6 +101,21 @@
                                inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
++ (id) MR_findFirstOrderedByAttribute:(NSString *)attribute ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
+{
+    NSFetchRequest *request = [self MR_requestAllSortedBy:attribute ascending:ascending inContext:context];
+    [request setFetchLimit:1];
+
+    return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
+}
+
++ (id) MR_findFirstOrderedByAttribute:(NSString *)attribute ascending:(BOOL)ascending;
+{
+    return [self MR_findFirstOrderedByAttribute:attribute
+                                      ascending:ascending
+                                      inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+}
+
 + (id) MR_findFirstWithPredicate:(NSPredicate *)searchTerm
 {
     return [self MR_findFirstWithPredicate:searchTerm inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
