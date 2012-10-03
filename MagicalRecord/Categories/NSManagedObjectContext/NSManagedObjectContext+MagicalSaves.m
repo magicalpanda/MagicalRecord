@@ -65,10 +65,25 @@
 
 - (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback;
 {
-    [self performBlockAndWait:^{
+    [self MR_saveNestedContextsErrorHandler:nil completion:nil];
+}
+
+- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion;
+{
+    [self performBlock:^{
         [self MR_saveWithErrorCallback:errorCallback];
+        if (self.parentContext) {
+            [[self parentContext] performBlock:^{
+                [[self parentContext] MR_saveNestedContextsErrorHandler:errorCallback completion:completion];
+            }];
+        } else {
+            if (completion) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion();
+                });
+            }
+        }
     }];
-    [[self parentContext] MR_saveNestedContextsErrorHandler:errorCallback];
 }
 
 - (void) MR_save;
@@ -120,5 +135,4 @@
         }
     }];
 }
-
 @end

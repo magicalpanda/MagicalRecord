@@ -37,7 +37,7 @@ void reset_action_queue(void)
     dispatch_async(action_queue(), ^{
         block(localContext);
         
-        [localContext MR_saveInBackgroundErrorHandler:errorHandler completion:completion];
+        [localContext MR_saveNestedContextsErrorHandler:errorHandler completion:completion];
     });
 }
 
