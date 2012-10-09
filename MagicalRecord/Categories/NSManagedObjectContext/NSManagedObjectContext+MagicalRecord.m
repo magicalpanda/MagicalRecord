@@ -52,6 +52,11 @@ static id iCloudSetupNotificationObserver = nil;
 
 + (void) MR_setDefaultContext:(NSManagedObjectContext *)moc
 {
+    if (defaultManagedObjectContext_)
+    {
+        [[NSNotificationCenter defaultCenter] removeObserver:defaultManagedObjectContext_];
+    }
+    
     NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_defaultStoreCoordinator];
     if (iCloudSetupNotificationObserver) {
         [[NSNotificationCenter defaultCenter] removeObserver:iCloudSetupNotificationObserver];
@@ -88,6 +93,11 @@ static id iCloudSetupNotificationObserver = nil;
 
 + (void) MR_setRootSavingContext:(NSManagedObjectContext *)context;
 {
+    if (rootSavingContext)
+    {
+        [[NSNotificationCenter defaultCenter] removeObserver:rootSavingContext];
+    }
+    
     rootSavingContext = context;
     [context MR_obtainPermanentIDsBeforeSaving];
     [rootSavingContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
@@ -174,8 +184,10 @@ static id iCloudSetupNotificationObserver = nil;
         NSArray *insertedObjects = [[context insertedObjects] allObjects];
         MRLog(@"Context %@ is about to save. Obtaining permanent IDs for new %lu inserted objects", [context MR_description], (unsigned long)[insertedObjects count]);
         NSError *error = nil;
-        [context obtainPermanentIDsForObjects:insertedObjects error:&error];
-        [MagicalRecord handleErrors:error];
+        BOOL success = [context obtainPermanentIDsForObjects:insertedObjects error:&error];
+        if (!success && error) {
+            [MagicalRecord handleErrors:error];
+        }
     }
 }
 
