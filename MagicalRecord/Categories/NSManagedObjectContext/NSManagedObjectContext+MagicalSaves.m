@@ -95,13 +95,13 @@
 {
     [self performBlockAndWait:^{
         [self MR_saveWithErrorCallback:errorCallback];
+
+		if (self.parentContext) {
+            [[self parentContext] performBlockAndWait:^{
+                [[self parentContext] MR_saveErrorHandler:errorCallback];
+            }];
+        }
     }];
-    
-    if (self == [[self class] MR_defaultContext])
-    {
-        // Since this is a synchronous call, I made the background context save synchronous as well to reflect the intent.
-        [[[self class] MR_rootSavingContext] MR_saveErrorHandler:errorCallback];
-    }
 }
 
 - (void) MR_saveInBackgroundCompletion:(void (^)(void))completion;

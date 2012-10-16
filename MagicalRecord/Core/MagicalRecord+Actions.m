@@ -66,7 +66,7 @@ void reset_action_queue(void)
     
     if ([localContext hasChanges]) 
     {
-        [localContext MR_saveNestedContextsErrorHandler:errorHandler];
+        [localContext MR_saveErrorHandler:errorHandler];
     }
     
     if (completion)
