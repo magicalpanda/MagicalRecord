@@ -13,10 +13,10 @@ static dispatch_queue_t background_action_queue;
 dispatch_queue_t action_queue(void);
 dispatch_queue_t action_queue(void)
 {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+    if (background_action_queue == NULL)
+    {
         background_action_queue = dispatch_queue_create("com.magicalpanda.magicalrecord.actionQueue", DISPATCH_QUEUE_SERIAL);
-    });
+    }
 
     return background_action_queue;
 }
