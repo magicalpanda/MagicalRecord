@@ -65,4 +65,21 @@
     expect([fetchedObject hasChanges]).to.beFalsy();
 }
 
+- (void)testCurrentThreadSavesActuallySave
+{
+	__block NSManagedObjectID *objectId;
+    __block NSManagedObject *fetchedObject;
+    [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
+        expect([inserted hasChanges]).to.beTruthy();
+        [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
+        objectId = inserted.objectID;
+    }];
+
+	fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectWithID:objectId];
+
+    expect(fetchedObject).toNot.beNil();
+    expect([fetchedObject hasChanges]).to.beFalsy();
+}
+
 @end
