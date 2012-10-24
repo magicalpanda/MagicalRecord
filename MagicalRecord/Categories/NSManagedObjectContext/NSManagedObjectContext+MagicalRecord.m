@@ -196,8 +196,9 @@ static id iCloudSetupNotificationObserver = nil;
     {
         MRLog(@"Context %@ is about to save. Obtaining permanent IDs for new %lu inserted objects", [context MR_description], (unsigned long)[insertedObjects count]);
         NSError *error = nil;
-        BOOL success = [context obtainPermanentIDsForObjects:insertedObjects error:&error];
-        if (!success && error) {
+        BOOL success = [context obtainPermanentIDsForObjects:[insertedObjects allObjects] error:&error];
+        if (!success)
+        {
             [MagicalRecord handleErrors:error];
         }
     }
