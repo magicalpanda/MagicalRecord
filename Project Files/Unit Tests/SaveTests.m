@@ -42,4 +42,44 @@
     expect(didSave).will.beTruthy();
 }
 
+- (void)testBackgroundSavesActuallySave
+{
+    __block NSManagedObjectID *objectId;
+    __block NSManagedObject *fetchedObject;
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_group_enter(group);
+    [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
+        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
+        expect([inserted hasChanges]).to.beTruthy();
+        [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
+        objectId = inserted.objectID;
+
+    } completion:^{
+        fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectWithID:objectId];
+        dispatch_group_leave(group);
+        
+    }];
+    
+    dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+    expect(fetchedObject).toNot.beNil();
+    expect([fetchedObject hasChanges]).to.beFalsy();
+}
+
+- (void)testCurrentThreadSavesActuallySave
+{
+	__block NSManagedObjectID *objectId;
+    __block NSManagedObject *fetchedObject;
+    [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
+        expect([inserted hasChanges]).to.beTruthy();
+        [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
+        objectId = inserted.objectID;
+    }];
+
+	fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectWithID:objectId];
+
+    expect(fetchedObject).toNot.beNil();
+    expect([fetchedObject hasChanges]).to.beFalsy();
+}
+
 @end

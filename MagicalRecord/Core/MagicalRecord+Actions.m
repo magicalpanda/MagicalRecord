@@ -17,6 +17,7 @@ dispatch_queue_t action_queue(void)
     {
         background_action_queue = dispatch_queue_create("com.magicalpanda.magicalrecord.actionQueue", DISPATCH_QUEUE_SERIAL);
     }
+
     return background_action_queue;
 }
 
@@ -37,7 +38,7 @@ void reset_action_queue(void)
     dispatch_async(action_queue(), ^{
         block(localContext);
         
-        [localContext MR_saveInBackgroundErrorHandler:errorHandler completion:completion];
+        [localContext MR_saveNestedContextsErrorHandler:errorHandler completion:completion];
     });
 }
 
@@ -65,7 +66,7 @@ void reset_action_queue(void)
     
     if ([localContext hasChanges]) 
     {
-        [localContext MR_saveNestedContextsErrorHandler:errorHandler];
+        [localContext MR_saveErrorHandler:errorHandler];
     }
     
     if (completion)

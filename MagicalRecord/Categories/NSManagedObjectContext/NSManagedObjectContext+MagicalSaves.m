@@ -65,10 +65,25 @@
 
 - (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback;
 {
-    [self performBlockAndWait:^{
+    [self MR_saveNestedContextsErrorHandler:nil completion:nil];
+}
+
+- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion;
+{
+    [self performBlock:^{
         [self MR_saveWithErrorCallback:errorCallback];
+        if (self.parentContext) {
+            [[self parentContext] performBlock:^{
+                [[self parentContext] MR_saveNestedContextsErrorHandler:errorCallback completion:completion];
+            }];
+        } else {
+            if (completion) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion();
+                });
+            }
+        }
     }];
-    [[self parentContext] MR_saveNestedContextsErrorHandler:errorCallback];
 }
 
 - (void) MR_save;
@@ -80,13 +95,13 @@
 {
     [self performBlockAndWait:^{
         [self MR_saveWithErrorCallback:errorCallback];
+
+		if (self.parentContext) {
+            [[self parentContext] performBlockAndWait:^{
+                [[self parentContext] MR_saveErrorHandler:errorCallback];
+            }];
+        }
     }];
-    
-    if (self == [[self class] MR_defaultContext])
-    {
-        // Since this is a synchronous call, I made the background context save synchronous as well to reflect the intent.
-        [[[self class] MR_rootSavingContext] MR_saveErrorHandler:errorCallback];
-    }
 }
 
 - (void) MR_saveInBackgroundCompletion:(void (^)(void))completion;
@@ -120,5 +135,4 @@
         }
     }];
 }
-
 @end
