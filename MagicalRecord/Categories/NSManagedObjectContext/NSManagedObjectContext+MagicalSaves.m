@@ -96,11 +96,9 @@
     [self performBlockAndWait:^{
         [self MR_saveWithErrorCallback:errorCallback];
 
-		if (self.parentContext) {
-            [[self parentContext] performBlockAndWait:^{
-                [[self parentContext] MR_saveErrorHandler:errorCallback];
-            }];
-        }
+        [[self parentContext] performBlockAndWait:^{
+            [[self parentContext] MR_saveErrorHandler:errorCallback];
+        }];
     }];
 }
 
