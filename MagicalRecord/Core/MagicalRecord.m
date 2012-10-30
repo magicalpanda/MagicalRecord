@@ -20,7 +20,6 @@
 
 @end
 
-void reset_action_queue(void);
 
 @implementation MagicalRecord
 
@@ -28,7 +27,6 @@ void reset_action_queue(void);
 {
     [self cleanUpErrorHanding];
     [self cleanUpStack];
-    reset_action_queue();
 }
 
 + (void) cleanUpStack;
