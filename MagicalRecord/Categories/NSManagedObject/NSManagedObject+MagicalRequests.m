@@ -92,10 +92,10 @@
 
 + (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
 {
-	return [self MR_requestAllSortedBy:sortTerm
+    return [self MR_requestAllSortedBy:sortTerm
                              ascending:ascending
-                         withPredicate:nil 
-                             inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+                         withPredicate:nil
+                             inContext:context];
 }
 
 + (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending
