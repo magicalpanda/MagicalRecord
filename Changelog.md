@@ -1,6 +1,14 @@
 # Changelog
 ## Version 2.0.8
-* Fixed issue #287 - MR_findByAttribute:withValue:andOrderBy:ascending:inContext does not pass context through `[31m4b97d0e[m` - [1;34m[Stephen Vanterpool](mailto:stephen@vanterpool.net)[m
+* Fixed issue #287 - MR_findByAttribute:withValue:andOrderBy:ascending:inContext does not pass context through `4b97d0e` - [Stephen Vanterpool](mailto:stephen@
+* Adding changelog `da70884` - [Stephen Vanterpool](mailto:stephen@vanterpool.net)
+* Cleanup contextWillSave method Update deleting incompatible store `2eaec27` - [Saul Mora](mailto:saul@magicalpanda.com)
+* don't check the error, rely only on the return value of methods to determine success `64a81c6` - [Saul Mora](mailto:saul@magicalpanda.com)
+* removed MR_saveErrorHandler, as it and MR_saveWithErrorCallback were essentially duplicates MR_save now only saves the current context (it was essentially do
+* Separate printing context chain method into its own method change contextWorkingName to property workingName `0fb7d36` - [Saul Mora](mailto:saul@magicalpanda
+* Added fetchAllWithDelegate: method for NSFRC `c0a1657` - [Saul Mora](mailto:saul@magicalpanda.com)
+* Fixed Issue #294 - MR_requestAllSortedBy:ascending:inContext: did not use correct context `3656e74` - [Stephen Vanterpool](mailto:stephen@vanterpool.net)
+* Bumping podspec version `fb81b5b` - [Stephen Vanterpool](mailto:stephen@vanterpool.net)
 ## Version 2.0.7
 * Fix small error in README with regard to MR_SHORTHAND `[31m8c14cc7[m` - [1;34m[Maik Gosenshuis](mailto:maik@gosenshuis.nl)[m
 * Hide intended private cleanUpErrorHandling method `[31ma903e7e[m` - [1;34m[Saul Mora](mailto:saul@magicalpanda.com)[m
