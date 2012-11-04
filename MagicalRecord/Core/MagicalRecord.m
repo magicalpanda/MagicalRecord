@@ -20,7 +20,6 @@
 
 @end
 
-void reset_action_queue(void);
 
 @implementation MagicalRecord
 
@@ -28,7 +27,6 @@ void reset_action_queue(void);
 {
     [self cleanUpErrorHanding];
     [self cleanUpStack];
-    reset_action_queue();
 }
 
 + (void) cleanUpStack;
@@ -42,12 +40,13 @@ void reset_action_queue(void);
 + (NSString *) currentStack
 {
     NSMutableString *status = [NSMutableString stringWithString:@"Current Default Core Data Stack: ---- \n"];
-    
-    [status appendFormat:@"Context:     %@\n", [NSManagedObjectContext MR_defaultContext]];
-    [status appendFormat:@"Model:       %@\n", [[NSManagedObjectModel MR_defaultManagedObjectModel] entityVersionHashesByName]];
-    [status appendFormat:@"Coordinator: %@\n", [NSPersistentStoreCoordinator MR_defaultStoreCoordinator]];
-    [status appendFormat:@"Store:       %@\n", [NSPersistentStore MR_defaultPersistentStore]];
-    
+
+    [status appendFormat:@"Model:           %@\n", [[NSManagedObjectModel MR_defaultManagedObjectModel] entityVersionHashesByName]];
+    [status appendFormat:@"Coordinator:     %@\n", [NSPersistentStoreCoordinator MR_defaultStoreCoordinator]];
+    [status appendFormat:@"Store:           %@\n", [NSPersistentStore MR_defaultPersistentStore]];
+    [status appendFormat:@"Default Context: %@\n", [[NSManagedObjectContext MR_defaultContext] MR_description]];
+    [status appendFormat:@"Context Chain:   \n%@\n", [[NSManagedObjectContext MR_defaultContext] MR_parentChain]];
+
     return status;
 }
 

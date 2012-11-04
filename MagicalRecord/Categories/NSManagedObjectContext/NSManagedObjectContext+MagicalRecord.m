@@ -12,7 +12,7 @@ static NSManagedObjectContext *rootSavingContext = nil;
 static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
 static id iCloudSetupNotificationObserver = nil;
 
-#define kNSManagedObjectContextWorkingName @"kNSManagedObjectContextWorkingName"
+static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSManagedObjectContextWorkingName";
 
 @interface NSManagedObjectContext (MagicalRecordInternal)
 
@@ -34,19 +34,23 @@ static id iCloudSetupNotificationObserver = nil;
 
 - (NSString *) MR_description;
 {
-    NSString *contextName = (self == defaultManagedObjectContext_) ? @"*** DEFAULT ***" : @"";
-    contextName = (self == rootSavingContext) ? @"*** BACKGROUND SAVE ***" : contextName;
-    
-    NSString *onMainThread = [NSThread isMainThread] ? @"*** MAIN THREAD ***" : @"*** SECONDARY THREAD ***";
-    
-    NSString *familyTree = [NSString string];
-    NSManagedObjectContext *parentContext = [self parentContext];
-    while (nil != parentContext) {
-        familyTree = [familyTree stringByAppendingFormat:@" ==> %@;",[parentContext MR_contextWorkingName]];
-        parentContext = [parentContext parentContext];
-    }
+    NSString *contextLabel = [NSString stringWithFormat:@"*** %@ ***", [self MR_workingName]];
+    NSString *onMainThread = [NSThread isMainThread] ? @"*** MAIN THREAD ***" : @"*** BACKGROUND THREAD ***";
 
-    return [NSString stringWithFormat:@"%@: %@ Context %@ \nFamilyTree: %@", [self MR_contextWorkingName], contextName, onMainThread,familyTree];
+    return [NSString stringWithFormat:@"<%@ (%p): %@> on %@", NSStringFromClass([self class]), self, contextLabel, onMainThread];
+}
+
+- (NSString *) MR_parentChain;
+{
+    NSMutableString *familyTree = [@"" mutableCopy];
+    NSManagedObjectContext *currentContext = self;
+    do
+    {
+        [familyTree appendFormat:@"- %@ (%p) %@\n", [currentContext MR_workingName], currentContext, (currentContext == self ? @"(*)" : @"")];
+    }
+    while ((currentContext = [currentContext parentContext]));
+
+    return [NSString stringWithString:familyTree];
 }
 
 + (NSManagedObjectContext *) MR_defaultContext
@@ -66,7 +70,8 @@ static id iCloudSetupNotificationObserver = nil;
     }
     
     NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_defaultStoreCoordinator];
-    if (iCloudSetupNotificationObserver) {
+    if (iCloudSetupNotificationObserver)
+    {
         [[NSNotificationCenter defaultCenter] removeObserver:iCloudSetupNotificationObserver];
         iCloudSetupNotificationObserver = nil;
     }
@@ -77,8 +82,10 @@ static id iCloudSetupNotificationObserver = nil;
     }
 
     defaultManagedObjectContext_ = moc;
-    [moc MR_obtainPermanentIDsBeforeSaving];
-    if ([MagicalRecord isICloudEnabled]) 
+    [defaultManagedObjectContext_ MR_setWorkingName:@"DEFAULT"];
+    
+//    [moc MR_obtainPermanentIDsBeforeSaving];
+    if ([MagicalRecord isICloudEnabled])
     {
         [defaultManagedObjectContext_ MR_observeiCloudChangesInCoordinator:coordinator];
     }
@@ -92,6 +99,7 @@ static id iCloudSetupNotificationObserver = nil;
                                                                            [[NSManagedObjectContext MR_defaultContext] MR_observeiCloudChangesInCoordinator:coordinator];
                                                                        }];        
     }
+    MRLog(@"Set Default Context: %@", defaultManagedObjectContext_);
 }
 
 + (NSManagedObjectContext *) MR_rootSavingContext;
@@ -107,9 +115,10 @@ static id iCloudSetupNotificationObserver = nil;
     }
     
     rootSavingContext = context;
-    [context MR_obtainPermanentIDsBeforeSaving];
+//    [context MR_obtainPermanentIDsBeforeSaving];
     [rootSavingContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
-    [rootSavingContext MR_setContextWorkingName:@"rootSavingsContext"];
+    [rootSavingContext MR_setWorkingName:@"BACKGROUND SAVING (ROOT)"];
+    MRLog(@"Set Root Saving Context: %@", rootSavingContext);
 }
 
 + (void) MR_initializeDefaultContextWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
@@ -117,14 +126,12 @@ static id iCloudSetupNotificationObserver = nil;
     if (defaultManagedObjectContext_ == nil)
     {
         NSManagedObjectContext *rootContext = [self MR_contextWithStoreCoordinator:coordinator];
-        
         [self MR_setRootSavingContext:rootContext];
         
         NSManagedObjectContext *defaultContext = [self MR_newMainQueueContext];
-        [defaultContext MR_setContextWorkingName:@"defaultContext"];
-        [defaultContext setParentContext:rootSavingContext];
-
         [self MR_setDefaultContext:defaultContext];
+        
+        [defaultContext setParentContext:rootSavingContext];
     }
 }
 
@@ -154,13 +161,14 @@ static id iCloudSetupNotificationObserver = nil;
 {
     NSManagedObjectContext *context = [self MR_contextWithoutParent];
     [context setParentContext:parentContext];
-    [context MR_obtainPermanentIDsBeforeSaving];
+//    [context MR_obtainPermanentIDsBeforeSaving];
     return context;
 }
 
 + (NSManagedObjectContext *) MR_newMainQueueContext;
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    MRLog(@"Created Main Queue Context: %@", context);
     return context;    
 }
 
@@ -182,35 +190,39 @@ static id iCloudSetupNotificationObserver = nil;
 - (void) MR_obtainPermanentIDsBeforeSaving;
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(contextWillSave:)
+                                             selector:@selector(MR_contextWillSave:)
                                                  name:NSManagedObjectContextWillSaveNotification
                                                object:self];
 }
 
-- (void)contextWillSave:(NSNotification *)notification
+- (void) MR_contextWillSave:(NSNotification *)notification
 {
-    NSManagedObjectContext *context = (NSManagedObjectContext *)notification.object;
-    if (context.insertedObjects.count > 0) {
-        NSArray *insertedObjects = [[context insertedObjects] allObjects];
-        MRLog(@"Context %@ is about to save. Obtaining permanent IDs for new %lu inserted objects", [context MR_description], (unsigned long)[insertedObjects count]);
+    NSManagedObjectContext *context = [notification object];
+    NSSet *insertedObjects = [context insertedObjects];
+
+    if ([insertedObjects count])
+    {
+        MRLog(@"Context %@ is about to save. Obtaining permanent IDs for new %lu inserted objects", [context MR_workingName], (unsigned long)[insertedObjects count]);
         NSError *error = nil;
-        BOOL success = [context obtainPermanentIDsForObjects:insertedObjects error:&error];
-        if (!success && error) {
+        BOOL success = [context obtainPermanentIDsForObjects:[insertedObjects allObjects] error:&error];
+        if (!success)
+        {
             [MagicalRecord handleErrors:error];
         }
     }
 }
 
-- (void) MR_setContextWorkingName:(NSString *)workingName;
+- (void) MR_setWorkingName:(NSString *)workingName;
 {
-    [[self userInfo] setObject:workingName forKey:kNSManagedObjectContextWorkingName];
+    [[self userInfo] setObject:workingName forKey:kMagicalRecordNSManagedObjectContextWorkingName];
 }
 
-- (NSString *) MR_contextWorkingName;
+- (NSString *) MR_workingName;
 {
-    NSString *workingName = [[self userInfo] objectForKey:kNSManagedObjectContextWorkingName];
-    if (nil == workingName) {
-        workingName = @"UndefinedWorkingContext";
+    NSString *workingName = [[self userInfo] objectForKey:kMagicalRecordNSManagedObjectContextWorkingName];
+    if (nil == workingName)
+    {
+        workingName = @"UNNAMED";
     }
     return workingName;
 }
