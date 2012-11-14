@@ -632,7 +632,6 @@
 				C721C7E413D0C3A00097AB6F /* Mac App Unit Tests */,
 				C721C80213D0C3CD0097AB6F /* iOS App Unit Tests */,
 				C7C9A37013F43D3E002C5B0C /* Third Party */,
-				C721C7B313D0A3AF0097AB6F /* Frameworks */,
 				C721C7B113D0A3AF0097AB6F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -877,6 +876,7 @@
 		C7C9A37013F43D3E002C5B0C /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				C721C7B313D0A3AF0097AB6F /* Frameworks */,
 				4B7116C015F8EE4600B64426 /* expecta */,
 				C7C9A37113F43D93002C5B0C /* JSONKit.h */,
 				C7C9A37213F43D93002C5B0C /* JSONKit.m */,
