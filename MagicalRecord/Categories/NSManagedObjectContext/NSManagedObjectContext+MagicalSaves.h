@@ -18,6 +18,7 @@
 - (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion;
 
 - (void) MR_saveNestedContexts;
+- (void) MR_saveNestedContextsAndWait;
 - (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback;
 - (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion;
 
