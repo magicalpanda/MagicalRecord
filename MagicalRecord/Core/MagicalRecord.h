@@ -24,7 +24,12 @@
       // First, check if we can use Cocoalumberjack for logging
     #ifdef LOG_VERBOSE
         extern int ddLogLevel;
-        #define MRLog(...)  DDLogVerbose(__VA_ARGS__)
+        #ifdef MR_LOG_CONTEXT
+            // Log to CocoaLumberjack with custom context
+            #define MRLog(frmt, ...)  ASYNC_LOG_OBJC_MAYBE(ddLogLevel, LOG_FLAG_VERBOSE, MR_LOG_CONTEXT, frmt, ##__VA_ARGS__)
+        #else
+            #define MRLog(...)  DDLogVerbose(__VA_ARGS__)
+        #endif
     #else
         #define MRLog(...) NSLog(@"%s(%p) %@", __PRETTY_FUNCTION__, self, [NSString stringWithFormat:__VA_ARGS__])
     #endif
