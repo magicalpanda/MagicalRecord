@@ -43,7 +43,7 @@
     
     if ([localContext hasChanges]) 
     {
-        [localContext MR_saveWithErrorCallback:errorHandler];
+        [localContext MR_saveNestedContextsErrorHandler:errorHandler];
     }
     
     if (completion)
