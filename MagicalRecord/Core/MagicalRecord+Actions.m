@@ -39,17 +39,11 @@
     NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
 
-    block(localContext);
-    
-    if ([localContext hasChanges]) 
-    {
-        [localContext MR_saveNestedContextsErrorHandler:errorHandler];
-    }
-    
-    if (completion)
-    {
-        dispatch_async(dispatch_get_main_queue(), completion);
-    }
+    [localContext performBlockAndWait: ^{
+        block(localContext);
+
+        [localContext MR_saveNestedContextsErrorHandler:errorHandler completion:completion];
+    }];
 }
 
 + (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block
