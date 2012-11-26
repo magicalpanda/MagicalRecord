@@ -27,9 +27,9 @@
         MRLog(@"NO CHANGES IN ** %@ ** CONTEXT - NOT SAVING", [self MR_workingName]);
         return;
     }
-    
+
     MRLog(@"-> Saving %@", [self MR_description]);
-    
+
     __block NSError *error = nil;
 	__block BOOL saved = NO;
 	@try
@@ -61,6 +61,17 @@
 - (void) MR_saveNestedContexts;
 {
     [self MR_saveNestedContextsErrorHandler:nil];
+}
+
+- (void) MR_saveNestedContextsAndWait;
+{
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_group_enter(group);
+    [self MR_saveNestedContextsErrorHandler:nil completion:^{
+        dispatch_group_leave(group);
+    }];
+
+    dispatch_group_wait(group, DISPATCH_TIME_FOREVER);  // Block until the save is complete
 }
 
 - (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback;
@@ -105,7 +116,7 @@
     [self performBlock:^{
         // Save the context
         [self MR_saveWithErrorCallback:errorCallback];
-        
+
         // If we're the default context, save to disk too (the user expects it to persist)
         if (self == [[self class] MR_defaultContext])
         {

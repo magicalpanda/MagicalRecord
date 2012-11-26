@@ -138,6 +138,7 @@
 - (void) saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback;
 - (void) saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion;
 - (void) saveNestedContexts;
+- (void) saveNestedContextsAndWait;
 - (void) saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback;
 @end
 @interface NSManagedObjectContext (MagicalThreadingShortHand)
