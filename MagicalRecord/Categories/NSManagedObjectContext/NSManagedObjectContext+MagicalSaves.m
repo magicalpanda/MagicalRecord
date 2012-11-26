@@ -24,7 +24,7 @@
 {
     if (![self hasChanges])
     {
-        MRLog(@"NO CHANGES IN CONTEXT %@ - NOT SAVING", [self MR_description]);
+        MRLog(@"NO CHANGES IN ** %@ ** CONTEXT - NOT SAVING", [self MR_workingName]);
         return;
     }
     
@@ -72,16 +72,15 @@
 {
     [self performBlock:^{
         [self MR_saveWithErrorCallback:errorCallback];
-        if (self.parentContext) {
+        if ([self parentContext])
+        {
             [[self parentContext] performBlock:^{
                 [[self parentContext] MR_saveNestedContextsErrorHandler:errorCallback completion:completion];
             }];
-        } else {
-            if (completion) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    completion();
-                });
-            }
+        }
+        else if (completion)
+        {
+            dispatch_async(dispatch_get_main_queue(), completion);
         }
     }];
 }
