@@ -130,6 +130,7 @@
 + (NSManagedObjectContext *) defaultContext;
 + (void) cleanUp;
 - (NSString *) description;
+- (void) deleteObjectsInArray:(NSArray *)managedObjects;
 @end
 @interface NSManagedObjectContext (MagicalSavesShortHand)
 - (void) save;
