@@ -125,6 +125,7 @@
 - (NSString *) parentChain;
 - (void) setWorkingName:(NSString *)workingName;
 - (NSString *) workingName;
+- (void) MR_deleteObjects:(id <NSFastEnumeration>)managedObjects;
 @end
 @interface NSManagedObjectContext (MagicalSavesShortHand)
 - (void) saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;
