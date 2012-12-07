@@ -76,13 +76,13 @@
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
-+ (MR_nonnull NSFetchedResultsController *) fetchAllWithDelegate:(MR_nullable id<NSFetchedResultsControllerDelegate>)delegate;
++ (MR_nonnull NSFetchedResultsController *) fetchAllSortedBy:(MR_nullable NSString *)sortTerm ascending:(BOOL)ascending delegate:(MR_nullable id<NSFetchedResultsControllerDelegate>)delegate;
 
 #endif /* TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR */
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
-+ (MR_nonnull NSFetchedResultsController *) fetchAllWithDelegate:(MR_nullable id<NSFetchedResultsControllerDelegate>)delegate inContext:(MR_nonnull NSManagedObjectContext *)context;
++ (MR_nonnull NSFetchedResultsController *) fetchAllSortedBy:(MR_nullable NSString *)sortTerm ascending:(BOOL)ascending delegate:(MR_nullable id<NSFetchedResultsControllerDelegate>)delegate inContext:(MR_nonnull NSManagedObjectContext *)context;
 
 #endif /* TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR */
 

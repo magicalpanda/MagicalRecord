@@ -48,8 +48,8 @@
 
 + (MR_nonnull NSFetchedResultsController *) MR_fetchController:(MR_nonnull NSFetchRequest *)request delegate:(MR_nullable id<NSFetchedResultsControllerDelegate>)delegate useFileCache:(BOOL)useFileCache groupedBy:(MR_nullable NSString *)groupKeyPath inContext:(MR_nonnull NSManagedObjectContext *)context;
 
-+ (MR_nonnull NSFetchedResultsController *) MR_fetchAllWithDelegate:(MR_nullable id<NSFetchedResultsControllerDelegate>)delegate;
-+ (MR_nonnull NSFetchedResultsController *) MR_fetchAllWithDelegate:(MR_nullable id<NSFetchedResultsControllerDelegate>)delegate inContext:(MR_nonnull NSManagedObjectContext *)context;
++ (MR_nonnull NSFetchedResultsController *) MR_fetchAllSortedBy:(MR_nullable NSString *)sortTerm ascending:(BOOL)ascending delegate:(MR_nullable id<NSFetchedResultsControllerDelegate>)delegate;
++ (MR_nonnull NSFetchedResultsController *) MR_fetchAllSortedBy:(MR_nullable NSString *)sortTerm ascending:(BOOL)ascending delegate:(MR_nullable id<NSFetchedResultsControllerDelegate>)delegate inContext:(MR_nonnull NSManagedObjectContext *)context;
 
 + (MR_nonnull NSFetchedResultsController *) MR_fetchAllSortedBy:(MR_nullable NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(MR_nullable NSPredicate *)searchTerm groupBy:(MR_nullable NSString *)groupingKeyPath delegate:(MR_nullable id<NSFetchedResultsControllerDelegate>)delegate;
 + (MR_nonnull NSFetchedResultsController *) MR_fetchAllSortedBy:(MR_nullable NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(MR_nullable NSPredicate *)searchTerm groupBy:(MR_nullable NSString *)groupingKeyPath delegate:(MR_nullable id<NSFetchedResultsControllerDelegate>)delegate inContext:(MR_nonnull NSManagedObjectContext *)context;
