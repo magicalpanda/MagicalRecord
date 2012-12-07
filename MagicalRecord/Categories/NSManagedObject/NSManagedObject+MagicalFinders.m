@@ -231,14 +231,14 @@
     return controller;
 }
 
-+ (NSFetchedResultsController *) MR_fetchAllWithDelegate:(id<NSFetchedResultsControllerDelegate>)delegate;
++ (NSFetchedResultsController *) MR_fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)asending delegate:(id<NSFetchedResultsControllerDelegate>)delegate;
 {
-    return [self MR_fetchAllWithDelegate:delegate inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+    return [self MR_fetchAllSortedBy:sortTerm ascending:asending delegate:delegate inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
-+ (NSFetchedResultsController *) MR_fetchAllWithDelegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context;
++ (NSFetchedResultsController *) MR_fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)asending delegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context;
 {
-    NSFetchRequest *request = [self MR_requestAllInContext:context];
+    NSFetchRequest *request = [self MR_requestAllSortedBy:sortTerm ascending:asending inContext:context];
     NSFetchedResultsController *controller = [self MR_fetchController:request delegate:delegate useFileCache:NO groupedBy:nil inContext:context];
 
     [self MR_performFetch:controller];
