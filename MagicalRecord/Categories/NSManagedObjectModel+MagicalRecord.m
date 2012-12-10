@@ -60,4 +60,10 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 	return model;
 }
 
++ (NSManagedObjectModel *) MR_managedObjectModelAtURL:(NSURL *)modelURL;
+{
+    NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    return model;
+}
+
 @end

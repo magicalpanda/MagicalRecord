@@ -65,13 +65,19 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 - (NSPersistentStore *) MR_addSqliteStoreNamed:(id)storeFileName withOptions:(__autoreleasing NSDictionary *)options
 {
     NSURL *url = [storeFileName isKindOfClass:[NSURL class]] ? storeFileName : [NSPersistentStore MR_urlForStoreName:storeFileName];
+ 
+    return [self MR_addSqliteStoreAtURL:url withOptions:options];
+}
+
+- (NSPersistentStore *) MR_addSqliteStoreAtURL:(NSURL *)storeURL withOptions:(NSDictionary *__autoreleasing)options
+{
     NSError *error = nil;
     
-    [self MR_createPathToStoreFileIfNeccessary:url];
+    [self MR_createPathToStoreFileIfNeccessary:storeURL];
     
     NSPersistentStore *store = [self addPersistentStoreWithType:NSSQLiteStoreType
                                                   configuration:nil
-                                                            URL:url
+                                                            URL:storeURL
                                                         options:options
                                                           error:&error];
     
@@ -80,14 +86,14 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
         if ([[error domain] isEqualToString:NSCocoaErrorDomain] && [error code] == NSPersistentStoreIncompatibleVersionHashError)
         {
             // Could not open the database, so... kill it!
-            [[NSFileManager defaultManager] removeItemAtURL:url error:nil];
+            [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
 
-            MRLog(@"Removed incompatible model version: %@", [url lastPathComponent]);
+            MRLog(@"Removed incompatible model version: %@", [storeURL lastPathComponent]);
             
             // Try one more time to create the store
             store = [self addPersistentStoreWithType:NSSQLiteStoreType
                                        configuration:nil
-                                                 URL:url
+                                                 URL:storeURL
                                              options:options
                                                error:&error];
             if (store)
@@ -279,9 +285,23 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     return psc;
 }
 
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreAtURL:(NSURL *)storeURL withOptions:(NSDictionary *)options;
+{
+    NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
+    NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+    
+    [psc MR_addSqliteStoreAtURL:storeURL withOptions:options];
+    return psc;
+}
+
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreNamed:(NSString *)storeFileName
 {
 	return [self MR_coordinatorWithSqliteStoreNamed:storeFileName withOptions:nil];
+}
+
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreAtURL:(NSURL *)storeURL;
+{
+    return [self MR_coordinatorWithSqliteStoreAtURL:storeURL withOptions:nil];
 }
 
 @end
