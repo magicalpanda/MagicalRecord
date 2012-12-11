@@ -10,6 +10,7 @@
 
 @interface NSManagedObjectContext (MagicalSaves)
 
+- (void) MR_blockingSave;
 - (void) MR_save;
 - (void) MR_saveWithErrorCallback:(void(^)(NSError *))errorCallback;
 

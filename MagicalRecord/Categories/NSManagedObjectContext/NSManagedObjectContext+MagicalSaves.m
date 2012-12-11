@@ -20,6 +20,20 @@
 
 @implementation NSManagedObjectContext (MagicalSaves)
 
+- (void) MR_blockingSave;
+{
+    [self performBlockAndWait:^{
+        [self MR_saveWithErrorCallback:nil];
+    }];
+}
+
+- (void) MR_save;
+{
+    [self performBlock:^{
+        [self MR_saveWithErrorCallback:nil];
+    }];
+}
+
 - (void) MR_saveWithErrorCallback:(void(^)(NSError *))errorCallback;
 {
     if (![self hasChanges])
@@ -34,9 +48,7 @@
 	__block BOOL saved = NO;
 	@try
 	{
-        [self performBlockAndWait:^{
-            saved = [self save:&error];
-        }];
+        saved = [self save:&error];
 	}
 	@catch (NSException *exception)
 	{
@@ -83,11 +95,6 @@
             dispatch_async(dispatch_get_main_queue(), completion);
         }
     }];
-}
-
-- (void) MR_save;
-{
-    [self MR_saveWithErrorCallback:nil];
 }
 
 - (void) MR_saveInBackgroundCompletion:(void (^)(void))completion;
