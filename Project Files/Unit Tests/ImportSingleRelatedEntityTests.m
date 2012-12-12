@@ -30,14 +30,14 @@
     testMappedEntity.testMappedEntityIDValue = 42;
     testMappedEntity.sampleAttribute = @"This attribute created as part of the test case setup";
     
-    [context MR_save];
+    [context MR_saveSelfAndParentContextsAndWait];
 }
 
 - (void) setUp
 {
     [super setUp];
     self.singleTestEntity = [SingleRelatedEntity MR_importFromObject:self.testEntityData];
-    [[NSManagedObjectContext MR_defaultContext] MR_save];
+    [[NSManagedObjectContext MR_defaultContext] MR_saveSelfAndParentContextsAndWait];
 }
 
 - (void) testImportAnEntityRelatedToAbstractEntityViaToOneRelationshop
