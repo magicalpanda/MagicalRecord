@@ -8,17 +8,38 @@
 
 #import <CoreData/CoreData.h>
 
+typedef NS_OPTIONS(NSUInteger, MRSaveContextOptions) {
+    MRSaveParentContexts = 1,
+    MRSaveSynchronously = 2
+};
+
+typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
+
 @interface NSManagedObjectContext (MagicalSaves)
 
-- (void) MR_save;
-- (void) MR_saveWithErrorCallback:(void(^)(NSError *))errorCallback;
+// Asynchronous saving
+- (void) MR_saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;
+- (void) MR_saveSelfAndParentContextsWithCompletion:(MRSaveCompletionHandler)completion;
 
-- (void) MR_saveInBackgroundCompletion:(void (^)(void))completion;
-- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback;
-- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion;
+// Synchronous saving
+- (void) MR_saveOnlySelfAndWait;
+- (void) MR_saveSelfAndParentContextsAndWait;
 
-- (void) MR_saveNestedContexts;
-- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback;
-- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion;
+// Save with options
+- (void) MR_saveWithOptions:(MRSaveContextOptions)mask completion:(MRSaveCompletionHandler)completion;
+
+/* DEPRECATION NOTICE:
+ * The following methods are deprecated, but remain in place for backwards compatibility until the next major version (3.x)
+ */
+- (void) MR_save __attribute__((deprecated));
+- (void) MR_saveWithErrorCallback:(void(^)(NSError *))errorCallback __attribute__((deprecated));
+
+- (void) MR_saveInBackgroundCompletion:(void (^)(void))completion __attribute__((deprecated));
+- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback __attribute__((deprecated));
+- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion __attribute__((deprecated));
+
+- (void) MR_saveNestedContexts __attribute__((deprecated));
+- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback __attribute__((deprecated));
+- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion __attribute__((deprecated));
 
 @end
