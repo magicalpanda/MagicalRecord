@@ -31,15 +31,15 @@
     
     SingleEntityRelatedToMappedEntityUsingDefaults *entity = [SingleEntityRelatedToMappedEntityUsingDefaults createInContext:context];
     entity.singleEntityRelatedToMappedEntityUsingDefaultsIDValue = 24;
-    
-    [context MR_saveSelfAndParentContextsAndWait];
+
+    [context MR_saveToPersistentStoreAndWait];
 }
 
 - (void) testImportMappedEntityViaToOneRelationship
 {
     SingleEntityRelatedToMappedEntityUsingDefaults *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
-    
-    [[NSManagedObjectContext MR_defaultContext] MR_saveSelfAndParentContextsAndWait];
+
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 
     id testRelatedEntity = entity.mappedEntity;
     

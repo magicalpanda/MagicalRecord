@@ -23,8 +23,8 @@
     MappedEntity *testMappedEntity = [MappedEntity createInContext:context];
     testMappedEntity.testMappedEntityIDValue = 42;
     testMappedEntity.sampleAttribute = @"This attribute created as part of the test case setup";
-    
-    [context MR_saveSelfAndParentContextsAndWait];
+
+    [context MR_saveToPersistentStoreAndWait];
 }
 
 - (Class) testEntityClass
