@@ -35,8 +35,8 @@
 - (void) testImportMappedEntityRelatedViaToOneRelationship
 {
     SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
-    [[NSManagedObjectContext MR_defaultContext] MR_saveSelfAndParentContextsAndWait];
-    
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+
     id testRelatedEntity = entity.mappedEntity;
     
     //verify mapping in relationship description userinfo
@@ -72,8 +72,8 @@
 - (void) testImportMappedEntityUsingPrimaryRelationshipKey
 {
     SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
-    [[NSManagedObjectContext MR_defaultContext] MR_saveSelfAndParentContextsAndWait];
-    
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+
     id testRelatedEntity = entity.mappedEntity;
     
     //verify mapping in relationship description userinfo
