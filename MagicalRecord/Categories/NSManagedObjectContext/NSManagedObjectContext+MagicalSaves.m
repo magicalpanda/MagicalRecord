@@ -23,12 +23,12 @@
     [self MR_saveWithOptions:MRSaveSynchronously completion:nil];
 }
 
-- (void)MR_saveSelfAndParentContextsWithCompletion:(MRSaveCompletionHandler)completion;
+- (void) MR_saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion;
 {
     [self MR_saveWithOptions:MRSaveParentContexts completion:completion];
 }
 
-- (void)MR_saveSelfAndParentContextsAndWait;
+- (void) MR_saveToPersistentStoreAndWait;
 {
     [self MR_saveWithOptions:MRSaveParentContexts | MRSaveSynchronously completion:nil];
 }
@@ -97,12 +97,12 @@
 
 - (void)MR_saveNestedContexts;
 {
-    [self MR_saveSelfAndParentContextsWithCompletion:nil];
+    [self MR_saveToPersistentStoreWithCompletion:nil];
 }
 
 - (void)MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback;
 {
-    [self MR_saveSelfAndParentContextsWithCompletion:^(BOOL success, NSError *error) {
+    [self MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
         if (!success) {
             if (errorCallback) {
                 errorCallback(error);
@@ -113,7 +113,7 @@
 
 - (void)MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion;
 {
-    [self MR_saveSelfAndParentContextsWithCompletion:^(BOOL success, NSError *error) {
+    [self MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
         if (success) {
             if (completion) {
                 completion();
@@ -128,7 +128,7 @@
 
 - (void)MR_save;
 {
-    [self MR_saveSelfAndParentContextsAndWait];
+    [self MR_saveToPersistentStoreAndWait];
 }
 
 - (void)MR_saveWithErrorCallback:(void (^)(NSError *))errorCallback __attribute__((deprecated));

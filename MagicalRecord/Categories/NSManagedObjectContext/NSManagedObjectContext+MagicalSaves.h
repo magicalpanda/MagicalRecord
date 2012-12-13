@@ -19,11 +19,11 @@ typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
 
 // Asynchronous saving
 - (void) MR_saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;
-- (void) MR_saveSelfAndParentContextsWithCompletion:(MRSaveCompletionHandler)completion;
+- (void) MR_saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion;
 
 // Synchronous saving
 - (void) MR_saveOnlySelfAndWait;
-- (void) MR_saveSelfAndParentContextsAndWait;
+- (void) MR_saveToPersistentStoreAndWait;
 
 // Save with options
 - (void) MR_saveWithOptions:(MRSaveContextOptions)mask completion:(MRSaveCompletionHandler)completion;
