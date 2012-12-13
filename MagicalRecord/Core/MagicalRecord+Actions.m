@@ -28,7 +28,7 @@
             block(localContext);
         }
 
-        [localContext MR_saveSelfAndParentContextsWithCompletion:completion];
+        [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:completion];
     }];
 }
 
@@ -41,7 +41,7 @@
             block(localContext);
         }
 
-        [localContext MR_saveSelfAndParentContextsWithCompletion:completion];
+        [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:completion];
     }];
 }
 
@@ -58,7 +58,7 @@
             block(localContext);
         }
 
-        [localContext MR_saveSelfAndParentContextsAndWait];
+        [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:nil];
     }];
 }
 
@@ -71,7 +71,7 @@
             block(localContext);
         }
 
-        [localContext MR_saveSelfAndParentContextsAndWait];
+        [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:nil];
     }];
 }
 
@@ -94,7 +94,7 @@
             block(localContext);
         }
 
-        [localContext MR_saveSelfAndParentContextsAndWait];
+        [localContext MR_saveToPersistentStoreAndWait];
 
         if (completion)
         {
@@ -112,18 +112,15 @@
             block(localContext);
         }
 
-        [localContext MR_saveSelfAndParentContextsWithCompletion:^(BOOL success, NSError *error) {
+        [localContext MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
 
             if (success) {
-                if (completion)
-                {
+                if (completion) {
                     completion();
                 }
             }
-            else
-            {
-                if (errorHandler)
-                {
+            else {
+                if (errorHandler) {
                     errorHandler(error);
                 }
             }
