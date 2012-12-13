@@ -26,15 +26,55 @@
 
 - (void) tearDown
 {
+    NSLog(@"Tearing down stack");
     [MagicalRecord cleanUp];
 }
+
+- (void)testSimpleSynchronousSaveToPersistentStoreActuallySaves
+{
+    NSManagedObjectContext *managedObjectContext = [NSManagedObjectContext MR_contextWithParent:[NSManagedObjectContext MR_defaultContext]];
+    NSManagedObject        *inserted             = [SingleEntityWithNoRelationships MR_createInContext:managedObjectContext];
+
+    expect([inserted hasChanges]).to.beTruthy();
+    [managedObjectContext obtainPermanentIDsForObjects:@[inserted] error:nil];
+    NSManagedObjectID *objectId = inserted.objectID;
+
+    [managedObjectContext MR_saveToPersistentStoreAndWait];
+
+    NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectWithID:objectId];
+    expect(fetchedObject).toNot.beNil();
+    expect([fetchedObject hasChanges]).to.beFalsy();
+}
+
+- (void)testSimpleAsynchronousSaveToPersistentStoreActuallySaves
+{
+    __block NSManagedObjectID *objectId = nil;
+    NSManagedObjectContext *managedObjectContext = [NSManagedObjectContext MR_contextWithParent:[NSManagedObjectContext MR_defaultContext]];
+    NSManagedObject        *inserted             = [SingleEntityWithNoRelationships MR_createInContext:managedObjectContext];
+
+    expect([inserted hasChanges]).to.beTruthy();
+
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_group_enter(group);
+
+    [managedObjectContext MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        [managedObjectContext obtainPermanentIDsForObjects:@[inserted] error:nil];
+        objectId = inserted.objectID;
+        dispatch_group_leave(group);
+    }];
+
+    dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+    NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectWithID:objectId];
+    expect(fetchedObject).toNot.beNil();
+    expect([fetchedObject hasChanges]).to.beFalsy();
+}
+
 
 - (void)testAsynchronousSaveCallsCompletionHandler
 {
     __block BOOL completionHandlerCalled = NO;
 
     dispatch_group_t group = dispatch_group_create();
-
     dispatch_group_enter(group);
 
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
@@ -101,7 +141,6 @@
     __block NSManagedObject   *fetchedObject;
 
     dispatch_group_t group = dispatch_group_create();
-
     dispatch_group_enter(group);
 
     [MagicalRecord saveUsingCurrentContextWithBlock:^(NSManagedObjectContext *localContext) {
@@ -115,6 +154,7 @@
     }];
 
     dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+    expect(objectId).toNot.beNil();
     fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectWithID:objectId];
     expect(fetchedObject).toNot.beNil();
     expect([fetchedObject hasChanges]).to.beFalsy();
@@ -123,37 +163,36 @@
 - (void)testCurrentThreadContextSynchronousSavesActuallySave
 {
     __block NSManagedObjectID *objectId;
-    __block NSManagedObject   *fetchedObject;
 
     [MagicalRecord saveUsingCurrentContextWithBlockAndWait:^(NSManagedObjectContext *localContext) {
         NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
         expect([inserted hasChanges]).to.beTruthy();
         [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
-        objectId = inserted.objectID;
+        objectId = [inserted.objectID copy];
     }];
 
-    fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectWithID:objectId];
+    NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] existingObjectWithID:objectId error:nil];
     expect(fetchedObject).toNot.beNil();
     expect([fetchedObject hasChanges]).to.beFalsy();
 }
 
 #pragma mark - Test deprecated methods still work as expected
 
-- (void)testDeprecatedSimpleSynchronousSaveActuallySaves
-{
-    NSManagedObjectContext *managedObjectContext = [NSManagedObjectContext MR_defaultContext];
-    NSManagedObject        *inserted             = [SingleEntityWithNoRelationships MR_createEntity];
-
-    expect([inserted hasChanges]).to.beTruthy();
-    [managedObjectContext obtainPermanentIDsForObjects:@[inserted] error:nil];
-    NSManagedObjectID *objectId = inserted.objectID;
-
-    [managedObjectContext MR_save];
-
-    NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectWithID:objectId];
-    expect(fetchedObject).toNot.beNil();
-    expect([fetchedObject hasChanges]).to.beFalsy();
-}
+//- (void)testDeprecatedSimpleSynchronousSaveActuallySaves
+//{
+//    NSManagedObjectContext *managedObjectContext = [NSManagedObjectContext MR_defaultContext];
+//    NSManagedObject        *inserted             = [SingleEntityWithNoRelationships MR_createEntity];
+//
+//    expect([inserted hasChanges]).to.beTruthy();
+//    [managedObjectContext obtainPermanentIDsForObjects:@[inserted] error:nil];
+//    NSManagedObjectID *objectId = inserted.objectID;
+//
+//    [managedObjectContext MR_save];
+//
+//    NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectWithID:objectId];
+//    expect(fetchedObject).toNot.beNil();
+//    expect([fetchedObject hasChanges]).to.beFalsy();
+//}
 
 - (void)testDeprecatedBackgroundSaveCallsCompletionHandler
 {
