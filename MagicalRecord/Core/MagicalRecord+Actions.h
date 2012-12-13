@@ -23,8 +23,8 @@
 /*
  If you want to reuse the context on the current thread, use these methods.
  */
-+ (void) saveUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *))block completion:(MRSaveCompletionHandler)completion;
-+ (void) saveUsingCurrentContextWithBlockAndWait:(void (^)(NSManagedObjectContext *))block;
++ (void) saveUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
++ (void) saveUsingCurrentContextWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block;
 
 
 /* DEPRECATION NOTICE:
@@ -43,6 +43,6 @@
 /*
  If you want to reuse the context on the current thread, use this method.
  */
-+ (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *))errorHandler __attribute__((deprecated));
++ (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *))errorHandler __attribute__((deprecated));
 
 @end
