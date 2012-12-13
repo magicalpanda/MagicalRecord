@@ -40,6 +40,12 @@
 
     if (![self hasChanges]) {
         MRLog(@"NO CHANGES IN ** %@ ** CONTEXT - NOT SAVING", [self MR_workingName]);
+
+        if (completion)
+        {
+            completion(NO, nil);
+        }
+        
         return;
     }
 
