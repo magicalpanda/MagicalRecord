@@ -4,4 +4,8 @@
 
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
+    #import <CoreData/CoreData.h>
+
+    #define MR_SHORTHAND
+    #import "CoreData+MagicalRecord.h"
 #endif
