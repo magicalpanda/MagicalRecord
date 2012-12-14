@@ -2064,6 +2064,7 @@
 				90DD2031167AA4350033BA25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C721C7A513D0A3750097AB6F /* Build configuration list for PBXProject "Magical Record" */ = {
 			isa = XCConfigurationList;
