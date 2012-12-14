@@ -161,6 +161,29 @@ describe(@"MagicalRecord", ^{
             });
         });
 
+        context(@"save action", ^{
+            it(@"should save", ^{
+                __block NSManagedObjectID *objectId;
+
+                [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+                    NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
+
+                    [[@([inserted hasChanges]) should] beTrue];
+
+                    [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
+                    objectId = [inserted objectID];
+                }];
+
+                [[objectId should] beNonNil];
+
+                NSManagedObject   *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectWithID:objectId];
+                
+                [[objectId should] beNonNil];
+                [[fetchedObject should] beNonNil];
+                [[@([fetchedObject hasChanges]) should] beFalse];
+            });
+        });
+
         context(@"background save action", ^{
             it(@"should call completion block", ^{
                 __block BOOL completionBlockCalled = NO;
@@ -176,7 +199,6 @@ describe(@"MagicalRecord", ^{
             });
 
             it(@"should save", ^{
-                __block BOOL               saveSuccessState = NO;
                 __block NSManagedObjectID *objectId;
                 __block NSManagedObject   *fetchedObject;
 
@@ -197,8 +219,9 @@ describe(@"MagicalRecord", ^{
                 [[expectFutureValue(fetchedObject) shouldEventually] beNonNil];
                 [[expectFutureValue(@([fetchedObject hasChanges])) shouldEventually] beFalse];
             });
-
         });
+
+        
     });
 });
 
