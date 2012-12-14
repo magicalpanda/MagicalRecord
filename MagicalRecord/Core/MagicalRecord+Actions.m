@@ -32,7 +32,7 @@
     }];
 }
 
-+ (void) saveUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
++ (void) saveUsingCurrentThreadContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
 {
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
 
@@ -62,7 +62,7 @@
     }];
 }
 
-+ (void) saveUsingCurrentContextWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block;
++ (void) saveUsingCurrentThreadContextWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block;
 {
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
 

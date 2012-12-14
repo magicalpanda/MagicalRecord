@@ -23,8 +23,8 @@
 /*
  If you want to reuse the context on the current thread, use these methods.
  */
-+ (void) saveUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
-+ (void) saveUsingCurrentContextWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block;
++ (void) saveUsingCurrentThreadContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
++ (void) saveUsingCurrentThreadContextWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block;
 
 
 /* DEPRECATION NOTICE:
