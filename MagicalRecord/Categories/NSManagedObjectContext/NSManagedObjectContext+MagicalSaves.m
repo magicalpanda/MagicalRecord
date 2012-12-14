@@ -83,6 +83,7 @@
                 }
                 // If we are not the default context (And therefore need to save the root context, do the completion action if one was specified
                 else {
+                    MRLog(@"→ Finished saving: %@", [self MR_description]);
                     if (completion) {
                         completion(saved, error);
                     }
