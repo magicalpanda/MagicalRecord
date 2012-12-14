@@ -50,6 +50,8 @@
     }
 
     MRLog(@"→ Saving %@", [self MR_description]);
+    MRLog(@"→ Save Parents? %@", @(saveParentContexts));
+    MRLog(@"→ Save Synchronously? %@", @(syncSave));
 
     id saveBlock = ^{
         NSError *error = nil;
@@ -102,46 +104,17 @@
 #pragma mark - Deprecated methods
 // These methods will be removed in MagicalRecord 3.0
 
-- (void)MR_saveNestedContexts;
-{
-    [self MR_saveToPersistentStoreWithCompletion:nil];
-}
-
-- (void)MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback;
-{
-    [self MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (!success) {
-            if (errorCallback) {
-                errorCallback(error);
-            }
-        }
-    }];
-}
-
-- (void)MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion;
-{
-    [self MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (success) {
-            if (completion) {
-                completion();
-            }
-        } else {
-            if (errorCallback) {
-                errorCallback(error);
-            }
-        }
-    }];
-}
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 
 - (void)MR_save;
 {
     [self MR_saveToPersistentStoreAndWait];
 }
 
-- (void)MR_saveWithErrorCallback:(void (^)(NSError *))errorCallback __attribute__((deprecated));
-
+- (void)MR_saveWithErrorCallback:(void (^)(NSError *error))errorCallback;
 {
-    [self MR_saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
+    [self MR_saveWithOptions:MRSaveSynchronously|MRSaveParentContexts completion:^(BOOL success, NSError *error) {
         if (!success) {
             if (errorCallback) {
                 errorCallback(error);
@@ -161,7 +134,7 @@
     }];
 }
 
-- (void)MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback;
+- (void)MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback;
 {
     [self MR_saveOnlySelfWithCompletion:^(BOOL success, NSError *error) {
         if (!success) {
@@ -172,7 +145,7 @@
     }];
 }
 
-- (void)MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion;
+- (void)MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion;
 {
     [self MR_saveOnlySelfWithCompletion:^(BOOL success, NSError *error) {
         if (success) {
@@ -186,5 +159,38 @@
         }
     }];
 }
+
+- (void)MR_saveNestedContexts;
+{
+    [self MR_saveToPersistentStoreWithCompletion:nil];
+}
+
+- (void)MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback;
+{
+    [self MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        if (!success) {
+            if (errorCallback) {
+                errorCallback(error);
+            }
+        }
+    }];
+}
+
+- (void)MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion;
+{
+    [self MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        if (success) {
+            if (completion) {
+                completion();
+            }
+        } else {
+            if (errorCallback) {
+                errorCallback(error);
+            }
+        }
+    }];
+}
+
+#pragma clang diagnostic pop // ignored "-Wdeprecated-implementations"
 
 @end

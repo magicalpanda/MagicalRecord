@@ -78,6 +78,9 @@
 
 #pragma mark - Deprecated methods
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
+
 + (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block
 {
     [[self class] saveWithBlock:block completion:nil];
@@ -103,7 +106,7 @@
     }];
 }
 
-+ (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *))errorHandler;
++ (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *error))errorHandler;
 {
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
 
@@ -113,7 +116,6 @@
         }
 
         [localContext MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-
             if (success) {
                 if (completion) {
                     completion();
@@ -127,5 +129,7 @@
         }];
     }];
 }
+
+#pragma clang diagnostic pop // ignored "-Wdeprecated-implementations"
 
 @end
