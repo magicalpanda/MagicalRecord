@@ -78,6 +78,9 @@
 
 #pragma mark - Deprecated methods
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
+
 + (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block
 {
     [[self class] saveWithBlock:block completion:nil];
@@ -126,5 +129,7 @@
         }];
     }];
 }
+
+#pragma clang diagnostic pop // ignored "-Wdeprecated-implementations"
 
 @end

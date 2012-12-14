@@ -32,14 +32,14 @@ typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
  * The following methods are deprecated, but remain in place for backwards compatibility until the next major version (3.x)
  */
 - (void) MR_save __attribute__((deprecated));
-- (void) MR_saveWithErrorCallback:(void(^)(NSError *))errorCallback __attribute__((deprecated));
+- (void) MR_saveWithErrorCallback:(void(^)(NSError *error))errorCallback __attribute__((deprecated));
 
 - (void) MR_saveInBackgroundCompletion:(void (^)(void))completion __attribute__((deprecated));
-- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback __attribute__((deprecated));
-- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion __attribute__((deprecated));
+- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback __attribute__((deprecated));
+- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion __attribute__((deprecated));
 
 - (void) MR_saveNestedContexts __attribute__((deprecated));
-- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback __attribute__((deprecated));
-- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion __attribute__((deprecated));
+- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback __attribute__((deprecated));
+- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion __attribute__((deprecated));
 
 @end
