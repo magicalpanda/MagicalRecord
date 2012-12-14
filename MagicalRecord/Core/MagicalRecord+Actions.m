@@ -103,7 +103,7 @@
     }];
 }
 
-+ (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *))errorHandler;
++ (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *error))errorHandler;
 {
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
 
@@ -113,7 +113,6 @@
         }
 
         [localContext MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-
             if (success) {
                 if (completion) {
                     completion();
