@@ -61,8 +61,6 @@
 		4B71173015F8EE4600B64426 /* EXPMatchers+raise.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116F815F8EE4600B64426 /* EXPMatchers+raise.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71173115F8EE4600B64426 /* NSValue+Expecta.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116FC15F8EE4600B64426 /* NSValue+Expecta.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71173215F8EE4600B64426 /* NSValue+Expecta.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116FC15F8EE4600B64426 /* NSValue+Expecta.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71173315F9149900B64426 /* SaveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116BC15F8ED5A00B64426 /* SaveTests.m */; };
-		4B71173415F914A400B64426 /* SaveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116BC15F8ED5A00B64426 /* SaveTests.m */; };
 		4B93EA49160ECF1D00FB5676 /* TestModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4B93EA47160ECF1D00FB5676 /* TestModel.xcdatamodeld */; };
 		4B93EA4A160ECF1D00FB5676 /* TestModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4B93EA47160ECF1D00FB5676 /* TestModel.xcdatamodeld */; };
 		900E1CC11676E246005FFF1C /* GHUnit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = C7D2DC22155AFDF500B3A468 /* GHUnit.framework */; };
@@ -379,8 +377,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4B7116BB15F8ED5A00B64426 /* SaveTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SaveTests.h; path = "Unit Tests/SaveTests.h"; sourceTree = "<group>"; };
-		4B7116BC15F8ED5A00B64426 /* SaveTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SaveTests.m; path = "Unit Tests/SaveTests.m"; sourceTree = "<group>"; };
 		4B7116C115F8EE4600B64426 /* EXPBackwardCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXPBackwardCompatibility.h; sourceTree = "<group>"; };
 		4B7116C215F8EE4600B64426 /* EXPBackwardCompatibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXPBackwardCompatibility.m; sourceTree = "<group>"; };
 		4B7116C315F8EE4600B64426 /* EXPBlockDefinedMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXPBlockDefinedMatcher.h; sourceTree = "<group>"; };
@@ -1161,8 +1157,6 @@
 				C70B6E7913D0F68400709450 /* NSManagedObjectContextHelperTests.m */,
 				C70B6E7B13D0F69A00709450 /* NSManagedObjectHelperTests.h */,
 				C70B6E7C13D0F69A00709450 /* NSManagedObjectHelperTests.m */,
-				4B7116BB15F8ED5A00B64426 /* SaveTests.h */,
-				4B7116BC15F8ED5A00B64426 /* SaveTests.m */,
 			);
 			name = "Core Tests";
 			sourceTree = "<group>";
@@ -1582,7 +1576,6 @@
 				4B71172D15F8EE4600B64426 /* EXPMatchers+haveCountOf.m in Sources */,
 				4B71172F15F8EE4600B64426 /* EXPMatchers+raise.m in Sources */,
 				4B71173115F8EE4600B64426 /* NSValue+Expecta.m in Sources */,
-				4B71173415F914A400B64426 /* SaveTests.m in Sources */,
 				4B93EA49160ECF1D00FB5676 /* TestModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1684,7 +1677,6 @@
 				4B71172E15F8EE4600B64426 /* EXPMatchers+haveCountOf.m in Sources */,
 				4B71173015F8EE4600B64426 /* EXPMatchers+raise.m in Sources */,
 				4B71173215F8EE4600B64426 /* NSValue+Expecta.m in Sources */,
-				4B71173315F9149900B64426 /* SaveTests.m in Sources */,
 				4B93EA4A160ECF1D00FB5676 /* TestModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
