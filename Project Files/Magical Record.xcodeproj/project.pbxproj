@@ -1172,6 +1172,7 @@
 				90DD2018167AA4350033BA25 /* Sources */,
 				90DD2019167AA4350033BA25 /* Frameworks */,
 				90DD201A167AA4350033BA25 /* Resources */,
+				9099A2C9167B5A7E00806DED /* Quit iOS Simulator */,
 				90DD201B167AA4350033BA25 /* Run Unit Tests */,
 			);
 			buildRules = (
@@ -1349,6 +1350,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		9099A2C9167B5A7E00806DED /* Quit iOS Simulator */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Quit iOS Simulator";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -n \"$RUN_UNIT_TESTS\" ]; then\nosascript -e 'tell app \"iPhone Simulator\" to quit'\nfi";
+		};
 		90DD201B167AA4350033BA25 /* Run Unit Tests */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1360,8 +1375,8 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+			shellPath = /usr/bin/ruby;
+			shellScript = "# Run the unit tests in this test bundle.\n\n# Use ios-sim to trigger the unit test\n# Reference: http://stackoverflow.com/questions/5403991/xcode-4-run-tests-from-the-command-line-xcodebuild\n\nif ENV[\"RUN_UNIT_TESTS\"]\nlauncher_path = \"/usr/local/bin/ios-sim\"\ntest_bundle_path = File.join(ENV['BUILT_PRODUCTS_DIR'], \"#{ENV['PRODUCT_NAME']}.#{ENV['WRAPPER_EXTENSION']}\")\n\nenvironment = {\n    'DYLD_INSERT_LIBRARIES' => \"/../../Library/PrivateFrameworks/IDEBundleInjection.framework/IDEBundleInjection\",\n    'XCInjectBundle' => test_bundle_path,\n    'XCInjectBundleInto' => ENV[\"TEST_HOST\"]\n}\n\nenvironment_args = environment.collect { |key, value| \"--setenv #{key}=\\\"#{value}\\\"\"}.join(\" \")\n\napp_test_host = File.dirname(ENV[\"TEST_HOST\"])\n\ncmd = \"#{launcher_path} launch \\\"#{app_test_host}\\\" #{environment_args} --args -SenTest All #{test_bundle_path}\"\ncmd.gsub! \"iphoneos\", \"iphonesimulator\"\nsystem(cmd)\nend";
 		};
 		90DD2091167AA7700033BA25 /* Update Generated Core Data Entities */ = {
 			isa = PBXShellScriptBuildPhase;
