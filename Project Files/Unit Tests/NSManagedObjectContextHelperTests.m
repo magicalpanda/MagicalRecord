@@ -40,7 +40,7 @@
     NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
     SingleEntityWithNoRelationships *entity = [SingleEntityWithNoRelationships MR_createInContext:context];
     assertThatBool([[entity objectID] isTemporaryID], equalToBool(YES));
-    [context MR_save];
+    [context MR_saveOnlySelfAndWait];
     assertThatBool([[entity objectID] isTemporaryID], equalToBool(NO));
 }
 
