@@ -26,19 +26,26 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
 {
     __block NSArray *results = nil;
-    [context performBlockAndWait:^{
+    void (^requestBlock)(void) = ^{
 
         NSError *error = nil;
-        
         results = [context executeFetchRequest:request error:&error];
-        
-        if (results == nil) 
+
+        if (results == nil)
         {
             [MagicalRecord handleErrors:error];
-        }
+        }  
+    };
 
-    }];
-	return results;	
+    if ([context concurrencyType] == NSConfinementConcurrencyType)
+    {
+        requestBlock();
+    }
+    else
+    {
+        [context performBlockAndWait:requestBlock];
+    }
+	return results;
 }
 
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request
@@ -217,6 +224,20 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 {
     [self MR_truncateAllInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
     return YES;
+}
+
+- (void) MR_obtainPermanentObjectID;
+{
+    if ([[self objectID] isTemporaryID])
+    {
+        NSError *error = nil;
+
+        BOOL success = [[self managedObjectContext] obtainPermanentIDsForObjects:[NSArray arrayWithObject:self] error:&error];
+        if (!success)
+        {
+            [MagicalRecord handleErrors:error];
+        }
+    }
 }
 
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext

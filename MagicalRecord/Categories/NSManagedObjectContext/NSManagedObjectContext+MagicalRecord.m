@@ -84,7 +84,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     defaultManagedObjectContext_ = moc;
     [defaultManagedObjectContext_ MR_setWorkingName:@"DEFAULT"];
     
-    [moc MR_obtainPermanentIDsBeforeSaving];
+//    [moc MR_obtainPermanentIDsBeforeSaving];
     if ([MagicalRecord isICloudEnabled])
     {
         [defaultManagedObjectContext_ MR_observeiCloudChangesInCoordinator:coordinator];
@@ -115,7 +115,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     }
     
     rootSavingContext = context;
-    [context MR_obtainPermanentIDsBeforeSaving];
+//    [context MR_obtainPermanentIDsBeforeSaving];
     [rootSavingContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
     [rootSavingContext MR_setWorkingName:@"BACKGROUND SAVING (ROOT)"];
     MRLog(@"Set Root Saving Context: %@", rootSavingContext);
@@ -161,7 +161,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
 {
     NSManagedObjectContext *context = [self MR_contextWithoutParent];
     [context setParentContext:parentContext];
-    [context MR_obtainPermanentIDsBeforeSaving];
+//    [context MR_obtainPermanentIDsBeforeSaving];
     return context;
 }
 
