@@ -99,7 +99,7 @@ Follow [@MagicalRecord](http://twitter.com/magicalrecord) on twitter to stay up 
 
 ## Nested Contexts
 
-New in Core Data is support for related contexts. This is a super neat, and super fast feature. However, writing a wrapper that supports both is, frankly, more work that it's worth. However, the 1.8.3 version will be the last version that has dual support, and going forward, MagicalRecord will only work with the version of Core Data that has supports nested managed object contexts.
+New in Core Data is support for related contexts. This is a super neat, and super fast feature. However, writing a wrapper that supports both is, frankly, more work that it's worth. However, the 1.8.3 version will be the last version that has dual support, and going forward, MagicalRecord will only work with the version of Core Data that supports nested managed object contexts.
 
 MagicalRecord provides a background saving queue so that saving all data is performed off the main thread, in the background. This means that it may be necessary to use *MR_saveNestedContexts* rather than the typical *MR_save* method in order to persist your changes all the way to your persistent store;
 
@@ -151,7 +151,7 @@ When using Core Data, you will deal with two types of objects the most: *NSManag
 
     [NSManagedObjectContext MR_defaultContext];
 
-This context will be used if a find or request method (described below) is not specifying a specific context using the **inContext:** method overload.
+This context will be used if a find or request method (described below) does not specify a specific context using the **inContext:** method overload.
 
 If you need to create a new Managed Object Context for use in other threads, based on the default persistent store that was creating using one of the setup methods, use:
 
@@ -246,7 +246,7 @@ There are also counterpart methods which return NSUInteger rather than NSNumbers
     
 #### Finding from a different context
 
-All find, fetch and request methods have an inContext: method parameter
+All find, fetch, and request methods have an inContext: method parameter
 
 	NSManagedObjectContext *someOtherContext = ...;
 
