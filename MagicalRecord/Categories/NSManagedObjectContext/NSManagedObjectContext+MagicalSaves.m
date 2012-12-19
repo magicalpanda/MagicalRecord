@@ -53,7 +53,7 @@
     MRLog(@"→ Save Parents? %@", @(saveParentContexts));
     MRLog(@"→ Save Synchronously? %@", @(syncSave));
 
-    id saveBlock = ^{
+    void (^saveBlock)(void) = ^{
         NSError *error = nil;
         BOOL     saved = NO;
 
@@ -94,9 +94,16 @@
         }
     };
 
-    if (YES == syncSave) {
+    if ([self concurrencyType] == NSConfinementConcurrencyType)
+    {
+        saveBlock();
+    }
+    else if (YES == syncSave)
+    {
         [self performBlockAndWait:saveBlock];
-    } else {
+    }
+    else
+    {
         [self performBlock:saveBlock];
     }
 }
