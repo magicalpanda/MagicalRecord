@@ -15,6 +15,7 @@
 
 + (void) MR_setDefaultManagedObjectModel:(NSManagedObjectModel *)newDefaultModel;
 
++ (NSManagedObjectModel *) MR_managedObjectModelAtURL:(NSURL *)url;
 + (NSManagedObjectModel *) MR_mergedObjectModelFromMainBundle;
 + (NSManagedObjectModel *) MR_newManagedObjectModelNamed:(NSString *)modelFileName NS_RETURNS_RETAINED;
 + (NSManagedObjectModel *) MR_managedObjectModelNamed:(NSString *)modelFileName;

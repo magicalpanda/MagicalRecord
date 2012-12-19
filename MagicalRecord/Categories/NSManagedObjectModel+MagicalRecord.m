@@ -27,6 +27,11 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 	defaultManagedObjectModel_ = newDefaultModel;
 }
 
++ (NSManagedObjectModel *) MR_managedObjectModelAtURL:(NSURL *)url;
+{
+    return [[NSManagedObjectModel alloc] initWithContentsOfURL:url];
+}
+
 + (NSManagedObjectModel *) MR_mergedObjectModelFromMainBundle;
 {
     return [self mergedModelFromBundles:nil];
