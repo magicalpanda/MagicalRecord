@@ -196,7 +196,7 @@ There are also counterpart methods which return NSUInteger rather than NSNumbers
 
 #### Aggregate Operations
 
-    NSPredicate *prediate = [NSPredicate predicateWithFormat:@"diaryEntry.date == %@", today];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"diaryEntry.date == %@", today];
     int totalFat = [[CTFoodDiaryEntry MR_aggregateOperation:@"sum:" onAttribute:@"fatColories" withPredicate:predicate] intValue];
     int fattest  = [[CTFoodDiaryEntry MR_aggregateOperation:@"max:" onAttribute:@"fatColories" withPredicate:predicate] intValue];
     
