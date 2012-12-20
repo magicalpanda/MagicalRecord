@@ -36,4 +36,6 @@ extern NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification;
 - (void) MR_addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent;
 - (void) MR_addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent completion:(void(^)(void))completionBlock;
 
++ (void) MR_createPathToStoreFileIfNeccessary:(NSURL *)urlForStore;
+
 @end

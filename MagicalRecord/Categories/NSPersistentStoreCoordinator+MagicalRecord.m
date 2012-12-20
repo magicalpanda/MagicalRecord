@@ -48,7 +48,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     }
 }
 
-- (void) MR_createPathToStoreFileIfNeccessary:(NSURL *)urlForStore
++ (void) MR_createPathToStoreFileIfNeccessary:(NSURL *)urlForStore
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *pathToStore = [urlForStore URLByDeletingLastPathComponent];
@@ -62,7 +62,6 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     }
 }
 
-
 - (NSPersistentStore *) MR_addSqliteStoreNamed:(id)storeFileName withOptions:(__autoreleasing NSDictionary *)options;
 {
     NSURL *url = [storeFileName isKindOfClass:[NSURL class]] ? storeFileName : [NSPersistentStore MR_urlForStoreName:storeFileName];
@@ -71,7 +70,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 
 - (NSPersistentStore *) MR_addSqliteStoreAtURL:(NSURL *)url withOptions:(NSDictionary *__autoreleasing)options;
 {
-    [self MR_createPathToStoreFileIfNeccessary:url];
+    [[self class] MR_createPathToStoreFileIfNeccessary:url];
     NSError *error = nil;
     NSPersistentStore *store = [self addPersistentStoreWithType:NSSQLiteStoreType
                                                   configuration:nil
