@@ -35,6 +35,11 @@
 + (id) MR_findFirstOrderedByAttribute:(NSString *)attribute ascending:(BOOL)ascending;
 + (id) MR_findFirstOrderedByAttribute:(NSString *)attribute ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
 
++ (id) MR_findLargestValueForAttribute:(NSString *)attribute;
++ (id) MR_findLargestValueForAttribute:(NSString *)attribute inContext:(NSManagedObjectContext *)context;
++ (id) MR_findSmallestValueForAttribute:(NSString *)attribute;
++ (id) MR_findSmallestValueForAttribute:(NSString *)attribute inContext:(NSManagedObjectContext *)context;
+
 + (NSArray *) MR_findByAttribute:(NSString *)attribute withValue:(id)searchValue;
 + (NSArray *) MR_findByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context;
 + (NSArray *) MR_findByAttribute:(NSString *)attribute withValue:(id)searchValue andOrderBy:(NSString *)sortTerm ascending:(BOOL)ascending;

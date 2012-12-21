@@ -38,7 +38,8 @@
     BOOL syncSave           = ((mask & MRSaveSynchronously) == MRSaveSynchronously);
     BOOL saveParentContexts = ((mask & MRSaveParentContexts) == MRSaveParentContexts);
 
-    if (![self hasChanges]) {
+    if (![self hasChanges])
+    {
         MRLog(@"NO CHANGES IN ** %@ ** CONTEXT - NOT SAVING", [self MR_workingName]);
 
         if (completion)
@@ -65,28 +66,35 @@
         {
             MRLog(@"Unable to perform save: %@", (id)[exception userInfo] ? : (id)[exception reason]);
         }
-
         @finally
         {
-            if (!saved) {
+            if (!saved)
+            {
                 [MagicalRecord handleErrors:error];
 
-                if (completion) {
+                if (completion)
+                {
                     completion(saved, error);
                 }
-            } else {
+            }
+            else
+            {
                 // If we're the default context, save to disk too (the user expects it to persist)
-                if (self == [[self class] MR_defaultContext]) {
+                if (self == [[self class] MR_defaultContext])
+                {
                     [[[self class] MR_rootSavingContext] MR_saveWithOptions:MRSaveSynchronously completion:completion];
                 }
                 // If we're saving parent contexts, do so
-                else if ((YES == saveParentContexts) && [self parentContext]) {
+                else if ((YES == saveParentContexts) && [self parentContext])
+                {
                     [[self parentContext] MR_saveWithOptions:MRSaveSynchronously | MRSaveParentContexts completion:completion];
                 }
                 // If we are not the default context (And therefore need to save the root context, do the completion action if one was specified
-                else {
+                else
+                {
                     MRLog(@"→ Finished saving: %@", [self MR_description]);
-                    if (completion) {
+                    if (completion)
+                    {
                         completion(saved, error);
                     }
                 }

@@ -15,21 +15,21 @@
 
 + (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
 {
-    [self saveWithBlockAndWait:block];
+    [self saveWithBlock:block completion:nil];
 }
 
 + (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
 {
     NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
-    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
+    NSManagedObjectContext *localContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSConfinementConcurrencyType];
+    [localContext setParentContext:mainContext];
 
-    [localContext performBlock:^{
-        if (block) {
-            block(localContext);
-        }
+    if (block)
+    {
+        block(localContext);
+    }
 
-        [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:completion];
-    }];
+    [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:completion];
 }
 
 + (void) saveUsingCurrentThreadContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
