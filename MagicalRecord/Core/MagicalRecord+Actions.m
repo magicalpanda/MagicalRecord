@@ -20,16 +20,20 @@
 
 + (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
 {
-    NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
-    NSManagedObjectContext *localContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSConfinementConcurrencyType];
-    [localContext setParentContext:mainContext];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
 
-    if (block)
-    {
-        block(localContext);
-    }
+        NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
+        NSManagedObjectContext *localContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSConfinementConcurrencyType];
+        [localContext setParentContext:mainContext];
 
-    [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:completion];
+        if (block)
+        {
+            block(localContext);
+        }
+
+        [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:completion];
+        
+    });
 }
 
 + (void) saveUsingCurrentThreadContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
