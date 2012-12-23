@@ -242,9 +242,9 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext
 {
-    NSError *error = nil;
-    NSManagedObject *inContext = [otherContext existingObjectWithID:[self objectID] error:&error];
-    [MagicalRecord handleErrors:error];
+//    NSError *error = nil;
+    NSManagedObject *inContext = [otherContext objectWithID:[self objectID]];
+//    [MagicalRecord handleErrors:error];
     if (inContext == nil)
     {
         MRLog(@"Did not find object %@ in context %@", self, otherContext);
