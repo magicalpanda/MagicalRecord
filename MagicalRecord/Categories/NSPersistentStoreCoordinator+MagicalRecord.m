@@ -77,7 +77,8 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     
     if (!store && [MagicalRecord shouldDeleteStoreOnModelMismatch])
     {
-        if ([[error domain] isEqualToString:NSCocoaErrorDomain] && [error code] == NSPersistentStoreIncompatibleVersionHashError)
+        BOOL isMigrationError = [error code] == NSPersistentStoreIncompatibleVersionHashError || [error code] == NSMigrationMissingSourceModelError;
+        if ([[error domain] isEqualToString:NSCocoaErrorDomain] && isMigrationError)
         {
             // Could not open the database, so... kill it!
             [[NSFileManager defaultManager] removeItemAtURL:url error:nil];
