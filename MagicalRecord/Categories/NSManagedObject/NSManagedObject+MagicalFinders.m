@@ -74,6 +74,21 @@
                                inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
++ (id) MR_selectAttribute:(NSString *)attribute ascending:(BOOL)ascending;
+{
+    return [self MR_selectAttribute:attribute ascending:ascending inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+}
+
++ (id) MR_selectAttribute:(NSString *)attribute ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
+{
+    NSFetchRequest *request = [self MR_requestAllSortedBy:attribute ascending:ascending inContext:context];
+    [request setResultType:NSDictionaryResultType];
+    [request setPropertiesToFetch:[NSArray arrayWithObject:attribute]];
+    NSArray *results = [self MR_executeFetchRequest:request inContext:context];
+
+    return [results valueForKeyPath:[NSString stringWithFormat:@"@unionOfObjects.%@", attribute]];
+}
+
 + (id) MR_findFirstInContext:(NSManagedObjectContext *)context
 {
 	NSFetchRequest *request = [self MR_createFetchRequestInContext:context];
