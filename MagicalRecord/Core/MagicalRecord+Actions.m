@@ -15,7 +15,7 @@
 
 + (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
 {
-    [self saveWithBlockAndWait:block];
+    [self saveWithBlock:block completion:nil];
 }
 
 + (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;

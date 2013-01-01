@@ -148,29 +148,6 @@ describe(@"MagicalRecord", ^{
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     
     context(@"deprecated method", ^{        
-        context(@"saveWithBlock:", ^{
-            it(@"should save", ^{
-                __block NSManagedObjectID *objectId;
-                
-                [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-                    NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
-                    
-                    [[@([inserted hasChanges]) should] beTrue];
-                    
-                    [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
-                    objectId = [inserted objectID];
-                }];
-                
-                [[objectId should] beNonNil];
-                
-                NSManagedObject   *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:objectId];
-                
-                [[objectId should] beNonNil];
-                [[fetchedObject should] beNonNil];
-                [[@([fetchedObject hasChanges]) should] beFalse];
-            });
-        });
-        
         context(@"saveInBackgroundWithBlock:", ^{
             it(@"should save", ^{
                 __block NSManagedObjectID *objectId;
