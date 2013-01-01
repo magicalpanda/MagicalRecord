@@ -1815,6 +1815,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = "";
+				WARNING_CFLAGS = "-Wdocumentation";
 			};
 			name = Debug;
 		};
@@ -1843,6 +1844,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = "";
+				WARNING_CFLAGS = "-Wdocumentation";
 			};
 			name = Release;
 		};
