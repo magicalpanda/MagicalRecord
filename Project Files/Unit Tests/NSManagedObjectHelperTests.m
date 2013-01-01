@@ -80,7 +80,7 @@
 - (void) testCanDeleteEntityInstance
 {
     id testEntity = [SingleRelatedEntity createEntity];
-    [[NSManagedObjectContext MR_defaultContext] MR_saveSelfAndParentContextsAndWait];
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
     
     assertThatBool([testEntity isDeleted], is(equalToBool(NO)));
     
