@@ -40,14 +40,16 @@ describe(@"MagicalRecord", ^{
     });
     
     context(@"asynchronous save action", ^{
-        it(@"should call completion block", ^{
+        it(@"should call completion block on the main thread", ^{
             __block BOOL completionBlockCalled = NO;
+            __block BOOL completionBlockIsOnMainThread = NO;
             
             [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
                 [SingleEntityWithNoRelationships MR_createInContext:localContext];
             } completion:^(BOOL success, NSError *error) {
-                // Ignore the success state — we only care that this block is executed
+                // Ignore the success state — we only care that this block is executed on the main thread
                 completionBlockCalled = YES;
+                completionBlockIsOnMainThread = [NSThread isMainThread];
             }];
             
             [[expectFutureValue(@(completionBlockCalled)) shouldEventually] beTrue];
@@ -100,14 +102,16 @@ describe(@"MagicalRecord", ^{
         });
         
         context(@"running asynchronously", ^{
-            it(@"should call completion block", ^{
+            it(@"should call completion block on the main thread", ^{
                 __block BOOL completionBlockCalled = NO;
-                
+                __block BOOL completionBlockIsOnMainThread = NO;
+
                 [MagicalRecord saveUsingCurrentThreadContextWithBlock:^(NSManagedObjectContext *localContext) {
                     [SingleEntityWithNoRelationships MR_createInContext:localContext];
                 } completion:^(BOOL success, NSError *error) {
-                    // Ignore the success state — we only care that this block is executed
+                    // Ignore the success state — we only care that this block is executed on the main thread
                     completionBlockCalled = YES;
+                    completionBlockIsOnMainThread = [NSThread isMainThread];
                 }];
                 
                 [[expectFutureValue(@(completionBlockCalled)) shouldEventually] beTrue];

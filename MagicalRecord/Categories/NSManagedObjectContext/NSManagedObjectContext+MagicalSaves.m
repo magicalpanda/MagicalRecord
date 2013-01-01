@@ -43,7 +43,9 @@
 
         if (completion)
         {
-            completion(NO, nil);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(NO, nil);
+            });
         }
         
         return;
@@ -72,7 +74,9 @@
                 [MagicalRecord handleErrors:error];
 
                 if (completion) {
-                    completion(saved, error);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completion(saved, error);
+                    });
                 }
             } else {
                 // If we're the default context, save to disk too (the user expects it to persist)
@@ -86,8 +90,11 @@
                 // If we are not the default context (And therefore need to save the root context, do the completion action if one was specified
                 else {
                     MRLog(@"→ Finished saving: %@", [self MR_description]);
+
                     if (completion) {
-                        completion(saved, error);
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            completion(saved, error);
+                        });
                     }
                 }
             }
