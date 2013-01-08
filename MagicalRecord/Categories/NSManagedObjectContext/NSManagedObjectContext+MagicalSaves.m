@@ -65,7 +65,7 @@
 
 - (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback;
 {
-    [self MR_saveNestedContextsErrorHandler:nil completion:nil];
+    [self MR_saveNestedContextsErrorHandler:errorCallback completion:nil];
 }
 
 - (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion;
