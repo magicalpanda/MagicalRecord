@@ -72,7 +72,7 @@
 {
     [self performBlock:^{
         [self MR_saveWithErrorCallback:errorCallback];
-        if (self.parentContext) {
+        if ([self parentContext]) {
             [[self parentContext] performBlock:^{
                 [[self parentContext] MR_saveNestedContextsErrorHandler:errorCallback completion:completion];
             }];
