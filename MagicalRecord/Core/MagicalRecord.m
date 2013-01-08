@@ -29,7 +29,7 @@
     [self cleanUpStack];
 }
 
-+ (void) cleanUpStack;
++ (void) cleanUpStack
 {
 	[NSManagedObjectContext MR_cleanUp];
 	[NSManagedObjectModel MR_setDefaultManagedObjectModel:nil];
@@ -50,20 +50,20 @@
     return status;
 }
 
-+ (void) setDefaultModelNamed:(NSString *)modelName;
++ (void) setDefaultModelNamed:(NSString *)modelName
 {
     NSManagedObjectModel *model = [NSManagedObjectModel MR_managedObjectModelNamed:modelName];
     [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
 }
 
-+ (void) setDefaultModelFromClass:(Class)klass;
++ (void) setDefaultModelFromClass:(Class)klass
 {
     NSBundle *bundle = [NSBundle bundleForClass:klass];
     NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:[NSArray arrayWithObject:bundle]];
     [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
 }
 
-+ (NSString *) defaultStoreName;
++ (NSString *) defaultStoreName
 {
     NSString *defaultName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(id)kCFBundleNameKey];
     if (defaultName == nil)
@@ -81,7 +81,7 @@
 
 #pragma mark - initialize
 
-+ (void) initialize;
++ (void) initialize
 {
     if (self == [MagicalRecord class]) 
     {

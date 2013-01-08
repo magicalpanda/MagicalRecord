@@ -12,12 +12,12 @@
 
 @implementation NSAttributeDescription (MagicalRecord_DataImport)
 
-- (NSString *) MR_primaryKey;
+- (NSString *) MR_primaryKey
 {
     return nil;
 }
 
-- (id) MR_valueForKeyPath:(NSString *)keyPath fromObjectData:(id)objectData;
+- (id) MR_valueForKeyPath:(NSString *)keyPath fromObjectData:(id)objectData
 {
     id value = [objectData valueForKeyPath:keyPath];
     

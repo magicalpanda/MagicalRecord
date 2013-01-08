@@ -35,18 +35,18 @@
 	return [NSNumber numberWithUnsignedInteger:[self MR_countOfEntitiesWithPredicate:searchTerm inContext:context]];
 }
 
-+ (NSNumber *) MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm;
++ (NSNumber *) MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm
 {
 	return [self MR_numberOfEntitiesWithPredicate:searchTerm
                                         inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
-+ (NSUInteger) MR_countOfEntities;
++ (NSUInteger) MR_countOfEntities
 {
     return [self MR_countOfEntitiesWithContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
-+ (NSUInteger) MR_countOfEntitiesWithContext:(NSManagedObjectContext *)context;
++ (NSUInteger) MR_countOfEntitiesWithContext:(NSManagedObjectContext *)context
 {
 	NSError *error = nil;
 	NSUInteger count = [context countForFetchRequest:[self MR_createFetchRequestInContext:context] error:&error];
@@ -55,12 +55,12 @@
     return count;
 }
 
-+ (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter;
++ (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter
 {
     return [self MR_countOfEntitiesWithPredicate:searchFilter inContext:[NSManagedObjectContext MR_defaultContext]];
 }
 
-+ (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter inContext:(NSManagedObjectContext *)context;
++ (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter inContext:(NSManagedObjectContext *)context
 {
 	NSError *error = nil;
 	NSFetchRequest *request = [self MR_createFetchRequestInContext:context];

@@ -16,27 +16,27 @@ static BOOL shouldDeleteStoreOnModelMismatch_;
 
 #pragma mark - Options
 
-+ (BOOL) shouldAutoCreateManagedObjectModel;
++ (BOOL) shouldAutoCreateManagedObjectModel
 {
     return shouldAutoCreateManagedObjectModel_;
 }
 
-+ (void) setShouldAutoCreateManagedObjectModel:(BOOL)shouldAutoCreate;
++ (void) setShouldAutoCreateManagedObjectModel:(BOOL)shouldAutoCreate
 {
     shouldAutoCreateManagedObjectModel_ = shouldAutoCreate;
 }
 
-+ (BOOL) shouldAutoCreateDefaultPersistentStoreCoordinator;
++ (BOOL) shouldAutoCreateDefaultPersistentStoreCoordinator
 {
     return shouldAutoCreateDefaultPersistentStoreCoordinator_;
 }
 
-+ (void) setShouldAutoCreateDefaultPersistentStoreCoordinator:(BOOL)shouldAutoCreate;
++ (void) setShouldAutoCreateDefaultPersistentStoreCoordinator:(BOOL)shouldAutoCreate
 {
     shouldAutoCreateDefaultPersistentStoreCoordinator_ = shouldAutoCreate;
 }
 
-+ (BOOL) shouldDeleteStoreOnModelMismatch;
++ (BOOL) shouldDeleteStoreOnModelMismatch
 {
     return shouldDeleteStoreOnModelMismatch_;
 }

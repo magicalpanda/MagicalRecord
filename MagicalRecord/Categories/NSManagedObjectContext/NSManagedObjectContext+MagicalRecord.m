@@ -32,7 +32,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     [self MR_setRootSavingContext:nil];
 }
 
-- (NSString *) MR_description;
+- (NSString *) MR_description
 {
     NSString *contextLabel = [NSString stringWithFormat:@"*** %@ ***", [self MR_workingName]];
     NSString *onMainThread = [NSThread isMainThread] ? @"*** MAIN THREAD ***" : @"*** BACKGROUND THREAD ***";
@@ -40,7 +40,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     return [NSString stringWithFormat:@"<%@ (%p): %@> on %@", NSStringFromClass([self class]), self, contextLabel, onMainThread];
 }
 
-- (NSString *) MR_parentChain;
+- (NSString *) MR_parentChain
 {
     NSMutableString *familyTree = [@"" mutableCopy];
     NSManagedObjectContext *currentContext = self;
@@ -102,12 +102,12 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     MRLog(@"Set Default Context: %@", defaultManagedObjectContext_);
 }
 
-+ (NSManagedObjectContext *) MR_rootSavingContext;
++ (NSManagedObjectContext *) MR_rootSavingContext
 {
     return rootSavingContext;
 }
 
-+ (void) MR_setRootSavingContext:(NSManagedObjectContext *)context;
++ (void) MR_setRootSavingContext:(NSManagedObjectContext *)context
 {
     if (rootSavingContext)
     {
@@ -121,7 +121,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     MRLog(@"Set Root Saving Context: %@", rootSavingContext);
 }
 
-+ (void) MR_initializeDefaultContextWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
++ (void) MR_initializeDefaultContextWithCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
     if (defaultManagedObjectContext_ == nil)
     {
@@ -144,20 +144,20 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     dispatch_async(dispatch_get_main_queue(), resetBlock);
 }
 
-+ (NSManagedObjectContext *) MR_contextWithoutParent;
++ (NSManagedObjectContext *) MR_contextWithoutParent
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     return context;
 }
 
-+ (NSManagedObjectContext *) MR_context;
++ (NSManagedObjectContext *) MR_context
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     [context setParentContext:[self MR_defaultContext]];
     return context;
 }
 
-+ (NSManagedObjectContext *) MR_contextWithParent:(NSManagedObjectContext *)parentContext;
++ (NSManagedObjectContext *) MR_contextWithParent:(NSManagedObjectContext *)parentContext
 {
     NSManagedObjectContext *context = [self MR_contextWithoutParent];
     [context setParentContext:parentContext];
@@ -165,14 +165,14 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     return context;
 }
 
-+ (NSManagedObjectContext *) MR_newMainQueueContext;
++ (NSManagedObjectContext *) MR_newMainQueueContext
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     MRLog(@"Created Main Queue Context: %@", context);
     return context;    
 }
 
-+ (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
++ (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
 	NSManagedObjectContext *context = nil;
     if (coordinator != nil)
@@ -187,7 +187,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     return context;
 }
 
-- (void) MR_obtainPermanentIDsBeforeSaving;
+- (void) MR_obtainPermanentIDsBeforeSaving
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(MR_contextWillSave:)
@@ -212,12 +212,12 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     }
 }
 
-- (void) MR_setWorkingName:(NSString *)workingName;
+- (void) MR_setWorkingName:(NSString *)workingName
 {
     [[self userInfo] setObject:workingName forKey:kMagicalRecordNSManagedObjectContextWorkingName];
 }
 
-- (NSString *) MR_workingName;
+- (NSString *) MR_workingName
 {
     NSString *workingName = [[self userInfo] objectForKey:kMagicalRecordNSManagedObjectContextWorkingName];
     if (nil == workingName)

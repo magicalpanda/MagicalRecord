@@ -16,12 +16,12 @@ static BOOL _iCloudEnabled = NO;
 
 #pragma mark - iCloud Methods
 
-+ (BOOL) isICloudEnabled;
++ (BOOL) isICloudEnabled
 {
     return _iCloudEnabled;
 }
 
-+ (void) setICloudEnabled:(BOOL)enabled;
++ (void) setICloudEnabled:(BOOL)enabled
 {
     @synchronized(self)
     {
@@ -29,7 +29,7 @@ static BOOL _iCloudEnabled = NO;
     }
 }
 
-+ (void) setupCoreDataStackWithiCloudContainer:(NSString *)icloudBucket localStoreNamed:(NSString *)localStore;
++ (void) setupCoreDataStackWithiCloudContainer:(NSString *)icloudBucket localStoreNamed:(NSString *)localStore
 {
     NSString *contentNameKey = [[[NSBundle mainBundle] infoDictionary] objectForKey:(id)kCFBundleIdentifierKey];
     [self setupCoreDataStackWithiCloudContainer:icloudBucket
@@ -38,7 +38,7 @@ static BOOL _iCloudEnabled = NO;
                         cloudStorePathComponent:nil];
 }
 
-+ (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent;
++ (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent
 {
     [self setupCoreDataStackWithiCloudContainer:containerID 
                                  contentNameKey:contentNameKey
@@ -47,7 +47,7 @@ static BOOL _iCloudEnabled = NO;
                                      completion:nil];
 }
 
-+ (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent completion:(void(^)(void))completion;
++ (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent completion:(void(^)(void))completion
 {
     NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithiCloudContainerID:containerID
                                                                                                    contentNameKey:contentNameKey 
