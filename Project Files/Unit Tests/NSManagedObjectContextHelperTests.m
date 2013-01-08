@@ -7,7 +7,7 @@
 //
 
 #import "NSManagedObjectContextHelperTests.h"
-#import "SingleEntityWithNoRelationships.h";
+#import "SingleEntityWithNoRelationships.h"
 @implementation NSManagedObjectContextHelperTests
 
 - (void) setUp
