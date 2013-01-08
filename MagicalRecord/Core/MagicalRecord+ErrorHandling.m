@@ -15,7 +15,7 @@ static SEL errorHandlerAction = nil;
 
 @implementation MagicalRecord (ErrorHandling)
 
-+ (void) cleanUpErrorHanding;
++ (void) cleanUpErrorHanding
 {
     errorHandlerTarget = nil;
     errorHandlerAction = nil;

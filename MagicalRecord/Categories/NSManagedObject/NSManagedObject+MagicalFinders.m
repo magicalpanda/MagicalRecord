@@ -101,7 +101,7 @@
                                inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
-+ (id) MR_findFirstOrderedByAttribute:(NSString *)attribute ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
++ (id) MR_findFirstOrderedByAttribute:(NSString *)attribute ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *request = [self MR_requestAllSortedBy:attribute ascending:ascending inContext:context];
     [request setFetchLimit:1];
@@ -109,7 +109,7 @@
     return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
 }
 
-+ (id) MR_findFirstOrderedByAttribute:(NSString *)attribute ascending:(BOOL)ascending;
++ (id) MR_findFirstOrderedByAttribute:(NSString *)attribute ascending:(BOOL)ascending
 {
     return [self MR_findFirstOrderedByAttribute:attribute
                                       ascending:ascending
@@ -231,7 +231,7 @@
     return controller;
 }
 
-+ (NSFetchedResultsController *) MR_fetchAllWithDelegate:(id<NSFetchedResultsControllerDelegate>)delegate;
++ (NSFetchedResultsController *) MR_fetchAllWithDelegate:(id<NSFetchedResultsControllerDelegate>)delegate
 {
     return [self MR_fetchAllWithDelegate:delegate inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
@@ -272,7 +272,7 @@
                             inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
-+ (NSFetchedResultsController *) MR_fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
++ (NSFetchedResultsController *) MR_fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
 {
     return [self MR_fetchAllGroupedBy:group 
                         withPredicate:searchTerm

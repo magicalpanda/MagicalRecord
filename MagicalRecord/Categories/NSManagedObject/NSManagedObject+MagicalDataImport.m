@@ -168,7 +168,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     }
 }
 
-- (BOOL) MR_preImport:(id)objectData;
+- (BOOL) MR_preImport:(id)objectData
 {
     if ([self respondsToSelector:@selector(shouldImport:)])
     {
@@ -187,7 +187,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     return YES;
 }
 
-- (BOOL) MR_postImport:(id)objectData;
+- (BOOL) MR_postImport:(id)objectData
 {
     MR_swapMethodsFromClass([objectData class], @selector(valueForUndefinedKey:), @selector(MR_valueForUndefinedKey:));
     if ([self respondsToSelector:@selector(didImport:)])
@@ -197,7 +197,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     return YES;
 }
 
-- (BOOL) MR_performDataImportFromObject:(id)objectData relationshipBlock:(void(^)(NSRelationshipDescription*, id))relationshipBlock;
+- (BOOL) MR_performDataImportFromObject:(id)objectData relationshipBlock:(void(^)(NSRelationshipDescription*, id))relationshipBlock
 {
     BOOL didStartimporting = [self MR_preImport:objectData];
     if (!didStartimporting) return NO;
@@ -230,7 +230,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     } ];
 }
 
-+ (id) MR_importFromObject:(id)objectData inContext:(NSManagedObjectContext *)context;
++ (id) MR_importFromObject:(id)objectData inContext:(NSManagedObjectContext *)context
 {
     NSAttributeDescription *primaryAttribute = [[self MR_entityDescription] MR_primaryAttributeToRelateBy];
     

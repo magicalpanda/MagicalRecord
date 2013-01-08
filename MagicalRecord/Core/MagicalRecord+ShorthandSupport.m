@@ -56,7 +56,7 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
     replaceSelectorForTargetWithSourceImpAndSwizzle(self, @selector(MR_resolveInstanceMethod:), klass, @selector(resolveInstanceMethod:));    
 }
 
-+ (void) swizzleShorthandMethods;
++ (void) swizzleShorthandMethods
 {
     if (methodsHaveBeenSwizzled) return;
     

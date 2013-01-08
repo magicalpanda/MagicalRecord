@@ -20,7 +20,7 @@
 
 @implementation NSManagedObjectContext (MagicalSaves)
 
-- (void) MR_saveWithErrorCallback:(void(^)(NSError *))errorCallback;
+- (void) MR_saveWithErrorCallback:(void(^)(NSError *))errorCallback
 {
     if (![self hasChanges])
     {
@@ -58,17 +58,17 @@
     }
 }
 
-- (void) MR_saveNestedContexts;
+- (void) MR_saveNestedContexts
 {
     [self MR_saveNestedContextsErrorHandler:nil];
 }
 
-- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback;
+- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback
 {
     [self MR_saveNestedContextsErrorHandler:nil completion:nil];
 }
 
-- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion;
+- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion
 {
     [self performBlock:^{
         [self MR_saveWithErrorCallback:errorCallback];
@@ -86,22 +86,22 @@
     }];
 }
 
-- (void) MR_save;
+- (void) MR_save
 {
     [self MR_saveWithErrorCallback:nil];
 }
 
-- (void) MR_saveInBackgroundCompletion:(void (^)(void))completion;
+- (void) MR_saveInBackgroundCompletion:(void (^)(void))completion
 {
     [self MR_saveInBackgroundErrorHandler:nil completion:completion];
 }
 
-- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback;
+- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback
 {
     [self MR_saveInBackgroundErrorHandler:errorCallback completion:nil];
 }
 
-- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion;
+- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion
 {
     [self performBlock:^{
         // Save the context

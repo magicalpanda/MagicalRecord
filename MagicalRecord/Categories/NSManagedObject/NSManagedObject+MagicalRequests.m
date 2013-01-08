@@ -127,7 +127,7 @@
 	return request;
 }
 
-+ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm;
++ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm
 {
 	NSFetchRequest *request = [self MR_requestAllSortedBy:sortTerm
                                                 ascending:ascending
