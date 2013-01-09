@@ -44,7 +44,9 @@
 
         if (completion)
         {
-            completion(NO, nil);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(NO, nil);
+            });
         }
         
         return;
@@ -74,7 +76,9 @@
 
                 if (completion)
                 {
-                    completion(saved, error);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completion(saved, error);
+                    });
                 }
             }
             else
@@ -95,7 +99,9 @@
                     MRLog(@"→ Finished saving: %@", [self MR_description]);
                     if (completion)
                     {
-                        completion(saved, error);
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            completion(saved, error);
+                        });
                     }
                 }
             }

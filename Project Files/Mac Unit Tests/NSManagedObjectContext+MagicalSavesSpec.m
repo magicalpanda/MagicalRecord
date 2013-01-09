@@ -53,13 +53,15 @@ describe(@"NSManagedObjectContext+MagicalSaves", ^{
         });
         
         context(@"asynchronously", ^{
-            it(@"should call completion block", ^{
+            it(@"and should call the completion block on the main thread", ^{
                 __block BOOL completionBlockCalled = NO;
-                
+                __block BOOL completionBlockIsOnMainThread = NO;
+
                 [SingleEntityWithNoRelationships MR_createInContext:managedObjectContext];
                 
                 [managedObjectContext MR_saveOnlySelfWithCompletion:^(BOOL success, NSError *error) {
                     completionBlockCalled = YES;
+                    completionBlockIsOnMainThread = [NSThread isMainThread];
                 }];
                 
                 [[expectFutureValue(@(completionBlockCalled)) shouldEventually] beTrue];
@@ -123,15 +125,17 @@ describe(@"NSManagedObjectContext+MagicalSaves", ^{
         });
         
         context(@"asynchronously", ^{
-            it(@"and should call completion block", ^{
+            it(@"and should call the completion block on the main thread", ^{
                 __block BOOL completionBlockCalled = NO;
-                
+                __block BOOL completionBlockIsOnMainThread = NO;
+
                 [SingleEntityWithNoRelationships MR_createInContext:managedObjectContext];
                 
                 [[@([managedObjectContext hasChanges]) should] beTrue];
                 
                 [managedObjectContext MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
                     completionBlockCalled = YES;
+                    completionBlockIsOnMainThread = [NSThread isMainThread];
                 }];
                 
                 [[expectFutureValue(@(completionBlockCalled)) shouldEventually] beTrue];
@@ -290,7 +294,7 @@ describe(@"NSManagedObjectContext+MagicalSaves", ^{
                     errorHandlerCalled = YES;
                 }];
                 
-                [[@(errorHandlerCalled) should] beTrue];
+                [[expectFutureValue(@(errorHandlerCalled)) shouldEventually] beTrue];
             });
             
             it(@"should save", ^{
@@ -441,7 +445,7 @@ describe(@"NSManagedObjectContext+MagicalSaves", ^{
                     errorHandlerCalled = YES;
                 }];
                 
-                [[@(errorHandlerCalled) should] beTrue];
+                [[expectFutureValue(@(errorHandlerCalled)) shouldEventually] beTrue];
             });
             
             it(@"should save", ^{

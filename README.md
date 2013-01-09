@@ -31,11 +31,11 @@ An iOS4 compatible version is available for use. Reference [tag 1.8.3](https://g
 
 ## Updating to 2.1
 
-MagicalRecord 2.1 is considered a major update since there are class and API changes that may affect existing uses of MagicalRecord in your code. 
+MagicalRecord 2.1 is considered a major update as there are class and API changes that may affect existing uses of MagicalRecord in your code. 
 
 ### Changes to saving
 
-The APIs for saving have been revised to behave more consistently overall, and also to follow naming patterns present in Core Data. Extensive work has gone into adding automated tests that ensure the save methods (both new and deprecated) continue to work as expected through future updates. 
+The APIs for saving have been revised to behave more consistently, and also to follow naming patterns present in Core Data. Extensive work has gone into adding automated tests that ensure the save methods (both new and deprecated) continue to work as expected through future updates. 
 
 `MR_save` has been temporarily restored to it's original state of running synchronously on the current thread, and saving to the persistent store. However, the __`MR_save` method is marked as deprecated and will be removed in the next major release of MagicalRecord (version 3.0)__. You should use `MR_saveToPersistentStoreAndWait` if you want the same behaviour in future versions of the library.
 
@@ -240,7 +240,7 @@ There are also counterpart methods which return NSUInteger rather than NSNumbers
 
 #### Aggregate Operations
 
-    NSPredicate *prediate = [NSPredicate predicateWithFormat:@"diaryEntry.date == %@", today];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"diaryEntry.date == %@", today];
     int totalFat = [[CTFoodDiaryEntry MR_aggregateOperation:@"sum:" onAttribute:@"fatColories" withPredicate:predicate] intValue];
     int fattest  = [[CTFoodDiaryEntry MR_aggregateOperation:@"max:" onAttribute:@"fatColories" withPredicate:predicate] intValue];
     
