@@ -9,14 +9,14 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C721C7DB13D0C3A00097AB6F"
-               BuildableName = "Mac App Unit Tests.app"
-               BlueprintName = "Mac App Unit Tests"
+               BlueprintIdentifier = "90DD201C167AA4350033BA25"
+               BuildableName = "Mac Unit Tests.octest"
+               BlueprintName = "Mac Unit Tests"
                ReferencedContainer = "container:Magical Record.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -24,30 +24,31 @@
    </BuildAction>
    <TestAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "90DD201C167AA4350033BA25"
+               BuildableName = "Mac Unit Tests.octest"
+               BlueprintName = "Mac Unit Tests"
+               ReferencedContainer = "container:Magical Record.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C721C7DB13D0C3A00097AB6F"
-            BuildableName = "Mac App Unit Tests.app"
-            BlueprintName = "Mac App Unit Tests"
-            ReferencedContainer = "container:Magical Record.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -57,15 +58,6 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C721C7DB13D0C3A00097AB6F"
-            BuildableName = "Mac App Unit Tests.app"
-            BlueprintName = "Mac App Unit Tests"
-            ReferencedContainer = "container:Magical Record.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

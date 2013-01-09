@@ -7,64 +7,132 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4B7116FD15F8EE4600B64426 /* EXPBackwardCompatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116C215F8EE4600B64426 /* EXPBackwardCompatibility.m */; };
+		4B7116FD15F8EE4600B64426 /* EXPBackwardCompatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116C215F8EE4600B64426 /* EXPBackwardCompatibility.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B7116FE15F8EE4600B64426 /* EXPBackwardCompatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116C215F8EE4600B64426 /* EXPBackwardCompatibility.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B7116FF15F8EE4600B64426 /* EXPBlockDefinedMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116C415F8EE4600B64426 /* EXPBlockDefinedMatcher.m */; };
+		4B7116FF15F8EE4600B64426 /* EXPBlockDefinedMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116C415F8EE4600B64426 /* EXPBlockDefinedMatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71170015F8EE4600B64426 /* EXPBlockDefinedMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116C415F8EE4600B64426 /* EXPBlockDefinedMatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71170115F8EE4600B64426 /* EXPDoubleTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116C715F8EE4600B64426 /* EXPDoubleTuple.m */; };
+		4B71170115F8EE4600B64426 /* EXPDoubleTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116C715F8EE4600B64426 /* EXPDoubleTuple.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71170215F8EE4600B64426 /* EXPDoubleTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116C715F8EE4600B64426 /* EXPDoubleTuple.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71170315F8EE4600B64426 /* Expecta.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116CA15F8EE4600B64426 /* Expecta.m */; };
+		4B71170315F8EE4600B64426 /* Expecta.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116CA15F8EE4600B64426 /* Expecta.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71170415F8EE4600B64426 /* Expecta.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116CA15F8EE4600B64426 /* Expecta.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71170515F8EE4600B64426 /* ExpectaSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116CC15F8EE4600B64426 /* ExpectaSupport.m */; };
+		4B71170515F8EE4600B64426 /* ExpectaSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116CC15F8EE4600B64426 /* ExpectaSupport.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71170615F8EE4600B64426 /* ExpectaSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116CC15F8EE4600B64426 /* ExpectaSupport.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71170715F8EE4600B64426 /* EXPExpect.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116CE15F8EE4600B64426 /* EXPExpect.m */; };
+		4B71170715F8EE4600B64426 /* EXPExpect.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116CE15F8EE4600B64426 /* EXPExpect.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71170815F8EE4600B64426 /* EXPExpect.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116CE15F8EE4600B64426 /* EXPExpect.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71170915F8EE4600B64426 /* EXPFloatTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116D015F8EE4600B64426 /* EXPFloatTuple.m */; };
+		4B71170915F8EE4600B64426 /* EXPFloatTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116D015F8EE4600B64426 /* EXPFloatTuple.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71170A15F8EE4600B64426 /* EXPFloatTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116D015F8EE4600B64426 /* EXPFloatTuple.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71170B15F8EE4600B64426 /* EXPUnsupportedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116D315F8EE4600B64426 /* EXPUnsupportedObject.m */; };
+		4B71170B15F8EE4600B64426 /* EXPUnsupportedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116D315F8EE4600B64426 /* EXPUnsupportedObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71170C15F8EE4600B64426 /* EXPUnsupportedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116D315F8EE4600B64426 /* EXPUnsupportedObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71170D15F8EE4600B64426 /* EXPMatcherHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116D615F8EE4600B64426 /* EXPMatcherHelpers.m */; };
+		4B71170D15F8EE4600B64426 /* EXPMatcherHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116D615F8EE4600B64426 /* EXPMatcherHelpers.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71170E15F8EE4600B64426 /* EXPMatcherHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116D615F8EE4600B64426 /* EXPMatcherHelpers.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71170F15F8EE4600B64426 /* EXPMatchers+beCloseTo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116D815F8EE4600B64426 /* EXPMatchers+beCloseTo.m */; };
+		4B71170F15F8EE4600B64426 /* EXPMatchers+beCloseTo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116D815F8EE4600B64426 /* EXPMatchers+beCloseTo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71171015F8EE4600B64426 /* EXPMatchers+beCloseTo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116D815F8EE4600B64426 /* EXPMatchers+beCloseTo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71171115F8EE4600B64426 /* EXPMatchers+beFalsy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116DA15F8EE4600B64426 /* EXPMatchers+beFalsy.m */; };
+		4B71171115F8EE4600B64426 /* EXPMatchers+beFalsy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116DA15F8EE4600B64426 /* EXPMatchers+beFalsy.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71171215F8EE4600B64426 /* EXPMatchers+beFalsy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116DA15F8EE4600B64426 /* EXPMatchers+beFalsy.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71171315F8EE4600B64426 /* EXPMatchers+beGreaterThan.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116DC15F8EE4600B64426 /* EXPMatchers+beGreaterThan.m */; };
+		4B71171315F8EE4600B64426 /* EXPMatchers+beGreaterThan.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116DC15F8EE4600B64426 /* EXPMatchers+beGreaterThan.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71171415F8EE4600B64426 /* EXPMatchers+beGreaterThan.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116DC15F8EE4600B64426 /* EXPMatchers+beGreaterThan.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71171515F8EE4600B64426 /* EXPMatchers+beGreaterThanOrEqualTo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116DE15F8EE4600B64426 /* EXPMatchers+beGreaterThanOrEqualTo.m */; };
+		4B71171515F8EE4600B64426 /* EXPMatchers+beGreaterThanOrEqualTo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116DE15F8EE4600B64426 /* EXPMatchers+beGreaterThanOrEqualTo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71171615F8EE4600B64426 /* EXPMatchers+beGreaterThanOrEqualTo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116DE15F8EE4600B64426 /* EXPMatchers+beGreaterThanOrEqualTo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71171715F8EE4600B64426 /* EXPMatchers+beIdenticalTo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116E015F8EE4600B64426 /* EXPMatchers+beIdenticalTo.m */; };
+		4B71171715F8EE4600B64426 /* EXPMatchers+beIdenticalTo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116E015F8EE4600B64426 /* EXPMatchers+beIdenticalTo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71171815F8EE4600B64426 /* EXPMatchers+beIdenticalTo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116E015F8EE4600B64426 /* EXPMatchers+beIdenticalTo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71171915F8EE4600B64426 /* EXPMatchers+beInstanceOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116E215F8EE4600B64426 /* EXPMatchers+beInstanceOf.m */; };
+		4B71171915F8EE4600B64426 /* EXPMatchers+beInstanceOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116E215F8EE4600B64426 /* EXPMatchers+beInstanceOf.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71171A15F8EE4600B64426 /* EXPMatchers+beInstanceOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116E215F8EE4600B64426 /* EXPMatchers+beInstanceOf.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71171B15F8EE4600B64426 /* EXPMatchers+beInTheRangeOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116E415F8EE4600B64426 /* EXPMatchers+beInTheRangeOf.m */; };
+		4B71171B15F8EE4600B64426 /* EXPMatchers+beInTheRangeOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116E415F8EE4600B64426 /* EXPMatchers+beInTheRangeOf.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71171C15F8EE4600B64426 /* EXPMatchers+beInTheRangeOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116E415F8EE4600B64426 /* EXPMatchers+beInTheRangeOf.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71171D15F8EE4600B64426 /* EXPMatchers+beKindOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116E615F8EE4600B64426 /* EXPMatchers+beKindOf.m */; };
+		4B71171D15F8EE4600B64426 /* EXPMatchers+beKindOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116E615F8EE4600B64426 /* EXPMatchers+beKindOf.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71171E15F8EE4600B64426 /* EXPMatchers+beKindOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116E615F8EE4600B64426 /* EXPMatchers+beKindOf.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71171F15F8EE4600B64426 /* EXPMatchers+beLessThan.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116E815F8EE4600B64426 /* EXPMatchers+beLessThan.m */; };
+		4B71171F15F8EE4600B64426 /* EXPMatchers+beLessThan.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116E815F8EE4600B64426 /* EXPMatchers+beLessThan.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71172015F8EE4600B64426 /* EXPMatchers+beLessThan.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116E815F8EE4600B64426 /* EXPMatchers+beLessThan.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71172115F8EE4600B64426 /* EXPMatchers+beLessThanOrEqualTo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116EA15F8EE4600B64426 /* EXPMatchers+beLessThanOrEqualTo.m */; };
+		4B71172115F8EE4600B64426 /* EXPMatchers+beLessThanOrEqualTo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116EA15F8EE4600B64426 /* EXPMatchers+beLessThanOrEqualTo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71172215F8EE4600B64426 /* EXPMatchers+beLessThanOrEqualTo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116EA15F8EE4600B64426 /* EXPMatchers+beLessThanOrEqualTo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71172315F8EE4600B64426 /* EXPMatchers+beNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116EC15F8EE4600B64426 /* EXPMatchers+beNil.m */; };
+		4B71172315F8EE4600B64426 /* EXPMatchers+beNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116EC15F8EE4600B64426 /* EXPMatchers+beNil.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71172415F8EE4600B64426 /* EXPMatchers+beNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116EC15F8EE4600B64426 /* EXPMatchers+beNil.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71172515F8EE4600B64426 /* EXPMatchers+beSubclassOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116EE15F8EE4600B64426 /* EXPMatchers+beSubclassOf.m */; };
+		4B71172515F8EE4600B64426 /* EXPMatchers+beSubclassOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116EE15F8EE4600B64426 /* EXPMatchers+beSubclassOf.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71172615F8EE4600B64426 /* EXPMatchers+beSubclassOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116EE15F8EE4600B64426 /* EXPMatchers+beSubclassOf.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71172715F8EE4600B64426 /* EXPMatchers+beTruthy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116F015F8EE4600B64426 /* EXPMatchers+beTruthy.m */; };
+		4B71172715F8EE4600B64426 /* EXPMatchers+beTruthy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116F015F8EE4600B64426 /* EXPMatchers+beTruthy.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71172815F8EE4600B64426 /* EXPMatchers+beTruthy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116F015F8EE4600B64426 /* EXPMatchers+beTruthy.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71172915F8EE4600B64426 /* EXPMatchers+contain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116F215F8EE4600B64426 /* EXPMatchers+contain.m */; };
+		4B71172915F8EE4600B64426 /* EXPMatchers+contain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116F215F8EE4600B64426 /* EXPMatchers+contain.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71172A15F8EE4600B64426 /* EXPMatchers+contain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116F215F8EE4600B64426 /* EXPMatchers+contain.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71172B15F8EE4600B64426 /* EXPMatchers+equal.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116F415F8EE4600B64426 /* EXPMatchers+equal.m */; };
+		4B71172B15F8EE4600B64426 /* EXPMatchers+equal.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116F415F8EE4600B64426 /* EXPMatchers+equal.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71172C15F8EE4600B64426 /* EXPMatchers+equal.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116F415F8EE4600B64426 /* EXPMatchers+equal.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71172D15F8EE4600B64426 /* EXPMatchers+haveCountOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116F615F8EE4600B64426 /* EXPMatchers+haveCountOf.m */; };
+		4B71172D15F8EE4600B64426 /* EXPMatchers+haveCountOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116F615F8EE4600B64426 /* EXPMatchers+haveCountOf.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71172E15F8EE4600B64426 /* EXPMatchers+haveCountOf.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116F615F8EE4600B64426 /* EXPMatchers+haveCountOf.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71172F15F8EE4600B64426 /* EXPMatchers+raise.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116F815F8EE4600B64426 /* EXPMatchers+raise.m */; };
+		4B71172F15F8EE4600B64426 /* EXPMatchers+raise.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116F815F8EE4600B64426 /* EXPMatchers+raise.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71173015F8EE4600B64426 /* EXPMatchers+raise.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116F815F8EE4600B64426 /* EXPMatchers+raise.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71173115F8EE4600B64426 /* NSValue+Expecta.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116FC15F8EE4600B64426 /* NSValue+Expecta.m */; };
+		4B71173115F8EE4600B64426 /* NSValue+Expecta.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116FC15F8EE4600B64426 /* NSValue+Expecta.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71173215F8EE4600B64426 /* NSValue+Expecta.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116FC15F8EE4600B64426 /* NSValue+Expecta.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B71173315F9149900B64426 /* SaveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116BC15F8ED5A00B64426 /* SaveTests.m */; };
-		4B71173415F914A400B64426 /* SaveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7116BC15F8ED5A00B64426 /* SaveTests.m */; };
 		4B93EA49160ECF1D00FB5676 /* TestModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4B93EA47160ECF1D00FB5676 /* TestModel.xcdatamodeld */; };
 		4B93EA4A160ECF1D00FB5676 /* TestModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4B93EA47160ECF1D00FB5676 /* TestModel.xcdatamodeld */; };
+		900E1CC11676E246005FFF1C /* GHUnit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = C7D2DC22155AFDF500B3A468 /* GHUnit.framework */; };
+		900E1CC21676E246005FFF1C /* OCHamcrest.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = C7D2DC23155AFDF500B3A468 /* OCHamcrest.framework */; };
+		900E1CC31676E246005FFF1C /* OCMock.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = C7D2DC24155AFDF500B3A468 /* OCMock.framework */; };
+		900E1CC81676E27E005FFF1C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 900E1CC41676E25E005FFF1C /* CoreGraphics.framework */; };
+		900E1CC91676E488005FFF1C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 900E1CC61676E275005FFF1C /* UIKit.framework */; };
+		90DD2047167AA4630033BA25 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90DD2045167AA45B0033BA25 /* SenTestingKit.framework */; };
+		90DD204A167AA46D0033BA25 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90DD2048167AA4670033BA25 /* Cocoa.framework */; };
+		90DD204B167AA46F0033BA25 /* libKiwi-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90DD203E167AA44D0033BA25 /* libKiwi-OSX.a */; };
+		90DD204E167AA4E10033BA25 /* MagicalRecord+ActionsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 90DD204D167AA4E10033BA25 /* MagicalRecord+ActionsSpec.m */; };
+		90DD2054167AA6C80033BA25 /* MappedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C784348E13F0FEE000463CEE /* MappedEntity.m */; };
+		90DD2055167AA6C80033BA25 /* AbstractRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD888313DBFA6200274567 /* AbstractRelatedEntity.m */; };
+		90DD2056167AA6C80033BA25 /* ConcreteRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD888513DBFA6200274567 /* ConcreteRelatedEntity.m */; };
+		90DD2057167AA6C80033BA25 /* DifferentClassNameMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD888713DBFA6200274567 /* DifferentClassNameMapping.m */; };
+		90DD2058167AA6C80033BA25 /* SingleEntityWithNoRelationships.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD888913DBFA6200274567 /* SingleEntityWithNoRelationships.m */; };
+		90DD2059167AA6C80033BA25 /* SingleRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD888B13DBFA6200274567 /* SingleRelatedEntity.m */; };
+		90DD205A167AA6C80033BA25 /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.m in Sources */ = {isa = PBXBuildFile; fileRef = C78F8FD913FDC3F400549DD8 /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.m */; };
+		90DD205B167AA6C80033BA25 /* SingleEntityRelatedToMappedEntityUsingDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C9A38713F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingDefaults.m */; };
+		90DD205C167AA6C80033BA25 /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C9A38913F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m */; };
+		90DD205D167AA6C80033BA25 /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m in Sources */ = {isa = PBXBuildFile; fileRef = C7913B9813FAEDF8007E09CC /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m */; };
+		90DD205E167AA6C80033BA25 /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = C7913BA813FB1D2A007E09CC /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m */; };
+		90DD205F167AA6CC0033BA25 /* TestModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4B93EA47160ECF1D00FB5676 /* TestModel.xcdatamodeld */; };
+		90DD2060167AA6D80033BA25 /* _SingleEntityRelatedToMappedEntityWithSecondaryMappings.m in Sources */ = {isa = PBXBuildFile; fileRef = C78F8FDC13FDC3FD00549DD8 /* _SingleEntityRelatedToMappedEntityWithSecondaryMappings.m */; };
+		90DD2061167AA6D80033BA25 /* _AbstractRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD887913DBFA6200274567 /* _AbstractRelatedEntity.m */; };
+		90DD2062167AA6D80033BA25 /* _ConcreteRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD887B13DBFA6200274567 /* _ConcreteRelatedEntity.m */; };
+		90DD2063167AA6D80033BA25 /* _DifferentClassNameMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD887D13DBFA6200274567 /* _DifferentClassNameMapping.m */; };
+		90DD2064167AA6D80033BA25 /* _SingleEntityWithNoRelationships.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD887F13DBFA6200274567 /* _SingleEntityWithNoRelationships.m */; };
+		90DD2065167AA6D80033BA25 /* _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m in Sources */ = {isa = PBXBuildFile; fileRef = C7913B9413FAEDE9007E09CC /* _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m */; };
+		90DD2066167AA6D80033BA25 /* _SingleRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD888113DBFA6200274567 /* _SingleRelatedEntity.m */; };
+		90DD2067167AA6D80033BA25 /* _MappedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C784348C13F0FEE000463CEE /* _MappedEntity.m */; };
+		90DD2068167AA6D80033BA25 /* _SingleEntityRelatedToMappedEntityUsingDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C9A38113F45240002C5B0C /* _SingleEntityRelatedToMappedEntityUsingDefaults.m */; };
+		90DD2069167AA6D80033BA25 /* _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C9A38313F45240002C5B0C /* _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m */; };
+		90DD206A167AA6D80033BA25 /* _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = C7913BA513FB1D17007E09CC /* _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m */; };
+		90DD206B167AA6DF0033BA25 /* SingleEntityWithNoRelationships.plist in Resources */ = {isa = PBXBuildFile; fileRef = C77E5FB213D0D1D100298F87 /* SingleEntityWithNoRelationships.plist */; };
+		90DD206C167AA6DF0033BA25 /* SingleEntityWithNoRelationships.json in Resources */ = {isa = PBXBuildFile; fileRef = C7E736DE1402FE64005657C9 /* SingleEntityWithNoRelationships.json */; };
+		90DD206D167AA6DF0033BA25 /* SampleJSONDataForImport.json in Resources */ = {isa = PBXBuildFile; fileRef = C77E5FB413D0D1EC00298F87 /* SampleJSONDataForImport.json */; };
+		90DD206E167AA6DF0033BA25 /* SingleRelatedEntity.json in Resources */ = {isa = PBXBuildFile; fileRef = C76AF82913DBEE5A00CE2E05 /* SingleRelatedEntity.json */; };
+		90DD206F167AA6DF0033BA25 /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.json in Resources */ = {isa = PBXBuildFile; fileRef = C7C9A37C13F44B08002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.json */; };
+		90DD2070167AA6DF0033BA25 /* SingleEntityRelatedToMappedEntityUsingDefaults.json in Resources */ = {isa = PBXBuildFile; fileRef = C7C9A37E13F44B29002C5B0C /* SingleEntityRelatedToMappedEntityUsingDefaults.json */; };
+		90DD2071167AA6DF0033BA25 /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json in Resources */ = {isa = PBXBuildFile; fileRef = C7B7379913FAE5D500EE4940 /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json */; };
+		90DD2072167AA6DF0033BA25 /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json in Resources */ = {isa = PBXBuildFile; fileRef = C7913BAE13FB1E11007E09CC /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json */; };
+		90DD2073167AA6DF0033BA25 /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.json in Resources */ = {isa = PBXBuildFile; fileRef = C78F8FD213FDC2B600549DD8 /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.json */; };
+		90DD2074167AA6DF0033BA25 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json in Resources */ = {isa = PBXBuildFile; fileRef = C7381275141037E80054EEF0 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json */; };
+		90DD2076167AA7050033BA25 /* MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72D2150F832A00216827 /* MagicalRecord.m */; };
+		90DD2077167AA7050033BA25 /* MagicalRecord+Actions.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72C6150F832A00216827 /* MagicalRecord+Actions.m */; };
+		90DD2078167AA7050033BA25 /* MagicalRecord+ErrorHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72C8150F832A00216827 /* MagicalRecord+ErrorHandling.m */; };
+		90DD2079167AA7050033BA25 /* MagicalRecord+iCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CA150F832A00216827 /* MagicalRecord+iCloud.m */; };
+		90DD207A167AA7050033BA25 /* MagicalRecord+Options.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CC150F832A00216827 /* MagicalRecord+Options.m */; };
+		90DD207B167AA7050033BA25 /* MagicalRecord+Setup.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CE150F832A00216827 /* MagicalRecord+Setup.m */; };
+		90DD207C167AA7050033BA25 /* MagicalRecord+ShorthandSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72D0150F832A00216827 /* MagicalRecord+ShorthandSupport.m */; };
+		90DD207D167AA7080033BA25 /* NSManagedObjectModel+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72BF150F832A00216827 /* NSManagedObjectModel+MagicalRecord.m */; };
+		90DD207E167AA7080033BA25 /* NSPersistentStore+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72C1150F832A00216827 /* NSPersistentStore+MagicalRecord.m */; };
+		90DD207F167AA7080033BA25 /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72C3150F832A00216827 /* NSPersistentStoreCoordinator+MagicalRecord.m */; };
+		90DD2080167AA70E0033BA25 /* MagicalImportFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD729D150F832A00216827 /* MagicalImportFunctions.m */; };
+		90DD2081167AA70E0033BA25 /* NSEntityDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72A1150F832A00216827 /* NSEntityDescription+MagicalDataImport.m */; };
+		90DD2082167AA70E0033BA25 /* NSAttributeDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD729F150F832A00216827 /* NSAttributeDescription+MagicalDataImport.m */; };
+		90DD2083167AA70E0033BA25 /* NSRelationshipDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72A7150F832A00216827 /* NSRelationshipDescription+MagicalDataImport.m */; };
+		90DD2084167AA70E0033BA25 /* NSNumber+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72A3150F832A00216827 /* NSNumber+MagicalDataImport.m */; };
+		90DD2085167AA70E0033BA25 /* NSObject+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72A5150F832A00216827 /* NSObject+MagicalDataImport.m */; };
+		90DD2086167AA70E0033BA25 /* NSString+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72A9150F832A00216827 /* NSString+MagicalDataImport.m */; };
+		90DD2087167AA7130033BA25 /* NSManagedObject+MagicalAggregation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72AC150F832A00216827 /* NSManagedObject+MagicalAggregation.m */; };
+		90DD2088167AA7130033BA25 /* NSManagedObject+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72AE150F832A00216827 /* NSManagedObject+MagicalDataImport.m */; };
+		90DD2089167AA7130033BA25 /* NSManagedObject+MagicalFinders.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72B0150F832A00216827 /* NSManagedObject+MagicalFinders.m */; };
+		90DD208A167AA7130033BA25 /* NSManagedObject+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72B2150F832A00216827 /* NSManagedObject+MagicalRecord.m */; };
+		90DD208B167AA7130033BA25 /* NSManagedObject+MagicalRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72B4150F832A00216827 /* NSManagedObject+MagicalRequests.m */; };
+		90DD208C167AA7180033BA25 /* NSManagedObjectContext+MagicalObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72B7150F832A00216827 /* NSManagedObjectContext+MagicalObserving.m */; };
+		90DD208D167AA7180033BA25 /* NSManagedObjectContext+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72B9150F832A00216827 /* NSManagedObjectContext+MagicalRecord.m */; };
+		90DD208E167AA7180033BA25 /* NSManagedObjectContext+MagicalSaves.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72BB150F832A00216827 /* NSManagedObjectContext+MagicalSaves.m */; };
+		90DD208F167AA7180033BA25 /* NSManagedObjectContext+MagicalThreading.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72BD150F832A00216827 /* NSManagedObjectContext+MagicalThreading.m */; };
+		90DD2090167AA7590033BA25 /* generateShorthandFile.rb in Resources */ = {isa = PBXBuildFile; fileRef = C75C7D69147220D300D0C2FE /* generateShorthandFile.rb */; };
+		90DD2093167AAEFA0033BA25 /* NSManagedObjectContext+MagicalSavesSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 90DD2092167AAEFA0033BA25 /* NSManagedObjectContext+MagicalSavesSpec.m */; };
 		C70B6E7113D0F62500709450 /* NSPersisentStoreHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C70B6E7013D0F62500709450 /* NSPersisentStoreHelperTests.m */; };
 		C70B6E7413D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C70B6E7313D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.m */; };
 		C70B6E7713D0F66000709450 /* NSManagedObjectModelHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C70B6E7613D0F66000709450 /* NSManagedObjectModelHelperTests.m */; };
@@ -104,8 +172,6 @@
 		C76AF7FC13DBEB5500CE2E05 /* ImportSingleRelatedEntityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C76AF7FA13DBEB5500CE2E05 /* ImportSingleRelatedEntityTests.m */; };
 		C76AF82A13DBEE5A00CE2E05 /* SingleRelatedEntity.json in Resources */ = {isa = PBXBuildFile; fileRef = C76AF82913DBEE5A00CE2E05 /* SingleRelatedEntity.json */; };
 		C76AF82B13DBEE5A00CE2E05 /* SingleRelatedEntity.json in Resources */ = {isa = PBXBuildFile; fileRef = C76AF82913DBEE5A00CE2E05 /* SingleRelatedEntity.json */; };
-		C76D3EF715718EBC00B2D163 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76D3EF615718EBC00B2D163 /* UIKit.framework */; };
-		C76D3EF915718EC800B2D163 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76D3EF815718EC800B2D163 /* CoreGraphics.framework */; };
 		C77E5F9B13D0CA0A00298F87 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C7E213D0C3A00097AB6F /* CoreData.framework */; };
 		C77E5FA813D0CBDE00298F87 /* MagicalRecordTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E5FA713D0CBDE00298F87 /* MagicalRecordTests.m */; };
 		C77E5FB313D0D1D100298F87 /* SingleEntityWithNoRelationships.plist in Resources */ = {isa = PBXBuildFile; fileRef = C77E5FB213D0D1D100298F87 /* SingleEntityWithNoRelationships.plist */; };
@@ -231,7 +297,6 @@
 		C7DD7307150F832B00216827 /* MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72D2150F832A00216827 /* MagicalRecord.m */; };
 		C7DD7308150F832B00216827 /* MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72D2150F832A00216827 /* MagicalRecord.m */; };
 		C7E736DF1402FE64005657C9 /* SingleEntityWithNoRelationships.json in Resources */ = {isa = PBXBuildFile; fileRef = C7E736DE1402FE64005657C9 /* SingleEntityWithNoRelationships.json */; };
-		C7F5EEB2148DC76700964607 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		FD73E54614AC4AC700922CA4 /* MagicalDataImportTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C7913B9C13FAFC13007E09CC /* MagicalDataImportTestCase.m */; };
 /* End PBXBuildFile section */
 
@@ -248,27 +313,45 @@
 		};
 /* End PBXBuildRule section */
 
+/* Begin PBXContainerItemProxy section */
+		90DD203B167AA44D0033BA25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90DD2033167AA44D0033BA25 /* Kiwi.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F5015B9F11583A77002E9A98;
+			remoteInfo = Kiwi;
+		};
+		90DD203D167AA44D0033BA25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90DD2033167AA44D0033BA25 /* Kiwi.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 832C83C7157263B300F160D5;
+			remoteInfo = "Kiwi-OSX";
+		};
+		90DD203F167AA44D0033BA25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90DD2033167AA44D0033BA25 /* Kiwi.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F5015C9E11584017002E9A98;
+			remoteInfo = KiwiTests;
+		};
+		90DD2041167AA44D0033BA25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90DD2033167AA44D0033BA25 /* Kiwi.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A3B16542139967B800E9CC6E;
+			remoteInfo = KiwiExamples;
+		};
+		90DD2043167AA4530033BA25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90DD2033167AA44D0033BA25 /* Kiwi.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 832C8323157263B300F160D5;
+			remoteInfo = "Kiwi-OSX";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
-		C753897513DB6310002B2F57 /* Copy GHUnit into App Bundle */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Copy GHUnit into App Bundle";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C76AF7F313DBC33100CE2E05 /* Copy OCHamcrest into App Bundle */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			name = "Copy OCHamcrest into App Bundle";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C7E37A7B14157BE600CE9BF5 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -278,20 +361,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FD73E54714AC4D5200922CA4 /* CopyFiles */ = {
+		FD73E54714AC4D5200922CA4 /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				900E1CC11676E246005FFF1C /* GHUnit.framework in Copy Frameworks */,
+				900E1CC21676E246005FFF1C /* OCHamcrest.framework in Copy Frameworks */,
+				900E1CC31676E246005FFF1C /* OCMock.framework in Copy Frameworks */,
 			);
+			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4B7116BB15F8ED5A00B64426 /* SaveTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SaveTests.h; path = "Unit Tests/SaveTests.h"; sourceTree = "<group>"; };
-		4B7116BC15F8ED5A00B64426 /* SaveTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SaveTests.m; path = "Unit Tests/SaveTests.m"; sourceTree = "<group>"; };
 		4B7116C115F8EE4600B64426 /* EXPBackwardCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXPBackwardCompatibility.h; sourceTree = "<group>"; };
 		4B7116C215F8EE4600B64426 /* EXPBackwardCompatibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXPBackwardCompatibility.m; sourceTree = "<group>"; };
 		4B7116C315F8EE4600B64426 /* EXPBlockDefinedMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXPBlockDefinedMatcher.h; sourceTree = "<group>"; };
@@ -352,6 +437,21 @@
 		4B7116FB15F8EE4600B64426 /* NSValue+Expecta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+Expecta.h"; sourceTree = "<group>"; };
 		4B7116FC15F8EE4600B64426 /* NSValue+Expecta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+Expecta.m"; sourceTree = "<group>"; };
 		4B93EA48160ECF1D00FB5676 /* TestModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TestModel.xcdatamodel; sourceTree = "<group>"; };
+		900E1CC41676E25E005FFF1C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		900E1CC61676E275005FFF1C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		90DD201D167AA4350033BA25 /* Mac Unit Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mac Unit Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		90DD201E167AA4350033BA25 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		90DD2020167AA4350033BA25 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		90DD2023167AA4350033BA25 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		90DD2024167AA4350033BA25 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		90DD2025167AA4350033BA25 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		90DD2028167AA4350033BA25 /* Mac Unit Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mac Unit Tests-Info.plist"; sourceTree = "<group>"; };
+		90DD202F167AA4350033BA25 /* Mac Unit Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mac Unit Tests-Prefix.pch"; sourceTree = "<group>"; };
+		90DD2033167AA44D0033BA25 /* Kiwi.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Kiwi.xcodeproj; path = "Third Party/Kiwi/Kiwi.xcodeproj"; sourceTree = "<group>"; };
+		90DD2045167AA45B0033BA25 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		90DD2048167AA4670033BA25 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		90DD204D167AA4E10033BA25 /* MagicalRecord+ActionsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MagicalRecord+ActionsSpec.m"; sourceTree = "<group>"; };
+		90DD2092167AAEFA0033BA25 /* NSManagedObjectContext+MagicalSavesSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+MagicalSavesSpec.m"; sourceTree = "<group>"; };
 		C70B6E6F13D0F62500709450 /* NSPersisentStoreHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSPersisentStoreHelperTests.h; path = "Unit Tests/NSPersisentStoreHelperTests.h"; sourceTree = "<group>"; };
 		C70B6E7013D0F62500709450 /* NSPersisentStoreHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSPersisentStoreHelperTests.m; path = "Unit Tests/NSPersisentStoreHelperTests.m"; sourceTree = "<group>"; };
 		C70B6E7213D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSPersistentStoreCoordinatorHelperTests.h; path = "Unit Tests/NSPersistentStoreCoordinatorHelperTests.h"; sourceTree = "<group>"; };
@@ -389,8 +489,6 @@
 		C763783113E10BEC0009A6CA /* GHUnitIOSTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUnitIOSTestMain.m; sourceTree = "<group>"; };
 		C76AF7FA13DBEB5500CE2E05 /* ImportSingleRelatedEntityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImportSingleRelatedEntityTests.m; path = "Unit Tests/ImportSingleRelatedEntityTests.m"; sourceTree = "<group>"; };
 		C76AF82913DBEE5A00CE2E05 /* SingleRelatedEntity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleRelatedEntity.json; path = "Unit Tests/Fixtures/SingleRelatedEntity.json"; sourceTree = "<group>"; };
-		C76D3EF615718EBC00B2D163 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		C76D3EF815718EC800B2D163 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		C77E5FA613D0CBDE00298F87 /* MagicalRecordTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MagicalRecordTests.h; path = "Unit Tests/MagicalRecordTests.h"; sourceTree = "<group>"; };
 		C77E5FA713D0CBDE00298F87 /* MagicalRecordTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MagicalRecordTests.m; path = "Unit Tests/MagicalRecordTests.m"; sourceTree = "<group>"; };
 		C77E5FB213D0D1D100298F87 /* SingleEntityWithNoRelationships.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SingleEntityWithNoRelationships.plist; path = "Unit Tests/Fixtures/SingleEntityWithNoRelationships.plist"; sourceTree = "<group>"; };
@@ -519,6 +617,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		90DD2019167AA4350033BA25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90DD204A167AA46D0033BA25 /* Cocoa.framework in Frameworks */,
+				90DD2047167AA4630033BA25 /* SenTestingKit.framework in Frameworks */,
+				90DD204B167AA46F0033BA25 /* libKiwi-OSX.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C721C7D913D0C3A00097AB6F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -535,8 +643,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C76D3EF915718EC800B2D163 /* CoreGraphics.framework in Frameworks */,
-				C76D3EF715718EBC00B2D163 /* UIKit.framework in Frameworks */,
+				900E1CC91676E488005FFF1C /* UIKit.framework in Frameworks */,
+				900E1CC81676E27E005FFF1C /* CoreGraphics.framework in Frameworks */,
 				C721C82513D0C4660097AB6F /* Foundation.framework in Frameworks */,
 				C77E5F9B13D0CA0A00298F87 /* CoreData.framework in Frameworks */,
 				C74F8E611555E39D0008B054 /* OCHamcrestIOS.framework in Frameworks */,
@@ -623,6 +731,48 @@
 			path = matchers;
 			sourceTree = "<group>";
 		};
+		90DD2022167AA4350033BA25 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				90DD2023167AA4350033BA25 /* AppKit.framework */,
+				90DD2024167AA4350033BA25 /* CoreData.framework */,
+				90DD2025167AA4350033BA25 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		90DD2026167AA4350033BA25 /* Mac Unit Tests */ = {
+			isa = PBXGroup;
+			children = (
+				90DD2027167AA4350033BA25 /* Supporting Files */,
+				90DD204D167AA4E10033BA25 /* MagicalRecord+ActionsSpec.m */,
+				90DD2092167AAEFA0033BA25 /* NSManagedObjectContext+MagicalSavesSpec.m */,
+			);
+			path = "Mac Unit Tests";
+			sourceTree = "<group>";
+		};
+		90DD2027167AA4350033BA25 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				90DD2048167AA4670033BA25 /* Cocoa.framework */,
+				90DD2045167AA45B0033BA25 /* SenTestingKit.framework */,
+				90DD2028167AA4350033BA25 /* Mac Unit Tests-Info.plist */,
+				90DD202F167AA4350033BA25 /* Mac Unit Tests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		90DD2034167AA44D0033BA25 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				90DD203C167AA44D0033BA25 /* libKiwi.a */,
+				90DD203E167AA44D0033BA25 /* libKiwi-OSX.a */,
+				90DD2040167AA44D0033BA25 /* KiwiTests.octest */,
+				90DD2042167AA44D0033BA25 /* KiwiExamples.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		C721C7A013D0A3750097AB6F = {
 			isa = PBXGroup;
 			children = (
@@ -632,6 +782,7 @@
 				C721C7E413D0C3A00097AB6F /* Mac App Unit Tests */,
 				C721C80213D0C3CD0097AB6F /* iOS App Unit Tests */,
 				C7C9A37013F43D3E002C5B0C /* Third Party */,
+				90DD2026167AA4350033BA25 /* Mac Unit Tests */,
 				C721C7B313D0A3AF0097AB6F /* Frameworks */,
 				C721C7B113D0A3AF0097AB6F /* Products */,
 			);
@@ -642,6 +793,7 @@
 			children = (
 				C721C7DC13D0C3A00097AB6F /* Mac App Unit Tests.app */,
 				C721C7FD13D0C3CD0097AB6F /* iOS App Unit Tests.app */,
+				90DD201D167AA4350033BA25 /* Mac Unit Tests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -651,6 +803,9 @@
 			children = (
 				C721C7E313D0C3A00097AB6F /* Foundation.framework */,
 				C721C7E213D0C3A00097AB6F /* CoreData.framework */,
+				90DD201E167AA4350033BA25 /* SenTestingKit.framework */,
+				90DD2020167AA4350033BA25 /* Cocoa.framework */,
+				90DD2022167AA4350033BA25 /* Other Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -700,8 +855,8 @@
 		C721C82E13D0C6390097AB6F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C76D3EF815718EC800B2D163 /* CoreGraphics.framework */,
-				C76D3EF615718EBC00B2D163 /* UIKit.framework */,
+				900E1CC61676E275005FFF1C /* UIKit.framework */,
+				900E1CC41676E25E005FFF1C /* CoreGraphics.framework */,
 				C7D2DC29155AFE6D00B3A468 /* GHUnitIOS.framework */,
 				C74F8E551555E39D0008B054 /* OCHamcrestIOS.framework */,
 				C74F8E561555E39D0008B054 /* OCMockLibrary */,
@@ -877,6 +1032,7 @@
 		C7C9A37013F43D3E002C5B0C /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				90DD2033167AA44D0033BA25 /* Kiwi.xcodeproj */,
 				4B7116C015F8EE4600B64426 /* expecta */,
 				C7C9A37113F43D93002C5B0C /* JSONKit.h */,
 				C7C9A37213F43D93002C5B0C /* JSONKit.m */,
@@ -1001,8 +1157,6 @@
 				C70B6E7913D0F68400709450 /* NSManagedObjectContextHelperTests.m */,
 				C70B6E7B13D0F69A00709450 /* NSManagedObjectHelperTests.h */,
 				C70B6E7C13D0F69A00709450 /* NSManagedObjectHelperTests.m */,
-				4B7116BB15F8ED5A00B64426 /* SaveTests.h */,
-				4B7116BC15F8ED5A00B64426 /* SaveTests.m */,
 			);
 			name = "Core Tests";
 			sourceTree = "<group>";
@@ -1010,6 +1164,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		90DD201C167AA4350033BA25 /* Mac Unit Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 90DD2032167AA4350033BA25 /* Build configuration list for PBXNativeTarget "Mac Unit Tests" */;
+			buildPhases = (
+				90DD2091167AA7700033BA25 /* Update Generated Core Data Entities */,
+				90DD2018167AA4350033BA25 /* Sources */,
+				90DD2019167AA4350033BA25 /* Frameworks */,
+				90DD201A167AA4350033BA25 /* Resources */,
+				90DD201B167AA4350033BA25 /* Run Unit Tests */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				90DD2044167AA4530033BA25 /* PBXTargetDependency */,
+			);
+			name = "Mac Unit Tests";
+			productName = "Mac Unit Tests";
+			productReference = 90DD201D167AA4350033BA25 /* Mac Unit Tests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		C721C7DB13D0C3A00097AB6F /* Mac App Unit Tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C721C7F613D0C3A00097AB6F /* Build configuration list for PBXNativeTarget "Mac App Unit Tests" */;
@@ -1018,9 +1192,7 @@
 				C721C7D813D0C3A00097AB6F /* Sources */,
 				C721C7D913D0C3A00097AB6F /* Frameworks */,
 				C721C7DA13D0C3A00097AB6F /* Resources */,
-				C753897513DB6310002B2F57 /* Copy GHUnit into App Bundle */,
-				C76AF7F313DBC33100CE2E05 /* Copy OCHamcrest into App Bundle */,
-				FD73E54714AC4D5200922CA4 /* CopyFiles */,
+				FD73E54714AC4D5200922CA4 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1058,7 +1230,7 @@
 		C721C7A213D0A3750097AB6F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Magical Panda Software LLC";
 			};
 			buildConfigurationList = C721C7A513D0A3750097AB6F /* Build configuration list for PBXProject "Magical Record" */;
@@ -1071,15 +1243,71 @@
 			mainGroup = C721C7A013D0A3750097AB6F;
 			productRefGroup = C721C7B113D0A3AF0097AB6F /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 90DD2034167AA44D0033BA25 /* Products */;
+					ProjectRef = 90DD2033167AA44D0033BA25 /* Kiwi.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				C721C7DB13D0C3A00097AB6F /* Mac App Unit Tests */,
 				C721C7FC13D0C3CD0097AB6F /* iOS App Unit Tests */,
+				90DD201C167AA4350033BA25 /* Mac Unit Tests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		90DD203C167AA44D0033BA25 /* libKiwi.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libKiwi.a;
+			remoteRef = 90DD203B167AA44D0033BA25 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		90DD203E167AA44D0033BA25 /* libKiwi-OSX.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libKiwi-OSX.a";
+			remoteRef = 90DD203D167AA44D0033BA25 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		90DD2040167AA44D0033BA25 /* KiwiTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = KiwiTests.octest;
+			remoteRef = 90DD203F167AA44D0033BA25 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		90DD2042167AA44D0033BA25 /* KiwiExamples.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = KiwiExamples.octest;
+			remoteRef = 90DD2041167AA44D0033BA25 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
+		90DD201A167AA4350033BA25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90DD2090167AA7590033BA25 /* generateShorthandFile.rb in Resources */,
+				90DD206B167AA6DF0033BA25 /* SingleEntityWithNoRelationships.plist in Resources */,
+				90DD206C167AA6DF0033BA25 /* SingleEntityWithNoRelationships.json in Resources */,
+				90DD206D167AA6DF0033BA25 /* SampleJSONDataForImport.json in Resources */,
+				90DD206E167AA6DF0033BA25 /* SingleRelatedEntity.json in Resources */,
+				90DD206F167AA6DF0033BA25 /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.json in Resources */,
+				90DD2070167AA6DF0033BA25 /* SingleEntityRelatedToMappedEntityUsingDefaults.json in Resources */,
+				90DD2071167AA6DF0033BA25 /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json in Resources */,
+				90DD2072167AA6DF0033BA25 /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json in Resources */,
+				90DD2073167AA6DF0033BA25 /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.json in Resources */,
+				90DD2074167AA6DF0033BA25 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C721C7DA13D0C3A00097AB6F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1121,6 +1349,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		90DD201B167AA4350033BA25 /* Run Unit Tests */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Unit Tests";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		90DD2091167AA7700033BA25 /* Update Generated Core Data Entities */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Generated Core Data Entities";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#cd \"Unit Tests/Fixtures/Mac\" && mogenerator -m TestModel.xcdatamodeld/TestModel.xcdatamodel -O TestEntities";
+		};
 		C76AF7F613DBD47400CE2E05 /* Update Generated Core Data Entities */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1166,6 +1422,64 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		90DD2018167AA4350033BA25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90DD204E167AA4E10033BA25 /* MagicalRecord+ActionsSpec.m in Sources */,
+				90DD2054167AA6C80033BA25 /* MappedEntity.m in Sources */,
+				90DD2055167AA6C80033BA25 /* AbstractRelatedEntity.m in Sources */,
+				90DD2056167AA6C80033BA25 /* ConcreteRelatedEntity.m in Sources */,
+				90DD2057167AA6C80033BA25 /* DifferentClassNameMapping.m in Sources */,
+				90DD2058167AA6C80033BA25 /* SingleEntityWithNoRelationships.m in Sources */,
+				90DD2059167AA6C80033BA25 /* SingleRelatedEntity.m in Sources */,
+				90DD205A167AA6C80033BA25 /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.m in Sources */,
+				90DD205B167AA6C80033BA25 /* SingleEntityRelatedToMappedEntityUsingDefaults.m in Sources */,
+				90DD205C167AA6C80033BA25 /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m in Sources */,
+				90DD205D167AA6C80033BA25 /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m in Sources */,
+				90DD205E167AA6C80033BA25 /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m in Sources */,
+				90DD205F167AA6CC0033BA25 /* TestModel.xcdatamodeld in Sources */,
+				90DD2060167AA6D80033BA25 /* _SingleEntityRelatedToMappedEntityWithSecondaryMappings.m in Sources */,
+				90DD2061167AA6D80033BA25 /* _AbstractRelatedEntity.m in Sources */,
+				90DD2062167AA6D80033BA25 /* _ConcreteRelatedEntity.m in Sources */,
+				90DD2063167AA6D80033BA25 /* _DifferentClassNameMapping.m in Sources */,
+				90DD2064167AA6D80033BA25 /* _SingleEntityWithNoRelationships.m in Sources */,
+				90DD2065167AA6D80033BA25 /* _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m in Sources */,
+				90DD2066167AA6D80033BA25 /* _SingleRelatedEntity.m in Sources */,
+				90DD2067167AA6D80033BA25 /* _MappedEntity.m in Sources */,
+				90DD2068167AA6D80033BA25 /* _SingleEntityRelatedToMappedEntityUsingDefaults.m in Sources */,
+				90DD2069167AA6D80033BA25 /* _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m in Sources */,
+				90DD206A167AA6D80033BA25 /* _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m in Sources */,
+				90DD2076167AA7050033BA25 /* MagicalRecord.m in Sources */,
+				90DD2077167AA7050033BA25 /* MagicalRecord+Actions.m in Sources */,
+				90DD2078167AA7050033BA25 /* MagicalRecord+ErrorHandling.m in Sources */,
+				90DD2079167AA7050033BA25 /* MagicalRecord+iCloud.m in Sources */,
+				90DD207A167AA7050033BA25 /* MagicalRecord+Options.m in Sources */,
+				90DD207B167AA7050033BA25 /* MagicalRecord+Setup.m in Sources */,
+				90DD207C167AA7050033BA25 /* MagicalRecord+ShorthandSupport.m in Sources */,
+				90DD207D167AA7080033BA25 /* NSManagedObjectModel+MagicalRecord.m in Sources */,
+				90DD207E167AA7080033BA25 /* NSPersistentStore+MagicalRecord.m in Sources */,
+				90DD207F167AA7080033BA25 /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
+				90DD2080167AA70E0033BA25 /* MagicalImportFunctions.m in Sources */,
+				90DD2081167AA70E0033BA25 /* NSEntityDescription+MagicalDataImport.m in Sources */,
+				90DD2082167AA70E0033BA25 /* NSAttributeDescription+MagicalDataImport.m in Sources */,
+				90DD2083167AA70E0033BA25 /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
+				90DD2084167AA70E0033BA25 /* NSNumber+MagicalDataImport.m in Sources */,
+				90DD2085167AA70E0033BA25 /* NSObject+MagicalDataImport.m in Sources */,
+				90DD2086167AA70E0033BA25 /* NSString+MagicalDataImport.m in Sources */,
+				90DD2087167AA7130033BA25 /* NSManagedObject+MagicalAggregation.m in Sources */,
+				90DD2088167AA7130033BA25 /* NSManagedObject+MagicalDataImport.m in Sources */,
+				90DD2089167AA7130033BA25 /* NSManagedObject+MagicalFinders.m in Sources */,
+				90DD208A167AA7130033BA25 /* NSManagedObject+MagicalRecord.m in Sources */,
+				90DD208B167AA7130033BA25 /* NSManagedObject+MagicalRequests.m in Sources */,
+				90DD208C167AA7180033BA25 /* NSManagedObjectContext+MagicalObserving.m in Sources */,
+				90DD208D167AA7180033BA25 /* NSManagedObjectContext+MagicalRecord.m in Sources */,
+				90DD208E167AA7180033BA25 /* NSManagedObjectContext+MagicalSaves.m in Sources */,
+				90DD208F167AA7180033BA25 /* NSManagedObjectContext+MagicalThreading.m in Sources */,
+				90DD2093167AAEFA0033BA25 /* NSManagedObjectContext+MagicalSavesSpec.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C721C7D813D0C3A00097AB6F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1181,7 +1495,6 @@
 				C76AF7EB13DBC08F00CE2E05 /* NSManagedObjectContextHelperTests.m in Sources */,
 				C76AF7EC13DBC08F00CE2E05 /* NSManagedObjectHelperTests.m in Sources */,
 				C76AF7FB13DBEB5500CE2E05 /* ImportSingleRelatedEntityTests.m in Sources */,
-				C7F5EEB2148DC76700964607 /* (null) in Sources */,
 				C78990211506937E0016F493 /* MappedEntity.m in Sources */,
 				C7899022150693D50016F493 /* _SingleEntityRelatedToMappedEntityWithSecondaryMappings.m in Sources */,
 				C7899023150693D50016F493 /* _AbstractRelatedEntity.m in Sources */,
@@ -1263,7 +1576,6 @@
 				4B71172D15F8EE4600B64426 /* EXPMatchers+haveCountOf.m in Sources */,
 				4B71172F15F8EE4600B64426 /* EXPMatchers+raise.m in Sources */,
 				4B71173115F8EE4600B64426 /* NSValue+Expecta.m in Sources */,
-				4B71173415F914A400B64426 /* SaveTests.m in Sources */,
 				4B93EA49160ECF1D00FB5676 /* TestModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1365,12 +1677,19 @@
 				4B71172E15F8EE4600B64426 /* EXPMatchers+haveCountOf.m in Sources */,
 				4B71173015F8EE4600B64426 /* EXPMatchers+raise.m in Sources */,
 				4B71173215F8EE4600B64426 /* NSValue+Expecta.m in Sources */,
-				4B71173315F9149900B64426 /* SaveTests.m in Sources */,
 				4B93EA4A160ECF1D00FB5676 /* TestModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		90DD2044167AA4530033BA25 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Kiwi-OSX";
+			targetProxy = 90DD2043167AA4530033BA25 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		C721C7E713D0C3A00097AB6F /* InfoPlist.strings */ = {
@@ -1400,27 +1719,103 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		90DD2030167AA4350033BA25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mac Unit Tests/Mac Unit Tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/Third Party/Kiwi/Kiwi\"",
+				);
+				INFOPLIST_FILE = "Mac Unit Tests/Mac Unit Tests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-all_load";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		90DD2031167AA4350033BA25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mac Unit Tests/Mac Unit Tests-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/Third Party/Kiwi/Kiwi\"",
+				);
+				INFOPLIST_FILE = "Mac Unit Tests/Mac Unit Tests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OTHER_LDFLAGS = "-all_load";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		C721C7A713D0A3750097AB6F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = "";
+				WARNING_CFLAGS = "-Wdocumentation";
 			};
 			name = Debug;
 		};
@@ -1429,22 +1824,27 @@
 			buildSettings = {
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = "";
+				WARNING_CFLAGS = "-Wdocumentation";
 			};
 			name = Release;
 		};
@@ -1659,6 +2059,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		90DD2032167AA4350033BA25 /* Build configuration list for PBXNativeTarget "Mac Unit Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				90DD2030167AA4350033BA25 /* Debug */,
+				90DD2031167AA4350033BA25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C721C7A513D0A3750097AB6F /* Build configuration list for PBXProject "Magical Record" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

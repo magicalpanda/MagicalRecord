@@ -42,7 +42,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
 
 - (NSString *) MR_parentChain;
 {
-    NSMutableString *familyTree = [@"" mutableCopy];
+    NSMutableString *familyTree = [@"\n" mutableCopy];
     NSManagedObjectContext *currentContext = self;
     do
     {
@@ -84,7 +84,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     defaultManagedObjectContext_ = moc;
     [defaultManagedObjectContext_ MR_setWorkingName:@"DEFAULT"];
     
-//    [moc MR_obtainPermanentIDsBeforeSaving];
+    [moc MR_obtainPermanentIDsBeforeSaving];
     if ([MagicalRecord isICloudEnabled])
     {
         [defaultManagedObjectContext_ MR_observeiCloudChangesInCoordinator:coordinator];
@@ -115,7 +115,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     }
     
     rootSavingContext = context;
-//    [context MR_obtainPermanentIDsBeforeSaving];
+    [context MR_obtainPermanentIDsBeforeSaving];
     [rootSavingContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
     [rootSavingContext MR_setWorkingName:@"BACKGROUND SAVING (ROOT)"];
     MRLog(@"Set Root Saving Context: %@", rootSavingContext);
@@ -131,7 +131,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
         NSManagedObjectContext *defaultContext = [self MR_newMainQueueContext];
         [self MR_setDefaultContext:defaultContext];
         
-        [defaultContext setParentContext:rootSavingContext];
+        [defaultContext setParentContext:rootContext];
     }
 }
 
@@ -161,7 +161,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
 {
     NSManagedObjectContext *context = [self MR_contextWithoutParent];
     [context setParentContext:parentContext];
-//    [context MR_obtainPermanentIDsBeforeSaving];
+    [context MR_obtainPermanentIDsBeforeSaving];
     return context;
 }
 
@@ -182,7 +182,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
             [context setPersistentStoreCoordinator:coordinator];
         }];
         
-        MRLog(@"-> Created %@", [context MR_description]);
+        MRLog(@"-> Created Context %@", [context MR_workingName]);
     }
     return context;
 }
@@ -193,6 +193,8 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
                                              selector:@selector(MR_contextWillSave:)
                                                  name:NSManagedObjectContextWillSaveNotification
                                                object:self];
+    
+    
 }
 
 - (void) MR_contextWillSave:(NSNotification *)notification

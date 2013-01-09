@@ -1,23 +1,19 @@
+# Finder
 .DS_Store
-*.swp
-*~.nib
 
-build/
-
+# Xcode
+build/*
 *.pbxuser
-*.perspective
-*.perspectivev3
-
-.hg
-.hgtags
-
+!default.pbxuser
 *.mode1v3
+!default.mode1v3
 *.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.xcworkspace
+!default.xcworkspace
+xcuserdata
+profile
+*.moved-aside
 
-UserInterfaceState.xcuserstate
-/Magical Record.xcodeproj/project.xcworkspace/xcuserdata/saul.xcuserdatad/UserInterfaceState.xcuserstate
-/Magical Record.xcodeproj/xcuserdata/saul.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist
-/Magical Record.xcodeproj/xcuserdata/gfurman.xcuserdatad
-Project Files/Magical Record.xcodeproj/xcuserdata
-Project Files/MagicalRecord.xcodeproj/xcuserdata/saul.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist
-Project Files/MagicalRecord.xcodeproj/xcuserdata/saul.xcuserdatad/xcschemes/iOS Test Runner.xcscheme
