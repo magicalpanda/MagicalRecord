@@ -17,21 +17,65 @@ MagicalRecord was inspired by the ease of Ruby on Rails' Active Record fetching.
 
 1. In your XCode Project, drag the *MagicalRecord* folder (under the main folder) into your project. 
 2. Add *CoreData+MagicalRecord.h* file to your PCH file or your AppDelegate file.
-3. Optionally precees the *CoreData+MagicalRecord.h* import with `#define MR_SHORTHAND` to your PCH file if you want to use MagicalRecord methods without the *MR_prefix* like `findAll` instead of `MR_findAll`
+3. Optionally preceed the *CoreData+MagicalRecord.h* import with `#define MR_SHORTHAND` to your PCH file if you want to use MagicalRecord methods without the *MR_prefix* like `findAll` instead of `MR_findAll`
 4. Start writing code!
 
 # Requirements
 
 MagicalRecord Platform Requirements:
 
-* iOS5.0 and newer, or Mac OS 10.7 and newer
+* iOS5.x or newer, or Mac OS 10.7 and newer
 * ARC
 
 An iOS4 compatible version is available for use. Reference [tag 1.8.3](https://github.com/magicalpanda/MagicalRecord/tree/1.8.3).
 
-## Updating to 2.0
+## Updating to 2.1
 
-MagicalRecord 2.0 is considered a major update since there were some class and API refactorings that will effect previous installations of MagicalRecord in your code. The most straight forward change is that *MagicalRecordHelpers* and *MRCoreDataAction* have both been replaced with a single class, *MagicalRecord*.
+MagicalRecord 2.1 is considered a major update as there are class and API changes that may affect existing uses of MagicalRecord in your code. 
+
+### Changes to saving
+
+The APIs for saving have been revised to behave more consistently, and also to follow naming patterns present in Core Data. Extensive work has gone into adding automated tests that ensure the save methods (both new and deprecated) continue to work as expected through future updates. 
+
+`MR_save` has been temporarily restored to it's original state of running synchronously on the current thread, and saving to the persistent store. However, the __`MR_save` method is marked as deprecated and will be removed in the next major release of MagicalRecord (version 3.0)__. You should use `MR_saveToPersistentStoreAndWait` if you want the same behaviour in future versions of the library.
+
+### New Methods
+The following methods have been added:
+
+#### NSManagedObjectContext+MagicalSaves
+- `- (void) MR_saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;`
+- `- (void) MR_saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion;`
+- `- (void) MR_saveOnlySelfAndWait;`
+- `- (void) MR_saveToPersistentStoreAndWait;`
+- `- (void) MR_saveWithOptions:(MRSaveContextOptions)mask completion:(MRSaveCompletionHandler)completion;`
+
+#### __MagicalRecord+Actions__
+- `+ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;`
+- `+ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;`
+- `+ (void) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;`
+- `+ (void) saveUsingCurrentThreadContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;`
+- `+ (void) saveUsingCurrentThreadContextWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block;`
+
+### Deprecations
+
+The following methods have been deprecated in favour of newer alternatives, and will be removed in MagicalRecord 3.0:
+
+#### NSManagedObjectContext+MagicalSaves
+- `- (void) MR_save;`
+- `- (void) MR_saveWithErrorCallback:(void(^)(NSError *error))errorCallback;`
+- `- (void) MR_saveInBackgroundCompletion:(void (^)(void))completion;`
+- `- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback;`
+- `- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion;`
+- `- (void) MR_saveNestedContexts;`
+- `- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback;`
+- `- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion;`
+        
+### MagicalRecord+Actions
+- `+ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;`
+- `+ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block;`
+- `+ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))completion;`
+- `+ (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *error))errorHandler;`
+
 
 ## ARC Support
 
@@ -55,7 +99,7 @@ Follow [@MagicalRecord](http://twitter.com/magicalrecord) on twitter to stay up 
 
 ## Nested Contexts
 
-New in Core Data is support for related contexts. This is a super neat, and super fast feature. However, writing a wrapper that supports both is, frankly, more work that it's worth. However, the 1.8.3 version will be the last version that has dual support, and going forward, MagicalRecord will only work with the version of Core Data that has supports nested managed object contexts.
+New in Core Data is support for related contexts. This is a super neat, and super fast feature. However, writing a wrapper that supports both is, frankly, more work that it's worth. However, the 1.8.3 version will be the last version that has dual support, and going forward, MagicalRecord will only work with the version of Core Data that supports nested managed object contexts.
 
 MagicalRecord provides a background saving queue so that saving all data is performed off the main thread, in the background. This means that it may be necessary to use *MR_saveNestedContexts* rather than the typical *MR_save* method in order to persist your changes all the way to your persistent store;
 
@@ -81,7 +125,9 @@ Next, somewhere in your app delegate, in either the applicationDidFinishLaunchin
 
 Each call instantiates one of each piece of the Core Data stack, and provides getter and setter methods for these instances. These well known instances to MagicalRecord, and are recognized as "defaults".
 
-And, before your app exits, you can use the clean up method:
+When using the default sqlite data store with the DEBUG flag set, if you change your model without creating a new model version, Magical Record will delete the old store and create a new one automatically. No more uninstall/reinstall every time you make a change!
+
+And finally, before your app exits, you can use the clean up method:
 
 	[MagicalRecord cleanUp];
 	
@@ -105,7 +151,7 @@ When using Core Data, you will deal with two types of objects the most: *NSManag
 
     [NSManagedObjectContext MR_defaultContext];
 
-This context will be used if a find or request method (described below) is not specifying a specific context using the **inContext:** method overload.
+This context will be used if a find or request method (described below) does not specify a specific context using the **inContext:** method overload.
 
 If you need to create a new Managed Object Context for use in other threads, based on the default persistent store that was creating using one of the setup methods, use:
 
@@ -194,13 +240,13 @@ There are also counterpart methods which return NSUInteger rather than NSNumbers
 
 #### Aggregate Operations
 
-    NSPredicate *prediate = [NSPredicate predicateWithFormat:@"diaryEntry.date == %@", today];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"diaryEntry.date == %@", today];
     int totalFat = [[CTFoodDiaryEntry MR_aggregateOperation:@"sum:" onAttribute:@"fatColories" withPredicate:predicate] intValue];
     int fattest  = [[CTFoodDiaryEntry MR_aggregateOperation:@"max:" onAttribute:@"fatColories" withPredicate:predicate] intValue];
     
 #### Finding from a different context
 
-All find, fetch and request methods have an inContext: method parameter
+All find, fetch, and request methods have an inContext: method parameter
 
 	NSManagedObjectContext *someOtherContext = ...;
 

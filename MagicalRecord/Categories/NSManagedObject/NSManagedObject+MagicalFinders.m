@@ -1,4 +1,4 @@
-//
+    //
 //  NSManagedObject+MagicalFinders.m
 //  Magical Record
 //
@@ -101,6 +101,21 @@
                                inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
++ (id) MR_findFirstOrderedByAttribute:(NSString *)attribute ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
+{
+    NSFetchRequest *request = [self MR_requestAllSortedBy:attribute ascending:ascending inContext:context];
+    [request setFetchLimit:1];
+
+    return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
+}
+
++ (id) MR_findFirstOrderedByAttribute:(NSString *)attribute ascending:(BOOL)ascending;
+{
+    return [self MR_findFirstOrderedByAttribute:attribute
+                                      ascending:ascending
+                                      inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+}
+
 + (id) MR_findFirstWithPredicate:(NSPredicate *)searchTerm
 {
     return [self MR_findFirstWithPredicate:searchTerm inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
@@ -183,7 +198,7 @@
 	NSPredicate *searchTerm = [NSPredicate predicateWithFormat:@"%K = %@", attribute, searchValue];
 	NSFetchRequest *request = [self MR_requestAllSortedBy:sortTerm ascending:ascending withPredicate:searchTerm inContext:context];
 	
-	return [self MR_executeFetchRequest:request];
+	return [self MR_executeFetchRequest:request inContext:context];
 }
 
 + (NSArray *) MR_findByAttribute:(NSString *)attribute withValue:(id)searchValue andOrderBy:(NSString *)sortTerm ascending:(BOOL)ascending
@@ -213,6 +228,20 @@
                                                    cacheName:cacheName];
     controller.delegate = delegate;
     
+    return controller;
+}
+
++ (NSFetchedResultsController *) MR_fetchAllWithDelegate:(id<NSFetchedResultsControllerDelegate>)delegate;
+{
+    return [self MR_fetchAllWithDelegate:delegate inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+}
+
++ (NSFetchedResultsController *) MR_fetchAllWithDelegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context;
+{
+    NSFetchRequest *request = [self MR_requestAllInContext:context];
+    NSFetchedResultsController *controller = [self MR_fetchController:request delegate:delegate useFileCache:NO groupedBy:nil inContext:context];
+
+    [self MR_performFetch:controller];
     return controller;
 }
 

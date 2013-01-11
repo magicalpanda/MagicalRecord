@@ -16,7 +16,6 @@ extern NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification;
 + (NSManagedObjectContext *) MR_context NS_RETURNS_RETAINED;
 + (NSManagedObjectContext *) MR_contextWithParent:(NSManagedObjectContext *)parentContext NS_RETURNS_RETAINED;
 + (NSManagedObjectContext *) MR_newMainQueueContext NS_RETURNS_RETAINED;
-+ (NSManagedObjectContext *) MR_contextThatPushesChangesToDefaultContext NS_RETURNS_RETAINED;
 + (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator NS_RETURNS_RETAINED;
 
 + (void) MR_resetDefaultContext;
@@ -24,5 +23,8 @@ extern NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification;
 + (NSManagedObjectContext *) MR_defaultContext;
 
 - (NSString *) MR_description;
+- (NSString *) MR_parentChain;
+
+@property (nonatomic, copy, setter = MR_setWorkingName:) NSString *MR_workingName;
 
 @end

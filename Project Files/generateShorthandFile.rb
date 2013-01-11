@@ -1,4 +1,4 @@
-#!/usr/local/Cellar/ruby/1.9.2-p290/bin/ruby
+#!/usr/bin/env ruby
 #
 #  ProcessHeader.rb
 #  Magical Record
