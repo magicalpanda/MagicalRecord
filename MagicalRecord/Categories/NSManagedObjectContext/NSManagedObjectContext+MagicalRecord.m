@@ -173,6 +173,14 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     return context;
 }
 
++ (NSManagedObjectContext *) MR_mainQueueContext;
+{
+    NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    [context setParentContext:[NSManagedObjectContext MR_defaultContext]];
+
+    return context;
+}
+
 + (NSManagedObjectContext *) MR_newMainQueueContext;
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
