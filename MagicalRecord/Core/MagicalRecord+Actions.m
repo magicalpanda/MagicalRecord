@@ -9,6 +9,16 @@
 #import "NSManagedObjectContext+MagicalRecord.h"
 
 
+dispatch_queue_t saveQueue()
+{
+    static dispatch_queue_t serial_save_queue;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        serial_save_queue = dispatch_queue_create("com.magicalpanda.magicalrecord.serialsavequeue", DISPATCH_QUEUE_SERIAL);
+    });
+    return serial_save_queue;
+}
+
 @implementation MagicalRecord (Actions)
 
 #pragma mark - Asynchronous saving
@@ -30,8 +40,9 @@
 
 + (void) saveWithBlock:(void (^)(NSManagedObjectContext *))block identifier:(NSString *)contextWorkingName completion:(MRSaveCompletionHandler)completion;
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-
+    MRLog(@"Dispatching save request: %@", contextWorkingName);
+    dispatch_async(saveQueue(), ^{
+        MRLog(@"%@ save starting", contextWorkingName);
         NSManagedObjectContext *localContext = [NSManagedObjectContext MR_confinementContext];
         [localContext MR_setWorkingName:contextWorkingName];
         
@@ -41,7 +52,7 @@
         }
 
         [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:completion];
-    
+        MRLog(@"%@ save completed", contextWorkingName);
     });
 }
 
