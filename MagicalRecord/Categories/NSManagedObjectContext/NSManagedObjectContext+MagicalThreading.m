@@ -31,7 +31,7 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
 		NSManagedObjectContext *threadContext = [threadDict objectForKey:kMagicalRecordManagedObjectContextKey];
 		if (threadContext == nil)
 		{
-			threadContext = [self MR_contextWithParent:[NSManagedObjectContext MR_defaultContext]];
+			threadContext = [self MR_confinementContext];
 			[threadDict setObject:threadContext forKey:kMagicalRecordManagedObjectContextKey];
 		}
 		return threadContext;

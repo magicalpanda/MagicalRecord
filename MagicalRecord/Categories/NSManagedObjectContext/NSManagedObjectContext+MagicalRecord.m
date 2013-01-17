@@ -128,7 +128,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
         NSManagedObjectContext *rootContext = [self MR_contextWithStoreCoordinator:coordinator];
         [self MR_setRootSavingContext:rootContext];
         
-        NSManagedObjectContext *defaultContext = [self MR_newMainQueueContext];
+        NSManagedObjectContext *defaultContext = [[self alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         [self MR_setDefaultContext:defaultContext];
         
         [defaultContext setParentContext:rootContext];
@@ -144,48 +144,33 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     dispatch_async(dispatch_get_main_queue(), resetBlock);
 }
 
-+ (NSManagedObjectContext *) MR_contextWithoutParent;
-{
-    NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    return context;
-}
-
 + (NSManagedObjectContext *) MR_context;
 {
-    NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    [context setParentContext:[self MR_defaultContext]];
-    return context;
-}
-
-+ (NSManagedObjectContext *) MR_contextWithParent:(NSManagedObjectContext *)parentContext;
-{
-    NSManagedObjectContext *context = [self MR_contextWithoutParent];
-    [context setParentContext:parentContext];
-//    [context MR_obtainPermanentIDsBeforeSaving];
-    return context;
+    return [self MR_privateQueueContext];
 }
 
 + (NSManagedObjectContext *) MR_confinementContext;
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSConfinementConcurrencyType];
-    [context setParentContext:[NSManagedObjectContext MR_defaultContext]];
-
+    [context setParentContext:[self MR_defaultContext]];
+    [context MR_setWorkingName:@"Confinement"];
     return context;
 }
 
 + (NSManagedObjectContext *) MR_mainQueueContext;
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [context setParentContext:[NSManagedObjectContext MR_defaultContext]];
-
+    [context setParentContext:[self MR_defaultContext]];
+    [context MR_setWorkingName:@"Main Queue"];
     return context;
 }
 
-+ (NSManagedObjectContext *) MR_newMainQueueContext;
++ (NSManagedObjectContext *) MR_privateQueueContext;
 {
-    NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    MRLog(@"Created Main Queue Context: %@", context);
-    return context;    
+    NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    [context setParentContext:[self MR_defaultContext]];
+    [context MR_setWorkingName:@"Private Queue"];
+    return context;
 }
 
 + (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
@@ -193,7 +178,9 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
 	NSManagedObjectContext *context = nil;
     if (coordinator != nil)
 	{
-        context = [self MR_contextWithoutParent];
+        context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        context.MR_workingName = @"Private Queue";
+        
         [context performBlockAndWait:^{
             [context setPersistentStoreCoordinator:coordinator];
         }];

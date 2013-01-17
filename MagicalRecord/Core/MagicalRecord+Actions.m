@@ -15,24 +15,33 @@
 
 + (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
 {
-    [self saveWithBlock:block completion:nil];
+    [self saveWithBlock:block identifier:NSStringFromSelector(_cmd) completion:nil];
+}
+
++ (void) saveWithIdentifier:(NSString *)identifier block:(void(^)(NSManagedObjectContext *))block;
+{
+    [self saveWithBlock:block identifier:identifier completion:nil];
 }
 
 + (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
 {
+    [self saveWithBlock:block identifier:NSStringFromSelector(_cmd) completion:completion];
+}
+
++ (void) saveWithBlock:(void (^)(NSManagedObjectContext *))block identifier:(NSString *)contextWorkingName completion:(MRSaveCompletionHandler)completion;
+{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
 
-        NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
-        NSManagedObjectContext *localContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSConfinementConcurrencyType];
-        [localContext setParentContext:mainContext];
-
+        NSManagedObjectContext *localContext = [NSManagedObjectContext MR_confinementContext];
+        [localContext MR_setWorkingName:contextWorkingName];
+        
         if (block)
         {
             block(localContext);
         }
 
         [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:completion];
-        
+    
     });
 }
 
@@ -54,8 +63,8 @@
 
 + (void) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
 {
-    NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
-    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
+//    NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
+    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_confinementContext];
 
     [localContext performBlockAndWait:^{
         if (block) {
@@ -92,8 +101,8 @@
 
 + (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))completion
 {
-    NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
-    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
+//    NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
+    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_confinementContext];
 
     [localContext performBlock:^{
         if (block)
