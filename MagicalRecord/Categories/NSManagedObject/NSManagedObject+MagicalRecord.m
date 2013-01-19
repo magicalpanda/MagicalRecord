@@ -203,6 +203,26 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     return [self MR_deleteAllMatchingPredicate:predicate inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
++ (BOOL) MR_deleteAllMatchingDictionaryOfAttributesAndValues:(NSDictionary *)attributesAndValues inContext:(NSManagedObjectContext *)context
+{
+    
+    NSMutableArray *predicates = [NSMutableArray array];
+    for (NSString *key in [attributesAndValues allKeys]) {
+        id value = [attributesAndValues objectForKey:key];
+        [predicates addObject:[NSPredicate predicateWithFormat:@"%K = %@", key,value]];
+    }
+    NSPredicate *finalPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicates];
+    
+    return [self MR_deleteAllMatchingPredicate:finalPredicate inContext:context];
+}
+
++ (BOOL) MR_deleteAllMatchingDictionaryOfAttributesAndValues:(NSDictionary *)attributesAndValues
+{
+    
+    return [self MR_deleteAllMatchingDictionaryOfAttributesAndValues:attributesAndValues
+                                                           inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+}
+
 + (BOOL) MR_truncateAllInContext:(NSManagedObjectContext *)context
 {
     NSArray *allEntities = [self MR_findAllInContext:context];

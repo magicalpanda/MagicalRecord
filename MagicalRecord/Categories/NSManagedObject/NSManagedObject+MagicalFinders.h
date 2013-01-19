@@ -19,6 +19,8 @@
 
 + (NSArray *) MR_findAllWithPredicate:(NSPredicate *)searchTerm;
 + (NSArray *) MR_findAllWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
++ (NSArray *) MR_FindAllMatchingDictionaryOfAttributesAndValues:(NSDictionary *)attributesAndValues;
++ (NSArray *) MR_FindAllMatchingDictionaryOfAttributesAndValues:(NSDictionary *)attributesAndValues inContext:(NSManagedObjectContext *)context;
 
 + (id) MR_findFirst;
 + (id) MR_findFirstInContext:(NSManagedObjectContext *)context;
