@@ -37,6 +37,9 @@
 + (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate;
 + (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
 
++ (BOOL) MR_deleteAllByAttributesAndValues:(NSDictionary *)attributesAndValues inContext:(NSManagedObjectContext *)context;                           
++ (BOOL) MR_deleteAllByAttributesAndValues:(NSDictionary *)attributesAndValues;
+
 + (BOOL) MR_truncateAll;
 + (BOOL) MR_truncateAllInContext:(NSManagedObjectContext *)context;
 

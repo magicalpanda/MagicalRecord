@@ -74,6 +74,24 @@
                                inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
++ (NSArray *) MR_findAllByAttributesAndValues:(NSDictionary *)attributesAndValues
+{
+    return [self MR_findAllByAttributesAndValues:attributesAndValues
+                                                         inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+}
+
++ (NSArray *) MR_findAllByAttributesAndValues:(NSDictionary *)attributesAndValues inContext:(NSManagedObjectContext *)context
+{
+    NSMutableArray *predicates = [NSMutableArray array];
+    for (NSString *key in [attributesAndValues allKeys]) {
+        id value = [attributesAndValues objectForKey:key];
+        [predicates addObject:[NSPredicate predicateWithFormat:@"%K = %@", key,value]];
+    }
+    NSPredicate *finalPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicates];
+    
+    return [self MR_findAllWithPredicate:finalPredicate inContext:context];
+}
+
 + (id) MR_findFirstInContext:(NSManagedObjectContext *)context
 {
 	NSFetchRequest *request = [self MR_createFetchRequestInContext:context];
