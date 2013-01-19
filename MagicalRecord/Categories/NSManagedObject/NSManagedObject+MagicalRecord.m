@@ -203,11 +203,11 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     return [self MR_deleteAllMatchingPredicate:predicate inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
-+ (BOOL) MR_deleteAllMatchingDictionaryOfAttributesAndValues:(NSDictionary *)attributesAndValues inContext:(NSManagedObjectContext *)context
++ (BOOL) MR_deleteAllByAttributesAndValues:(NSDictionary *)attributesAndValues inContext:(NSManagedObjectContext *)context
 {
-    
     NSMutableArray *predicates = [NSMutableArray array];
-    for (NSString *key in [attributesAndValues allKeys]) {
+    for (NSString *key in [attributesAndValues allKeys])
+    {
         id value = [attributesAndValues objectForKey:key];
         [predicates addObject:[NSPredicate predicateWithFormat:@"%K = %@", key,value]];
     }
@@ -216,10 +216,10 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     return [self MR_deleteAllMatchingPredicate:finalPredicate inContext:context];
 }
 
-+ (BOOL) MR_deleteAllMatchingDictionaryOfAttributesAndValues:(NSDictionary *)attributesAndValues
++ (BOOL) MR_deleteAllByAttributesAndValues:(NSDictionary *)attributesAndValues
 {
     
-    return [self MR_deleteAllMatchingDictionaryOfAttributesAndValues:attributesAndValues
+    return [self MR_deleteAllByAttributesAndValues:attributesAndValues
                                                            inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 

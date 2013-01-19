@@ -74,13 +74,13 @@
                                inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
-+ (NSArray *) MR_FindAllMatchingDictionaryOfAttributesAndValues:(NSDictionary *)attributesAndValues
++ (NSArray *) MR_findAllByAttributesAndValues:(NSDictionary *)attributesAndValues
 {
-    return [self MR_FindAllMatchingDictionaryOfAttributesAndValues:attributesAndValues
+    return [self MR_findAllByAttributesAndValues:attributesAndValues
                                                          inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
-+ (NSArray *) MR_FindAllMatchingDictionaryOfAttributesAndValues:(NSDictionary *)attributesAndValues inContext:(NSManagedObjectContext *)context
++ (NSArray *) MR_findAllByAttributesAndValues:(NSDictionary *)attributesAndValues inContext:(NSManagedObjectContext *)context
 {
     NSMutableArray *predicates = [NSMutableArray array];
     for (NSString *key in [attributesAndValues allKeys]) {
