@@ -20,6 +20,8 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 
 - (void) MR_observeContext:(NSManagedObjectContext *)otherContext
 {
+    if (self == otherContext) return;
+
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
 	[notificationCenter addObserver:self
                            selector:@selector(MR_mergeChangesFromNotification:)
@@ -29,6 +31,8 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 
 - (void) MR_observeContextOnMainThread:(NSManagedObjectContext *)otherContext
 {
+    if (self == otherContext) return;
+
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
 	[notificationCenter addObserver:self
                            selector:@selector(MR_mergeChangesOnMainThread:)
