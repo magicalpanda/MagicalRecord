@@ -160,4 +160,34 @@
     
 }
 
+- (void) testImportInt16AsStringAttributeToEntity
+{
+    assertThat(testEntity.int16AsStringTestAttribute, is(equalToInteger(256)));
+}
+
+- (void) testImportInt32AsStringAttributeToEntity
+{
+    assertThat(testEntity.int32AsStringTestAttribute, is(equalToInt(32)));
+}
+
+- (void) testImportInt64AsStringAttributeToEntity
+{
+    assertThat(testEntity.int64AsStringTestAttribute, is(equalToInteger(42)));
+}
+
+- (void) testImportDecimalAsStringAttributeToEntity
+{
+    assertThat(testEntity.decimalAsStringTestAttribute, is(equalToDouble(1.2)));
+}
+
+- (void) testImportDoubleAsStringAttributeToEntity
+{
+    assertThat(testEntity.doubleAsStringTestAttribute, is(equalToDouble(124.3)));
+}
+
+- (void) testImportFloatAsStringAttributeToEntity
+{
+    assertThat(testEntity.floatAsStringTestAttribute, is(equalToFloat(10000000000)));
+}
+
 @end
