@@ -36,8 +36,19 @@
         {
             if (![value isKindOfClass:[NSDate class]]) 
             {
-                NSString *dateFormat = [[self userInfo] valueForKey:kMagicalRecordImportCustomDateFormatKey];
-                value = dateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
+                NSDate *convertedValue = nil;
+                NSString *dateFormat;
+                NSUInteger index = 0;
+                do {
+                    NSMutableString *dateFormatKey = [kMagicalRecordImportCustomDateFormatKey mutableCopy];
+                    if (index) {
+                        [dateFormatKey appendFormat:@".%d", index];
+                    }
+                    index++;
+                    dateFormat = [[self userInfo] valueForKey:dateFormatKey];
+                    convertedValue = dateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
+                } while (!convertedValue && dateFormat);
+                value = convertedValue;
             }
             //            value = adjustDateForDST(value);
         }
