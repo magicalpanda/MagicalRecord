@@ -102,6 +102,11 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     MRLog(@"Set Default Context: %@", defaultManagedObjectContext_);
 }
 
+- (BOOL) MR_isDefaultContext
+{
+    return self == defaultManagedObjectContext_;
+}
+
 + (NSManagedObjectContext *) MR_rootSavingContext;
 {
     return rootSavingContext;

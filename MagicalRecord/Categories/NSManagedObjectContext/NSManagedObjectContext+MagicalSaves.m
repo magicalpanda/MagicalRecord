@@ -80,7 +80,7 @@
                 }
             } else {
                 // If we're the default context, save to disk too (the user expects it to persist)
-                if (self == [[self class] MR_defaultContext]) {
+                if ([self MR_isDefaultContext]) {
                     [[[self class] MR_rootSavingContext] MR_saveWithOptions:MRSaveSynchronously completion:completion];
                 }
                 // If we're saving parent contexts, do so
