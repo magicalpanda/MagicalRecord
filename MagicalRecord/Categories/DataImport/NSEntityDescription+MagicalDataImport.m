@@ -29,7 +29,7 @@
     return newInstance;
 }
 
-- (NSString*)lookupKey
+- (NSString*) lookupKey
 {
     return [[self userInfo] valueForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: primaryKeyNameFromString([self name]);
 }
