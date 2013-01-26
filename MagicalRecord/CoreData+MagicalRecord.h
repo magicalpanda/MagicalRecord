@@ -45,6 +45,8 @@
     #import "NSRelationshipDescription+MagicalDataImport.h"
     #import "NSEntityDescription+MagicalDataImport.h"
 
+    #import "NSFetchedResultsController+MagicalRecord.h"
+
 #endif
 
 // @see https://github.com/ccgus/fmdb/commit/aef763eeb64e6fa654e7d121f1df4c16a98d9f4f
