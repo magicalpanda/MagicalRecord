@@ -44,7 +44,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     for (NSString *attributeName in attributes) 
     {
         NSAttributeDescription *attributeInfo = [attributes valueForKey:attributeName];
-        NSString *lookupKeyPath = [objectData MR_lookupKeyForAttribute:attributeInfo];
+        NSString *lookupKeyPath = [objectData isKindOfClass:[self class]] ? attributeName : [objectData MR_lookupKeyForAttribute:attributeInfo];
         
         if (lookupKeyPath) 
         {
@@ -205,8 +205,10 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     NSDictionary *attributes = [[self entity] attributesByName];
     [self MR_setAttributes:attributes forKeysWithObject:objectData];
     
-    NSDictionary *relationships = [[self entity] relationshipsByName];
-    [self MR_setRelationships:relationships forKeysWithObject:objectData withBlock:relationshipBlock];
+    if (![objectData isKindOfClass:[self class]]) { // Not importing Relationships when the object is a ManagedObject — I was otherwise in an infinite loop.
+        NSDictionary *relationships = [[self entity] relationshipsByName];
+        [self MR_setRelationships:relationships forKeysWithObject:objectData withBlock:relationshipBlock];
+    }
     
     return [self MR_postImport:objectData];  
 }
@@ -234,7 +236,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 {
     NSAttributeDescription *primaryAttribute = [[self MR_entityDescription] MR_primaryAttributeToRelateBy];
     
-    id value = [objectData MR_valueForAttribute:primaryAttribute];
+    id value = [objectData isKindOfClass:self] ? [objectData valueForKey:[[self MR_entityDescription] MR_lookupKey]] : [objectData MR_valueForAttribute:primaryAttribute];
     
     NSManagedObject *managedObject = [self MR_findFirstByAttribute:[primaryAttribute name] withValue:value inContext:context];
     if (managedObject == nil) 

@@ -16,7 +16,7 @@
                                     
     if ([attributesByName count] == 0) return nil;
     
-    NSAttributeDescription *primaryAttribute = [attributesByName objectForKey:[self lookupKey]];
+    NSAttributeDescription *primaryAttribute = [attributesByName objectForKey:[self MR_lookupKey]];
 
     return primaryAttribute;
 }
@@ -29,7 +29,7 @@
     return newInstance;
 }
 
-- (NSString*) lookupKey
+- (NSString*) MR_lookupKey
 {
     return [[self userInfo] valueForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: primaryKeyNameFromString([self name]);
 }
