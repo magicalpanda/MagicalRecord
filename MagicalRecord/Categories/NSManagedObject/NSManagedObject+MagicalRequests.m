@@ -115,7 +115,7 @@
 	[request setFetchBatchSize:[self MR_defaultBatchSize]];
 	
     NSMutableArray* sortDescriptors = [[NSMutableArray alloc] init];
-    NSArray* sortKeys = [sortTerm componentsSeparatedByString:@","];
+    NSArray* sortKeys = [sortTerm MR_sortKeys];
     for (NSString* sortKey in sortKeys) 
     {
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];

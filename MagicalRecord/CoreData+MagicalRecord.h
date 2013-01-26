@@ -40,6 +40,7 @@
     #import "NSNumber+MagicalDataImport.h"
     #import "NSObject+MagicalDataImport.h"
     #import "NSString+MagicalDataImport.h"
+    #import "NSString+MagicalRecord.h"
     #import "NSAttributeDescription+MagicalDataImport.h"
     #import "NSRelationshipDescription+MagicalDataImport.h"
     #import "NSEntityDescription+MagicalDataImport.h"
