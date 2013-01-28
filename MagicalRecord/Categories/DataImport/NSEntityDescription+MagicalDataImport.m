@@ -12,11 +12,15 @@
 
 - (NSAttributeDescription *) MR_primaryAttributeToRelateBy;
 {
-    NSDictionary *attributesByName = [self attributesByName];
-                                    
-    if ([attributesByName count] == 0) return nil;
-    
-    NSAttributeDescription *primaryAttribute = [attributesByName objectForKey:[self MR_lookupKey]];
+    NSEntityDescription *entityDescription = self;
+    NSAttributeDescription *primaryAttribute = nil;
+    do {
+        NSDictionary *attributesByName = [entityDescription attributesByName];
+        if ([attributesByName count]) {
+            primaryAttribute = [attributesByName objectForKey:[entityDescription MR_lookupKey]];
+        };
+        entityDescription = entityDescription.superentity;
+    } while (!primaryAttribute && entityDescription);
 
     return primaryAttribute;
 }
