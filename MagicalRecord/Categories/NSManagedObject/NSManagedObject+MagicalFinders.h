@@ -37,6 +37,8 @@
 
 + (id) MR_findLargestValueForAttribute:(NSString *)attribute;
 + (id) MR_findLargestValueForAttribute:(NSString *)attribute inContext:(NSManagedObjectContext *)context;
++ (id) MR_findLargestValueForAttribute:(NSString *)attribute withPredicate:(NSPredicate *)predicate;
++ (id) MR_findLargestValueForAttribute:(NSString *)attribute withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
 + (id) MR_findSmallestValueForAttribute:(NSString *)attribute;
 + (id) MR_findSmallestValueForAttribute:(NSString *)attribute inContext:(NSManagedObjectContext *)context;
 

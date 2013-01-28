@@ -131,6 +131,25 @@
                                       inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
++ (id) MR_findLargestValueForAttribute:(NSString *)attribute withPredicate:(NSPredicate *)predicate;
+{
+    return [self MR_findLargestValueForAttribute:attribute withPredicate:predicate inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+}
+
++ (id) MR_findLargestValueForAttribute:(NSString *)attribute withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
+{
+    NSFetchRequest *request = [self MR_requestAllSortedBy:attribute ascending:NO inContext:context];
+    [request setFetchLimit:1];
+    [request setResultType:NSDictionaryResultType];
+    [request setPropertiesToFetch:@[attribute]];
+    [request setPredicate:predicate];
+
+    NSDictionary *results = [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
+    id value = [results valueForKey:attribute];
+
+    return value;
+}
+
 + (id) MR_findLargestValueForAttribute:(NSString *)attribute;
 {
     return [self MR_findLargestValueForAttribute:attribute inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
@@ -138,15 +157,7 @@
 
 + (id) MR_findLargestValueForAttribute:(NSString *)attribute inContext:(NSManagedObjectContext *)context;
 {
-    NSFetchRequest *request = [self MR_requestAllSortedBy:attribute ascending:NO inContext:context];
-    [request setFetchLimit:1];
-    [request setResultType:NSDictionaryResultType];
-    [request setPropertiesToFetch:@[attribute]];
-
-    NSDictionary *results = [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
-    id value = [results valueForKey:attribute];
-
-    return value;
+    return [self MR_findLargestValueForAttribute:attribute withPredicate:nil inContext:context];
 }
 
 + (id) MR_findSmallestValueForAttribute:(NSString *)attribute;
