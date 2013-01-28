@@ -181,9 +181,6 @@
 @interface NSEntityDescription (MagicalRecordShortHand)
 - (NSAttributeDescription *) primaryAttributeToRelateBy;
 - (NSManagedObject *) createInstanceInContext:(NSManagedObjectContext *)context;
-- (NSString*) lookupKey;
-@end
-@interface NSEntityDescription (MagicalRecordShortHand)
 - (NSInteger)numberOfObjectsInSection:(NSUInteger)section;
 @end
 
