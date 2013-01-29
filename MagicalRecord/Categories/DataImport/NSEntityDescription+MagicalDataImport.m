@@ -35,7 +35,13 @@
 
 - (NSString*) MR_lookupKey
 {
-    return [[self userInfo] valueForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: primaryKeyNameFromString([self name]);
+    NSString *primaryKeyName = [[self userInfo] valueForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: primaryKeyNameFromString([self name]);
+    if ([[[self attributesByName] allKeys] containsObject:primaryKeyName]) {
+        return primaryKeyName;
+    } else {
+        NSString *primaryKeyNameInSuperentity = [[self superentity] MR_lookupKey];
+        return primaryKeyNameInSuperentity ?: primaryKeyName;
+    }
 }
 
 @end
