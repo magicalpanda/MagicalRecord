@@ -55,8 +55,8 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 {
     [self performBlock:^{
         
-        MRLog(@"Merging changes From iCloud %@context%@", 
-              self == [NSManagedObjectContext MR_defaultContext] ? @"*** DEFAULT *** " : @"",
+        MRLog(@"Merging changes From iCloud to %@ %@",
+              [self MR_workingName],
               ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
         
         [self mergeChangesFromContextDidSaveNotification:notification];
@@ -71,11 +71,22 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 
 - (void) MR_mergeChangesFromNotification:(NSNotification *)notification;
 {
-	MRLog(@"Merging changes to %@context%@", 
-          self == [NSManagedObjectContext MR_defaultContext] ? @"*** DEFAULT *** " : @"",
+	MRLog(@"Merging changes from %@ to %@ %@",
+          [[notification object] MR_workingName], [self MR_workingName],
           ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
+
+    void (^mergeBlock)(void) = ^{
+        [self mergeChangesFromContextDidSaveNotification:notification];
+    };
     
-	[self mergeChangesFromContextDidSaveNotification:notification];
+    if (self.concurrencyType == NSConfinementConcurrencyType)
+    {
+        mergeBlock();
+    }
+    else
+    {
+        [self performBlock:mergeBlock];
+    }
 }
 
 - (void) MR_mergeChangesOnMainThread:(NSNotification *)notification;
