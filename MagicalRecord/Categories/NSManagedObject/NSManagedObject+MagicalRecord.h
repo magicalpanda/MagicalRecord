@@ -44,6 +44,7 @@
 + (NSArray *) MR_descendingSortDescriptors:(NSArray *)attributesToSortBy;
 
 - (void) MR_obtainPermanentObjectID;
+- (void) MR_refresh;
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext;
 - (id) MR_inThreadContext;
 

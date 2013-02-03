@@ -71,8 +71,11 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 
 - (void) MR_mergeChangesFromNotification:(NSNotification *)notification;
 {
+    NSManagedObjectContext *fromContext = [notification object];
+    if (fromContext == self) return;
+    
 	MRLog(@"Merging changes from %@ to %@ %@",
-          [[notification object] MR_workingName], [self MR_workingName],
+          [fromContext MR_workingName], [self MR_workingName],
           ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
 
     void (^mergeBlock)(void) = ^{
