@@ -34,6 +34,7 @@
     #import "NSPersistentStoreCoordinator+MagicalRecord.h"
     #import "NSManagedObjectModel+MagicalRecord.h"
     #import "NSPersistentStore+MagicalRecord.h"
+    #import "NSFetchedResultsController+MagicalFetching.h"
 
     #import "MagicalImportFunctions.h"
     #import "NSManagedObject+MagicalDataImport.h"
