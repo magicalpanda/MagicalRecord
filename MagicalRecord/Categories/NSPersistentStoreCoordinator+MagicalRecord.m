@@ -68,6 +68,37 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     return [self MR_addSqliteStoreAtURL:url withOptions:options];
 }
 
+- (NSPersistentStore *) MR_reinitializeStoreAtURL:(NSURL *)url withOptions:(NSDictionary *__autoreleasing)options;
+{
+    if (![MagicalRecord shouldDeleteStoreOnModelMismatch]) return nil;
+
+    NSError *error = nil;
+    NSPersistentStore *store = nil;
+    BOOL isMigrationError = [error code] == NSPersistentStoreIncompatibleVersionHashError || [error code] == NSMigrationMissingSourceModelError;
+    if ([[error domain] isEqualToString:NSCocoaErrorDomain] && isMigrationError)
+    {
+        // Could not open the database, so... kill it!
+        [[NSFileManager defaultManager] removeItemAtURL:url error:nil];
+
+        MRLog(@"Removed incompatible model version: %@", [url lastPathComponent]);
+
+        // Try one more time to create the store
+        store = [self addPersistentStoreWithType:NSSQLiteStoreType
+                                   configuration:nil
+                                             URL:url
+                                         options:options
+                                           error:&error];
+        if (store)
+        {
+            // If we successfully added a store, remove the error that was initially created
+            error = nil;
+        }
+    }
+
+    [MagicalRecord handleErrors:error];
+    return store;
+}
+
 - (NSPersistentStore *) MR_addSqliteStoreAtURL:(NSURL *)url withOptions:(NSDictionary *__autoreleasing)options;
 {
     [[self class] MR_createPathToStoreFileIfNeccessary:url];
@@ -78,30 +109,13 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
                                                         options:options
                                                           error:&error];
     
-    if (!store && [MagicalRecord shouldDeleteStoreOnModelMismatch])
+    if (store == nil)
     {
-        BOOL isMigrationError = [error code] == NSPersistentStoreIncompatibleVersionHashError || [error code] == NSMigrationMissingSourceModelError;
-        if ([[error domain] isEqualToString:NSCocoaErrorDomain] && isMigrationError)
-        {
-            // Could not open the database, so... kill it!
-            [[NSFileManager defaultManager] removeItemAtURL:url error:nil];
-
-            MRLog(@"Removed incompatible model version: %@", [url lastPathComponent]);
-            
-            // Try one more time to create the store
-            store = [self addPersistentStoreWithType:NSSQLiteStoreType
-                                       configuration:nil
-                                                 URL:url
-                                             options:options
-                                               error:&error];
-            if (store)
-            {
-                // If we successfully added a store, remove the error that was initially created
-                error = nil;
-            }
-        }
-                
+        MRLog(@"Unable to setup store at URL: %@", url);
         [MagicalRecord handleErrors:error];
+        
+
+        store = [self MR_reinitializeStoreAtURL:url withOptions:options];
     }
     return store;
 }
