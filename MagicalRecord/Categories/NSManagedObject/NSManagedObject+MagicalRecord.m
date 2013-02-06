@@ -226,6 +226,11 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     return YES;
 }
 
+- (void) MR_refresh;
+{
+    [[self managedObjectContext] refreshObject:self mergeChanges:YES];
+}
+
 - (void) MR_obtainPermanentObjectID;
 {
     if ([[self objectID] isTemporaryID])
@@ -242,15 +247,23 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext
 {
-    NSManagedObject *inContext = [otherContext objectRegisteredForID:[self objectID]];  //see if its already there
-    if (inContext == nil)
+    NSManagedObject *inContext = nil;
+    if ([[self objectID] isTemporaryID])
     {
-        NSError *error = nil;
-        inContext = [otherContext existingObjectWithID:[self objectID] error:&error];
-
+        MRLog(@"Cannot load a temporary object across Managed Object Contexts");
+    }
+    else
+    {
+        inContext = [otherContext objectRegisteredForID:[self objectID]];  //see if its already there
         if (inContext == nil)
         {
-            MRLog(@"Did not find object %@ in context %@: %@", self, [otherContext MR_description], error);
+            NSError *error = nil;
+            inContext = [otherContext existingObjectWithID:[self objectID] error:&error];
+
+            if (inContext == nil)
+            {
+                MRLog(@"Did not find object %@ in context '%@': %@", self, [otherContext MR_description], error);
+            }
         }
     }
     return inContext;
