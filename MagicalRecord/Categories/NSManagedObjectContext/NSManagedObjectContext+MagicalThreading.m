@@ -38,4 +38,16 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
 	}
 }
 
++ (void)MR_setContextForCurrentThread:(NSManagedObjectContext *)threadContext {
+    NSMutableDictionary *threadDict = [[NSThread currentThread] threadDictionary];
+    if ([NSThread isMainThread] || [threadDict objectForKey:kMagicalRecordManagedObjectContextKey]) {
+        MRLog(@"ERROR: Attempting to set thread context when one already exists or in main thread");
+    }
+    else
+    {
+        [threadDict setValue:threadContext forKey:kMagicalRecordManagedObjectContextKey];
+    }
+    
+}
+
 @end
