@@ -27,7 +27,6 @@ NSDate * adjustDateForDST(NSDate *date)
 {
     NSTimeInterval dstOffset = [[NSTimeZone localTimeZone] daylightSavingTimeOffsetForDate:date];
     NSDate *actualDate = [date dateByAddingTimeInterval:dstOffset];
-    
     return actualDate;
 }
 
@@ -37,14 +36,22 @@ NSDate * dateFromString(NSString *value, NSString *format)
     [formatter setTimeZone:[NSTimeZone localTimeZone]];
     [formatter setLocale:[NSLocale currentLocale]];
     [formatter setDateFormat:format];
-    
     NSDate *parsedDate = [formatter dateFromString:value];
-    
     return parsedDate;
 }
 
+<<<<<<< HEAD
 NSNumber * numberFromString(NSString *value) {
     return [NSNumber numberWithDouble:[value doubleValue]];
+=======
+NSNumber * numberFromString(NSString *value) {
+    return [NSNumber numberWithDouble:[value doubleValue]];
+}
+NSDate * dateFromUnixTimestamp(NSInteger timestamp)
+{
+    NSDate *parsedDate = [NSDate dateWithTimeIntervalSince1970:timestamp];
+    return parsedDate;
+>>>>>>> Added regex to check for unix timestamp during import, and added a method to handle found timestamps
 }
 
 NSInteger* newColorComponentsFromString(NSString *serializedColor);
@@ -53,12 +60,10 @@ NSInteger* newColorComponentsFromString(NSString *serializedColor)
     NSScanner *colorScanner = [NSScanner scannerWithString:serializedColor];
     NSString *colorType;
     [colorScanner scanUpToString:@"(" intoString:&colorType];
-    
     NSInteger *componentValues = malloc(4 * sizeof(NSInteger));
     if ([colorType hasPrefix:@"rgba"])
     {
         NSCharacterSet *rgbaCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"(,)"];
-        
         NSInteger *componentValue = componentValues;
         while (![colorScanner isAtEnd]) 
         {
@@ -81,7 +86,6 @@ UIColor * UIColorFromString(NSString *serializedColor)
                                      green:(componentValues[1] / 255.0f)
                                       blue:(componentValues[2] / 255.0f)
                                      alpha:componentValues[3]];
-    
     free(componentValues);
     return color;
 }
