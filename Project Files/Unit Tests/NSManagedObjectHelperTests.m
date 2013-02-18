@@ -90,6 +90,38 @@
     assertThatBool([testEntity isDeleted], is(equalToBool(YES)));
 }
 
+
+- (void) testCanDeleteEntityInstanceInOtherContext
+{
+    NSManagedObjectContext * defaultContext = [NSManagedObjectContext MR_defaultContext];
+    SingleRelatedEntity * testEntity = [SingleRelatedEntity MR_createEntity];
+    [defaultContext MR_saveToPersistentStoreAndWait];
+
+    assertThatBool([testEntity isDeleted], is(equalToBool(NO)));
+
+    // Create another context and load the object in it
+    NSManagedObjectContext * otherContext = [NSManagedObjectContext MR_contextWithParent:defaultContext];
+    id otherEntity = [testEntity MR_inContext:otherContext];
+
+    // Delete the object in the other context
+    [testEntity MR_deleteInContext:otherContext];
+
+    // The nested context entity should now be deleted
+    assertThat(otherEntity, is(notNilValue()));
+    assertThatBool([otherEntity isDeleted], is(equalToBool(YES)));
+
+    // The default context entity should not be deleted
+    assertThat(testEntity, is(notNilValue()));
+    assertThatBool([testEntity isDeleted], is(equalToBool(NO)));
+
+    // Save the nested context then reload the original object
+    [otherContext MR_saveToPersistentStoreAndWait];
+    id deletedEntity = [defaultContext existingObjectWithID:[testEntity objectID]
+                                                      error:nil];
+
+    assertThat(deletedEntity, is(nilValue()));
+}
+
 // Test Number of Entities
 
 - (void) createSampleData:(NSInteger)numberOfTestEntitiesToCreate
