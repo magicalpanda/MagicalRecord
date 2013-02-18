@@ -172,11 +172,11 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 - (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context
 {
-    NSError *error = nil;
-    NSManagedObject *inContext = [context existingObjectWithID:[self objectID] error:&error];
-    [MagicalRecord handleErrors:error];
+	NSError *error = nil;
+	NSManagedObject *inContext = [context existingObjectWithID:[self objectID] error:&error];
+	[MagicalRecord handleErrors:error];
 
-    [context deleteObject:inContext];
+	[context deleteObject:inContext];
 	return YES;
 }
 
