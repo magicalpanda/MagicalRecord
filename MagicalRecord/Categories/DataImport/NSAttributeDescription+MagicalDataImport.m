@@ -36,8 +36,27 @@
         {
             if (![value isKindOfClass:[NSDate class]]) 
             {
-                NSString *dateFormat = [[self userInfo] valueForKey:kMagicalRecordImportCustomDateFormatKey];
-                value = dateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
+                NSError *error = NULL;
+                NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^[0-9]{10}"
+                                                                                       options:NSRegularExpressionCaseInsensitive
+                                                                                         error:&error];
+                
+                NSTextCheckingResult *match = [regex firstMatchInString:[value description]
+                                                                options:0
+                                                                  range:NSMakeRange(0, [[value description] length])];
+                
+                if (match)
+                {
+                    NSString *timestamp = [value substringWithRange: [match range]];
+                    value = dateFromUnixTimestamp([timestamp integerValue]);
+                }
+                
+                else
+                {
+                    NSString *dateFormat = [[self userInfo] valueForKey:kMagicalRecordImportCustomDateFormatKey];
+                    value = dateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
+                }
+                
             }
             //            value = adjustDateForDST(value);
         }
