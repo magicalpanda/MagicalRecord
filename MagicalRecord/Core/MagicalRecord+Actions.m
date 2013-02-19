@@ -117,21 +117,18 @@ dispatch_queue_t saveQueue()
 
 + (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))completion
 {
-//    NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_confinementContext];
 
-    [localContext performBlock:^{
-        if (block)
-        {
-            block(localContext);
-        }
-
-        [localContext MR_saveToPersistentStoreAndWait];
-
+    if (block)
+    {
+        block(localContext);
+    }
+ 
+    [localContext MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
         if (completion)
         {
             completion();
-        }
+        } 
     }];
 }
 
