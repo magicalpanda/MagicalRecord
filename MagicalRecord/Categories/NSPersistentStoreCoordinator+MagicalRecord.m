@@ -64,12 +64,18 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 
 - (NSPersistentStore *) MR_addSqliteStoreNamed:(id)storeFileName withOptions:(__autoreleasing NSDictionary *)options
 {
+    return [self MR_addCustomStoreNamed:storeFileName withOptions:options storeType:NSSQLiteStoreType];
+}
+
+// For use MagicalRecord with NSAtomicStore or other store types
+- (NSPersistentStore *) MR_addCustomStoreNamed:(id)storeFileName withOptions:(__autoreleasing NSDictionary *)options storeType:(NSString*)storeType
+{
     NSURL *url = [storeFileName isKindOfClass:[NSURL class]] ? storeFileName : [NSPersistentStore MR_urlForStoreName:storeFileName];
     NSError *error = nil;
     
     [self MR_createPathToStoreFileIfNeccessary:url];
     
-    NSPersistentStore *store = [self addPersistentStoreWithType:NSSQLiteStoreType
+    NSPersistentStore *store = [self addPersistentStoreWithType:storeType
                                                   configuration:nil
                                                             URL:url
                                                         options:options
@@ -82,11 +88,11 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
         {
             // Could not open the database, so... kill it!
             [[NSFileManager defaultManager] removeItemAtURL:url error:nil];
-
+            
             MRLog(@"Removed incompatible model version: %@", [url lastPathComponent]);
             
             // Try one more time to create the store
-            store = [self addPersistentStoreWithType:NSSQLiteStoreType
+            store = [self addPersistentStoreWithType:storeType
                                        configuration:nil
                                                  URL:url
                                              options:options
@@ -97,7 +103,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
                 error = nil;
             }
         }
-                
+        
         [MagicalRecord handleErrors:error];
     }
     return store;
@@ -141,21 +147,53 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     return [self MR_addSqliteStoreNamed:storeFileName withOptions:options];
 }
 
+/**
+    @params Array of parameters:
+        - Store file name
+        - Store type name
+ */
+- (NSPersistentStore *) MR_addAutoMigratingCustomStoreNamed:(NSArray *) params;
+{
+    if (params.count < 2) {
+        MRLog(@"Error: Argument count mismatch on '%s'.", __FUNCTION__);
+    }
+    NSDictionary *options = [[self class] MR_autoMigrationOptions];
+    return [self MR_addCustomStoreNamed:params[0] withOptions:options storeType:params[1]];
+}
 
 #pragma mark - Public Class Methods
 
-
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *) storeFileName
-{
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *) storeFileName {
     NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
     
     [coordinator MR_addAutoMigratingSqliteStoreNamed:storeFileName];
     
     //HACK: lame solution to fix automigration error "Migration failed after first pass"
-    if ([[coordinator persistentStores] count] == 0) 
+    if ([[coordinator persistentStores] count] == 0)
     {
         [coordinator performSelector:@selector(MR_addAutoMigratingSqliteStoreNamed:) withObject:storeFileName afterDelay:0.5];
+    }
+    
+    return coordinator;
+}
+
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingCustomStoreNamed:(NSString *) storeFileName storeType:(NSString*) storeType
+{
+    NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
+    NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+    
+    if (!storeType) {
+        MRLog(@"Loading default SQLite store type");
+        storeType = NSSQLiteStoreType;
+    }
+    
+    [coordinator MR_addAutoMigratingCustomStoreNamed:@[storeFileName, storeType]];
+    
+    //HACK: lame solution to fix automigration error "Migration failed after first pass"
+    if ([[coordinator persistentStores] count] == 0) 
+    {
+        [coordinator performSelector:@selector(MR_addAutoMigratingCustomStoreNamed:) withObject:@[storeFileName, storeType] afterDelay:0.5];
     }
 
     return coordinator;
@@ -268,6 +306,20 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     
     [psc MR_addSqliteStoreNamed:[persistentStore URL] withOptions:nil];
 
+    return psc;
+}
+
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithCustomStoreNamed:(NSString *)storeFileName storeType:(NSString*)storeType
+{
+    if (!storeType) {
+        MRLog(@"Loading default SQLite store type");
+        storeType = NSSQLiteStoreType;
+    }
+    
+    NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
+    NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+    
+    [psc MR_addCustomStoreNamed:storeFileName withOptions:nil storeType:storeType];
     return psc;
 }
 
