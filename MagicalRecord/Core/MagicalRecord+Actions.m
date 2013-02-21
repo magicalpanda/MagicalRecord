@@ -8,7 +8,7 @@
 #import "CoreData+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
 
-
+dispatch_queue_t saveQueue(void);
 dispatch_queue_t saveQueue()
 {
     static dispatch_queue_t serial_save_queue;
