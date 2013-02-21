@@ -147,18 +147,9 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     return [self MR_addSqliteStoreNamed:storeFileName withOptions:options];
 }
 
-/**
-    @params Array of parameters:
-        - Store file name
-        - Store type name
- */
-- (NSPersistentStore *) MR_addAutoMigratingCustomStoreNamed:(NSArray *) params;
-{
-    if (params.count < 2) {
-        MRLog(@"Error: Argument count mismatch on '%s'.", __FUNCTION__);
-    }
+- (NSPersistentStore *) MR_addAutoMigratingCustomStoreNamed:(NSString*)fileName storeType:(NSString*)storeTypeName {
     NSDictionary *options = [[self class] MR_autoMigrationOptions];
-    return [self MR_addCustomStoreNamed:params[0] withOptions:options storeType:params[1]];
+    return [self MR_addCustomStoreNamed:fileName withOptions:options storeType:storeTypeName];
 }
 
 #pragma mark - Public Class Methods
@@ -188,12 +179,17 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
         storeType = NSSQLiteStoreType;
     }
     
-    [coordinator MR_addAutoMigratingCustomStoreNamed:@[storeFileName, storeType]];
+    [coordinator MR_addAutoMigratingCustomStoreNamed:storeFileName storeType:storeType];
     
     //HACK: lame solution to fix automigration error "Migration failed after first pass"
-    if ([[coordinator persistentStores] count] == 0) 
+    if ([[coordinator persistentStores] count] == 0)
     {
-        [coordinator performSelector:@selector(MR_addAutoMigratingCustomStoreNamed:) withObject:@[storeFileName, storeType] afterDelay:0.5];
+        int64_t delay = 0.5;
+        dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC);
+        dispatch_after(time, dispatch_get_current_queue(), ^(void){
+            [coordinator performSelector:@selector(MR_addAutoMigratingSqliteStoreNamed:) withObject:storeFileName afterDelay:0.5];
+            [coordinator MR_addAutoMigratingCustomStoreNamed:storeFileName storeType:storeType];
+        });
     }
 
     return coordinator;

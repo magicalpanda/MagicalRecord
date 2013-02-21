@@ -30,7 +30,7 @@ extern NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification;
 
 - (NSPersistentStore *) MR_addInMemoryStore;
 - (NSPersistentStore *) MR_addAutoMigratingSqliteStoreNamed:(NSString *) storeFileName;
-- (NSPersistentStore *) MR_addAutoMigratingCustomStoreNamed:(NSArray *) params;
+- (NSPersistentStore *) MR_addAutoMigratingCustomStoreNamed:(NSString*)fileName storeType:(NSString*)storeTypeName;
 - (NSPersistentStore *) MR_addSqliteStoreNamed:(id)storeFileName withOptions:(__autoreleasing NSDictionary *)options;
 - (NSPersistentStore *) MR_addCustomStoreNamed:(id)storeFileName withOptions:(__autoreleasing NSDictionary *)options storeType:(NSString*)storeType;
 
