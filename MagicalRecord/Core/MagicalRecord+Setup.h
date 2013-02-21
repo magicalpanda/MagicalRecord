@@ -13,9 +13,13 @@
 + (void) setupCoreDataStack;
 + (void) setupCoreDataStackWithInMemoryStore;
 + (void) setupAutoMigratingCoreDataStack;
++ (void) setupCoreDataStackWithType:(NSString*)storeType;
++ (void) setupAutoMigratingCoreDataStackWithType:(NSString*)storeType;
 
 + (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName;
++ (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName andCustomStoreType:(NSString*)storeType;
 + (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName;
++ (void) setupCoreDataStackWithAutoMigratingCustomStoreNamed:(NSString *)storeName andCustomStoreType:(NSString*)storeType;
 
 
 @end
