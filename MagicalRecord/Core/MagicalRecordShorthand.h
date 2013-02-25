@@ -156,6 +156,7 @@
 @interface NSManagedObjectModel (MagicalRecordShortHand)
 + (NSManagedObjectModel *) defaultManagedObjectModel;
 + (void) setDefaultManagedObjectModel:(NSManagedObjectModel *)newDefaultModel;
+- (BOOL) isDefaultContext;
 + (NSManagedObjectModel *) mergedObjectModelFromMainBundle;
 + (NSManagedObjectModel *) newManagedObjectModelNamed:(NSString *)modelFileName NS_RETURNS_RETAINED;
 + (NSManagedObjectModel *) managedObjectModelNamed:(NSString *)modelFileName;

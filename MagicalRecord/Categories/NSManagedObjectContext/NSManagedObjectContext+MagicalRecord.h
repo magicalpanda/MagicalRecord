@@ -21,6 +21,7 @@ extern NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification;
 + (void) MR_resetDefaultContext;
 + (NSManagedObjectContext *) MR_rootSavingContext;
 + (NSManagedObjectContext *) MR_defaultContext;
+- (BOOL) MR_isDefaultContext;
 
 - (NSString *) MR_description;
 - (NSString *) MR_parentChain;
