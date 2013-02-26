@@ -74,9 +74,7 @@
                 [MagicalRecord handleErrors:error];
 
                 if (completion) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        completion(saved, error);
-                    });
+                    completion(saved, error);
                 }
             } else {
                 // If we're the default context, save to disk too (the user expects it to persist)
@@ -92,9 +90,7 @@
                     MRLog(@"→ Finished saving: %@", [self MR_description]);
 
                     if (completion) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            completion(saved, error);
-                        });
+                        completion(saved, error);
                     }
                 }
             }
