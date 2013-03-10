@@ -16,8 +16,10 @@
 
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request;
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
++ (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context affectedStores:(NSArray*)affectedStores;
 + (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request;
 + (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
++ (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context affectedStores:(NSArray*)affectedStores;
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 

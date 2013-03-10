@@ -25,20 +25,28 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
 {
+    return [self MR_executeFetchRequest:request inContext:context affectedStores:nil];
+}
+
++ (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context affectedStores:(NSArray*)affectedStores
+{
     __block NSArray *results = nil;
     [context performBlockAndWait:^{
-
+        
         NSError *error = nil;
         
+        if ([affectedStores count]) {
+            [request setAffectedStores:affectedStores];
+        }
         results = [context executeFetchRequest:request error:&error];
         
-        if (results == nil) 
+        if (results == nil)
         {
             [MagicalRecord handleErrors:error];
         }
-
+        
     }];
-	return results;	
+	return results;
 }
 
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request
@@ -48,8 +56,15 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
 {
+    return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context affectedStores:nil];
+}
+
++ (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context affectedStores:(NSArray*)affectedStores
+{
 	[request setFetchLimit:1];
-	
+	if ([affectedStores count]) {
+        [request setAffectedStores:affectedStores];
+    }
 	NSArray *results = [self MR_executeFetchRequest:request inContext:context];
 	if ([results count] == 0)
 	{

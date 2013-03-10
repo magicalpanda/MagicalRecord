@@ -15,15 +15,31 @@
 
 #pragma mark - Finding Data
 
++ (NSArray *) MR_findAllInContext:(NSManagedObjectContext *)context affectedStores:(NSArray*)affectedStores
+{
+    return [self MR_executeFetchRequest:[self MR_requestAllInContext:context] inContext:context affectedStores:affectedStores];
+}
 
 + (NSArray *) MR_findAllInContext:(NSManagedObjectContext *)context
 {
 	return [self MR_executeFetchRequest:[self MR_requestAllInContext:context] inContext:context];
 }
 
++ (NSArray *) MR_findAllInStores:(NSArray*)affectedStores
+{
+	return [self MR_findAllInContext:[NSManagedObjectContext MR_contextForCurrentThread] affectedStores:affectedStores];
+}
+
 + (NSArray *) MR_findAll
 {
 	return [self MR_findAllInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+}
+
++ (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context affectedStores:(NSArray*)affectedStores
+{
+	NSFetchRequest *request = [self MR_requestAllSortedBy:sortTerm ascending:ascending inContext:context];
+	
+	return [self MR_executeFetchRequest:request inContext:context affectedStores:affectedStores];
 }
 
 + (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
@@ -33,11 +49,29 @@
 	return [self MR_executeFetchRequest:request inContext:context];
 }
 
++ (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending affectedStores:(NSArray*)affectedStores
+{
+	return [self MR_findAllSortedBy:sortTerm
+                          ascending:ascending
+                          inContext:[NSManagedObjectContext MR_contextForCurrentThread]
+                     affectedStores:affectedStores];
+}
+
 + (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending
 {
 	return [self MR_findAllSortedBy:sortTerm
                           ascending:ascending 
                           inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+}
+
++ (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context affectedStores:(NSArray*)affectedStores
+{
+	NSFetchRequest *request = [self MR_requestAllSortedBy:sortTerm
+                                                ascending:ascending
+                                            withPredicate:searchTerm
+                                                inContext:context];
+	
+	return [self MR_executeFetchRequest:request inContext:context affectedStores:affectedStores];
 }
 
 + (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
@@ -50,6 +84,15 @@
 	return [self MR_executeFetchRequest:request inContext:context];
 }
 
++ (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm affectedStores:(NSArray*)affectedStores
+{
+	return [self MR_findAllSortedBy:sortTerm
+                          ascending:ascending
+                      withPredicate:searchTerm
+                          inContext:[NSManagedObjectContext MR_contextForCurrentThread]
+                     affectedStores:affectedStores];
+}
+
 + (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm
 {
 	return [self MR_findAllSortedBy:sortTerm
@@ -58,6 +101,15 @@
                           inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
++ (NSArray *) MR_findAllWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context affectedStores:(NSArray*)affectedStores
+{
+	NSFetchRequest *request = [self MR_createFetchRequestInContext:context];
+	[request setPredicate:searchTerm];
+	
+	return [self MR_executeFetchRequest:request
+                              inContext:context
+                         affectedStores:affectedStores];
+}
 
 + (NSArray *) MR_findAllWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
 {
@@ -68,10 +120,24 @@
                               inContext:context];
 }
 
++ (NSArray *) MR_findAllWithPredicate:(NSPredicate *)searchTerm affectedStores:(NSArray*)affectedStores
+{
+	return [self MR_findAllWithPredicate:searchTerm
+                               inContext:[NSManagedObjectContext MR_contextForCurrentThread]
+                          affectedStores:affectedStores];
+}
+
 + (NSArray *) MR_findAllWithPredicate:(NSPredicate *)searchTerm
 {
 	return [self MR_findAllWithPredicate:searchTerm
                                inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+}
+
++ (id) MR_findFirstInContext:(NSManagedObjectContext *)context affectedStores:(NSArray*)affectedStores
+{
+	NSFetchRequest *request = [self MR_createFetchRequestInContext:context];
+	
+	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context affectedStores:affectedStores];
 }
 
 + (id) MR_findFirstInContext:(NSManagedObjectContext *)context
@@ -79,6 +145,11 @@
 	NSFetchRequest *request = [self MR_createFetchRequestInContext:context];
 	
 	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
+}
+
++ (id) MR_findFirstINStores:(NSArray*)affectedStores
+{
+	return [self MR_findFirstInContext:[NSManagedObjectContext MR_contextForCurrentThread] affectedStores:affectedStores];
 }
 
 + (id) MR_findFirst
