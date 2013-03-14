@@ -11,5 +11,12 @@
     "colorTestAttribute": "rgba(64,128,225,1)",
     "mappedAttributeWithStringValue": "Mapped value",
     "dateWithCustomFormat": "8/5/2011 1-56-04 AM",
-    "nullTestAttribute": null
+    "nullTestAttribute": null,
+    "int64AsStringTestAttribute": "42",
+    "int32AsStringTestAttribute": "32",
+    "int16AsStringTestAttribute": "256",
+    "decimalAsStringTestAttribute": "1.2",
+    "doubleAsStringTestAttribute": "124.3",
+    "floatAsStringTestAttribute": "10000000000",
+
 }

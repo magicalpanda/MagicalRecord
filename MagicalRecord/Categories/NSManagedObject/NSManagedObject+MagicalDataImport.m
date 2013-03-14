@@ -154,7 +154,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
             }
         };
         
-        if ([relationshipInfo isToMany])
+        if ([relationshipInfo isToMany] && [relatedObjectData isKindOfClass:[NSArray class]])
         {
             for (id singleRelatedObjectData in relatedObjectData) 
             {
