@@ -10,6 +10,7 @@
 #import "NSManagedObject+MagicalRequests.h"
 #import "NSManagedObject+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalThreading.h"
+#import "NSManagedObject+MagicalRecord.h"
 
 @implementation NSManagedObject (MagicalFinders)
 
@@ -109,11 +110,35 @@
 	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
 }
 
+
 + (id) MR_findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue
 {
 	return [self MR_findFirstByAttribute:attribute
                                withValue:searchValue 
                                inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+}
+
++ (id) MR_findFirstOrCreateByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context
+{
+	id result = [self MR_findFirstByAttribute:attribute
+									withValue:searchValue
+									inContext:context];
+	if (result) {
+		return result;
+	}
+
+	result = [self MR_createInContext:context];
+	[result setValue:searchValue
+			  forKey:attribute];
+	
+	return result;
+}
+
++ (id) MR_findFirstOrCreateByAttribute:(NSString *)attribute withValue:(id)searchValue
+{
+	return [self MR_findFirstOrCreateByAttribute:attribute
+									   withValue:searchValue
+									   inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
 + (id) MR_findFirstOrderedByAttribute:(NSString *)attribute ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
