@@ -242,7 +242,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
 	return NO;
 }
 
-- (BOOL)MR_isAccendentOfContext:(NSManagedObjectContext *)otherContext
+- (BOOL)MR_isAscendentOfContext:(NSManagedObjectContext *)otherContext
 {
 	for (NSManagedObjectContext *context = otherContext; context.parentContext != nil; context = context.parentContext) {
 		if (self == context) {
