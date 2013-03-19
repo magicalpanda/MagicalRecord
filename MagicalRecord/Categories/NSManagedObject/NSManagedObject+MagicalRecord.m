@@ -248,9 +248,10 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext
 {
     NSManagedObject *inContext = nil;
-    if ([[self objectID] isTemporaryID])
+	BOOL isDescendantContext = [otherContext MR_isDescendantOfContext:self.managedObjectContext];
+	if (!isDescendantContext && [[self objectID] isTemporaryID])
     {
-        MRLog(@"Cannot load a temporary object across Managed Object Contexts");
+        MRLog(@"Cannot load a temporary object across unrelated Managed Object Contexts");
     }
     else
     {
