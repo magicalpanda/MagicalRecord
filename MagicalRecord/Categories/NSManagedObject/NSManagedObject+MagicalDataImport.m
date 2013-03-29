@@ -89,38 +89,50 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 
 - (void) MR_addObject:(NSManagedObject *)relatedObject forRelationship:(NSRelationshipDescription *)relationshipInfo
 {
-    NSAssert2(relatedObject != nil, @"Cannot add nil to %@ for attribute %@", NSStringFromClass([self class]), [relationshipInfo name]);    
+    NSAssert2(relatedObject != nil, @"Cannot add nil to %@ for attribute %@", NSStringFromClass([self class]), [relationshipInfo name]);
     NSAssert2([relatedObject entity] == [relationshipInfo destinationEntity], @"related object entity %@ not same as destination entity %@", [relatedObject entity], [relationshipInfo destinationEntity]);
-
+    
     //add related object to set
     NSString *addRelationMessageFormat = @"set%@:";
     id relationshipSource = self;
-    if ([relationshipInfo isToMany]) 
+    if ([relationshipInfo isToMany])
     {
         addRelationMessageFormat = @"add%@Object:";
+        
         if ([relationshipInfo respondsToSelector:@selector(isOrdered)] && [relationshipInfo isOrdered])
         {
             //Need to get the ordered set
-            NSString *selectorName = [[relationshipInfo name] stringByAppendingString:@"Set"];
-            relationshipSource = [self performSelector:NSSelectorFromString(selectorName)];
+            relationshipSource = [self performSelector:NSSelectorFromString([relationshipInfo name])];
             addRelationMessageFormat = @"addObject:";
         }
     }
-
+    
     NSString *addRelatedObjectToSetMessage = [NSString stringWithFormat:addRelationMessageFormat, attributeNameFromString([relationshipInfo name])];
- 
+    
     SEL selector = NSSelectorFromString(addRelatedObjectToSetMessage);
     
-    @try 
+    if ([relationshipSource respondsToSelector:selector])
     {
-        [relationshipSource performSelector:selector withObject:relatedObject];        
+        if (relationshipSource != self)
+        {
+            NSUInteger idx = [relationshipSource count];
+            NSIndexSet* indexes = [NSIndexSet indexSetWithIndex:idx];
+            
+            [self willChange:NSKeyValueChangeInsertion valuesAtIndexes:indexes forKey:[relationshipInfo name]];
+            [relationshipSource performSelector:selector withObject:relatedObject];
+            [self didChange:NSKeyValueChangeInsertion valuesAtIndexes:indexes forKey:[relationshipInfo name]];
+        }
+        else
+        {
+            [relationshipSource performSelector:selector withObject:relatedObject];
+        }
     }
-    @catch (NSException *exception) 
+    else
     {
         MRLog(@"Adding object for relationship failed: %@\n", relationshipInfo);
         MRLog(@"relatedObject.entity %@", [relatedObject entity]);
         MRLog(@"relationshipInfo.destinationEntity %@", [relationshipInfo destinationEntity]);
-        MRLog(@"Add Relationship Selector: %@", addRelatedObjectToSetMessage);   
+        MRLog(@"Add Relationship Selector: %@", addRelatedObjectToSetMessage);
         MRLog(@"perform selector error: %@", exception);
     }
 }
