@@ -68,11 +68,10 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     return [self MR_addSqliteStoreAtURL:url withOptions:options];
 }
 
-- (NSPersistentStore *) MR_reinitializeStoreAtURL:(NSURL *)url withOptions:(NSDictionary *__autoreleasing)options;
+- (NSPersistentStore *) MR_reinitializeStoreAtURL:(NSURL *)url fromError:(NSError *)error withOptions:(NSDictionary *__autoreleasing)options;
 {
     if (![MagicalRecord shouldDeleteStoreOnModelMismatch]) return nil;
 
-    NSError *error = nil;
     NSPersistentStore *store = nil;
     BOOL isMigrationError = [error code] == NSPersistentStoreIncompatibleVersionHashError || [error code] == NSMigrationMissingSourceModelError;
     if ([[error domain] isEqualToString:NSCocoaErrorDomain] && isMigrationError)
@@ -115,7 +114,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
         [MagicalRecord handleErrors:error];
         
 
-        store = [self MR_reinitializeStoreAtURL:url withOptions:options];
+        store = [self MR_reinitializeStoreAtURL:url fromError:error withOptions:options];
     }
     return store;
 }
