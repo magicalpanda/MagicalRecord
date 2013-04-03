@@ -206,7 +206,7 @@ If you want to be more specific with your search, you can send in a predicate:
 
 	NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"Department IN %@", departments];
 
-	NSArray *people = [Person MR_fetchAllWithPredicate:peopleFilter];
+	NSFetchRequest *peopleRequest = [Person MR_requestAllWithPredicate:peopleFilter];
 
 For each of these single line calls, the full stack of NSFetchRequest, NSSortDescriptors and a simple default error handling scheme (ie. logging to the console) is created.
 
