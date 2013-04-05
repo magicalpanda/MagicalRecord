@@ -261,7 +261,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 {
     NSMutableArray *objectIDs = [NSMutableArray array];
     
-    [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) 
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext)
     {    
         [listOfObjectData enumerateObjectsWithOptions:0 usingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
         {
