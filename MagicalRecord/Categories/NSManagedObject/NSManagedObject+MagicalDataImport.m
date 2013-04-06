@@ -267,10 +267,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
          
          NSManagedObject *dataObject = [self MR_importFromObject:objectData inContext:context];
          
-         if ([context obtainPermanentIDsForObjects:[NSArray arrayWithObject:dataObject] error:nil])
-         {
-             [dataObjects addObject:dataObject];
-         }
+         [dataObjects addObject:dataObject];
      }];
     
     return dataObjects;
