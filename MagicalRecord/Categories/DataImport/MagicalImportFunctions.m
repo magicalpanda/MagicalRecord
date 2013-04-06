@@ -33,10 +33,38 @@ NSDate * adjustDateForDST(NSDate *date)
 
 NSDate * dateFromString(NSString *value, NSString *format)
 {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setTimeZone:[NSTimeZone localTimeZone]];
-    [formatter setLocale:[NSLocale currentLocale]];
-    [formatter setDateFormat:format];
+    static NSArray *existingFormatters = nil;
+    
+    NSDateFormatter *formatter = nil;
+    
+    if (existingFormatters)
+    {
+        for (NSDateFormatter *existingFormatter in existingFormatters)
+        {
+            if ([existingFormatter.dateFormat isEqualToString:format])
+            {
+                formatter = existingFormatter;
+                break;
+            }
+        }
+    }
+    
+    if (!formatter)
+    {
+        formatter = [[NSDateFormatter alloc] init];
+        [formatter setTimeZone:[NSTimeZone localTimeZone]];
+        [formatter setLocale:[NSLocale currentLocale]];
+        [formatter setDateFormat:format];
+        
+        if (existingFormatters)
+        {
+            existingFormatters = [existingFormatters arrayByAddingObject:formatter];
+        }
+        else
+        {
+            existingFormatters = @[formatter];
+        }
+    }
     
     NSDate *parsedDate = [formatter dateFromString:value];
     
