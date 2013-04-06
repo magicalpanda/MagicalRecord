@@ -41,6 +41,23 @@
             }
             //            value = adjustDateForDST(value);
         }
+        else if ((attributeType == NSStringAttributeType) && ([value isKindOfClass:[NSNumber class]]))
+        {
+            value = [value stringValue];
+        }
+        else if (((attributeType == NSInteger16AttributeType) ||
+                  (attributeType == NSInteger32AttributeType) ||
+                  (attributeType == NSInteger64AttributeType) ||
+                  (attributeType == NSBooleanAttributeType)) &&
+                 ([value isKindOfClass:[NSString class]]))
+        {
+            value = @([value integerValue]);
+        }
+        else if ((attributeType == NSFloatAttributeType) &&
+                 ([value isKindOfClass:[NSString class]]))
+        {
+            value = @([value doubleValue]);
+        }
     }
     
     return value == [NSNull null] ? nil : value;   
