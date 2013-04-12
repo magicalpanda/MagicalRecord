@@ -183,11 +183,11 @@ Most methods in MagicalRecord return an NSArray of results. So, if you have an E
 
 Or, to have the results sorted by a property:
 
-	NSArray *peopleSorted = [Person MR_findAllSortedByProperty:@"LastName" ascending:YES];
+	NSArray *peopleSorted = [Person MR_findAllSortedBy:@"LastName" ascending:YES];
 
 Or, to have the results sorted by multiple properties:
 
-    NSArray *peopleSorted = [Person MR_findAllSortedByProperty:@"LastName,FirstName" ascending:YES];
+    NSArray *peopleSorted = [Person MR_findAllSortedBy:@"LastName,FirstName" ascending:YES];
 
 If you have a unique way of retrieving a single object from your data store, you can get that object directly:
 
