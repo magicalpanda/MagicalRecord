@@ -7,6 +7,8 @@
 
 #import "CoreData+MagicalRecord.h"
 
+NSString * const kMagicalRecordCleanedUpNotification = @"kMagicalRecordCleanedUpNotification";
+
 @interface MagicalRecord (Internal)
 
 + (void) cleanUpStack;
@@ -27,6 +29,10 @@
 {
     [self cleanUpErrorHanding];
     [self cleanUpStack];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:kMagicalRecordCleanedUpNotification
+                                      object:nil
+                                    userInfo:nil];
 }
 
 + (void) cleanUpStack;

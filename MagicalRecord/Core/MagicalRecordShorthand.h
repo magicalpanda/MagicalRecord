@@ -152,6 +152,7 @@
 + (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThread;
 + (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 + (void) resetContextForCurrentThread;
++ (void) clearNonMainThreadContextsCache;
 @end
 @interface NSManagedObjectModel (MagicalRecordShortHand)
 + (NSManagedObjectModel *) defaultManagedObjectModel;

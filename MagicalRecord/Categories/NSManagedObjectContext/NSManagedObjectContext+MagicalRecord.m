@@ -30,6 +30,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
 {
     [self MR_setDefaultContext:nil];
     [self MR_setRootSavingContext:nil];
+    [self MR_clearNonMainThreadContextsCache];
 }
 
 - (NSString *) MR_description;
