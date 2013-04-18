@@ -34,6 +34,8 @@
 
 #ifdef NS_BLOCKS_AVAILABLE
 
+extern NSString * const kMagicalRecordCleanedUpNotification;
+
 @class NSManagedObjectContext;
 typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
