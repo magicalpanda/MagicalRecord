@@ -37,6 +37,26 @@ describe(@"MagicalRecord", ^{
             [[fetchedObject should] beNonNil];
             [[@([fetchedObject hasChanges]) should] beFalse];
         });
+        
+        it(@"should make entities available to the default context", ^{
+            __block NSManagedObjectID *objectId;
+            
+            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
+                
+                [[@([inserted hasChanges]) should] beTrue];
+                
+                [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
+                objectId = [inserted objectID];
+            }];
+            
+            [[objectId should] beNonNil];
+            
+            NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_defaultContext] objectWithID:objectId];
+            
+            [[fetchedObject should] beNonNil];
+            [[@([fetchedObject hasChanges]) should] beFalse];
+        });
     });
     
     context(@"asynchronous save action", ^{
@@ -70,6 +90,28 @@ describe(@"MagicalRecord", ^{
             } completion:^(BOOL success, NSError *error) {
                 saveSuccessState = success;
                 fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:objectId];
+            }];
+            
+            [[expectFutureValue(@(saveSuccessState)) shouldEventually] beTrue];
+            [[expectFutureValue(fetchedObject) shouldEventually] beNonNil];
+            [[expectFutureValue(@([fetchedObject hasChanges])) shouldEventually] beFalse];
+        });
+        
+        it(@"should make entities available to the default context", ^{
+            __block BOOL               saveSuccessState = NO;
+            __block NSManagedObjectID *objectId;
+            __block NSManagedObject   *fetchedObject;
+            
+            [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+                NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
+                
+                [[@([inserted hasChanges]) should] beTrue];
+                
+                [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
+                objectId = [inserted objectID];
+            } completion:^(BOOL success, NSError *error) {
+                saveSuccessState = success;
+                fetchedObject = [[NSManagedObjectContext MR_defaultContext] objectWithID:objectId];
             }];
             
             [[expectFutureValue(@(saveSuccessState)) shouldEventually] beTrue];
