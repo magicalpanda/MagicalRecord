@@ -38,7 +38,7 @@ describe(@"MagicalRecord", ^{
             [[@([fetchedObject hasChanges]) should] beFalse];
         });
         
-        it(@"should make entities available to the default context", ^{
+        it(@"should make inserted entities available to the default context", ^{
             __block NSManagedObjectID *objectId;
             
             [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
@@ -56,6 +56,37 @@ describe(@"MagicalRecord", ^{
             
             [[fetchedObject should] beNonNil];
             [[@([fetchedObject hasChanges]) should] beFalse];
+        });
+        
+        it(@"should make updates to entities available to the default context", ^{
+            __block NSManagedObjectID *objectId;
+            __block NSManagedObject   *fetchedObject;
+            
+            NSString * const kTestAttributeKey = @"booleanTestAttribute";
+            
+            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
+                
+                [inserted setValue:@YES forKey:kTestAttributeKey];
+                
+                [[@([inserted hasChanges]) should] beTrue];
+                
+                [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
+                objectId = [inserted objectID];
+            }];
+            
+            fetchedObject = [[NSManagedObjectContext MR_defaultContext] objectWithID:objectId];
+            [[[fetchedObject valueForKey:kTestAttributeKey] should] beTrue];
+            
+            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                NSManagedObject *changed = [localContext objectWithID:objectId];
+                
+                [changed setValue:@NO forKey:kTestAttributeKey];
+            }];
+            
+            fetchedObject = [[NSManagedObjectContext MR_defaultContext] objectWithID:objectId];
+            
+            [[[fetchedObject valueForKey:kTestAttributeKey] should] beFalse];
         });
     });
     
@@ -97,7 +128,7 @@ describe(@"MagicalRecord", ^{
             [[expectFutureValue(@([fetchedObject hasChanges])) shouldEventually] beFalse];
         });
         
-        it(@"should make entities available to the default context", ^{
+        it(@"should make inserted entities available to the default context", ^{
             __block BOOL               saveSuccessState = NO;
             __block NSManagedObjectID *objectId;
             __block NSManagedObject   *fetchedObject;
@@ -117,6 +148,38 @@ describe(@"MagicalRecord", ^{
             [[expectFutureValue(@(saveSuccessState)) shouldEventually] beTrue];
             [[expectFutureValue(fetchedObject) shouldEventually] beNonNil];
             [[expectFutureValue(@([fetchedObject hasChanges])) shouldEventually] beFalse];
+        });
+        
+        it(@"should make updates to entities available to the default context", ^{
+            __block NSManagedObjectID *objectId;
+            __block NSManagedObject   *fetchedObject;
+            
+            NSString * const kTestAttributeKey = @"booleanTestAttribute";
+            
+            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
+                
+                [inserted setValue:@YES forKey:kTestAttributeKey];
+                
+                [[@([inserted hasChanges]) should] beTrue];
+                
+                [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
+                objectId = [inserted objectID];
+            }];
+            
+            fetchedObject = [[NSManagedObjectContext MR_defaultContext] objectWithID:objectId];
+            [[[fetchedObject valueForKey:kTestAttributeKey] should] beTrue];
+            
+            [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+                NSManagedObject *changed = [localContext objectWithID:objectId];
+                
+                [changed setValue:@NO forKey:kTestAttributeKey];
+            } completion:^(BOOL success, NSError *error) {
+                fetchedObject = [[NSManagedObjectContext MR_defaultContext] objectWithID:objectId];
+            }];
+            
+            
+            [[expectFutureValue([fetchedObject valueForKey:kTestAttributeKey]) shouldEventually] beFalse];
         });
     });
     
