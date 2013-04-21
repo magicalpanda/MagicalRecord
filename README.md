@@ -241,8 +241,10 @@ There are also counterpart methods which return NSUInteger rather than NSNumbers
 #### Aggregate Operations
 
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"diaryEntry.date == %@", today];
-    int totalFat = [[CTFoodDiaryEntry MR_aggregateOperation:@"sum:" onAttribute:@"fatColories" withPredicate:predicate] intValue];
-    int fattest  = [[CTFoodDiaryEntry MR_aggregateOperation:@"max:" onAttribute:@"fatColories" withPredicate:predicate] intValue];
+    int totalFat = [[CTFoodDiaryEntry MR_aggregateOperation:@"sum:" onAttribute:@"fatCalories" withPredicate:predicate] intValue];
+    int fattest  = [[CTFoodDiaryEntry MR_aggregateOperation:@"max:" onAttribute:@"fatCalories" withPredicate:predicate] intValue];
+    NSArray* caloriesByMonth = [CTFoodDiaryEntry aggregateOperation:@"sum:" onAttribute:@"fatCalories" withPredicate:predicate groupBy:@"month"];
+
     
 #### Finding from a different context
 
