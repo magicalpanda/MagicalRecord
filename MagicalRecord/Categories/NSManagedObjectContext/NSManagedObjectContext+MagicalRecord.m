@@ -84,6 +84,13 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     defaultManagedObjectContext_ = moc;
     [defaultManagedObjectContext_ MR_setWorkingName:@"DEFAULT"];
     
+    if ((defaultManagedObjectContext_ != nil) && ([self MR_rootSavingContext] != nil)) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(rootContextChanged:)
+                                                     name:NSManagedObjectContextDidSaveNotification
+                                                   object:[self MR_rootSavingContext]];
+    }
+    
     [moc MR_obtainPermanentIDsBeforeSaving];
     if ([MagicalRecord isICloudEnabled])
     {
@@ -100,6 +107,13 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
                                                                        }];        
     }
     MRLog(@"Set Default Context: %@", defaultManagedObjectContext_);
+}
+
++ (void)rootContextChanged:(NSNotification *)notification {
+    [[self MR_defaultContext] performSelector:@selector(mergeChangesFromContextDidSaveNotification:)
+                                     onThread:[NSThread mainThread]
+                                   withObject:notification
+                                waitUntilDone:NO];
 }
 
 + (NSManagedObjectContext *) MR_rootSavingContext;
