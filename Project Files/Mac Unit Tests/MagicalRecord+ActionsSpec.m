@@ -86,7 +86,8 @@ describe(@"MagicalRecord", ^{
             
             fetchedObject = [[NSManagedObjectContext MR_defaultContext] objectWithID:objectId];
             
-            [[[fetchedObject valueForKey:kTestAttributeKey] should] beFalse];
+            // Async since the merge to the main thread context after persistence
+            [[expectFutureValue([fetchedObject valueForKey:kTestAttributeKey]) shouldEventually] beFalse];
         });
     });
     
