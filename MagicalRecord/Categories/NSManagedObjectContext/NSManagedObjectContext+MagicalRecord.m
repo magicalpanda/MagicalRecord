@@ -110,10 +110,15 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
 }
 
 + (void)rootContextChanged:(NSNotification *)notification {
-    [[self MR_defaultContext] performSelector:@selector(mergeChangesFromContextDidSaveNotification:)
-                                     onThread:[NSThread mainThread]
-                                   withObject:notification
-                                waitUntilDone:NO];
+    if ([NSThread isMainThread] == NO) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self rootContextChanged:notification];
+        });
+        
+        return;
+    }
+    
+    [[self MR_defaultContext] mergeChangesFromContextDidSaveNotification:notification];
 }
 
 + (NSManagedObjectContext *) MR_rootSavingContext;
