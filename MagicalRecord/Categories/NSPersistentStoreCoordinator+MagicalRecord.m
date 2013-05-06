@@ -104,6 +104,8 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 - (NSPersistentStore *) MR_addSqliteStoreAtURL:(NSURL *)url withOptions:(NSDictionary *__autoreleasing)options;
 {
     [[self class] MR_createPathToStoreFileIfNeccessary:url];
+
+    MRLog(@"Adding store at [%@] to NSPSC with options [%@]", url, options);
     NSError *error = nil;
     NSPersistentStore *store = [self addPersistentStoreWithType:NSSQLiteStoreType
                                                   configuration:nil
@@ -347,6 +349,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 {
     NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
                              [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                             [NSNumber numberWithBool:NO], NSInferMappingModelAutomaticallyOption,
                              nil];
     return options;
 }
