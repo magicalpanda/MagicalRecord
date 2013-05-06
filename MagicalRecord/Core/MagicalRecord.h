@@ -43,6 +43,10 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
 + (NSString *) currentStack;
 
++ (void) cleanUpWhenFinishedSaving;
++ (void) cancelCleanUpWhenFinishedSaving;
++ (BOOL) isWaitingToCleanUp;
+
 + (void) cleanUp;
 
 + (void) setDefaultModelFromClass:(Class)klass;
