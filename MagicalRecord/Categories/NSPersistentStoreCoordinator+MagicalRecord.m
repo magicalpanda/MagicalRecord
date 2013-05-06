@@ -10,9 +10,12 @@
 static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
 NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagicalRecordPSCDidCompleteiCloudSetupNotification";
 
-@interface NSDictionary (MagicalRecordMerging)
+@interface NSDictionary (MagicalRecordAdditions)
 
 - (NSMutableDictionary*) MR_dictionaryByMergingDictionary:(NSDictionary*)d; 
++ (NSDictionary *) MR_defaultSqliteStoreOptions;
++ (NSDictionary *) MR_autoMigrationOptions;
++ (NSDictionary *) MR_manualMigrationOptions;
 
 @end 
 
@@ -137,31 +140,22 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     return store;
 }
 
-+ (NSDictionary *) MR_autoMigrationOptions;
+- (NSPersistentStore *) MR_addAutoMigratingSqliteStoreNamed:(NSString *)storeFileName;
 {
-    // Adding the journalling mode recommended by apple
-    NSMutableDictionary *sqliteOptions = [NSMutableDictionary dictionary];
-    [sqliteOptions setObject:@"WAL" forKey:@"journal_mode"];
-    
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-                             [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
-                             sqliteOptions, NSSQLitePragmasOption,
-                             nil];
-    return options;
-}
-
-- (NSPersistentStore *) MR_addAutoMigratingSqliteStoreNamed:(NSString *) storeFileName;
-{
-    NSDictionary *options = [[self class] MR_autoMigrationOptions];
+    NSDictionary *options = [NSDictionary MR_autoMigrationOptions];
     return [self MR_addSqliteStoreNamed:storeFileName withOptions:options];
 }
 
+- (NSPersistentStore *) MR_addManuallyMigratingSqliteStoreNamed:(NSString *)storeFileName;
+{
+    NSDictionary *options = [NSDictionary MR_manualMigrationOptions];
+    return [self MR_addSqliteStoreNamed:storeFileName withOptions:options];
+}
 
 #pragma mark - Public Class Methods
 
 
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *) storeFileName
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *)storeFileName
 {
     NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
@@ -173,6 +167,16 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     {
         [coordinator performSelector:@selector(MR_addAutoMigratingSqliteStoreNamed:) withObject:storeFileName afterDelay:0.5];
     }
+
+    return coordinator;
+}
+
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithManuallyMigratingSqliteStoreNamed:(NSString *)storeFileName;
+{
+    NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
+    NSPersistentStoreCoordinator *coordinator = [[self alloc] initWithManagedObjectModel:model];
+
+    [coordinator MR_addManuallyMigratingSqliteStoreNamed:storeFileName];
 
     return coordinator;
 }
@@ -215,7 +219,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 
         [MagicalRecord setICloudEnabled:cloudURL != nil];
         
-        NSDictionary *options = [[self class] MR_autoMigrationOptions];
+        NSDictionary *options = [NSDictionary MR_autoMigrationOptions];
         if (cloudURL)   //iCloud is available
         {
             NSDictionary *iCloudOptions = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -309,16 +313,42 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     [psc MR_addSqliteStoreAtURL:url withOptions:nil];
     return psc;
 }
+
 @end
 
 
-@implementation NSDictionary (Merging) 
+@implementation NSDictionary (MagicalRecordAdditions) 
 
 - (NSMutableDictionary *) MR_dictionaryByMergingDictionary:(NSDictionary *)d;
 {
     NSMutableDictionary *mutDict = [self mutableCopy];
     [mutDict addEntriesFromDictionary:d];
     return mutDict; 
-} 
+}
+
++ (NSDictionary *) MR_defaultSqliteStoreOptions;
+{
+    NSMutableDictionary *options = [NSMutableDictionary dictionary];
+    [options setObject:@"WAL" forKey:@"journal_mode"];
+
+    return options;
+}
+
++ (NSDictionary *) MR_autoMigrationOptions;
+{
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                             [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
+                             nil];
+    return options;
+}
+
++ (NSDictionary *) MR_manualMigrationOptions;
+{
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                             nil];
+    return options;
+}
 
 @end 

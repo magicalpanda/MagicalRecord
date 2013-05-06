@@ -18,28 +18,48 @@
     [self setupCoreDataStackWithStoreNamed:[self defaultStoreName]];
 }
 
++ (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName
+{
+    if ([NSPersistentStoreCoordinator MR_defaultStoreCoordinator] != nil) return;
+
+	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreNamed:storeName];
+    [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
+
+    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
+}
+
 + (void) setupAutoMigratingCoreDataStack
 {
     [self setupCoreDataStackWithAutoMigratingSqliteStoreNamed:[self defaultStoreName]];
 }
 
-+ (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName
++ (void) setupAutoMigratingCoreDataStackWithSqliteStoreNamed:(NSString *)storeName;
 {
     if ([NSPersistentStoreCoordinator MR_defaultStoreCoordinator] != nil) return;
-    
-	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreNamed:storeName];
+
+    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithAutoMigratingSqliteStoreNamed:storeName];
     [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
-	
+
     [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
 }
 
-+ (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName
++ (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName //depricated
+{
+    [self setupAutoMigratingCoreDataStackWithSqliteStoreNamed:storeName];
+}
+
++ (void) setupManuallyMigratingCoreDataStack;
+{
+    [self setupAutoMigratingCoreDataStackWithSqliteStoreNamed:[self defaultStoreName]];
+}
+
++ (void) setupManuallyMigratingCoreDataStackWithSqliteStoreNamed:(NSString *)storeName;
 {
     if ([NSPersistentStoreCoordinator MR_defaultStoreCoordinator] != nil) return;
-    
-    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithAutoMigratingSqliteStoreNamed:storeName];
+
+    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithManuallyMigratingSqliteStoreNamed:storeName];
     [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
-    
+
     [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
 }
 
