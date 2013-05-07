@@ -5,6 +5,7 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
+#import <libkern/OSAtomic.h>
 #import "CoreData+MagicalRecord.h"
 
 static volatile int32_t saveOperationsCount;
