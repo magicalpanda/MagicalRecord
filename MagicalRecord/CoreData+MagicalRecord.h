@@ -43,6 +43,7 @@
     #import "NSAttributeDescription+MagicalDataImport.h"
     #import "NSRelationshipDescription+MagicalDataImport.h"
     #import "NSEntityDescription+MagicalDataImport.h"
+    #import "NSError+MagicalRecordErrorHandling.h"
 //#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 //    #import "NSFetchedResultsController+MagicalFetching.h"
 //#endif

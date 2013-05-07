@@ -7,6 +7,7 @@
 //
 
 #import "MagicalRecord+ErrorHandling.h"
+#import "NSError+MagicalRecordErrorHandling.h"
 
 
 static id errorHandlerTarget = nil;
@@ -19,76 +20,33 @@ static SEL errorHandlerAction = nil;
 {
     errorHandlerTarget = nil;
     errorHandlerAction = nil;
-}
-
-+ (void) defaultErrorHandler:(NSError *)error
-{
-    NSDictionary *userInfo = [error userInfo];
-    for (NSArray *detailedError in [userInfo allValues])
-    {
-        if ([detailedError isKindOfClass:[NSArray class]])
-        {
-            for (NSError *e in detailedError)
-            {
-                if ([e respondsToSelector:@selector(userInfo)])
-                {
-                    MRLog(@"Error Details: %@", [e userInfo]);
-                }
-                else
-                {
-                    MRLog(@"Error Details: %@", e);
-                }
-            }
-        }
-        else
-        {
-            MRLog(@"Error: %@", detailedError);
-        }
-    }
-    MRLog(@"Error Message: %@", [error localizedDescription]);
-    MRLog(@"Error Domain: %@", [error domain]);
-    MRLog(@"Recovery Suggestion: %@", [error localizedRecoverySuggestion]);
-}
-
-+ (void) handleErrors:(NSError *)error
-{
-	if (error)
-	{
-        // If a custom error handler is set, call that
-        if (errorHandlerTarget != nil && errorHandlerAction != nil) 
-		{
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-            [errorHandlerTarget performSelector:errorHandlerAction withObject:error];
-#pragma clang diagnostic pop
-        }
-		else
-		{
-	        // Otherwise, fall back to the default error handling
-	        [self defaultErrorHandler:error];			
-		}
-    }
+    [NSError MR_cleanUp];
 }
 
 + (id) errorHandlerTarget
 {
-    return errorHandlerTarget;
+    return [NSError MR_handlerTarget];
 }
 
 + (SEL) errorHandlerAction
 {
-    return errorHandlerAction;
+    return [NSError MR_handlerAction];
 }
 
 + (void) setErrorHandlerTarget:(id)target action:(SEL)action
 {
-    errorHandlerTarget = target;    /* Deliberately don't retain to avoid potential retain cycles */
-    errorHandlerAction = action;
+    [NSError MR_setHandlerTarget:target];
+    [NSError MR_setHandlerAction:action];
+}
+
++ (void) handleErrors:(NSError *)error
+{
+    [error MR_log];
 }
 
 - (void) handleErrors:(NSError *)error
 {
-	[[self class] handleErrors:error];
+    [error MR_log];
 }
 
 @end

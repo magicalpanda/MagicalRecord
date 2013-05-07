@@ -10,11 +10,11 @@
 
 @interface MagicalRecord (ErrorHandling)
 
-+ (void) handleErrors:(NSError *)error;
-- (void) handleErrors:(NSError *)error;
++ (void) handleErrors:(NSError *)error __attribute__((depricated));
+- (void) handleErrors:(NSError *)error __attribute__((depricated));
 
-+ (void) setErrorHandlerTarget:(id)target action:(SEL)action;
-+ (SEL) errorHandlerAction;
-+ (id) errorHandlerTarget;
++ (void) setErrorHandlerTarget:(id)target action:(SEL)action __attribute__((depricated));
++ (SEL) errorHandlerAction __attribute__((depricated));
++ (id) errorHandlerTarget __attribute__((depricated));
 
 @end

@@ -72,7 +72,7 @@
         {
             if (!saved)
             {
-                [MagicalRecord handleErrors:error];
+                [error MR_log];
 
                 if (completion)
                 {
