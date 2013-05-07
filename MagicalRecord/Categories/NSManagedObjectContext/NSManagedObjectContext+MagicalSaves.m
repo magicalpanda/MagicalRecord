@@ -11,6 +11,13 @@
 #import "NSManagedObjectContext+MagicalRecord.h"
 #import "MagicalRecord.h"
 
+@interface MagicalRecord (Internal)
+
++ (void) didBeginSaveOperation;
++ (void) didEndSaveOperation;
+
+@end
+
 @implementation NSManagedObjectContext (MagicalSaves)
 
 - (void)MR_saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;
@@ -35,6 +42,8 @@
 
 - (void)MR_saveWithOptions:(MRSaveContextOptions)mask completion:(MRSaveCompletionHandler)completion;
 {
+	[MagicalRecord didBeginSaveOperation];
+	
     BOOL syncSave           = ((mask & MRSaveSynchronously) == MRSaveSynchronously);
     BOOL saveParentContexts = ((mask & MRSaveParentContexts) == MRSaveParentContexts);
 
@@ -45,8 +54,12 @@
         {
             dispatch_async(dispatch_get_main_queue(), ^{
                 completion(NO, nil);
+				[MagicalRecord didEndSaveOperation];
             });
         }
+		else {
+			[MagicalRecord didEndSaveOperation];
+		}
         
         return;
     }
@@ -76,16 +89,22 @@
                 if (completion) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         completion(saved, error);
+						[MagicalRecord didEndSaveOperation];
                     });
                 }
+				else {
+					[MagicalRecord didEndSaveOperation];
+				}
             } else {
                 // If we're the default context, save to disk too (the user expects it to persist)
                 if (self == [[self class] MR_defaultContext]) {
                     [[[self class] MR_rootSavingContext] MR_saveWithOptions:MRSaveSynchronously completion:completion];
+					[MagicalRecord didEndSaveOperation];
                 }
                 // If we're saving parent contexts, do so
                 else if ((YES == saveParentContexts) && [self parentContext]) {
                     [[self parentContext] MR_saveWithOptions:MRSaveSynchronously | MRSaveParentContexts completion:completion];
+					[MagicalRecord didEndSaveOperation];
                 }
                 // If we are not the default context (And therefore need to save the root context, do the completion action if one was specified
                 else {
@@ -94,8 +113,12 @@
                     if (completion) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             completion(saved, error);
+							[MagicalRecord didEndSaveOperation];
                         });
                     }
+					else {
+						[MagicalRecord didEndSaveOperation];
+					}
                 }
             }
         }

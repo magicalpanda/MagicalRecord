@@ -8,6 +8,12 @@
 #import "CoreData+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
 
+@interface MagicalRecord (Internal)
+
++ (void) didBeginSaveOperation;
++ (void) didEndSaveOperation;
+
+@end
 
 @implementation MagicalRecord (Actions)
 
@@ -20,6 +26,8 @@
 
 + (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
 {
+	[MagicalRecord didBeginSaveOperation];
+	
     NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
 
@@ -29,11 +37,15 @@
         }
 
         [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:completion];
+		
+		[MagicalRecord didEndSaveOperation];
     }];
 }
 
 + (void) saveUsingCurrentThreadContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
 {
+	[MagicalRecord didBeginSaveOperation];
+	
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
 
     [localContext performBlock:^{
@@ -42,6 +54,8 @@
         }
 
         [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:completion];
+		
+		[MagicalRecord didEndSaveOperation];
     }];
 }
 
@@ -50,6 +64,8 @@
 
 + (void) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
 {
+	[MagicalRecord didBeginSaveOperation];
+	
     NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
 
@@ -59,11 +75,15 @@
         }
 
         [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:nil];
+		
+		[MagicalRecord didEndSaveOperation];
     }];
 }
 
 + (void) saveUsingCurrentThreadContextWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block;
 {
+	[MagicalRecord didBeginSaveOperation];
+	
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
 
     [localContext performBlockAndWait:^{
@@ -72,6 +92,8 @@
         }
 
         [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:nil];
+		
+		[MagicalRecord didEndSaveOperation];
     }];
 }
 
@@ -88,6 +110,8 @@
 
 + (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))completion
 {
+	[MagicalRecord didBeginSaveOperation];
+	
     NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
 
@@ -103,11 +127,15 @@
         {
             completion();
         }
+		
+		[MagicalRecord didEndSaveOperation];
     }];
 }
 
 + (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *error))errorHandler;
 {
+	[MagicalRecord didBeginSaveOperation];
+	
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
 
     [localContext performBlock:^{
@@ -126,6 +154,7 @@
                     errorHandler(error);
                 }
             }
+			[MagicalRecord didEndSaveOperation];
         }];
     }];
 }

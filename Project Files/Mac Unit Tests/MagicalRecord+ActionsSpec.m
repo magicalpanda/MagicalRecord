@@ -145,6 +145,24 @@ describe(@"MagicalRecord", ^{
             });
         });
 	});
+	
+	context(@"clean up when finished saving", ^{
+		it(@"should clean up immediately when no operations are in progress", ^{
+			[MagicalRecord cleanUpWhenFinishedSaving];
+			[[expectFutureValue([NSPersistentStore MR_defaultPersistentStore]) should] beNil];
+		});
+		
+		it(@"should wait to clean up until all operations are finished", ^{
+			[MagicalRecord saveUsingCurrentThreadContextWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+				[MagicalRecord saveUsingCurrentThreadContextWithBlock:nil
+														   completion:^(BOOL success, NSError *error) {
+					[MagicalRecord cleanUpWhenFinishedSaving];
+					[[expectFutureValue([NSPersistentStore MR_defaultPersistentStore]) should] beNonNil];
+				}];
+			}];
+			[[expectFutureValue([NSPersistentStore MR_defaultPersistentStore]) shouldEventually] beNil];
+		});
+	});
     
     
     // We're testing for deprecated method function — ignore the warnings

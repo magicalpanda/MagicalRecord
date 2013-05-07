@@ -5,7 +5,11 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
+#import <libkern/OSAtomic.h>
 #import "CoreData+MagicalRecord.h"
+
+static volatile int32_t saveOperationsCount;
+static BOOL isWaitingToCleanUp;
 
 @interface MagicalRecord (Internal)
 
@@ -20,11 +24,49 @@
 
 @end
 
-
 @implementation MagicalRecord
+
++ (void) didBeginSaveOperation
+{
+	OSAtomicIncrement32Barrier(&saveOperationsCount);
+}
+
++ (void) didEndSaveOperation
+{
+	NSUInteger operationsInProgress = OSAtomicDecrement32Barrier(&saveOperationsCount);
+	if (operationsInProgress == 0 && isWaitingToCleanUp) {
+		[self cleanUp];
+	}
+}
+
++ (NSUInteger) countOfSaveOperationsInProgress
+{
+	return OSAtomicAdd32Barrier(0, &saveOperationsCount);
+}
+
++ (void) cleanUpWhenFinishedSaving
+{
+	NSUInteger operationsInProgress = [self countOfSaveOperationsInProgress];
+	if (operationsInProgress == 0) {
+		[self cleanUp];
+	} else {
+		isWaitingToCleanUp = YES;
+	}
+}
+
++ (void) cancelCleanUpWhenFinishedSaving
+{
+	isWaitingToCleanUp = NO;
+}
+
++ (BOOL) isWaitingToCleanUp
+{
+	return isWaitingToCleanUp;
+}
 
 + (void) cleanUp
 {
+	isWaitingToCleanUp = NO;
     [self cleanUpErrorHanding];
     [self cleanUpStack];
 }
