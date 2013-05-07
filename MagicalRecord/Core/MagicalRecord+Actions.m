@@ -154,9 +154,8 @@
                     errorHandler(error);
                 }
             }
+			[MagicalRecord didEndSaveOperation];
         }];
-		
-		[MagicalRecord didEndSaveOperation];
     }];
 }
 
