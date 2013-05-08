@@ -10,11 +10,11 @@
 
 @interface MagicalRecord (ErrorHandling)
 
-+ (void) handleErrors:(NSError *)error __attribute__((depricated));
-- (void) handleErrors:(NSError *)error __attribute__((depricated));
++ (void) handleErrors:(NSError *)error __attribute__((deprecated));
+- (void) handleErrors:(NSError *)error __attribute__((deprecated));
 
-+ (void) setErrorHandlerTarget:(id)target action:(SEL)action __attribute__((depricated));
-+ (SEL) errorHandlerAction __attribute__((depricated));
-+ (id) errorHandlerTarget __attribute__((depricated));
++ (void) setErrorHandlerTarget:(id)target action:(SEL)action __attribute__((deprecated));
++ (SEL) errorHandlerAction __attribute__((deprecated));
++ (id) errorHandlerTarget __attribute__((deprecated));
 
 @end
