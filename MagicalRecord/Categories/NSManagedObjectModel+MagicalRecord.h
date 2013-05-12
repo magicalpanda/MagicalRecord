@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MagicalRecord.h"
+#import "NSManagedObjectModel+KCOrderedAccessorFix.h"
 
 
 @interface NSManagedObjectModel (MagicalRecord)
