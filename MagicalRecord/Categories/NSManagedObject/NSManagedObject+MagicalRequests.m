@@ -131,7 +131,7 @@
         } else {
             keypath = sortKey;
         }
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:keypath ascending:ascendingOrder];
         [sortDescriptors addObject:sortDescriptor];
     }
     
