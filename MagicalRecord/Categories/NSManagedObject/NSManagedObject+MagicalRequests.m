@@ -118,6 +118,19 @@
     NSArray* sortKeys = [sortTerm componentsSeparatedByString:@","];
     for (NSString* sortKey in sortKeys) 
     {
+        // Pull out + or - from the sortTerm since it indicates which way to sort
+        // + sorts with the ascending
+        // - sorts the opposite of the ascending
+        NSString *keypath = nil;
+        BOOL ascendingOrder = ascending;
+        if([sortKey hasPrefix:@"+"]) {
+            keypath = [sortKey substringFromIndex:1];
+        } else if([sortKey hasPrefix:@"-"]) {
+            keypath = [sortKey substringFromIndex:1];
+            ascendingOrder = !ascending;
+        } else {
+            keypath = sortKey;
+        }
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
         [sortDescriptors addObject:sortDescriptor];
     }
