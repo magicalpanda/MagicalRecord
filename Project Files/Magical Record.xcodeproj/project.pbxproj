@@ -240,6 +240,7 @@
 		C7CDF558150F78DC00FD3D52 /* ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7913BAC13FB1DF9007E09CC /* ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m */; };
 		C7CDF559150F78DC00FD3D52 /* ImportSingleEntityRelatedToMappedEntityWithSecondaryMappingsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78F8FD613FDC31700549DD8 /* ImportSingleEntityRelatedToMappedEntityWithSecondaryMappingsTests.m */; };
 		C7CDF55A150F78DC00FD3D52 /* ImportSingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeysTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C73812781410383B0054EEF0 /* ImportSingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeysTests.m */; };
+		C7CF963D174963D0008D9D13 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7CF963C174963D0008D9D13 /* Default-568h@2x.png */; };
 		C7D2DC25155AFDF500B3A468 /* GHUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D2DC22155AFDF500B3A468 /* GHUnit.framework */; };
 		C7D2DC26155AFDF500B3A468 /* OCHamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D2DC23155AFDF500B3A468 /* OCHamcrest.framework */; };
 		C7D2DC27155AFDF500B3A468 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D2DC24155AFDF500B3A468 /* OCMock.framework */; };
@@ -548,6 +549,7 @@
 		C7C9A38813F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.h; sourceTree = "<group>"; };
 		C7C9A38913F4524B002C5B0C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m; sourceTree = "<group>"; };
 		C7C9A38C13F45438002C5B0C /* ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests.m; path = "Unit Tests/ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests.m"; sourceTree = "<group>"; };
+		C7CF963C174963D0008D9D13 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C7D2DC22155AFDF500B3A468 /* GHUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GHUnit.framework; sourceTree = "<group>"; };
 		C7D2DC23155AFDF500B3A468 /* OCHamcrest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCHamcrest.framework; sourceTree = "<group>"; };
 		C7D2DC24155AFDF500B3A468 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCMock.framework; sourceTree = "<group>"; };
@@ -768,6 +770,7 @@
 		C721C7A013D0A3750097AB6F = {
 			isa = PBXGroup;
 			children = (
+				C7CF963C174963D0008D9D13 /* Default-568h@2x.png */,
 				C75C7D69147220D300D0C2FE /* generateShorthandFile.rb */,
 				C7DD7299150F832A00216827 /* MagicalRecord */,
 				C77E5FA513D0CBA600298F87 /* Unit Tests */,
@@ -1328,6 +1331,7 @@
 				C7E736DF1402FE64005657C9 /* SingleEntityWithNoRelationships.json in Resources */,
 				C738127B141039900054EEF0 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json in Resources */,
 				C75C7D6B147220D400D0C2FE /* generateShorthandFile.rb in Resources */,
+				C7CF963D174963D0008D9D13 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
