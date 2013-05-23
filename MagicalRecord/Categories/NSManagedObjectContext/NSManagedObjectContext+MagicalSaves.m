@@ -80,17 +80,16 @@
                 }
             } else {
                 // If we're the default context, save to disk too (the user expects it to persist)
-                if (self == [[self class] MR_defaultContext]) {
-                    [[[self class] MR_rootSavingContext] MR_saveWithOptions:MRSaveSynchronously completion:completion];
+                BOOL isDefaultContext = (self == [[self class] MR_defaultContext]);
+                BOOL shouldSaveParentContext = ((YES == saveParentContexts) || isDefaultContext);
+                
+                if (shouldSaveParentContext && [self parentContext]) {
+                    [[self parentContext] MR_saveWithOptions:mask completion:completion];
                 }
-                // If we're saving parent contexts, do so
-                else if ((YES == saveParentContexts) && [self parentContext]) {
-                    [[self parentContext] MR_saveWithOptions:MRSaveSynchronously | MRSaveParentContexts completion:completion];
-                }
-                // If we are not the default context (And therefore need to save the root context, do the completion action if one was specified
+                // If we should not save the parent context, or there is not a parent context to save (root context), call the completion block
                 else {
                     MRLog(@"→ Finished saving: %@", [self MR_description]);
-
+                    
                     if (completion) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             completion(saved, error);
