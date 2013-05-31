@@ -21,22 +21,22 @@ static SEL _errorHandlerAction = nil;
     _errorHandlerTarget = nil;
 }
 
-- (id) MR_handlerTarget;
++ (id) MR_handlerTarget;
 {
     return _errorHandlerTarget;
 }
 
-- (void) MR_setHandlerTarget:(id)target;
++ (void) MR_setHandlerTarget:(id)target;
 {
     _errorHandlerTarget = target;
 }
 
-- (SEL) MR_handlerAction;
++ (SEL) MR_handlerAction;
 {
     return _errorHandlerAction;
 }
 
-- (void) MR_setHandlerAction:(SEL)action;
++ (void) MR_setHandlerAction:(SEL)action;
 {
     _errorHandlerAction = action;
 }
