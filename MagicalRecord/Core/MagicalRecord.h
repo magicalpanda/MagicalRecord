@@ -25,6 +25,9 @@
     #ifdef LOG_VERBOSE
         extern int ddLogLevel;
         #define MRLog(...)  DDLogVerbose(__VA_ARGS__)
+	// Then check if NSLogger can be used for logging
+	#elif NSLOGGER_WAS_HERE
+		#define MRLog(...) LogMessageF(__FILE__, __LINE__, __PRETTY_FUNCTION__, @"MagicalRecord", 3, __VA_ARGS__)
     #else
         #define MRLog(...) NSLog(@"%s(%p) %@", __PRETTY_FUNCTION__, self, [NSString stringWithFormat:__VA_ARGS__])
     #endif
