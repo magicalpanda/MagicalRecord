@@ -61,7 +61,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 
     if (!pathWasCreated) 
     {
-        [MagicalRecord handleErrors:error];
+        [error MR_log];
     }
 }
 
@@ -97,7 +97,6 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
         }
     }
 
-    [MagicalRecord handleErrors:error];
     return store;
 }
 
@@ -115,11 +114,12 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     
     if (store == nil)
     {
-        MRLog(@"Unable to setup store at URL: %@", url);
-        [MagicalRecord handleErrors:error];
-        
-
         store = [self MR_reinitializeStoreAtURL:url fromError:error withOptions:options];
+        if (store == nil)
+        {
+            MRLog(@"Unable to setup store at URL: %@", url);
+            [error MR_log];
+        }
     }
     return store;
 }
@@ -137,7 +137,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
                                                           error:&error];
     if (!store)
     {
-        [MagicalRecord handleErrors:error];
+        [error MR_log];
     }
     return store;
 }

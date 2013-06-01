@@ -48,8 +48,11 @@
                 completion(YES, nil);
             });
         }
-        
-        return;
+
+        if (!(saveParentContexts && [self parentContext]))
+        {
+            return;
+        }
     }
 
     void (^saveBlock)(void) = ^{
@@ -59,6 +62,10 @@
         MRLog(@"→ Saving %@", [self MR_description]);
         MRLog(@"→ Save Parents? %@", @(saveParentContexts));
         MRLog(@"→ Save Synchronously? %@", @(syncSave));
+
+        NSInteger numberOfInsertedObjects = [[self insertedObjects] count];
+        NSInteger numberOfUpdatedObjects = [[self updatedObjects] count];
+        NSInteger numberOfDeletedObjects = [[self deletedObjects] count];
 
         @try
         {
@@ -72,7 +79,7 @@
         {
             if (!saved)
             {
-                [MagicalRecord handleErrors:error];
+                [error MR_log];
 
                 if (completion)
                 {
@@ -97,6 +104,8 @@
                 else
                 {
                     MRLog(@"→ Finished saving: %@", [self MR_description]);
+                    MRLog(@"Objects - Inserted %d, Updated %d, Deleted %d", numberOfInsertedObjects, numberOfUpdatedObjects, numberOfDeletedObjects);
+                    
                     if (completion)
                     {
                         dispatch_async(dispatch_get_main_queue(), ^{
