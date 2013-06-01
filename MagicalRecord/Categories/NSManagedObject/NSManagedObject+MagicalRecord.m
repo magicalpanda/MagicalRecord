@@ -33,7 +33,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
         if (results == nil)
         {
-            [error MR_log];
+            [[error MR_coreDataDescription] MR_logToConsole];
         }  
     };
 
@@ -77,7 +77,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	NSError *error = nil;
 	if (![controller performFetch:&error])
 	{
-        [error MR_log];
+        [[error MR_coreDataDescription] MR_logToConsole];
 	}
 }
 
@@ -240,7 +240,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
         BOOL success = [[self managedObjectContext] obtainPermanentIDsForObjects:[NSArray arrayWithObject:self] error:&error];
         if (!success)
         {
-            [error MR_log];
+            [[error MR_coreDataDescription] MR_logToConsole];
         }
     }
 }
