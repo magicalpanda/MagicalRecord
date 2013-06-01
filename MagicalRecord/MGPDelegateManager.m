@@ -15,15 +15,15 @@
 
 @implementation MGPDelegateManager
 
--(id)init
+- (id) init;
 {
-	_proxiedObject=nil;
-	_justResponded=NO;
-	_logOnNoResponse=NO;
+	_proxiedObject = nil;
+	_justResponded = NO;
+	_logOnNoResponse = NO;
 	return self;
 }
 
--(NSMethodSignature*)methodSignatureForSelector:(SEL)selector
+- (NSMethodSignature*) methodSignatureForSelector:(SEL)selector
 {
 	NSMethodSignature *sig = [[_proxiedObject class] instanceMethodSignatureForSelector:selector];
 	if (sig == nil)
@@ -34,11 +34,11 @@
 	return sig;
 }
 
--(void)forwardInvocation:(NSInvocation*)invocation
+- (void) forwardInvocation:(NSInvocation*)invocation
 {
-	if (_proxiedObject==nil)
+	if (_proxiedObject == nil)
 	{
-		if(_logOnNoResponse)
+		if (_logOnNoResponse)
         {
             NSLog(@"Warning: proxiedObject is nil! This is a debugging message!");
         }
@@ -47,13 +47,12 @@
 	if ([_proxiedObject respondsToSelector:[invocation selector]])
 	{
 		[invocation invokeWithTarget:_proxiedObject];
-		_justResponded=YES;
+		_justResponded = YES;
 	}
-	else if(_logOnNoResponse)
+	else if (_logOnNoResponse)
 	{
 		NSLog(@"Object \"%@\" failed to respond to delegate message \"%@\"! This is a debugging message.", [[self proxiedObject] class], NSStringFromSelector([invocation selector]));
 	}
-	return;
 }
 
 @end
