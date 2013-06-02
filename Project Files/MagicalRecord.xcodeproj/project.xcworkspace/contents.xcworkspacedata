@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Magical Record.xcodeproj">
+      location = "self:MagicalRecord.xcodeproj">
    </FileRef>
 </Workspace>

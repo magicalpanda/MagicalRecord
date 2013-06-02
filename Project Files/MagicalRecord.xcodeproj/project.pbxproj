@@ -753,7 +753,7 @@
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Magical Panda Software LLC";
 			};
-			buildConfigurationList = C721C7A513D0A3750097AB6F /* Build configuration list for PBXProject "Magical Record" */;
+			buildConfigurationList = C721C7A513D0A3750097AB6F /* Build configuration list for PBXProject "MagicalRecord" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1381,7 +1381,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C721C7A513D0A3750097AB6F /* Build configuration list for PBXProject "Magical Record" */ = {
+		C721C7A513D0A3750097AB6F /* Build configuration list for PBXProject "MagicalRecord" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C721C7A713D0A3750097AB6F /* Debug */,
