@@ -8,15 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@interface NSString (MagicalRecordLogging)
+
+- (void) MR_logToConsole;
+
+@end
+
+
 @interface NSError (MagicalRecordErrorHandling)
 
-+ (void) MR_setHandlerTarget:(id)target;
-+ (id) MR_handlerTarget;
-+ (void) MR_setHandlerAction:(SEL)action;
-+ (SEL) MR_handlerAction;
-
-- (void) MR_log;
-
-+ (void) MR_cleanUp;
+- (NSString *) MR_coreDataDescription;
 
 @end

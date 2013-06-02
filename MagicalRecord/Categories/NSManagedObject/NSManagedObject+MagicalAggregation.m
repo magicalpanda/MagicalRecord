@@ -50,7 +50,7 @@
 {
 	NSError *error = nil;
 	NSUInteger count = [context countForFetchRequest:[self MR_createFetchRequestInContext:context] error:&error];
-    [error MR_log];
+    [[error MR_coreDataDescription] MR_logToConsole];
 
     return count;
 }
@@ -67,7 +67,7 @@
 	[request setPredicate:searchFilter];
 	
 	NSUInteger count = [context countForFetchRequest:request error:&error];
-    [error MR_log];
+    [[error MR_coreDataDescription] MR_logToConsole];
 
     return count;
 }

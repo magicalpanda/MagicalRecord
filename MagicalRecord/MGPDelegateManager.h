@@ -14,6 +14,6 @@
 @property (nonatomic, assign) BOOL logOnNoResponse;
 @property (nonatomic, weak) id proxiedObject;
 
--(id)init;
+- (id) init;
 
 @end

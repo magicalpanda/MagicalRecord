@@ -31,7 +31,7 @@
 
 + (void) setupAutoMigratingCoreDataStack
 {
-    [self setupCoreDataStackWithAutoMigratingSqliteStoreNamed:[self defaultStoreName]];
+    [self setupAutoMigratingCoreDataStackWithSqliteStoreNamed:[self defaultStoreName]];
 }
 
 + (void) setupAutoMigratingCoreDataStackWithSqliteStoreNamed:(NSString *)storeName;

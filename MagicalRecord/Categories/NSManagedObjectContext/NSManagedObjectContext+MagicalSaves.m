@@ -7,8 +7,8 @@
 //
 
 #import "NSManagedObjectContext+MagicalSaves.h"
-#import "MagicalRecord+ErrorHandling.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
+#import "NSError+MagicalRecordErrorHandling.h"
 #import "MagicalRecord.h"
 
 @implementation NSManagedObjectContext (MagicalSaves)
@@ -48,8 +48,15 @@
                 completion(YES, nil);
             });
         }
-        
-        return;
+
+        if (saveParentContexts && [self parentContext])
+        {
+            MRLog(@"Proceeding to save parent context %@", [[self parentContext] MR_description]);
+        }
+        else
+        {
+            return;
+        }
     }
 
     void (^saveBlock)(void) = ^{
@@ -60,6 +67,12 @@
         MRLog(@"→ Save Parents? %@", @(saveParentContexts));
         MRLog(@"→ Save Synchronously? %@", @(syncSave));
 
+#if MR_ENABLE_ACTIVE_RECORD_LOGGING != 0
+        NSInteger numberOfInsertedObjects = [[self insertedObjects] count];
+        NSInteger numberOfUpdatedObjects = [[self updatedObjects] count];
+        NSInteger numberOfDeletedObjects = [[self deletedObjects] count];
+#endif
+        
         @try
         {
             saved = [self save:&error];
@@ -72,7 +85,7 @@
         {
             if (!saved)
             {
-                [error MR_log];
+                [[error MR_coreDataDescription] MR_logToConsole];
 
                 if (completion)
                 {
@@ -97,6 +110,8 @@
                 else
                 {
                     MRLog(@"→ Finished saving: %@", [self MR_description]);
+                    MRLog(@"Objects - Inserted %ld, Updated %ld, Deleted %ld", (long)numberOfInsertedObjects, (long)numberOfUpdatedObjects, (long)numberOfDeletedObjects);
+                    
                     if (completion)
                     {
                         dispatch_async(dispatch_get_main_queue(), ^{

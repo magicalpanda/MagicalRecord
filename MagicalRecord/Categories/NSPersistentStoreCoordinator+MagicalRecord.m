@@ -61,7 +61,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 
     if (!pathWasCreated) 
     {
-        [error MR_log];
+        [[error MR_coreDataDescription] MR_logToConsole];
     }
 }
 
@@ -118,7 +118,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
         if (store == nil)
         {
             MRLog(@"Unable to setup store at URL: %@", url);
-            [error MR_log];
+            [[error MR_coreDataDescription] MR_logToConsole];
         }
     }
     return store;
@@ -137,7 +137,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
                                                           error:&error];
     if (!store)
     {
-        [error MR_log];
+        [[error MR_coreDataDescription] MR_logToConsole];
     }
     return store;
 }

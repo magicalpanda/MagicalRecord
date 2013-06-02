@@ -15,7 +15,7 @@
 
 + (void) setupAutoMigratingCoreDataStack;
 + (void) setupAutoMigratingCoreDataStackWithSqliteStoreNamed:(NSString *)storeName;
-+ (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName  __attribute__((deprecated));
++ (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName  __deprecated;
 
 + (void) setupManuallyMigratingCoreDataStack;
 + (void) setupManuallyMigratingCoreDataStackWithSqliteStoreNamed:(NSString *)storeName;

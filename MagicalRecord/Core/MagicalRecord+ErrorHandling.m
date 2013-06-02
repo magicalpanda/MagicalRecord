@@ -20,33 +20,30 @@ static SEL errorHandlerAction = nil;
 {
     errorHandlerTarget = nil;
     errorHandlerAction = nil;
-    [NSError MR_cleanUp];
 }
 
 + (id) errorHandlerTarget
 {
-    return [NSError MR_handlerTarget];
+    return nil;
 }
 
 + (SEL) errorHandlerAction
 {
-    return [NSError MR_handlerAction];
+    return nil;
 }
 
 + (void) setErrorHandlerTarget:(id)target action:(SEL)action
 {
-    [NSError MR_setHandlerTarget:target];
-    [NSError MR_setHandlerAction:action];
 }
 
 + (void) handleErrors:(NSError *)error
 {
-    [error MR_log];
+    [[error MR_coreDataDescription] MR_logToConsole];
 }
 
 - (void) handleErrors:(NSError *)error
 {
-    [error MR_log];
+    [[error MR_coreDataDescription] MR_logToConsole];
 }
 
 @end
