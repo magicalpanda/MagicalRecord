@@ -19,17 +19,25 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 	{
         [self MR_setDefaultManagedObjectModel:[self MR_mergedObjectModelFromMainBundle]];
 	}
+    //FIX
+    [defaultManagedObjectModel_ kc_generateOrderedSetAccessors];
 	return defaultManagedObjectModel_;
 }
 
 + (void) MR_setDefaultManagedObjectModel:(NSManagedObjectModel *)newDefaultModel
 {
 	defaultManagedObjectModel_ = newDefaultModel;
+    //FIX
+    [defaultManagedObjectModel_ kc_generateOrderedSetAccessors];
+
 }
 
 + (NSManagedObjectModel *) MR_mergedObjectModelFromMainBundle;
 {
-    return [self mergedModelFromBundles:nil];
+    NSManagedObjectModel * model = [self mergedModelFromBundles:nil];
+    //FIX
+    [model kc_generateOrderedSetAccessors];
+    return model;
 }
 
 + (NSManagedObjectModel *) MR_newModelNamed:(NSString *) modelName inBundleNamed:(NSString *) bundleName
@@ -40,7 +48,9 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
     NSURL *modelUrl = [NSURL fileURLWithPath:path];
     
     NSManagedObjectModel *mom = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelUrl];
-    
+    //FIX
+    [mom kc_generateOrderedSetAccessors];
+
     return mom;
 }
 
@@ -51,12 +61,16 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 	NSURL *momURL = [NSURL fileURLWithPath:path];
 	
 	NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:momURL];
+    //FIX
+    [model kc_generateOrderedSetAccessors];
 	return model;
 }
 
 + (NSManagedObjectModel *) MR_managedObjectModelNamed:(NSString *)modelFileName
 {
     NSManagedObjectModel *model = [self MR_newManagedObjectModelNamed:modelFileName];
+    //FIX
+    [model kc_generateOrderedSetAccessors];
 	return model;
 }
 
