@@ -82,6 +82,14 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
         {
             // Could not open the database, so... kill it!
             [[NSFileManager defaultManager] removeItemAtURL:url error:nil];
+            
+            // Delete WAL bits
+            NSString *rawURL = [url absoluteString];
+            NSURL *shmSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-shm"]];
+            NSURL *walSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-wal"]];
+            [[NSFileManager defaultManager] removeItemAtURL:shmSidecar error:nil];
+            [[NSFileManager defaultManager] removeItemAtURL:walSidecar error:nil];
+            
 
             MRLog(@"Removed incompatible model version: %@", [url lastPathComponent]);
             
