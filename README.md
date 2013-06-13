@@ -183,11 +183,11 @@ Most methods in MagicalRecord return an NSArray of results. So, if you have an E
 
 Or, to have the results sorted by a property:
 
-	NSArray *peopleSorted = [Person MR_findAllSortedByProperty:@"LastName" ascending:YES];
+	NSArray *peopleSorted = [Person MR_findAllSortedBy:@"LastName" ascending:YES];
 
 Or, to have the results sorted by multiple properties:
 
-    NSArray *peopleSorted = [Person MR_findAllSortedByProperty:@"LastName,FirstName" ascending:YES];
+        NSArray *peopleSorted = [Person MR_findAllSortedBy:@"LastName,FirstName" ascending:YES];
 
 If you have a unique way of retrieving a single object from your data store, you can get that object directly:
 
@@ -206,7 +206,7 @@ If you want to be more specific with your search, you can send in a predicate:
 
 	NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"Department IN %@", departments];
 
-	NSArray *people = [Person MR_fetchAllWithPredicate:peopleFilter];
+	NSArray *people = [Person MR_findAllWithPredicate:peopleFilter];
 
 For each of these single line calls, the full stack of NSFetchRequest, NSSortDescriptors and a simple default error handling scheme (ie. logging to the console) is created.
 
@@ -307,7 +307,7 @@ MagicalRecord also provides some handy methods to set up background context for 
 For example, if we have Person entity, and we need to set the firstName and lastName fields, this is how you would use MagicalRecord to setup a background context for your use:
 
 	Person *person = ...;
-	[MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *localContext){
+	[MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext){
 	
 		Person *localPerson = [person MR_inContext:localContext];
 
@@ -321,14 +321,14 @@ In this method, the specified block provides you with the proper context in whic
 To perform an action after this save block is completed, you can fill in a completion block:
 
 	Person *person = ...;
-	[MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *localContext){
+	[MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext){
 	
 		Person *localPerson = [person MR_inContext:localContext];
 
 		localPerson.firstName = @"John";
 		localPerson.lastName = @"Appleseed";
 		
-	} completion:^{
+	} completion:^(BOOL success, NSError *error) {
 	
 		self.everyoneInTheDepartment = [Person findAll];
 		

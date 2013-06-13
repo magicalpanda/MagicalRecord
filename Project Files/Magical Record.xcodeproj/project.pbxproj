@@ -335,13 +335,6 @@
 			remoteGlobalIDString = F5015C9E11584017002E9A98;
 			remoteInfo = KiwiTests;
 		};
-		90DD2041167AA44D0033BA25 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 90DD2033167AA44D0033BA25 /* Kiwi.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A3B16542139967B800E9CC6E;
-			remoteInfo = KiwiExamples;
-		};
 		90DD2043167AA4530033BA25 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 90DD2033167AA44D0033BA25 /* Kiwi.xcodeproj */;
@@ -768,7 +761,6 @@
 				90DD203C167AA44D0033BA25 /* libKiwi.a */,
 				90DD203E167AA44D0033BA25 /* libKiwi-OSX.a */,
 				90DD2040167AA44D0033BA25 /* KiwiTests.octest */,
-				90DD2042167AA44D0033BA25 /* KiwiExamples.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1280,13 +1272,6 @@
 			remoteRef = 90DD203F167AA44D0033BA25 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		90DD2042167AA44D0033BA25 /* KiwiExamples.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = KiwiExamples.octest;
-			remoteRef = 90DD2041167AA44D0033BA25 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1746,7 +1731,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/Third Party/Kiwi/Kiwi\"",
+					"\"$(SRCROOT)/Third Party/Kiwi/Classes\"",
 				);
 				INFOPLIST_FILE = "Mac Unit Tests/Mac Unit Tests-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
@@ -1779,7 +1764,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mac Unit Tests/Mac Unit Tests-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/Third Party/Kiwi/Kiwi\"",
+					"\"$(SRCROOT)/Third Party/Kiwi/Classes\"",
 				);
 				INFOPLIST_FILE = "Mac Unit Tests/Mac Unit Tests-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
