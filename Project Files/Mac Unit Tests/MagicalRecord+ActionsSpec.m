@@ -18,7 +18,7 @@ describe(@"MagicalRecord", ^{
 	});
     
     context(@"synchronous save action", ^{
-        it(@"should save", ^{
+        it(@"should save to the default context", ^{
             __block NSManagedObjectID *objectId;
             
             [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
@@ -32,10 +32,30 @@ describe(@"MagicalRecord", ^{
             
             [[objectId should] beNonNil];
             
-            NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:objectId];
+            NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_defaultContext] objectRegisteredForID:objectId];
             
             [[fetchedObject should] beNonNil];
             [[@([fetchedObject hasChanges]) should] beFalse];
+        });
+        
+        it(@"should eventually save to disk", ^{
+            __block NSManagedObjectID *objectId;
+            
+            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
+                
+                [[@([inserted hasChanges]) should] beTrue];
+                
+                [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
+                objectId = [inserted objectID];
+            }];
+            
+            [[expectFutureValue(objectId) shouldEventually] beNonNil];
+            
+            NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:objectId];
+            
+            [[expectFutureValue(fetchedObject) shouldEventually] beNonNil];
+            [[expectFutureValue(@([fetchedObject hasChanges])) shouldEventually] beFalse];
         });
     });
     

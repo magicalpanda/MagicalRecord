@@ -15,7 +15,7 @@
 
 - (void)MR_saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;
 {
-    [self MR_saveWithOptions:0 completion:completion];
+    [self MR_saveWithOptions:MRSaveNoOptions completion:completion];
 }
 
 - (void)MR_saveOnlySelfAndWait;
@@ -81,7 +81,7 @@
             } else {
                 // If we're the default context, save to disk too (the user expects it to persist)
                 if (self == [[self class] MR_defaultContext]) {
-                    [[[self class] MR_rootSavingContext] MR_saveWithOptions:MRSaveSynchronously completion:completion];
+                    [[[self class] MR_rootSavingContext] MR_saveWithOptions:syncSave ? MRSaveSynchronously : MRSaveNoOptions completion:completion];
                 }
                 // If we're saving parent contexts, do so
                 else if ((YES == saveParentContexts) && [self parentContext]) {
