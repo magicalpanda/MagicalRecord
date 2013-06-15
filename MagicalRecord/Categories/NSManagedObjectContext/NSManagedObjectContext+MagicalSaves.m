@@ -35,7 +35,10 @@
 
 - (void)MR_saveWithOptions:(MRSaveContextOptions)mask completion:(MRSaveCompletionHandler)completion;
 {
-    BOOL syncSave           = ((mask & MRSaveSynchronously) == MRSaveSynchronously);
+    BOOL shouldSaveSync             = ((mask & MRSaveSynchronously) == MRSaveSynchronously);
+    BOOL shouldSaveSyncExceptRoot   = ((mask & MRSaveAllSynchronouslyExceptRoot) == MRSaveAllSynchronouslyExceptRoot);
+    
+    BOOL syncSave = (shouldSaveSync && !shouldSaveSyncExceptRoot) || (shouldSaveSyncExceptRoot && (self != [[self class] MR_rootSavingContext]));
     BOOL saveParentContexts = ((mask & MRSaveParentContexts) == MRSaveParentContexts);
 
     if (![self hasChanges]) {
@@ -79,15 +82,11 @@
                     });
                 }
             } else {
-                // If we're the default context, save to disk too (the user expects it to persist)
-                if (self == [[self class] MR_defaultContext]) {
-                    [[[self class] MR_rootSavingContext] MR_saveWithOptions:syncSave ? MRSaveSynchronously : MRSaveNoOptions completion:completion];
-                }
                 // If we're saving parent contexts, do so
-                else if ((YES == saveParentContexts) && [self parentContext]) {
-                    [[self parentContext] MR_saveWithOptions:MRSaveSynchronously | MRSaveParentContexts completion:completion];
+                if (saveParentContexts && [self parentContext]) {
+                    [[self parentContext] MR_saveWithOptions:mask completion:completion];
                 }
-                // If we are not the default context (And therefore need to save the root context, do the completion action if one was specified
+                // Do the completion action if one was specified
                 else {
                     MRLog(@"→ Finished saving: %@", [self MR_description]);
 

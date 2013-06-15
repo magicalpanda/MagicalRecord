@@ -9,9 +9,10 @@
 #import <CoreData/CoreData.h>
 
 typedef NS_OPTIONS(NSUInteger, MRSaveContextOptions) {
-    MRSaveNoOptions      = 0, // /< No options — used for cleanliness only
-    MRSaveParentContexts = 1, // /< When saving, continue saving parent contexts until the changes are present in the persistent store
-    MRSaveSynchronously  = 2  // /< Peform saves synchronously, blocking execution on the current thread until the save is complete
+    MRSaveNoOptions                     = 0,        // /< No options — used for cleanliness only
+    MRSaveParentContexts                = 1 << 1,   // /< When saving, continue saving parent contexts until the changes are present in the persistent store
+    MRSaveSynchronously                 = 1 << 2,   // /< Perform saves synchronously, blocking execution on the current thread until the save is complete
+    MRSaveAllSynchronouslyExceptRoot    = 1 << 3    // /< Perform saves synchronously, blocking execution on the current thread until the save is complete; however, save root context asynchronously
 };
 
 typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
