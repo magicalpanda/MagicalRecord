@@ -118,6 +118,13 @@
     NSArray* sortKeys = [sortTerm componentsSeparatedByString:@","];
     for (NSString* sortKey in sortKeys) 
     {
+        NSArray * sortComponents = [sortKey componentsSeparatedByString:@":"];
+        if (sortComponents.count > 1)
+          {
+              NSNumber * customAscending = sortComponents.lastObject;
+              ascending = customAscending.boolValue;
+          }
+      
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
         [sortDescriptors addObject:sortDescriptor];
     }
