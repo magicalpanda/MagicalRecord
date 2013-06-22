@@ -27,3 +27,11 @@ extern NSString * const kMagicalRecordImportRelationshipTypeKey;
 + (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context;
 
 @end
+
+@interface NSManagedObject (MagicalRecord_DataImportControls)
+
+- (BOOL) shouldImport:(id)data;
+- (void) willImport:(id)data;
+- (void) didImport:(id)data;
+
+@end

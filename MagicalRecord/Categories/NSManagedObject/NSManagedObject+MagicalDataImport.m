@@ -6,6 +6,7 @@
 //
 
 #import "CoreData+MagicalRecord.h"
+#import "NSObject+MagicalDataImport.h"
 #import <objc/runtime.h>
 
 void MR_swapMethodsFromClass(Class c, SEL orig, SEL new);
@@ -22,6 +23,12 @@ NSString * const kMagicalRecordImportRelationshipTypeKey            = @"type";  
 
 NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"useDefaultValueWhenNotPresent";
 
+@interface NSObject (MagicalRecord_DataImportControls)
+
+- (id) MR_valueForUndefinedKey:(NSString *)key;
+
+@end
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 
@@ -33,7 +40,12 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     SEL selector = NSSelectorFromString(selectorString);
     if ([self respondsToSelector:selector])
     {
-        [self performSelector:selector withObject:value];
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:selector]];
+        [invocation setTarget:self];
+        [invocation setSelector:selector];
+        [invocation setArgument:&value atIndex:2];
+        [invocation invoke];
+//        [self performSelector:selector withObject:value];
         return YES;
     }
     return NO;
@@ -172,7 +184,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 {
     if ([self respondsToSelector:@selector(shouldImport:)])
     {
-        BOOL shouldImport = (BOOL)[self performSelector:@selector(shouldImport:) withObject:objectData];
+        BOOL shouldImport = (BOOL)[self shouldImport:objectData];
         if (!shouldImport) 
         {
             return NO;
@@ -181,7 +193,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 
     if ([self respondsToSelector:@selector(willImport:)])
     {
-        [self performSelector:@selector(willImport:) withObject:objectData];
+        [self willImport:objectData];
     }
     MR_swapMethodsFromClass([objectData class], @selector(valueForUndefinedKey:), @selector(MR_valueForUndefinedKey:));
     return YES;
