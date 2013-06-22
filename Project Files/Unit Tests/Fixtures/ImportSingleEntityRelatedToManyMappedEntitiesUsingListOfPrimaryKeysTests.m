@@ -38,13 +38,13 @@
     entity.testPrimaryKeyValue = 84;
     [entity addMappedEntitiesObject:related];
     
-    [context MR_save];
+    [context MR_saveToPersistentStoreAndWait];
 }
 
 - (void) testDataImportUsingListOfPrimaryKeyIDs
 {
     SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey *testEntity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
-    [[NSManagedObjectContext MR_defaultContext] MR_save];
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
     
     assertThat([SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey numberOfEntities], is(equalToInteger(1)));
     assertThat([MappedEntity numberOfEntities], is(equalToInteger(10)));

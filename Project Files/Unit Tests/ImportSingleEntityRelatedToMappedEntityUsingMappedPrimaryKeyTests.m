@@ -24,7 +24,7 @@
     testMappedEntity.testMappedEntityIDValue = 42;
     testMappedEntity.sampleAttribute = @"This attribute created as part of the test case setup";
     
-    [context MR_save];
+    [context MR_saveToPersistentStoreAndWait];
 }
 
 - (Class) testEntityClass
@@ -35,7 +35,7 @@
 - (void) testImportMappedEntityRelatedViaToOneRelationship
 {
     SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
-    [[NSManagedObjectContext MR_defaultContext] MR_save];
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
     
     id testRelatedEntity = entity.mappedEntity;
     
@@ -72,7 +72,7 @@
 - (void) testImportMappedEntityUsingPrimaryRelationshipKey
 {
     SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
-    [[NSManagedObjectContext MR_defaultContext] MR_save];
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
     
     id testRelatedEntity = entity.mappedEntity;
     

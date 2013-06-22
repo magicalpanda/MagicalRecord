@@ -80,7 +80,7 @@
 - (void) testCanDeleteEntityInstance
 {
     id testEntity = [SingleRelatedEntity createEntity];
-    [[NSManagedObjectContext MR_defaultContext] MR_save];
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
     
     assertThatBool([testEntity isDeleted], is(equalToBool(NO)));
     
@@ -100,7 +100,7 @@
         testEntity.mappedStringAttribute = [NSString stringWithFormat:@"%d", i / 5];
     }
     
-    [[NSManagedObjectContext MR_defaultContext] MR_save];
+    [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
 }
 
 - (void) testCanSearchForNumberOfAllEntities

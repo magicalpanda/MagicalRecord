@@ -50,11 +50,15 @@
 + (id) findFirstWithPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortBy ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context andRetrieveAttributes:(id)attributes, ...;
 + (id) findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue;
 + (id) findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context;
++ (id) findFirstOrderedByAttribute:(NSString *)attribute ascending:(BOOL)ascending;
++ (id) findFirstOrderedByAttribute:(NSString *)attribute ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
 + (NSArray *) findByAttribute:(NSString *)attribute withValue:(id)searchValue;
 + (NSArray *) findByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context;
 + (NSArray *) findByAttribute:(NSString *)attribute withValue:(id)searchValue andOrderBy:(NSString *)sortTerm ascending:(BOOL)ascending;
 + (NSArray *) findByAttribute:(NSString *)attribute withValue:(id)searchValue andOrderBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
++ (NSFetchedResultsController *) fetchAllWithDelegate:(id<NSFetchedResultsControllerDelegate>)delegate;
++ (NSFetchedResultsController *) fetchAllWithDelegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context;
 + (NSFetchedResultsController *) fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate;
 + (NSFetchedResultsController *) fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context;
 + (NSFetchedResultsController *) fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending;
@@ -127,14 +131,21 @@
 + (void) cleanUp;
 - (NSString *) description;
 @end
+#import "NSManagedObjectContext+MagicalSaves.h"
 @interface NSManagedObjectContext (MagicalSavesShortHand)
-- (void) save;
-- (void) saveErrorHandler:(void (^)(NSError *))errorCallback;
-- (void) saveInBackgroundCompletion:(void (^)(void))completion;
-- (void) saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback;
-- (void) saveInBackgroundErrorHandler:(void (^)(NSError *))errorCallback completion:(void (^)(void))completion;
-- (void) saveNestedContexts;
-- (void) saveNestedContextsErrorHandler:(void (^)(NSError *))errorCallback;
+- (void) saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;
+- (void) saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion;
+- (void) saveOnlySelfAndWait;
+- (void) saveToPersistentStoreAndWait;
+- (void) saveWithOptions:(MRSaveContextOptions)mask completion:(MRSaveCompletionHandler)completion;
+- (void) save __attribute__((deprecated));
+- (void) saveWithErrorCallback:(void(^)(NSError *error))errorCallback __attribute__((deprecated));
+- (void) saveInBackgroundCompletion:(void (^)(void))completion __attribute__((deprecated));
+- (void) saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback __attribute__((deprecated));
+- (void) saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion __attribute__((deprecated));
+- (void) saveNestedContexts __attribute__((deprecated));
+- (void) saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback __attribute__((deprecated));
+- (void) saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion __attribute__((deprecated));
 @end
 @interface NSManagedObjectContext (MagicalThreadingShortHand)
 + (NSManagedObjectContext *) contextForCurrentThread;
