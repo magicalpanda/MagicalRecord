@@ -21,8 +21,9 @@ NSString * const kMagicalRecordImportRelationshipMapKey             = @"mappedKe
 NSString * const kMagicalRecordImportRelationshipLinkedByKey        = @"relatedByAttribute";
 NSString * const kMagicalRecordImportRelationshipTypeKey            = @"type";  //this needs to be revisited
 
-@interface NSObject (MagicalRecord_DataImportControls)
 NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"useDefaultValueWhenNotPresent";
+
+@interface NSObject (MagicalRecord_DataImportControls)
 
 - (id) MR_valueForUndefinedKey:(NSString *)key;
 
