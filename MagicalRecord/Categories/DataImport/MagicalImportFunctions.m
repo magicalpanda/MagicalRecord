@@ -57,7 +57,7 @@ NSInteger* newColorComponentsFromString(NSString *serializedColor)
     NSInteger *componentValues = malloc(4 * sizeof(NSInteger));
     if (componentValues == NULL)
     {
-        return NULL
+        return NULL;
     }
   
     if ([colorType hasPrefix:@"rgba"])
