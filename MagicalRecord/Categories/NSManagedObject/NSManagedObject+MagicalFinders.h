@@ -11,17 +11,29 @@
 @interface NSManagedObject (MagicalFinders)
 
 + (NSArray *) MR_findAll;
++ (NSArray *) MR_findAllInStores:(NSArray*)affectedStores;
 + (NSArray *) MR_findAllInContext:(NSManagedObjectContext *)context;
++ (NSArray *) MR_findAllInContext:(NSManagedObjectContext *)context affectedStores:(NSArray*)affectedStores;
 + (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending;
++ (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending affectedStores:(NSArray*)affectedStores;
 + (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
++ (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context affectedStores:(NSArray*)affectedStores;
 + (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm;
++ (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm affectedStores:(NSArray*)affectedStores;
 + (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
++ (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context affectedStores:(NSArray*)affectedStores;
 
 + (NSArray *) MR_findAllWithPredicate:(NSPredicate *)searchTerm;
++ (NSArray *) MR_findAllWithPredicate:(NSPredicate *)searchTerm affectedStores:(NSArray*)affectedStores;
 + (NSArray *) MR_findAllWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
++ (NSArray *) MR_findAllWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context affectedStores:(NSArray*)affectedStores;
+
+
 
 + (id) MR_findFirst;
++ (id) MR_findFirstINStores:(NSArray*)affectedStores;
 + (id) MR_findFirstInContext:(NSManagedObjectContext *)context;
++ (id) MR_findFirstInContext:(NSManagedObjectContext *)context affectedStores:(NSArray*)affectedStores;
 + (id) MR_findFirstWithPredicate:(NSPredicate *)searchTerm;
 + (id) MR_findFirstWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
 + (id) MR_findFirstWithPredicate:(NSPredicate *)searchterm sortedBy:(NSString *)property ascending:(BOOL)ascending;
