@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1DEF429E178D8E5B00155357 /* NSArray+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DEF429D178D8E5B00155357 /* NSArray+MagicalRecord.m */; };
+		1DEF429F178D8E5B00155357 /* NSArray+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DEF429D178D8E5B00155357 /* NSArray+MagicalRecord.m */; };
+		1DEF42A0178D8E5B00155357 /* NSArray+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DEF429D178D8E5B00155357 /* NSArray+MagicalRecord.m */; };
+		1DEF42A1178D8E5B00155357 /* NSArray+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DEF429D178D8E5B00155357 /* NSArray+MagicalRecord.m */; };
+		1DEF42AB178D8E6400155357 /* NSArray+MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DEF42AA178D8E6400155357 /* NSArray+MagicalRecord.h */; };
 		C7CF97AC17498414008D9D13 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C7E313D0C3A00097AB6F /* Foundation.framework */; };
 		C7CF97BC1749843F008D9D13 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90DD2020167AA4350033BA25 /* Cocoa.framework */; };
 		C7CF97C617498493008D9D13 /* MagicalImportFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD729D150F832A00216827 /* MagicalImportFunctions.m */; };
@@ -202,6 +207,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1DEF429D178D8E5B00155357 /* NSArray+MagicalRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MagicalRecord.m"; sourceTree = "<group>"; };
+		1DEF42AA178D8E6400155357 /* NSArray+MagicalRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MagicalRecord.h"; sourceTree = "<group>"; };
 		90DD201E167AA4350033BA25 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		90DD2020167AA4350033BA25 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		90DD2023167AA4350033BA25 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -607,6 +614,8 @@
 		C7DD72AA150F832A00216827 /* NSManagedObject */ = {
 			isa = PBXGroup;
 			children = (
+				1DEF42AA178D8E6400155357 /* NSArray+MagicalRecord.h */,
+				1DEF429D178D8E5B00155357 /* NSArray+MagicalRecord.m */,
 				C7DD72AB150F832A00216827 /* NSManagedObject+MagicalAggregation.h */,
 				C7DD72AC150F832A00216827 /* NSManagedObject+MagicalAggregation.m */,
 				C7DD72AD150F832A00216827 /* NSManagedObject+MagicalDataImport.h */,
@@ -666,6 +675,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7CF9AE6174986B5008D9D13 /* MagicalRecord-OSX-Prefix.pch in Headers */,
+				1DEF42AB178D8E6400155357 /* NSArray+MagicalRecord.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -962,6 +972,7 @@
 				C7CF97DD17498493008D9D13 /* MagicalRecord+Options.m in Sources */,
 				C7CF97DE17498493008D9D13 /* MagicalRecord+Setup.m in Sources */,
 				C7CF97DF17498493008D9D13 /* MagicalRecord+ShorthandSupport.m in Sources */,
+				1DEF429E178D8E5B00155357 /* NSArray+MagicalRecord.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -995,6 +1006,7 @@
 				C7CF97F7174984A5008D9D13 /* MagicalRecord+Options.m in Sources */,
 				C7CF97F8174984A5008D9D13 /* MagicalRecord+Setup.m in Sources */,
 				C7CF97F9174984A5008D9D13 /* MagicalRecord+ShorthandSupport.m in Sources */,
+				1DEF429F178D8E5B00155357 /* NSArray+MagicalRecord.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1043,6 +1055,7 @@
 				C7CF9B221749894D008D9D13 /* MagicalRecord+Setup.m in Sources */,
 				C7CF9B231749894D008D9D13 /* MagicalRecord+ShorthandSupport.m in Sources */,
 				C7CF9B6D17498B5C008D9D13 /* FixtureHelpers.m in Sources */,
+				1DEF42A0178D8E5B00155357 /* NSArray+MagicalRecord.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1051,6 +1064,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7CF9B6E17498B5C008D9D13 /* FixtureHelpers.m in Sources */,
+				1DEF42A1178D8E5B00155357 /* NSArray+MagicalRecord.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
