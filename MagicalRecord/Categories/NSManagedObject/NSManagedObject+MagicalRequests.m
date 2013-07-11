@@ -107,7 +107,50 @@
 
 + (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
 {
-	NSFetchRequest *request = [self MR_requestAllInContext:context];
+    return [self MR_requestAllSortedBy:sortTerm ascending:ascending withPredicate:searchTerm inContext:context lexicalSort:NO];
+}
+
++ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm;
+{
+	NSFetchRequest *request = [self MR_requestAllSortedBy:sortTerm
+                                                ascending:ascending
+                                            withPredicate:searchTerm 
+                                                inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+	return request;
+}
+
++ (NSFetchRequest *) MR_requestAllSortedLexicallyBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
+{
+    return [self MR_requestAllSortedLexicallyBy:sortTerm
+                                     ascending:ascending
+                                 withPredicate:nil
+                                     inContext:context];
+}
+
++ (NSFetchRequest *) MR_requestAllSortedLexicallyBy:(NSString *)sortTerm ascending:(BOOL)ascending
+{
+	return [self MR_requestAllSortedLexicallyBy:sortTerm
+                                     ascending:ascending
+                                     inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+}
+
+// ADDED @shujin 2013-07-11
++ (NSFetchRequest *) MR_requestAllSortedLexicallyBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
+{
+    return [self MR_requestAllSortedBy:sortTerm ascending:ascending withPredicate:searchTerm inContext:context lexicalSort:YES];
+}
+
++ (NSFetchRequest *) MR_requestAllSortedLexicallyBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm;
+{
+	NSFetchRequest *request = [self MR_requestAllSortedLexicallyBy:sortTerm
+                                                        ascending:ascending
+                                                    withPredicate:searchTerm
+                                                        inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+	return request;
+}
+
++ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context lexicalSort:(BOOL)lexicalSort {
+    NSFetchRequest *request = [self MR_requestAllInContext:context];
 	if (searchTerm)
     {
         [request setPredicate:searchTerm];
@@ -120,13 +163,19 @@
     {
         NSArray * sortComponents = [sortKey componentsSeparatedByString:@":"];
         if (sortComponents.count > 1)
-          {
-              NSNumber * customAscending = sortComponents.lastObject;
-              ascending = customAscending.boolValue;
-              sortKey = sortComponents[0];
-          }
-      
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
+        {
+            NSNumber * customAscending = sortComponents.lastObject;
+            ascending = customAscending.boolValue;
+            sortKey = sortComponents[0];
+        }
+        
+        NSSortDescriptor *sortDescriptor;
+        if (lexicalSort) {
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending selector:@selector(localizedStandardCompare:)];
+        } else {
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
+        }
+        
         [sortDescriptors addObject:sortDescriptor];
     }
     
@@ -134,15 +183,5 @@
     
 	return request;
 }
-
-+ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm;
-{
-	NSFetchRequest *request = [self MR_requestAllSortedBy:sortTerm
-                                                ascending:ascending
-                                            withPredicate:searchTerm 
-                                                inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
-	return request;
-}
-
 
 @end

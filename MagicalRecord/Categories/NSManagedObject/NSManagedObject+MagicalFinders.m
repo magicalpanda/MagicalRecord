@@ -59,6 +59,39 @@
 }
 
 
+// ADDED @shujin 2013-07-11
++ (NSArray *) MR_findAllSortedLexicallyBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
+{
+	NSFetchRequest *request = [self MR_requestAllSortedLexicallyBy:sortTerm ascending:ascending inContext:context];
+	
+	return [self MR_executeFetchRequest:request inContext:context];
+}
+
++ (NSArray *) MR_findAllSortedLexicallyBy:(NSString *)sortTerm ascending:(BOOL)ascending
+{
+	return [self MR_findAllSortedLexicallyBy:sortTerm
+                                  ascending:ascending
+                                  inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+}
+
++ (NSArray *) MR_findAllSortedLexicallyBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
+{
+	NSFetchRequest *request = [self MR_requestAllSortedLexicallyBy:sortTerm
+                                                        ascending:ascending
+                                                    withPredicate:searchTerm
+                                                        inContext:context];
+	
+	return [self MR_executeFetchRequest:request inContext:context];
+}
+
++ (NSArray *) MR_findAllSortedLexicallyBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm
+{
+	return [self MR_findAllSortedLexicallyBy:sortTerm
+                                  ascending:ascending
+                              withPredicate:searchTerm
+                                  inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+}
+
 + (NSArray *) MR_findAllWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
 {
 	NSFetchRequest *request = [self MR_createFetchRequestInContext:context];

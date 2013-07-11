@@ -16,6 +16,10 @@
 + (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
 + (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm;
 + (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
++ (NSArray *) MR_findAllSortedLexicallyBy:(NSString *)sortTerm ascending:(BOOL)ascending;
++ (NSArray *) MR_findAllSortedLexicallyBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
++ (NSArray *) MR_findAllSortedLexicallyBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm;
++ (NSArray *) MR_findAllSortedLexicallyBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
 
 + (NSArray *) MR_findAllWithPredicate:(NSPredicate *)searchTerm;
 + (NSArray *) MR_findAllWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;

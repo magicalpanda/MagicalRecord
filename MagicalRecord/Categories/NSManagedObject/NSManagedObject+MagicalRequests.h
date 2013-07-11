@@ -27,6 +27,9 @@
 + (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
 + (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm;
 + (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
-
++ (NSFetchRequest *) MR_requestAllSortedLexicallyBy:(NSString *)sortTerm ascending:(BOOL)ascending;
++ (NSFetchRequest *) MR_requestAllSortedLexicallyBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
++ (NSFetchRequest *) MR_requestAllSortedLexicallyBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm;
++ (NSFetchRequest *) MR_requestAllSortedLexicallyBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
 
 @end
