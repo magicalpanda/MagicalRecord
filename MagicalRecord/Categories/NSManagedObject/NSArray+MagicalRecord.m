@@ -30,7 +30,7 @@
   {
     NSAssert1([object isKindOfClass:[NSManagedObject class]], @"Expected NSManagedObject or subclass in array, received %@", NSStringFromClass([object class]));
     
-    [(NSManagedObject *)object MR_deleteEntity];
+    [(NSManagedObject *)object MR_deleteInContext:[object managedObjectContext]];
   }
 }
 
