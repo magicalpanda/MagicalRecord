@@ -38,7 +38,7 @@ dispatch_queue_t saveQueue()
     [self saveWithBlock:block identifier:NSStringFromSelector(_cmd) completion:completion];
 }
 
-+ (void) saveWithBlock:(void (^)(NSManagedObjectContext *))block identifier:(NSString *)contextWorkingName completion:(MRSaveCompletionHandler)completion;
++ (void) saveWithBlock:(void (^)(NSManagedObjectContext *localContext))block identifier:(NSString *)contextWorkingName completion:(MRSaveCompletionHandler)completion;
 {
     MRLog(@"Dispatching save request: %@", contextWorkingName);
     dispatch_async(saveQueue(), ^{
