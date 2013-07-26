@@ -159,8 +159,8 @@
 		C7CF96FC1749725B008D9D13 /* _Ingredient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Ingredient.m; sourceTree = "<group>"; };
 		C7CF96FD1749725B008D9D13 /* _Recipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Recipe.h; sourceTree = "<group>"; };
 		C7CF96FE1749725B008D9D13 /* _Recipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Recipe.m; sourceTree = "<group>"; };
-		C7CF970317497347008D9D13 /* TemperatureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TemperatureCell.h; path = ../../../../../../../Downloads/iPhoneCoreDataRecipes/Classes/TemperatureCell.h; sourceTree = "<group>"; };
-		C7CF970417497348008D9D13 /* TemperatureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TemperatureCell.m; path = ../../../../../../../Downloads/iPhoneCoreDataRecipes/Classes/TemperatureCell.m; sourceTree = "<group>"; };
+		C7CF970317497347008D9D13 /* TemperatureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemperatureCell.h; sourceTree = "<group>"; };
+		C7CF970417497348008D9D13 /* TemperatureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TemperatureCell.m; sourceTree = "<group>"; };
 		C7CF97061749752C008D9D13 /* WeightConverterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeightConverterViewController.m; sourceTree = "<group>"; };
 		C7CF970C174976AF008D9D13 /* MagicalImportFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalImportFunctions.h; sourceTree = "<group>"; };
 		C7CF970D174976AF008D9D13 /* MagicalImportFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalImportFunctions.m; sourceTree = "<group>"; };
