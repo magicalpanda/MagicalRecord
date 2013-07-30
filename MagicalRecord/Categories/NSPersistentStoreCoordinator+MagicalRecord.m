@@ -75,8 +75,10 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
                                                         options:options
                                                           error:&error];
     
-    if (!store && [MagicalRecord shouldDeleteStoreOnModelMismatch])
+    if (!store) 
     {
+        if ([MagicalRecord shouldDeleteStoreOnModelMismatch])
+        {
         BOOL isMigrationError = [error code] == NSPersistentStoreIncompatibleVersionHashError || [error code] == NSMigrationMissingSourceModelError;
         if ([[error domain] isEqualToString:NSCocoaErrorDomain] && isMigrationError)
         {
@@ -103,8 +105,8 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
                 error = nil;
             }
         }
-                
-        [MagicalRecord handleErrors:error];
+    }
+    [MagicalRecord handleErrors:error];
     }
     return store;
 }
