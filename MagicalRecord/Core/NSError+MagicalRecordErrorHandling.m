@@ -7,7 +7,7 @@
 //
 
 #import "NSError+MagicalRecordErrorHandling.h"
-
+#import "MagicalRecord.h"
 
 @implementation NSString (MagicalRecordLogging)
 

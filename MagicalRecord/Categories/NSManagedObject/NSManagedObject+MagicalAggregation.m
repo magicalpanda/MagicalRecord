@@ -13,6 +13,8 @@
 #import "NSManagedObject+MagicalRecord.h"
 #import "NSManagedObject+MagicalFinders.h"
 #import "MagicalRecord+ErrorHandling.h"
+#import "NSError+MagicalRecordErrorHandling.h"
+
 
 @implementation NSManagedObject (MagicalAggregation)
 
