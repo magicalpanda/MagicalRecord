@@ -10,6 +10,7 @@
 #import "NSManagedObjectContext+MagicalRecord.h"
 #import "NSError+MagicalRecordErrorHandling.h"
 #import "MagicalRecord.h"
+static NSInteger ddLogLevel = MR_LOG_LEVEL;
 
 @implementation NSManagedObjectContext (MagicalSaves)
 

@@ -8,6 +8,7 @@
 #import "CoreData+MagicalRecord.h"
 #import <objc/runtime.h>
 
+static NSInteger ddLogLevel = MR_LOG_LEVEL;
 static NSManagedObjectContext *rootSavingContext = nil;
 static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
 static id iCloudSetupNotificationObserver = nil;

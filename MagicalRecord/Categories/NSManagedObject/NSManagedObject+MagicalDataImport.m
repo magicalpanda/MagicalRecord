@@ -8,6 +8,8 @@
 #import "CoreData+MagicalRecord.h"
 #import <objc/runtime.h>
 
+static NSInteger ddLogLevel = MR_LOG_LEVEL;
+
 void MR_swapMethodsFromClass(Class c, SEL orig, SEL new);
 
 NSString * const kMagicalRecordImportCustomDateFormatKey            = @"dateFormat";

@@ -7,6 +7,7 @@
 
 #import "CoreData+MagicalRecord.h"
 
+static NSInteger ddLogLevel = MR_LOG_LEVEL;
 static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
 NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagicalRecordPSCDidCompleteiCloudSetupNotification";
 

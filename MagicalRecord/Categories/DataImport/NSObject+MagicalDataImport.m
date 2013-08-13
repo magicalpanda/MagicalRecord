@@ -11,6 +11,7 @@
 #import "MagicalRecord.h"
 #import "CoreData+MagicalRecord.h"
 
+static NSInteger ddLogLevel = MR_LOG_LEVEL;
 NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
 
 

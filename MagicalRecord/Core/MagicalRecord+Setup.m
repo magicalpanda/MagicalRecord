@@ -10,6 +10,7 @@
 #import "NSManagedObject+MagicalRecord.h"
 #import "NSPersistentStoreCoordinator+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
+static NSInteger ddLogLevel = MR_LOG_LEVEL;
 
 @implementation MagicalRecord (Setup)
 

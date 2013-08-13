@@ -6,7 +6,7 @@
 #import "CoreData+MagicalRecord.h"
 
 static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
-
+static NSInteger ddLogLevel = MR_LOG_LEVEL;
 
 @implementation NSManagedObject (MagicalRecord)
 

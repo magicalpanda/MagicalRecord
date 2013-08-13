@@ -11,6 +11,7 @@
 #import "MagicalRecord.h"
 #import "MagicalRecord+iCloud.h"
 
+static NSInteger ddLogLevel = MR_LOG_LEVEL;
 NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalRecordDidMergeChangesFromiCloudNotification";
 
 

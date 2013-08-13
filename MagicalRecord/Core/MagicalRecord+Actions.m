@@ -8,6 +8,8 @@
 #import "CoreData+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
 
+static NSInteger ddLogLevel = MR_LOG_LEVEL;
+
 dispatch_queue_t saveQueue(void);
 dispatch_queue_t saveQueue()
 {

@@ -9,6 +9,8 @@
 #import "NSError+MagicalRecordErrorHandling.h"
 #import "MagicalRecord.h"
 
+static NSInteger ddLogLevel = MR_LOG_LEVEL;
+
 NSDictionary *MR_errorCodeSummaryLookup(void);
 
 BOOL MR_errorCodeIsValidationErrorCode(NSInteger errorCode);
