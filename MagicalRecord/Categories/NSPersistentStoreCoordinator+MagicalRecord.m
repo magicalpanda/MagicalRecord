@@ -105,23 +105,30 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     [[self class] MR_createPathToStoreFileIfNeccessary:url];
 
     MRLog(@"Adding store at [%@] to NSPSC with options [%@]", url, options);
-    NSError *error = nil;
-    NSPersistentStore *store = [self addPersistentStoreWithType:NSSQLiteStoreType
-                                                  configuration:nil
-                                                            URL:url
-                                                        options:options
-                                                          error:&error];
-    
-    if (store == nil)
-    {
-        store = [self MR_reinitializeStoreAtURL:url fromError:error withOptions:options];
+    @try {
+        
+        NSError *error = nil;
+        NSPersistentStore *store = [self addPersistentStoreWithType:NSSQLiteStoreType
+                                                      configuration:nil
+                                                                URL:url
+                                                            options:options
+                                                              error:&error];
         if (store == nil)
         {
-            MRLog(@"Unable to setup store at URL: %@", url);
-            [[error MR_coreDataDescription] MR_logToConsole];
+            store = [self MR_reinitializeStoreAtURL:url fromError:error withOptions:options];
+            if (store == nil)
+            {
+                MRLog(@"Unable to setup store at URL: %@", url);
+                [[error MR_coreDataDescription] MR_logToConsole];
+            }
         }
+        return store;
     }
-    return store;
+    @catch (NSException *exception)
+    {
+        [[exception description] MR_logToConsole];
+    }
+    return nil;
 }
 
 
