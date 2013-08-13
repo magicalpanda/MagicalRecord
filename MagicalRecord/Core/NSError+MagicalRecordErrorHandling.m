@@ -9,80 +9,34 @@
 #import "NSError+MagicalRecordErrorHandling.h"
 #import "MagicalRecord.h"
 
+NSDictionary *MR_errorCodeSummaryLookup(void);
+
+BOOL MR_errorCodeIsValidationErrorCode(NSInteger errorCode);
+BOOL MR_errorCodeIsPersistentStoreErrorCode(NSInteger errorCode);
+BOOL MR_errorCodeIsMigrationErrorCode(NSInteger errorCode);
+BOOL MR_errorCodeIsObjectGraphErrorCode(NSInteger errorCode);
 
 NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
 {
-    switch (errorCode)
-    {
-        case NSManagedObjectValidationError:
-        case NSValidationMultipleErrorsError:
-            return @"General Validation Error";
-            
-        case NSValidationMissingMandatoryPropertyError:
-            return @"Missing Mandiatory Property";
-            
-        case NSValidationRelationshipLacksMinimumCountError:
-            return @"Relationship Lacks Minimum Count";
-            
-        case NSValidationRelationshipExceedsMaximumCountError:
-            return @"Relationship Exceeds Maximum Count";
-            
-        case NSValidationRelationshipDeniedDeleteError:
-            return @"Relationship Denied Delete";
-            
-        case NSValidationNumberTooLargeError:
-            return @"Number too Large";
-            
-        case NSValidationNumberTooSmallError:
-            return @"Number too Small";
-            
-        case NSValidationDateTooLateError:
-            return @"Date too Late";
-            
-        case NSValidationDateTooSoonError:
-            return @"Date too Soon";
-            
-        case NSValidationInvalidDateError:
-            return @"Invalid Date";
-            
-        case NSValidationStringTooLongError:
-            return @"String too Long";
-            
-        case NSValidationStringTooShortError:
-            return @"String too Short";
-            
-        case NSValidationStringPatternMatchingError:
-            return @"String Pattering Matching Error";
-            
-        default:
-            return @"Unknown Core Data Error";
-    }
-}
+    static NSDictionary *errorCodes = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        errorCodes = MR_errorCodeSummaryLookup();
+    });
 
-BOOL MR_errorCodeIsValidationErrorCode(NSInteger errorCode)
-{
-    return
-    errorCode == NSManagedObjectValidationError ||
-    errorCode == NSValidationMultipleErrorsError ||
-    errorCode == NSValidationMissingMandatoryPropertyError ||
-    errorCode == NSValidationRelationshipDeniedDeleteError ||
-    errorCode == NSValidationRelationshipExceedsMaximumCountError ||
-    errorCode == NSValidationRelationshipLacksMinimumCountError ||
-    errorCode == NSValidationNumberTooSmallError ||
-    errorCode == NSValidationNumberTooLargeError ||
-    errorCode == NSValidationDateTooSoonError ||
-    errorCode == NSValidationDateTooLateError ||
-    errorCode == NSValidationInvalidDateError ||
-    errorCode == NSValidationStringPatternMatchingError ||
-    errorCode == NSValidationStringTooLongError ||
-    errorCode == NSValidationStringTooShortError;
+    NSString *summary = [errorCodes objectForKey:@(errorCode)];
+    if (summary == nil)
+    {
+        summary = [NSString stringWithFormat:@"Unknown Core Data Error Code (%d)", errorCode];
+    }
+    return summary;
 }
 
 @implementation NSString (MagicalRecordLogging)
 
 - (void) MR_logToConsole;
 {
-    MRLog(@"%@", self);
+    MRLog(@"*** %@ ***", self);
 }
 
 @end
@@ -116,14 +70,15 @@ BOOL MR_errorCodeIsValidationErrorCode(NSInteger errorCode)
 
 - (NSString *) MR_summaryDescription;
 {
-    if (MR_errorCodeIsValidationErrorCode([self code]))
+    NSInteger errorCode = [self code];
+    if (MR_errorCodeIsValidationErrorCode(errorCode))
     {
         return [NSString stringWithFormat:@"- [Validation] %@, Invalid Property: [%@], ManagedObject: [%@]",
-                MR_errorSummaryFromErrorCode([self code]),
+                MR_errorSummaryFromErrorCode(errorCode),
                 [self MR_validationError],
                 [self MR_validationErrorObject]];
     }
-    return [NSString stringWithFormat:@"%@ [%@]", MR_errorSummaryFromErrorCode([self code]), [self MR_validationErrorObject]];
+    return [NSString stringWithFormat:@"(%d) %@ [%@]", errorCode, MR_errorSummaryFromErrorCode(errorCode), [self MR_validationErrorObject] ?: [[self userInfo] valueForKey:@"reason"]];
 }
 
 - (NSString *) MR_coreDataDescription;
@@ -167,3 +122,129 @@ BOOL MR_errorCodeIsValidationErrorCode(NSInteger errorCode)
 }
 
 @end
+
+
+/*********************
+ Returns a lookup table of error codes to human readable strings as specified in the Core Data Constants Reference:
+ https://developer.apple.com/library/mac/documentation/Cocoa/Reference/CoreDataFramework/Miscellaneous/CoreData_Constants/Reference/reference.html
+ */
+NSDictionary *MR_validationErrorCodeLookup(void)
+{
+    static NSDictionary *validationErrorMap = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+
+        validationErrorMap =
+            @{
+              @(NSValidationMultipleErrorsError): @"General Validation Error",
+              @(NSValidationMissingMandatoryPropertyError): @"Missing Mandiatory Property",
+              @(NSValidationRelationshipLacksMinimumCountError): @"Relationship Lacks Minimum Count",
+              @(NSValidationRelationshipExceedsMaximumCountError): @"Relationship Exceeds Maximum Count",
+              @(NSValidationRelationshipDeniedDeleteError): @"Relationship Denied Delete",
+              @(NSValidationNumberTooLargeError): @"Number too Large",
+              @(NSValidationNumberTooSmallError): @"Number too Small",
+              @(NSValidationDateTooLateError): @"Date too Late",
+              @(NSValidationDateTooSoonError): @"Date too Soon",
+              @(NSValidationInvalidDateError): @"Invalid Date",
+              @(NSValidationStringTooLongError): @"String too Long",
+              @(NSValidationStringTooShortError): @"String too Short",
+              @(NSValidationStringPatternMatchingError): @"String Pattering Matching Error"
+          };
+    });
+    return validationErrorMap;
+}
+BOOL MR_errorCodeIsValidationErrorCode(NSInteger errorCode)
+{
+    NSDictionary *validationLookup = MR_validationErrorCodeLookup();
+    return [[validationLookup allKeys] containsObject:@(errorCode)];
+}
+
+NSDictionary *MR_migrationErrorCodeLookup(void)
+{
+    static NSDictionary *migrationErrorDictionary = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+
+        migrationErrorDictionary =
+
+    @{
+      @(NSMigrationError): @"General Migration Error",
+      @(NSMigrationCancelledError): @"Migration Cancelled",
+      @(NSMigrationMissingSourceModelError): @"Migration Missing Source Model",
+      @(NSMigrationMissingMappingModelError): @"Migration Missing Mapping Model",
+      @(NSMigrationManagerSourceStoreError): @"Migration Manager Source Store Problem",
+      @(NSMigrationManagerDestinationStoreError): @"Migration Manager Destination Store Problem",
+      @(NSEntityMigrationPolicyError): @"Entity Migration Policy Failure",
+      @(NSInferredMappingModelError): @"Error Inferring Mapping Model",
+      @(NSExternalRecordImportError): @"Error Importing External Records"
+      };
+            });
+    return migrationErrorDictionary;
+}
+BOOL MR_errorCodeIsMigrationErrorCode(NSInteger errorCode)
+{
+    NSDictionary *lookup = MR_migrationErrorCodeLookup();
+    return [[lookup allKeys] containsObject:@(errorCode)];
+}
+NSDictionary *MR_persistentStoreErrorCodeLookup(void)
+{
+    static NSDictionary *persistentStoreErrorDictionary = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+
+        persistentStoreErrorDictionary =
+    @{
+      @(NSPersistentStoreInvalidTypeError): @"Invalid type specified for persistent store",
+      @(NSPersistentStoreTypeMismatchError): @"Store does not match specified type",
+      @(NSPersistentStoreIncompatibleSchemaError): @"Unable to save. Error in persistent store (missing table?).",
+      @(NSPersistentStoreSaveError): @"Unable to save. Error in persistent store (permission error?).",
+      @(NSPersistentStoreIncompleteSaveError): @"One or more stores failed to save",
+      @(NSPersistentStoreSaveConflictsError): @"Unable to resolve merge conflicts during save",
+      @(NSPersistentStoreOperationError): @"Error in persistent store. Store level operation failed",
+      @(NSPersistentStoreOpenError): @"Unable to open persistent store",
+      @(NSPersistentStoreTimeoutError): @"Timeout expired connecting to persistent store",
+      @(NSPersistentStoreUnsupportedRequestTypeError): @"Did not understand request type",
+      @(NSPersistentStoreIncompatibleVersionHashError): @"Store version info does not match managed object model version info"
+      };
+    });
+    return persistentStoreErrorDictionary;
+}
+BOOL MR_errorCodeIsPersistentStoreErrorCode(NSInteger errorCode)
+{
+    NSDictionary *lookup = MR_persistentStoreErrorCodeLookup();
+    return [[lookup allKeys] containsObject:@(errorCode)];
+}
+
+NSDictionary *MR_objectGraphErrorCodeLooup(void)
+{
+    static NSDictionary *objectGraphErrorCodeMap = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+
+        objectGraphErrorCodeMap =
+    @{
+      @(NSManagedObjectContextLockingError): @"Unable to aquire lock in NSManagedObjectContext instance",
+      @(NSPersistentStoreCoordinatorLockingError): @"Unable to aquire lock in NSPersistentStoreCoordinator instance",
+      @(NSManagedObjectReferentialIntegrityError): @"Attempted to fire fault pointing to non-existant object in store",
+      @(NSManagedObjectExternalRelationshipError): @"Object being saved has relationship containing object from a different store",
+      @(NSManagedObjectMergeError): @"Merge policy failed"
+      };
+    });
+    return objectGraphErrorCodeMap;
+}
+BOOL MR_errorCodeIsObjectGraphErrorCode(NSInteger errorCode)
+{
+    NSDictionary *lookup = MR_objectGraphErrorCodeLooup();
+    return [[lookup allKeys] containsObject:@(errorCode)];
+}
+
+NSDictionary *MR_errorCodeSummaryLookup(void)
+{
+    NSMutableDictionary *combinedErrorCodes = [NSMutableDictionary dictionary];
+    [combinedErrorCodes addEntriesFromDictionary:MR_validationErrorCodeLookup()];
+    [combinedErrorCodes addEntriesFromDictionary:MR_migrationErrorCodeLookup()];
+    [combinedErrorCodes addEntriesFromDictionary:MR_persistentStoreErrorCodeLookup()];
+    [combinedErrorCodes addEntriesFromDictionary:MR_objectGraphErrorCodeLooup()];
+
+    return [NSDictionary dictionaryWithDictionary:combinedErrorCodes];
+}

@@ -113,14 +113,14 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
                                                                 URL:url
                                                             options:options
                                                               error:&error];
-        if (store == nil)
+        if (store == nil && error == nil)
         {
             store = [self MR_reinitializeStoreAtURL:url fromError:error withOptions:options];
-            if (store == nil)
-            {
-                MRLog(@"Unable to setup store at URL: %@", url);
-                [[error MR_coreDataDescription] MR_logToConsole];
-            }
+        }
+        if (error)
+        {
+            MRLog(@"Unable to setup store at URL: %@", url);
+            [[error MR_coreDataDescription] MR_logToConsole];
         }
         return store;
     }
