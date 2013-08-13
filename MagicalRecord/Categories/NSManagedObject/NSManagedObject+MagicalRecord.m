@@ -205,10 +205,14 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (BOOL) MR_truncateAllInContext:(NSManagedObjectContext *)context
 {
-    NSArray *allEntities = [self MR_findAllInContext:context];
-    for (NSManagedObject *obj in allEntities)
+    NSFetchRequest *request = [self MR_requestAllInContext:context];
+    [request setReturnsObjectsAsFaults:YES];
+    [request setIncludesPropertyValues:NO];
+
+    NSArray *objectsToDelete = [self MR_executeFetchRequest:request inContext:context];
+    for (NSManagedObject *objectToDelete in objectsToDelete)
     {
-        [obj MR_deleteInContext:context];
+        [objectToDelete MR_deleteInContext:context];
     }
     return YES;
 }
