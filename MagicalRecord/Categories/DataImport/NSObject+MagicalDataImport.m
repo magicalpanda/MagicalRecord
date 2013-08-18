@@ -58,9 +58,18 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
         return nil;
     }
     
-    NSString *primaryKeyName = [relationshipInfo MR_primaryKey];
-    
-    NSAttributeDescription *primaryKeyAttribute = [[destinationEntity attributesByName] valueForKey:primaryKeyName];
+    NSString                       *primaryKeyName   = [relationshipInfo MR_primaryKey];
+    NSDictionary                   *attributesByName = [destinationEntity attributesByName];
+    __block NSAttributeDescription *primaryKeyAttribute;
+
+    [attributesByName enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        if ([key isEqualToString:primaryKeyName]) {
+            primaryKeyAttribute = obj;
+
+            *stop = YES;
+        }
+    }];
+
     NSString *lookupKey = [[primaryKeyAttribute userInfo] valueForKey:kMagicalRecordImportAttributeKeyMapKey] ?: [primaryKeyAttribute name];
     
     return lookupKey;

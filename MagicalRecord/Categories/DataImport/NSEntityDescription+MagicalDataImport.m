@@ -17,7 +17,15 @@
                                     
     if ([attributesByName count] == 0) return nil;
     
-    NSAttributeDescription *primaryAttribute = [attributesByName objectForKey:lookupKey];
+    __block NSAttributeDescription *primaryAttribute;
+
+    [attributesByName enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        if ([key isEqualToString:lookupKey]) {
+            primaryAttribute = obj;
+
+            *stop = YES;
+        }
+    }];
 
     return primaryAttribute;
 }
