@@ -13,19 +13,8 @@
 - (NSAttributeDescription *) MR_primaryAttributeToRelateBy;
 {
     NSString *lookupKey = [[self userInfo] valueForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: primaryKeyNameFromString([self name]);
-    NSDictionary *attributesByName = [self attributesByName];
-                                    
-    if ([attributesByName count] == 0) return nil;
-    
-    __block NSAttributeDescription *primaryAttribute;
 
-    [attributesByName enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        if ([key isEqualToString:lookupKey]) {
-            primaryAttribute = obj;
-
-            *stop = YES;
-        }
-    }];
+    NSAttributeDescription *primaryAttribute = [self MR_attributeDescriptionForName:lookupKey];
 
     return primaryAttribute;
 }
@@ -36,6 +25,27 @@
     NSManagedObject *newInstance = [relatedClass MR_createInContext:context];
    
     return newInstance;
+}
+
+- (NSAttributeDescription *) MR_attributeDescriptionForName:(NSString *)name;
+{
+    __block NSAttributeDescription *attributeDescription;
+
+    NSDictionary *attributesByName = [self attributesByName];
+
+    if ([attributesByName count] == 0) {
+        return nil;
+    }
+
+    [attributesByName enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        if ([key isEqualToString:name]) {
+            attributeDescription = obj;
+
+            *stop = YES;
+        }
+    }];
+
+    return attributeDescription;
 }
 
 

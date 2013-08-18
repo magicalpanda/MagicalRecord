@@ -12,6 +12,7 @@
 #import "NSManagedObject+MagicalRequests.h"
 #import "NSManagedObject+MagicalRecord.h"
 #import "NSManagedObject+MagicalFinders.h"
+#import "NSEntityDescription+MagicalDataImport.h"
 #import "MagicalRecord+ErrorHandling.h"
 
 @implementation NSManagedObject (MagicalAggregation)
@@ -115,17 +116,7 @@
     [ed setExpression:ex];
     
     // determine the type of attribute, required to set the expression return type
-    NSDictionary *attributesByName = [[self MR_entityDescription] attributesByName];
-
-    __block NSAttributeDescription *attributeDescription;
-
-    [attributesByName enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        if ([key isEqualToString:attributeName]) {
-            attributeDescription = obj;
-
-            *stop = YES;
-        }
-    }];
+    NSAttributeDescription *attributeDescription = [[self MR_entityDescription] MR_attributeDescriptionForName:attributeName];
 
     [ed setExpressionResultType:[attributeDescription attributeType]];    
     NSArray *properties = [NSArray arrayWithObject:ed];
