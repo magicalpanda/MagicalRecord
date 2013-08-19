@@ -102,7 +102,8 @@
 }
 
 + (id) MR_findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context
-{	
+{
+    NSAssert(attribute != nil, @"attribute can't be nil — You either need to use 'relatedByAttribute' or use 'entityID'...");
 	NSFetchRequest *request = [self MR_requestFirstByAttribute:attribute withValue:searchValue inContext:context];
     //    [request setPropertiesToFetch:[NSArray arrayWithObject:attribute]];
     

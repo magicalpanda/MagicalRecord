@@ -46,7 +46,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     for (NSString *attributeName in attributes) 
     {
         NSAttributeDescription *attributeInfo = [attributes valueForKey:attributeName];
-        NSString *lookupKeyPath = [objectData MR_lookupKeyForAttribute:attributeInfo];
+        NSString *lookupKeyPath = [objectData isKindOfClass:[self class]] ? attributeName : [objectData MR_lookupKeyForAttribute:attributeInfo];
         
         if (lookupKeyPath) 
         {
@@ -207,8 +207,10 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     NSDictionary *attributes = [[self entity] attributesByName];
     [self MR_setAttributes:attributes forKeysWithObject:objectData];
     
-    NSDictionary *relationships = [[self entity] relationshipsByName];
-    [self MR_setRelationships:relationships forKeysWithObject:objectData withBlock:relationshipBlock];
+    if (![objectData isKindOfClass:[self class]]) { // Not importing Relationships when the object is a ManagedObject — I was otherwise in an infinite loop.
+        NSDictionary *relationships = [[self entity] relationshipsByName];
+        [self MR_setRelationships:relationships forKeysWithObject:objectData withBlock:relationshipBlock];
+    }
     
     return [self MR_postImport:objectData];  
 }
@@ -236,7 +238,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 {
     NSAttributeDescription *primaryAttribute = [[self MR_entityDescription] MR_primaryAttributeToRelateBy];
     
-    id value = [objectData MR_valueForAttribute:primaryAttribute];
+    id value = [objectData isKindOfClass:self] ? [objectData valueForKey:[[self MR_entityDescription] MR_lookupKey]] : [objectData MR_valueForAttribute:primaryAttribute];
     
     NSManagedObject *managedObject = [self MR_findFirstByAttribute:[primaryAttribute name] withValue:value inContext:context];
     if (managedObject == nil) 
@@ -261,28 +263,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 
 + (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context
 {
-//    NSMutableArray *objectIDs = [NSMutableArray array];
-//    
-//    [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext)
-//    {    
-//        [listOfObjectData enumerateObjectsWithOptions:0 usingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
-//        {
-//            NSDictionary *objectData = (NSDictionary *)obj;
-//
-//            NSManagedObject *dataObject = [self MR_importFromObject:objectData inContext:localContext];
-//
-//            if ([context obtainPermanentIDsForObjects:[NSArray arrayWithObject:dataObject] error:nil])
-//            {
-//              [objectIDs addObject:[dataObject objectID]];
-//            }
-//        }];
-//    }];
-//    
-//    return [self MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"self IN %@", objectIDs] inContext:context];
-    
-    
     // See https://gist.github.com/4501089 and https://alpha.app.net/tonymillion/post/2397422
-    
     NSMutableArray *objects = [NSMutableArray array];
 
     [listOfObjectData enumerateObjectsWithOptions:0

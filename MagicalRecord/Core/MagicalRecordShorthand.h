@@ -1,11 +1,5 @@
 #ifdef MR_SHORTHAND
 
-
-
-
-
-
-
 @interface NSManagedObject (MagicalAggregationShortHand)
 + (NSNumber *) numberOfEntities;
 + (NSNumber *) numberOfEntitiesWithContext:(NSManagedObjectContext *)context;
@@ -182,11 +176,11 @@
 - (void) addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent;
 - (void) addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent completion:(void(^)(void))completionBlock;
 @end
-
-
-
-
-
+@interface NSEntityDescription (MagicalRecordShortHand)
+- (NSAttributeDescription *) primaryAttributeToRelateBy;
+- (NSManagedObject *) createInstanceInContext:(NSManagedObjectContext *)context;
+- (NSInteger)numberOfObjectsInSection:(NSUInteger)section;
+@end
 
 #endif
 

@@ -11,5 +11,6 @@
 
 - (NSAttributeDescription *) MR_primaryAttributeToRelateBy;
 - (NSManagedObject *) MR_createInstanceInContext:(NSManagedObjectContext *)context;
+- (NSString*) MR_lookupKey;
 
 @end

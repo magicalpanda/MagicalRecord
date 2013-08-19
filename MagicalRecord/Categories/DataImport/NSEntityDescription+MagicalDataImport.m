@@ -12,12 +12,15 @@
 
 - (NSAttributeDescription *) MR_primaryAttributeToRelateBy;
 {
-    NSString *lookupKey = [[self userInfo] valueForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: primaryKeyNameFromString([self name]);
-    NSDictionary *attributesByName = [self attributesByName];
-                                    
-    if ([attributesByName count] == 0) return nil;
-    
-    NSAttributeDescription *primaryAttribute = [attributesByName objectForKey:lookupKey];
+    NSEntityDescription *entityDescription = self;
+    NSAttributeDescription *primaryAttribute = nil;
+    do {
+        NSDictionary *attributesByName = [entityDescription attributesByName];
+        if ([attributesByName count]) {
+            primaryAttribute = [attributesByName objectForKey:[entityDescription MR_lookupKey]];
+        };
+        entityDescription = entityDescription.superentity;
+    } while (!primaryAttribute && entityDescription);
 
     return primaryAttribute;
 }
@@ -30,5 +33,15 @@
     return newInstance;
 }
 
+- (NSString*) MR_lookupKey
+{
+    NSString *primaryKeyName = [[self userInfo] valueForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: primaryKeyNameFromString([self name]);
+    if ([[[self attributesByName] allKeys] containsObject:primaryKeyName]) {
+        return primaryKeyName;
+    } else {
+        NSString *primaryKeyNameInSuperentity = [[self superentity] MR_lookupKey];
+        return primaryKeyNameInSuperentity ?: primaryKeyName;
+    }
+}
 
 @end
