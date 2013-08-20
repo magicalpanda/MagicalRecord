@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		90171E1617C3210F00E7084A /* NSManagedObjectContext+MagicalSavesSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099490017C2F0B700BC2B5C /* NSManagedObjectContext+MagicalSavesSpec.m */; };
 		90171E1717C3210F00E7084A /* NSManagedObjectContext+MagicalSavesSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099490017C2F0B700BC2B5C /* NSManagedObjectContext+MagicalSavesSpec.m */; };
-		90171E1917C3283C00E7084A /* ImportSingleRelatedEntitySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 90171E1817C3283C00E7084A /* ImportSingleRelatedEntitySpec.m */; };
-		90171E1A17C3283C00E7084A /* ImportSingleRelatedEntitySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 90171E1817C3283C00E7084A /* ImportSingleRelatedEntitySpec.m */; };
 		90171E1B17C329CC00E7084A /* FixtureHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF9B6C17498B5C008D9D13 /* FixtureHelpers.m */; };
 		90171E1C17C329CD00E7084A /* FixtureHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF9B6C17498B5C008D9D13 /* FixtureHelpers.m */; };
 		90171E1D17C32ACE00E7084A /* TestModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 9099490817C2F3D400BC2B5C /* TestModel.xcdatamodeld */; };
 		90171E1E17C32AD300E7084A /* TestModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 9099490817C2F3D400BC2B5C /* TestModel.xcdatamodeld */; };
+		90171E2017C3300500E7084A /* NSManagedObject+MagicalRecordSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 90171E1F17C3300500E7084A /* NSManagedObject+MagicalRecordSpec.m */; };
+		90171E2117C3300500E7084A /* NSManagedObject+MagicalRecordSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 90171E1F17C3300500E7084A /* NSManagedObject+MagicalRecordSpec.m */; };
 		909948F617C2EF9800BC2B5C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 909948F517C2EF9800BC2B5C /* CoreData.framework */; };
 		909948F717C2EFA100BC2B5C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 909B48C817C2EB5C00CE8C5E /* Cocoa.framework */; };
 		909948F817C2EFA500BC2B5C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C7E213D0C3A00097AB6F /* CoreData.framework */; };
@@ -241,6 +241,7 @@
 
 /* Begin PBXFileReference section */
 		90171E1817C3283C00E7084A /* ImportSingleRelatedEntitySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportSingleRelatedEntitySpec.m; sourceTree = "<group>"; };
+		90171E1F17C3300500E7084A /* NSManagedObject+MagicalRecordSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+MagicalRecordSpec.m"; sourceTree = "<group>"; };
 		909948F517C2EF9800BC2B5C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
 		909948FF17C2F0B700BC2B5C /* MagicalRecord+ActionsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MagicalRecord+ActionsSpec.m"; path = "Tests/MagicalRecord+ActionsSpec.m"; sourceTree = SOURCE_ROOT; };
 		9099490017C2F0B700BC2B5C /* NSManagedObjectContext+MagicalSavesSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectContext+MagicalSavesSpec.m"; path = "Tests/NSManagedObjectContext+MagicalSavesSpec.m"; sourceTree = SOURCE_ROOT; };
@@ -640,8 +641,9 @@
 			isa = PBXGroup;
 			children = (
 				909948FF17C2F0B700BC2B5C /* MagicalRecord+ActionsSpec.m */,
-				9099490017C2F0B700BC2B5C /* NSManagedObjectContext+MagicalSavesSpec.m */,
 				909948FC17C2F08B00BC2B5C /* Needs Porting */,
+				90171E1F17C3300500E7084A /* NSManagedObject+MagicalRecordSpec.m */,
+				9099490017C2F0B700BC2B5C /* NSManagedObjectContext+MagicalSavesSpec.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1159,11 +1161,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90171E2017C3300500E7084A /* NSManagedObject+MagicalRecordSpec.m in Sources */,
 				9099495317C2F42100BC2B5C /* DifferentClassNameMapping.m in Sources */,
 				9099493917C2F42100BC2B5C /* _AbstractRelatedEntity.m in Sources */,
 				9099496317C2F42100BC2B5C /* SingleRelatedEntity.m in Sources */,
 				9099494917C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityWithSecondaryMappings.m in Sources */,
-				90171E1917C3283C00E7084A /* ImportSingleRelatedEntitySpec.m in Sources */,
 				9099494117C2F42100BC2B5C /* _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m in Sources */,
 				9099495B17C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m in Sources */,
 				9099494317C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityUsingDefaults.m in Sources */,
@@ -1193,11 +1195,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90171E2117C3300500E7084A /* NSManagedObject+MagicalRecordSpec.m in Sources */,
 				9099495417C2F42100BC2B5C /* DifferentClassNameMapping.m in Sources */,
 				9099493A17C2F42100BC2B5C /* _AbstractRelatedEntity.m in Sources */,
 				9099496417C2F42100BC2B5C /* SingleRelatedEntity.m in Sources */,
 				9099494A17C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityWithSecondaryMappings.m in Sources */,
-				90171E1A17C3283C00E7084A /* ImportSingleRelatedEntitySpec.m in Sources */,
 				9099494217C2F42100BC2B5C /* _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m in Sources */,
 				9099495C17C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m in Sources */,
 				9099494417C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityUsingDefaults.m in Sources */,
