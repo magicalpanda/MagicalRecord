@@ -6,6 +6,8 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
+#import <SenTestingKit/SenTestingKit.h>
+
 @interface FixtureHelpers : NSObject
 
 + (id) dataFromPListFixtureNamed:(NSString *)fixtureName;
@@ -13,8 +15,7 @@
 
 @end
 
-
-@interface GHTestCase (FixtureHelpers)
+@interface SenTest (FixtureHelpers)
 
 - (id) dataFromJSONFixture;
 
