@@ -8,8 +8,6 @@
 
 SpecBegin(MagicalRecordActions)
 
-[Expecta setAsynchronousTestTimeout:10.f];
-
 describe(@"MagicalRecord", ^{		
 	beforeAll(^{
         [MagicalRecord setDefaultModelFromClass:[self class]];
