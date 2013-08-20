@@ -1088,7 +1088,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "mogen=`which mogenerator`\nPlistBuddy=/usr/libexec/PlistBuddy\nHUMAN_FILES_OUTPUT_FOLDER=$PROJECT_DIR/TestsFixtures/iOS/entities\nMACHINE_FILES_OUTPUT_FOLDER=$PROJECT_DIR/Tests/Fixtures/iOS/generated\nMODEL_DATA_FOLDER=$PROJECT_DIR/Tests/Fixtures/iOS/TestModel.xcdatamodeld\n\nif [[ -x $mogen ]]; then\necho \"Updating data objects from $MODEL_DATA_FOLDER/using $mogen\"\n\"$mogen\" -m \"$MODEL_DATA_FOLDER/$CURRENT_MODEL_VERSION\" -M \"$MACHINE_FILES_OUTPUT_FOLDER\" -H \"$HUMAN_FILES_OUTPUT_FOLDER\" --template-var arc=true\nfi";
+			shellScript = "mogen=`which mogenerator`\nPlistBuddy=/usr/libexec/PlistBuddy\nOUTPUT_FOLDER=$PROJECT_DIR/Tests/Fixtures/TestModel\nMODEL_DATA_FOLDER=$PROJECT_DIR/Tests/Fixtures/TestModel.xcdatamodeld\n\nif [[ -x $mogen ]]; then\n    echo \"Updating data objects from $MODEL_DATA_FOLDER/using $mogen\"\n    \"$mogen\" -m \"$MODEL_DATA_FOLDER/$CURRENT_MODEL_VERSION\" -O \"$OUTPUT_FOLDER\" --template-var arc=true\nfi";
 		};
 		C7CF9B68174989CC008D9D13 /* Regenerate Core Data Entity Classes */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1102,7 +1102,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "mogen=`which mogenerator`\nPlistBuddy=/usr/libexec/PlistBuddy\nHUMAN_FILES_OUTPUT_FOLDER=$PROJECT_DIR/Application/Models/entities\nMACHINE_FILES_OUTPUT_FOLDER=$PROJECT_DIR/Application/Models/generated\nMODEL_DATA_FOLDER=$PROJECT_DIR/Application/Models/TestModel.xcdatamodeld\n\n#figure out current model version\nCURRENT_MODEL_VERSION=`\"$PlistBuddy\" -c 'Print _XCCurrentVersionName' \"$MODEL_DATA_FOLDER/.xccurrentversion\"`\n\n\nif [[ -x $mogen ]]; then\necho \"Updating data objects from $MODEL_DATA_FOLDER/$CURRENT_MODEL_VERSION using $mogen\"\n\"$mogen\" -m \"$MODEL_DATA_FOLDER/$CURRENT_MODEL_VERSION\" -M \"$MACHINE_FILES_OUTPUT_FOLDER\" -H \"$HUMAN_FILES_OUTPUT_FOLDER\" --template-var arc=true\nfi";
+			shellScript = "mogen=`which mogenerator`\nPlistBuddy=/usr/libexec/PlistBuddy\nOUTPUT_FOLDER=$PROJECT_DIR/Tests/Fixtures/TestModel\nMODEL_DATA_FOLDER=$PROJECT_DIR/Tests/Fixtures/TestModel.xcdatamodeld\n\nif [[ -x $mogen ]]; then\n    echo \"Updating data objects from $MODEL_DATA_FOLDER/using $mogen\"\n    \"$mogen\" -m \"$MODEL_DATA_FOLDER/$CURRENT_MODEL_VERSION\" -O \"$OUTPUT_FOLDER\" --template-var arc=true\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
