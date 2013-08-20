@@ -860,7 +860,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7CF980E174984CA008D9D13 /* Build configuration list for PBXNativeTarget "MagicalRecordTests-iOS" */;
 			buildPhases = (
-				C7CF9B671749899D008D9D13 /* Regenerate Core Data Entity Classes */,
 				C7CF97FA174984CA008D9D13 /* Sources */,
 				C7CF97FB174984CA008D9D13 /* Frameworks */,
 				C7CF97FC174984CA008D9D13 /* Resources */,
@@ -880,7 +879,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7CF9823174984E4008D9D13 /* Build configuration list for PBXNativeTarget "MagicalRecordTests-OSX" */;
 			buildPhases = (
-				C7CF9B68174989CC008D9D13 /* Regenerate Core Data Entity Classes */,
 				C7CF9811174984E4008D9D13 /* Sources */,
 				C7CF9812174984E4008D9D13 /* Frameworks */,
 				C7CF9813174984E4008D9D13 /* Resources */,
@@ -1059,34 +1057,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-		C7CF9B671749899D008D9D13 /* Regenerate Core Data Entity Classes */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Regenerate Core Data Entity Classes";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "mogen=`which mogenerator`\nPlistBuddy=/usr/libexec/PlistBuddy\nOUTPUT_FOLDER=$PROJECT_DIR/Tests/Fixtures/TestModel\nMODEL_DATA_FOLDER=$PROJECT_DIR/Tests/Fixtures/TestModel.xcdatamodeld\n\nif [[ -x $mogen ]]; then\n    echo \"Updating data objects from $MODEL_DATA_FOLDER/using $mogen\"\n    \"$mogen\" -m \"$MODEL_DATA_FOLDER/$CURRENT_MODEL_VERSION\" -O \"$OUTPUT_FOLDER\" --template-var arc=true\nfi";
-		};
-		C7CF9B68174989CC008D9D13 /* Regenerate Core Data Entity Classes */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Regenerate Core Data Entity Classes";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "mogen=`which mogenerator`\nPlistBuddy=/usr/libexec/PlistBuddy\nOUTPUT_FOLDER=$PROJECT_DIR/Tests/Fixtures/TestModel\nMODEL_DATA_FOLDER=$PROJECT_DIR/Tests/Fixtures/TestModel.xcdatamodeld\n\nif [[ -x $mogen ]]; then\n    echo \"Updating data objects from $MODEL_DATA_FOLDER/using $mogen\"\n    \"$mogen\" -m \"$MODEL_DATA_FOLDER/$CURRENT_MODEL_VERSION\" -O \"$OUTPUT_FOLDER\" --template-var arc=true\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
