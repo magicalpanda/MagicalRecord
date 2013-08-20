@@ -126,10 +126,12 @@ describe(@"NSManagedObjectContext+MagicalSaves", ^{
                 
                 [managedObjectContext MR_saveToPersistentStoreAndWait];
                 
-                NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:objectId];
+                NSError *fetchError;
+                NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] existingObjectWithID:objectId error:&fetchError];
 
                 expect(fetchedObject).toNot.beNil();
-                expect([fetchedObject hasChanges]).will.beFalsy();
+                expect(fetchError).to.beNil();
+                expect([fetchedObject hasChanges]).to.beFalsy();
             });
         });
         
@@ -220,8 +222,11 @@ describe(@"NSManagedObjectContext+MagicalSaves", ^{
                     expect(error).to.beNil();
                 }];
                 
-                NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:permanentObjectID];
+                NSError *fetchError;
+                NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] existingObjectWithID:permanentObjectID error:&fetchError];
+
                 expect(fetchedObject).toNot.beNil();
+                expect(fetchError).to.beNil();
                 expect([fetchedObject hasChanges]).to.beFalsy();
             });
         });

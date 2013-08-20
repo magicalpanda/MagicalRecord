@@ -38,9 +38,11 @@ describe(@"MagicalRecord", ^{
 
             expect(objectId).toNot.beNil();
 
-            NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:objectId];
+            NSError *fetchError;
+            NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] existingObjectWithID:objectId error:&fetchError];
 
             expect(fetchedObject).toNot.beNil();
+            expect(fetchError).to.beNil();
             expect([fetchedObject hasChanges]).to.beFalsy();
         });
         
@@ -58,9 +60,11 @@ describe(@"MagicalRecord", ^{
             
             expect(objectId).toNot.beNil();
 
-            NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_defaultContext] objectWithID:objectId];
-            
+            NSError *fetchError;
+            NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] existingObjectWithID:objectId error:&fetchError];
+
             expect(fetchedObject).toNot.beNil();
+            expect(fetchError).to.beNil();
             expect([fetchedObject hasChanges]).to.beFalsy();
         });
         
@@ -208,9 +212,11 @@ describe(@"MagicalRecord", ^{
 
                 expect(objectId).toNot.beNil();
                 
-                NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:objectId];
+                NSError *fetchError;
+                NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] existingObjectWithID:objectId error:&fetchError];
 
                 expect(fetchedObject).toNot.beNil();
+                expect(fetchError).to.beNil();
                 expect([fetchedObject hasChanges]).to.beFalsy();
             });
         });
