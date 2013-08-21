@@ -279,31 +279,33 @@
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
++ (NSString *) MR_fileCacheNameForObject:(id)object;
+{
+    SEL selector = @selector(fetchedResultsControllerCacheName);
+    if ([object respondsToSelector:selector])
+    {
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[object methodSignatureForSelector:selector]];
+        [invocation setSelector:selector];
+        [invocation setTarget:object];
+        [invocation invoke];
+        NSString *returnValue = nil;
+        [invocation getReturnValue:&returnValue];
+        return returnValue;
+    }
+    return [NSString stringWithFormat:@"MagicalRecord-Cache-%@", NSStringFromClass([object class])];
+}
+
 + (NSFetchedResultsController *) MR_fetchController:(NSFetchRequest *)request delegate:(id<NSFetchedResultsControllerDelegate>)delegate useFileCache:(BOOL)useFileCache groupedBy:(NSString *)groupKeyPath inContext:(NSManagedObjectContext *)context
 {
-    NSString *cacheName = useFileCache ? [NSString stringWithFormat:@"MagicalRecord-Cache-%@", NSStringFromClass([self class])] : nil;
+    NSString *cacheName = useFileCache ? [self MR_fileCacheNameForObject:delegate] : nil;
     
 	NSFetchedResultsController *controller =
-    [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                        managedObjectContext:context
-                                          sectionNameKeyPath:groupKeyPath
-                                                   cacheName:cacheName];
+        [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                            managedObjectContext:context
+                                              sectionNameKeyPath:groupKeyPath
+                                                       cacheName:cacheName];
     controller.delegate = delegate;
     
-    return controller;
-}
-
-+ (NSFetchedResultsController *) MR_fetchAllWithDelegate:(id<NSFetchedResultsControllerDelegate>)delegate;
-{
-    return [self MR_fetchAllWithDelegate:delegate inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
-}
-
-+ (NSFetchedResultsController *) MR_fetchAllWithDelegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context;
-{
-    NSFetchRequest *request = [self MR_requestAllInContext:context];
-    NSFetchedResultsController *controller = [self MR_fetchController:request delegate:delegate useFileCache:NO groupedBy:nil inContext:context];
-
-    [self MR_performFetch:controller];
     return controller;
 }
 
