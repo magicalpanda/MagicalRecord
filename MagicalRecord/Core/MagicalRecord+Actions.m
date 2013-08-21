@@ -100,7 +100,8 @@ dispatch_queue_t saveQueue()
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
 
     [localContext performBlockAndWait:^{
-        if (block) {
+        if (block)
+        {
             block(localContext);
         }
 
@@ -114,12 +115,12 @@ dispatch_queue_t saveQueue()
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-implementations"
 
-+ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block
++ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
 {
     [[self class] saveWithBlock:block completion:nil];
 }
 
-+ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))completion
++ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))completion;
 {
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_confinementContext];
 
@@ -141,18 +142,23 @@ dispatch_queue_t saveQueue()
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
 
     [localContext performBlock:^{
-        if (block) {
+        if (block)
+        {
             block(localContext);
         }
 
         [localContext MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-            if (success) {
-                if (completion) {
+            if (success)
+            {
+                if (completion)
+                {
                     completion();
                 }
             }
-            else {
-                if (errorHandler) {
+            else
+            {
+                if (errorHandler)
+                {
                     errorHandler(error);
                 }
             }

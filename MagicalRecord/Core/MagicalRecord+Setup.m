@@ -33,6 +33,19 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
     [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
 }
 
++ (void) setupCoreDataStackWithStoreAtURL:(NSURL *)url;
+{
+    if ([NSPersistentStoreCoordinator MR_defaultStoreCoordinator] != nil) return;
+
+    MRLog(@"Setting up Core Data Stack with store at URL: %@", url);
+	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreAtURL:url];
+	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
+
+    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
+}
+
+#pragma mark - Auto Migration Stack Setup
+
 + (void) setupAutoMigratingCoreDataStack
 {
     [self setupAutoMigratingCoreDataStackWithSqliteStoreNamed:[self defaultStoreName]];
@@ -49,10 +62,18 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
     [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
 }
 
-+ (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName //depricated
++ (void) setupAutoMigratingCoreDataStackWithSqliteStoreAtURL:(NSURL *)url;
 {
-    [self setupAutoMigratingCoreDataStackWithSqliteStoreNamed:storeName];
+    if ([NSPersistentStoreCoordinator MR_defaultStoreCoordinator] != nil) return;
+
+    MRLog(@"Setting up AUTO MIGRATING Core Data Stack with store at url: %@", url);
+    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithAutoMigratingSqliteStoreAtURL:url];
+    [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
+
+    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
 }
+
+#pragma mark - Manual Migration Stack Setup
 
 + (void) setupManuallyMigratingCoreDataStack;
 {
@@ -70,6 +91,19 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
     [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
 }
 
++ (void) setupManuallyMigratingCoreDataStackWithSqliteStoreAtURL:(NSURL *)url;
+{
+    if ([NSPersistentStoreCoordinator MR_defaultStoreCoordinator] != nil) return;
+
+    MRLog(@"Setting up MANUALLY MIGRATING Core Data Stack with store at url: %@", url);
+    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithManuallyMigratingSqliteStoreAtURL:url];
+    [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
+
+    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
+}
+
+#pragma mark - In Memory Stack Setup
+
 + (void) setupCoreDataStackWithInMemoryStore;
 {
     if ([NSPersistentStoreCoordinator MR_defaultStoreCoordinator] != nil) return;
@@ -78,17 +112,6 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithInMemoryStore];
 	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
 	
-    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
-}
-
-+ (void) setupCoreDataStackWithStoreAtURL:(NSURL *)url;
-{
-    if ([NSPersistentStoreCoordinator MR_defaultStoreCoordinator] != nil) return;
-
-    MRLog(@"Setting up Core Data Stack with store at URL: %@", url);
-	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreAtURL:url];
-	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
-
     [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
 }
 

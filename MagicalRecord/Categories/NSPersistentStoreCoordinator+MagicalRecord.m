@@ -159,16 +159,28 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     return [self MR_addSqliteStoreNamed:storeFileName withOptions:options];
 }
 
+- (NSPersistentStore *) MR_addAutoMigratingSqliteStoreAtURL:(NSURL *)url;
+{
+    NSDictionary *options = [NSDictionary MR_autoMigrationOptions];
+    return [self MR_addSqliteStoreAtURL:url withOptions:options];
+}
+
 - (NSPersistentStore *) MR_addManuallyMigratingSqliteStoreNamed:(NSString *)storeFileName;
 {
     NSDictionary *options = [NSDictionary MR_manualMigrationOptions];
     return [self MR_addSqliteStoreNamed:storeFileName withOptions:options];
 }
 
+- (NSPersistentStore *) MR_addManuallyMigratingSqliteStoreAtURL:(NSURL *)url;
+{
+    NSDictionary *options = [NSDictionary MR_manualMigrationOptions];
+    return [self MR_addSqliteStoreAtURL:url withOptions:options];
+}
+
 #pragma mark - Public Class Methods
 
 
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *)storeFileName
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *)storeFileName;
 {
     NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
@@ -184,12 +196,38 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     return coordinator;
 }
 
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreAtURL:(NSURL *)url;
+{
+    NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
+    NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+
+    [coordinator MR_addAutoMigratingSqliteStoreAtURL:url];
+
+    //HACK: lame solution to fix automigration error "Migration failed after first pass"
+    if ([[coordinator persistentStores] count] == 0)
+    {
+        [coordinator performSelector:@selector(MR_addAutoMigratingSqliteStoreAtURL:) withObject:url afterDelay:0.5];
+    }
+
+    return coordinator;
+}
+
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithManuallyMigratingSqliteStoreNamed:(NSString *)storeFileName;
 {
     NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
     NSPersistentStoreCoordinator *coordinator = [[self alloc] initWithManagedObjectModel:model];
 
     [coordinator MR_addManuallyMigratingSqliteStoreNamed:storeFileName];
+
+    return coordinator;
+}
+
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithManuallyMigratingSqliteStoreAtURL:(NSURL *)url;
+{
+    NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
+    NSPersistentStoreCoordinator *coordinator = [[self alloc] initWithManagedObjectModel:model];
+
+    [coordinator MR_addManuallyMigratingSqliteStoreAtURL:url];
 
     return coordinator;
 }
