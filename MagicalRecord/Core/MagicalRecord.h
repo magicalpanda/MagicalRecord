@@ -26,6 +26,7 @@
         #define MR_LOG_LEVEL LOG_LEVEL_VERBOSE
         #define MRLog(...)  DDLogVerbose(__VA_ARGS__)
     #else
+        #define MR_LOG_LEVEL -1
         #define MRLog(...) NSLog(@"%s(%p) %@", __PRETTY_FUNCTION__, self, [NSString stringWithFormat:__VA_ARGS__])
     #endif
 #else
