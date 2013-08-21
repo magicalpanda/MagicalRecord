@@ -29,6 +29,20 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 
+@interface NSManagedObject (MagicalRecord_DataImportInternal)
+
+- (BOOL) shouldImport:(id)data;
+- (BOOL) willImport:(id)data;
+- (BOOL) didImport:(id)data;
+
+@end
+
+@interface NSObject (MagicalRecord_DataImportInternal)
+
+- (id) MR_valueForUndefinedKey:(NSString *)key;
+
+@end
+
 @implementation NSManagedObject (MagicalRecord_DataImport)
 
 - (BOOL) MR_importValue:(id)value forKey:(NSString *)key
