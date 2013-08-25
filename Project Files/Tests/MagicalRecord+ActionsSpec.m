@@ -68,6 +68,22 @@ describe(@"MagicalRecord", ^{
             expect([fetchedObject hasChanges]).to.beFalsy();
         });
         
+        it(@"should not assign temporary inserted entites without a context to any context", ^{
+            __block NSManagedObjectID *objectId;
+            
+            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:nil];
+                
+                expect([inserted hasChanges]).to.beFalsy();
+                expect([inserted managedObjectContext]).to.beNil;
+                
+                expect([localContext obtainPermanentIDsForObjects:@[inserted] error:nil]).to.beFalsy;
+                objectId = [inserted objectID];
+            }];
+            
+            expect([objectId isTemporaryID]).to.beTruthy;
+        });
+        
         it(@"should make updates to entities available to the default context", ^{
             __block NSManagedObjectID *objectId;
             __block NSManagedObject   *fetchedObject;
