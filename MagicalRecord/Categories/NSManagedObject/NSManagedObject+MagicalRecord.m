@@ -205,10 +205,14 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (BOOL) MR_truncateAllInContext:(NSManagedObjectContext *)context
 {
-    NSArray *allEntities = [self MR_findAllInContext:context];
-    for (NSManagedObject *obj in allEntities)
+    NSFetchRequest *request = [self MR_requestAllInContext:context];
+    [request setReturnsObjectsAsFaults:YES];
+    [request setIncludesPropertyValues:NO];
+
+    NSArray *objectsToDelete = [self MR_executeFetchRequest:request inContext:context];
+    for (NSManagedObject *objectToDelete in objectsToDelete)
     {
-        [obj MR_deleteInContext:context];
+        [objectToDelete MR_deleteInContext:context];
     }
     return YES;
 }
@@ -222,6 +226,19 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext
 {
     NSError *error = nil;
+    
+    if ([[self objectID] isTemporaryID])
+    {
+        BOOL success = [[self managedObjectContext] obtainPermanentIDsForObjects:@[self] error:&error];
+        if (!success)
+        {
+            [MagicalRecord handleErrors:error];
+            return nil;
+        }
+    }
+    
+    error = nil;
+    
     NSManagedObject *inContext = [otherContext existingObjectWithID:[self objectID] error:&error];
     [MagicalRecord handleErrors:error];
     
