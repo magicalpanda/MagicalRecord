@@ -153,10 +153,15 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     return [self MR_privateQueueContext];
 }
 
-+ (NSManagedObjectContext *) MR_confinementContext;
++ (NSManagedObjectContext *)MR_confinementContext;
+{
+    return [self MR_confinementContextWithParent:[self MR_defaultContext]];
+}
+
++ (NSManagedObjectContext *) MR_confinementContextWithParent:(NSManagedObjectContext *)parentContext;
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSConfinementConcurrencyType];
-    [context setParentContext:[self MR_defaultContext]];
+    [context setParentContext:parentContext];
     [context MR_setWorkingName:@"Confinement"];
     return context;
 }
