@@ -117,11 +117,11 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     }
     @catch (NSException *exception) 
     {
-        MRLog(@"Adding object for relationship failed: %@\n", relationshipInfo);
-        MRLog(@"relatedObject.entity %@", [relatedObject entity]);
-        MRLog(@"relationshipInfo.destinationEntity %@", [relationshipInfo destinationEntity]);
-        MRLog(@"Add Relationship Selector: %@", addRelatedObjectToSetMessage);   
-        MRLog(@"perform selector error: %@", exception);
+        MRLogError(@"Adding object for relationship failed: %@\n", relationshipInfo);
+        MRLogError(@"relatedObject.entity %@", [relatedObject entity]);
+        MRLogError(@"relationshipInfo.destinationEntity %@", [relationshipInfo destinationEntity]);
+        MRLogError(@"Add Relationship Selector: %@", addRelatedObjectToSetMessage);   
+        MRLogError(@"perform selector error: %@", exception);
     }
 }
 

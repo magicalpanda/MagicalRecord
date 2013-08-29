@@ -12,24 +12,26 @@
 // enable to use caches for the fetchedResultsControllers (iOS only)
 // #define STORE_USE_CACHE
 
-#ifndef MR_ENABLE_ACTIVE_RECORD_LOGGING
-    #ifdef DEBUG
-        #define MR_ENABLE_ACTIVE_RECORD_LOGGING 1
-    #else
-        #define MR_ENABLE_ACTIVE_RECORD_LOGGING 0
-    #endif
-#endif
-
-#if MR_ENABLE_ACTIVE_RECORD_LOGGING != 0
-      // First, check if we can use Cocoalumberjack for logging
-    #ifdef LOG_VERBOSE
-        extern int ddLogLevel;
-        #define MRLog(...)  DDLogVerbose(__VA_ARGS__)
-    #else
-        #define MRLog(...) NSLog(@"%s(%p) %@", __PRETTY_FUNCTION__, self, [NSString stringWithFormat:__VA_ARGS__])
-    #endif
+// First, check if we can use Cocoalumberjack for logging
+#if defined(COCOAPODS_POD_AVAILABLE_CocoaLumberjack)
+    #import <CocoaLumberjack/DDLog.h>
+    extern int ddLogLevel;
+    #define MRLogError(...)   DDLogError(__VA_ARGS__)
+    #define MRLogWarn(...)    DDLogWarn(__VA_ARGS__)
+    #define MRLogInfo(...)    DDLogInfo(__VA_ARGS__)
+    #define MRLogVerbose(...) DDLogVerbose(__VA_ARGS__)
 #else
-    #define MRLog(...) ((void)0)
+    // if not, only log in DEBUG
+    #if defined(DEBUG)
+        #define MRLog(...) NSLog(@"%s(%p) %@", __PRETTY_FUNCTION__, self, [NSString stringWithFormat:__VA_ARGS__])
+    #else
+        #define MRLog(...) ((void)0)
+    #endif
+
+    #define MRLogError(...)   MRLog(__VA_ARGS__)
+    #define MRLogWarn(...)    MRLog(__VA_ARGS__)
+    #define MRLogInfo(...)    MRLog(__VA_ARGS__)
+    #define MRLogVerbose(...) MRLog(__VA_ARGS__)
 #endif
 
 #ifdef NS_BLOCKS_AVAILABLE

@@ -83,7 +83,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
             // Could not open the database, so... kill it!
             [[NSFileManager defaultManager] removeItemAtURL:url error:nil];
 
-            MRLog(@"Removed incompatible model version: %@", [url lastPathComponent]);
+            MRLogInfo(@"Removed incompatible model version: %@", [url lastPathComponent]);
             
             // Try one more time to create the store
             store = [self addPersistentStoreWithType:NSSQLiteStoreType
@@ -209,7 +209,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
         }
         else 
         {
-            MRLog(@"iCloud is not enabled");
+            MRLogError(@"iCloud is not enabled");
         }
         
         [self lock];

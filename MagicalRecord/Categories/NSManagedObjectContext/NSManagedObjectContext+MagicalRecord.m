@@ -100,7 +100,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
                                                                            [[NSManagedObjectContext MR_defaultContext] MR_observeiCloudChangesInCoordinator:coordinator];
                                                                        }];        
     }
-    MRLog(@"Set Default Context: %@", defaultManagedObjectContext_);
+    MRLogVerbose(@"Set Default Context: %@", defaultManagedObjectContext_);
 }
 
 + (NSManagedObjectContext *) MR_rootSavingContext;
@@ -119,7 +119,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     [context MR_obtainPermanentIDsBeforeSaving];
     [rootSavingContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
     [rootSavingContext MR_setWorkingName:@"BACKGROUND SAVING (ROOT)"];
-    MRLog(@"Set Root Saving Context: %@", rootSavingContext);
+    MRLogVerbose(@"Set Root Saving Context: %@", rootSavingContext);
 }
 
 + (void) MR_initializeDefaultContextWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
@@ -169,7 +169,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
 + (NSManagedObjectContext *) MR_newMainQueueContext;
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    MRLog(@"Created Main Queue Context: %@", context);
+    MRLogVerbose(@"Created Main Queue Context: %@", context);
     return context;    
 }
 
@@ -183,7 +183,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
             [context setPersistentStoreCoordinator:coordinator];
         }];
         
-        MRLog(@"-> Created Context %@", [context MR_workingName]);
+        MRLogVerbose(@"-> Created Context %@", [context MR_workingName]);
     }
     return context;
 }
@@ -205,7 +205,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
 
     if ([insertedObjects count])
     {
-        MRLog(@"Context %@ is about to save. Obtaining permanent IDs for new %lu inserted objects", [context MR_workingName], (unsigned long)[insertedObjects count]);
+        MRLogInfo(@"Context %@ is about to save. Obtaining permanent IDs for new %lu inserted objects", [context MR_workingName], (unsigned long)[insertedObjects count]);
         NSError *error = nil;
         BOOL success = [context obtainPermanentIDsForObjects:[insertedObjects allObjects] error:&error];
         if (!success)

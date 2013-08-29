@@ -42,7 +42,7 @@
     BOOL saveParentContexts = ((mask & MRSaveParentContexts) == MRSaveParentContexts);
 
     if (![self hasChanges]) {
-        MRLog(@"NO CHANGES IN ** %@ ** CONTEXT - NOT SAVING", [self MR_workingName]);
+        MRLogInfo(@"NO CHANGES IN ** %@ ** CONTEXT - NOT SAVING", [self MR_workingName]);
 
         if (completion)
         {
@@ -54,9 +54,9 @@
         return;
     }
 
-    MRLog(@"→ Saving %@", [self MR_description]);
-    MRLog(@"→ Save Parents? %@", @(saveParentContexts));
-    MRLog(@"→ Save Synchronously? %@", @(syncSave));
+    MRLogInfo(@"→ Saving %@", [self MR_description]);
+    MRLogInfo(@"→ Save Parents? %@", @(saveParentContexts));
+    MRLogInfo(@"→ Save Synchronously? %@", @(syncSave));
 
     id saveBlock = ^{
         NSError *error = nil;
@@ -68,7 +68,7 @@
         }
         @catch(NSException *exception)
         {
-            MRLog(@"Unable to perform save: %@", (id)[exception userInfo] ? : (id)[exception reason]);
+            MRLogError(@"Unable to perform save: %@", (id)[exception userInfo] ? : (id)[exception reason]);
         }
 
         @finally
@@ -88,7 +88,7 @@
                 }
                 // Do the completion action if one was specified
                 else {
-                    MRLog(@"→ Finished saving: %@", [self MR_description]);
+                    MRLogInfo(@"→ Finished saving: %@", [self MR_description]);
 
                     if (completion) {
                         dispatch_async(dispatch_get_main_queue(), ^{
