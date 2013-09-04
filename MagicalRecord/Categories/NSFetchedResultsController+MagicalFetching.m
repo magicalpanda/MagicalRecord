@@ -18,7 +18,7 @@
     
     if (!success)
     {
-        [MagicalRecord handleErrors:error];
+        [[error MR_coreDataDescription] MR_logToConsole];
     }
 }
 
