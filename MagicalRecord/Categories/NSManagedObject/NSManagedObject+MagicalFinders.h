@@ -6,7 +6,15 @@
 //  Copyright (c) 2012 Magical Panda Software LLC. All rights reserved.
 //
 
+#import <CoreFoundation/CoreFoundation.h>
 #import <CoreData/CoreData.h>
+
+@interface NSObject (MagicalFindersExtentions)
+
+- (NSString *) fetchedResultsControllerCacheName;
+
+@end
+
 
 @interface NSManagedObject (MagicalFinders)
 
