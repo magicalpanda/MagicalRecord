@@ -250,21 +250,22 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext
 {
     NSManagedObject *inContext = nil;
+    NSManagedObjectID *objectID = [self objectID];
     if (otherContext == [self managedObjectContext])
     {
         inContext = self;
     }
-    else if ([[self objectID] isTemporaryID])
+    else if ([objectID isTemporaryID])
     {
         MRLog(@"Cannot load a temporary object across Managed Object Contexts");
     }
     else
     {
-        inContext = [otherContext objectRegisteredForID:[self objectID]];  //see if its already there
+        inContext = [otherContext objectRegisteredForID:objectID];  //see if its already there
         if (inContext == nil)
         {
             NSError *error = nil;
-            inContext = [otherContext existingObjectWithID:[self objectID] error:&error];
+            inContext = [otherContext existingObjectWithID:objectID error:&error];
 
             if (inContext == nil)
             {

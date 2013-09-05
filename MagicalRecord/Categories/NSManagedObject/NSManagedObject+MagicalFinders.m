@@ -116,6 +116,20 @@
                                inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
++ (id) MR_findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue orderedBy:(NSString *)orderedBy ascending:(BOOL)ascending;
+{
+    return [self MR_findFirstByAttribute:attribute withValue:searchValue orderedBy:orderedBy ascending:ascending inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+}
+
++ (id) MR_findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue orderedBy:(NSString *)orderedBy ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
+{
+    NSFetchRequest *request = [self MR_requestFirstByAttribute:attribute withValue:searchValue inContext:context];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:orderedBy ascending:ascending];
+    [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    
+    return [self MR_executeFetchRequest:request inContext:context];
+}
+
 + (id) MR_findFirstOrderedByAttribute:(NSString *)attribute ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
 {
     NSFetchRequest *request = [self MR_requestAllSortedBy:attribute ascending:ascending inContext:context];
