@@ -257,7 +257,7 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
     }
     else if ([objectID isTemporaryID])
     {
-        MRLog(@"Cannot load a temporary object across Managed Object Contexts");
+        MRTransferObjectToContextError(self);
     }
     else
     {
@@ -283,3 +283,9 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 }
 
 @end
+
+void MRTransferObjectToContextError(NSManagedObject *object)
+{
+    NSLog(@"Cannot load a temporary object %@ across Managed Object Contexts", object);
+    NSLog(@"Break in MRTransferObjectToContextError for more information");
+}

@@ -50,3 +50,4 @@
 
 @end
 
+void MRTransferObjectToContextError(NSManagedObject *object);
