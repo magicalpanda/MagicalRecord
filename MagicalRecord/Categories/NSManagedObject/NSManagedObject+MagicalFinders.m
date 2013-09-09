@@ -127,7 +127,7 @@
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:orderedBy ascending:ascending];
     [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     
-    return [self MR_executeFetchRequest:request inContext:context];
+    return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
 }
 
 + (id) MR_findFirstOrderedByAttribute:(NSString *)attribute ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
