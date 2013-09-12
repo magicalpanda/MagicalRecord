@@ -154,16 +154,21 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *) storeFileName
 {
     NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
+    return [self MR_coordinatorWithAutoMigratingSqliteStoreNamed:storeFileName andManagedObjectModel:model];
+}
+
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *) storeFileName andManagedObjectModel:(NSManagedObjectModel*)model
+{
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
     
     [coordinator MR_addAutoMigratingSqliteStoreNamed:storeFileName];
     
     //HACK: lame solution to fix automigration error "Migration failed after first pass"
-    if ([[coordinator persistentStores] count] == 0) 
+    if ([[coordinator persistentStores] count] == 0)
     {
         [coordinator performSelector:@selector(MR_addAutoMigratingSqliteStoreNamed:) withObject:storeFileName afterDelay:0.5];
     }
-
+    
     return coordinator;
 }
 
