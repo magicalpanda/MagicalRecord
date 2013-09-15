@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1456" systemVersion="11E53" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="AbstractRelatedEntity" representedClassName="AbstractRelatedEntity" isAbstract="YES">
+        <attribute name="sampleBaseAttribute" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <userInfo/>
+    </entity>
+    <entity name="ConcreteRelatedEntity" representedClassName="ConcreteRelatedEntity" parentEntity="AbstractRelatedEntity">
+        <attribute name="sampleConcreteAttribute" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <userInfo/>
+    </entity>
+    <entity name="EntityWithDiffernentClassName" representedClassName="DifferentClassNameMapping">
+        <userInfo/>
+    </entity>
+    <entity name="MappedEntity" representedClassName="MappedEntity">
+        <attribute name="mappedEntityID" optional="YES" attributeType="Integer 16" defaultValueString="0">
+            <userInfo/>
+        </attribute>
+        <attribute name="nestedAttribute" optional="YES" attributeType="String">
+            <userInfo>
+                <entry key="mappedKeyName" value="attributeValue.nestedValue"/>
+            </userInfo>
+        </attribute>
+        <attribute name="sampleAttribute" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <attribute name="testMappedEntityID" optional="YES" attributeType="Integer 64" defaultValueString="0">
+            <userInfo>
+                <entry key="mappedKeyName" value="id"/>
+            </userInfo>
+        </attribute>
+        <userInfo>
+            <entry key="relatedByAttribute" value="mapped"/>
+        </userInfo>
+    </entity>
+    <entity name="SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey" representedClassName="SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey">
+        <attribute name="testPrimaryKey" optional="YES" attributeType="Integer 16" defaultValueString="0">
+            <userInfo/>
+        </attribute>
+        <relationship name="mappedEntities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MappedEntity">
+            <userInfo>
+                <entry key="relatedByAttribute" value="testMappedEntityID"/>
+            </userInfo>
+        </relationship>
+        <userInfo>
+            <entry key="relatedByAttribute" value="testPrimaryKey"/>
+        </userInfo>
+    </entity>
+    <entity name="SingleEntityRelatedToMappedEntityUsingDefaults" representedClassName="SingleEntityRelatedToMappedEntityUsingDefaults">
+        <attribute name="singleEntityRelatedToMappedEntityUsingDefaultsID" optional="YES" attributeType="Integer 16" defaultValueString="0">
+            <userInfo/>
+        </attribute>
+        <relationship name="mappedEntity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MappedEntity">
+            <userInfo/>
+        </relationship>
+        <userInfo/>
+    </entity>
+    <entity name="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" representedClassName="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey">
+        <relationship name="mappedEntity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MappedEntity" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="someRandomAttributeName"/>
+                <entry key="relatedByAttribute" value="testMappedEntityID"/>
+            </userInfo>
+        </relationship>
+        <userInfo/>
+    </entity>
+    <entity name="SingleEntityRelatedToMappedEntityWithNestedMappedAttributes" representedClassName="SingleEntityRelatedToMappedEntityWithNestedMappedAttributes">
+        <relationship name="mappedEntity" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MappedEntity">
+            <userInfo/>
+        </relationship>
+        <userInfo/>
+    </entity>
+    <entity name="SingleEntityRelatedToMappedEntityWithSecondaryMappings" representedClassName="SingleEntityRelatedToMappedEntityWithSecondaryMappings">
+        <attribute name="secondaryMappedAttribute" optional="YES" attributeType="String">
+            <userInfo>
+                <entry key="mappedKeyName" value="no_in_use"/>
+                <entry key="mappedKeyName.1" value="getting_warmer"/>
+                <entry key="mappedKeyName.2" value="actualMappedKey"/>
+            </userInfo>
+        </attribute>
+        <relationship name="mappedRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MappedEntity">
+            <userInfo>
+                <entry key="mappedKeyName" value="not_in_use"/>
+                <entry key="mappedKeyName.1" value="almost_there"/>
+                <entry key="mappedKeyName.2" value="actualRelatedObject"/>
+            </userInfo>
+        </relationship>
+        <userInfo/>
+    </entity>
+    <entity name="SingleEntityWithNoRelationships" representedClassName="SingleEntityWithNoRelationships">
+        <attribute name="booleanTestAttribute" optional="YES" attributeType="Boolean">
+            <userInfo/>
+        </attribute>
+        <attribute name="colorTestAttribute" optional="YES" attributeType="Transformable">
+            <userInfo/>
+        </attribute>
+        <attribute name="dateTestAttribute" optional="YES" attributeType="Date">
+            <userInfo/>
+        </attribute>
+        <attribute name="dateWithCustomFormat" optional="YES" attributeType="Date" syncable="YES">
+            <userInfo>
+                <entry key="dateFormat" value="M/d/yyyy H-mm-ss a"/>
+            </userInfo>
+        </attribute>
+        <attribute name="decimalTestAttribute" optional="YES" attributeType="Decimal" defaultValueString="0.0">
+            <userInfo/>
+        </attribute>
+        <attribute name="doubleTestAttribute" optional="YES" attributeType="Double" defaultValueString="0.0">
+            <userInfo/>
+        </attribute>
+        <attribute name="floatTestAttribute" optional="YES" attributeType="Float" defaultValueString="0">
+            <userInfo/>
+        </attribute>
+        <attribute name="int16TestAttribute" optional="YES" attributeType="Integer 16" defaultValueString="0">
+            <userInfo/>
+        </attribute>
+        <attribute name="int32TestAttribute" optional="YES" attributeType="Integer 32" defaultValueString="0">
+            <userInfo/>
+        </attribute>
+        <attribute name="int64TestAttribute" optional="YES" attributeType="Integer 64" defaultValueString="0">
+            <userInfo/>
+        </attribute>
+        <attribute name="mappedStringAttribute" optional="YES" attributeType="String">
+            <userInfo>
+                <entry key="mappedKeyName" value="mappedAttributeWithStringValue"/>
+            </userInfo>
+        </attribute>
+        <attribute name="notInJsonAttribute" optional="YES" attributeType="String" defaultValueString="Set From Core Data Model Editor">
+            <userInfo/>
+        </attribute>
+        <attribute name="nullTestAttribute" optional="YES" attributeType="Integer 64" defaultValueString="100">
+            <userInfo/>
+        </attribute>
+        <attribute name="stringTestAttribute" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <userInfo/>
+    </entity>
+    <entity name="SingleRelatedEntity" representedClassName="SingleRelatedEntity">
+        <attribute name="mappedStringAttribute" optional="YES" attributeType="String">
+            <userInfo/>
+        </attribute>
+        <relationship name="testAbstractToManyRelationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AbstractRelatedEntity">
+            <userInfo/>
+        </relationship>
+        <relationship name="testAbstractToOneRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AbstractRelatedEntity">
+            <userInfo/>
+        </relationship>
+        <relationship name="testConcreteToManyRelationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ConcreteRelatedEntity">
+            <userInfo/>
+        </relationship>
+        <relationship name="testConcreteToOneRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ConcreteRelatedEntity">
+            <userInfo/>
+        </relationship>
+        <userInfo/>
+    </entity>
+    <elements>
+        <element name="AbstractRelatedEntity" positionX="115" positionY="126" width="128" height="60"/>
+        <element name="ConcreteRelatedEntity" positionX="153" positionY="375" width="171" height="60"/>
+        <element name="EntityWithDiffernentClassName" positionX="-135" positionY="135" width="198" height="45"/>
+        <element name="MappedEntity" positionX="421" positionY="558" width="128" height="105"/>
+        <element name="SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey" positionX="657" positionY="450" width="351" height="75"/>
+        <element name="SingleEntityRelatedToMappedEntityUsingDefaults" positionX="621" positionY="333" width="297" height="75"/>
+        <element name="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" positionX="603" positionY="702" width="342" height="60"/>
+        <element name="SingleEntityRelatedToMappedEntityWithNestedMappedAttributes" positionX="664" positionY="597" width="470" height="60"/>
+        <element name="SingleEntityRelatedToMappedEntityWithSecondaryMappings" positionX="-63" positionY="738" width="344" height="75"/>
+        <element name="SingleEntityWithNoRelationships" positionX="-135" positionY="327" width="180" height="255"/>
+        <element name="SingleRelatedEntity" positionX="333" positionY="198" width="189" height="120"/>
+    </elements>
+</model>

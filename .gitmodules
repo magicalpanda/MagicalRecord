@@ -1,3 +1,6 @@
-[submodule "Project Files/Third Party/Kiwi"]
-	path = Project Files/Third Party/Kiwi
+[submodule "Project Files/Tests/Support/Vendor/Kiwi"]
+	path = Project Files/Tests/Support/Vendor/Kiwi
 	url = git://github.com/allending/Kiwi.git
+[submodule "Project Files/Tests/Support/Vendor/Expecta"]
+	path = Project Files/Tests/Support/Vendor/Expecta
+	url = git@github.com:petejkim/expecta.git

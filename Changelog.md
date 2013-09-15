@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 2.2
+* Updated examples and fixed errors in README - [Tony Arnold](mailto:tony@thecocoabots.com)
+* Changes block saves to use child context of rootSavingContext so that large saves do not channel through the default context and block the main thread - r-peck
+* Using contextDidSave notifications to perform merges - r-peck
+* Included CoreDataRecipies sample application updated to use Magical Record - [Saul Mora](mailto:saul@magicalpanda.com)
+
 ## Version 2.1.0
 * Fixed issue #287 - MR_findByAttribute:withValue:andOrderBy:ascending:inContext does not pass context through `4b97d0e` - [Stephen Vanterpool](mailto:stephen@vanterpool.net)
 * Adding changelog `da70884` - [Stephen Vanterpool](mailto:stephen@vanterpool.net)

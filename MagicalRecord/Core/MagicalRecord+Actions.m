@@ -69,7 +69,7 @@ dispatch_queue_t saveQueue()
             block(localContext);
         }
 
-        [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:completion];
+        [localContext MR_saveWithOptions:MRSaveParentContexts completion:completion];
     }];
 }
 
@@ -78,6 +78,7 @@ dispatch_queue_t saveQueue()
 
 + (void) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
 {
+    NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_rootSavingContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_confinementContext];
     
     if (block)
