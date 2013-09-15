@@ -8,50 +8,13 @@
 #import "CoreData+MagicalRecord.h"
 #import "MagicalRecordStack.h"
 
-@interface MagicalRecord (Internal)
-
-+ (void) cleanUpStack;
-+ (void) cleanUpErrorHanding;
-
-@end
-
-@interface NSManagedObjectContext (MagicalRecordInternal)
-
-+ (void) MR_cleanUp;
-
-@end
-
 
 @implementation MagicalRecord
 
 + (void) cleanUp
 {
-    [self cleanUpErrorHanding];
-    [self cleanUpStack];
+    [MagicalRecordStack setDefaultStack:nil];
 }
-
-+ (void) cleanUpStack;
-{
-	[NSManagedObjectContext MR_cleanUp];
-//    [MagicalRecordStack ]
-//	[NSManagedObjectModel MR_setDefaultManagedObjectModel:nil];
-//	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:nil];
-//	[NSPersistentStore MR_setDefaultPersistentStore:nil];
-}
-
-
-//+ (void) setDefaultModelNamed:(NSString *)modelName;
-//{
-//    NSManagedObjectModel *model = [NSManagedObjectModel MR_managedObjectModelNamed:modelName];
-//    [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
-//}
-//
-//+ (void) setDefaultModelFromClass:(Class)klass;
-//{
-//    NSBundle *bundle = [NSBundle bundleForClass:klass];
-//    NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:[NSArray arrayWithObject:bundle]];
-//    [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
-//}
 
 + (NSString *) defaultStoreName;
 {

@@ -17,7 +17,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C7CF97FE174984CA008D9D13"
-               BuildableName = "MagicalRecordTests-iOS.octest"
+               BuildableName = "libMagicalRecordTests-iOS.octest"
                BlueprintName = "libMagicalRecordTests-iOS"
                ReferencedContainer = "container:MagicalRecord.xcodeproj">
             </BuildableReference>

@@ -13,22 +13,11 @@
 static NSInteger ddLogLevel = MR_LOG_LEVEL;
 #endif
 
-
 static id iCloudSetupNotificationObserver = nil;
 
 static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSManagedObjectContextWorkingName";
 
-@interface NSManagedObjectContext (MagicalRecordInternal)
-
-
-@end
-
-
 @implementation NSManagedObjectContext (MagicalRecord)
-
-+ (void) MR_cleanUp;
-{
-}
 
 - (NSString *) MR_description;
 {
@@ -51,75 +40,12 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     return [NSString stringWithString:familyTree];
 }
 
-
-//+ (void) MR_setDefaultContext:(NSManagedObjectContext *)moc
-//{
-//    if (defaultManagedObjectContext_)
-//    {
-//        [[NSNotificationCenter defaultCenter] removeObserver:defaultManagedObjectContext_];
-//    }
-//    
-//    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_defaultStoreCoordinator];
-//    if (iCloudSetupNotificationObserver)
-//    {
-//        [[NSNotificationCenter defaultCenter] removeObserver:iCloudSetupNotificationObserver];
-//        iCloudSetupNotificationObserver = nil;
-//    }
-//    
-//    if ([MagicalRecord isICloudEnabled]) 
-//    {
-//        [defaultManagedObjectContext_ MR_stopObservingiCloudChangesInCoordinator:coordinator];
-//    }
-//
-//    defaultManagedObjectContext_ = moc;
-//    [defaultManagedObjectContext_ MR_setWorkingName:@"DEFAULT"];
-//    
-//    if ((defaultManagedObjectContext_ != nil) && ([self MR_rootSavingContext] != nil)) {
-//        [[NSNotificationCenter defaultCenter] addObserver:self
-//                                                 selector:@selector(rootContextChanged:)
-//                                                     name:NSManagedObjectContextDidSaveNotification
-//                                                   object:[self MR_rootSavingContext]];
-//    }
-//    
-////    [moc MR_obtainPermanentIDsBeforeSaving];
-//    if ([MagicalRecord isICloudEnabled])
-//    {
-//        [defaultManagedObjectContext_ MR_observeiCloudChangesInCoordinator:coordinator];
-//    }
-//    else
-//    {
-//        // If icloud is NOT enabled at the time of this method being called, listen for it to be setup later, and THEN set up observing cloud changes
-//        iCloudSetupNotificationObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kMagicalRecordPSCDidCompleteiCloudSetupNotification
-//                                                                           object:nil
-//                                                                            queue:[NSOperationQueue mainQueue]
-//                                                                       usingBlock:^(NSNotification *note) {
-//                                                                           [[NSManagedObjectContext MR_defaultContext] MR_observeiCloudChangesInCoordinator:coordinator];
-//                                                                       }];        
-//    }
-//    MRLog(@"Set Default Context: %@", defaultManagedObjectContext_);
-//}
-
-
-//+ (void) MR_setRootSavingContext:(NSManagedObjectContext *)context;
-//{
-//    if (backgroundSavingContext)
-//    {
-//        [[NSNotificationCenter defaultCenter] removeObserver:backgroundSavingContext];
-//    }
-//    
-//    backgroundSavingContext = context;
-//
-//    [backgroundSavingContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
-//    [backgroundSavingContext MR_setWorkingName:@"BACKGROUND SAVING (ROOT)"];
-//    MRLog(@"Set Root Saving Context: %@", backgroundSavingContext);
-//}
-
 + (NSManagedObjectContext *) MR_context;
 {
     return [self MR_privateQueueContext];
 }
 
-+ (NSManagedObjectContext *)MR_confinementContext;
++ (NSManagedObjectContext *) MR_confinementContext;
 {
     return [self MR_confinementContextWithParent:[[MagicalRecordStack defaultStack] context]];
 }
@@ -165,30 +91,30 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     return context;
 }
 
-- (void) MR_obtainPermanentIDsBeforeSaving;
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(MR_contextWillSave:)
-                                                 name:NSManagedObjectContextWillSaveNotification
-                                               object:self];
-}
-
-- (void) MR_contextWillSave:(NSNotification *)notification
-{
-    NSManagedObjectContext *context = [notification object];
-    NSSet *insertedObjects = [context insertedObjects];
-
-    if ([insertedObjects count])
-    {
-        MRLog(@"Context %@ is about to save. Obtaining permanent IDs for new %tu inserted objects", [context MR_workingName], [insertedObjects count]);
-        NSError *error = nil;
-        BOOL success = [context obtainPermanentIDsForObjects:[insertedObjects allObjects] error:&error];
-        if (!success)
-        {
-            [[error MR_coreDataDescription] MR_logToConsole];
-        }
-    }
-}
+//- (void) MR_obtainPermanentIDsBeforeSaving;
+//{
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(MR_contextWillSave:)
+//                                                 name:NSManagedObjectContextWillSaveNotification
+//                                               object:self];
+//}
+//
+//- (void) MR_contextWillSave:(NSNotification *)notification
+//{
+//    NSManagedObjectContext *context = [notification object];
+//    NSSet *insertedObjects = [context insertedObjects];
+//
+//    if ([insertedObjects count])
+//    {
+//        MRLog(@"Context %@ is about to save. Obtaining permanent IDs for new %tu inserted objects", [context MR_workingName], [insertedObjects count]);
+//        NSError *error = nil;
+//        BOOL success = [context obtainPermanentIDsForObjects:[insertedObjects allObjects] error:&error];
+//        if (!success)
+//        {
+//            [[error MR_coreDataDescription] MR_logToConsole];
+//        }
+//    }
+//}
 
 - (void) MR_setWorkingName:(NSString *)workingName;
 {

@@ -11,22 +11,21 @@
 #import "Expecta.h"
 
 #import "NSManagedObject+MagicalDataImport.h"
+#import "MagicalRecordStack.h"
 
 SpecBegin(NSManagedObjectMagicalDataImport)
 
 describe(@"NSManagedObject+MagicalDataImport", ^{
+
+    __block MagicalRecordStack *stack = nil;
+
 	beforeAll(^{
-        [MagicalRecord setDefaultModelFromClass:[self class]];
-        [MagicalRecord setupCoreDataStackWithInMemoryStore];
+        stack = [MagicalRecord setupCoreDataStackWithInMemoryStore];
+        [stack setModelFromClass:[self class]];
 	});
 
-    afterEach(^{
-        [NSManagedObjectContext MR_resetContextForCurrentThread];
-        [NSManagedObjectContext MR_resetDefaultContext];
-    });
-
     afterAll(^{
-        [MagicalRecord cleanUp];
+        [stack reset];
     });
 });
 

@@ -5,9 +5,7 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "MagicalRecord.h"
-
+#import <CoreData/CoreData.h>
 
 @interface NSManagedObjectModel (MagicalRecord)
 

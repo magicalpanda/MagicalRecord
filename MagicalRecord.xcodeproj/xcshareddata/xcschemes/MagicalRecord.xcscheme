@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C7CF97BA1749843F008D9D13"
-               BuildableName = "libMagicalRecord-OSX.dylib"
-               BlueprintName = "libMagicalRecord-OSX"
+               BlueprintIdentifier = "C779107E17E63C8900D20ACF"
+               BuildableName = "MagicalRecord.framework"
+               BlueprintName = "MagicalRecord"
                ReferencedContainer = "container:MagicalRecord.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C7CF9815174984E4008D9D13"
-               BuildableName = "MagicalRecordTests-OSX.octest"
-               BlueprintName = "MagicalRecordTests-OSX"
+               BlueprintIdentifier = "C779109217E63C8900D20ACF"
+               BuildableName = "MagicalRecordTests.xctest"
+               BlueprintName = "MagicalRecordTests"
                ReferencedContainer = "container:MagicalRecord.xcodeproj">
             </BuildableReference>
          </TestableReference>

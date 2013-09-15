@@ -7,11 +7,8 @@
 //
 
 #import "SQLiteMagicalRecordStack.h"
-
-//#import "NSManagedObjectContext+MagicalRecord.h"
-//#import "NSManagedObjectModel+MagicalRecord.h"
 #import "NSPersistentStoreCoordinator+MagicalRecord.h"
-//#import "NSPersistentStore+MagicalRecord.h"
+
 
 @interface SQLiteMagicalRecordStack ()
 

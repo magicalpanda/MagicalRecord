@@ -72,7 +72,7 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
         MRLog(@"→ Save Parents? %@", @(saveParentContexts));
         MRLog(@"→ Save Synchronously? %@", @(syncSave));
 
-#if MR_ENABLE_ACTIVE_RECORD_LOGGING != 0
+#if MR_ENABLE_LOGGING != 0
         NSInteger numberOfInsertedObjects = [[self insertedObjects] count];
         NSInteger numberOfUpdatedObjects = [[self updatedObjects] count];
         NSInteger numberOfDeletedObjects = [[self deletedObjects] count];

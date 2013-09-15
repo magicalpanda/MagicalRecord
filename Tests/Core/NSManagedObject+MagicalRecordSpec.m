@@ -9,6 +9,7 @@
 #define EXP_SHORTHAND
 #import "Expecta.h"
 #import "Specta.h"
+#import "InMemoryMagicalRecordStack.h"
 
 // Project
 #import "NSManagedObject+MagicalRecord.h"
@@ -18,13 +19,12 @@ SpecBegin(NSManagedObjectMagicalRecord)
 
 describe(@"NSManagedObject+MagicalRecord", ^{
 	beforeAll(^{
-        [MagicalRecord setDefaultModelFromClass:[self class]];
         [MagicalRecord setupCoreDataStackWithInMemoryStore];
+
 	});
 
     afterEach(^{
-        [NSManagedObjectContext MR_resetContextForCurrentThread];
-        [NSManagedObjectContext MR_resetDefaultContext];
+
     });
 
     afterAll(^{

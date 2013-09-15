@@ -12,15 +12,15 @@
 // enable to use caches for the fetchedResultsControllers (iOS only)
 // #define STORE_USE_CACHE
 
-#ifndef MR_ENABLE_ACTIVE_RECORD_LOGGING
+#ifndef MR_ENABLE_LOGGING
     #ifdef DEBUG
-        #define MR_ENABLE_ACTIVE_RECORD_LOGGING 1
+        #define MR_ENABLE_LOGGING 1
     #else
-        #define MR_ENABLE_ACTIVE_RECORD_LOGGING 0
+        #define MR_ENABLE_LOGGING 0
     #endif
 #endif
 
-#if MR_ENABLE_ACTIVE_RECORD_LOGGING != 0
+#if MR_ENABLE_LOGGING != 0
       // First, check if we can use Cocoalumberjack for logging
     #ifdef LOG_VERBOSE
         #define MR_LOG_LEVEL LOG_LEVEL_VERBOSE
@@ -43,12 +43,8 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
 @interface MagicalRecord : NSObject
 
-//+ (NSString *) currentStack;
-
 + (void) cleanUp;
 
-//+ (void) setDefaultModelFromClass:(Class)klass;
-//+ (void) setDefaultModelNamed:(NSString *)modelName;
 + (NSString *) defaultStoreName;
 
 @end

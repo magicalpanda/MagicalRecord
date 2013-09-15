@@ -32,30 +32,6 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 
 @implementation NSPersistentStoreCoordinator (MagicalRecord)
 
-//+ (NSPersistentStoreCoordinator *) MR_defaultStoreCoordinator
-//{
-//    if (defaultCoordinator_ == nil && [MagicalRecord shouldAutoCreateDefaultPersistentStoreCoordinator])
-//    {
-//        [self MR_setDefaultStoreCoordinator:[self MR_newPersistentStoreCoordinator]];
-//    }
-//	return defaultCoordinator_;
-//}
-//
-//+ (void) MR_setDefaultStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
-//{
-//	defaultCoordinator_ = coordinator;
-//    
-//    if (defaultCoordinator_ != nil)
-//    {
-//        NSArray *persistentStores = [defaultCoordinator_ persistentStores];
-//        
-//        if ([persistentStores count] && [NSPersistentStore MR_defaultPersistentStore] == nil)
-//        {
-//            [NSPersistentStore MR_setDefaultPersistentStore:[persistentStores objectAtIndex:0]];
-//        }
-//    }
-//}
-
 + (void) MR_createPathToStoreFileIfNeccessary:(NSURL *)urlForStore
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];

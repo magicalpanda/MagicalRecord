@@ -15,22 +15,23 @@
 #import "ConcreteRelatedEntity.h"
 #import "MappedEntity.h"
 #import "FixtureHelpers.h"
+#import "MagicalRecordStack.h"
 
 SpecBegin(ImportSingleRelatedEntity)
 
 describe(@"ImportSingleRelatedEntity", ^{
     __block NSManagedObjectContext *managedObjectContext;
     __block SingleRelatedEntity    *singleTestEntity;
-
+    __block MagicalRecordStack      *stack;
 	beforeAll(^{
-        [MagicalRecord setDefaultModelFromClass:[self class]];
-        [MagicalRecord setupCoreDataStackWithInMemoryStore];
+        stack = [MagicalRecord setupCoreDataStackWithInMemoryStore];
+        [stack setModelFromClass:[self class]];
 
-        managedObjectContext = [NSManagedObjectContext MR_defaultContext];
+        managedObjectContext = [stack context];
 	});
 
     afterAll(^{
-        [MagicalRecord cleanUp];
+        [stack reset];
     });
 
     beforeEach(^{
@@ -46,10 +47,10 @@ describe(@"ImportSingleRelatedEntity", ^{
         expect(singleTestEntity).toNot.beNil();
     });
 
-    afterEach(^{
-        [NSManagedObjectContext MR_resetContextForCurrentThread];
-        [NSManagedObjectContext MR_resetDefaultContext];
-    });
+//    afterEach(^{
+//        [NSManagedObjectContext MR_resetContextForCurrentThread];
+//        [NSManagedObjectContext MR_resetDefaultContext];
+//    });
 
 	describe(@"should import an entity related to an abstract entity", ^{
         it(@"via a 'to one' relationship", ^{

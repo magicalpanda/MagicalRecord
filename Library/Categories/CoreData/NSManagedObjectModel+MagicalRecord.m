@@ -5,27 +5,10 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-//#import "NSManagedObjectModel+MagicalRecord.h"
-#import "CoreData+MagicalRecord.h"
+#import "NSManagedObjectModel+MagicalRecord.h"
 
-
-static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 
 @implementation NSManagedObjectModel (MagicalRecord)
-
-//+ (NSManagedObjectModel *) MR_defaultManagedObjectModel
-//{
-//	if (defaultManagedObjectModel_ == nil && [MagicalRecord shouldAutoCreateManagedObjectModel])
-//	{
-//        [self MR_setDefaultManagedObjectModel:[self MR_mergedObjectModelFromMainBundle]];
-//	}
-//	return defaultManagedObjectModel_;
-//}
-//
-//+ (void) MR_setDefaultManagedObjectModel:(NSManagedObjectModel *)newDefaultModel
-//{
-//	defaultManagedObjectModel_ = newDefaultModel;
-//}
 
 + (NSManagedObjectModel *) MR_managedObjectModelAtURL:(NSURL *)url;
 {

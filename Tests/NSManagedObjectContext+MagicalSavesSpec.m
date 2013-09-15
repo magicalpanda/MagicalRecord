@@ -5,22 +5,21 @@
 // Project
 #import "NSManagedObjectContext+MagicalSaves.h"
 #import "SingleEntityWithNoRelationships.h"
+#import "MagicalRecordStack.h"
 
 SpecBegin(NSManagedObjectContextMagicalSaves)
 
 describe(@"NSManagedObjectContext+MagicalSaves", ^{
+
+    __block MagicalRecordStack *stack = nil;
+
 	beforeAll(^{
-        [MagicalRecord setDefaultModelFromClass:[self class]];
-        [MagicalRecord setupCoreDataStackWithInMemoryStore];
+        stack = [MagicalRecord setupCoreDataStackWithInMemoryStore];
+        [stack setModelFromClass:[self class]];
 	});
 
-    afterEach(^{
-        [NSManagedObjectContext MR_resetContextForCurrentThread];
-        [NSManagedObjectContext MR_resetDefaultContext];
-    });
-
     afterAll(^{
-        [MagicalRecord cleanUp];
+        [stack reset];
     });
 
     describe(@"be able to save to self only", ^{
@@ -46,7 +45,7 @@ describe(@"NSManagedObjectContext+MagicalSaves", ^{
                 
                 [managedObjectContext MR_saveOnlySelfAndWait];
                 
-                NSManagedObject *rootFetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:objectId];
+                NSManagedObject *rootFetchedObject = [[stack context] objectRegisteredForID:objectId];
 
                 expect(rootFetchedObject).to.beNil();
                 expect([rootFetchedObject hasChanges]).to.beFalsy();
@@ -89,7 +88,7 @@ describe(@"NSManagedObjectContext+MagicalSaves", ^{
 
                 expect(objectId).willNot.beNil();
 
-                NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:objectId];
+                NSManagedObject *fetchedObject = [[stack context] objectRegisteredForID:objectId];
                 
                 expect(fetchedObject).will.beNil();
                 expect([fetchedObject hasChanges]).will.beFalsy();
@@ -127,7 +126,7 @@ describe(@"NSManagedObjectContext+MagicalSaves", ^{
                 [managedObjectContext MR_saveToPersistentStoreAndWait];
                 
                 NSError *fetchError;
-                NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] existingObjectWithID:objectId error:&fetchError];
+                NSManagedObject *fetchedObject = [[stack context] existingObjectWithID:objectId error:&fetchError];
 
                 expect(fetchedObject).toNot.beNil();
                 expect(fetchError).to.beNil();
@@ -167,7 +166,7 @@ describe(@"NSManagedObjectContext+MagicalSaves", ^{
                 
                 expect(objectId).willNot.beNil();
 
-                NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:objectId];
+                NSManagedObject *fetchedObject = [[stack context] objectRegisteredForID:objectId];
                 
                 expect(fetchedObject).willNot.beNil();
                 expect([fetchedObject hasChanges]).will.beFalsy();
@@ -211,7 +210,7 @@ describe(@"NSManagedObjectContext+MagicalSaves", ^{
                     expect(error).to.beNil();
                 }];
                 
-                NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:permanentObjectID];
+                NSManagedObject *fetchedObject = [[stack context] objectRegisteredForID:permanentObjectID];
                 expect(fetchedObject).to.beNil();
                 expect([fetchedObject hasChanges]).to.beFalsy();
             });
@@ -223,7 +222,7 @@ describe(@"NSManagedObjectContext+MagicalSaves", ^{
                 }];
                 
                 NSError *fetchError;
-                NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] existingObjectWithID:permanentObjectID error:&fetchError];
+                NSManagedObject *fetchedObject = [[stack context] existingObjectWithID:permanentObjectID error:&fetchError];
 
                 expect(fetchedObject).toNot.beNil();
                 expect(fetchError).to.beNil();
@@ -243,7 +242,7 @@ describe(@"NSManagedObjectContext+MagicalSaves", ^{
 
                 expect(permanentObjectID).willNot.beNil();
 
-                NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:permanentObjectID];
+                NSManagedObject *fetchedObject = [[stack context] objectRegisteredForID:permanentObjectID];
 
                 // The object should not exist into the root saving context
                 expect(fetchedObject).to.beNil();
@@ -260,7 +259,7 @@ describe(@"NSManagedObjectContext+MagicalSaves", ^{
 
                 expect(permanentObjectID).willNot.beNil();
                 
-                NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:permanentObjectID];
+                NSManagedObject *fetchedObject = [[stack context] objectRegisteredForID:permanentObjectID];
 
                 expect(fetchedObject).willNot.beNil();
                 expect([fetchedObject hasChanges]).will.beFalsy();

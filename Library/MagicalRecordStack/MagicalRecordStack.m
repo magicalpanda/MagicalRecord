@@ -45,6 +45,38 @@ static MagicalRecordStack *defaultStack;
     defaultStack = stack;
 }
 
++ (instancetype) stack;
+{
+    return [[self alloc] init];
+}
+
+- (id) init;
+{
+    NSAssert(NO, @"%@ is an Abstract Class. Use one of the subclasses", NSStringFromClass([self class]));
+    return nil;
+}
+
+- (void) setModelFromClass:(Class)klass;
+{
+    NSBundle *bundle = [NSBundle bundleForClass:klass];
+    NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:[NSArray arrayWithObject:bundle]];
+    [self setModel:model];
+}
+
+- (void) setModelNamed:(NSString *)modelName;
+{
+    NSManagedObjectModel *model = [NSManagedObjectModel MR_managedObjectModelNamed:modelName];
+    [self setModel:model];
+}
+
+- (void) reset;
+{
+    self.context = nil;
+    self.model = nil;
+    self.coordinator = nil;
+    self.store = nil;
+}
+
 - (NSManagedObjectContext *) context;
 {
     if (_context == nil)
@@ -75,6 +107,7 @@ static MagicalRecordStack *defaultStack;
 
 - (NSPersistentStoreCoordinator *) createCoordinator;
 {
+    MRLog(@"%@ must be overridden in %@", NSStringFromSelector(_cmd), NSStringFromClass([self class]));
     return nil;
 }
 

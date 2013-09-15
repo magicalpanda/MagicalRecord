@@ -18,6 +18,12 @@
 + (instancetype) defaultStack;
 + (void) setDefaultStack:(MagicalRecordStack *)stack;
 
++ (instancetype) stack;
+
+- (void) reset;
+
 - (NSPersistentStoreCoordinator *) createCoordinator;
+- (void) setModelFromClass:(Class)klass;
+- (void) setModelNamed:(NSString *)modelName;
 
 @end
