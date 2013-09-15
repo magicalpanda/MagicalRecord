@@ -22,6 +22,8 @@
     #import "MagicalRecord+Setup.h"
     #import "MagicalRecord+iCloud.h"
 
+    #import "MagicalRecordStack.h"
+
     #import "NSManagedObject+MagicalRecord.h"
     #import "NSManagedObject+MagicalRequests.h"
     #import "NSManagedObject+MagicalFinders.h"
@@ -29,7 +31,13 @@
     #import "NSManagedObjectContext+MagicalRecord.h"
     #import "NSManagedObjectContext+MagicalObserving.h"
     #import "NSManagedObjectContext+MagicalSaves.h"
+
     #import "NSPersistentStoreCoordinator+MagicalRecord.h"
+    #import "NSPersistentStoreCoordinator+MagicalAutoMigrations.h"
+    #import "NSPersistentStoreCoordinator+MagicalManualMigrations.h"
+    #import "NSPersistentStoreCoordinator+MagicalInMemoryStoreAdditions.h"
+    #import "NSPersistentStoreCoordinator+MagicaliCloudAdditions.h"
+
     #import "NSManagedObjectModel+MagicalRecord.h"
     #import "NSPersistentStore+MagicalRecord.h"
 
