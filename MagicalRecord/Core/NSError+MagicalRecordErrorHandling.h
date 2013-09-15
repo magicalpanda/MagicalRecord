@@ -20,3 +20,10 @@
 - (NSString *) MR_coreDataDescription;
 
 @end
+
+BOOL MR_errorCodeIsValidationErrorCode(NSInteger errorCode);
+BOOL MR_errorCodeIsPersistentStoreErrorCode(NSInteger errorCode);
+BOOL MR_errorCodeIsMigrationErrorCode(NSInteger errorCode);
+BOOL MR_errorCodeIsObjectGraphErrorCode(NSInteger errorCode);
+
+NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode);

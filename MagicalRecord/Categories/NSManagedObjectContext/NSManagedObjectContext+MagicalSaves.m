@@ -101,8 +101,6 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
             {
                 // If we're the default context, save to disk too (the user expects it to persist)
                 if (self == [[self class] MR_defaultContext])
-                BOOL shouldSaveParentContext = ((YES == saveParentContexts) || isDefaultContext);
-                
                 {
                     [[[self class] MR_rootSavingContext] MR_saveWithOptions:mask completion:completion];
                 }

@@ -247,12 +247,11 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
         if (!success)
         {
             [[error MR_coreDataDescription] MR_logToConsole];
-            return nil;
         }
     }
 }
 
-    
+- (id) MR_inContext:(NSManagedObjectContext *)otherContext;
 {
     NSManagedObject *inContext = nil;
     NSManagedObjectID *objectID = [self objectID];

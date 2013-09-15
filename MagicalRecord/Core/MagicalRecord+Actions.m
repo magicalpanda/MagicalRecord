@@ -78,7 +78,7 @@ dispatch_queue_t saveQueue()
 
 + (void) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
 {
-    NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_rootSavingContext];
+//    NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_rootSavingContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_confinementContext];
     
     if (block)

@@ -38,9 +38,9 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 
 @interface NSManagedObject (MagicalRecord_DataImportInternal)
 
-- (BOOL) shouldImport:(id)data;
-- (BOOL) willImport:(id)data;
-- (BOOL) didImport:(id)data;
+//- (BOOL) shouldImport:(id)data;
+//- (BOOL) willImport:(id)data;
+//- (BOOL) didImport:(id)data;
 
 @end
 
@@ -331,13 +331,13 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 //            NSManagedObject *dataObject = [self MR_importFromObject:objectData inContext:localContext];
 //
 //            if ([context obtainPermanentIDsForObjects:[NSArray arrayWithObject:dataObject] error:nil])
-    [listOfObjectData enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-    {
-        NSDictionary *objectData = (NSDictionary *)obj;
-
-        NSManagedObject *dataObject = [self MR_importFromObject:objectData inContext:context];
-
-        [dataObjects addObject:dataObject];
+//    [listOfObjectData enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+//    {
+//        NSDictionary *objectData = (NSDictionary *)obj;
+//
+//        NSManagedObject *dataObject = [self MR_importFromObject:objectData inContext:context];
+//
+//        [dataObjects addObject:dataObject];
 //            {
 //              [objectIDs addObject:[dataObject objectID]];
 //            }

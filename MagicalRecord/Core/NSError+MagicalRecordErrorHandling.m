@@ -13,12 +13,13 @@
 static NSInteger ddLogLevel = MR_LOG_LEVEL;
 #endif
 
-NSDictionary *MR_errorCodeSummaryLookup(void);
 
-BOOL MR_errorCodeIsValidationErrorCode(NSInteger errorCode);
-BOOL MR_errorCodeIsPersistentStoreErrorCode(NSInteger errorCode);
-BOOL MR_errorCodeIsMigrationErrorCode(NSInteger errorCode);
-BOOL MR_errorCodeIsObjectGraphErrorCode(NSInteger errorCode);
+NSDictionary *MR_validationErrorCodeLookup(void);
+
+NSDictionary *MR_errorCodeSummaryLookup(void);
+NSDictionary *MR_objectGraphErrorCodeLooup(void);
+NSDictionary *MR_persistentStoreErrorCodeLookup(void);
+NSDictionary *MR_migrationErrorCodeLookup(void);
 
 NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
 {
@@ -97,7 +98,7 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
             
             [descriptionBuffer appendFormat:@" Object: %@ -", managedObject];
             NSArray *errors = [groupedErrors objectForKey:managedObject];
-            [errors enumerateObjectsUsingBlock:^(id error, NSUInteger idx, BOOL *stop) {
+            [errors enumerateObjectsUsingBlock:^(id error, NSUInteger inneridx, BOOL *innerstop) {
                 [descriptionBuffer appendFormat:@" %@ [%@],",[error MR_validationError], MR_errorSummaryFromErrorCode([error code])];
             }];
             [descriptionBuffer deleteCharactersInRange:NSMakeRange([descriptionBuffer length] - 1, 1)];
@@ -190,6 +191,7 @@ BOOL MR_errorCodeIsMigrationErrorCode(NSInteger errorCode)
     NSDictionary *lookup = MR_migrationErrorCodeLookup();
     return [[lookup allKeys] containsObject:@(errorCode)];
 }
+
 NSDictionary *MR_persistentStoreErrorCodeLookup(void)
 {
     static NSDictionary *persistentStoreErrorDictionary = nil;
