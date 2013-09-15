@@ -29,7 +29,7 @@ static MagicalRecordStack *defaultStack;
     [status appendFormat:@"Model:           %@\n", [[self model] entityVersionHashesByName]];
     [status appendFormat:@"Coordinator:     %@\n", [self coordinator]];
     [status appendFormat:@"Store:           %@\n", [self store]];
-    [status appendFormat:@"Default Context: %@\n", [[self context] MR_description]];
+    [status appendFormat:@"Context:         %@\n", [[self context] MR_description]];
 
     return status;
 }
@@ -50,11 +50,11 @@ static MagicalRecordStack *defaultStack;
     return [[self alloc] init];
 }
 
-- (id) init;
-{
-    NSAssert(NO, @"%@ is an Abstract Class. Use one of the subclasses", NSStringFromClass([self class]));
-    return nil;
-}
+//- (id) init;
+//{
+//    NSAssert(NO, @"%@ is an Abstract Class. Use one of the subclasses", NSStringFromClass([self class]));
+//    return nil;
+//}
 
 - (void) setModelFromClass:(Class)klass;
 {
@@ -101,8 +101,9 @@ static MagicalRecordStack *defaultStack;
     if (_coordinator == nil)
     {
         _coordinator = [self createCoordinator];
+        _store = [[_coordinator persistentStores] objectAtIndex:0];
     }
-    return nil;
+    return _coordinator;
 }
 
 - (NSPersistentStoreCoordinator *) createCoordinator;
