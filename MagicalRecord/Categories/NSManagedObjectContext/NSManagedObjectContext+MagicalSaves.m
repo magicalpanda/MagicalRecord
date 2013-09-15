@@ -110,7 +110,7 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
                 else
                 {
                     MRLog(@"→ Finished saving: %@", [self MR_description]);
-                    MRLog(@"Objects - Inserted %ld, Updated %ld, Deleted %ld", (long)numberOfInsertedObjects, (long)numberOfUpdatedObjects, (long)numberOfDeletedObjects);
+                    MRLog(@"Objects - Inserted %zd, Updated %zd, Deleted %zd", numberOfInsertedObjects, numberOfUpdatedObjects, numberOfDeletedObjects);
                     
                     if (completion)
                     {
