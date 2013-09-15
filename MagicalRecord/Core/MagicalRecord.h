@@ -43,12 +43,12 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
 @interface MagicalRecord : NSObject
 
-+ (NSString *) currentStack;
+//+ (NSString *) currentStack;
 
 + (void) cleanUp;
 
-+ (void) setDefaultModelFromClass:(Class)klass;
-+ (void) setDefaultModelNamed:(NSString *)modelName;
+//+ (void) setDefaultModelFromClass:(Class)klass;
+//+ (void) setDefaultModelNamed:(NSString *)modelName;
 + (NSString *) defaultStoreName;
 
 @end

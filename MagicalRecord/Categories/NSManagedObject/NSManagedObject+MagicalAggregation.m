@@ -6,14 +6,13 @@
 //  Copyright (c) 2012 Magical Panda Software LLC. All rights reserved.
 //
 
+#import "MagicalRecordStack.h"
 #import "NSManagedObject+MagicalAggregation.h"
 #import "NSEntityDescription+MagicalDataImport.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
-#import "NSManagedObjectContext+MagicalThreading.h"
 #import "NSManagedObject+MagicalRequests.h"
 #import "NSManagedObject+MagicalRecord.h"
 #import "NSManagedObject+MagicalFinders.h"
-#import "MagicalRecord+ErrorHandling.h"
 #import "NSError+MagicalRecordErrorHandling.h"
 
 
@@ -29,7 +28,7 @@
 
 + (NSNumber *) MR_numberOfEntities
 {
-	return [self MR_numberOfEntitiesWithContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+	return [self MR_numberOfEntitiesWithContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (NSNumber *) MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
@@ -41,12 +40,12 @@
 + (NSNumber *) MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm;
 {
 	return [self MR_numberOfEntitiesWithPredicate:searchTerm
-                                        inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+                                        inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (NSUInteger) MR_countOfEntities;
 {
-    return [self MR_countOfEntitiesWithContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+    return [self MR_countOfEntitiesWithContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (NSUInteger) MR_countOfEntitiesWithContext:(NSManagedObjectContext *)context;
@@ -60,7 +59,7 @@
 
 + (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter;
 {
-    return [self MR_countOfEntitiesWithPredicate:searchFilter inContext:[NSManagedObjectContext MR_defaultContext]];
+    return [self MR_countOfEntitiesWithPredicate:searchFilter inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter inContext:(NSManagedObjectContext *)context;
@@ -77,7 +76,7 @@
 
 + (BOOL) MR_hasAtLeastOneEntity
 {
-    return [self MR_hasAtLeastOneEntityInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+    return [self MR_hasAtLeastOneEntityInContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (BOOL) MR_hasAtLeastOneEntityInContext:(NSManagedObjectContext *)context
@@ -137,7 +136,7 @@
     return [self MR_aggregateOperation:function 
                            onAttribute:attributeName 
                          withPredicate:predicate
-                             inContext:[NSManagedObjectContext MR_defaultContext]];    
+                             inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 @end

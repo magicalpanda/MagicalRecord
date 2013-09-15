@@ -6,24 +6,20 @@
 //
 
 #import "CoreData+MagicalRecord.h"
+#import "MagicalRecordStack.h"
 #import <objc/runtime.h>
 
 #if MR_LOG_LEVEL >= 0
 static NSInteger ddLogLevel = MR_LOG_LEVEL;
 #endif
 
-static NSManagedObjectContext *rootSavingContext = nil;
-static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
+
 static id iCloudSetupNotificationObserver = nil;
 
 static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSManagedObjectContextWorkingName";
 
 @interface NSManagedObjectContext (MagicalRecordInternal)
 
-- (void) MR_mergeChangesFromNotification:(NSNotification *)notification;
-- (void) MR_mergeChangesOnMainThread:(NSNotification *)notification;
-+ (void) MR_setDefaultContext:(NSManagedObjectContext *)moc;
-+ (void) MR_setRootSavingContext:(NSManagedObjectContext *)context;
 
 @end
 
@@ -32,8 +28,6 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
 
 + (void) MR_cleanUp;
 {
-    [self MR_setDefaultContext:nil];
-    [self MR_setRootSavingContext:nil];
 }
 
 - (NSString *) MR_description;
@@ -57,115 +51,68 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     return [NSString stringWithString:familyTree];
 }
 
-+ (NSManagedObjectContext *) MR_defaultContext
-{
-	@synchronized (self)
-	{
-        NSAssert(defaultManagedObjectContext_ != nil, @"Default Context is nil! Did you forget to initialize the Core Data Stack?");
-        return defaultManagedObjectContext_;
-	}
-}
 
-+ (void) MR_setDefaultContext:(NSManagedObjectContext *)moc
-{
-    if (defaultManagedObjectContext_)
-    {
-        [[NSNotificationCenter defaultCenter] removeObserver:defaultManagedObjectContext_];
-    }
-    
-    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_defaultStoreCoordinator];
-    if (iCloudSetupNotificationObserver)
-    {
-        [[NSNotificationCenter defaultCenter] removeObserver:iCloudSetupNotificationObserver];
-        iCloudSetupNotificationObserver = nil;
-    }
-    
-    if ([MagicalRecord isICloudEnabled]) 
-    {
-        [defaultManagedObjectContext_ MR_stopObservingiCloudChangesInCoordinator:coordinator];
-    }
+//+ (void) MR_setDefaultContext:(NSManagedObjectContext *)moc
+//{
+//    if (defaultManagedObjectContext_)
+//    {
+//        [[NSNotificationCenter defaultCenter] removeObserver:defaultManagedObjectContext_];
+//    }
+//    
+//    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_defaultStoreCoordinator];
+//    if (iCloudSetupNotificationObserver)
+//    {
+//        [[NSNotificationCenter defaultCenter] removeObserver:iCloudSetupNotificationObserver];
+//        iCloudSetupNotificationObserver = nil;
+//    }
+//    
+//    if ([MagicalRecord isICloudEnabled]) 
+//    {
+//        [defaultManagedObjectContext_ MR_stopObservingiCloudChangesInCoordinator:coordinator];
+//    }
+//
+//    defaultManagedObjectContext_ = moc;
+//    [defaultManagedObjectContext_ MR_setWorkingName:@"DEFAULT"];
+//    
+//    if ((defaultManagedObjectContext_ != nil) && ([self MR_rootSavingContext] != nil)) {
+//        [[NSNotificationCenter defaultCenter] addObserver:self
+//                                                 selector:@selector(rootContextChanged:)
+//                                                     name:NSManagedObjectContextDidSaveNotification
+//                                                   object:[self MR_rootSavingContext]];
+//    }
+//    
+////    [moc MR_obtainPermanentIDsBeforeSaving];
+//    if ([MagicalRecord isICloudEnabled])
+//    {
+//        [defaultManagedObjectContext_ MR_observeiCloudChangesInCoordinator:coordinator];
+//    }
+//    else
+//    {
+//        // If icloud is NOT enabled at the time of this method being called, listen for it to be setup later, and THEN set up observing cloud changes
+//        iCloudSetupNotificationObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kMagicalRecordPSCDidCompleteiCloudSetupNotification
+//                                                                           object:nil
+//                                                                            queue:[NSOperationQueue mainQueue]
+//                                                                       usingBlock:^(NSNotification *note) {
+//                                                                           [[NSManagedObjectContext MR_defaultContext] MR_observeiCloudChangesInCoordinator:coordinator];
+//                                                                       }];        
+//    }
+//    MRLog(@"Set Default Context: %@", defaultManagedObjectContext_);
+//}
 
-    defaultManagedObjectContext_ = moc;
-    [defaultManagedObjectContext_ MR_setWorkingName:@"DEFAULT"];
-    
-    if ((defaultManagedObjectContext_ != nil) && ([self MR_rootSavingContext] != nil)) {
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(rootContextChanged:)
-                                                     name:NSManagedObjectContextDidSaveNotification
-                                                   object:[self MR_rootSavingContext]];
-    }
-    
-//    [moc MR_obtainPermanentIDsBeforeSaving];
-    if ([MagicalRecord isICloudEnabled])
-    {
-        [defaultManagedObjectContext_ MR_observeiCloudChangesInCoordinator:coordinator];
-    }
-    else
-    {
-        // If icloud is NOT enabled at the time of this method being called, listen for it to be setup later, and THEN set up observing cloud changes
-        iCloudSetupNotificationObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kMagicalRecordPSCDidCompleteiCloudSetupNotification
-                                                                           object:nil
-                                                                            queue:[NSOperationQueue mainQueue]
-                                                                       usingBlock:^(NSNotification *note) {
-                                                                           [[NSManagedObjectContext MR_defaultContext] MR_observeiCloudChangesInCoordinator:coordinator];
-                                                                       }];        
-    }
-    MRLog(@"Set Default Context: %@", defaultManagedObjectContext_);
-}
 
-+ (void)rootContextChanged:(NSNotification *)notification {
-    if ([NSThread isMainThread] == NO) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self rootContextChanged:notification];
-        });
-        
-        return;
-    }
-    
-    [[self MR_defaultContext] mergeChangesFromContextDidSaveNotification:notification];
-}
-
-+ (NSManagedObjectContext *) MR_rootSavingContext;
-{
-    return rootSavingContext;
-}
-
-+ (void) MR_setRootSavingContext:(NSManagedObjectContext *)context;
-{
-    if (rootSavingContext)
-    {
-        [[NSNotificationCenter defaultCenter] removeObserver:rootSavingContext];
-    }
-    
-    rootSavingContext = context;
-//    [context MR_obtainPermanentIDsBeforeSaving];
-    [rootSavingContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
-    [rootSavingContext MR_setWorkingName:@"BACKGROUND SAVING (ROOT)"];
-    MRLog(@"Set Root Saving Context: %@", rootSavingContext);
-}
-
-+ (void) MR_initializeDefaultContextWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
-{
-    if (defaultManagedObjectContext_ == nil)
-    {
-        NSManagedObjectContext *rootContext = [self MR_contextWithStoreCoordinator:coordinator];
-        [self MR_setRootSavingContext:rootContext];
-        
-        NSManagedObjectContext *defaultContext = [[self alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-        [self MR_setDefaultContext:defaultContext];
-        
-        [defaultContext setParentContext:rootContext];
-    }
-}
-
-+ (void) MR_resetDefaultContext
-{
-    void (^resetBlock)(void) = ^{
-        [[NSManagedObjectContext MR_defaultContext] reset];
-    };
-    
-    dispatch_async(dispatch_get_main_queue(), resetBlock);
-}
+//+ (void) MR_setRootSavingContext:(NSManagedObjectContext *)context;
+//{
+//    if (backgroundSavingContext)
+//    {
+//        [[NSNotificationCenter defaultCenter] removeObserver:backgroundSavingContext];
+//    }
+//    
+//    backgroundSavingContext = context;
+//
+//    [backgroundSavingContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
+//    [backgroundSavingContext MR_setWorkingName:@"BACKGROUND SAVING (ROOT)"];
+//    MRLog(@"Set Root Saving Context: %@", backgroundSavingContext);
+//}
 
 + (NSManagedObjectContext *) MR_context;
 {
@@ -174,7 +121,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
 
 + (NSManagedObjectContext *)MR_confinementContext;
 {
-    return [self MR_confinementContextWithParent:[self MR_defaultContext]];
+    return [self MR_confinementContextWithParent:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (NSManagedObjectContext *) MR_confinementContextWithParent:(NSManagedObjectContext *)parentContext;
@@ -188,7 +135,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
 + (NSManagedObjectContext *) MR_mainQueueContext;
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [context setParentContext:[self MR_defaultContext]];
+    [context setParentContext:[[MagicalRecordStack defaultStack] context]];
     [context MR_setWorkingName:@"Main Queue"];
     return context;
 }
@@ -196,7 +143,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
 + (NSManagedObjectContext *) MR_privateQueueContext;
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    [context setParentContext:[self MR_defaultContext]];
+    [context setParentContext:[[MagicalRecordStack defaultStack] context]];
     [context MR_setWorkingName:@"Private Queue"];
     return context;
 }

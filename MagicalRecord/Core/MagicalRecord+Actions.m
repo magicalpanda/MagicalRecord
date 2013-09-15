@@ -7,6 +7,7 @@
 
 #import "CoreData+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
+#import "MagicalRecordStack.h"
 
 #if MR_LOG_LEVEL >= 0
 static NSInteger ddLogLevel = MR_LOG_LEVEL;
@@ -60,25 +61,10 @@ dispatch_queue_t saveQueue()
     });
 }
 
-+ (void) saveUsingCurrentThreadContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
-{
-    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
-
-    [localContext performBlock:^{
-        if (block) {
-            block(localContext);
-        }
-
-        [localContext MR_saveWithOptions:MRSaveParentContexts completion:completion];
-    }];
-}
-
-
 #pragma mark - Synchronous saving
 
 + (void) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
 {
-//    NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_rootSavingContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_confinementContext];
     
     if (block)
@@ -87,86 +73,6 @@ dispatch_queue_t saveQueue()
     }
 
     [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:nil];
-//    [localContext performBlockAndWait:^{
-//        if (block) {
-//            block(localContext);
-//        }
-//
-//        [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:nil];
-//    }];
 }
-
-+ (void) saveUsingCurrentThreadContextWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block;
-{
-    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
-
-    [localContext performBlockAndWait:^{
-        if (block)
-        {
-            block(localContext);
-        }
-
-        [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:nil];
-    }];
-}
-
-
-#pragma mark - Deprecated methods
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-implementations"
-
-+ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
-{
-    [[self class] saveWithBlock:block completion:nil];
-}
-
-+ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))completion;
-{
-    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_confinementContext];
-
-    if (block)
-    {
-        block(localContext);
-    }
- 
-    [localContext MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (completion)
-        {
-            completion();
-        } 
-    }];
-}
-
-+ (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *error))errorHandler;
-{
-    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
-
-    [localContext performBlock:^{
-        if (block)
-        {
-            block(localContext);
-        }
-
-        [localContext MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-            if (success)
-            {
-                if (completion)
-                {
-                    completion();
-                }
-            }
-            else
-            {
-                if (errorHandler)
-                {
-                    errorHandler(error);
-                }
-            }
-        }];
-    }];
-}
-
-#pragma clang diagnostic pop // ignored "-Wdeprecated-implementations"
 
 @end

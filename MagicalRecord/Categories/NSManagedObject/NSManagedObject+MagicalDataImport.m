@@ -5,6 +5,7 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
+#import "MagicalRecordStack.h"
 #import "CoreData+MagicalRecord.h"
 #import "NSObject+MagicalDataImport.h"
 #import <objc/runtime.h>
@@ -310,12 +311,12 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 
 + (id) MR_importFromObject:(id)objectData
 {
-    return [self MR_importFromObject:objectData inContext:[NSManagedObjectContext MR_defaultContext]];
+    return [self MR_importFromObject:objectData inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData
 {
-    return [self MR_importFromArray:listOfObjectData inContext:[NSManagedObjectContext MR_defaultContext]];
+    return [self MR_importFromArray:listOfObjectData inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context

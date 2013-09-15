@@ -10,6 +10,8 @@
 #import "NSManagedObjectContext+MagicalRecord.h"
 #import "NSError+MagicalRecordErrorHandling.h"
 #import "MagicalRecord.h"
+#import "MagicalRecordStack.h"
+
 #if MR_LOG_LEVEL >= 0
 static NSInteger ddLogLevel = MR_LOG_LEVEL;
 #endif
@@ -99,13 +101,8 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
             }
             else
             {
-                // If we're the default context, save to disk too (the user expects it to persist)
-                if (self == [[self class] MR_defaultContext])
-                {
-                    [[[self class] MR_rootSavingContext] MR_saveWithOptions:mask completion:completion];
-                }
                 // If we should not save the parent context, or there is not a parent context to save (root context), call the completion block
-                else if ((YES == saveParentContexts) && [self parentContext])
+                if ((YES == saveParentContexts) && [self parentContext])
                 {
                     [[self parentContext] MR_saveWithOptions:MRSaveSynchronously | MRSaveParentContexts completion:completion];
                 }
@@ -139,91 +136,5 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
         [self performBlock:saveBlock];
     }
 }
-
-#pragma mark - Deprecated methods
-// These methods will be removed in MagicalRecord 3.0
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-implementations"
-
-- (void) MR_save;
-{
-    [self MR_saveToPersistentStoreAndWait];
-}
-
-- (void) MR_saveWithErrorCallback:(void (^)(NSError *error))errorCallback;
-{
-    [self MR_saveWithOptions:MRSaveSynchronously|MRSaveParentContexts completion:^(BOOL success, NSError *error) {
-        if (!success)
-        {
-            if (errorCallback) { errorCallback(error); }
-        }
-    }];
-}
-
-- (void) MR_saveInBackgroundCompletion:(void (^)(void))completion;
-{
-    [self MR_saveOnlySelfWithCompletion:^(BOOL success, NSError *error) {
-        if (success)
-        {
-            if (completion) { completion(); }
-        }
-    }];
-}
-
-- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback;
-{
-    [self MR_saveOnlySelfWithCompletion:^(BOOL success, NSError *error) {
-        if (!success)
-        {
-            if (errorCallback) { errorCallback(error); }
-        }
-    }];
-}
-
-- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion;
-{
-    [self MR_saveOnlySelfWithCompletion:^(BOOL success, NSError *error) {
-        if (success)
-        {
-            if (completion) { completion(); }
-        }
-        else
-        {
-            if (errorCallback) { errorCallback(error); }
-        }
-    }];
-}
-
-- (void) MR_saveNestedContexts;
-{
-    [self MR_saveToPersistentStoreWithCompletion:nil];
-}
-
-- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback;
-{
-    [self MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (!success)
-        {
-            if (errorCallback) { errorCallback(error); }
-        }
-    }];
-}
-
-- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion;
-{
-    [self MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (success)
-        {
-            if (completion) { completion(); }
-        }
-        else
-        {
-            if (errorCallback) { errorCallback(error); }
-        }
-    }];
-}
-
-#pragma clang diagnostic pop // ignored "-Wdeprecated-implementations"
 
 @end

@@ -6,12 +6,13 @@
 //
 
 #import "CoreData+MagicalRecord.h"
+#import "MagicalRecordStack.h"
 
 #if MR_LOG_LEVEL >= 0
 static NSInteger ddLogLevel = MR_LOG_LEVEL;
 #endif
 
-static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
+//static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
 NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagicalRecordPSCDidCompleteiCloudSetupNotification";
 
 @interface NSDictionary (MagicalRecordAdditions)
@@ -31,29 +32,29 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 
 @implementation NSPersistentStoreCoordinator (MagicalRecord)
 
-+ (NSPersistentStoreCoordinator *) MR_defaultStoreCoordinator
-{
-    if (defaultCoordinator_ == nil && [MagicalRecord shouldAutoCreateDefaultPersistentStoreCoordinator])
-    {
-        [self MR_setDefaultStoreCoordinator:[self MR_newPersistentStoreCoordinator]];
-    }
-	return defaultCoordinator_;
-}
-
-+ (void) MR_setDefaultStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
-{
-	defaultCoordinator_ = coordinator;
-    
-    if (defaultCoordinator_ != nil)
-    {
-        NSArray *persistentStores = [defaultCoordinator_ persistentStores];
-        
-        if ([persistentStores count] && [NSPersistentStore MR_defaultPersistentStore] == nil)
-        {
-            [NSPersistentStore MR_setDefaultPersistentStore:[persistentStores objectAtIndex:0]];
-        }
-    }
-}
+//+ (NSPersistentStoreCoordinator *) MR_defaultStoreCoordinator
+//{
+//    if (defaultCoordinator_ == nil && [MagicalRecord shouldAutoCreateDefaultPersistentStoreCoordinator])
+//    {
+//        [self MR_setDefaultStoreCoordinator:[self MR_newPersistentStoreCoordinator]];
+//    }
+//	return defaultCoordinator_;
+//}
+//
+//+ (void) MR_setDefaultStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
+//{
+//	defaultCoordinator_ = coordinator;
+//    
+//    if (defaultCoordinator_ != nil)
+//    {
+//        NSArray *persistentStores = [defaultCoordinator_ persistentStores];
+//        
+//        if ([persistentStores count] && [NSPersistentStore MR_defaultPersistentStore] == nil)
+//        {
+//            [NSPersistentStore MR_setDefaultPersistentStore:[persistentStores objectAtIndex:0]];
+//        }
+//    }
+//}
 
 + (void) MR_createPathToStoreFileIfNeccessary:(NSURL *)urlForStore
 {
@@ -90,14 +91,14 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
             NSURL *shmSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-shm"]];
             NSURL *walSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-wal"]];
 
-            for (NSURL *toRemove in @[url, shmSidecar, walSidecar])
+            for (NSURL *toRemove in [NSArray arrayWithObjects:url, shmSidecar, walSidecar, nil])
             {
                 [[NSFileManager defaultManager] removeItemAtURL:toRemove error:nil];
             }
 
             MRLog(@"Removed incompatible model version: %@", [url lastPathComponent]);
         }
-        
+
         // Try one more time to create the store
         store = [self addPersistentStoreWithType:NSSQLiteStoreType
                                    configuration:nil
@@ -145,207 +146,16 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
     return nil;
 }
 
-
-#pragma mark - Public Instance Methods
-
-- (NSPersistentStore *) MR_addInMemoryStore
-{
-    NSError *error = nil;
-    NSPersistentStore *store = [self addPersistentStoreWithType:NSInMemoryStoreType
-                                                  configuration:nil 
-                                                            URL:nil
-                                                        options:nil
-                                                          error:&error];
-    if (!store)
-    {
-        [[error MR_coreDataDescription] MR_logToConsole];
-    }
-    return store;
-}
-
-- (NSPersistentStore *) MR_addAutoMigratingSqliteStoreNamed:(NSString *)storeFileName;
-{
-    NSDictionary *options = [NSDictionary MR_autoMigrationOptions];
-    return [self MR_addSqliteStoreNamed:storeFileName withOptions:options];
-}
-
-- (NSPersistentStore *) MR_addAutoMigratingSqliteStoreAtURL:(NSURL *)url;
-{
-    NSDictionary *options = [NSDictionary MR_autoMigrationOptions];
-    return [self MR_addSqliteStoreAtURL:url withOptions:options];
-}
-
-- (NSPersistentStore *) MR_addManuallyMigratingSqliteStoreNamed:(NSString *)storeFileName;
-{
-    NSDictionary *options = [NSDictionary MR_manualMigrationOptions];
-    return [self MR_addSqliteStoreNamed:storeFileName withOptions:options];
-}
-
-- (NSPersistentStore *) MR_addManuallyMigratingSqliteStoreAtURL:(NSURL *)url;
-{
-    NSDictionary *options = [NSDictionary MR_manualMigrationOptions];
-    return [self MR_addSqliteStoreAtURL:url withOptions:options];
-}
-
-#pragma mark - Public Class Methods
-
-
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *)storeFileName;
-{
-    NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
-    NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
-    
-    [coordinator MR_addAutoMigratingSqliteStoreNamed:storeFileName];
-    
-    //HACK: lame solution to fix automigration error "Migration failed after first pass"
-    if ([[coordinator persistentStores] count] == 0) 
-    {
-        [coordinator performSelector:@selector(MR_addAutoMigratingSqliteStoreNamed:) withObject:storeFileName afterDelay:0.5];
-    }
-
-    return coordinator;
-}
-
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreAtURL:(NSURL *)url;
-{
-    NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
-    NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
-
-    [coordinator MR_addAutoMigratingSqliteStoreAtURL:url];
-
-    //HACK: lame solution to fix automigration error "Migration failed after first pass"
-    if ([[coordinator persistentStores] count] == 0)
-    {
-        [coordinator performSelector:@selector(MR_addAutoMigratingSqliteStoreAtURL:) withObject:url afterDelay:0.5];
-    }
-
-    return coordinator;
-}
-
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithManuallyMigratingSqliteStoreNamed:(NSString *)storeFileName;
-{
-    NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
-    NSPersistentStoreCoordinator *coordinator = [[self alloc] initWithManagedObjectModel:model];
-
-    [coordinator MR_addManuallyMigratingSqliteStoreNamed:storeFileName];
-
-    return coordinator;
-}
-
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithManuallyMigratingSqliteStoreAtURL:(NSURL *)url;
-{
-    NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
-    NSPersistentStoreCoordinator *coordinator = [[self alloc] initWithManagedObjectModel:model];
-
-    [coordinator MR_addManuallyMigratingSqliteStoreAtURL:url];
-
-    return coordinator;
-}
-
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithInMemoryStore
-{
-	NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
-	NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
-
-    [coordinator MR_addInMemoryStore];
-
-    return coordinator;
-}
-
 + (NSPersistentStoreCoordinator *) MR_newPersistentStoreCoordinator
 {
 	NSPersistentStoreCoordinator *coordinator = [self MR_coordinatorWithSqliteStoreNamed:[MagicalRecord defaultStoreName]];
 
     return coordinator;
 }
-
-- (void) MR_addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent;
-{
-    [self MR_addiCloudContainerID:containerID 
-                   contentNameKey:contentNameKey 
-                  localStoreNamed:localStoreName
-          cloudStorePathComponent:subPathComponent
-                       completion:nil];
-}
-
-- (void) MR_addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent completion:(void(^)(void))completionBlock;
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        NSURL *cloudURL = [NSPersistentStore MR_cloudURLForUbiqutiousContainer:containerID];
-        if (subPathComponent) 
-        {
-            cloudURL = [cloudURL URLByAppendingPathComponent:subPathComponent];
-        }
-
-        [MagicalRecord setICloudEnabled:cloudURL != nil];
-        
-        NSDictionary *options = [NSDictionary MR_autoMigrationOptions];
-        if (cloudURL)   //iCloud is available
-        {
-            NSDictionary *iCloudOptions = [NSDictionary dictionaryWithObjectsAndKeys:
-                                           contentNameKey, NSPersistentStoreUbiquitousContentNameKey,
-                                           cloudURL, NSPersistentStoreUbiquitousContentURLKey, nil];
-            options = [options MR_dictionaryByMergingDictionary:iCloudOptions];
-        }
-        else 
-        {
-            MRLog(@"iCloud is not enabled");
-        }
-        
-        [self lock];
-        [self MR_addSqliteStoreNamed:localStoreName withOptions:options];
-        [self unlock];
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if ([NSPersistentStore MR_defaultPersistentStore] == nil)
-            {
-                [NSPersistentStore MR_setDefaultPersistentStore:[[self persistentStores] objectAtIndex:0]];
-            }
-            if (completionBlock)
-            {
-                completionBlock();
-            }
-            NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-            [notificationCenter postNotificationName:kMagicalRecordPSCDidCompleteiCloudSetupNotification object:nil];
-        });
-    });   
-}
-
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithiCloudContainerID:(NSString *)containerID 
-                                                        contentNameKey:(NSString *)contentNameKey
-                                                       localStoreNamed:(NSString *)localStoreName
-                                               cloudStorePathComponent:(NSString *)subPathComponent;
-{
-    return [self MR_coordinatorWithiCloudContainerID:containerID 
-                                      contentNameKey:contentNameKey
-                                     localStoreNamed:localStoreName
-                             cloudStorePathComponent:subPathComponent
-                                          completion:nil];
-}
-
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithiCloudContainerID:(NSString *)containerID 
-                                                        contentNameKey:(NSString *)contentNameKey
-                                                       localStoreNamed:(NSString *)localStoreName
-                                               cloudStorePathComponent:(NSString *)subPathComponent
-                                                            completion:(void(^)(void))completionHandler;
-{
-    NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
-    NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
-    
-    [psc MR_addiCloudContainerID:containerID 
-                  contentNameKey:contentNameKey
-                 localStoreNamed:localStoreName
-         cloudStorePathComponent:subPathComponent
-                      completion:completionHandler];
-    
-    return psc;
-}
-
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithPersistentStore:(NSPersistentStore *)persistentStore;
 {
-    NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
-    NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+    NSManagedObjectModel *model = [[MagicalRecordStack defaultStack] model];
+    NSPersistentStoreCoordinator *psc = [[self alloc] initWithManagedObjectModel:model];
 
     [psc MR_addSqliteStoreNamed:[persistentStore URL] withOptions:nil];
 
@@ -354,8 +164,8 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *)options
 {
-    NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
-    NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+    NSManagedObjectModel *model = [[MagicalRecordStack defaultStack] model];
+    NSPersistentStoreCoordinator *psc = [[self alloc] initWithManagedObjectModel:model];
     
     [psc MR_addSqliteStoreNamed:storeFileName withOptions:options];
     return psc;
@@ -368,8 +178,8 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreAtURL:(NSURL *)url;
 {
-    NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
-    NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+    NSManagedObjectModel *model = [[MagicalRecordStack defaultStack] model];
+    NSPersistentStoreCoordinator *psc = [[self alloc] initWithManagedObjectModel:model];
 
     [psc MR_addSqliteStoreAtURL:url withOptions:nil];
     return psc;
@@ -378,39 +188,3 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 @end
 
 
-@implementation NSDictionary (MagicalRecordAdditions) 
-
-- (NSMutableDictionary *) MR_dictionaryByMergingDictionary:(NSDictionary *)d;
-{
-    NSMutableDictionary *mutDict = [self mutableCopy];
-    [mutDict addEntriesFromDictionary:d];
-    return mutDict; 
-}
-
-+ (NSDictionary *) MR_defaultSqliteStoreOptions;
-{
-    NSMutableDictionary *options = [NSMutableDictionary dictionary];
-    [options setObject:@"WAL" forKey:@"journal_mode"];
-
-    return options;
-}
-
-+ (NSDictionary *) MR_autoMigrationOptions;
-{
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-                             [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
-                             nil];
-    return options;
-}
-
-+ (NSDictionary *) MR_manualMigrationOptions;
-{
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-                             [NSNumber numberWithBool:NO], NSInferMappingModelAutomaticallyOption,
-                             nil];
-    return options;
-}
-
-@end 

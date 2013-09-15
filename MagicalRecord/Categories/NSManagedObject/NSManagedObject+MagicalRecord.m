@@ -4,6 +4,7 @@
 //
 
 #import "CoreData+MagicalRecord.h"
+#import "MagicalRecordStack.h"
 
 static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 #if MR_LOG_LEVEL >= 0
@@ -52,7 +53,7 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request
 {
-	return [self MR_executeFetchRequest:request inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+	return [self MR_executeFetchRequest:request inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
@@ -69,7 +70,7 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 
 + (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request
 {
-	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 #if TARGET_OS_IPHONE
@@ -87,26 +88,22 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 
 + (NSString *) MR_entityName
 {
+    if ([self respondsToSelector:@selector(entityName)])
+    {
+        return [self performSelector:@selector(entityName)];
+    }
     return NSStringFromClass(self);
 }
 
 + (NSEntityDescription *) MR_entityDescriptionInContext:(NSManagedObjectContext *)context
 {
-    if ([self respondsToSelector:@selector(entityInManagedObjectContext:)]) 
-    {
-        NSEntityDescription *entity = [self performSelector:@selector(entityInManagedObjectContext:) withObject:context];
-        return entity;
-    }
-    else
-    {
-        NSString *entityName = [self MR_entityName];
-        return [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
-    }
+    NSString *entityName = [self MR_entityName];
+    return [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
 }
 
 + (NSEntityDescription *) MR_entityDescription
 {
-	return [self MR_entityDescriptionInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+	return [self MR_entityDescriptionInContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (NSArray *) MR_propertiesNamed:(NSArray *)properties
@@ -161,20 +158,12 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 
 + (id) MR_createInContext:(NSManagedObjectContext *)context
 {
-    if ([self respondsToSelector:@selector(insertInManagedObjectContext:)]) 
-    {
-        id entity = [self performSelector:@selector(insertInManagedObjectContext:) withObject:context];
-        return entity;
-    }
-    else
-    {
-        return [NSEntityDescription insertNewObjectForEntityForName:[self MR_entityName] inManagedObjectContext:context];
-    }
+    return [NSEntityDescription insertNewObjectForEntityForName:[self MR_entityName] inManagedObjectContext:context];
 }
 
 + (id) MR_createEntity
 {	
-	NSManagedObject *newEntity = [self MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+	NSManagedObject *newEntity = [self MR_createInContext:[[MagicalRecordStack defaultStack] context]];
 
 	return newEntity;
 }
@@ -209,7 +198,7 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 
 + (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate
 {
-    return [self MR_deleteAllMatchingPredicate:predicate inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+    return [self MR_deleteAllMatchingPredicate:predicate inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (BOOL) MR_truncateAllInContext:(NSManagedObjectContext *)context
@@ -228,7 +217,7 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 
 + (BOOL) MR_truncateAll
 {
-    [self MR_truncateAllInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+    [self MR_truncateAllInContext:[[MagicalRecordStack defaultStack] context]];
     return YES;
 }
 
@@ -278,12 +267,6 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
         }
     }
     return inContext;
-}
-
-- (id) MR_inThreadContext
-{
-    NSManagedObject *weakSelf = self;
-    return [weakSelf MR_inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
 @end

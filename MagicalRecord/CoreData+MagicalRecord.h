@@ -17,7 +17,6 @@
 
     #import "MagicalRecord.h"
     #import "MagicalRecord+Actions.h"
-    #import "MagicalRecord+ErrorHandling.h"
     #import "MagicalRecord+Options.h"
     #import "MagicalRecord+ShorthandSupport.h"
     #import "MagicalRecord+Setup.h"
@@ -30,7 +29,6 @@
     #import "NSManagedObjectContext+MagicalRecord.h"
     #import "NSManagedObjectContext+MagicalObserving.h"
     #import "NSManagedObjectContext+MagicalSaves.h"
-    #import "NSManagedObjectContext+MagicalThreading.h"
     #import "NSPersistentStoreCoordinator+MagicalRecord.h"
     #import "NSManagedObjectModel+MagicalRecord.h"
     #import "NSPersistentStore+MagicalRecord.h"

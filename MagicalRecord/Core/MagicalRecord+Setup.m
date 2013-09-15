@@ -10,6 +10,11 @@
 #import "NSManagedObject+MagicalRecord.h"
 #import "NSPersistentStoreCoordinator+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
+#import "SQLiteMagicalRecordStack.h"
+#import "AutoMigratingMagicalRecordStack.h"
+#import "ManuallyMigratingMagicalRecordStack.h"
+#import "InMemoryMagicalRecordStack.h"
+#import "iCloudMagicalRecordStack.h"
 
 #if MR_LOG_LEVEL >= 0
 static NSInteger ddLogLevel = MR_LOG_LEVEL;
@@ -19,100 +24,85 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 
 + (void) setupCoreDataStack
 {
-    [self setupCoreDataStackWithStoreNamed:[self defaultStoreName]];
+    MagicalRecordStack *stack = [[SQLiteMagicalRecordStack alloc] init];
+    [MagicalRecordStack setDefaultStack:stack];
 }
 
-+ (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName
++(void)setupCoreDataStackWithStoreAtURL:(NSURL *)url;
 {
-    if ([NSPersistentStoreCoordinator MR_defaultStoreCoordinator] != nil) return;
-
-    MRLog(@"Setting up Core Data Stack with store named: %@", storeName);
-	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreNamed:storeName];
-    [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
-
-    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
+    MagicalRecordStack *stack = [[SQLiteMagicalRecordStack alloc] initWithStoreAtURL:url];
+    [MagicalRecordStack setDefaultStack:stack];
 }
 
-+ (void) setupCoreDataStackWithStoreAtURL:(NSURL *)url;
++ (void)setupCoreDataStackWithStoreNamed:(NSString *)storeName;
 {
-    if ([NSPersistentStoreCoordinator MR_defaultStoreCoordinator] != nil) return;
-
-    MRLog(@"Setting up Core Data Stack with store at URL: %@", url);
-	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreAtURL:url];
-	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
-
-    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
+    MagicalRecordStack *stack = [[SQLiteMagicalRecordStack alloc] initWithStoreNamed:storeName];
+    [MagicalRecordStack setDefaultStack:stack];
 }
 
-#pragma mark - Auto Migration Stack Setup
-
-+ (void) setupAutoMigratingCoreDataStack
++ (void) setupAutoMigratingCoreDataStack;
 {
-    [self setupAutoMigratingCoreDataStackWithSqliteStoreNamed:[self defaultStoreName]];
+    MagicalRecordStack *stack = [[AutoMigratingMagicalRecordStack alloc] init];
+    [MagicalRecordStack setDefaultStack:stack];
 }
 
 + (void) setupAutoMigratingCoreDataStackWithSqliteStoreNamed:(NSString *)storeName;
 {
-    if ([NSPersistentStoreCoordinator MR_defaultStoreCoordinator] != nil) return;
-
-    MRLog(@"Setting up AUTO MIGRATING Core Data Stack with store named: %@", storeName);
-    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithAutoMigratingSqliteStoreNamed:storeName];
-    [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
-
-    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
+    MagicalRecordStack *stack = [[AutoMigratingMagicalRecordStack alloc] initWithStoreNamed:storeName];
+    [MagicalRecordStack setDefaultStack:stack];
 }
 
 + (void) setupAutoMigratingCoreDataStackWithSqliteStoreAtURL:(NSURL *)url;
 {
-    if ([NSPersistentStoreCoordinator MR_defaultStoreCoordinator] != nil) return;
-
-    MRLog(@"Setting up AUTO MIGRATING Core Data Stack with store at url: %@", url);
-    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithAutoMigratingSqliteStoreAtURL:url];
-    [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
-
-    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
+    MagicalRecordStack *stack = [[AutoMigratingMagicalRecordStack alloc] initWithStoreAtURL:url];
+    [MagicalRecordStack setDefaultStack:stack];
 }
-
-#pragma mark - Manual Migration Stack Setup
 
 + (void) setupManuallyMigratingCoreDataStack;
 {
-    [self setupManuallyMigratingCoreDataStackWithSqliteStoreNamed:[self defaultStoreName]];
+    MagicalRecordStack *stack = [[ManuallyMigratingMagicalRecordStack alloc] init];
+    [MagicalRecordStack setDefaultStack:stack];
 }
 
 + (void) setupManuallyMigratingCoreDataStackWithSqliteStoreNamed:(NSString *)storeName;
 {
-    if ([NSPersistentStoreCoordinator MR_defaultStoreCoordinator] != nil) return;
-
-    MRLog(@"Setting up MANUALLY MIGRATING Core Data Stack with store named: %@", storeName);
-    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithManuallyMigratingSqliteStoreNamed:storeName];
-    [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
-
-    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
+    MagicalRecordStack *stack = [[ManuallyMigratingMagicalRecordStack alloc] initWithStoreNamed:storeName];
+    [MagicalRecordStack setDefaultStack:stack];
 }
 
 + (void) setupManuallyMigratingCoreDataStackWithSqliteStoreAtURL:(NSURL *)url;
 {
-    if ([NSPersistentStoreCoordinator MR_defaultStoreCoordinator] != nil) return;
-
-    MRLog(@"Setting up MANUALLY MIGRATING Core Data Stack with store at url: %@", url);
-    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithManuallyMigratingSqliteStoreAtURL:url];
-    [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
-
-    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
+    MagicalRecordStack *stack = [[ManuallyMigratingMagicalRecordStack alloc] initWithStoreAtURL:url];
+    [MagicalRecordStack setDefaultStack:stack];
 }
-
-#pragma mark - In Memory Stack Setup
 
 + (void) setupCoreDataStackWithInMemoryStore;
 {
-    if ([NSPersistentStoreCoordinator MR_defaultStoreCoordinator] != nil) return;
+    MagicalRecordStack *stack = [[InMemoryMagicalRecordStack alloc] init];
+    [MagicalRecordStack setDefaultStack:stack];
+}
 
-    MRLog(@"Setting up IN MEMORY Core Data Stack");
-	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithInMemoryStore];
-	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
-	
-    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
++ (void) setupCoreDataStackWithiCloudContainer:(NSString *)icloudBucket localStoreNamed:(NSString *)localStore;
+{
+    MagicalRecordStack *stack = [[iCloudMagicalRecordStack alloc] initWithContainerID:icloudBucket localStoreName:localStore];
+    [MagicalRecordStack setDefaultStack:stack];
+}
+
++ (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent;
+{
+    MagicalRecordStack *stack = [[iCloudMagicalRecordStack alloc] initWithContainerID:containerID
+                                                                       contentNameKey:contentNameKey
+                                                              cloudStorePathComponent:pathSubcomponent
+                                                                       localStoreName:localStoreName];
+    [MagicalRecordStack setDefaultStack:stack];
+}
+
++ (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent completion:(void(^)(void))completion;
+{
+    iCloudMagicalRecordStack *stack = [[iCloudMagicalRecordStack alloc] initWithContainerID:containerID contentNameKey:contentNameKey cloudStorePathComponent:pathSubcomponent localStoreName:localStoreName];
+    stack.setupCompletionBlock = completion;
+
+    [MagicalRecordStack setDefaultStack:stack];
 }
 
 @end

@@ -9,7 +9,7 @@
 #import "NSManagedObject+MagicalFinders.h"
 #import "NSManagedObject+MagicalRequests.h"
 #import "NSManagedObject+MagicalRecord.h"
-#import "NSManagedObjectContext+MagicalThreading.h"
+#import "MagicalRecordStack.h"
 
 @implementation NSManagedObject (MagicalFinders)
 
@@ -23,7 +23,7 @@
 
 + (NSArray *) MR_findAll
 {
-	return [self MR_findAllInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+	return [self MR_findAllInContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
@@ -37,7 +37,7 @@
 {
 	return [self MR_findAllSortedBy:sortTerm
                           ascending:ascending 
-                          inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+                          inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
@@ -55,7 +55,7 @@
 	return [self MR_findAllSortedBy:sortTerm
                           ascending:ascending
                       withPredicate:searchTerm 
-                          inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+                          inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 
@@ -71,12 +71,12 @@
 + (NSArray *) MR_findAllWithPredicate:(NSPredicate *)searchTerm
 {
 	return [self MR_findAllWithPredicate:searchTerm
-                               inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+                               inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (id) MR_selectAttribute:(NSString *)attribute ascending:(BOOL)ascending;
 {
-    return [self MR_selectAttribute:attribute ascending:ascending inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+    return [self MR_selectAttribute:attribute ascending:ascending inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (id) MR_selectAttribute:(NSString *)attribute ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
@@ -98,7 +98,7 @@
 
 + (id) MR_findFirst
 {
-	return [self MR_findFirstInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+	return [self MR_findFirstInContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (id) MR_findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context
@@ -113,12 +113,12 @@
 {
 	return [self MR_findFirstByAttribute:attribute
                                withValue:searchValue 
-                               inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+                               inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (id) MR_findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue orderedBy:(NSString *)orderedBy ascending:(BOOL)ascending;
 {
-    return [self MR_findFirstByAttribute:attribute withValue:searchValue orderedBy:orderedBy ascending:ascending inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+    return [self MR_findFirstByAttribute:attribute withValue:searchValue orderedBy:orderedBy ascending:ascending inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (id) MR_findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue orderedBy:(NSString *)orderedBy ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
@@ -142,12 +142,12 @@
 {
     return [self MR_findFirstOrderedByAttribute:attribute
                                       ascending:ascending
-                                      inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+                                      inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (id) MR_findLargestValueForAttribute:(NSString *)attribute withPredicate:(NSPredicate *)predicate;
 {
-    return [self MR_findLargestValueForAttribute:attribute withPredicate:predicate inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+    return [self MR_findLargestValueForAttribute:attribute withPredicate:predicate inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (id) MR_findLargestValueForAttribute:(NSString *)attribute withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
@@ -166,7 +166,7 @@
 
 + (id) MR_findLargestValueForAttribute:(NSString *)attribute;
 {
-    return [self MR_findLargestValueForAttribute:attribute inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+    return [self MR_findLargestValueForAttribute:attribute inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (id) MR_findLargestValueForAttribute:(NSString *)attribute inContext:(NSManagedObjectContext *)context;
@@ -176,7 +176,7 @@
 
 + (id) MR_findSmallestValueForAttribute:(NSString *)attribute;
 {
-    return [self MR_findSmallestValueForAttribute:attribute inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+    return [self MR_findSmallestValueForAttribute:attribute inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (id) MR_findSmallestValueForAttribute:(NSString *)attribute inContext:(NSManagedObjectContext *)context;
@@ -194,7 +194,7 @@
 
 + (id) MR_findFirstWithPredicate:(NSPredicate *)searchTerm
 {
-    return [self MR_findFirstWithPredicate:searchTerm inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+    return [self MR_findFirstWithPredicate:searchTerm inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (id) MR_findFirstWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
@@ -216,7 +216,7 @@
 	return [self MR_findFirstWithPredicate:searchterm
                                   sortedBy:property 
                                  ascending:ascending 
-                                 inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+                                 inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (id) MR_findFirstWithPredicate:(NSPredicate *)searchTerm andRetrieveAttributes:(NSArray *)attributes inContext:(NSManagedObjectContext *)context
@@ -232,7 +232,7 @@
 {
 	return [self MR_findFirstWithPredicate:searchTerm
                      andRetrieveAttributes:attributes 
-                                 inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+                                 inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (id) MR_findFirstWithPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortBy ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context andRetrieveAttributes:(id)attributes, ...
@@ -251,7 +251,7 @@
 	return [self MR_findFirstWithPredicate:searchTerm
                                   sortedBy:sortBy 
                                  ascending:ascending 
-                                 inContext:[NSManagedObjectContext MR_contextForCurrentThread]
+                                 inContext:[[MagicalRecordStack defaultStack] context]
                      andRetrieveAttributes:attributes];
 }
 
@@ -266,7 +266,7 @@
 {
 	return [self MR_findByAttribute:attribute
                           withValue:searchValue 
-                          inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+                          inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (NSArray *) MR_findByAttribute:(NSString *)attribute withValue:(id)searchValue andOrderBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
@@ -283,7 +283,7 @@
                           withValue:searchValue
                          andOrderBy:sortTerm 
                           ascending:ascending 
-                          inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+                          inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 
@@ -347,7 +347,7 @@
                              sortedBy:sortTerm
                             ascending:ascending
                              delegate:delegate
-                            inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+                            inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (NSFetchedResultsController *) MR_fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
@@ -366,7 +366,7 @@
                         withPredicate:searchTerm
                              sortedBy:sortTerm
                             ascending:ascending
-                            inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+                            inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 
@@ -381,7 +381,7 @@
                                                              delegate:nil
                                                          useFileCache:NO
                                                             groupedBy:groupingKeyPath
-                                                            inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+                                                            inContext:[[MagicalRecordStack defaultStack] context]];
     
     [self MR_performFetch:controller];
     return controller;
@@ -393,7 +393,7 @@
                            ascending:ascending
                        withPredicate:searchTerm
                              groupBy:groupingKeyPath
-                           inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+                           inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (NSFetchedResultsController *) MR_fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context
@@ -413,7 +413,7 @@
                        withPredicate:searchTerm 
                              groupBy:groupingKeyPath 
                             delegate:delegate
-                           inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+                           inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 #endif

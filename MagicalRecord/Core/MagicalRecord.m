@@ -6,6 +6,7 @@
 //
 
 #import "CoreData+MagicalRecord.h"
+#import "MagicalRecordStack.h"
 
 @interface MagicalRecord (Internal)
 
@@ -32,36 +33,25 @@
 + (void) cleanUpStack;
 {
 	[NSManagedObjectContext MR_cleanUp];
-	[NSManagedObjectModel MR_setDefaultManagedObjectModel:nil];
-	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:nil];
-	[NSPersistentStore MR_setDefaultPersistentStore:nil];
+//    [MagicalRecordStack ]
+//	[NSManagedObjectModel MR_setDefaultManagedObjectModel:nil];
+//	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:nil];
+//	[NSPersistentStore MR_setDefaultPersistentStore:nil];
 }
 
-+ (NSString *) currentStack
-{
-    NSMutableString *status = [NSMutableString stringWithString:@"Current Default Core Data Stack: ---- \n"];
 
-    [status appendFormat:@"Model:           %@\n", [[NSManagedObjectModel MR_defaultManagedObjectModel] entityVersionHashesByName]];
-    [status appendFormat:@"Coordinator:     %@\n", [NSPersistentStoreCoordinator MR_defaultStoreCoordinator]];
-    [status appendFormat:@"Store:           %@\n", [NSPersistentStore MR_defaultPersistentStore]];
-    [status appendFormat:@"Default Context: %@\n", [[NSManagedObjectContext MR_defaultContext] MR_description]];
-    [status appendFormat:@"Context Chain:   \n%@\n", [[NSManagedObjectContext MR_defaultContext] MR_parentChain]];
-
-    return status;
-}
-
-+ (void) setDefaultModelNamed:(NSString *)modelName;
-{
-    NSManagedObjectModel *model = [NSManagedObjectModel MR_managedObjectModelNamed:modelName];
-    [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
-}
-
-+ (void) setDefaultModelFromClass:(Class)klass;
-{
-    NSBundle *bundle = [NSBundle bundleForClass:klass];
-    NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:[NSArray arrayWithObject:bundle]];
-    [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
-}
+//+ (void) setDefaultModelNamed:(NSString *)modelName;
+//{
+//    NSManagedObjectModel *model = [NSManagedObjectModel MR_managedObjectModelNamed:modelName];
+//    [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
+//}
+//
+//+ (void) setDefaultModelFromClass:(Class)klass;
+//{
+//    NSBundle *bundle = [NSBundle bundleForClass:klass];
+//    NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:[NSArray arrayWithObject:bundle]];
+//    [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
+//}
 
 + (NSString *) defaultStoreName;
 {

@@ -7,23 +7,24 @@
 
 #import "MagicalRecord.h"
 
-extern NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification;
+extern NSString * const MagicalRecordDidMergeChangesFromiCloudNotification;
 
 @interface NSManagedObjectContext (MagicalRecord)
 
-+ (void) MR_initializeDefaultContextWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
+//+ (void) MR_initializeDefaultContextWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 
 + (NSManagedObjectContext *) MR_context NS_RETURNS_RETAINED;
++ (NSManagedObjectContext *) MR_mainQueueContext;
 + (NSManagedObjectContext *) MR_privateQueueContext;
+
 + (NSManagedObjectContext *) MR_confinementContext;
 + (NSManagedObjectContext *) MR_confinementContextWithParent:(NSManagedObjectContext *)parentContext;
-+ (NSManagedObjectContext *) MR_mainQueueContext;
 
 + (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator NS_RETURNS_RETAINED;
 
-+ (void) MR_resetDefaultContext;
-+ (NSManagedObjectContext *) MR_rootSavingContext;
-+ (NSManagedObjectContext *) MR_defaultContext;
+//+ (void) MR_resetDefaultContext;
+//+ (NSManagedObjectContext *) MR_rootSavingContext;
+//+ (NSManagedObjectContext *) MR_defaultContext;
 
 - (NSString *) MR_description;
 - (NSString *) MR_parentChain;

@@ -7,8 +7,6 @@
 //
 
 #import "MagicalRecord+iCloud.h"
-#import "NSPersistentStoreCoordinator+MagicalRecord.h"
-#import "NSManagedObjectContext+MagicalRecord.h"
 
 static BOOL _iCloudEnabled = NO;
 
@@ -27,35 +25,6 @@ static BOOL _iCloudEnabled = NO;
     {
         _iCloudEnabled = enabled;
     }
-}
-
-+ (void) setupCoreDataStackWithiCloudContainer:(NSString *)icloudBucket localStoreNamed:(NSString *)localStore;
-{
-    NSString *contentNameKey = [[[NSBundle mainBundle] infoDictionary] objectForKey:(id)kCFBundleIdentifierKey];
-    [self setupCoreDataStackWithiCloudContainer:icloudBucket
-                                 contentNameKey:contentNameKey
-                                localStoreNamed:localStore
-                        cloudStorePathComponent:nil];
-}
-
-+ (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent;
-{
-    [self setupCoreDataStackWithiCloudContainer:containerID 
-                                 contentNameKey:contentNameKey
-                                localStoreNamed:localStoreName
-                        cloudStorePathComponent:pathSubcomponent
-                                     completion:nil];
-}
-
-+ (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent completion:(void(^)(void))completion;
-{
-    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithiCloudContainerID:containerID
-                                                                                                   contentNameKey:contentNameKey 
-                                                                                                  localStoreNamed:localStoreName 
-                                                                                          cloudStorePathComponent:pathSubcomponent
-                                                                                                       completion:completion];
-    [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
-    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
 }
 
 @end

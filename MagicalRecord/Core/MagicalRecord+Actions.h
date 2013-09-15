@@ -23,25 +23,4 @@
  */
 + (void) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
 
-/*
- If you want to reuse the context on the current thread, use these methods.
- */
-+ (void) saveUsingCurrentThreadContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
-+ (void) saveUsingCurrentThreadContextWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block;
-
-
-/* DEPRECATION NOTICE:
- * The following methods are deprecated, but remain in place for backwards compatibility until the next major version (3.x)
- */
-
-/* For all background saving operations. These calls will be sent to a different thread/queue.
- */
-+ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block __attribute__((deprecated));
-+ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))completion __attribute__((deprecated));
-
-/*
- If you want to reuse the context on the current thread, use this method.
- */
-+ (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *error))errorHandler __attribute__((deprecated));
-
 @end

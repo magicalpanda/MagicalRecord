@@ -15,7 +15,7 @@
 static NSInteger ddLogLevel = MR_LOG_LEVEL;
 #endif
 
-NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalRecordDidMergeChangesFromiCloudNotification";
+NSString * const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalRecordDidMergeChangesFromiCloudNotification";
 
 
 @implementation NSManagedObjectContext (MagicalObserving)
@@ -67,7 +67,7 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
         
         NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
 
-        [notificationCenter postNotificationName:kMagicalRecordDidMergeChangesFromiCloudNotification
+        [notificationCenter postNotificationName:MagicalRecordDidMergeChangesFromiCloudNotification
                                           object:self
                                         userInfo:[notification userInfo]];
     }];

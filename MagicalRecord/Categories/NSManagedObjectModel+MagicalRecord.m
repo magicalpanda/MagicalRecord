@@ -13,23 +13,23 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 
 @implementation NSManagedObjectModel (MagicalRecord)
 
-+ (NSManagedObjectModel *) MR_defaultManagedObjectModel
-{
-	if (defaultManagedObjectModel_ == nil && [MagicalRecord shouldAutoCreateManagedObjectModel])
-	{
-        [self MR_setDefaultManagedObjectModel:[self MR_mergedObjectModelFromMainBundle]];
-	}
-	return defaultManagedObjectModel_;
-}
-
-+ (void) MR_setDefaultManagedObjectModel:(NSManagedObjectModel *)newDefaultModel
-{
-	defaultManagedObjectModel_ = newDefaultModel;
-}
+//+ (NSManagedObjectModel *) MR_defaultManagedObjectModel
+//{
+//	if (defaultManagedObjectModel_ == nil && [MagicalRecord shouldAutoCreateManagedObjectModel])
+//	{
+//        [self MR_setDefaultManagedObjectModel:[self MR_mergedObjectModelFromMainBundle]];
+//	}
+//	return defaultManagedObjectModel_;
+//}
+//
+//+ (void) MR_setDefaultManagedObjectModel:(NSManagedObjectModel *)newDefaultModel
+//{
+//	defaultManagedObjectModel_ = newDefaultModel;
+//}
 
 + (NSManagedObjectModel *) MR_managedObjectModelAtURL:(NSURL *)url;
 {
-    return [[NSManagedObjectModel alloc] initWithContentsOfURL:url];
+    return [[self alloc] initWithContentsOfURL:url];
 }
 
 + (NSManagedObjectModel *) MR_mergedObjectModelFromMainBundle;
@@ -44,7 +44,7 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
                                                 inDirectory:bundleName];
     NSURL *modelUrl = [NSURL fileURLWithPath:path];
     
-    NSManagedObjectModel *mom = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelUrl];
+    NSManagedObjectModel *mom = [[self alloc] initWithContentsOfURL:modelUrl];
     
     return mom;
 }
@@ -55,7 +55,7 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
                                                      ofType:[modelFileName pathExtension]];
 	NSURL *momURL = [NSURL fileURLWithPath:path];
 	
-	NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:momURL];
+	NSManagedObjectModel *model = [[self alloc] initWithContentsOfURL:momURL];
 	return model;
 }
 
