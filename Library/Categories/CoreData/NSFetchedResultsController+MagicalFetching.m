@@ -7,6 +7,7 @@
 //
 
 #import "NSFetchedResultsController+MagicalFetching.h"
+#import "NSError+MagicalRecordErrorHandling.h"
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 @implementation NSFetchedResultsController (MagicalFetching)
