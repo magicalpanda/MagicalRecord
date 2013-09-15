@@ -25,13 +25,16 @@
     #ifdef LOG_VERBOSE
         #define MR_LOG_LEVEL LOG_LEVEL_VERBOSE
         #define MRLog(...)  DDLogVerbose(__VA_ARGS__)
+        #define MRCLog(...) DDLogCVerbose(__VA_ARGS__)
     #else
         #define MR_LOG_LEVEL -1
         #define MRLog(...) NSLog(@"%s(%p) %@", __PRETTY_FUNCTION__, self, [NSString stringWithFormat:__VA_ARGS__])
+        #define MRCLog(...)
     #endif
 #else
     #define MR_LOG_LEVEL -1
     #define MRLog(...) ((void)0)
+    #define MRCLog(...) ((void)0)
 #endif
 
 #ifdef NS_BLOCKS_AVAILABLE

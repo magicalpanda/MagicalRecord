@@ -19,6 +19,21 @@
 
 @implementation SQLiteMagicalRecordStack
 
++ (instancetype) stackWithStoreNamed:(NSString *)name;
+{
+    return [[self alloc] initWithStoreNamed:name];
+}
+
++ (instancetype) stackWithStoreAtURL:(NSURL *)url;
+{
+    return [[self alloc] initWithStoreAtURL:url];
+}
+
++ (instancetype) stackWithStoreAtPath:(NSString *)path;
+{
+    return [[self alloc] initWithStoreAtPath:path];
+}
+
 - (instancetype) init;
 {
     return [self initWithStoreNamed:[MagicalRecord defaultStoreName]];

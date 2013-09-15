@@ -7,8 +7,6 @@
 #import <CoreData/CoreData.h>
 #import "MagicalRecord.h"
 
-#define kMagicalRecordDefaultBatchSize 20
-
 @interface NSManagedObject (MagicalRecord)
 
 + (NSUInteger) MR_defaultBatchSize;
@@ -18,12 +16,6 @@
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
 + (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request;
 + (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
-
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
-
-+ (void) MR_performFetch:(NSFetchedResultsController *)controller;
-
-#endif
 
 + (NSEntityDescription *) MR_entityDescription;
 + (NSEntityDescription *) MR_entityDescriptionInContext:(NSManagedObjectContext *)context;

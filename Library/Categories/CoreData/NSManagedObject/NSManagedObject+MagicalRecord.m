@@ -6,7 +6,8 @@
 #import "CoreData+MagicalRecord.h"
 #import "MagicalRecordStack.h"
 
-static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
+static NSUInteger defaultBatchSize = 20;
+
 #if MR_LOG_LEVEL >= 0
 static NSInteger ddLogLevel = MR_LOG_LEVEL;
 #endif
@@ -72,19 +73,6 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 {
 	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:[[MagicalRecordStack defaultStack] context]];
 }
-
-#if TARGET_OS_IPHONE
-
-+ (void) MR_performFetch:(NSFetchedResultsController *)controller
-{
-	NSError *error = nil;
-	if (![controller performFetch:&error])
-	{
-        [[error MR_coreDataDescription] MR_logToConsole];
-	}
-}
-
-#endif
 
 + (NSString *) MR_entityName
 {

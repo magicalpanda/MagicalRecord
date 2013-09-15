@@ -10,6 +10,8 @@
 #import "NSManagedObject+MagicalRecord.h"
 #import "MagicalRecordStack.h"
 
+NSArray *MR_NSSortDescriptorsFromString(NSString *string, BOOL defaultAscendingValue);
+
 @implementation NSManagedObject (MagicalRequests)
 
 + (NSFetchRequest *)MR_createFetchRequestInContext:(NSManagedObjectContext *)context
@@ -111,24 +113,7 @@
         [request setPredicate:searchTerm];
     }
 	[request setFetchBatchSize:[self MR_defaultBatchSize]];
-	
-    NSMutableArray* sortDescriptors = [[NSMutableArray alloc] init];
-    NSArray* sortKeys = [sortTerm componentsSeparatedByString:@","];
-    for (__strong NSString* sortKey in sortKeys)
-    {
-        NSArray * sortComponents = [sortKey componentsSeparatedByString:@":"];
-        if (sortComponents.count > 1)
-          {
-              NSNumber * customAscending = sortComponents.lastObject;
-              ascending = customAscending.boolValue;
-              sortKey = sortComponents[0];
-          }
-      
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
-        [sortDescriptors addObject:sortDescriptor];
-    }
-    
-	[request setSortDescriptors:sortDescriptors];
+	[request setSortDescriptors:MR_NSSortDescriptorsFromString(sortTerm, ascending)];
     
 	return request;
 }
@@ -142,5 +127,29 @@
 	return request;
 }
 
-
 @end
+
+NSArray *MR_NSSortDescriptorsFromString(NSString *sortTerm, BOOL defaultAscendingValue)
+{
+    NSMutableArray* sortDescriptors = [[NSMutableArray alloc] init];
+    NSArray* sortKeys = [sortTerm componentsSeparatedByString:@","];
+
+    for (__strong NSString* sortKey in sortKeys)
+    {
+        BOOL ascending = defaultAscendingValue;
+        NSArray* sortComponents = [sortKey componentsSeparatedByString:@":"];
+
+        sortKey = sortComponents[0];
+        if ([sortComponents count] > 1)
+        {
+            NSNumber* customAscending = [sortComponents lastObject];
+            ascending = [customAscending boolValue];
+        }
+
+        MRCLog(@"- Sorting %@ %@", sortKey, ascending ? @"Ascending": @"Descending");
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
+        [sortDescriptors addObject:sortDescriptor];
+    }
+
+    return [NSArray arrayWithArray:sortDescriptors];
+}
