@@ -180,7 +180,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
 
     if ([insertedObjects count])
     {
-        MRLog(@"Context %@ is about to save. Obtaining permanent IDs for new %lu inserted objects", [context MR_workingName], (unsigned long)[insertedObjects count]);
+        MRLog(@"Context %@ is about to save. Obtaining permanent IDs for new %tu inserted objects", [context MR_workingName], [insertedObjects count]);
         NSError *error = nil;
         BOOL success = [context obtainPermanentIDsForObjects:[insertedObjects allObjects] error:&error];
         if (!success)

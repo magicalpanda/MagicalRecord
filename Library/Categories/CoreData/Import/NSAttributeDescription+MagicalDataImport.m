@@ -42,7 +42,7 @@
                 do {
                     NSMutableString *dateFormatKey = [kMagicalRecordImportCustomDateFormatKey mutableCopy];
                     if (index) {
-                        [dateFormatKey appendFormat:@".%lu", (unsigned long)index];
+                        [dateFormatKey appendFormat:@".%tu", index];
                     }
                     index++;
                     dateFormat = [[self userInfo] valueForKey:dateFormatKey];
