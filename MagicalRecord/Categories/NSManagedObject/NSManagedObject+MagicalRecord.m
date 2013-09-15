@@ -214,10 +214,14 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 
 + (BOOL) MR_truncateAllInContext:(NSManagedObjectContext *)context
 {
-    NSArray *allEntities = [self MR_findAllInContext:context];
-    for (NSManagedObject *obj in allEntities)
+    NSFetchRequest *request = [self MR_requestAllInContext:context];
+    [request setReturnsObjectsAsFaults:YES];
+    [request setIncludesPropertyValues:NO];
+
+    NSArray *objectsToDelete = [self MR_executeFetchRequest:request inContext:context];
+    for (NSManagedObject *objectToDelete in objectsToDelete)
     {
-        [obj MR_deleteInContext:context];
+        [objectToDelete MR_deleteInContext:context];
     }
     return YES;
 }
@@ -243,11 +247,12 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
         if (!success)
         {
             [[error MR_coreDataDescription] MR_logToConsole];
+            return nil;
         }
     }
 }
 
-- (id) MR_inContext:(NSManagedObjectContext *)otherContext
+    
 {
     NSManagedObject *inContext = nil;
     NSManagedObjectID *objectID = [self objectID];

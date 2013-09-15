@@ -7,6 +7,7 @@
 //
 
 #import "NSObject+MagicalDataImport.h"
+#import "NSEntityDescription+MagicalDataImport.h"
 #import "NSManagedObject+MagicalDataImport.h"
 #import "MagicalRecord.h"
 #import "CoreData+MagicalRecord.h"
@@ -62,11 +63,10 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
         return nil;
     }
     
-    NSString *primaryKeyName = [relationshipInfo MR_primaryKey];
-    
-    NSAttributeDescription *primaryKeyAttribute = [[destinationEntity attributesByName] valueForKey:primaryKeyName];
-    NSString *lookupKey = [[primaryKeyAttribute userInfo] valueForKey:kMagicalRecordImportAttributeKeyMapKey] ?: [primaryKeyAttribute name];
-    
+    NSString               *primaryKeyName      = [relationshipInfo MR_primaryKey];
+    NSAttributeDescription *primaryKeyAttribute = [destinationEntity MR_attributeDescriptionForName:primaryKeyName];
+    NSString               *lookupKey           = [[primaryKeyAttribute userInfo] valueForKey:kMagicalRecordImportAttributeKeyMapKey] ? :[primaryKeyAttribute name];
+
     return lookupKey;
 }
 

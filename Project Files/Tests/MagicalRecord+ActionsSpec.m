@@ -1,41 +1,49 @@
-#import "Kiwi.h"
+#define EXP_SHORTHAND
+#import "Expecta.h"
+#import "Specta.h"
 
 // Project
+#import "MagicalRecord+Actions.h"
 #import "SingleEntityWithNoRelationships.h"
 
-SPEC_BEGIN(MagicalRecordActionsSpec)
+SpecBegin(MagicalRecordActions)
 
 describe(@"MagicalRecord", ^{		
-	beforeEach(^{
-		// Occurs before each enclosed "it" block
+	beforeAll(^{
         [MagicalRecord setDefaultModelFromClass:[self class]];
         [MagicalRecord setupCoreDataStackWithInMemoryStore];
 	});
-	
-	afterEach(^{
-		// Occurs after each enclosed "it" block
+
+    afterEach(^{
+        [NSManagedObjectContext MR_resetContextForCurrentThread];
+        [NSManagedObjectContext MR_resetDefaultContext];
+    });
+
+    afterAll(^{
         [MagicalRecord cleanUp];
-	});
-    
-    context(@"synchronous save action", ^{
+    });
+
+    describe(@"synchronous save action", ^{
         it(@"should save", ^{
             __block NSManagedObjectID *objectId;
             
             [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                 NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
-                
-                [[@([inserted hasChanges]) should] beTrue];
-                
+
+                expect([inserted hasChanges]).to.beTruthy();
+
                 [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
                 objectId = [inserted objectID];
             }];
-            
-            [[objectId should] beNonNil];
-            
-            NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:objectId];
-            
-            [[fetchedObject should] beNonNil];
-            [[@([fetchedObject hasChanges]) should] beFalse];
+
+            expect(objectId).toNot.beNil();
+
+            NSError *fetchError;
+            NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] existingObjectWithID:objectId error:&fetchError];
+
+            expect(fetchedObject).toNot.beNil();
+            expect(fetchError).to.beNil();
+            expect([fetchedObject hasChanges]).to.beFalsy();
         });
         
         it(@"should make inserted entities available to the default context", ^{
@@ -43,19 +51,21 @@ describe(@"MagicalRecord", ^{
             
             [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                 NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
-                
-                [[@([inserted hasChanges]) should] beTrue];
-                
+
+                expect([inserted hasChanges]).to.beTruthy();
+
                 [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
                 objectId = [inserted objectID];
             }];
             
-            [[objectId should] beNonNil];
-            
-            NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_defaultContext] objectWithID:objectId];
-            
-            [[fetchedObject should] beNonNil];
-            [[@([fetchedObject hasChanges]) should] beFalse];
+            expect(objectId).toNot.beNil();
+
+            NSError *fetchError;
+            NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] existingObjectWithID:objectId error:&fetchError];
+
+            expect(fetchedObject).toNot.beNil();
+            expect(fetchError).to.beNil();
+            expect([fetchedObject hasChanges]).to.beFalsy();
         });
         
         it(@"should make updates to entities available to the default context", ^{
@@ -69,14 +79,14 @@ describe(@"MagicalRecord", ^{
                 
                 [inserted setValue:@YES forKey:kTestAttributeKey];
                 
-                [[@([inserted hasChanges]) should] beTrue];
-                
+                expect([inserted hasChanges]).to.beTruthy();
+
                 [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
                 objectId = [inserted objectID];
             }];
             
             fetchedObject = [[NSManagedObjectContext MR_defaultContext] objectWithID:objectId];
-            [[[fetchedObject valueForKey:kTestAttributeKey] should] beTrue];
+            expect([fetchedObject valueForKey:kTestAttributeKey]).to.beTruthy();
             
             [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                 NSManagedObject *changed = [localContext objectWithID:objectId];
@@ -87,26 +97,29 @@ describe(@"MagicalRecord", ^{
             fetchedObject = [[NSManagedObjectContext MR_defaultContext] objectWithID:objectId];
             
             // Async since the merge to the main thread context after persistence
-            [[expectFutureValue([fetchedObject valueForKey:kTestAttributeKey]) shouldEventually] beFalse];
+            expect([fetchedObject valueForKey:kTestAttributeKey]).will.beFalsy();
         });
     });
     
-    context(@"asynchronous save action", ^{
+    describe(@"asynchronous save action", ^{
         it(@"should call completion block on the main thread", ^{
             __block BOOL completionBlockCalled = NO;
             __block BOOL completionBlockIsOnMainThread = NO;
             
             [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-                [SingleEntityWithNoRelationships MR_createInContext:localContext];
+                NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
+
+                expect(inserted).toNot.beNil();
             } completion:^(BOOL success, NSError *error) {
                 // Ignore the success state — we only care that this block is executed on the main thread
                 completionBlockCalled = YES;
                 completionBlockIsOnMainThread = [NSThread isMainThread];
             }];
-            
-            [[expectFutureValue(@(completionBlockCalled)) shouldEventually] beTrue];
+
+            expect(completionBlockCalled).will.beTruthy();
+            expect(completionBlockIsOnMainThread).will.beTruthy();
         });
-        
+
         it(@"should save", ^{
             __block BOOL               saveSuccessState = NO;
             __block NSManagedObjectID *objectId;
@@ -114,8 +127,8 @@ describe(@"MagicalRecord", ^{
             
             [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
                 NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
-                
-                [[@([inserted hasChanges]) should] beTrue];
+
+                expect([inserted hasChanges]).to.beTruthy();
                 
                 [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
                 objectId = [inserted objectID];
@@ -123,10 +136,10 @@ describe(@"MagicalRecord", ^{
                 saveSuccessState = success;
                 fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:objectId];
             }];
-            
-            [[expectFutureValue(@(saveSuccessState)) shouldEventually] beTrue];
-            [[expectFutureValue(fetchedObject) shouldEventually] beNonNil];
-            [[expectFutureValue(@([fetchedObject hasChanges])) shouldEventually] beFalse];
+
+            expect(saveSuccessState).will.beTruthy();
+            expect(fetchedObject).willNot.beNil();
+            expect([fetchedObject hasChanges]).will.beFalsy();
         });
         
         it(@"should make inserted entities available to the default context", ^{
@@ -137,8 +150,8 @@ describe(@"MagicalRecord", ^{
             [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
                 NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
                 
-                [[@([inserted hasChanges]) should] beTrue];
-                
+                expect([inserted hasChanges]).to.beTruthy();
+
                 [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
                 objectId = [inserted objectID];
             } completion:^(BOOL success, NSError *error) {
@@ -146,9 +159,9 @@ describe(@"MagicalRecord", ^{
                 fetchedObject = [[NSManagedObjectContext MR_defaultContext] objectWithID:objectId];
             }];
             
-            [[expectFutureValue(@(saveSuccessState)) shouldEventually] beTrue];
-            [[expectFutureValue(fetchedObject) shouldEventually] beNonNil];
-            [[expectFutureValue(@([fetchedObject hasChanges])) shouldEventually] beFalse];
+            expect(saveSuccessState).will.beTruthy();
+            expect(fetchedObject).willNot.beNil();
+            expect([fetchedObject hasChanges]).will.beFalsy();
         });
         
         it(@"should make updates to entities available to the default context", ^{
@@ -162,14 +175,14 @@ describe(@"MagicalRecord", ^{
                 
                 [inserted setValue:@YES forKey:kTestAttributeKey];
                 
-                [[@([inserted hasChanges]) should] beTrue];
-                
+                expect([inserted hasChanges]).to.beTruthy();
+
                 [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
                 objectId = [inserted objectID];
             }];
             
             fetchedObject = [[NSManagedObjectContext MR_defaultContext] objectWithID:objectId];
-            [[[fetchedObject valueForKey:kTestAttributeKey] should] beTrue];
+            expect([fetchedObject valueForKey:kTestAttributeKey]).to.beTruthy();
             
             [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
                 NSManagedObject *changed = [localContext objectWithID:objectId];
@@ -179,35 +192,36 @@ describe(@"MagicalRecord", ^{
                 fetchedObject = [[NSManagedObjectContext MR_defaultContext] objectWithID:objectId];
             }];
             
-            
-            [[expectFutureValue([fetchedObject valueForKey:kTestAttributeKey]) shouldEventually] beFalse];
+            expect([fetchedObject valueForKey:kTestAttributeKey]).will.beFalsy();
         });
     });
-    
-	context(@"current thread save action", ^{
-        context(@"running synchronously", ^{
+
+	describe(@"current thread save action", ^{
+        describe(@"running synchronously", ^{
             it(@"should save", ^{
                 __block NSManagedObjectID *objectId;
                 
                 [MagicalRecord saveUsingCurrentThreadContextWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                     NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
                     
-                    [[@([inserted hasChanges]) should] beTrue];
-                    
+                    expect([inserted hasChanges]).to.beTruthy();
+
                     [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
                     objectId = [inserted objectID];
                 }];
+
+                expect(objectId).toNot.beNil();
                 
-                [[objectId should] beNonNil];
-                
-                NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:objectId];
-                
-                [[fetchedObject should] beNonNil];
-                [[@([fetchedObject hasChanges]) should] beFalse];
+                NSError *fetchError;
+                NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] existingObjectWithID:objectId error:&fetchError];
+
+                expect(fetchedObject).toNot.beNil();
+                expect(fetchError).to.beNil();
+                expect([fetchedObject hasChanges]).to.beFalsy();
             });
         });
         
-        context(@"running asynchronously", ^{
+        describe(@"running asynchronously", ^{
             it(@"should call completion block on the main thread", ^{
                 __block BOOL completionBlockCalled = NO;
                 __block BOOL completionBlockIsOnMainThread = NO;
@@ -219,8 +233,8 @@ describe(@"MagicalRecord", ^{
                     completionBlockCalled = YES;
                     completionBlockIsOnMainThread = [NSThread isMainThread];
                 }];
-                
-                [[expectFutureValue(@(completionBlockCalled)) shouldEventually] beTrue];
+
+                expect(completionBlockCalled).will.beTruthy();
             });
             
             it(@"should save", ^{
@@ -231,8 +245,8 @@ describe(@"MagicalRecord", ^{
                 [MagicalRecord saveUsingCurrentThreadContextWithBlock:^(NSManagedObjectContext *localContext) {
                     NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
                     
-                    [[@([inserted hasChanges]) should] beTrue];
-                    
+                    expect([inserted hasChanges]).to.beTruthy();
+
                     [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
                     objectId = [inserted objectID];
                 } completion:^(BOOL success, NSError *error) {
@@ -240,151 +254,17 @@ describe(@"MagicalRecord", ^{
                     saveError = error;
                 }];
 
-                [[expectFutureValue(@(saveSuccessState)) shouldEventually] beTrue];
-                [[expectFutureValue(saveError) shouldEventually] beNil];
-                [[expectFutureValue(objectId) shouldEventually] beNonNil];
-                
+                expect(saveSuccessState).will.beTruthy();
+                expect(saveError).will.beNil();
+                expect(objectId).willNot.beNil();
+
                 NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:objectId];
-                
-                [[expectFutureValue(fetchedObject) shouldEventually] beNonNil];
-                [[expectFutureValue(@([fetchedObject hasChanges])) shouldEventually] beFalse];
+
+                expect(fetchedObject).willNot.beNil();
+                expect([fetchedObject hasChanges]).will.beFalsy();
             });
         });
 	});
-    
-    
-    // We're testing for deprecated method function — ignore the warnings
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    
-    context(@"deprecated method", ^{        
-        context(@"saveInBackgroundWithBlock:", ^{
-            it(@"should save", ^{
-                __block NSManagedObjectID *objectId;
-                
-                [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
-                    NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
-                    
-                    [[@([inserted hasChanges]) should] beTrue];
-                    
-                    [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
-                    objectId = [inserted objectID];
-                }];
-                
-                [[expectFutureValue(objectId) shouldEventually] beNonNil];
-                
-                NSManagedObject   *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:objectId];
-                
-                [[expectFutureValue(objectId) shouldEventually] beNonNil];
-                [[expectFutureValue(fetchedObject) shouldEventually] beNonNil];
-                [[expectFutureValue(@([fetchedObject hasChanges])) shouldEventually] beFalse];
-            });
-        });
-        
-        context(@"saveInBackgroundWithBlock:completion:", ^{
-            it(@"should call completion block", ^{
-                __block BOOL completionBlockCalled = NO;
-                
-                [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
-                    [SingleEntityWithNoRelationships MR_createInContext:localContext];
-                } completion:^{
-                    completionBlockCalled = YES;
-                }];
-                
-                [[expectFutureValue(@(completionBlockCalled)) shouldEventually] beTrue];
-            });
-            
-            it(@"should save", ^{
-                __block NSManagedObjectID *objectId;
-                __block NSManagedObject *fetchedObject;
-                
-                [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
-                    NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
-                    
-                    [[@([inserted hasChanges])should] beTrue];
-                    
-                    [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
-                    objectId = [inserted objectID];
-                } completion:^{
-                    [[objectId should] beNonNil];
-                    
-                    fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:objectId];
-                }];
-                
-                [[expectFutureValue(objectId) shouldEventually] beNonNil];
-                [[expectFutureValue(fetchedObject) shouldEventually] beNonNil];
-                [[expectFutureValue(@([fetchedObject hasChanges])) shouldEventually] beFalse];
-            });
-        });
-        
-        context(@"saveInBackgroundUsingCurrentContextWithBlock:completion:errorHandler:", ^{
-            
-            context(@"should call", ^{
-                __block BOOL completionBlockCalled = NO;
-                __block BOOL errorBlockCalled = NO;
-                
-                afterEach(^{
-                    completionBlockCalled = NO;
-                    errorBlockCalled = NO;
-                });
-                
-                it(@"completion block", ^{
-                    [MagicalRecord saveInBackgroundUsingCurrentContextWithBlock:^(NSManagedObjectContext *localContext) {
-                        [SingleEntityWithNoRelationships MR_createInContext:localContext];
-                    } completion:^{
-                        completionBlockCalled = YES;
-                    } errorHandler:^(NSError *error) {
-                        errorBlockCalled = YES;
-                    }];
-                    
-                    [[expectFutureValue(@(completionBlockCalled)) shouldEventually] beTrue];
-                    [[expectFutureValue(@(errorBlockCalled)) shouldEventually] beFalse];
-                });
-                
-                it(@"error handler when there is an error", ^{
-                    [MagicalRecord saveInBackgroundUsingCurrentContextWithBlock:^(NSManagedObjectContext *localContext) {
-                        // Don't make any changes so that an error is triggered
-                    } completion:^{
-                        completionBlockCalled = YES;
-                    } errorHandler:^(NSError *error) {
-                        errorBlockCalled = YES;
-                    }];
-                    
-                    [[expectFutureValue(@(completionBlockCalled)) shouldEventually] beFalse];
-                    [[expectFutureValue(@(errorBlockCalled)) shouldEventually] beTrue];
-                });
-            });
-            
-            it(@"should save", ^{
-                __block NSError *saveError;
-                __block NSManagedObjectID *objectId;
-                __block NSManagedObject *fetchedObject;
-                
-                [MagicalRecord saveInBackgroundUsingCurrentContextWithBlock:^(NSManagedObjectContext *localContext) {
-                    NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
-                    
-                    [[@([inserted hasChanges])should] beTrue];
-                    
-                    [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
-                    objectId = [inserted objectID];
-                } completion:^{
-                    [[objectId should] beNonNil];
-                    
-                    fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:objectId];
-                } errorHandler:^(NSError *error) {
-                    saveError = error;
-                }];
-                
-                [[expectFutureValue(objectId) shouldEventually] beNonNil];
-                [[expectFutureValue(saveError) shouldEventually] beNil];
-                [[expectFutureValue(fetchedObject) shouldEventually] beNonNil];
-                [[expectFutureValue(@([fetchedObject hasChanges])) shouldEventually] beFalse];
-            });
-        });        
-    });
-    
-#pragma clang diagnostic pop // ignored "-Wdeprecated-declarations"
-    
 });
 
-SPEC_END
+SpecEnd
