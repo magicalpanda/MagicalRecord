@@ -96,12 +96,19 @@ static MagicalRecordStack *defaultStack;
     return _stackName;
 }
 
-- (NSManagedObjectContext *) newConfinementContext;
+- (NSManagedObjectContext *) createConfinementContext;
 {
     NSManagedObjectContext *context = [NSManagedObjectContext MR_confinementContext];
     NSString *workingName = [[context MR_workingName] stringByAppendingFormat:@" (%@)", [self stackName]];
-    [context setParentContext:[self context]];
     [context MR_setWorkingName:workingName];
+    return context;
+}
+
+- (NSManagedObjectContext *) newConfinementContext;
+{
+    NSManagedObjectContext *context = [self createConfinementContext];
+    [context setParentContext:[self context]];
+
     return context;
 }
 

@@ -11,5 +11,6 @@
 @interface MagicalRecordStack ()
 
 - (NSPersistentStoreCoordinator *) createCoordinator;
+- (NSManagedObjectContext *) createConfinementContext;
 
 @end
