@@ -24,6 +24,12 @@
 
     #import "MagicalRecordStack.h"
     #import "MagicalRecordStack+Actions.h"
+    #import "SQLiteMagicalRecordStack.h"
+    #import "SQLiteWithSavingContextMagicalRecordStack.h"
+    #import "InMemoryMagicalRecordStack.h"
+    #import "iCloudMagicalRecordStack.h"
+    #import "AutoMigratingMagicalRecordStack.h"
+    #import "ManuallyMigratingMagicalRecordStack.h"
 
     #import "NSManagedObject+MagicalRecord.h"
     #import "NSManagedObject+MagicalRequests.h"
