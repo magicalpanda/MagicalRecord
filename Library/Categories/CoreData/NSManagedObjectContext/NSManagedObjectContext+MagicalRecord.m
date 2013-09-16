@@ -24,7 +24,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     NSString *contextLabel = [NSString stringWithFormat:@"*** %@ ***", [self MR_workingName]];
     NSString *onMainThread = [NSThread isMainThread] ? @"*** MAIN THREAD ***" : @"*** BACKGROUND THREAD ***";
 
-    return [NSString stringWithFormat:@"<%@ (%p): %@> on %@", NSStringFromClass([self class]), self, contextLabel, onMainThread];
+    return [NSString stringWithFormat:@"<%@ (%p)> %@ on %@", NSStringFromClass([self class]), self, contextLabel, onMainThread];
 }
 
 - (NSString *) MR_parentChain;
