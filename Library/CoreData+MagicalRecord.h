@@ -4,9 +4,11 @@
 #endif
 
 #ifdef __OBJC__
-    #if !( __has_feature(objc_arc) && __has_feature(objc_arc_weak) )
-        #warning MagicalRecord now requires ARC to be enabled
-    #endif
+//#if defined(__has_feature)
+//    #if !( __has_feature(objc_arc))
+//        #warning MagicalRecord now requires ARC to be enabled
+//    #endif
+//#endif
 
     #import <CoreFoundation/CoreFoundation.h>
     #import <CoreData/CoreData.h>
@@ -51,6 +53,7 @@
     #import "NSError+MagicalRecordErrorHandling.h"
 
     #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+        #import "NSManagedObject+MagicalFetching.h"
         #import "NSFetchedResultsController+MagicalFetching.h"
     #endif
 
