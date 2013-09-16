@@ -24,23 +24,23 @@
 
 - (void)dealloc;
 {
-    [self.savingContext MR_stopObservingContext:self.context];
+    [_savingContext MR_stopObservingContext:_context];
 }
 
 - (NSManagedObjectContext *) context;
 {
     if (_savingContext == nil)
     {
-        _savingContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        _savingContext = [NSManagedObjectContext MR_privateQueueContext];
         [_savingContext setPersistentStoreCoordinator:[self coordinator]];
     }
 
     if (_context == nil)
     {
-        _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+        _context = [NSManagedObjectContext MR_mainQueueContext];
         [_context setPersistentStoreCoordinator:[self coordinator]];
 
-        [_context MR_observeContextOnMainThread:_savingContext];
+        [_context MR_observeContext:_savingContext];
     }
 
     return _context;
