@@ -16,6 +16,7 @@ extern NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification;
 + (void) MR_setDefaultStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithInMemoryStore;
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithInMemoryStoreAndManagedObjectModel:(NSManagedObjectModel*)model;
 
 + (NSPersistentStoreCoordinator *) MR_newPersistentStoreCoordinator NS_RETURNS_RETAINED;
 

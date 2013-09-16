@@ -175,10 +175,15 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithInMemoryStore
 {
 	NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
-	NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+	return [NSPersistentStoreCoordinator MR_coordinatorWithInMemoryStoreAndManagedObjectModel:model];
+}
 
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithInMemoryStoreAndManagedObjectModel:(NSManagedObjectModel *)model
+{
+    NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+    
     [coordinator MR_addInMemoryStore];
-
+    
     return coordinator;
 }
 
