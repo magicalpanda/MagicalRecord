@@ -19,7 +19,7 @@
 
 @implementation SQLiteMagicalRecordStack
 
-@synthesize  model = _model;
+//@synthesize  model = _model;
 
 + (instancetype) stackWithStoreNamed:(NSString *)name;
 {
@@ -93,7 +93,7 @@
     if (self)
     {
         _storeURL = url;
-        _model = model;
+        self.model = model;
     }
     return self;
 }
