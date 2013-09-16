@@ -65,19 +65,22 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
     }
 
     void (^saveBlock)(void) = ^{
-        NSError *error = nil;
-        BOOL     saved = NO;
-
-        MRLog(@"→ Saving %@", [self MR_description]);
-        MRLog(@"→ Save Parents? %@", @(saveParentContexts));
-        MRLog(@"→ Save Synchronously? %@", @(syncSave));
-
+        
 #if MR_ENABLE_LOGGING != 0
+
+        NSString *optionsSummary = @"";
+        [optionsSummary stringByAppendingString:saveParentContexts ? @"Save Parents," : @""];
+        [optionsSummary stringByAppendingString:syncSave ? @"Sync Save" : @""];
+
+        MRLog(@"→ Saving %@ [%@]", [self MR_description], optionsSummary);
+
         NSInteger numberOfInsertedObjects = [[self insertedObjects] count];
         NSInteger numberOfUpdatedObjects = [[self updatedObjects] count];
         NSInteger numberOfDeletedObjects = [[self deletedObjects] count];
 #endif
-        
+        NSError *error = nil;
+        BOOL     saved = NO;
+
         @try
         {
             saved = [self save:&error];

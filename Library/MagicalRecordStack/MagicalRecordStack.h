@@ -10,6 +10,8 @@
 
 @interface MagicalRecordStack : NSObject
 
+@property (nonatomic, copy) NSString *stackName;
+
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) NSManagedObjectModel *model;
 @property (nonatomic, strong) NSPersistentStoreCoordinator *coordinator;
@@ -22,7 +24,8 @@
 
 - (void) reset;
 
-- (NSPersistentStoreCoordinator *) createCoordinator;
+- (NSManagedObjectContext *) newConfinementContext;
+
 - (void) setModelFromClass:(Class)klass;
 - (void) setModelNamed:(NSString *)modelName;
 

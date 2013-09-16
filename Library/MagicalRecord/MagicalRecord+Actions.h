@@ -1,18 +1,16 @@
 //
 //  MagicalRecord+Actions.h
+//  MagicalRecord
 //
-//  Created by Saul Mora on 2/24/11.
-//  Copyright 2011 Magical Panda Software. All rights reserved.
+//  Created by Saul Mora on 9/15/13.
+//  Copyright (c) 2013 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "NSManagedObjectContext+MagicalRecord.h"
+#import "MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalSaves.h"
 
 @interface MagicalRecord (Actions)
 
-/* For all background saving operations. These calls will be sent to a different thread/queue.
- */
 + (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
 + (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
 + (void) saveWithBlock:(void (^)(NSManagedObjectContext *))block identifier:(NSString *)contextWorkingName completion:(MRSaveCompletionHandler)completion;

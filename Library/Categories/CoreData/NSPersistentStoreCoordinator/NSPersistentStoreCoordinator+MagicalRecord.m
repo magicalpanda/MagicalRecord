@@ -12,24 +12,6 @@
 static NSInteger ddLogLevel = MR_LOG_LEVEL;
 #endif
 
-//static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
-NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagicalRecordPSCDidCompleteiCloudSetupNotification";
-
-@interface NSDictionary (MagicalRecordAdditions)
-
-- (NSMutableDictionary*) MR_dictionaryByMergingDictionary:(NSDictionary*)d; 
-+ (NSDictionary *) MR_defaultSqliteStoreOptions;
-+ (NSDictionary *) MR_autoMigrationOptions;
-+ (NSDictionary *) MR_manualMigrationOptions;
-
-@end 
-
-@interface MagicalRecord (iCloudPrivate)
-
-+ (void) setICloudEnabled:(BOOL)enabled;
-
-@end
-
 @implementation NSPersistentStoreCoordinator (MagicalRecord)
 
 + (void) MR_createPathToStoreFileIfNeccessary:(NSURL *)urlForStore

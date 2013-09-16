@@ -87,6 +87,24 @@ static MagicalRecordStack *defaultStack;
     return _context;
 }
 
+- (NSString *) stackName;
+{
+    if (_stackName == nil)
+    {
+        _stackName = [NSString stringWithFormat:@"%@ [%p]", NSStringFromClass([self class]), self];
+    }
+    return _stackName;
+}
+
+- (NSManagedObjectContext *) newConfinementContext;
+{
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_confinementContext];
+    NSString *workingName = [[context MR_workingName] stringByAppendingFormat:@" (%@)", [self stackName]];
+    [context setParentContext:[self context]];
+    [context MR_setWorkingName:workingName];
+    return context;
+}
+
 - (NSManagedObjectModel *) model;
 {
     if (_model == nil)

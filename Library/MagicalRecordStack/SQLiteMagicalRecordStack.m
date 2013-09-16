@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Magical Panda Software LLC. All rights reserved.
 //
 
+#import "MagicalRecordStack+Private.h"
 #import "SQLiteMagicalRecordStack.h"
 #import "NSPersistentStoreCoordinator+MagicalRecord.h"
-
 
 @interface SQLiteMagicalRecordStack ()
 
@@ -18,6 +18,8 @@
 
 
 @implementation SQLiteMagicalRecordStack
+
+@synthesize  model = _model;
 
 + (instancetype) stackWithStoreNamed:(NSString *)name;
 {
@@ -32,6 +34,21 @@
 + (instancetype) stackWithStoreAtPath:(NSString *)path;
 {
     return [[self alloc] initWithStoreAtPath:path];
+}
+
++ (instancetype) stackWithStoreNamed:(NSString *)name model:(NSManagedObjectModel *)model;
+{
+    return [[self alloc] initWithStoreNamed:name model:model];
+}
+
++ (instancetype) stackWithStoreAtURL:(NSURL *)url model:(NSManagedObjectModel *)model;
+{
+    return [[self alloc] initWithStoreAtURL:url model:model];
+}
+
++ (instancetype) stackWithStoreAtPath:(NSString *)path model:(NSManagedObjectModel *)model;
+{
+    return [[self alloc] initWithStoreAtPath:path model:model];
 }
 
 - (instancetype) init;
@@ -53,17 +70,37 @@
 
 - (instancetype) initWithStoreAtURL:(NSURL *)url;
 {
+    return [self initWithStoreAtURL:url model:nil];
+}
+
+- (instancetype) initWithStoreAtPath:(NSString *)path model:(NSManagedObjectModel *)model;
+{
+    NSURL *storeURL = [NSURL fileURLWithPath:path];
+    return [self initWithStoreAtURL:storeURL model:model];
+}
+
+- (instancetype) initWithStoreNamed:(NSString *)name model:(NSManagedObjectModel *)model;
+{
+    NSURL *storeURL = [NSPersistentStore MR_urlForStoreName:name];
+    return [self initWithStoreAtURL:storeURL model:model];
+}
+
+- (instancetype) initWithStoreAtURL:(NSURL *)url model:(NSManagedObjectModel *)model;
+{
+    NSParameterAssert(url);
+
     self = [super init];
     if (self)
     {
-        MRLog(@"Init with store at URL: %@", url);
         _storeURL = url;
+        _model = model;
     }
     return self;
 }
 
 - (NSPersistentStoreCoordinator *) createCoordinator;
 {
+    MRLog(@"Loading Store at URL: %@", self.storeURL);
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self model]];
     [coordinator MR_addSqliteStoreAtURL:self.storeURL withOptions:nil];
     return coordinator;

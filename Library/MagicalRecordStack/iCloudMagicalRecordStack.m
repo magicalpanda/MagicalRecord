@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Magical Panda Software LLC. All rights reserved.
 //
 
+#import "MagicalRecordStack+Private.h"
 #import "iCloudMagicalRecordStack.h"
 #import "NSPersistentStoreCoordinator+MagicaliCloudAdditions.h"
 

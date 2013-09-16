@@ -16,13 +16,12 @@
     #endif
 
     #import "MagicalRecord.h"
-    #import "MagicalRecord+Actions.h"
     #import "MagicalRecord+Options.h"
     #import "MagicalRecord+ShorthandSupport.h"
     #import "MagicalRecord+Setup.h"
-    #import "MagicalRecord+iCloud.h"
 
     #import "MagicalRecordStack.h"
+    #import "MagicalRecordStack+Actions.h"
 
     #import "NSManagedObject+MagicalRecord.h"
     #import "NSManagedObject+MagicalRequests.h"

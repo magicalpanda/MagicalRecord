@@ -8,6 +8,8 @@
 
 #import <CoreData/CoreData.h>
 
+extern NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification;
+
 @interface NSPersistentStoreCoordinator (MagicaliCloudAdditions)
 
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent;

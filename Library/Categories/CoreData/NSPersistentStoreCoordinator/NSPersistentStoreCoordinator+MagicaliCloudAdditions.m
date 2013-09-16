@@ -12,6 +12,8 @@
 #import "MagicalRecordStack.h"
 #import "MagicalRecord.h"
 
+NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagicalRecordPSCDidCompleteiCloudSetupNotification";
+
 @implementation NSPersistentStoreCoordinator (MagicaliCloudAdditions)
 
 
@@ -63,8 +65,6 @@
         {
             cloudURL = [cloudURL URLByAppendingPathComponent:subPathComponent];
         }
-
-//        [MagicalRecord setICloudEnabled:cloudURL != nil];
 
         NSDictionary *options = [NSDictionary MR_autoMigrationOptions];
         if (cloudURL)   //iCloud is available
