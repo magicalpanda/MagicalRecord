@@ -43,6 +43,7 @@ static MagicalRecordStack *defaultStack;
 + (void) setDefaultStack:(MagicalRecordStack *)stack;
 {
     defaultStack = stack;
+    [stack loadStack];
 }
 
 + (instancetype) stack;
@@ -50,6 +51,10 @@ static MagicalRecordStack *defaultStack;
     return [[self alloc] init];
 }
 
+- (void) loadStack;
+{
+    [self context];
+}
 //- (id) init;
 //{
 //    NSAssert(NO, @"%@ is an Abstract Class. Use one of the subclasses", NSStringFromClass([self class]));
@@ -126,7 +131,7 @@ static MagicalRecordStack *defaultStack;
     if (_coordinator == nil)
     {
         _coordinator = [self createCoordinator];
-        _store = [[_coordinator persistentStores] objectAtIndex:0];
+        _store = [[_coordinator persistentStores] lastObject];
     }
     return _coordinator;
 }
