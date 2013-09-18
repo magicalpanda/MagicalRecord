@@ -11,6 +11,8 @@ extern NSString * const MagicalRecordDidMergeChangesFromiCloudNotification;
 
 @interface NSManagedObjectContext (MagicalRecord)
 
+- (void) MR_obtainPermanentIDsForObjects:(NSArray *)objects;
+
 + (NSManagedObjectContext *) MR_context NS_RETURNS_RETAINED;
 + (NSManagedObjectContext *) MR_mainQueueContext;
 + (NSManagedObjectContext *) MR_privateQueueContext;
