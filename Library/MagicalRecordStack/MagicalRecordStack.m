@@ -88,6 +88,8 @@ static MagicalRecordStack *defaultStack;
     {
         _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         [_context setPersistentStoreCoordinator:[self coordinator]];
+        [_context MR_setWorkingName:[NSString stringWithFormat:@"Main Queue Context (%@)", [self stackName]]];
+        [_context setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
     }
     return _context;
 }
