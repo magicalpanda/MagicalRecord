@@ -251,7 +251,10 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
        {
            id relatedObjects = [[weakself valueForKey:relationshipInfo.name] mutableCopy];
 
-           NSArray *result = [NSClassFromString(relationshipInfo.destinationEntity.name) MR_importFromArray:localObjectData inContext:[weakself managedObjectContext]];
+           NSString *primaryKeyName = [relationshipInfo MR_primaryKey];
+           
+           NSAttributeDescription *primaryKeyAttribute = [[relationshipInfo.destinationEntity attributesByName] valueForKey:primaryKeyName];
+           NSArray *result = [NSClassFromString(relationshipInfo.destinationEntity.name) MR_importFromArray:localObjectData withPrimaryAttribute:primaryKeyAttribute inContext:[weakself managedObjectContext]];
            [relatedObjects addObjectsFromArray:result];
                                       
            
