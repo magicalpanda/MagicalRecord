@@ -234,7 +234,8 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     return [self MR_performDataImportFromObject:objectData
                               relationshipBlock:^(NSRelationshipDescription *relationshipInfo, id localObjectData) {
         
-       if(![relationshipInfo isToMany]) {
+       if(![relationshipInfo isToMany])
+       {
            NSManagedObject *relatedObject = [weakself MR_findObjectForRelationship:relationshipInfo withData:localObjectData];
                                       
            if (relatedObject == nil)
@@ -245,7 +246,9 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
            [relatedObject MR_importValuesForKeysWithObject:localObjectData];
                                       
            [weakself MR_setValueIfDifferent:relatedObject forKey:relationshipInfo.name];
-       } else {
+       }
+       else
+       {
            id relatedObjects = [[weakself valueForKey:relationshipInfo.name] mutableCopy];
 
            NSArray *result = [NSClassFromString(relationshipInfo.destinationEntity.name) MR_importFromArray:localObjectData inContext:[weakself managedObjectContext]];
