@@ -271,24 +271,51 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 
 + (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context
 {
-    NSMutableArray *objectIDs = [NSMutableArray array];
+    NSEntityDescription *entity = [self MR_entityDescription];
+    NSAttributeDescription *primaryAttribute = [entity MR_primaryAttributeToRelateBy];
+    return [self MR_importFromArray:listOfObjectData withPrimaryAttribute:primaryAttribute inContext:context];
+}
+
++ (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData withPrimaryAttribute:(NSAttributeDescription *)primaryAttribute inContext:(NSManagedObjectContext *)context
+{
+    NSMutableArray *resultObjects = [NSMutableArray arrayWithCapacity:listOfObjectData.count];
     
-    [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) 
-    {    
-        [listOfObjectData enumerateObjectsWithOptions:0 usingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
+    NSMutableSet *keysToFetchBy = [NSMutableSet setWithCapacity:listOfObjectData.count];
+    
+    for(id singleObjectData in listOfObjectData)
+    {
+        id primaryKey = [singleObjectData MR_valueForAttribute:primaryAttribute];
+        if(primaryKey)
         {
-            NSDictionary *objectData = (NSDictionary *)obj;
-
-            NSManagedObject *dataObject = [self MR_importFromObject:objectData inContext:localContext];
-
-            if ([context obtainPermanentIDsForObjects:[NSArray arrayWithObject:dataObject] error:nil])
-            {
-              [objectIDs addObject:[dataObject objectID]];
-            }
-        }];
-    }];
+            [keysToFetchBy addObject:primaryKey];
+        }
+    }
     
-    return [self MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"self IN %@", objectIDs] inContext:context];
+    NSArray *fetchedObjects = [self MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"%K in %@", primaryAttribute.name, keysToFetchBy] inContext:context];
+    
+    NSMutableDictionary *objectCache = [[NSMutableDictionary alloc] initWithCapacity:fetchedObjects.count];
+    
+    for(NSManagedObject *object in fetchedObjects)
+    {
+        [objectCache setObject:object forKey:[object valueForKey:primaryAttribute.name]];
+    }
+    
+    for(id singleObjectData in listOfObjectData)
+    {
+        
+        id primaryKey = [singleObjectData MR_valueForAttribute:primaryAttribute];
+        NSManagedObject *object = [objectCache objectForKey:primaryKey];
+        
+        if(object == nil)
+        {
+            object = [self MR_createInContext:context];
+        }
+        
+        [object MR_importValuesForKeysWithObject:singleObjectData];
+        [resultObjects addObject:object];
+    }
+    
+    return resultObjects;
 }
 
 @end
