@@ -63,7 +63,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
             id value = [attributeInfo MR_valueForKeyPath:lookupKeyPath fromObjectData:objectData];
             if (![self MR_importValue:value forKey:attributeName])
             {
-                [self setValue:value forKey:attributeName];
+                [self MR_setValueIfDifferent:value forKey:attributeName];
             }
         } 
         else 
@@ -73,12 +73,32 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
                 id value = [attributeInfo defaultValue];
                 if (![self MR_importValue:value forKey:attributeName])
                 {
-                    [self setValue:value forKey:attributeName];
+                    [self MR_setValueIfDifferent:value forKey:attributeName];
                 }
             }
         }
     }
 }
+
+- (void)MR_setValueIfDifferent:(id)value forKey:(NSString *)key
+{
+    id currentValue = [self valueForKey:key];
+    if(currentValue == nil && value == nil)
+    {
+        return;
+    }
+    
+    if((currentValue == nil && value != nil) || (currentValue != nil && value == nil))
+    {
+        [self setValue:value forKey:key];
+        return;
+    }
+    if(![currentValue isEqual:value])
+    {
+        [self setValue:value forKey:key];
+    }
+}
+
 
 - (NSManagedObject *) MR_findObjectForRelationship:(NSRelationshipDescription *)relationshipInfo withData:(id)singleRelatedObjectData
 {
@@ -224,7 +244,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
            }
            [relatedObject MR_importValuesForKeysWithObject:localObjectData];
                                       
-           [weakself setValue:relatedObject forKey:relationshipInfo.name];
+           [weakself MR_setValueIfDifferent:relatedObject forKey:relationshipInfo.name];
        } else {
            id relatedObjects = [[weakself valueForKey:relationshipInfo.name] mutableCopy];
 
@@ -232,7 +252,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
            [relatedObjects addObjectsFromArray:result];
                                       
            
-           [weakself setValue:relatedObjects forKey:relationshipInfo.name];
+           [weakself MR_setValueIfDifferent:relatedObjects forKey:relationshipInfo.name];
        }
     } ];
 }
