@@ -8,6 +8,7 @@ Pod::Spec.new do |s|
   s.source   = { :git => 'https://github.com/magicalpanda/MagicalRecord.git', :branch=>'master', :tag => '3.0' }
   s.description  = 'Handy fetching, threading and data import helpers to make Core Data a little easier to use.'
   s.source_files = 'Library/**/*.{h,m}'
+  s.exclude_files = 'Library/Categories/UIKit/**'
   s.framework    = 'CoreData'
   s.requires_arc = true
   s.prefix_header_contents = "#ifdef __OBJC__\n#define MR_SHORTHAND\n#import \"CoreData+MagicalRecord.h\"\n#endif"
