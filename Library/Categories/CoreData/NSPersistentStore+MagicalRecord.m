@@ -43,8 +43,7 @@ NSString * const kMagicalRecordDefaultStoreFileName = @"CoreDataStore.sqlite";
         }
     }
 
-    //set default url
-    return [NSURL fileURLWithPath:[[self MR_applicationStorageDirectory] stringByAppendingPathComponent:storeFileName]];
+    return nil;
 }
 
 + (NSURL *) MR_cloudURLForUbiqutiousContainer:(NSString *)bucketName;
