@@ -29,6 +29,17 @@ NSString * const kMagicalRecordDefaultStoreFileName = @"CoreDataStore.sqlite";
     return [[self MR_directory:NSApplicationSupportDirectory] stringByAppendingPathComponent:applicationName];
 }
 
++ (NSURL *) MR_defaultURLForStoreName:(NSString *)storeFileName;
+{
+    NSURL *storeURL = [self MR_urlForStoreName:storeFileName];
+    if (storeURL == nil)
+    {
+        NSString *storePath = [[self MR_applicationStorageDirectory] stringByAppendingPathComponent:storeFileName];
+        storeURL = [NSURL fileURLWithPath:storePath];
+    }
+    return storeURL;
+}
+
 + (NSURL *) MR_urlForStoreName:(NSString *)storeFileName
 {
 	NSArray *paths = [NSArray arrayWithObjects:[self MR_applicationDocumentsDirectory], [self MR_applicationStorageDirectory], nil];

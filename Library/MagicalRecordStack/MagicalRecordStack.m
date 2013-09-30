@@ -24,9 +24,9 @@ static MagicalRecordStack *defaultStack;
 
 - (NSString *) description;
 {
-    NSMutableString *status = [NSMutableString string];
+    NSMutableString *status = [NSMutableString stringWithString:@"\n"];
 
-    [status appendFormat:@"Stack:           %@\n", NSStringFromClass([self class])];
+    [status appendFormat:@"Stack:           %@ (%p)\n", NSStringFromClass([self class]), self];
     [status appendFormat:@"Model:           %@\n", [[self model] entityVersionHashesByName]];
     [status appendFormat:@"Coordinator:     %@\n", [self coordinator]];
     [status appendFormat:@"Store:           %@\n", [self store]];
