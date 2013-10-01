@@ -76,4 +76,55 @@ static NSPersistentStore *defaultPersistentStore_ = nil;
     return [self MR_urlForStoreName:kMagicalRecordDefaultStoreFileName];
 }
 
++ (BOOL)MR_deleteFilesForSqliteStoreAtURL:(NSURL *)sqliteStoreURL withFileManager:(NSFileManager *)manager
+{
+    if (![[sqliteStoreURL pathExtension] isEqualToString:@"sqlite"]) {
+        NSString *reason = [NSString stringWithFormat:@"*** -[%@ %@]: sqliteStoreURL does not point to a .sqlite file",
+                            NSStringFromClass([self class]),
+                            NSStringFromSelector(_cmd)];
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:reason userInfo:nil];
+    }
+    
+    NSString *storeDirectoryPath = [[sqliteStoreURL path] stringByDeletingLastPathComponent];
+    NSString *storeFilename = [[sqliteStoreURL path] lastPathComponent];
+    
+    NSError *fileError;
+    NSArray *storeDirectoryContents;
+    storeDirectoryContents = [manager contentsOfDirectoryAtPath:storeDirectoryPath error:&fileError];
+    
+    BOOL result = YES;
+    if (fileError) {
+        [MagicalRecord handleErrors:fileError];
+        result = NO;
+    } else {
+        NSError *regexError;
+        NSString *pattern = [NSString stringWithFormat:@"\\A%@.*\\z", storeFilename];
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern
+                                                                               options:kNilOptions
+                                                                                 error:&regexError];
+        if (regexError) {
+            [MagicalRecord handleErrors:regexError];
+            result = NO;
+        } else {
+            for (NSString *filename in storeDirectoryContents) {
+                NSRange filenameRange = NSMakeRange(0, [filename length]);
+                NSUInteger numMatches = [regex numberOfMatchesInString:filename
+                                                               options:kNilOptions
+                                                                 range:filenameRange];
+                if (numMatches > 0) {
+                    NSString *fullFilePath = [storeDirectoryPath stringByAppendingPathComponent:filename];
+                    NSError *deletionError;
+                    if ([manager removeItemAtPath:fullFilePath error:&deletionError]) {
+                        MRLogInfo(@"Removed SQLite persistent store file at path '%@'", fullFilePath);
+                    } else {
+                        [MagicalRecord handleErrors:deletionError];
+                        result = NO;
+                    }
+                }
+            }
+        }
+    }
+    return result;
+}
+
 @end

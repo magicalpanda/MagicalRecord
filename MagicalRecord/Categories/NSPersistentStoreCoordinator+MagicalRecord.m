@@ -81,10 +81,18 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
         if ([[error domain] isEqualToString:NSCocoaErrorDomain] && isMigrationError)
         {
             // Could not open the database, so... kill it!
-            [[NSFileManager defaultManager] removeItemAtURL:url error:nil];
-
-            MRLogInfo(@"Removed incompatible model version: %@", [url lastPathComponent]);
+            NSFileManager *manager = [NSFileManager defaultManager];
+            BOOL deletionResult = [NSPersistentStore MR_deleteFilesForSqliteStoreAtURL:url
+                                                                       withFileManager:manager];
             
+            if (deletionResult) {
+                MRLogInfo(@"Removed SQLite store %@ to resolve incompatible model version",
+                          [url lastPathComponent]);
+            } else {
+                MRLogWarn(@"Unable to fully remove SQLite store %@ to resolve incompatible model version; will try to create store one more time anyway",
+                          [url lastPathComponent]);
+            }
+
             // Try one more time to create the store
             store = [self addPersistentStoreWithType:NSSQLiteStoreType
                                        configuration:nil

@@ -22,6 +22,8 @@ extern NSString * const kMagicalRecordDefaultStoreFileName;
 + (NSURL *) MR_urlForStoreName:(NSString *)storeFileName;
 + (NSURL *) MR_cloudURLForUbiqutiousContainer:(NSString *)bucketName;
 
++ (BOOL)MR_deleteFilesForSqliteStoreAtURL:(NSURL *)sqliteStoreURL withFileManager:(NSFileManager *)manager;
+
 @end
 
 
