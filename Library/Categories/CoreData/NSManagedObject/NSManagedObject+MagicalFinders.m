@@ -15,7 +15,7 @@
 
 + (NSArray *) MR_findAllInContext:(NSManagedObjectContext *)context
 {
-	return [self MR_executeFetchRequest:[self MR_requestAllInContext:context] inContext:context];
+	return [self MR_executeFetchRequest:[self MR_requestAll] inContext:context];
 }
 
 + (NSArray *) MR_findAll
@@ -25,7 +25,7 @@
 
 + (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
 {
-	NSFetchRequest *request = [self MR_requestAllSortedBy:sortTerm ascending:ascending inContext:context];
+	NSFetchRequest *request = [self MR_requestAllSortedBy:sortTerm ascending:ascending];
 	
 	return [self MR_executeFetchRequest:request inContext:context];
 }
@@ -41,8 +41,7 @@
 {
 	NSFetchRequest *request = [self MR_requestAllSortedBy:sortTerm
                                                 ascending:ascending
-                                            withPredicate:searchTerm
-                                                inContext:context];
+                                            withPredicate:searchTerm];
 	
 	return [self MR_executeFetchRequest:request inContext:context];
 }
@@ -58,7 +57,7 @@
 
 + (NSArray *) MR_findAllWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
 {
-	NSFetchRequest *request = [self MR_createFetchRequestInContext:context];
+	NSFetchRequest *request = [self MR_requestAll];
 	[request setPredicate:searchTerm];
 	
 	return [self MR_executeFetchRequest:request
@@ -78,7 +77,7 @@
 
 + (id) MR_selectAttribute:(NSString *)attribute ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
 {
-    NSFetchRequest *request = [self MR_requestAllSortedBy:attribute ascending:ascending inContext:context];
+    NSFetchRequest *request = [self MR_requestAllSortedBy:attribute ascending:ascending];
     [request setResultType:NSDictionaryResultType];
     [request setPropertiesToFetch:[NSArray arrayWithObject:attribute]];
     NSArray *results = [self MR_executeFetchRequest:request inContext:context];
@@ -93,7 +92,7 @@
 
 + (id) MR_findFirstInContext:(NSManagedObjectContext *)context;
 {
-	NSFetchRequest *request = [self MR_createFetchRequestInContext:context];
+	NSFetchRequest *request = [self MR_requestAll];
 	
 	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
 }
@@ -107,7 +106,7 @@
 
 + (id) MR_findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context
 {	
-	NSFetchRequest *request = [self MR_requestFirstByAttribute:attribute withValue:searchValue inContext:context];
+	NSFetchRequest *request = [self MR_requestFirstByAttribute:attribute withValue:searchValue];
     
 	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
 }
@@ -119,7 +118,7 @@
 
 + (id) MR_findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue orderedBy:(NSString *)orderedBy ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
 {
-    NSFetchRequest *request = [self MR_requestFirstByAttribute:attribute withValue:searchValue inContext:context];
+    NSFetchRequest *request = [self MR_requestFirstByAttribute:attribute withValue:searchValue];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:orderedBy ascending:ascending];
     [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     
@@ -128,7 +127,7 @@
 
 + (id) MR_findFirstOrderedByAttribute:(NSString *)attribute ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
 {
-    NSFetchRequest *request = [self MR_requestAllSortedBy:attribute ascending:ascending inContext:context];
+    NSFetchRequest *request = [self MR_requestAllSortedBy:attribute ascending:ascending];
     [request setFetchLimit:1];
 
     return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
@@ -148,7 +147,7 @@
 
 + (id) MR_findLargestValueForAttribute:(NSString *)attribute withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
 {
-    NSFetchRequest *request = [self MR_requestAllSortedBy:attribute ascending:NO inContext:context];
+    NSFetchRequest *request = [self MR_requestAllSortedBy:attribute ascending:NO];
     [request setFetchLimit:1];
     [request setResultType:NSDictionaryResultType];
     [request setPropertiesToFetch:@[attribute]];
@@ -177,7 +176,7 @@
 
 + (id) MR_findSmallestValueForAttribute:(NSString *)attribute inContext:(NSManagedObjectContext *)context;
 {
-    NSFetchRequest *request = [self MR_requestAllSortedBy:attribute ascending:YES inContext:context];
+    NSFetchRequest *request = [self MR_requestAllSortedBy:attribute ascending:YES];
     [request setFetchLimit:1];
     [request setResultType:NSDictionaryResultType];
     [request setPropertiesToFetch:@[attribute]];
@@ -195,14 +194,14 @@
 
 + (id) MR_findFirstWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
 {
-    NSFetchRequest *request = [self MR_requestFirstWithPredicate:searchTerm inContext:context];
+    NSFetchRequest *request = [self MR_requestFirstWithPredicate:searchTerm];
     
     return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
 }
 
 + (id) MR_findFirstWithPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)property ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
 {
-	NSFetchRequest *request = [self MR_requestAllSortedBy:property ascending:ascending withPredicate:searchTerm inContext:context];
+	NSFetchRequest *request = [self MR_requestAllSortedBy:property ascending:ascending withPredicate:searchTerm];
     
 	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
 }
@@ -217,7 +216,7 @@
 
 + (id) MR_findFirstWithPredicate:(NSPredicate *)searchTerm andRetrieveAttributes:(NSArray *)attributes inContext:(NSManagedObjectContext *)context;
 {
-	NSFetchRequest *request = [self MR_createFetchRequestInContext:context];
+	NSFetchRequest *request = [self MR_requestAll];
 	[request setPredicate:searchTerm];
 	[request setPropertiesToFetch:attributes];
 	
@@ -235,8 +234,7 @@
 {
 	NSFetchRequest *request = [self MR_requestAllSortedBy:sortBy
                                                 ascending:ascending
-                                            withPredicate:searchTerm
-                                                inContext:context];
+                                            withPredicate:searchTerm];
 	[request setPropertiesToFetch:[self MR_propertiesNamed:attributes]];
 	
 	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
@@ -253,7 +251,7 @@
 
 + (NSArray *) MR_findByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context;
 {
-    NSFetchRequest *request = [self MR_requestAllWhere:attribute isEqualTo:searchValue inContext:context];
+    NSFetchRequest *request = [self MR_requestAllWhere:attribute isEqualTo:searchValue];
 	
 	return [self MR_executeFetchRequest:request inContext:context];
 }
@@ -268,7 +266,7 @@
 + (NSArray *) MR_findByAttribute:(NSString *)attribute withValue:(id)searchValue andOrderBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
 {
 	NSPredicate *searchTerm = [NSPredicate predicateWithFormat:@"%K = %@", attribute, searchValue];
-	NSFetchRequest *request = [self MR_requestAllSortedBy:sortTerm ascending:ascending withPredicate:searchTerm inContext:context];
+	NSFetchRequest *request = [self MR_requestAllSortedBy:sortTerm ascending:ascending withPredicate:searchTerm];
 	
 	return [self MR_executeFetchRequest:request inContext:context];
 }
