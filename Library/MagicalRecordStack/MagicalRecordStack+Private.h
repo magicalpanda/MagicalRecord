@@ -12,5 +12,6 @@
 
 - (NSPersistentStoreCoordinator *) createCoordinator;
 - (NSManagedObjectContext *) createConfinementContext;
+- (void) loadStack;
 
 @end

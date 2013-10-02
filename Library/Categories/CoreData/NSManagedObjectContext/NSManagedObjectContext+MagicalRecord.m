@@ -21,10 +21,14 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
 
 - (NSString *) MR_description;
 {
-    NSString *contextLabel = [NSString stringWithFormat:@"*** %@ ***", [self MR_workingName]];
     NSString *onMainThread = [NSThread isMainThread] ? @"*** MAIN THREAD ***" : @"*** BACKGROUND THREAD ***";
 
-    return [NSString stringWithFormat:@"<%@ (%p)> %@ on %@", NSStringFromClass([self class]), self, contextLabel, onMainThread];
+    return [NSString stringWithFormat:@"%@ on %@", [self MR_workingName], onMainThread];
+}
+
+- (NSString *) MR_debugDescription;
+{
+    return [NSString stringWithFormat:@"<%@ (%p)> %@ ", NSStringFromClass([self class]), self, [self MR_description]];
 }
 
 - (NSString *) MR_parentChain;
@@ -38,6 +42,16 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     while ((currentContext = [currentContext parentContext]));
 
     return [NSString stringWithString:familyTree];
+}
+
+- (void) MR_obtainPermanentIDsForObjects:(NSArray *)objects;
+{
+    NSError *error = nil;
+    BOOL success = [self obtainPermanentIDsForObjects:objects error:&error];
+    if (!success)
+    {
+        [[error MR_coreDataDescription] MR_logToConsole];
+    }
 }
 
 + (NSManagedObjectContext *) MR_context;

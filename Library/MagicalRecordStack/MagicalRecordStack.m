@@ -24,8 +24,9 @@ static MagicalRecordStack *defaultStack;
 
 - (NSString *) description;
 {
-    NSMutableString *status = [NSMutableString string];
+    NSMutableString *status = [NSMutableString stringWithString:@"\n"];
 
+    [status appendFormat:@"Stack:           %@ (%p)\n", NSStringFromClass([self class]), self];
     [status appendFormat:@"Model:           %@\n", [[self model] entityVersionHashesByName]];
     [status appendFormat:@"Coordinator:     %@\n", [self coordinator]];
     [status appendFormat:@"Store:           %@\n", [self store]];
@@ -43,6 +44,7 @@ static MagicalRecordStack *defaultStack;
 + (void) setDefaultStack:(MagicalRecordStack *)stack;
 {
     defaultStack = stack;
+    [stack loadStack];
 }
 
 + (instancetype) stack;
@@ -50,6 +52,10 @@ static MagicalRecordStack *defaultStack;
     return [[self alloc] init];
 }
 
+- (void) loadStack;
+{
+    [self context];
+}
 //- (id) init;
 //{
 //    NSAssert(NO, @"%@ is an Abstract Class. Use one of the subclasses", NSStringFromClass([self class]));
@@ -83,6 +89,8 @@ static MagicalRecordStack *defaultStack;
     {
         _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         [_context setPersistentStoreCoordinator:[self coordinator]];
+        [_context MR_setWorkingName:[NSString stringWithFormat:@"Main Queue Context (%@)", [self stackName]]];
+        [_context setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
     }
     return _context;
 }
@@ -126,7 +134,7 @@ static MagicalRecordStack *defaultStack;
     if (_coordinator == nil)
     {
         _coordinator = [self createCoordinator];
-        _store = [[_coordinator persistentStores] objectAtIndex:0];
+        _store = [[_coordinator persistentStores] lastObject];
     }
     return _coordinator;
 }
