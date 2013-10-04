@@ -7,6 +7,10 @@
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
 
+#if DEBUG
     #define MR_LOGGING_ENABLED 1
+#else
+    #define MR_LOGGING_ENABLED 0
+#endif
 
 #endif
