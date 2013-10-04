@@ -50,8 +50,7 @@
 {
 	NSFetchRequest *request = [self MR_requestAllSortedBy:sortTerm
                                                 ascending:ascending
-                                            withPredicate:searchTerm
-                                                inContext:context];
+                                            withPredicate:searchTerm];
 
     NSFetchedResultsController *controller = [self MR_fetchController:request
                                                              delegate:delegate
@@ -97,8 +96,7 @@
 {
     NSFetchRequest *request = [self MR_requestAllSortedBy:sortTerm
                                                 ascending:ascending
-                                            withPredicate:searchTerm
-                                                inContext:context];
+                                            withPredicate:searchTerm];
 
 	NSFetchedResultsController *controller = [self MR_fetchController:request
                                                              delegate:nil

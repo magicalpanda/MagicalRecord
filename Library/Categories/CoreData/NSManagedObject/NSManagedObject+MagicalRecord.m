@@ -74,7 +74,7 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
-+ (NSString *) MR_entityName
++ (NSString *) MR_entityName;
 {
     if ([self respondsToSelector:@selector(entityName)])
     {
@@ -170,7 +170,7 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 
 + (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context
 {
-    NSFetchRequest *request = [self MR_requestAllWithPredicate:predicate inContext:context];
+    NSFetchRequest *request = [self MR_requestAllWithPredicate:predicate];
     [request setReturnsObjectsAsFaults:YES];
 	[request setIncludesPropertyValues:NO];
     
@@ -191,7 +191,7 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 
 + (BOOL) MR_truncateAllInContext:(NSManagedObjectContext *)context
 {
-    NSFetchRequest *request = [self MR_requestAllInContext:context];
+    NSFetchRequest *request = [self MR_requestAll];
     [request setReturnsObjectsAsFaults:YES];
     [request setIncludesPropertyValues:NO];
 

@@ -51,7 +51,7 @@
 + (NSUInteger) MR_countOfEntitiesWithContext:(NSManagedObjectContext *)context;
 {
 	NSError *error = nil;
-	NSUInteger count = [context countForFetchRequest:[self MR_createFetchRequestInContext:context] error:&error];
+	NSUInteger count = [context countForFetchRequest:[self MR_requestAll] error:&error];
     [[error MR_coreDataDescription] MR_logToConsole];
 
     return count;
@@ -65,7 +65,7 @@
 + (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter inContext:(NSManagedObjectContext *)context;
 {
 	NSError *error = nil;
-	NSFetchRequest *request = [self MR_createFetchRequestInContext:context];
+	NSFetchRequest *request = [self MR_requestAll];
 	[request setPredicate:searchFilter];
 	
 	NSUInteger count = [context countForFetchRequest:request error:&error];
@@ -94,7 +94,7 @@
 
 - (id) MR_objectWithMinValueFor:(NSString *)property inContext:(NSManagedObjectContext *)context
 {
-	NSFetchRequest *request = [[self class] MR_createFetchRequestInContext:context];
+	NSFetchRequest *request = [[self class] MR_requestAll];
     
 	NSPredicate *searchFor = [NSPredicate predicateWithFormat:@"SELF = %@ AND %K = min(%@)", self, property, property];
 	[request setPredicate:searchFor];
@@ -121,7 +121,7 @@
     [ed setExpressionResultType:[attributeDescription attributeType]];    
     NSArray *properties = [NSArray arrayWithObject:ed];
     
-    NSFetchRequest *request = [self MR_requestAllWithPredicate:predicate inContext:context];
+    NSFetchRequest *request = [self MR_requestAllWithPredicate:predicate];
     [request setPropertiesToFetch:properties];
     [request setResultType:NSDictionaryResultType];    
     
