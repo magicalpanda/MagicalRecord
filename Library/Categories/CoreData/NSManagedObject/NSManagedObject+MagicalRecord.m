@@ -7,22 +7,7 @@
 #import "MagicalRecordStack.h"
 #import "MagicalRecordLogging.h"
 
-static NSUInteger defaultBatchSize = 20;
-
 @implementation NSManagedObject (MagicalRecord)
-
-+ (void) MR_setDefaultBatchSize:(NSUInteger)newBatchSize
-{
-	@synchronized(self)
-	{
-		defaultBatchSize = newBatchSize;
-	}
-}
-
-+ (NSUInteger) MR_defaultBatchSize
-{
-	return defaultBatchSize;
-}
 
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
 {
@@ -258,6 +243,6 @@ static NSUInteger defaultBatchSize = 20;
 
 void MRTransferObjectToContextError(NSManagedObject *object)
 {
-    MRCLogFatal(@"Cannot load a temporary object %@ across Managed Object Contexts", object);
+    MRCLogFatal(@"Cannot load a temporary object '%@' [%@] across Managed Object Contexts", object, [object objectID]);
     MRCLogFatal(@"Break in MRTransferObjectToContextError for more information");
 }

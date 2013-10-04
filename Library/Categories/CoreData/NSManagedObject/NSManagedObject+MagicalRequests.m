@@ -11,9 +11,24 @@
 #import "MagicalRecordStack.h"
 #import "MagicalRecordLogging.h"
 
+static NSUInteger defaultBatchSize = 20;
+
 NSArray *MR_NSSortDescriptorsFromString(NSString *string, BOOL defaultAscendingValue);
 
 @implementation NSManagedObject (MagicalRequests)
+
++ (void) MR_setDefaultBatchSize:(NSUInteger)newBatchSize
+{
+	@synchronized(self)
+	{
+		defaultBatchSize = newBatchSize;
+	}
+}
+
++ (NSUInteger) MR_defaultBatchSize
+{
+	return defaultBatchSize;
+}
 
 + (NSFetchRequest *) MR_requestAll
 {

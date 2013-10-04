@@ -10,6 +10,9 @@
 
 @interface NSManagedObject (MagicalRequests)
 
++ (NSUInteger) MR_defaultBatchSize;
++ (void) MR_setDefaultBatchSize:(NSUInteger)newBatchSize;
+
 + (NSFetchRequest *) MR_requestAll;
 + (NSFetchRequest *) MR_requestAllWithPredicate:(NSPredicate *)searchTerm;
 + (NSFetchRequest *) MR_requestAllWhere:(NSString *)property isEqualTo:(id)value;
