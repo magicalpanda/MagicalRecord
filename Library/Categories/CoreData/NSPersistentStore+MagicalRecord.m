@@ -6,7 +6,7 @@
 //
 
 #import "NSPersistentStore+MagicalRecord.h"
-//#import "CoreData+MagicalRecord.h"
+#import "NSError+MagicalRecordErrorHandling.h"
 
 NSString * const kMagicalRecordDefaultStoreFileName = @"CoreDataStore.sqlite";
 
@@ -72,6 +72,53 @@ NSString * const kMagicalRecordDefaultStoreFileName = @"CoreDataStore.sqlite";
 + (NSURL *) MR_defaultLocalStoreUrl
 {
     return [self MR_urlForStoreName:kMagicalRecordDefaultStoreFileName];
+}
+
+- (BOOL) MR_isSqliteStore;
+{
+    return [[self type] isEqualToString:NSSQLiteStoreType];
+}
+
+- (BOOL) copyToURL:(NSURL *)destinationUrl error:(NSError **)error;
+{
+    if (![self MR_isSqliteStore]) return NO;
+
+    NSArray *storeUrls = [self MR_sqliteURLs];
+
+    BOOL success = YES;
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+
+    for (NSURL *storeUrl in storeUrls)
+    {
+        NSURL *copyToURL = [destinationUrl URLByDeletingPathExtension];
+        copyToURL = [copyToURL URLByAppendingPathExtension:[storeUrl pathExtension]];
+        success &= [fileManager copyItemAtURL:storeUrl toURL:copyToURL error:error];
+    }
+    return success;
+}
+
+- (NSArray *) MR_sqliteURLs;
+{
+    if (![self MR_isSqliteStore]) return nil;
+
+    NSURL *primaryStoreURL = [self URL];
+    NSMutableArray *storeURLs = [NSMutableArray arrayWithObject:primaryStoreURL];
+    NSArray *extensions = @[@"sqlite-wal", @"sqlite-shm"];
+
+    for (NSString *extension in extensions)
+    {
+        NSURL *extensionURL = [primaryStoreURL URLByDeletingPathExtension];
+        extensionURL = [extensionURL URLByAppendingPathExtension:extension];
+
+        NSError *error;
+        BOOL fileExists = [extensionURL checkResourceIsReachableAndReturnError:&error];
+        if (fileExists)
+        {
+            [storeURLs addObject:extensionURL];
+        }
+        [[error MR_coreDataDescription] MR_logToConsole];
+    }
+    return [NSArray arrayWithArray:storeURLs];
 }
 
 @end

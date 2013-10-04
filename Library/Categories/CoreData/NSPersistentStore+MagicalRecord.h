@@ -19,6 +19,9 @@ extern NSString * const kMagicalRecordDefaultStoreFileName;
 + (NSURL *) MR_urlForStoreName:(NSString *)storeFileName;
 + (NSURL *) MR_cloudURLForUbiqutiousContainer:(NSString *)bucketName;
 
+- (NSArray *) MR_sqliteURLs;
+- (BOOL) copyToURL:(NSURL *)destinationUrl error:(NSError **)error;
+
 @end
 
 
