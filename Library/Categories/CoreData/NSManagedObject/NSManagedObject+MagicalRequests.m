@@ -9,6 +9,7 @@
 #import "NSManagedObject+MagicalRequests.h"
 #import "NSManagedObject+MagicalRecord.h"
 #import "MagicalRecordStack.h"
+#import "MagicalRecordLogging.h"
 
 NSArray *MR_NSSortDescriptorsFromString(NSString *string, BOOL defaultAscendingValue);
 
@@ -92,7 +93,7 @@ NSArray *MR_NSSortDescriptorsFromString(NSString *sortTerm, BOOL defaultAscendin
             ascending = [customAscending boolValue];
         }
 
-        MRCLog(@"- Sorting %@ %@", sortKey, ascending ? @"Ascending": @"Descending");
+        MRCLogVerbose(@"- Sorting %@ %@", sortKey, ascending ? @"Ascending": @"Descending");
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
         [sortDescriptors addObject:sortDescriptor];
     }

@@ -6,11 +6,11 @@
 //
 
 #import "CoreData+MagicalRecord.h"
+#import "NSDictionary+MagicalRecordAdditions.h"
 #import "MagicalRecordStack.h"
+#import "MagicalRecordLogging.h"
 
-#if MR_LOG_LEVEL >= 0
-static NSInteger ddLogLevel = MR_LOG_LEVEL;
-#endif
+NSString * const MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey = @"MagicalRecordShouldDeletePersistentStoreOnModelMistachKey";
 
 @implementation NSPersistentStoreCoordinator (MagicalRecord)
 
@@ -36,8 +36,6 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 
 - (NSPersistentStore *) MR_reinitializeStoreAtURL:(NSURL *)url fromError:(NSError *)error withOptions:(NSDictionary *__autoreleasing)options;
 {
-    if (![MagicalRecord shouldDeleteStoreOnModelMismatch]) return nil;
-
     NSPersistentStore *store = nil;
     BOOL isMigrationError = [error code] == NSPersistentStoreIncompatibleVersionHashError || [error code] == NSMigrationMissingSourceModelError;
     if ([[error domain] isEqualToString:NSCocoaErrorDomain] && isMigrationError)
@@ -54,7 +52,7 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
                 [[NSFileManager defaultManager] removeItemAtURL:toRemove error:nil];
             }
 
-            MRLog(@"Removed incompatible model version: %@", [url lastPathComponent]);
+            MRLogInfo(@"Removed incompatible model version: %@", [url lastPathComponent]);
         }
 
         // Try one more time to create the store
@@ -77,7 +75,7 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 {
     [[self class] MR_createPathToStoreFileIfNeccessary:url];
 
-    MRLog(@"Adding store at [%@] to NSPSC with options [%@]", url, options);
+    MRLogVerbose(@"Adding store at [%@] to NSPSC with options [%@]", url, options);
     @try {
         
         NSError *error = nil;
@@ -86,13 +84,14 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
                                                                 URL:url
                                                             options:options
                                                               error:&error];
-        if (store == nil && error == nil)
+        
+        if ([options MR_shouldDeletePersistentStoreOnModelMismatch] && store == nil && error == nil)
         {
             store = [self MR_reinitializeStoreAtURL:url fromError:error withOptions:options];
         }
         if (error)
         {
-            MRLog(@"Unable to setup store at URL: %@", url);
+            MRLogError(@"Unable to setup store at URL: %@", url);
             [[error MR_coreDataDescription] MR_logToConsole];
         }
         return store;

@@ -7,11 +7,8 @@
 
 #import "CoreData+MagicalRecord.h"
 #import "MagicalRecordStack.h"
+#import "MagicalRecordLogging.h"
 #import <objc/runtime.h>
-
-#if MR_LOG_LEVEL >= 0
-static NSInteger ddLogLevel = MR_LOG_LEVEL;
-#endif
 
 static id iCloudSetupNotificationObserver = nil;
 
@@ -98,7 +95,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
             [context setPersistentStoreCoordinator:coordinator];
         }];
         
-        MRLog(@"-> Created Context %@", [context MR_workingName]);
+        MRLogInfo(@"-> Created Context %@", [context MR_workingName]);
     }
     return context;
 }

@@ -1,5 +1,5 @@
 //
-//  NSManagedObject+JSONHelpers.m
+//  NSManagedObject+MagicalDataImport.m
 //
 //  Created by Saul Mora on 6/28/11.
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
@@ -8,11 +8,8 @@
 #import "MagicalRecordStack.h"
 #import "CoreData+MagicalRecord.h"
 #import "NSObject+MagicalDataImport.h"
+#import "MagicalRecordLogging.h"
 #import <objc/runtime.h>
-
-#if MR_LOG_LEVEL >= 0
-static NSInteger ddLogLevel = MR_LOG_LEVEL;
-#endif
 
 void MR_swapMethodsFromClass(Class c, SEL orig, SEL new);
 
@@ -161,11 +158,11 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     }
     @catch (NSException *exception) 
     {
-        MRLog(@"Adding object for relationship failed: %@\n", relationshipInfo);
-        MRLog(@"relatedObject.entity %@", [relatedObject entity]);
-        MRLog(@"relationshipInfo.destinationEntity %@", [relationshipInfo destinationEntity]);
-        MRLog(@"Add Relationship Selector: %@", addRelatedObjectToSetMessage);   
-        MRLog(@"perform selector error: %@", exception);
+        MRLogError(@"Adding object for relationship failed: %@\n", relationshipInfo);
+        MRLogError(@"relatedObject.entity %@", [relatedObject entity]);
+        MRLogError(@"relationshipInfo.destinationEntity %@", [relationshipInfo destinationEntity]);
+        MRLogError(@"Add Relationship Selector: %@", addRelatedObjectToSetMessage);
+        MRLogError(@"perform selector error: %@", exception);
     }
 }
 

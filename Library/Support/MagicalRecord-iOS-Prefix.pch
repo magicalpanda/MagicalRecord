@@ -6,4 +6,7 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
+
+    #define MR_LOGGING_ENABLED 1
+
 #endif

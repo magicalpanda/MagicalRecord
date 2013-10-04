@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface MagicalRecordStack : NSObject
 
 @property (nonatomic, copy) NSString *stackName;
@@ -16,6 +14,8 @@
 @property (nonatomic, strong) NSManagedObjectModel *model;
 @property (nonatomic, strong) NSPersistentStoreCoordinator *coordinator;
 @property (nonatomic, strong) NSPersistentStore *store;
+
+@property (nonatomic, assign) BOOL loggingEnabled;
 
 + (instancetype) defaultStack;
 + (void) setDefaultStack:(MagicalRecordStack *)stack;

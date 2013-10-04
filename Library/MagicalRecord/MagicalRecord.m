@@ -31,9 +31,6 @@
     return defaultName;
 }
 
-
-#pragma mark - initialize
-
 + (void) initialize;
 {
     if (self == [MagicalRecord class]) 
@@ -41,14 +38,17 @@
 #ifdef MR_SHORTHAND
         [self swizzleShorthandMethods];
 #endif
-        [self setShouldAutoCreateManagedObjectModel:YES];
-        [self setShouldAutoCreateDefaultPersistentStoreCoordinator:NO];
-#ifdef DEBUG
-        [self setShouldDeleteStoreOnModelMismatch:YES];
-#else
-        [self setShouldDeleteStoreOnModelMismatch:NO];
-#endif
     }
+}
+
+- (NSString *) version;
+{
+    return [[self class] version];
+}
+
++ (NSString *) version;
+{
+    return @"3.0";
 }
 
 @end

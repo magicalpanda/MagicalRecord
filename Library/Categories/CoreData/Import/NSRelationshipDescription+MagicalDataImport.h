@@ -6,8 +6,6 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <CoreData/CoreData.h>
-
 @interface NSRelationshipDescription (MagicalRecord_DataImport)
 
 - (NSString *) MR_primaryKey;

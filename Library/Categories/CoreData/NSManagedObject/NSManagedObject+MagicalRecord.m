@@ -5,12 +5,9 @@
 
 #import "CoreData+MagicalRecord.h"
 #import "MagicalRecordStack.h"
+#import "MagicalRecordLogging.h"
 
 static NSUInteger defaultBatchSize = 20;
-
-#if MR_LOG_LEVEL >= 0
-static NSInteger ddLogLevel = MR_LOG_LEVEL;
-#endif
 
 @implementation NSManagedObject (MagicalRecord)
 
@@ -112,7 +109,7 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 			}
 			else
 			{
-				MRLog(@"Property '%@' not found in %tu properties for %@", propertyName, [propDict count], NSStringFromClass(self));
+				MRLogWarn(@"Property '%@' not found in %tu properties for %@", propertyName, [propDict count], NSStringFromClass(self));
 			}
 		}
 	}
@@ -250,7 +247,7 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 
             if (inContext == nil)
             {
-                MRLog(@"Did not find object %@ in context '%@': %@", self, [otherContext MR_description], error);
+                MRLogWarn(@"Did not find object %@ in context '%@': %@", self, [otherContext MR_description], error);
             }
         }
     }
@@ -261,6 +258,6 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 
 void MRTransferObjectToContextError(NSManagedObject *object)
 {
-    NSLog(@"Cannot load a temporary object %@ across Managed Object Contexts", object);
-    NSLog(@"Break in MRTransferObjectToContextError for more information");
+    MRCLogFatal(@"Cannot load a temporary object %@ across Managed Object Contexts", object);
+    MRCLogFatal(@"Break in MRTransferObjectToContextError for more information");
 }

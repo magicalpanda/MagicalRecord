@@ -7,20 +7,21 @@
 //
 
 #import "MagicalRecordStack.h"
-#import "MagicalRecord.h"
 
 #import "NSManagedObjectContext+MagicalRecord.h"
 #import "NSPersistentStore+MagicalRecord.h"
 #import "NSManagedObjectModel+MagicalRecord.h"
+#import "MagicalRecordLogging.h"
 
 static MagicalRecordStack *defaultStack;
 
-@interface MagicalRecordStack ()
-
-@end
-
 
 @implementation MagicalRecordStack
+
+- (void)dealloc;
+{
+    [self reset];
+}
 
 - (NSString *) description;
 {
@@ -45,6 +46,7 @@ static MagicalRecordStack *defaultStack;
 {
     defaultStack = stack;
     [stack loadStack];
+    MRLogVerbose(@"Default Core Data Stack Initialized: %@", stack);
 }
 
 + (instancetype) stack;
@@ -54,13 +56,9 @@ static MagicalRecordStack *defaultStack;
 
 - (void) loadStack;
 {
-    [self context];
+    NSManagedObjectContext *context = [self context];
+    NSAssert(context != nil, @"%@ not properly initialized", NSStringFromClass([self class]));
 }
-//- (id) init;
-//{
-//    NSAssert(NO, @"%@ is an Abstract Class. Use one of the subclasses", NSStringFromClass([self class]));
-//    return nil;
-//}
 
 - (void) setModelFromClass:(Class)klass;
 {
@@ -141,7 +139,7 @@ static MagicalRecordStack *defaultStack;
 
 - (NSPersistentStoreCoordinator *) createCoordinator;
 {
-    MRLog(@"%@ must be overridden in %@", NSStringFromSelector(_cmd), NSStringFromClass([self class]));
+    MRLogError(@"%@ must be overridden in %@", NSStringFromSelector(_cmd), NSStringFromClass([self class]));
     return nil;
 }
 

@@ -8,6 +8,8 @@
 #import "MagicalRecord.h"
 #import "NSPersistentStore+MagicalRecord.h"
 
+extern NSString * const MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey;
+
 @interface NSPersistentStoreCoordinator (MagicalRecord)
 
 + (NSPersistentStoreCoordinator *) MR_newPersistentStoreCoordinator NS_RETURNS_RETAINED;

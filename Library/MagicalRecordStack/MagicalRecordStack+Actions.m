@@ -9,10 +9,7 @@
 #import "CoreData+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
 #import "MagicalRecordStack.h"
-
-#if MR_LOG_LEVEL >= 0
-static NSInteger ddLogLevel = MR_LOG_LEVEL;
-#endif
+#import "MagicalRecordLogging.h"
 
 dispatch_queue_t MR_saveQueue(void);
 dispatch_queue_t MR_saveQueue()
@@ -46,9 +43,9 @@ dispatch_queue_t MR_saveQueue()
 
 - (void) saveWithBlock:(void (^)(NSManagedObjectContext *))block identifier:(NSString *)contextWorkingName completion:(MRSaveCompletionHandler)completion;
 {
-    MRLog(@"Dispatching save request: %@", contextWorkingName);
+    MRLogVerbose(@"Dispatching save request: %@", contextWorkingName);
     dispatch_async(MR_saveQueue(), ^{
-        MRLog(@"%@ save starting", contextWorkingName);
+        MRLogVerbose(@"%@ save starting", contextWorkingName);
         
         NSManagedObjectContext *localContext = [self newConfinementContext];
         [localContext MR_setWorkingName:contextWorkingName];

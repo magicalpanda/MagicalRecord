@@ -7,6 +7,8 @@
 //
 
 #import "NSDictionary+MagicalRecordAdditions.h"
+#import "NSPersistentStoreCoordinator+MagicalRecord.h"
+
 
 @implementation NSDictionary (MagicalRecordAdditions)
 
@@ -41,6 +43,12 @@
                              [NSNumber numberWithBool:NO], NSInferMappingModelAutomaticallyOption,
                              nil];
     return options;
+}
+
+- (BOOL) MR_shouldDeletePersistentStoreOnModelMismatch;
+{
+    id value = [self valueForKey:MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey];
+    return [value boolValue];
 }
 
 @end

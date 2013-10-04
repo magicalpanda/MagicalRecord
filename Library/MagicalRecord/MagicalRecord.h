@@ -9,34 +9,6 @@
 #define MAC_PLATFORM_ONLY YES
 #endif
 
-// enable to use caches for the fetchedResultsControllers (iOS only)
-// #define STORE_USE_CACHE
-
-#ifndef MR_ENABLE_LOGGING
-    #ifdef DEBUG
-        #define MR_ENABLE_LOGGING 1
-    #else
-        #define MR_ENABLE_LOGGING 0
-    #endif
-#endif
-
-#if MR_ENABLE_LOGGING != 0
-      // First, check if we can use Cocoalumberjack for logging
-    #ifdef LOG_VERBOSE
-        #define MR_LOG_LEVEL LOG_LEVEL_VERBOSE
-        #define MRLog(...)  DDLogVerbose(__VA_ARGS__)
-        #define MRCLog(...) DDLogCVerbose(__VA_ARGS__)
-    #else
-        #define MR_LOG_LEVEL -1
-        #define MRLog(...) NSLog(@"%s(%p) %@", __PRETTY_FUNCTION__, self, [NSString stringWithFormat:__VA_ARGS__])
-        #define MRCLog(...)
-    #endif
-#else
-    #define MR_LOG_LEVEL -1
-    #define MRLog(...) ((void)0)
-    #define MRCLog(...) ((void)0)
-#endif
-
 #ifdef NS_BLOCKS_AVAILABLE
 
 @class NSManagedObjectContext;
@@ -44,8 +16,20 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
 #endif
 
+typedef NS_ENUM(NSInteger, MagicalRecordLogLevel)
+{
+    MagicalRecordLogLevelOff        = 0,
+    MagicalRecordLogLevelFatal      = 1 << 0,
+    MagicalRecordLogLevelError      = 1 << 1,
+    MagicalRecordLogLevelWarn       = 1 << 2,
+    MagicalRecordLogLevelInfo       = 1 << 3,
+    MagicalRecordLogLevelVerbose    = 1 << 4,
+};
+
 @interface MagicalRecord : NSObject
 
++ (NSString *) version;
+- (NSString *) version;
 + (void) cleanUp;
 
 + (NSString *) defaultStoreName;

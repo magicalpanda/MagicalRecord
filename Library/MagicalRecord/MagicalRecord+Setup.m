@@ -15,10 +15,8 @@
 #import "ManuallyMigratingMagicalRecordStack.h"
 #import "InMemoryMagicalRecordStack.h"
 #import "iCloudMagicalRecordStack.h"
+#import "MagicalRecordLogging.h"
 
-#if MR_LOG_LEVEL >= 0
-static NSInteger ddLogLevel = MR_LOG_LEVEL;
-#endif
 
 @implementation MagicalRecord (Setup)
 

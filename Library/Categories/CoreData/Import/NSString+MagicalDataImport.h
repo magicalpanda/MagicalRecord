@@ -6,8 +6,6 @@
 //  Copyright (c) 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface NSString (MagicalRecord_DataImport)
 
 - (NSString *) MR_capitalizedFirstCharacterString;

@@ -422,6 +422,7 @@
 		C781813217E6555300ADD31C /* NSManagedObject+MagicalFetching.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+MagicalFetching.m"; sourceTree = "<group>"; };
 		C781813617E65FDA00ADD31C /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		C781818717E6615200ADD31C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		C79F9C2717FF6FE2007CDA6F /* MagicalRecordLogging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MagicalRecordLogging.h; sourceTree = "<group>"; };
 		C7CF976717498275008D9D13 /* MagicalRecordTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordTests.h; sourceTree = "<group>"; };
 		C7CF976817498275008D9D13 /* MagicalRecordTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalRecordTests.m; sourceTree = "<group>"; };
 		C7CF976917498275008D9D13 /* NSManagedObjectContextHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSManagedObjectContextHelperTests.h; sourceTree = "<group>"; };
@@ -823,6 +824,7 @@
 				C781810117E6462500ADD31C /* Rakefile */,
 				C781810217E6462500ADD31C /* generateShorthandFile.rb */,
 				C7790F8D17E63C3100D20ACF /* CoreData+MagicalRecord.h */,
+				C79F9C2717FF6FE2007CDA6F /* MagicalRecordLogging.h */,
 				C7790F9D17E63C3100D20ACF /* MagicalRecordShorthand.h */,
 				C77910AB17E63E2300D20ACF /* en.lproj */,
 				C721C7B313D0A3AF0097AB6F /* Frameworks */,
