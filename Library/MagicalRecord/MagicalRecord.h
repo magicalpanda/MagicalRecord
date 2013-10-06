@@ -26,12 +26,25 @@ typedef NS_ENUM(NSInteger, MagicalRecordLogLevel)
     MagicalRecordLogLevelVerbose    = 1 << 4,
 };
 
+/*!
+ *  @class MagicalRecord
+ *
+ *  @discussion
+ *
+ *  @since 2.0
+ */
 @interface MagicalRecord : NSObject
 
 + (NSString *) version;
 - (NSString *) version;
 + (void) cleanUp;
 
+/*!
+ *  @method Determines the store file name your app should use. This method is used by the MagicalRecord SQLite stacks when a store file is not specified. The file name returned is in the form "<ApplicationName>.sqlite". ApplicationName is retrieved from the app's info dictionary retrieved from the method [[NSBundle mainBundle] infoDictionary].
+ *
+ *  @return A string in the form <ApplicationName>.sqlite
+ *
+ */
 + (NSString *) defaultStoreName;
 
 @end
