@@ -11,15 +11,30 @@
 #import "MagicalRecordStack.h"
 #import "MagicalRecordLogging.h"
 
+static dispatch_queue_t save_queue;
+static dispatch_once_t *save_queue_once_token;
+
 dispatch_queue_t MR_saveQueue(void);
+void MR_releaseSaveQueue(void);
+dispatch_queue_t MR_newSaveQueue(void);
+
+void MR_releaseSaveQueue(void)
+{
+    save_queue = nil;
+    *save_queue_once_token = 0;
+}
+
+dispatch_queue_t MR_newSaveQueue()
+{
+    return dispatch_queue_create("com.magicalpanda.magicalrecord.savequeue", DISPATCH_QUEUE_SERIAL);
+}
+
 dispatch_queue_t MR_saveQueue()
 {
-    static dispatch_queue_t serial_save_queue;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        serial_save_queue = dispatch_queue_create("com.magicalpanda.magicalrecord.serialsavequeue", DISPATCH_QUEUE_SERIAL);
+    dispatch_once(save_queue_once_token, ^{
+        save_queue = MR_newSaveQueue();
     });
-    return serial_save_queue;
+    return save_queue;
 }
 
 @implementation MagicalRecordStack (Actions)
