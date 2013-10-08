@@ -12,7 +12,8 @@
 #import "MagicalRecordLogging.h"
 
 static dispatch_queue_t save_queue;
-static dispatch_once_t *save_queue_once_token;
+static dispatch_once_t save_queue_once_token;
+static dispatch_once_t *save_queue_reset_token;
 
 dispatch_queue_t MR_saveQueue(void);
 void MR_releaseSaveQueue(void);
@@ -21,7 +22,7 @@ dispatch_queue_t MR_newSaveQueue(void);
 void MR_releaseSaveQueue(void)
 {
     save_queue = nil;
-    *save_queue_once_token = 0;
+    *save_queue_reset_token = 0;
 }
 
 dispatch_queue_t MR_newSaveQueue()
@@ -31,7 +32,8 @@ dispatch_queue_t MR_newSaveQueue()
 
 dispatch_queue_t MR_saveQueue()
 {
-    dispatch_once(save_queue_once_token, ^{
+    dispatch_once(&save_queue_once_token, ^{
+        save_queue_reset_token = &save_queue_once_token;
         save_queue = MR_newSaveQueue();
     });
     return save_queue;
