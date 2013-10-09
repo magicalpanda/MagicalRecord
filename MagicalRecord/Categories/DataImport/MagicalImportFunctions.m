@@ -50,12 +50,6 @@ NSDate * dateFromUnixTimestamp(NSInteger timestamp)
     return parsedDate;
 }
 
-NSDate * dateFromUnixTimestamp(NSInteger timestamp)
-{
-    NSDate *parsedDate = [NSDate dateWithTimeIntervalSince1970:timestamp];
-    return parsedDate;
-}
-
 NSInteger* newColorComponentsFromString(NSString *serializedColor);
 NSInteger* newColorComponentsFromString(NSString *serializedColor)
 {
