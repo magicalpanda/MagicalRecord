@@ -12,6 +12,7 @@
 NSDate * adjustDateForDST(NSDate *date);
 NSDate * dateFromString(NSString *value, NSString *format);
 NSNumber * numberFromString(NSString *value);
+NSDate * dateFromUnixTimestamp(NSInteger value);
 NSString * attributeNameFromString(NSString *value);
 NSString * primaryKeyNameFromString(NSString *value);
 
