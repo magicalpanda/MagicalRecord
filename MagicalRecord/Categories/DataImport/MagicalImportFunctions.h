@@ -11,12 +11,8 @@
 
 NSDate * adjustDateForDST(NSDate *date);
 NSDate * dateFromString(NSString *value, NSString *format);
-<<<<<<< HEAD
-NSNumber * numberFromString(NSString *value);
-=======
 NSNumber * numberFromString(NSString *value);
 NSDate * dateFromUnixTimestamp(NSInteger value);
->>>>>>> Added regex to check for unix timestamp during import, and added a method to handle found timestamps
 NSString * attributeNameFromString(NSString *value);
 NSString * primaryKeyNameFromString(NSString *value);
 

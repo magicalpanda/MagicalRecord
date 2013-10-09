@@ -40,18 +40,14 @@ NSDate * dateFromString(NSString *value, NSString *format)
     return parsedDate;
 }
 
-<<<<<<< HEAD
-NSNumber * numberFromString(NSString *value) {
-    return [NSNumber numberWithDouble:[value doubleValue]];
-=======
 NSNumber * numberFromString(NSString *value) {
     return [NSNumber numberWithDouble:[value doubleValue]];
 }
+
 NSDate * dateFromUnixTimestamp(NSInteger timestamp)
 {
     NSDate *parsedDate = [NSDate dateWithTimeIntervalSince1970:timestamp];
     return parsedDate;
->>>>>>> Added regex to check for unix timestamp during import, and added a method to handle found timestamps
 }
 
 NSInteger* newColorComponentsFromString(NSString *serializedColor);
