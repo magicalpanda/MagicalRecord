@@ -16,11 +16,13 @@ extern NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification;
 + (void) MR_setDefaultStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithInMemoryStore;
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithInMemoryStoreAndManagedObjectModel:(NSManagedObjectModel*)model;
 
 + (NSPersistentStoreCoordinator *) MR_newPersistentStoreCoordinator NS_RETURNS_RETAINED;
 
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreNamed:(NSString *)storeFileName;
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *)storeFileName;
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *)storeFileName andManagedObjectModel:(NSManagedObjectModel*)model;
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithPersistentStore:(NSPersistentStore *)persistentStore;
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent;
 
