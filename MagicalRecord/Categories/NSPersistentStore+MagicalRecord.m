@@ -73,7 +73,7 @@ static NSPersistentStore *defaultPersistentStore_ = nil;
 
 + (NSURL *) MR_defaultLocalStoreUrl
 {
-    return [self MR_urlForStoreName:kMagicalRecordDefaultStoreFileName];
+    return [self MR_urlForStoreName:[MagicalRecord defaultStoreName]];
 }
 
 @end
