@@ -22,7 +22,7 @@
 - (void) testDefaultStoreFolderForiOSDevicesIsTheApplicationSupportFolder
 {
     NSString *applicationLibraryDirectory = [self applicationStorageDirectory];
-    NSString *defaultStoreName = kMagicalRecordDefaultStoreFileName;
+    NSString *defaultStoreName = [MagicalRecord defaultStoreName];
     
     NSURL *expectedStoreUrl = [NSURL fileURLWithPath:[applicationLibraryDirectory stringByAppendingPathComponent:defaultStoreName]];
     
@@ -74,7 +74,7 @@
 {
     NSString *applictionSupportDirectory = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject];
     NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
-    NSString *defaultStoreName = kMagicalRecordDefaultStoreFileName;
+    NSString *defaultStoreName = [MagicalRecord defaultStoreName];
     
     NSURL *expectedStoreUrl = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@/%@", applictionSupportDirectory, applicationName, defaultStoreName]];
     
