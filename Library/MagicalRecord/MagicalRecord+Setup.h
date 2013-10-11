@@ -12,22 +12,22 @@
 
 @interface MagicalRecord (Setup)
 
-+ (MagicalRecordStack *) setupCoreDataStack;
-+ (MagicalRecordStack *) setupCoreDataStackWithStoreAtURL:(NSURL *)url;
-+ (MagicalRecordStack *) setupCoreDataStackWithStoreNamed:(NSString *)storeName;
++ (MagicalRecordStack *) setupSQliteStack;
++ (MagicalRecordStack *) setupSQliteStackWithStoreAtURL:(NSURL *)url;
++ (MagicalRecordStack *) setupSQliteStackWithStoreNamed:(NSString *)storeName;
 
-+ (MagicalRecordStack *) setupAutoMigratingCoreDataStack;
-+ (MagicalRecordStack *) setupAutoMigratingCoreDataStackWithSqliteStoreNamed:(NSString *)storeName;
-+ (MagicalRecordStack *) setupAutoMigratingCoreDataStackWithSqliteStoreAtURL:(NSURL *)url;
++ (MagicalRecordStack *) setupAutoMigratingStack;
++ (MagicalRecordStack *) setupAutoMigratingStackWithSqliteStoreNamed:(NSString *)storeName;
++ (MagicalRecordStack *) setupAutoMigratingStackWithSqliteStoreAtURL:(NSURL *)url;
 
-+ (MagicalRecordStack *) setupManuallyMigratingCoreDataStack;
-+ (MagicalRecordStack *) setupManuallyMigratingCoreDataStackWithSqliteStoreNamed:(NSString *)storeName;
-+ (MagicalRecordStack *) setupManuallyMigratingCoreDataStackWithSqliteStoreAtURL:(NSURL *)url;
++ (MagicalRecordStack *) setupManuallyMigratingStack;
++ (MagicalRecordStack *) setupManuallyMigratingStackWithSqliteStoreNamed:(NSString *)storeName;
++ (MagicalRecordStack *) setupManuallyMigratingStackWithSqliteStoreAtURL:(NSURL *)url;
 
-+ (MagicalRecordStack *) setupCoreDataStackWithiCloudContainer:(NSString *)icloudBucket localStoreNamed:(NSString *)localStore;
-+ (MagicalRecordStack *) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent;
-+ (MagicalRecordStack *) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent completion:(void(^)(void))completion;
++ (MagicalRecordStack *) setupStackWithiCloudContainer:(NSString *)icloudBucket localStoreNamed:(NSString *)localStore;
++ (MagicalRecordStack *) setupStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent;
++ (MagicalRecordStack *) setupStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent completion:(void(^)(void))completion;
 
-+ (MagicalRecordStack *) setupCoreDataStackWithInMemoryStore;
++ (MagicalRecordStack *) setupStackWithInMemoryStore;
 
 @end

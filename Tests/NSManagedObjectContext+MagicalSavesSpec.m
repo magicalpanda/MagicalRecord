@@ -14,7 +14,7 @@ describe(@"NSManagedObjectContext+MagicalSaves", ^{
     __block MagicalRecordStack *stack = nil;
 
 	beforeAll(^{
-        stack = [MagicalRecord setupCoreDataStackWithInMemoryStore];
+        stack = [MagicalRecord setupStackWithInMemoryStore];
         [stack setModelFromClass:[self class]];
 	});
 
