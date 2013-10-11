@@ -97,12 +97,18 @@
     return self;
 }
 
+- (NSDictionary *) defaultStoreOptions;
+{
+    NSDictionary *options = @{ MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey: @(self.shouldDeletePersistentStoreOnModelMismatch) };
+    return options;
+}
+
 - (NSPersistentStoreCoordinator *) createCoordinator;
 {
     MRLogVerbose(@"Loading Store at URL: %@", self.storeURL);
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self model]];
-    NSDictionary *options = @{ MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey: @(self.shouldDeletePersistentStoreOnModelMismatch) };
-    [coordinator MR_addSqliteStoreAtURL:self.storeURL withOptions:options];
+
+    [coordinator MR_addSqliteStoreAtURL:self.storeURL withOptions:[self defaultStoreOptions]];
     return coordinator;
 }
 

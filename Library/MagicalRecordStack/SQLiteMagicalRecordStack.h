@@ -37,4 +37,6 @@
 - (instancetype) initWithStoreAtURL:(NSURL *)url;
 - (instancetype) initWithStoreAtPath:(NSString *)path;
 
+- (NSDictionary *) defaultStoreOptions;
+
 @end

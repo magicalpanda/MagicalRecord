@@ -25,6 +25,7 @@
     #import "iCloudMagicalRecordStack.h"
     #import "AutoMigratingMagicalRecordStack.h"
     #import "ManuallyMigratingMagicalRecordStack.h"
+    #import "AutoMigratingWithSourceAndTargetModelMagicalRecordStack.h"
 
     #ifdef MR_SHORTHAND
         #import "MagicalRecordShorthand.h"
