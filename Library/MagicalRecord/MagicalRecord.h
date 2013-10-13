@@ -29,8 +29,6 @@ typedef NS_ENUM(NSInteger, MagicalRecordLogLevel)
 /*!
  *  @class MagicalRecord
  *
- *  @discussion
- *
  *  @since 2.0
  */
 @interface MagicalRecord : NSObject
