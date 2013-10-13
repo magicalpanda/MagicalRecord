@@ -12,9 +12,9 @@
 
 @interface MagicalRecord (Setup)
 
-+ (MagicalRecordStack *) setupSQliteStack;
-+ (MagicalRecordStack *) setupSQliteStackWithStoreAtURL:(NSURL *)url;
-+ (MagicalRecordStack *) setupSQliteStackWithStoreNamed:(NSString *)storeName;
++ (MagicalRecordStack *) setupSQLiteStack;
++ (MagicalRecordStack *) setupSQLiteStackWithStoreAtURL:(NSURL *)url;
++ (MagicalRecordStack *) setupSQLiteStackWithStoreNamed:(NSString *)storeName;
 
 + (MagicalRecordStack *) setupAutoMigratingStack;
 + (MagicalRecordStack *) setupAutoMigratingStackWithSqliteStoreNamed:(NSString *)storeName;

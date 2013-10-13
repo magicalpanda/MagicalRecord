@@ -20,21 +20,21 @@
 
 @implementation MagicalRecord (Setup)
 
-+ (MagicalRecordStack *) setupSQliteStack
++ (MagicalRecordStack *) setupSQLiteStack
 {
     MagicalRecordStack *stack = [[SQLiteMagicalRecordStack alloc] init];
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }
 
-+ (MagicalRecordStack *)setupSQliteStackWithStoreAtURL:(NSURL *)url;
++ (MagicalRecordStack *)setupSQLiteStackWithStoreAtURL:(NSURL *)url;
 {
     MagicalRecordStack *stack = [[SQLiteMagicalRecordStack alloc] initWithStoreAtURL:url];
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }
 
-+ (MagicalRecordStack *)setupSQliteStackWithStoreNamed:(NSString *)storeName;
++ (MagicalRecordStack *)setupSQLiteStackWithStoreNamed:(NSString *)storeName;
 {
     MagicalRecordStack *stack = [[SQLiteMagicalRecordStack alloc] initWithStoreNamed:storeName];
     [MagicalRecordStack setDefaultStack:stack];
