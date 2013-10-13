@@ -17,6 +17,11 @@
     return self;
 }
 
+- (id)MR_valueForPrimaryKeyAttribute:(NSAttributeDescription *)primaryKeyAttribute
+{
+    return self;
+}
+
 - (NSString *) MR_lookupKeyForAttribute:(NSAttributeDescription *)attributeInfo
 {
     return nil;

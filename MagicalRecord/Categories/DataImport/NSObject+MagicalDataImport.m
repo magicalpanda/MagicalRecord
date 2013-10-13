@@ -66,6 +66,12 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
     return lookupKey;
 }
 
+- (id) MR_valueForPrimaryKeyAttribute:(NSAttributeDescription *)primaryKeyAttribute
+{
+    NSString *lookupKey = [self MR_lookupKeyForAttribute:primaryKeyAttribute];
+    return lookupKey ? [self valueForKeyPath:lookupKey] : nil;
+}
+
 - (id) MR_relatedValueForRelationship:(NSRelationshipDescription *)relationshipInfo
 {
     NSString *lookupKey = [self MR_lookupKeyForRelationship:relationshipInfo];

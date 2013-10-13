@@ -16,4 +16,6 @@
 - (NSString *) MR_lookupKeyForRelationship:(NSRelationshipDescription *)relationshipInfo;
 - (id) MR_relatedValueForRelationship:(NSRelationshipDescription *)relationshipInfo;
 
+- (id)MR_valueForPrimaryKeyAttribute:(NSAttributeDescription *)primaryKeyAttribute;
+
 @end
