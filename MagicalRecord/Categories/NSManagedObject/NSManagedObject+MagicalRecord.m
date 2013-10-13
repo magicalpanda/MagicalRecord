@@ -76,7 +76,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 #endif
 
-+ (NSString *) MR_entityName
++ (NSString *) MR_bestGuessAtAnEntityName
 {
     if ([self respondsToSelector:@selector(entityName)])
     {
@@ -87,7 +87,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (NSEntityDescription *) MR_entityDescriptionInContext:(NSManagedObjectContext *)context
 {
-    NSString *entityName = [self MR_entityName];
+    NSString *entityName = [self MR_bestGuessAtAnEntityName];
     return [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
 }
 
@@ -148,7 +148,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (id) MR_createInContext:(NSManagedObjectContext *)context
 {
-    return [NSEntityDescription insertNewObjectForEntityForName:[self MR_entityName] inManagedObjectContext:context];
+    return [NSEntityDescription insertNewObjectForEntityForName:[self MR_bestGuessAtAnEntityName] inManagedObjectContext:context];
 }
 
 + (id) MR_createEntity
