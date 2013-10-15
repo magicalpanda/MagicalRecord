@@ -13,6 +13,7 @@
 #import "SQLiteMagicalRecordStack.h"
 #import "AutoMigratingMagicalRecordStack.h"
 #import "ManuallyMigratingMagicalRecordStack.h"
+#import "DualContextDualCoordinatorMagicalRecordStack.h"
 #import "InMemoryMagicalRecordStack.h"
 #import "iCloudMagicalRecordStack.h"
 #import "MagicalRecordLogging.h"
@@ -48,14 +49,14 @@
     return stack;
 }
 
-+ (MagicalRecordStack *) setupAutoMigratingStackWithSqliteStoreNamed:(NSString *)storeName;
++ (MagicalRecordStack *) setupAutoMigratingStackWithSQLiteStoreNamed:(NSString *)storeName;
 {
     MagicalRecordStack *stack = [[AutoMigratingMagicalRecordStack alloc] initWithStoreNamed:storeName];
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }
 
-+ (MagicalRecordStack *) setupAutoMigratingStackWithSqliteStoreAtURL:(NSURL *)url;
++ (MagicalRecordStack *) setupAutoMigratingStackWithSQLiteStoreAtURL:(NSURL *)url;
 {
     MagicalRecordStack *stack = [[AutoMigratingMagicalRecordStack alloc] initWithStoreAtURL:url];
     [MagicalRecordStack setDefaultStack:stack];
@@ -69,16 +70,37 @@
     return stack;
 }
 
-+ (MagicalRecordStack *) setupManuallyMigratingStackWithSqliteStoreNamed:(NSString *)storeName;
++ (MagicalRecordStack *) setupManuallyMigratingStackWithSQLiteStoreNamed:(NSString *)storeName;
 {
     MagicalRecordStack *stack = [[ManuallyMigratingMagicalRecordStack alloc] initWithStoreNamed:storeName];
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }
 
-+ (MagicalRecordStack *) setupManuallyMigratingStackWithSqliteStoreAtURL:(NSURL *)url;
++ (MagicalRecordStack *) setupManuallyMigratingStackWithSQLiteStoreAtURL:(NSURL *)url;
 {
     MagicalRecordStack *stack = [[ManuallyMigratingMagicalRecordStack alloc] initWithStoreAtURL:url];
+    [MagicalRecordStack setDefaultStack:stack];
+    return stack;
+}
+
++ (MagicalRecordStack *) setupDualContextDualCoordinatorStack;
+{
+    MagicalRecordStack *stack = [[DualContextDualCoordinatorMagicalRecordStack alloc] init];
+    [MagicalRecordStack setDefaultStack:stack];
+    return stack;
+}
+
++ (MagicalRecordStack *) setupDualContextDualCoordinatorStackWithSQLiteStoreNamed:(NSString *)storeName;
+{
+    MagicalRecordStack *stack = [[DualContextDualCoordinatorMagicalRecordStack alloc] initWithStoreNamed:storeName];
+    [MagicalRecordStack setDefaultStack:stack];
+    return stack;
+}
+
++ (MagicalRecordStack *) setupDualContextDualCoordinatorStackWithSQLiteStoreAtURL:(NSURL *)storeURL;
+{
+    MagicalRecordStack *stack = [[DualContextDualCoordinatorMagicalRecordStack alloc] initWithStoreAtURL:storeURL];
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }

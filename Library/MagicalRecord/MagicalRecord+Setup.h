@@ -17,12 +17,16 @@
 + (MagicalRecordStack *) setupSQLiteStackWithStoreNamed:(NSString *)storeName;
 
 + (MagicalRecordStack *) setupAutoMigratingStack;
-+ (MagicalRecordStack *) setupAutoMigratingStackWithSqliteStoreNamed:(NSString *)storeName;
-+ (MagicalRecordStack *) setupAutoMigratingStackWithSqliteStoreAtURL:(NSURL *)url;
++ (MagicalRecordStack *) setupAutoMigratingStackWithSQLiteStoreNamed:(NSString *)storeName;
++ (MagicalRecordStack *) setupAutoMigratingStackWithSQLiteStoreAtURL:(NSURL *)url;
 
 + (MagicalRecordStack *) setupManuallyMigratingStack;
-+ (MagicalRecordStack *) setupManuallyMigratingStackWithSqliteStoreNamed:(NSString *)storeName;
-+ (MagicalRecordStack *) setupManuallyMigratingStackWithSqliteStoreAtURL:(NSURL *)url;
++ (MagicalRecordStack *) setupManuallyMigratingStackWithSQLiteStoreNamed:(NSString *)storeName;
++ (MagicalRecordStack *) setupManuallyMigratingStackWithSQLiteStoreAtURL:(NSURL *)url;
+
++ (MagicalRecordStack *) setupDualContextDualCoordinatorStack;
++ (MagicalRecordStack *) setupDualContextDualCoordinatorStackWithSQLiteStoreNamed:(NSString *)storeName;
++ (MagicalRecordStack *) setupDualContextDualCoordinatorStackWithSQLiteStoreAtURL:(NSURL *)storeURL;
 
 + (MagicalRecordStack *) setupStackWithiCloudContainer:(NSString *)icloudBucket localStoreNamed:(NSString *)localStore;
 + (MagicalRecordStack *) setupStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent;

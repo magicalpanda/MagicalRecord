@@ -13,6 +13,9 @@
 		909B48CB17C2EC7E00CE8C5E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 909B48CA17C2EC7E00CE8C5E /* UIKit.framework */; };
 		909B48CC17C2EC8700CE8C5E /* libExpecta-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7CF9B03174988D0008D9D13 /* libExpecta-iOS.a */; };
 		909B48CD17C2EC8700CE8C5E /* libSpecta-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 909B48C117C2EB4400CE8C5E /* libSpecta-iOS.a */; };
+		C73A7CDD180CF7A700E305D8 /* DualContextDualCoordinatorMagicalRecordStack.h in Headers */ = {isa = PBXBuildFile; fileRef = C73A7CDB180CF7A700E305D8 /* DualContextDualCoordinatorMagicalRecordStack.h */; };
+		C73A7CDE180CF7A700E305D8 /* DualContextDualCoordinatorMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = C73A7CDC180CF7A700E305D8 /* DualContextDualCoordinatorMagicalRecordStack.m */; };
+		C73A7CDF180CF7A700E305D8 /* DualContextDualCoordinatorMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = C73A7CDC180CF7A700E305D8 /* DualContextDualCoordinatorMagicalRecordStack.m */; };
 		C771EB2D17E6951900D2E984 /* SQLiteWithSavingContextMagicalRecordStack.h in Headers */ = {isa = PBXBuildFile; fileRef = C771EB2B17E6951900D2E984 /* SQLiteWithSavingContextMagicalRecordStack.h */; };
 		C771EB2E17E6951900D2E984 /* SQLiteWithSavingContextMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = C771EB2C17E6951900D2E984 /* SQLiteWithSavingContextMagicalRecordStack.m */; };
 		C771EB2F17E6951900D2E984 /* SQLiteWithSavingContextMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = C771EB2C17E6951900D2E984 /* SQLiteWithSavingContextMagicalRecordStack.m */; };
@@ -328,6 +331,8 @@
 		90DD201E167AA4350033BA25 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		C721C7E213D0C3A00097AB6F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C721C7E313D0C3A00097AB6F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C73A7CDB180CF7A700E305D8 /* DualContextDualCoordinatorMagicalRecordStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DualContextDualCoordinatorMagicalRecordStack.h; sourceTree = "<group>"; };
+		C73A7CDC180CF7A700E305D8 /* DualContextDualCoordinatorMagicalRecordStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DualContextDualCoordinatorMagicalRecordStack.m; sourceTree = "<group>"; };
 		C771EB2B17E6951900D2E984 /* SQLiteWithSavingContextMagicalRecordStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteWithSavingContextMagicalRecordStack.h; sourceTree = "<group>"; };
 		C771EB2C17E6951900D2E984 /* SQLiteWithSavingContextMagicalRecordStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteWithSavingContextMagicalRecordStack.m; sourceTree = "<group>"; };
 		C771EB3817E6AC2C00D2E984 /* MagicalRecordStack+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MagicalRecordStack+Private.h"; sourceTree = "<group>"; };
@@ -809,6 +814,8 @@
 				C7790FAA17E63C3100D20ACF /* SQLiteMagicalRecordStack.m */,
 				C771EB2B17E6951900D2E984 /* SQLiteWithSavingContextMagicalRecordStack.h */,
 				C771EB2C17E6951900D2E984 /* SQLiteWithSavingContextMagicalRecordStack.m */,
+				C73A7CDB180CF7A700E305D8 /* DualContextDualCoordinatorMagicalRecordStack.h */,
+				C73A7CDC180CF7A700E305D8 /* DualContextDualCoordinatorMagicalRecordStack.m */,
 				C7790F9F17E63C3100D20ACF /* AutoMigratingMagicalRecordStack.h */,
 				C7790FA017E63C3100D20ACF /* AutoMigratingMagicalRecordStack.m */,
 				C7790FA717E63C3100D20ACF /* ManuallyMigratingMagicalRecordStack.h */,
@@ -1003,6 +1010,7 @@
 				C781814117E6606F00ADD31C /* ManuallyMigratingMagicalRecordStack.h in Headers */,
 				C79D63E2180880A9006C29E3 /* AutoMigratingWithSourceAndTargetModelMagicalRecordStack.h in Headers */,
 				C781814217E6606F00ADD31C /* iCloudMagicalRecordStack.h in Headers */,
+				C73A7CDD180CF7A700E305D8 /* DualContextDualCoordinatorMagicalRecordStack.h in Headers */,
 				C781814317E6606F00ADD31C /* InMemoryMagicalRecordStack.h in Headers */,
 				C781814417E6606F00ADD31C /* MagicalImportFunctions.h in Headers */,
 				C781814517E6606F00ADD31C /* NSManagedObject+MagicalDataImport.h in Headers */,
@@ -1290,6 +1298,7 @@
 				C781817117E660DE00ADD31C /* NSNumber+MagicalDataImport.m in Sources */,
 				C781817217E660DE00ADD31C /* NSObject+MagicalDataImport.m in Sources */,
 				C781817317E660DE00ADD31C /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
+				C73A7CDF180CF7A700E305D8 /* DualContextDualCoordinatorMagicalRecordStack.m in Sources */,
 				C781817417E660DE00ADD31C /* NSString+MagicalDataImport.m in Sources */,
 				C781817517E660DE00ADD31C /* NSManagedObject+MagicalRecord.m in Sources */,
 				C781817617E660DE00ADD31C /* NSManagedObject+MagicalAggregation.m in Sources */,
@@ -1358,6 +1367,7 @@
 				C779100917E63C3100D20ACF /* NSPersistentStoreCoordinator+MagicalAutoMigrations.m in Sources */,
 				C781813417E6555300ADD31C /* NSManagedObject+MagicalFetching.m in Sources */,
 				C771EB3C17E6AD3100D2E984 /* MagicalRecordStack+Actions.m in Sources */,
+				C73A7CDE180CF7A700E305D8 /* DualContextDualCoordinatorMagicalRecordStack.m in Sources */,
 				C779106F17E63C3100D20ACF /* ManuallyMigratingMagicalRecordStack.m in Sources */,
 				C779101317E63C3100D20ACF /* NSPersistentStoreCoordinator+MagicalInMemoryStoreAdditions.m in Sources */,
 				C779104B17E63C3100D20ACF /* MagicalRecord+Setup.m in Sources */,
