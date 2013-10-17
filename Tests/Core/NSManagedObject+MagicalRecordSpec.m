@@ -19,7 +19,7 @@ SpecBegin(NSManagedObjectMagicalRecord)
 
 describe(@"NSManagedObject+MagicalRecord", ^{
 	beforeAll(^{
-        [MagicalRecord setupCoreDataStackWithInMemoryStore];
+        [MagicalRecord setupStackWithInMemoryStore];
 
 	});
 

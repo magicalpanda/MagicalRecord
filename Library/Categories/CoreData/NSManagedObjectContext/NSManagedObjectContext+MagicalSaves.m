@@ -9,12 +9,8 @@
 #import "NSManagedObjectContext+MagicalSaves.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
 #import "NSError+MagicalRecordErrorHandling.h"
-#import "MagicalRecord.h"
 #import "MagicalRecordStack.h"
-
-#if MR_LOG_LEVEL >= 0
-static NSInteger ddLogLevel = MR_LOG_LEVEL;
-#endif
+#import "MagicalRecordLogging.h"
 
 @implementation NSManagedObjectContext (MagicalSaves)
 
@@ -45,7 +41,7 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 
     if (![self hasChanges])
     {
-        MRLog(@"NO CHANGES IN ** %@ ** CONTEXT - NOT SAVING", [self MR_workingName]);
+        MRLogInfo(@"NO CHANGES IN ** %@ ** CONTEXT - NOT SAVING", [self MR_workingName]);
 
         if (completion)
         {
@@ -56,7 +52,7 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 
         if (saveParentContexts && [self parentContext])
         {
-            MRLog(@"Proceeding to save parent context %@", [[self parentContext] MR_description]);
+            MRLogVerbose(@"Proceeding to save parent context %@", [[self parentContext] MR_description]);
         }
         else
         {
@@ -66,13 +62,13 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
 
     void (^saveBlock)(void) = ^{
         
-#if MR_ENABLE_LOGGING != 0
+#if MR_LOGGING_ENABLED > 0
 
         NSString *optionsSummary = @"";
         [optionsSummary stringByAppendingString:saveParentContexts ? @"Save Parents," : @""];
         [optionsSummary stringByAppendingString:syncSave ? @"Sync Save" : @""];
 
-        MRLog(@"→ Saving %@ [%@]", [self MR_description], optionsSummary);
+        MRLogVerbose(@"→ Saving %@ [%@]", [self MR_description], optionsSummary);
 
         NSInteger numberOfInsertedObjects = [[self insertedObjects] count];
         NSInteger numberOfUpdatedObjects = [[self updatedObjects] count];
@@ -87,7 +83,7 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
         }
         @catch(NSException *exception)
         {
-            MRLog(@"Unable to perform save: %@", (id)[exception userInfo] ? : (id)[exception reason]);
+            MRLogError(@"Unable to perform save: %@", (id)[exception userInfo] ? : (id)[exception reason]);
         }
         @finally
         {
@@ -112,8 +108,8 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
                 // If we are not the default context (And therefore need to save the root context, do the completion action if one was specified
                 else
                 {
-                    MRLog(@"→ Finished saving: %@", [self MR_description]);
-                    MRLog(@"Objects - Inserted %zd, Updated %zd, Deleted %zd", numberOfInsertedObjects, numberOfUpdatedObjects, numberOfDeletedObjects);
+                    MRLogVerbose(@"→ Finished saving: %@", [self MR_description]);
+                    MRLogVerbose(@"Objects - Inserted %zd, Updated %zd, Deleted %zd", numberOfInsertedObjects, numberOfUpdatedObjects, numberOfDeletedObjects);
                     
                     if (completion)
                     {

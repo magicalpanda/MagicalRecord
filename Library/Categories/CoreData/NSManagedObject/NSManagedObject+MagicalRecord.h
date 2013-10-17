@@ -9,8 +9,6 @@
 
 @interface NSManagedObject (MagicalRecord)
 
-+ (NSUInteger) MR_defaultBatchSize;
-+ (void) MR_setDefaultBatchSize:(NSUInteger)newBatchSize;
 
 + (NSString *) MR_entityName;
 

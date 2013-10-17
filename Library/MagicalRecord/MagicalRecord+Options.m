@@ -7,43 +7,20 @@
 //
 
 #import "MagicalRecord+Options.h"
+#import "MagicalRecordStack.h"
 
-static BOOL shouldAutoCreateManagedObjectModel_;
-static BOOL shouldAutoCreateDefaultPersistentStoreCoordinator_;
-static BOOL shouldDeleteStoreOnModelMismatch_;
+static MagicalRecordLogLevel magicalRecordLogLevel = MagicalRecordLogLevelVerbose;
 
 @implementation MagicalRecord (Options)
 
-#pragma mark - Options
-
-+ (BOOL) shouldAutoCreateManagedObjectModel;
++ (MagicalRecordLogLevel) logLevel;
 {
-    return shouldAutoCreateManagedObjectModel_;
+    return magicalRecordLogLevel;
 }
 
-+ (void) setShouldAutoCreateManagedObjectModel:(BOOL)shouldAutoCreate;
++ (void) setLogLevel:(MagicalRecordLogLevel)logLevel;
 {
-    shouldAutoCreateManagedObjectModel_ = shouldAutoCreate;
-}
-
-+ (BOOL) shouldAutoCreateDefaultPersistentStoreCoordinator;
-{
-    return shouldAutoCreateDefaultPersistentStoreCoordinator_;
-}
-
-+ (void) setShouldAutoCreateDefaultPersistentStoreCoordinator:(BOOL)shouldAutoCreate;
-{
-    shouldAutoCreateDefaultPersistentStoreCoordinator_ = shouldAutoCreate;
-}
-
-+ (BOOL) shouldDeleteStoreOnModelMismatch;
-{
-    return shouldDeleteStoreOnModelMismatch_;
-}
-
-+ (void) setShouldDeleteStoreOnModelMismatch:(BOOL)shouldDeleteStoreOnModelMismatch
-{
-    shouldDeleteStoreOnModelMismatch_ = shouldDeleteStoreOnModelMismatch;
+    magicalRecordLogLevel = logLevel;
 }
 
 @end

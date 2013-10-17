@@ -5,7 +5,6 @@
 //  Copyright 2011 Magical Panda Software. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "MagicalRecordStack.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalSaves.h"

@@ -10,6 +10,15 @@
 
 @interface SQLiteMagicalRecordStack : MagicalRecordStack
 
+/*!
+ @property shouldDeletePersistentStoreOnModelMistmatch
+ @abstract If true, when configuring the persistant store coordinator, and Magical Record encounters a store that does not match the model, it will attempt to remove it and re-create a new store.
+ This is extremely useful during development where every model change could potentially require a delete/reinstall of the app.
+ */
+
+@property (nonatomic, assign) BOOL shouldDeletePersistentStoreOnModelMismatch;
+
+
 @property (nonatomic, copy, readonly) NSURL *storeURL;
 
 + (instancetype) stackWithStoreNamed:(NSString *)name model:(NSManagedObjectModel *)model;
@@ -27,5 +36,7 @@
 - (instancetype) initWithStoreNamed:(NSString *)name;
 - (instancetype) initWithStoreAtURL:(NSURL *)url;
 - (instancetype) initWithStoreAtPath:(NSString *)path;
+
+- (NSDictionary *) defaultStoreOptions;
 
 @end

@@ -6,9 +6,6 @@
 //  Copyright (c) 2012 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
-
 NSDate * adjustDateForDST(NSDate *date);
 NSDate * dateFromString(NSString *value, NSString *format);
 NSNumber * numberFromString(NSString *value);

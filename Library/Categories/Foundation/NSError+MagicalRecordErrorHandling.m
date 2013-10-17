@@ -7,12 +7,7 @@
 //
 
 #import "NSError+MagicalRecordErrorHandling.h"
-#import "MagicalRecord.h"
-
-#if MR_LOG_LEVEL >= 0
-static NSInteger ddLogLevel = MR_LOG_LEVEL;
-#endif
-
+#import "MagicalRecordLogging.h"
 
 NSDictionary *MR_validationErrorCodeLookup(void);
 
@@ -41,7 +36,7 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
 
 - (void) MR_logToConsole;
 {
-    MRLog(@"*** %@ ***", self);
+    MRLogVerbose(@"*** %@ ***", self);
 }
 
 @end

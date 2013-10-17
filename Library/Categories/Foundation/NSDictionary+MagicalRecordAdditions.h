@@ -15,4 +15,6 @@
 + (NSDictionary *) MR_manualMigrationOptions;
 + (NSDictionary *) MR_autoMigrationOptions;
 
+- (BOOL) MR_shouldDeletePersistentStoreOnModelMismatch;
+
 @end

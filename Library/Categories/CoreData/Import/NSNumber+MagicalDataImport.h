@@ -6,8 +6,6 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface NSNumber (MagicalRecord_DataImport)
 
 - (NSString *) MR_lookupKeyForAttribute:(NSAttributeDescription *)attributeInfo;

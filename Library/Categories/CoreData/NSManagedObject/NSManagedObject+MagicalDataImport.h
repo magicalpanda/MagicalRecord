@@ -1,11 +1,10 @@
 //
-//  NSManagedObject+JSONHelpers.h
+//  NSManagedObject+MagicalDataImport.h
 //
 //  Created by Saul Mora on 6/28/11.
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <CoreData/CoreData.h>
 
 extern NSString * const kMagicalRecordImportCustomDateFormatKey;
 extern NSString * const kMagicalRecordImportDefaultDateFormatString;

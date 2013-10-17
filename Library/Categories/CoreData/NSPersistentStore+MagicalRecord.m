@@ -7,6 +7,8 @@
 
 #import "NSPersistentStore+MagicalRecord.h"
 #import "NSError+MagicalRecordErrorHandling.h"
+#import "MagicalRecordLogging.h"
+
 
 NSString * const kMagicalRecordDefaultStoreFileName = @"CoreDataStore.sqlite";
 
@@ -81,7 +83,11 @@ NSString * const kMagicalRecordDefaultStoreFileName = @"CoreDataStore.sqlite";
 
 - (BOOL) copyToURL:(NSURL *)destinationUrl error:(NSError **)error;
 {
-    if (![self MR_isSqliteStore]) return NO;
+    if (![self MR_isSqliteStore])
+    {
+        MRLogWarn(@"NSPersistentStore [%@] is not a %@", self, NSSQLiteStoreType);
+        return NO;
+    }
 
     NSArray *storeUrls = [self MR_sqliteURLs];
 
@@ -99,9 +105,15 @@ NSString * const kMagicalRecordDefaultStoreFileName = @"CoreDataStore.sqlite";
 
 - (NSArray *) MR_sqliteURLs;
 {
-    if (![self MR_isSqliteStore]) return nil;
+    if (![self MR_isSqliteStore])
+    {
+        MRLogWarn(@"NSPersistentStore [%@] is not a %@", self, NSSQLiteStoreType);
+        return nil;
+    }
 
     NSURL *primaryStoreURL = [self URL];
+    NSAssert([primaryStoreURL isFileURL], @"Store URL [%@] does not point to a resource on the local file system", primaryStoreURL);
+    
     NSMutableArray *storeURLs = [NSMutableArray arrayWithObject:primaryStoreURL];
     NSArray *extensions = @[@"sqlite-wal", @"sqlite-shm"];
 

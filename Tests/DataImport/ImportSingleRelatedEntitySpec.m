@@ -24,7 +24,7 @@ describe(@"ImportSingleRelatedEntity", ^{
     __block SingleRelatedEntity    *singleTestEntity;
     __block MagicalRecordStack      *stack;
 	beforeAll(^{
-        stack = [MagicalRecord setupCoreDataStackWithInMemoryStore];
+        stack = [MagicalRecord setupStackWithInMemoryStore];
         [stack setModelFromClass:[self class]];
 
         managedObjectContext = [stack context];

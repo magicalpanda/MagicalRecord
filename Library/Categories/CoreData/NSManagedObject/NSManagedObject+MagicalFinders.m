@@ -85,6 +85,21 @@
     return [results valueForKeyPath:[NSString stringWithFormat:@"@unionOfObjects.%@", attribute]];
 }
 
++ (id) MR_selectAttribute:(NSString *)attribute ascending:(BOOL)ascending withPredicate:(NSPredicate *)predicate;
+{
+    return [self MR_selectAttribute:attribute ascending:ascending withPredicate:predicate inContext:[[MagicalRecordStack defaultStack] context]];
+}
+
++ (id) MR_selectAttribute:(NSString *)attribute ascending:(BOOL)ascending withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
+{
+    NSFetchRequest *request = [self MR_requestAllSortedBy:attribute ascending:ascending withPredicate:predicate];
+    [request setResultType:NSDictionaryResultType];
+    [request setPropertiesToFetch:[NSArray arrayWithObject:attribute]];
+    NSArray *results = [self MR_executeFetchRequest:request inContext:context];
+
+    return [results valueForKeyPath:[NSString stringWithFormat:@"@unionOfObjects.%@", attribute]];
+}
+
 + (id) MR_findFirst;
 {
 	return [self MR_findFirstInContext:[[MagicalRecordStack defaultStack] context]];

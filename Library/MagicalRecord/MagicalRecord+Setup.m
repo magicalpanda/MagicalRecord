@@ -13,93 +13,113 @@
 #import "SQLiteMagicalRecordStack.h"
 #import "AutoMigratingMagicalRecordStack.h"
 #import "ManuallyMigratingMagicalRecordStack.h"
+#import "DualContextDualCoordinatorMagicalRecordStack.h"
 #import "InMemoryMagicalRecordStack.h"
 #import "iCloudMagicalRecordStack.h"
+#import "MagicalRecordLogging.h"
 
-#if MR_LOG_LEVEL >= 0
-static NSInteger ddLogLevel = MR_LOG_LEVEL;
-#endif
 
 @implementation MagicalRecord (Setup)
 
-+ (MagicalRecordStack *) setupCoreDataStack
++ (MagicalRecordStack *) setupSQLiteStack
 {
     MagicalRecordStack *stack = [[SQLiteMagicalRecordStack alloc] init];
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }
 
-+ (MagicalRecordStack *)setupCoreDataStackWithStoreAtURL:(NSURL *)url;
++ (MagicalRecordStack *)setupSQLiteStackWithStoreAtURL:(NSURL *)url;
 {
     MagicalRecordStack *stack = [[SQLiteMagicalRecordStack alloc] initWithStoreAtURL:url];
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }
 
-+ (MagicalRecordStack *)setupCoreDataStackWithStoreNamed:(NSString *)storeName;
++ (MagicalRecordStack *)setupSQLiteStackWithStoreNamed:(NSString *)storeName;
 {
     MagicalRecordStack *stack = [[SQLiteMagicalRecordStack alloc] initWithStoreNamed:storeName];
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }
 
-+ (MagicalRecordStack *) setupAutoMigratingCoreDataStack;
++ (MagicalRecordStack *) setupAutoMigratingStack;
 {
     MagicalRecordStack *stack = [[AutoMigratingMagicalRecordStack alloc] init];
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }
 
-+ (MagicalRecordStack *) setupAutoMigratingCoreDataStackWithSqliteStoreNamed:(NSString *)storeName;
++ (MagicalRecordStack *) setupAutoMigratingStackWithSQLiteStoreNamed:(NSString *)storeName;
 {
     MagicalRecordStack *stack = [[AutoMigratingMagicalRecordStack alloc] initWithStoreNamed:storeName];
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }
 
-+ (MagicalRecordStack *) setupAutoMigratingCoreDataStackWithSqliteStoreAtURL:(NSURL *)url;
++ (MagicalRecordStack *) setupAutoMigratingStackWithSQLiteStoreAtURL:(NSURL *)url;
 {
     MagicalRecordStack *stack = [[AutoMigratingMagicalRecordStack alloc] initWithStoreAtURL:url];
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }
 
-+ (MagicalRecordStack *) setupManuallyMigratingCoreDataStack;
++ (MagicalRecordStack *) setupManuallyMigratingStack;
 {
     MagicalRecordStack *stack = [[ManuallyMigratingMagicalRecordStack alloc] init];
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }
 
-+ (MagicalRecordStack *) setupManuallyMigratingCoreDataStackWithSqliteStoreNamed:(NSString *)storeName;
++ (MagicalRecordStack *) setupManuallyMigratingStackWithSQLiteStoreNamed:(NSString *)storeName;
 {
     MagicalRecordStack *stack = [[ManuallyMigratingMagicalRecordStack alloc] initWithStoreNamed:storeName];
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }
 
-+ (MagicalRecordStack *) setupManuallyMigratingCoreDataStackWithSqliteStoreAtURL:(NSURL *)url;
++ (MagicalRecordStack *) setupManuallyMigratingStackWithSQLiteStoreAtURL:(NSURL *)url;
 {
     MagicalRecordStack *stack = [[ManuallyMigratingMagicalRecordStack alloc] initWithStoreAtURL:url];
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }
 
-+ (MagicalRecordStack *) setupCoreDataStackWithInMemoryStore;
++ (MagicalRecordStack *) setupDualContextDualCoordinatorStack;
+{
+    MagicalRecordStack *stack = [[DualContextDualCoordinatorMagicalRecordStack alloc] init];
+    [MagicalRecordStack setDefaultStack:stack];
+    return stack;
+}
+
++ (MagicalRecordStack *) setupDualContextDualCoordinatorStackWithSQLiteStoreNamed:(NSString *)storeName;
+{
+    MagicalRecordStack *stack = [[DualContextDualCoordinatorMagicalRecordStack alloc] initWithStoreNamed:storeName];
+    [MagicalRecordStack setDefaultStack:stack];
+    return stack;
+}
+
++ (MagicalRecordStack *) setupDualContextDualCoordinatorStackWithSQLiteStoreAtURL:(NSURL *)storeURL;
+{
+    MagicalRecordStack *stack = [[DualContextDualCoordinatorMagicalRecordStack alloc] initWithStoreAtURL:storeURL];
+    [MagicalRecordStack setDefaultStack:stack];
+    return stack;
+}
+
++ (MagicalRecordStack *) setupStackWithInMemoryStore;
 {
     MagicalRecordStack *stack = [[InMemoryMagicalRecordStack alloc] init];
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }
 
-+ (MagicalRecordStack *) setupCoreDataStackWithiCloudContainer:(NSString *)icloudBucket localStoreNamed:(NSString *)localStore;
++ (MagicalRecordStack *) setupStackWithiCloudContainer:(NSString *)icloudBucket localStoreNamed:(NSString *)localStore;
 {
     MagicalRecordStack *stack = [[iCloudMagicalRecordStack alloc] initWithContainerID:icloudBucket localStoreName:localStore];
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }
 
-+ (MagicalRecordStack *) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent;
++ (MagicalRecordStack *) setupStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent;
 {
     MagicalRecordStack *stack = [[iCloudMagicalRecordStack alloc] initWithContainerID:containerID
                                                                        contentNameKey:contentNameKey
@@ -109,7 +129,7 @@ static NSInteger ddLogLevel = MR_LOG_LEVEL;
     return stack;
 }
 
-+ (MagicalRecordStack *) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent completion:(void(^)(void))completion;
++ (MagicalRecordStack *) setupStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent completion:(void(^)(void))completion;
 {
     iCloudMagicalRecordStack *stack = [[iCloudMagicalRecordStack alloc] initWithContainerID:containerID contentNameKey:contentNameKey cloudStorePathComponent:pathSubcomponent localStoreName:localStoreName];
     stack.setupCompletionBlock = completion;

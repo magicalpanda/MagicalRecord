@@ -9,6 +9,7 @@
 #import "MagicalRecordStack+Private.h"
 #import "SQLiteMagicalRecordStack.h"
 #import "NSPersistentStoreCoordinator+MagicalRecord.h"
+#import "MagicalRecordLogging.h"
 
 @interface SQLiteMagicalRecordStack ()
 
@@ -18,8 +19,6 @@
 
 
 @implementation SQLiteMagicalRecordStack
-
-//@synthesize  model = _model;
 
 + (instancetype) stackWithStoreNamed:(NSString *)name;
 {
@@ -98,11 +97,18 @@
     return self;
 }
 
+- (NSDictionary *) defaultStoreOptions;
+{
+    NSDictionary *options = @{ MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey: @(self.shouldDeletePersistentStoreOnModelMismatch) };
+    return options;
+}
+
 - (NSPersistentStoreCoordinator *) createCoordinator;
 {
-    MRLog(@"Loading Store at URL: %@", self.storeURL);
+    MRLogVerbose(@"Loading Store at URL: %@", self.storeURL);
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self model]];
-    [coordinator MR_addSqliteStoreAtURL:self.storeURL withOptions:nil];
+
+    [coordinator MR_addSqliteStoreAtURL:self.storeURL withOptions:[self defaultStoreOptions]];
     return coordinator;
 }
 

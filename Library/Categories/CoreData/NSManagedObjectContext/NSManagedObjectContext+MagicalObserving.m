@@ -8,11 +8,7 @@
 
 #import "NSManagedObjectContext+MagicalObserving.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
-#import "MagicalRecord.h"
-
-#if MR_LOG_LEVEL >= 0
-static NSInteger ddLogLevel = MR_LOG_LEVEL;
-#endif
+#import "MagicalRecordLogging.h"
 
 NSString * const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalRecordDidMergeChangesFromiCloudNotification";
 
@@ -83,7 +79,7 @@ NSString * const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagical
 {
     void (^mergeBlock)(void) = ^{
         
-        MRLog(@"Merging changes From iCloud to %@ %@",
+        MRLogInfo(@"Merging changes From iCloud to %@ %@",
               [self MR_workingName],
               ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
         
@@ -105,11 +101,12 @@ NSString * const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagical
     if (fromContext == self) return;
 
     void (^mergeBlock)(void) = ^{
+#if MR_LOG_LEVEL > MR_LOG_LEVEL_OFF
         NSManagedObjectContext *toContext = self;
-        MRLog(@"Merging changes from %@ to %@ %@",
+        MRLogVerbose(@"Merging changes from %@ to %@ %@",
               [fromContext MR_workingName], [toContext MR_workingName],
               ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
-
+#endif
         [self mergeChangesFromContextDidSaveNotification:notification];
     };
 

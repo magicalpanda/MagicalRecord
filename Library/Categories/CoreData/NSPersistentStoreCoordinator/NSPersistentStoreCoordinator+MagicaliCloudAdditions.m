@@ -11,6 +11,8 @@
 #import "NSPersistentStoreCoordinator+MagicalRecord.h"
 #import "MagicalRecordStack.h"
 #import "MagicalRecord.h"
+#import "MagicalRecordLogging.h"
+
 
 NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagicalRecordPSCDidCompleteiCloudSetupNotification";
 
@@ -76,7 +78,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
         }
         else
         {
-            MRLog(@"iCloud is not enabled");
+            MRLogWarn(@"iCloud is not enabled");
         }
 
         [self lock];
