@@ -13,6 +13,16 @@
 static NSInteger ddLogLevel = MR_LOG_LEVEL;
 #endif
 
+NSString * MR_concurrencyStringFromType(NSManagedObjectContextConcurrencyType type);
+NSString * MR_concurrencyStringFromType(NSManagedObjectContextConcurrencyType type)
+{
+    if (type == NSPrivateQueueConcurrencyType) { return @"Private Queue"; }
+    if (type == NSMainQueueConcurrencyType) { return @"Main Queue"; }
+    if (type == NSConfinementConcurrencyType) {return @"Confinement"; }
+
+    return @"Unknown Concurrency";
+}
+
 static id iCloudSetupNotificationObserver = nil;
 
 static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSManagedObjectContextWorkingName";
@@ -28,7 +38,7 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
 
 - (NSString *) MR_debugDescription;
 {
-    return [NSString stringWithFormat:@"<%@ (%p)> %@ ", NSStringFromClass([self class]), self, [self MR_description]];
+    return [NSString stringWithFormat:@"<%@ (%p)> %@ (%@ Concurrency)", NSStringFromClass([self class]), self, [self MR_description], MR_concurrencyStringFromType([self concurrencyType])];
 }
 
 - (NSString *) MR_parentChain;
