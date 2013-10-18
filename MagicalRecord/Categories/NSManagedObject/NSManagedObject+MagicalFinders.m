@@ -338,6 +338,30 @@
                            inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
 }
 
+
++ (NSFetchedResultsController *) MR_fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm orders:(NSArray *)orders delegate:(id<NSFetchedResultsControllerDelegate>)delegate
+{
+    return  [self MR_fetchAllGroupedBy:group
+                         withPredicate:searchTerm
+                              sortedBy:sortTerm
+                                orders:orders
+                              delegate:delegate
+                             inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+}
+
++ (NSFetchedResultsController *) MR_fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm orders:(NSArray *)orders delegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context
+{
+    NSFetchRequest *request = [self MR_requestAllSortedBy:sortTerm orders:orders withPredicate:searchTerm inContext:context];
+    
+    NSFetchedResultsController *controller = [self MR_fetchController:request
+                                                             delegate:delegate
+                                                         useFileCache:NO
+                                                            groupedBy:group
+                                                            inContext:context];
+    [self MR_performFetch:controller];
+    return controller;
+}
+
 #endif
 
 @end
