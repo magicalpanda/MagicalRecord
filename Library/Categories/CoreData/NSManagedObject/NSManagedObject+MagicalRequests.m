@@ -108,7 +108,7 @@ NSArray *MR_NSSortDescriptorsFromString(NSString *sortTerm, BOOL defaultAscendin
             ascending = [customAscending boolValue];
         }
 
-        MRCLogVerbose(@"- Sorting %@ %@", sortKey, ascending ? @"Ascending": @"Descending");
+        MRLogCVerbose(@"- Sorting %@ %@", sortKey, ascending ? @"Ascending": @"Descending");
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
         [sortDescriptors addObject:sortDescriptor];
     }

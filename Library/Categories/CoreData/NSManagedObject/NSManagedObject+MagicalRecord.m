@@ -243,6 +243,6 @@
 
 void MRTransferObjectToContextError(NSManagedObject *object)
 {
-    MRCLogFatal(@"Cannot load a temporary object '%@' [%@] across Managed Object Contexts", object, [object objectID]);
-    MRCLogFatal(@"Break in MRTransferObjectToContextError for more information");
+    MRLogCFatal(@"Cannot load a temporary object '%@' [%@] across Managed Object Contexts", object, [object objectID]);
+    MRLogCFatal(@"Break in MRTransferObjectToContextError for more information");
 }
