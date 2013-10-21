@@ -57,7 +57,11 @@ static MagicalRecordStack *defaultStack;
 - (void) loadStack;
 {
     NSManagedObjectContext *context = [self context];
-    NSAssert(context != nil, @"%@ not properly initialized", NSStringFromClass([self class]));
+    NSString *stackType = NSStringFromClass([self class]);
+    NSAssert(context, @"No NSManagedObjectContext for stack [%@]", stackType);
+    NSAssert([self model], @"No NSManagedObjectModel loaded for stack [%@]", stackType);
+    NSAssert([self store], @"No NSPersistentStore initialized for stack [%@]", stackType);
+    NSAssert([self coordinator], @"No NSPersistentStoreCoodinator initialized for stack [%@]", stackType);
 }
 
 - (void) setModelFromClass:(Class)klass;
