@@ -26,7 +26,7 @@
     #import "AutoMigratingMagicalRecordStack.h"
     #import "ManuallyMigratingMagicalRecordStack.h"
     #import "AutoMigratingWithSourceAndTargetModelMagicalRecordStack.h"
-    #import "DualContextDualCoordinatorMagicalRecordStack.h"
+    #import "ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.h"
 
     #ifdef MR_SHORTHAND
         #import "MagicalRecordShorthand.h"

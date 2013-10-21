@@ -13,7 +13,7 @@
 #import "SQLiteMagicalRecordStack.h"
 #import "AutoMigratingMagicalRecordStack.h"
 #import "ManuallyMigratingMagicalRecordStack.h"
-#import "DualContextDualCoordinatorMagicalRecordStack.h"
+#import "ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.h"
 #import "InMemoryMagicalRecordStack.h"
 #import "iCloudMagicalRecordStack.h"
 #import "MagicalRecordLogging.h"
@@ -84,23 +84,23 @@
     return stack;
 }
 
-+ (MagicalRecordStack *) setupDualContextDualCoordinatorStack;
++ (MagicalRecordStack *) setupClassicStack;
 {
-    MagicalRecordStack *stack = [[DualContextDualCoordinatorMagicalRecordStack alloc] init];
+    MagicalRecordStack *stack = [[ClassicSQLiteMagicalRecordStack alloc] init];
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }
 
-+ (MagicalRecordStack *) setupDualContextDualCoordinatorStackWithSQLiteStoreNamed:(NSString *)storeName;
++ (MagicalRecordStack *) setupClassicStackWithSQLiteStoreNamed:(NSString *)storeName;
 {
-    MagicalRecordStack *stack = [[DualContextDualCoordinatorMagicalRecordStack alloc] initWithStoreNamed:storeName];
+    MagicalRecordStack *stack = [[ClassicSQLiteMagicalRecordStack alloc] initWithStoreNamed:storeName];
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }
 
-+ (MagicalRecordStack *) setupDualContextDualCoordinatorStackWithSQLiteStoreAtURL:(NSURL *)storeURL;
++ (MagicalRecordStack *) setupClassicStackWithSQLiteStoreAtURL:(NSURL *)storeURL;
 {
-    MagicalRecordStack *stack = [[DualContextDualCoordinatorMagicalRecordStack alloc] initWithStoreAtURL:storeURL];
+    MagicalRecordStack *stack = [[ClassicSQLiteMagicalRecordStack alloc] initWithStoreAtURL:storeURL];
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }

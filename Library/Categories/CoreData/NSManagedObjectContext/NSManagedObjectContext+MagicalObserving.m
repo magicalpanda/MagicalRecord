@@ -101,12 +101,13 @@ NSString * const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagical
     if (fromContext == self) return;
 
     void (^mergeBlock)(void) = ^{
-#if MR_LOG_LEVEL > MR_LOG_LEVEL_OFF
-        NSManagedObjectContext *toContext = self;
-        MRLogVerbose(@"Merging changes from %@ to %@ %@",
-              [fromContext MR_workingName], [toContext MR_workingName],
-              ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
-#endif
+        if ([MagicalRecord logLevel] & MR_LOG_LEVEL_VERBOSE)
+        {
+            NSManagedObjectContext *toContext = self;
+            MRLogVerbose(@"Merging changes from %@ to %@ %@",
+                  [fromContext MR_workingName], [toContext MR_workingName],
+                  ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
+        }
         [self mergeChangesFromContextDidSaveNotification:notification];
     };
 
