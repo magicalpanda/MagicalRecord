@@ -65,8 +65,8 @@
 #if MR_LOGGING_ENABLED > 0
 
         NSString *optionsSummary = @"";
-        [optionsSummary stringByAppendingString:saveParentContexts ? @"Save Parents," : @""];
-        [optionsSummary stringByAppendingString:syncSave ? @"Sync Save" : @""];
+        optionsSummary = [optionsSummary stringByAppendingString:saveParentContexts ? @"Save Parents," : @""];
+        optionsSummary = [optionsSummary stringByAppendingString:syncSave ? @"Sync Save" : @""];
 
         MRLogVerbose(@"→ Saving %@ [%@]", [self MR_description], optionsSummary);
 
@@ -108,7 +108,7 @@
                 // If we are not the default context (And therefore need to save the root context, do the completion action if one was specified
                 else
                 {
-                    MRLogVerbose(@"→ Finished saving: %@", [self MR_description]);
+                    MRLogInfo(@"→ Finished saving: %@", [self MR_description]);
                     MRLogVerbose(@"Objects - Inserted %zd, Updated %zd, Deleted %zd", numberOfInsertedObjects, numberOfUpdatedObjects, numberOfDeletedObjects);
                     
                     if (completion)
