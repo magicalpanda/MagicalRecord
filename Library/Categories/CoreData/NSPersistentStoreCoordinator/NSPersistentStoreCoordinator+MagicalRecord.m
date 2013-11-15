@@ -85,7 +85,7 @@ NSString * const MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey = @"
                                                             options:options
                                                               error:&error];
         
-        if ([options MR_shouldDeletePersistentStoreOnModelMismatch] && store == nil && error == nil)
+        if ([options MR_shouldDeletePersistentStoreOnModelMismatch] && store == nil && error != nil)
         {
             store = [self MR_reinitializeStoreAtURL:url fromError:error withOptions:options];
         }
