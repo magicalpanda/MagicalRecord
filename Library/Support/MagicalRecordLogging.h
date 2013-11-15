@@ -69,11 +69,11 @@
     #define MRLogError(...) ((void)0)
     #define MRLogFatal(...) ((void)0)
 
-    #define MRCLogVerbose(...) ((void)0)
-    #define MRCLogInfo(...) ((void)0)
-    #define MRCLogWarn(...) ((void)0)
-    #define MRCLogError(...) ((void)0)
-    #define MRCLogFatal(...) ((void)0)
+    #define MRLogCVerbose(...) ((void)0)
+    #define MRLogCInfo(...) ((void)0)
+    #define MRLogCWarn(...) ((void)0)
+    #define MRLogCError(...) ((void)0)
+    #define MRLogCFatal(...) ((void)0)
 
 #endif
 
