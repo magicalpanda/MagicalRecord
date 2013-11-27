@@ -25,6 +25,7 @@
 
 #endif
 
++ (NSString *) MR_entityName;
 + (NSEntityDescription *) MR_entityDescription;
 + (NSEntityDescription *) MR_entityDescriptionInContext:(NSManagedObjectContext *)context;
 + (NSArray *) MR_propertiesNamed:(NSArray *)properties;
