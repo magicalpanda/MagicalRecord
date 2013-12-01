@@ -239,6 +239,30 @@
     return inContext;
 }
 
+- (BOOL) MR_isValidForInsert;
+{
+    NSError *error = nil;
+    BOOL isValid = [self validateForInsert:&error];
+    if (!isValid)
+    {
+        [[error MR_coreDataDescription] MR_logToConsole];
+    }
+    
+    return isValid;
+}
+
+- (BOOL) MR_isValidForUpdate;
+{
+    NSError *error = nil;
+    BOOL isValid = [self validateForUpdate:&error];
+    if (!isValid)
+    {
+        [[error MR_coreDataDescription] MR_logToConsole];
+    }
+
+    return isValid;
+}
+
 @end
 
 void MRTransferObjectToContextError(NSManagedObject *object)

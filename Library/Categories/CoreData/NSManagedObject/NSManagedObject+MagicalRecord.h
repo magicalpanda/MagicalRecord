@@ -39,6 +39,9 @@
 - (void) MR_refresh;
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext;
 
+- (BOOL) MR_isValidForInsert;
+- (BOOL) MR_isValidForUpdate;
+
 @end
 
 void MRTransferObjectToContextError(NSManagedObject *object);
