@@ -22,13 +22,19 @@
 {
     NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_rootSavingContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
+    [[NSManagedObjectContext MR_defaultContext] MR_observeContext:localContext];
 
     [localContext performBlock:^{
         if (block) {
             block(localContext);
         }
 
-        [localContext MR_saveWithOptions:MRSaveParentContexts completion:completion];
+        [localContext MR_saveWithOptions:MRSaveParentContexts completion:^(BOOL success, NSError *error) {
+            [[NSManagedObjectContext MR_defaultContext] MR_stopObservingContext:localContext];
+            if (completion) {
+                completion(success,error);
+            }
+        }];
     }];
 }
 
@@ -52,13 +58,16 @@
 {
     NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_rootSavingContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
-
+    [[NSManagedObjectContext MR_defaultContext] MR_observeContext:localContext];
     [localContext performBlockAndWait:^{
         if (block) {
             block(localContext);
         }
 
-        [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:nil];
+        [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:^(BOOL success, NSError *error) {
+            [[NSManagedObjectContext MR_defaultContext] MR_stopObservingContext:localContext];
+        }];
+        
     }];
 }
 
@@ -90,7 +99,8 @@
 {
     NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
-
+    [[NSManagedObjectContext MR_defaultContext] MR_observeContext:localContext];
+    
     [localContext performBlock:^{
         if (block)
         {
@@ -99,6 +109,8 @@
 
         [localContext MR_saveToPersistentStoreAndWait];
 
+        [[NSManagedObjectContext MR_defaultContext] MR_stopObservingContext:localContext];
+        
         if (completion)
         {
             completion();
