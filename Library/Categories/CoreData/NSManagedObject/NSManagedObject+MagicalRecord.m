@@ -128,7 +128,12 @@
 
 + (id) MR_createInContext:(NSManagedObjectContext *)context
 {
-    return [NSEntityDescription insertNewObjectForEntityForName:[self MR_entityName] inManagedObjectContext:context];
+    id managedObject = [NSEntityDescription insertNewObjectForEntityForName:[self MR_entityName] inManagedObjectContext:context];
+    if ([managedObject respondsToSelector:@selector(MR_awakeFromCreation)])
+    {
+        [managedObject MR_awakeFromCreation];
+    }
+    return managedObject;
 }
 
 + (id) MR_createEntity

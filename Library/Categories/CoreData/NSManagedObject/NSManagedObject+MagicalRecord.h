@@ -42,6 +42,8 @@
 - (BOOL) MR_isValidForInsert;
 - (BOOL) MR_isValidForUpdate;
 
+- (void) MR_awakeFromCreation;
+
 @end
 
 void MRTransferObjectToContextError(NSManagedObject *object);
