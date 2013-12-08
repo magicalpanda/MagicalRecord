@@ -42,6 +42,10 @@
 - (BOOL) MR_isValidForInsert;
 - (BOOL) MR_isValidForUpdate;
 
+@end
+
+@interface NSManagedObject (MagicalRecordOptional)
+
 - (void) MR_awakeFromCreation;
 
 @end
