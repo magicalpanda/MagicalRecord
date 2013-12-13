@@ -24,7 +24,7 @@
       // First, check if we can use Cocoalumberjack for logging
     #if defined(LOG_VERBOSE) || defined(COCOAPODS_POD_AVAILABLE_CocoaLumberjack)
         #import "DDLog.h"
-        extern int ddLogLevel;
+        extern const int ddLogLevel;
         #define MRLog(...)  DDLogVerbose(__VA_ARGS__)
     #else
         #define MRLog(...) NSLog(@"%s(%p) %@", __PRETTY_FUNCTION__, self, [NSString stringWithFormat:__VA_ARGS__])
