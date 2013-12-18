@@ -51,6 +51,11 @@
                 value = numberFromString([value description]);
             }
         }
+        else if (attributeType == NSStringAttributeType) {
+            if (![value isKindOfClass:[NSString class]] && value != [NSNull null]) {
+                value = [value description];
+            }
+        }
     }
     
     return value == [NSNull null] ? nil : value;   
