@@ -43,7 +43,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
         
         if ([persistentStores count] && [NSPersistentStore MR_defaultPersistentStore] == nil)
         {
-            [NSPersistentStore MR_setDefaultPersistentStore:[persistentStores objectAtIndex:0]];
+            [NSPersistentStore MR_setDefaultPersistentStore:[persistentStores firstObject]];
         }
     }
 }
@@ -225,7 +225,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([NSPersistentStore MR_defaultPersistentStore] == nil)
             {
-                [NSPersistentStore MR_setDefaultPersistentStore:[[self persistentStores] objectAtIndex:0]];
+                [NSPersistentStore MR_setDefaultPersistentStore:[[self persistentStores] firstObject]];
             }
             if (completionBlock)
             {

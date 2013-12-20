@@ -51,7 +51,7 @@
     NSUInteger persistentStoreCount = [[testCoordinator persistentStores] count];
     XCTAssertEqual(persistentStoreCount, (NSUInteger)1, @"Expected there to be 1 persistent store, sadly there are %tu", persistentStoreCount);
 
-    NSPersistentStore *firstStore = [[testCoordinator persistentStores] objectAtIndex:0];
+    NSPersistentStore *firstStore = [[testCoordinator persistentStores] firstObject];
     NSString *firstStoreType = [firstStore type];
     XCTAssertEqualObjects(firstStoreType, NSSQLiteStoreType, @"First store type should be NSSQLiteStoreType, instead is %@", firstStoreType);
 

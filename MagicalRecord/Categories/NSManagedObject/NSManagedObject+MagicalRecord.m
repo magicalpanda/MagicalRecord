@@ -55,7 +55,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	{
 		return nil;
 	}
-	return [results objectAtIndex:0];
+	return [results firstObject];
 }
 
 + (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request
