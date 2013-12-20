@@ -10,7 +10,7 @@
     "dateTestAttribute": "2011-07-23T22:30:40Z",
     "colorTestAttribute": "rgba(64,128,225,1)",
     "mappedAttributeWithStringValue": "Mapped value",
-    "dateWithCustomFormat": "8/5/2011 1-56-04 AM",
+    "dateWithCustomFormat": "8/5/2011 1-56-04",
     "nullTestAttribute": null,
     "int64AsStringTestAttribute": "42",
     "int32AsStringTestAttribute": "32",

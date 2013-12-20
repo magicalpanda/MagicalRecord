@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3389" systemVersion="13A538g" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5041" systemVersion="13B3116" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AbstractRelatedEntity" representedClassName="AbstractRelatedEntity" isAbstract="YES" syncable="YES">
         <attribute name="sampleBaseAttribute" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -72,7 +72,7 @@
         <attribute name="dateTestAttribute" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dateWithCustomFormat" optional="YES" attributeType="Date" syncable="YES">
             <userInfo>
-                <entry key="dateFormat" value="M/d/yyyy H-mm-ss a"/>
+                <entry key="dateFormat" value="M/d/yyyy H-mm-ss"/>
             </userInfo>
         </attribute>
         <attribute name="decimalTestAttribute" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
@@ -98,16 +98,16 @@
         <relationship name="testConcreteToOneRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="ConcreteRelatedEntity" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AbstractRelatedEntity" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="ConcreteRelatedEntity" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="MappedEntity" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="SingleEntityRelatedToMappedEntityUsingDefaults" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="SingleEntityRelatedToMappedEntityWithNestedMappedAttributes" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="SingleEntityRelatedToMappedEntityWithSecondaryMappings" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="SingleEntityWithNoRelationships" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="SingleRelatedEntity" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="EntityWithDiffernentClassName" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AbstractRelatedEntity" positionX="0" positionY="0" width="128" height="60"/>
+        <element name="ConcreteRelatedEntity" positionX="0" positionY="0" width="128" height="60"/>
+        <element name="EntityWithDiffernentClassName" positionX="0" positionY="0" width="128" height="45"/>
+        <element name="MappedEntity" positionX="0" positionY="0" width="128" height="105"/>
+        <element name="SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="SingleEntityRelatedToMappedEntityUsingDefaults" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" positionX="0" positionY="0" width="128" height="60"/>
+        <element name="SingleEntityRelatedToMappedEntityWithNestedMappedAttributes" positionX="0" positionY="0" width="128" height="60"/>
+        <element name="SingleEntityRelatedToMappedEntityWithSecondaryMappings" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="SingleEntityWithNoRelationships" positionX="0" positionY="0" width="128" height="255"/>
+        <element name="SingleRelatedEntity" positionX="0" positionY="0" width="128" height="120"/>
     </elements>
 </model>

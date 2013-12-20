@@ -6,12 +6,19 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import "NSManagedObjectContextHelperTests.h"
-#import "SingleEntityWithNoRelationships.h";
+#import <XCTest/XCTest.h>
+#import "SingleEntityWithNoRelationships.h"
+
+@interface NSManagedObjectContextHelperTests : XCTestCase
+
+@end
+
+
 @implementation NSManagedObjectContextHelperTests
 
 - (void) setUp
 {
+    [MagicalRecord setDefaultModelFromClass:[self class]];
     [MagicalRecord setupCoreDataStackWithInMemoryStore];
 }
 
@@ -24,24 +31,25 @@
 {
     NSManagedObjectContext *firstContext = [NSManagedObjectContext MR_contextForCurrentThread];
     NSManagedObjectContext *secondContext = [NSManagedObjectContext MR_contextForCurrentThread];
-    
-    assertThat(firstContext, is(equalTo(secondContext)));
+
+    XCTAssertEqualObjects(firstContext, secondContext, @"Contexts should be equal");
 }
 
 - (void) testCanNotifyDefaultContextOnSave
 {
     NSManagedObjectContext *testContext = [NSManagedObjectContext MR_contextWithParent:[NSManagedObjectContext MR_defaultContext]];
 
-   assertThat([testContext parentContext], is(equalTo([NSManagedObjectContext MR_defaultContext])));
+    XCTAssertEqualObjects([testContext parentContext], [NSManagedObjectContext MR_defaultContext], @"Parent context should be the default context");
 }
 
 - (void) testThatSavedObjectsHavePermanentIDs
 {
     NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
     SingleEntityWithNoRelationships *entity = [SingleEntityWithNoRelationships MR_createInContext:context];
-    assertThatBool([[entity objectID] isTemporaryID], equalToBool(YES));
+
+    XCTAssertTrue([[entity objectID] isTemporaryID], @"Entity should have a temporary ID before saving");
     [context MR_saveOnlySelfAndWait];
-    assertThatBool([[entity objectID] isTemporaryID], equalToBool(NO));
+    XCTAssertFalse([[entity objectID] isTemporaryID], @"Entity should not have a temporary ID after saving");
 }
 
 

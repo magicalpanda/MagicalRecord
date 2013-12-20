@@ -6,15 +6,12 @@
 //  Copyright (c) 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#ifdef MAC_PLATFORM_ONLY
-#import <GHUnit/GHUnit.h>
-#else
-#import <GHUnitIOS/GHUnit.h>
-#endif
-@interface MagicalDataImportTestCase : GHTestCase
+#import <XCTest/XCTest.h>
 
-@property (nonatomic, retain) id testEntityData;
-@property (nonatomic, retain) id testEntity;
+@interface MagicalDataImportTestCase : XCTestCase
+
+@property (nonatomic, strong) id testEntityData;
+@property (nonatomic, strong) id testEntity;
 
 - (Class) testEntityClass;
 

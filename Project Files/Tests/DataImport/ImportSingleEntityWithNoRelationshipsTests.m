@@ -6,11 +6,13 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
+#import <XCTest/XCTest.h>
+#import "FixtureHelpers.h"
 #import "SingleEntityWithNoRelationships.h"
 
-@interface ImportSingleEntityWithNoRelationshipsTests : GHTestCase
+@interface ImportSingleEntityWithNoRelationshipsTests : XCTestCase
 
-@property (nonatomic, retain) SingleEntityWithNoRelationships *testEntity;
+@property (nonatomic, strong) SingleEntityWithNoRelationships *testEntity;
 
 @end
 
@@ -18,9 +20,9 @@
 
 @synthesize testEntity;
 
-- (void) setUpClass
+- (void) setUp
 {
-    [NSManagedObjectModel MR_setDefaultManagedObjectModel:[NSManagedObjectModel MR_managedObjectModelNamed:@"TestModel.momd"]];
+    [MagicalRecord setDefaultModelFromClass:[self class]];
     [MagicalRecord setupCoreDataStackWithInMemoryStore];
 
     id singleEntity = [self dataFromJSONFixture];
@@ -28,69 +30,70 @@
     testEntity = [SingleEntityWithNoRelationships MR_importFromObject:singleEntity];
 }
 
-- (void) tearDownClass
+- (void) tearDown
 {
     [MagicalRecord cleanUp];
 }
 
 - (void) testImportASingleEntity
 {
-    assertThat(testEntity, is(notNilValue()));
+    XCTAssertNotNil(testEntity, @"testEntity should not be nil");
 }
 
 - (void) testImportStringAttributeToEntity
 {
-    assertThat(testEntity.stringTestAttribute, is(equalTo(@"This is a test value")));
+    XCTAssertEqualObjects(testEntity.stringTestAttribute, @"This is a test value", @"stringTestAttribute did not contain expected value, instead found '%@'", testEntity.stringTestAttribute);
 }
 
 - (void) testImportInt16AttributeToEntity
 {
-    assertThat(testEntity.int16TestAttribute, is(equalToInteger(256)));
+    XCTAssertEqualObjects(testEntity.int16TestAttribute, @256, @"int16TestAttribute did not contain expected value, instead found: %@", testEntity.int16TestAttribute);
 }
 
 - (void) testImportInt32AttributeToEntity
 {
-    assertThat(testEntity.int32TestAttribute, is(equalToInt(32)));
+    XCTAssertEqualObjects(testEntity.int32TestAttribute, @32, @"int32TestAttribute did not contain expected value, instead found: %@", testEntity.int32TestAttribute);
 }
 
 - (void) testImportInt64AttributeToEntity
 {
-    assertThat(testEntity.int64TestAttribute, is(equalToInteger(42)));
+    XCTAssertEqualObjects(testEntity.int64TestAttribute, @42, @"int64TestAttribute did not contain expected value, instead found: %@", testEntity.int64TestAttribute);
 }
 
 - (void) testImportDecimalAttributeToEntity
 {
-    assertThat(testEntity.decimalTestAttribute, is(equalToDouble(1.2)));
+    XCTAssertEqualObjects(testEntity.decimalTestAttribute, @1.2, @"decimalTestAttribute did not contain expected value, instead found: %@", testEntity.decimalTestAttribute);
 }
 
 - (void) testImportDoubleAttributeToEntity
 {
-    assertThat(testEntity.doubleTestAttribute, is(equalToDouble(124.3)));
+    XCTAssertEqualObjects(testEntity.doubleTestAttribute, @124.3, @"doubleTestAttribute did not contain expected value, instead found: %@", testEntity.doubleTestAttribute);
 }
 
 - (void) testImportFloatAttributeToEntity
 {
-    assertThat(testEntity.floatTestAttribute, is(equalToFloat(10000000000)));
+    XCTAssertEqualObjects(testEntity.floatTestAttribute, @10000000000, @"floatTestAttribute did not contain expected value, instead found: %@", testEntity.floatTestAttribute);
 }
 
 - (void) testImportBooleanAttributeToEntity
 {
-    assertThat(testEntity.booleanTestAttribute, is(equalToBool(NO)));
+    XCTAssertFalse(testEntity.booleanTestAttributeValue, @"booleanTestAttribute did not contain expected value, instead found: %@", testEntity.booleanTestAttribute);
 }
 
 - (void) testImportMappedStringAttributeToEntity
 {
-    assertThat(testEntity.mappedStringAttribute, is(equalTo(@"Mapped value")));
+    XCTAssertEqualObjects(testEntity.mappedStringAttribute, @"Mapped value", @"mappedStringAttribute did not contain expected value, instead found: %@", testEntity.mappedStringAttribute);
 }
 
 - (void) testImportStringAttributeWithNullValue
 {
-    assertThat(testEntity.nullTestAttribute, is(nilValue()));
+    XCTAssertNil(testEntity.nullTestAttribute, @"nullTestAttribute did not contain expected value, instead found: %@", testEntity.nullTestAttribute);
 }
 
 - (void) testImportAttributeNotInJsonData
 {
-    assertThat(testEntity.notInJsonAttribute, containsString(@"Core Data Model"));
+    NSRange rangeOfString = [testEntity.notInJsonAttribute rangeOfString:@"Core Data Model"];
+    XCTAssertNotEqual(@(rangeOfString.length), @0, @"notInJsonAttribute did not contain expected string, instead received: %@", testEntity.notInJsonAttribute);
 }
 
 #if TARGET_OS_IPHONE 
@@ -106,10 +109,10 @@
         CGFloat red, blue, green, alpha;
         [actualColor getRed:&red green:&green blue:&blue alpha:&alpha];
 
-        assertThatFloat(alpha, is(equalToFloat(1.)));
-        assertThatFloat(red, is(equalToFloat(64.0f/255.0f)));
-        assertThatFloat(green, is(equalToFloat(128.0f/255.0f)));
-        assertThatFloat(blue, is(equalToFloat(225.0f/255.0f)));
+        XCTAssertEqual(alpha, 1.0, @"Unexpected value returned: %f", alpha);
+        XCTAssertEqual(red, 64.0f/255.0f, @"Unexpected value returned: %f", red);
+        XCTAssertEqual(green, 128.0f/255.0f, @"Unexpected value returned: %f", green);
+        XCTAssertEqual(blue, 225.0f/255.0f, @"Unexpected value returned: %f", blue);
     }
 }
 #endif
@@ -130,13 +133,13 @@
 
 - (void) testImportNSColorAttributeToEntity
 {
-#warning Proper fix is to extract out color tests to seperate mac and iOS specific model files with proper configurations
+#warning Proper fix is to extract out color tests to separate mac and iOS specific model files with proper configurations
     NSColor *actualColor = (NSColor *)[testEntity colorTestAttribute];
-    
-    assertThatDouble([actualColor alphaComponent], is(equalToDouble(255.0/255.0)));
-    assertThatDouble([actualColor redComponent], is(equalToFloat(64.0f/255.0f)));
-    assertThatDouble([actualColor greenComponent], is(equalToFloat(128.0f/255.0f)));
-    assertThatDouble([actualColor blueComponent], is(equalToFloat(225.0f/255.0f)));
+
+    XCTAssertEqual([actualColor alphaComponent], 255.0/255.0, @"Unexpected value returned");
+    XCTAssertEqual([actualColor redComponent], 64.0f/255.0f, @"Unexpected value returned");
+    XCTAssertEqual([actualColor greenComponent], 128.0f/255.0f, @"Unexpected value returned");
+    XCTAssertEqual([actualColor blueComponent], 225.0f/255.0f, @"Unexpected value returned");
 }
 
 - (NSDate *) dateFromString:(NSString *)date
@@ -150,44 +153,13 @@
 - (void) testImportDateAttributeToEntity
 {
     NSDate *expectedDate = [self dateFromString:@"2011-07-23 22:30:40 +0000"];
-    assertThat(testEntity.dateTestAttribute, is(equalTo(expectedDate)));
+    XCTAssertEqualObjects(testEntity.dateTestAttribute, expectedDate, @"Unexpected value returned");
 }
 
 - (void) testImportDateAttributeWithCustomFormat
 {
-    NSDate *expectedDate = [self dateFromString:@"2011-08-05 00:56:04 +0000"];
-    assertThat(testEntity.dateWithCustomFormat, is(equalTo(expectedDate)));
-    
-}
-
-- (void) testImportInt16AsStringAttributeToEntity
-{
-    assertThat(testEntity.int16AsStringTestAttribute, is(equalToInteger(256)));
-}
-
-- (void) testImportInt32AsStringAttributeToEntity
-{
-    assertThat(testEntity.int32AsStringTestAttribute, is(equalToInt(32)));
-}
-
-- (void) testImportInt64AsStringAttributeToEntity
-{
-    assertThat(testEntity.int64AsStringTestAttribute, is(equalToInteger(42)));
-}
-
-- (void) testImportDecimalAsStringAttributeToEntity
-{
-    assertThat(testEntity.decimalAsStringTestAttribute, is(equalToDouble(1.2)));
-}
-
-- (void) testImportDoubleAsStringAttributeToEntity
-{
-    assertThat(testEntity.doubleAsStringTestAttribute, is(equalToDouble(124.3)));
-}
-
-- (void) testImportFloatAsStringAttributeToEntity
-{
-    assertThat(testEntity.floatAsStringTestAttribute, is(equalToFloat(10000000000)));
+    NSDate *expectedDate = [self dateFromString:@"2011-08-05 01:56:04 +0000"];
+    XCTAssertEqualObjects(testEntity.dateWithCustomFormat, expectedDate, @"Unexpected value returned");
 }
 
 @end

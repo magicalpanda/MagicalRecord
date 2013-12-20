@@ -25,11 +25,11 @@
 {
     NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
     
-    MappedEntity *testMappedEntity = [MappedEntity createInContext:context];
+    MappedEntity *testMappedEntity = [MappedEntity MR_createInContext:context];
     testMappedEntity.mappedEntityIDValue = 42;
     testMappedEntity.sampleAttribute = @"This attribute created as part of the test case setup";
     
-    SingleEntityRelatedToMappedEntityUsingDefaults *entity = [SingleEntityRelatedToMappedEntityUsingDefaults createInContext:context];
+    SingleEntityRelatedToMappedEntityUsingDefaults *entity = [SingleEntityRelatedToMappedEntityUsingDefaults MR_createInContext:context];
     entity.singleEntityRelatedToMappedEntityUsingDefaultsIDValue = 24;
     
     [context MR_saveToPersistentStoreAndWait];
@@ -42,11 +42,16 @@
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 
     id testRelatedEntity = entity.mappedEntity;
-    
-    assertThat(testRelatedEntity, is(notNilValue()));
-    assertThat([testRelatedEntity sampleAttribute], containsString(@"sample json file"));
-    
-    assertThat([MappedEntity numberOfEntities], is(equalToInteger(1)));
+
+    XCTAssertNotNil(testRelatedEntity, @"Entity should not be nil");
+
+    NSString *string = [testRelatedEntity sampleAttribute];
+    NSRange stringRange = [string rangeOfString:@"sample json file"];
+
+    XCTAssert(stringRange.length > 0, @"Could not find 'sample json file' in '%@'", string);
+
+    NSNumber *numberOfEntities = [MappedEntity MR_numberOfEntities];
+    XCTAssertEqualObjects(numberOfEntities, @1, @"Expected 1 entity, got %@", numberOfEntities);
 }
 
 //- (void) testUpdateMappedEntity

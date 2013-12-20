@@ -25,7 +25,7 @@
 
 - (void) setUp
 {
-    [MagicalRecord setDefaultModelNamed:@"TestModel.momd"];
+    [MagicalRecord setDefaultModelFromClass:[self class]];
 }
 
 - (void) tearDown
@@ -90,14 +90,14 @@
 {
     [MagicalRecord setErrorHandlerTarget:self action:@selector(customErrorHandler:)];
 
-    XCTAssertEqual([MagicalRecord errorHandlerTarget], self, @"Error handler should be self");
-    XCTAssertEqual(NSStringFromSelector([MagicalRecord errorHandlerAction]), NSStringFromSelector(@selector(customErrorHandler:)), @"Error handler action expected to be `customErrorHandler:`");
+    XCTAssertEqualObjects([MagicalRecord errorHandlerTarget], self, @"Error handler should be self");
+    XCTAssertEqualObjects(NSStringFromSelector([MagicalRecord errorHandlerAction]), NSStringFromSelector(@selector(customErrorHandler:)), @"Error handler action expected to be `customErrorHandler:`");
 }
 
 - (void) magicalRecordErrorHandlerTest:(NSError *)error
 {
     XCTAssertNotNil(error, @"Expected a non-nil error object");
-    XCTAssertEqual([error domain], @"MRTests", @"Expected an error domain of 'MRTests'");
+    XCTAssertEqualObjects([error domain], @"MRTests", @"Expected an error domain of 'MRTests'");
     XCTAssertEqual([error code], 1000, @"Expected an error code of '1000'");
     errorHandlerWasCalled_ = YES;
 }

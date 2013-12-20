@@ -7,6 +7,7 @@
 //
 
 #import "MagicalDataImportTestCase.h"
+#import "FixtureHelpers.h"
 
 @implementation MagicalDataImportTestCase
 
@@ -15,7 +16,7 @@
 
 - (void) setUp
 {
-    [MagicalRecord setDefaultModelNamed:@"TestModel.momd"];
+    [MagicalRecord setDefaultModelFromClass:[self class]];
     [MagicalRecord setupCoreDataStackWithInMemoryStore];
     //[MagicalRecord setupCoreDataStack];
     

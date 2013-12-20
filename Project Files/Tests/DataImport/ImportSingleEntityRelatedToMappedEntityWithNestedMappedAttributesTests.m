@@ -26,10 +26,12 @@
 {
     SingleEntityRelatedToMappedEntityWithNestedMappedAttributes *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+
+    XCTAssertNotNil(entity.mappedEntity, @"mappedEntity should not be nil");
+    XCTAssertEqual(entity.mappedEntity.mappedEntityIDValue, 42, @"Expected mappedEntityID to be 42, got %@", entity.mappedEntity.mappedEntityID);
     
-    assertThat(entity.mappedEntity, is(notNilValue()));
-    assertThat(entity.mappedEntity.mappedEntityID, is(equalToInteger(42)));
-    assertThat(entity.mappedEntity.nestedAttribute, containsString(@"nested value"));
+    NSRange stringRange = [entity.mappedEntity.nestedAttribute rangeOfString:@"nested value"];
+    XCTAssertTrue(stringRange.length > 0, @"nestedAttribute did not contain 'nested value': %@", entity.mappedEntity.nestedAttribute);
 }
 
 @end

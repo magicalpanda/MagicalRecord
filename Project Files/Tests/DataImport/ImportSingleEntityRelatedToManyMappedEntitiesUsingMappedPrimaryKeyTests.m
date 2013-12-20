@@ -24,9 +24,11 @@
 {
     SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-    
-    assertThat(entity, is(notNilValue()));
-    assertThat(entity.mappedEntities, hasCountOf(4));
+
+    XCTAssertNotNil(entity, @"Entity should not be nil");
+
+    NSInteger mappedEntitiesCount = [entity.mappedEntities count];
+    XCTAssertEqual(mappedEntitiesCount, 4, @"Expected 4 mapped entities, received %zd", mappedEntitiesCount);
 }
 
 @end

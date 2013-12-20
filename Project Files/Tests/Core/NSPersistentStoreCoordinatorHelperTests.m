@@ -6,7 +6,11 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import "NSPersistentStoreCoordinatorHelperTests.h"
+#import <XCTest/XCTest.h>
+
+@interface NSPersistentStoreCoordinatorHelperTests : XCTestCase
+
+@end
 
 @implementation NSPersistentStoreCoordinatorHelperTests
 
@@ -19,38 +23,46 @@
 - (void) testCreateCoodinatorWithSqlitePersistentStore
 {
     NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreNamed:@"TestStore.sqlite"];
-    
-    assertThatUnsignedInteger([[testCoordinator persistentStores] count], is(equalToUnsignedInteger(1)));
 
-    NSPersistentStore *store = [[testCoordinator persistentStores] objectAtIndex:0];
-    assertThat([store type], is(equalTo(NSSQLiteStoreType)));
+    NSUInteger persistentStoreCount = [[testCoordinator persistentStores] count];
+    XCTAssertEqual(persistentStoreCount, (NSUInteger)1, @"Expected there to be 1 persistent store, sadly there are %tu", persistentStoreCount);
+
+    NSPersistentStore *store = [[testCoordinator persistentStores] firstObject];
+    NSString *storeType = [store type];
+    XCTAssertEqualObjects(storeType, NSSQLiteStoreType, @"Store type should be NSSQLiteStoreType, instead is %@", storeType);
 }
 
 - (void) testCreateCoordinatorWithInMemoryStore
 {
     NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator MR_coordinatorWithInMemoryStore];
 
-    assertThatUnsignedInteger([[testCoordinator persistentStores] count], is(equalToUnsignedInteger(1)));
-    
-    NSPersistentStore *store = [[testCoordinator persistentStores] objectAtIndex:0];
-    assertThat([store type], is(equalTo(NSInMemoryStoreType)));
+    NSUInteger persistentStoreCount = [[testCoordinator persistentStores] count];
+    XCTAssertEqual(persistentStoreCount, (NSUInteger)1, @"Expected there to be 1 persistent store, sadly there are %tu", persistentStoreCount);
+
+    NSPersistentStore *store = [[testCoordinator persistentStores] firstObject];
+    NSString *storeType = [store type];
+    XCTAssertEqualObjects(storeType, NSInMemoryStoreType, @"Store type should be NSInMemoryStoreType, instead is %@", storeType);
 }
 
 - (void) testCanAddAnInMemoryStoreToAnExistingCoordinator
 {
     NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreNamed:@"TestStore.sqlite"];
-    
-    assertThatUnsignedInteger([[testCoordinator persistentStores] count], is(equalToUnsignedInteger(1)));
-    
+
+    NSUInteger persistentStoreCount = [[testCoordinator persistentStores] count];
+    XCTAssertEqual(persistentStoreCount, (NSUInteger)1, @"Expected there to be 1 persistent store, sadly there are %tu", persistentStoreCount);
+
     NSPersistentStore *firstStore = [[testCoordinator persistentStores] objectAtIndex:0];
-    assertThat([firstStore type], is(equalTo(NSSQLiteStoreType)));
-    
+    NSString *firstStoreType = [firstStore type];
+    XCTAssertEqualObjects(firstStoreType, NSSQLiteStoreType, @"First store type should be NSSQLiteStoreType, instead is %@", firstStoreType);
+
     [testCoordinator MR_addInMemoryStore];
     
-    assertThatUnsignedInteger([[testCoordinator persistentStores] count], is(equalToUnsignedInteger(2)));
-    
+    persistentStoreCount = [[testCoordinator persistentStores] count];
+    XCTAssertEqual(persistentStoreCount, (NSUInteger)1, @"Expected there to be 2 persistent store, sadly there are %tu", persistentStoreCount);
+
     NSPersistentStore *secondStore = [[testCoordinator persistentStores] objectAtIndex:1];
-    assertThat([secondStore type], is(equalTo(NSInMemoryStoreType)));
+    NSString *secondStoreType = [secondStore type];
+    XCTAssertEqualObjects(secondStoreType, NSSQLiteStoreType, @"Second store type should be NSSQLiteStoreType, instead is %@", secondStoreType);
 }
 
 @end

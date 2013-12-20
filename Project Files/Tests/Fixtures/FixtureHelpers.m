@@ -12,7 +12,8 @@
 
 + (id) dataFromPListFixtureNamed:(NSString *)fixtureName
 {
-    NSString *resource = [[NSBundle bundleForClass:[self class]] pathForResource:fixtureName ofType:@"plist"];
+    NSBundle *testBundle = [NSBundle bundleForClass:[self class]];
+    NSString *resource = [testBundle pathForResource:fixtureName ofType:@"plist"];
     NSData *plistData = [NSData dataWithContentsOfFile:resource];
     
     return [NSPropertyListSerialization propertyListWithData:plistData options:NSPropertyListImmutable format:nil error:nil];
@@ -20,7 +21,8 @@
 
 + (id) dataFromJSONFixtureNamed:(NSString *)fixtureName
 {
-    NSString *resource = [[NSBundle bundleForClass:[self class]] pathForResource:fixtureName ofType:@"json"];
+    NSBundle *testBundle = [NSBundle bundleForClass:[self class]];
+    NSString *resource = [testBundle pathForResource:fixtureName ofType:@"json"];
     NSInputStream *inputStream = [NSInputStream inputStreamWithFileAtPath:resource];
     [inputStream open];
     
@@ -36,6 +38,7 @@
     NSString *className = NSStringFromClass([self class]);
     className = [className stringByReplacingOccurrencesOfString:@"Import" withString:@""];
     className = [className stringByReplacingOccurrencesOfString:@"Spec" withString:@""];
+    className = [className stringByReplacingOccurrencesOfString:@"Tests" withString:@""];
     return [FixtureHelpers dataFromJSONFixtureNamed:className];
 }
 
