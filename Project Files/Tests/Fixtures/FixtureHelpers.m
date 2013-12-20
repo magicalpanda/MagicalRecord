@@ -29,7 +29,7 @@
 
 @end
 
-@implementation SenTest (FixtureHelpers)
+@implementation XCTest (FixtureHelpers)
 
 - (id) dataFromJSONFixture;
 {

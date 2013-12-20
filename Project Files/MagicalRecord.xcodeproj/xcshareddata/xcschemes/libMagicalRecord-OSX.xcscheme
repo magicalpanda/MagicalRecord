@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0500"
+   LastUpgradeVersion = "0510"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C7CF9815174984E4008D9D13"
-               BuildableName = "MagicalRecordTests-OSX.octest"
+               BuildableName = "MagicalRecordTests-OSX.xctest"
                BlueprintName = "MagicalRecordTests-OSX"
                ReferencedContainer = "container:MagicalRecord.xcodeproj">
             </BuildableReference>
