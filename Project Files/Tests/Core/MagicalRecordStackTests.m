@@ -3,11 +3,9 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
-#import "CoreData+MagicalRecord.h"
-#import "NSPersistentStore+MagicalRecord.h"
+#import "MagicalRecordTestBase.h"
 
-@interface MagicalRecordTests : XCTestCase
+@interface MagicalRecordTests : MagicalRecordTestBase
 
 @end
 
@@ -21,16 +19,6 @@
 @implementation MagicalRecordTests
 {
     BOOL errorHandlerWasCalled_;
-}
-
-- (void) setUp
-{
-    [MagicalRecord setDefaultModelFromClass:[self class]];
-}
-
-- (void) tearDown
-{
-    [MagicalRecord cleanUp];
 }
 
 - (void) assertDefaultStack

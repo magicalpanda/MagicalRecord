@@ -6,10 +6,10 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+#import "MagicalRecordTestBase.h"
 #import "SingleEntityWithNoRelationships.h"
 
-@interface NSManagedObjectContextHelperTests : XCTestCase
+@interface NSManagedObjectContextHelperTests : MagicalRecordTestBase
 
 @end
 
@@ -18,13 +18,9 @@
 
 - (void) setUp
 {
-    [MagicalRecord setDefaultModelFromClass:[self class]];
-    [MagicalRecord setupCoreDataStackWithInMemoryStore];
-}
+    [super setUp];
 
-- (void) tearDown
-{
-    [MagicalRecord cleanUp];
+    [MagicalRecord setupCoreDataStackWithInMemoryStore];
 }
 
 - (void) testCanCreateContextForCurrentThead

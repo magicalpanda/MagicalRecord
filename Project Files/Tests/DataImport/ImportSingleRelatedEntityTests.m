@@ -22,25 +22,27 @@
 
 @synthesize singleTestEntity = _singleTestEntity;
 
-- (void) setupTestData
+- (void)setupTestData
 {
     NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
 
     MappedEntity *testMappedEntity = [MappedEntity MR_createInContext:context];
+
     testMappedEntity.testMappedEntityIDValue = 42;
     testMappedEntity.sampleAttribute = @"This attribute created as part of the test case setup";
 
     [context MR_saveToPersistentStoreAndWait];
 }
 
-- (void) setUp
+- (void)setUp
 {
     [super setUp];
+
     self.singleTestEntity = [SingleRelatedEntity MR_importFromObject:self.testEntityData];
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 }
 
-- (void) testImportAnEntityRelatedToAbstractEntityViaToOneRelationshop
+- (void)testImportAnEntityRelatedToAbstractEntityViaToOneRelationshop
 {
     XCTAssertNotNil(self.singleTestEntity, @"singleTestEntity should not be nil");
 
@@ -54,7 +56,7 @@
     XCTAssertFalse([testRelatedEntity respondsToSelector:@selector(sampleConcreteAttribute)], @"testRelatedEntity should respond to selector sampleConcreteAttribute");
 }
 
-- (void) testImportAnEntityRelatedToAbstractEntityViaToManyRelationship
+- (void)testImportAnEntityRelatedToAbstractEntityViaToManyRelationship
 {
     XCTAssertNotNil(self.singleTestEntity, @"singleTestEntity should not be nil");
 
@@ -71,13 +73,12 @@
     XCTAssertFalse([testRelatedEntity respondsToSelector:@selector(sampleConcreteAttribute)], @"testRelatedEntity should respond to selector sampleConcreteAttribute");
 }
 
-
 #pragma mark - Subentity tests
 
-
-- (void) testImportAnEntityRelatedToAConcreteSubEntityViaToOneRelationship
+- (void)testImportAnEntityRelatedToAConcreteSubEntityViaToOneRelationship
 {
     id testRelatedEntity = self.singleTestEntity.testConcreteToOneRelationship;
+
     XCTAssertNotNil(testRelatedEntity, @"testRelatedEntity should not be nil");
 
     NSRange stringRange = [[testRelatedEntity sampleBaseAttribute] rangeOfString:@"BASE"];
@@ -87,9 +88,10 @@
     XCTAssertTrue(stringRange.length > 0, @"Expected to find 'DESCENDANT' in string '%@' but did not", [testRelatedEntity sampleConcreteAttribute]);
 }
 
-- (void) testImportAnEntityRelatedToASubEntityViaToManyRelationship
+- (void)testImportAnEntityRelatedToASubEntityViaToManyRelationship
 {
     NSInteger relationshipCount = [self.singleTestEntity.testConcreteToManyRelationship count];
+
     XCTAssertEqual(relationshipCount, 3, @"Expected relationship count to be 3, received %zd", relationshipCount);
 
     id testRelatedEntity = [self.singleTestEntity.testConcreteToManyRelationship anyObject];
@@ -102,10 +104,6 @@
     XCTAssertTrue(stringRange.length > 0, @"Expected to find 'DESCENDANT' in string '%@' but did not", [testRelatedEntity sampleConcreteAttribute]);
 }
 
-
-//Test ordered to many
-
-
-
+// TODO: Test ordered to many relationships
 
 @end

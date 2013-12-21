@@ -71,13 +71,12 @@
 
 #else
 
-- (void) testDefaultStoreFolderForMacIsTheApplicationSupportSlashApplicationFolder
+- (void) testDefaultStoreFolderForMacIsTheApplicationSupportDirectory
 {
     NSString *applictionSupportDirectory = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
     NSString *defaultStoreName = kMagicalRecordDefaultStoreFileName;
     
-    NSURL *expectedStoreUrl = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@/%@", applictionSupportDirectory, applicationName, defaultStoreName]];
+    NSURL *expectedStoreUrl = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", applictionSupportDirectory, defaultStoreName]];
     
     NSURL *defaultStoreUrl = [NSPersistentStore MR_defaultLocalStoreUrl];
 
@@ -89,14 +88,13 @@
 {
     NSString *storeFileName = @"NotTheDefaultStoreName.storefile";
     NSString *applicationSupportDirectory = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
     NSString *testStorePath = [applicationSupportDirectory stringByAppendingPathComponent:storeFileName];
     
     BOOL fileWasCreated = [[NSFileManager defaultManager] createFileAtPath:testStorePath contents:[storeFileName dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
 
     XCTAssertTrue(fileWasCreated, @"Expected file to have been created");
 
-    NSURL *expectedStoreUrl = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@/%@", applicationSupportDirectory, applicationName, storeFileName]];
+    NSURL *expectedStoreUrl = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", applicationSupportDirectory, storeFileName]];
     
     NSURL *foundStoreUrl = [NSPersistentStore MR_urlForStoreName:storeFileName];
     

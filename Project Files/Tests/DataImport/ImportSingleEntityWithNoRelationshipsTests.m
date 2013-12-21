@@ -20,110 +20,115 @@
 
 @synthesize testEntity;
 
-- (void) setUp
+- (void)setUp
 {
+    [super setUp];
+
     [MagicalRecord setDefaultModelFromClass:[self class]];
     [MagicalRecord setupCoreDataStackWithInMemoryStore];
 
     id singleEntity = [self dataFromJSONFixture];
-    
+
     testEntity = [SingleEntityWithNoRelationships MR_importFromObject:singleEntity];
 }
 
-- (void) tearDown
+- (void)tearDown
 {
+    [super tearDown];
+
     [MagicalRecord cleanUp];
 }
 
-- (void) testImportASingleEntity
+- (void)testImportASingleEntity
 {
     XCTAssertNotNil(testEntity, @"testEntity should not be nil");
 }
 
-- (void) testImportStringAttributeToEntity
+- (void)testImportStringAttributeToEntity
 {
     XCTAssertEqualObjects(testEntity.stringTestAttribute, @"This is a test value", @"stringTestAttribute did not contain expected value, instead found '%@'", testEntity.stringTestAttribute);
 }
 
-- (void) testImportInt16AttributeToEntity
+- (void)testImportInt16AttributeToEntity
 {
     XCTAssertEqualObjects(testEntity.int16TestAttribute, @256, @"int16TestAttribute did not contain expected value, instead found: %@", testEntity.int16TestAttribute);
 }
 
-- (void) testImportInt32AttributeToEntity
+- (void)testImportInt32AttributeToEntity
 {
     XCTAssertEqualObjects(testEntity.int32TestAttribute, @32, @"int32TestAttribute did not contain expected value, instead found: %@", testEntity.int32TestAttribute);
 }
 
-- (void) testImportInt64AttributeToEntity
+- (void)testImportInt64AttributeToEntity
 {
     XCTAssertEqualObjects(testEntity.int64TestAttribute, @42, @"int64TestAttribute did not contain expected value, instead found: %@", testEntity.int64TestAttribute);
 }
 
-- (void) testImportDecimalAttributeToEntity
+- (void)testImportDecimalAttributeToEntity
 {
     XCTAssertEqualObjects(testEntity.decimalTestAttribute, @1.2, @"decimalTestAttribute did not contain expected value, instead found: %@", testEntity.decimalTestAttribute);
 }
 
-- (void) testImportDoubleAttributeToEntity
+- (void)testImportDoubleAttributeToEntity
 {
     XCTAssertEqualObjects(testEntity.doubleTestAttribute, @124.3, @"doubleTestAttribute did not contain expected value, instead found: %@", testEntity.doubleTestAttribute);
 }
 
-- (void) testImportFloatAttributeToEntity
+- (void)testImportFloatAttributeToEntity
 {
     XCTAssertEqualObjects(testEntity.floatTestAttribute, @10000000000, @"floatTestAttribute did not contain expected value, instead found: %@", testEntity.floatTestAttribute);
 }
 
-- (void) testImportBooleanAttributeToEntity
+- (void)testImportBooleanAttributeToEntity
 {
     XCTAssertFalse(testEntity.booleanTestAttributeValue, @"booleanTestAttribute did not contain expected value, instead found: %@", testEntity.booleanTestAttribute);
 }
 
-- (void) testImportMappedStringAttributeToEntity
+- (void)testImportMappedStringAttributeToEntity
 {
     XCTAssertEqualObjects(testEntity.mappedStringAttribute, @"Mapped value", @"mappedStringAttribute did not contain expected value, instead found: %@", testEntity.mappedStringAttribute);
 }
 
-- (void) testImportStringAttributeWithNullValue
+- (void)testImportStringAttributeWithNullValue
 {
     XCTAssertNil(testEntity.nullTestAttribute, @"nullTestAttribute did not contain expected value, instead found: %@", testEntity.nullTestAttribute);
 }
 
-- (void) testImportAttributeNotInJsonData
+- (void)testImportAttributeNotInJsonData
 {
     NSRange rangeOfString = [testEntity.notInJsonAttribute rangeOfString:@"Core Data Model"];
+
     XCTAssertNotEqual(@(rangeOfString.length), @0, @"notInJsonAttribute did not contain expected string, instead received: %@", testEntity.notInJsonAttribute);
 }
 
-#if TARGET_OS_IPHONE 
+#if TARGET_OS_IPHONE
 
 #if defined(__IPHONE_5_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_5_0
 
-- (void) testImportUIColorAttributeToEntity
+- (void)testImportUIColorAttributeToEntity
 {
     UIColor *actualColor = testEntity.colorTestAttribute;
- 
-    if ([actualColor respondsToSelector:@selector(getRed:green:blue:alpha:)]) 
-    {
+
+    if ([actualColor respondsToSelector:@selector(getRed:green:blue:alpha:)]) {
         CGFloat red, blue, green, alpha;
         [actualColor getRed:&red green:&green blue:&blue alpha:&alpha];
 
         XCTAssertEqual(alpha, 1.0, @"Unexpected value returned: %f", alpha);
-        XCTAssertEqual(red, 64.0f/255.0f, @"Unexpected value returned: %f", red);
-        XCTAssertEqual(green, 128.0f/255.0f, @"Unexpected value returned: %f", green);
-        XCTAssertEqual(blue, 225.0f/255.0f, @"Unexpected value returned: %f", blue);
+        XCTAssertEqual(red, 64.0f / 255.0f, @"Unexpected value returned: %f", red);
+        XCTAssertEqual(green, 128.0f / 255.0f, @"Unexpected value returned: %f", green);
+        XCTAssertEqual(blue, 225.0f / 255.0f, @"Unexpected value returned: %f", blue);
     }
 }
 #endif
 
-- (NSDate *) dateFromString:(NSString *)date
+- (NSDate *)dateFromString:(NSString *)date
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+
     formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss ZZZ";
     formatter.timeZone = [NSTimeZone timeZoneWithName:@"GMT"];
     formatter.locale = [NSLocale currentLocale];
-    
+
     NSDate *expectedDate = [formatter dateFromString:date];
 
     return expectedDate;
@@ -131,34 +136,36 @@
 
 #else
 
-- (void) testImportNSColorAttributeToEntity
+- (void)testImportNSColorAttributeToEntity
 {
 #warning Proper fix is to extract out color tests to separate mac and iOS specific model files with proper configurations
-    NSColor *actualColor = (NSColor *)[testEntity colorTestAttribute];
+    NSColor *actualColor = testEntity.colorTestAttribute;
 
-    XCTAssertEqual([actualColor alphaComponent], 255.0/255.0, @"Unexpected value returned");
-    XCTAssertEqual([actualColor redComponent], 64.0f/255.0f, @"Unexpected value returned");
-    XCTAssertEqual([actualColor greenComponent], 128.0f/255.0f, @"Unexpected value returned");
-    XCTAssertEqual([actualColor blueComponent], 225.0f/255.0f, @"Unexpected value returned");
+    XCTAssertEqual([actualColor alphaComponent], 255.0 / 255.0, @"Unexpected value returned");
+    XCTAssertEqual([actualColor redComponent], 64.0f / 255.0f, @"Unexpected value returned");
+    XCTAssertEqual([actualColor greenComponent], 128.0f / 255.0f, @"Unexpected value returned");
+    XCTAssertEqual([actualColor blueComponent], 225.0f / 255.0f, @"Unexpected value returned");
 }
 
-- (NSDate *) dateFromString:(NSString *)date
+- (NSDate *)dateFromString:(NSString *)date
 {
     NSDate *expectedDate = [NSDate dateWithString:date];
+
     return expectedDate;
 }
+#endif /* if TARGET_OS_IPHONE */
 
-#endif
-
-- (void) testImportDateAttributeToEntity
+- (void)testImportDateAttributeToEntity
 {
     NSDate *expectedDate = [self dateFromString:@"2011-07-23 22:30:40 +0000"];
+
     XCTAssertEqualObjects(testEntity.dateTestAttribute, expectedDate, @"Unexpected value returned");
 }
 
-- (void) testImportDateAttributeWithCustomFormat
+- (void)testImportDateAttributeWithCustomFormat
 {
     NSDate *expectedDate = [self dateFromString:@"2011-08-05 01:56:04 +0000"];
+
     XCTAssertEqualObjects(testEntity.dateWithCustomFormat, expectedDate, @"Unexpected value returned");
 }
 

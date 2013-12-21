@@ -14,33 +14,30 @@
 @synthesize testEntityData = testEntityData__;
 @synthesize testEntity = testEntity__;
 
-- (void) setUp
+- (void)setUp
 {
+    [super setUp];
+
     [MagicalRecord setDefaultModelFromClass:[self class]];
     [MagicalRecord setupCoreDataStackWithInMemoryStore];
-    //[MagicalRecord setupCoreDataStack];
-    
-    if ([self respondsToSelector:@selector(setupTestData)])
-    {
+
+    if ([self respondsToSelector:@selector(setupTestData)]) {
         [self performSelector:@selector(setupTestData)];
     }
-    
+
     self.testEntityData = [self dataFromJSONFixture];
 }
 
-- (void) tearDown
+- (void)tearDown
 {
+    [super tearDown];
+
     [MagicalRecord cleanUp];
 }
 
-- (Class) testEntityClass;
+- (Class)testEntityClass;
 {
     return [NSManagedObject class];
-}
-
--(BOOL)shouldRunOnMainThread
-{
-    return YES;
 }
 
 @end

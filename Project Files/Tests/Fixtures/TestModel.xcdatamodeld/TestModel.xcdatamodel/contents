@@ -68,7 +68,11 @@
     </entity>
     <entity name="SingleEntityWithNoRelationships" representedClassName="SingleEntityWithNoRelationships" syncable="YES">
         <attribute name="booleanTestAttribute" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="colorTestAttribute" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="colorTestAttribute" optional="YES" attributeType="Transformable" syncable="YES">
+            <userInfo>
+                <entry key="attributeValueClassName" value="*Color"/>
+            </userInfo>
+        </attribute>
         <attribute name="dateTestAttribute" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dateWithCustomFormat" optional="YES" attributeType="Date" syncable="YES">
             <userInfo>

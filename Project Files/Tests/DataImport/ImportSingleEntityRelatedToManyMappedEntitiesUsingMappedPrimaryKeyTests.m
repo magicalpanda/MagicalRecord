@@ -15,14 +15,15 @@
 
 @implementation ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests
 
-- (Class) testEntityClass
+- (Class)testEntityClass
 {
     return [SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey class];
 }
 
-- (void) testImportData
+- (void)testImportData
 {
     SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
+
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 
     XCTAssertNotNil(entity, @"Entity should not be nil");

@@ -16,6 +16,8 @@
 
 - (void) setUp
 {
+    [super setUp];
+    
     NSURL *testStoreURL = [NSPersistentStore MR_urlForStoreName:@"TestStore.sqlite"];
     [[NSFileManager defaultManager] removeItemAtPath:[testStoreURL path] error:nil];
 }
@@ -58,11 +60,11 @@
     [testCoordinator MR_addInMemoryStore];
     
     persistentStoreCount = [[testCoordinator persistentStores] count];
-    XCTAssertEqual(persistentStoreCount, (NSUInteger)1, @"Expected there to be 2 persistent store, sadly there are %tu", persistentStoreCount);
+    XCTAssertEqual(persistentStoreCount, (NSUInteger)2, @"Expected there to be 2 persistent store, sadly there are %tu", persistentStoreCount);
 
     NSPersistentStore *secondStore = [[testCoordinator persistentStores] objectAtIndex:1];
     NSString *secondStoreType = [secondStore type];
-    XCTAssertEqualObjects(secondStoreType, NSSQLiteStoreType, @"Second store type should be NSSQLiteStoreType, instead is %@", secondStoreType);
+    XCTAssertEqualObjects(secondStoreType, NSInMemoryStoreType, @"Second store type should be NSInMemoryStoreType, instead is %@", secondStoreType);
 }
 
 @end
