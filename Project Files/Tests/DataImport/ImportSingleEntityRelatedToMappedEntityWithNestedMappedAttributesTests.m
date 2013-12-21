@@ -28,7 +28,7 @@
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 
     XCTAssertNotNil(entity.mappedEntity, @"mappedEntity should not be nil");
-    XCTAssertEqual(entity.mappedEntity.mappedEntityIDValue, 42, @"Expected mappedEntityID to be 42, got %@", entity.mappedEntity.mappedEntityID);
+    XCTAssertEqualObjects(entity.mappedEntity.mappedEntityID, @42, @"Expected mappedEntityID to be 42, got %@", entity.mappedEntity.mappedEntityID);
 
     NSRange stringRange = [entity.mappedEntity.nestedAttribute rangeOfString:@"nested value"];
     XCTAssertTrue(stringRange.length > 0, @"nestedAttribute did not contain 'nested value': %@", entity.mappedEntity.nestedAttribute);

@@ -28,8 +28,8 @@
 
     XCTAssertNotNil(entity, @"Entity should not be nil");
 
-    NSInteger mappedEntitiesCount = [entity.mappedEntities count];
-    XCTAssertEqual(mappedEntitiesCount, 4, @"Expected 4 mapped entities, received %zd", mappedEntitiesCount);
+    NSUInteger mappedEntitiesCount = [entity.mappedEntities count];
+    XCTAssertEqual(mappedEntitiesCount, (NSUInteger)4, @"Expected 4 mapped entities, received %zd", mappedEntitiesCount);
 }
 
 @end

@@ -140,10 +140,10 @@
 {
     NSColor *actualColor = testEntity.colorTestAttribute;
 
-    XCTAssertEqual([actualColor alphaComponent], 255.0 / 255.0, @"Unexpected value returned");
-    XCTAssertEqual([actualColor redComponent], 64.0f / 255.0f, @"Unexpected value returned");
-    XCTAssertEqual([actualColor greenComponent], 128.0f / 255.0f, @"Unexpected value returned");
-    XCTAssertEqual([actualColor blueComponent], 225.0f / 255.0f, @"Unexpected value returned");
+    XCTAssertEqual([actualColor alphaComponent], (CGFloat)(255.0 / 255.0), @"Unexpected value returned");
+    XCTAssertEqual([actualColor redComponent], (CGFloat)(64.0f / 255.0f), @"Unexpected value returned");
+    XCTAssertEqual([actualColor greenComponent], (CGFloat)(128.0f / 255.0f), @"Unexpected value returned");
+    XCTAssertEqual([actualColor blueComponent], (CGFloat)(225.0f / 255.0f), @"Unexpected value returned");
 }
 
 - (NSDate *)dateFromString:(NSString *)date

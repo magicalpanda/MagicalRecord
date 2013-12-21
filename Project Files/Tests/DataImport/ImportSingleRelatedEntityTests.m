@@ -60,8 +60,8 @@
 {
     XCTAssertNotNil(self.singleTestEntity, @"singleTestEntity should not be nil");
 
-    NSInteger relationshipCount = [self.singleTestEntity.testAbstractToManyRelationship count];
-    XCTAssertEqual(relationshipCount, 2, @"Expected relationship count to be 2, received %zd", relationshipCount);
+    NSUInteger relationshipCount = [self.singleTestEntity.testAbstractToManyRelationship count];
+    XCTAssertEqual(relationshipCount, (NSUInteger)2, @"Expected relationship count to be 2, received %zd", relationshipCount);
 
     id testRelatedEntity = [self.singleTestEntity.testAbstractToManyRelationship anyObject];
 
@@ -90,9 +90,8 @@
 
 - (void)testImportAnEntityRelatedToASubEntityViaToManyRelationship
 {
-    NSInteger relationshipCount = [self.singleTestEntity.testConcreteToManyRelationship count];
-
-    XCTAssertEqual(relationshipCount, 3, @"Expected relationship count to be 3, received %zd", relationshipCount);
+    NSUInteger relationshipCount = [self.singleTestEntity.testConcreteToManyRelationship count];
+    XCTAssertEqual(relationshipCount, (NSUInteger)3, @"Expected relationship count to be 3, received %zd", relationshipCount);
 
     id testRelatedEntity = [self.singleTestEntity.testConcreteToManyRelationship anyObject];
     XCTAssertNotNil(testRelatedEntity, @"testRelatedEntity should not be nil");

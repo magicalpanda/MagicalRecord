@@ -46,9 +46,11 @@
     NSRelationshipDescription *testRelationship = [[mappedEntity propertiesByName] valueForKey:@"mappedEntity"];
     XCTAssertEqualObjects([[testRelationship userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey], @"someRandomAttributeName", @"Expected 'someRandomAttributeName' got '%@'", [[testRelationship userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey]);
 
-    XCTAssertEqual([[SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_numberOfEntities] integerValue], 1, @"Expected count of 1 entity, got %@", [SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_numberOfEntities]);
+    NSNumber *numberOfEntities = [SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_numberOfEntities];
+    XCTAssertEqualObjects(numberOfEntities, @1, @"Expected count of 1 entity, got %@", numberOfEntities);
 
-    XCTAssertEqual([[MappedEntity MR_numberOfEntities] integerValue], 1, @"Expected count of 1 entity, got %@", [MappedEntity MR_numberOfEntities]);
+    NSNumber *numberOfMappedEntities = [MappedEntity MR_numberOfEntities];
+    XCTAssertEqualObjects(numberOfMappedEntities, @1, @"Expected count of 1 entity, got %@", numberOfMappedEntities);
 
     XCTAssertNotNil(testRelatedEntity, @"testRelatedEntity should not be nil");
 
@@ -72,13 +74,13 @@
     XCTAssertEqualObjects(mapKey, @"someRandomAttributeName", @"Expected 'someRandomAttributeName' got '%@'", mapKey);
 
     NSNumber *entityCount = [SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_numberOfEntities];
-    XCTAssertEqual([entityCount integerValue], 1, @"Expected count of 1 entity, got %@", entityCount);
+    XCTAssertEqualObjects(entityCount, @1, @"Expected count of 1 entity, got %@", entityCount);
 
     NSNumber *mappedEntityCount = [MappedEntity MR_numberOfEntities];
-    XCTAssertEqual([mappedEntityCount integerValue], 1, @"Expected count of 1 entity, got %@", mappedEntityCount);
+    XCTAssertEqualObjects(mappedEntityCount, @1, @"Expected count of 1 entity, got %@", mappedEntityCount);
 
     NSNumber *mappedEntityID = [testRelatedEntity testMappedEntityID];
-    XCTAssertEqual([mappedEntityID integerValue], 42, @"Expected testMappedEntityID to be '42', got '%@'", mappedEntityID);
+    XCTAssertEqualObjects(mappedEntityID, @42, @"Expected testMappedEntityID to be '42', got '%@'", mappedEntityID);
 
     XCTAssertNotNil(testRelatedEntity, @"testRelatedEntity should not be nil");
 

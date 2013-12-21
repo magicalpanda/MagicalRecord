@@ -86,7 +86,7 @@
 {
     XCTAssertNotNil(error, @"Expected a non-nil error object");
     XCTAssertEqualObjects([error domain], @"MRTests", @"Expected an error domain of 'MRTests'");
-    XCTAssertEqual([error code], 1000, @"Expected an error code of '1000'");
+    XCTAssertEqual([error code], (NSInteger)1000, @"Expected an error code of '1000'");
     errorHandlerWasCalled_ = YES;
 }
 
