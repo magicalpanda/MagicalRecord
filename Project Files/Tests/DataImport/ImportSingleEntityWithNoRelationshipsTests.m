@@ -138,7 +138,6 @@
 
 - (void)testImportNSColorAttributeToEntity
 {
-#warning Proper fix is to extract out color tests to separate mac and iOS specific model files with proper configurations
     NSColor *actualColor = testEntity.colorTestAttribute;
 
     XCTAssertEqual([actualColor alphaComponent], 255.0 / 255.0, @"Unexpected value returned");
