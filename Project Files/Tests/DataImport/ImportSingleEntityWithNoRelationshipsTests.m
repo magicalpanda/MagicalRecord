@@ -113,10 +113,10 @@
         CGFloat red, blue, green, alpha;
         [actualColor getRed:&red green:&green blue:&blue alpha:&alpha];
 
-        XCTAssertEqual(alpha, 1.0, @"Unexpected value returned: %f", alpha);
-        XCTAssertEqual(red, 64.0f / 255.0f, @"Unexpected value returned: %f", red);
-        XCTAssertEqual(green, 128.0f / 255.0f, @"Unexpected value returned: %f", green);
-        XCTAssertEqual(blue, 225.0f / 255.0f, @"Unexpected value returned: %f", blue);
+        XCTAssertEqual(alpha, (CGFloat)1.0, @"Unexpected value returned: %f", alpha);
+        XCTAssertEqual(red, (CGFloat)(64.0f / 255.0f), @"Unexpected value returned: %f", red);
+        XCTAssertEqual(green, (CGFloat)(128.0f / 255.0f), @"Unexpected value returned: %f", green);
+        XCTAssertEqual(blue, (CGFloat)(225.0f / 255.0f), @"Unexpected value returned: %f", blue);
     }
 }
 #endif
