@@ -234,6 +234,10 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 {
     NSAttributeDescription *primaryAttribute = [[self MR_entityDescription] MR_primaryAttributeToRelateBy];
     
+    NSAssert2(primaryAttribute != nil, @"Importing to the entity '%@' requires User Info key %@ to be set to an attribute name to avoid importing duplicate records.",
+              [[self MR_entityDescription] name],
+              kMagicalRecordImportRelationshipLinkedByKey);
+    
     id value = [objectData MR_valueForAttribute:primaryAttribute];
     
     NSManagedObject *managedObject = [self MR_findFirstByAttribute:[primaryAttribute name] withValue:value inContext:context];
