@@ -29,9 +29,6 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 
 @end
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-
 @implementation NSManagedObject (MagicalRecord_DataImport)
 
 - (BOOL) MR_importValue:(id)value forKey:(NSString *)key
@@ -130,7 +127,11 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
         {
             //Need to get the ordered set
             NSString *selectorName = [[relationshipInfo name] stringByAppendingString:@"Set"];
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             relationshipSource = [self performSelector:NSSelectorFromString(selectorName)];
+#pragma clang diagnostic pop
             addRelationMessageFormat = @"addObject:";
         }
     }
@@ -138,12 +139,15 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     NSString *addRelatedObjectToSetMessage = [NSString stringWithFormat:addRelationMessageFormat, attributeNameFromString([relationshipInfo name])];
  
     SEL selector = NSSelectorFromString(addRelatedObjectToSetMessage);
-    
-    @try 
+
+    @try
     {
-        [relationshipSource performSelector:selector withObject:relatedObject];        
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        [relationshipSource performSelector:selector withObject:relatedObject];
+#pragma clang diagnostic pop
     }
-    @catch (NSException *exception) 
+    @catch (NSException *exception)
     {
         MRLog(@"Adding object for relationship failed: %@\n", relationshipInfo);
         MRLog(@"relatedObject.entity %@", [relatedObject entity]);
@@ -176,10 +180,13 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
         BOOL implementsShouldImport = (BOOL)[self respondsToSelector:shouldImportSelector];
         void (^establishRelationship)(NSRelationshipDescription *, id) = ^(NSRelationshipDescription *blockInfo, id blockData)
         {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             if (!(implementsShouldImport && !(BOOL)[self performSelector:shouldImportSelector withObject:relatedObjectData]))
             {
                 setRelationshipBlock(blockInfo, blockData);
             }
+#pragma clang diagnostic pop
         };
         
         if ([relationshipInfo isToMany] && [relatedObjectData isKindOfClass:[NSArray class]])
@@ -317,8 +324,6 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 }
 
 @end
-
-#pragma clang diagnostic pop
 
 void MR_swapMethodsFromClass(Class c, SEL orig, SEL new)
 {
