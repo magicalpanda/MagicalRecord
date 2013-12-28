@@ -109,6 +109,33 @@
     }];
 }
 
+- (void)testCanDeleteEntityInstanceInOtherContext
+{
+    NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
+    NSManagedObject *testEntity = [SingleRelatedEntity MR_createInContext:defaultContext];
+
+    [defaultContext MR_saveToPersistentStoreAndWait];
+
+    XCTAssertFalse([testEntity isDeleted], @"Entity should not be deleted at this point");
+
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+        NSManagedObject *otherEntity = [testEntity MR_inContext:localContext];
+
+        XCTAssertNotNil(otherEntity, @"Entity should not be nil");
+        XCTAssertFalse([otherEntity isDeleted], @"Entity should not be deleted at this point");
+
+        // Delete the object in the other context
+        [testEntity MR_deleteInContext:localContext];
+
+        // The nested context entity should now be deleted
+        XCTAssertTrue([otherEntity isDeleted], @"Entity should now be deleted");
+    }];
+
+    // The default context entity should now be deleted
+    XCTAssertNotNil(testEntity, @"Entity should not be nil");
+    XCTAssertTrue([testEntity isDeleted], @"Entity should now be deleted");
+}
+
 #pragma mark - Private Methods
 
 - (void)p_createSampleData:(NSInteger)numberOfTestEntitiesToCreate
