@@ -92,14 +92,31 @@
         </attribute>
         <attribute name="notInJsonAttribute" optional="YES" attributeType="String" defaultValueString="Set From Core Data Model Editor" syncable="YES"/>
         <attribute name="nullTestAttribute" optional="YES" attributeType="Integer 64" defaultValueString="100" syncable="YES"/>
+        <attribute name="numberAsStringTestAttribute" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stringTestAttribute" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="SingleRelatedEntity" representedClassName="SingleRelatedEntity" syncable="YES">
         <attribute name="mappedStringAttribute" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="testAbstractToManyRelationship" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AbstractRelatedEntity" syncable="YES"/>
-        <relationship name="testAbstractToOneRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="AbstractRelatedEntity" syncable="YES"/>
-        <relationship name="testConcreteToManyRelationship" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ConcreteRelatedEntity" syncable="YES"/>
-        <relationship name="testConcreteToOneRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="ConcreteRelatedEntity" syncable="YES"/>
+        <relationship name="testAbstractToManyRelationship" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AbstractRelatedEntity" syncable="YES">
+            <userInfo>
+                <entry key="relatedByAttribute" value="sampleBaseAttribute"/>
+            </userInfo>
+        </relationship>
+        <relationship name="testAbstractToOneRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="AbstractRelatedEntity" syncable="YES">
+            <userInfo>
+                <entry key="relatedByAttribute" value="sampleBaseAttribute"/>
+            </userInfo>
+        </relationship>
+        <relationship name="testConcreteToManyRelationship" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ConcreteRelatedEntity" syncable="YES">
+            <userInfo>
+                <entry key="relatedByAttribute" value="sampleConcreteAttribute"/>
+            </userInfo>
+        </relationship>
+        <relationship name="testConcreteToOneRelationship" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="ConcreteRelatedEntity" syncable="YES">
+            <userInfo>
+                <entry key="relatedByAttribute" value="sampleConcreteAttribute"/>
+            </userInfo>
+        </relationship>
     </entity>
     <elements>
         <element name="AbstractRelatedEntity" positionX="0" positionY="0" width="128" height="60"/>
@@ -111,7 +128,7 @@
         <element name="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" positionX="0" positionY="0" width="128" height="60"/>
         <element name="SingleEntityRelatedToMappedEntityWithNestedMappedAttributes" positionX="0" positionY="0" width="128" height="60"/>
         <element name="SingleEntityRelatedToMappedEntityWithSecondaryMappings" positionX="0" positionY="0" width="128" height="75"/>
-        <element name="SingleEntityWithNoRelationships" positionX="0" positionY="0" width="128" height="255"/>
-        <element name="SingleRelatedEntity" positionX="0" positionY="0" width="128" height="120"/>
+        <element name="SingleEntityWithNoRelationships" positionX="0" positionY="0" width="128" height="270"/>
+        <element name="SingleRelatedEntity" positionX="0" positionY="0" width="128" height="118"/>
     </elements>
 </model>

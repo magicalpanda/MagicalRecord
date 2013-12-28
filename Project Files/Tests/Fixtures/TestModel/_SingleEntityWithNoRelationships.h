@@ -19,6 +19,7 @@ extern const struct SingleEntityWithNoRelationshipsAttributes {
 	__unsafe_unretained NSString *mappedStringAttribute;
 	__unsafe_unretained NSString *notInJsonAttribute;
 	__unsafe_unretained NSString *nullTestAttribute;
+	__unsafe_unretained NSString *numberAsStringTestAttribute;
 	__unsafe_unretained NSString *stringTestAttribute;
 } SingleEntityWithNoRelationshipsAttributes;
 
@@ -35,6 +36,8 @@ extern const struct SingleEntityWithNoRelationshipsAttributes {
 
 
 @class NSObject;
+
+
 
 
 
@@ -245,6 +248,16 @@ extern const struct SingleEntityWithNoRelationshipsAttributes {
 
 
 
+@property (nonatomic, strong) NSString* numberAsStringTestAttribute;
+
+
+
+//- (BOOL)validateNumberAsStringTestAttribute:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) NSString* stringTestAttribute;
 
 
@@ -358,6 +371,12 @@ extern const struct SingleEntityWithNoRelationshipsAttributes {
 
 - (int64_t)primitiveNullTestAttributeValue;
 - (void)setPrimitiveNullTestAttributeValue:(int64_t)value_;
+
+
+
+
+- (NSString*)primitiveNumberAsStringTestAttribute;
+- (void)setPrimitiveNumberAsStringTestAttribute:(NSString*)value;
 
 
 

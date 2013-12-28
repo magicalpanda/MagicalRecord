@@ -94,6 +94,11 @@
     XCTAssertNil(testEntity.nullTestAttribute, @"nullTestAttribute did not contain expected value, instead found: %@", testEntity.nullTestAttribute);
 }
 
+- (void)testImportNumberAsStringAttributeToEntity
+{
+    XCTAssertEqualObjects(testEntity.numberAsStringTestAttribute, @"10248909829", @"numberAsStringTestAttribute did not contain expected value, instead found: %@", testEntity.numberAsStringTestAttribute);
+}
+
 - (void)testImportAttributeNotInJsonData
 {
     NSRange rangeOfString = [testEntity.notInJsonAttribute rangeOfString:@"Core Data Model"];

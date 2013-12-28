@@ -18,6 +18,7 @@ const struct SingleEntityWithNoRelationshipsAttributes SingleEntityWithNoRelatio
 	.mappedStringAttribute = @"mappedStringAttribute",
 	.notInJsonAttribute = @"notInJsonAttribute",
 	.nullTestAttribute = @"nullTestAttribute",
+	.numberAsStringTestAttribute = @"numberAsStringTestAttribute",
 	.stringTestAttribute = @"stringTestAttribute",
 };
 
@@ -329,6 +330,13 @@ const struct SingleEntityWithNoRelationshipsAttributes SingleEntityWithNoRelatio
 - (void)setPrimitiveNullTestAttributeValue:(int64_t)value_ {
 	[self setPrimitiveNullTestAttribute:@(value_)];
 }
+
+
+
+
+
+@dynamic numberAsStringTestAttribute;
+
 
 
 
