@@ -56,7 +56,11 @@ static NSPersistentStore *defaultPersistentStore_ = nil;
     }
 
     //set default url
+#if TARGET_OS_IPHONE
+    return [NSURL fileURLWithPath:[[self MR_applicationDocumentsDirectory] stringByAppendingPathComponent:storeFileName]];
+#else
     return [NSURL fileURLWithPath:[[self MR_applicationStorageDirectory] stringByAppendingPathComponent:storeFileName]];
+#endif
 }
 
 + (NSURL *) MR_cloudURLForUbiqutiousContainer:(NSString *)bucketName;
