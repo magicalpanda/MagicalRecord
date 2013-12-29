@@ -274,6 +274,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9042530D187002710066DA41 /* BuildConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuildConfig.h; sourceTree = SOURCE_ROOT; };
 		909948F517C2EF9800BC2B5C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
 		909948FF17C2F0B700BC2B5C /* MagicalRecord+ActionsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MagicalRecord+ActionsSpec.m"; path = "Tests/MagicalRecord+ActionsSpec.m"; sourceTree = SOURCE_ROOT; };
 		9099490017C2F0B700BC2B5C /* NSManagedObjectContext+MagicalSavesSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectContext+MagicalSavesSpec.m"; path = "Tests/NSManagedObjectContext+MagicalSavesSpec.m"; sourceTree = SOURCE_ROOT; };
@@ -712,6 +713,7 @@
 		C7CF9AE21749867D008D9D13 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				9042530D187002710066DA41 /* BuildConfig.h */,
 				C7CF9AE3174986B5008D9D13 /* MagicalRecord-iOS-Prefix.pch */,
 				C7CF9AE4174986B5008D9D13 /* MagicalRecord-OSX-Prefix.pch */,
 			);
@@ -850,6 +852,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7CF97B417498414008D9D13 /* Build configuration list for PBXNativeTarget "libMagicalRecord-iOS" */;
 			buildPhases = (
+				908FFE1A186FB3A10073F316 /* Update Version Information */,
 				C7CF97A717498414008D9D13 /* Sources */,
 				C7CF97A817498414008D9D13 /* Frameworks */,
 				C7CF97A917498414008D9D13 /* CopyFiles */,
@@ -867,6 +870,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7CF97C31749843F008D9D13 /* Build configuration list for PBXNativeTarget "libMagicalRecord-OSX" */;
 			buildPhases = (
+				908FFE1B186FB3DF0073F316 /* Update Version Information */,
 				C7CF97B71749843F008D9D13 /* Sources */,
 				C7CF97B81749843F008D9D13 /* Frameworks */,
 				C7CF97B91749843F008D9D13 /* Headers */,
@@ -1059,6 +1063,37 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		908FFE1A186FB3A10073F316 /* Update Version Information */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Version Information";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "#!/bin/bash\n\n# This script automatically sets the version and short version string of\n# an Xcode project from the Git repository containing the project.\n#\n# To use this script in Xcode 4, add the contents to a \"Run Script\" build\n# phase for your application target.\n\nset -o errexit\nset -o nounset\n\n# Use the latest tag for short version (You'll have to make sure that all your tags are of the format 0.0.0,\n# this is to satisfy Apple's rule that short version be three integers separated by dots)\nSHORT_VERSION=$(git --git-dir=\"${SRCROOT}/../.git\" --work-tree=\"${SRCROOT}/../\" describe --abbrev=0)\n\n# I'd like to use the Git commit hash for CFBundleVersion.\n# VERSION=$(git --git-dir=\"${PROJECT_DIR}/.git\" --work-tree=\"${PROJECT_DIR}\" rev-parse --short HEAD)\n\n# But Apple wants this value to be a monotonically increasing integer, so\n# instead use the number of commits on the master branch. If you like to\n# play fast and loose with your Git history, this may cause you problems.\n# Thanks to @amrox for pointing out the issue and fix.\nVERSION=$(git --git-dir=\"${SRCROOT}/../.git\" --work-tree=\"${SRCROOT}\" rev-list HEAD | wc -l | xargs)\n\necho \"VERSION: ${VERSION}\"\necho \"SHORT VERSION: ${SHORT_VERSION}\"\n\n# Output header file\nHEADER=\"${SRCROOT}/BuildConfig.h\"\ncd \"${SRCROOT}/../\"\necho \"// Do not edit\" > \"${HEADER}\"\necho \"#define MAGICAL_RECORD_DISPLAY_VERSION @\\\"${SHORT_VERSION}\\\"\" >> \"${HEADER}\"\necho \"#define MAGICAL_RECORD_VERSION ${VERSION}\" >> \"${HEADER}\"\necho \"// Updated on \"`date` >> \"${HEADER}\"\n";
+		};
+		908FFE1B186FB3DF0073F316 /* Update Version Information */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Version Information";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "#!/bin/bash\n\n# This script automatically sets the version and short version string of\n# an Xcode project from the Git repository containing the project.\n#\n# To use this script in Xcode 4, add the contents to a \"Run Script\" build\n# phase for your application target.\n\nset -o errexit\nset -o nounset\n\n# Use the latest tag for short version (You'll have to make sure that all your tags are of the format 0.0.0,\n# this is to satisfy Apple's rule that short version be three integers separated by dots)\nSHORT_VERSION=$(git --git-dir=\"${SRCROOT}/../.git\" --work-tree=\"${SRCROOT}/../\" describe --abbrev=0)\n\n# I'd like to use the Git commit hash for CFBundleVersion.\n# VERSION=$(git --git-dir=\"${PROJECT_DIR}/.git\" --work-tree=\"${PROJECT_DIR}\" rev-parse --short HEAD)\n\n# But Apple wants this value to be a monotonically increasing integer, so\n# instead use the number of commits on the master branch. If you like to\n# play fast and loose with your Git history, this may cause you problems.\n# Thanks to @amrox for pointing out the issue and fix.\nVERSION=$(git --git-dir=\"${SRCROOT}/../.git\" --work-tree=\"${SRCROOT}\" rev-list HEAD | wc -l | xargs)\n\necho \"VERSION: ${VERSION}\"\necho \"SHORT VERSION: ${SHORT_VERSION}\"\n\n# Output header file\nHEADER=\"${SRCROOT}/BuildConfig.h\"\ncd \"${SRCROOT}/../\"\necho \"// Do not edit\" > \"${HEADER}\"\necho \"#define MAGICAL_RECORD_DISPLAY_VERSION @\\\"${SHORT_VERSION}\\\"\" >> \"${HEADER}\"\necho \"#define MAGICAL_RECORD_VERSION ${VERSION}\" >> \"${HEADER}\"\necho \"// Updated on \"`date` >> \"${HEADER}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C7CF97A717498414008D9D13 /* Sources */ = {

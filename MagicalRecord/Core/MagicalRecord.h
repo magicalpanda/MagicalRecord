@@ -44,6 +44,9 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
 @interface MagicalRecord : NSObject
 
++ (NSInteger)version;
++ (NSString *)displayVersion;
+
 + (NSString *) currentStack;
 
 + (void) cleanUp;
