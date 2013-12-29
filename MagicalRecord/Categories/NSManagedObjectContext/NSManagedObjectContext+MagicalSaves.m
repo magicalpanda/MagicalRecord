@@ -15,7 +15,7 @@
 
 - (void)MR_saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;
 {
-    [self MR_saveWithOptions:0 completion:completion];
+    [self MR_saveWithOptions:MRSaveWithoutOptions completion:completion];
 }
 
 - (void)MR_saveOnlySelfAndWait;
@@ -35,7 +35,10 @@
 
 - (void)MR_saveWithOptions:(MRSaveContextOptions)mask completion:(MRSaveCompletionHandler)completion;
 {
-    BOOL syncSave           = ((mask & MRSaveSynchronously) == MRSaveSynchronously);
+    BOOL shouldSaveSync             = ((mask & MRSaveSynchronously) == MRSaveSynchronously);
+    BOOL shouldSaveSyncExceptRoot   = ((mask & MRSaveAllSynchronouslyExceptRoot) == MRSaveAllSynchronouslyExceptRoot);
+
+    BOOL syncSave = (shouldSaveSync && !shouldSaveSyncExceptRoot) || (shouldSaveSyncExceptRoot && (self != [[self class] MR_rootSavingContext]));
     BOOL saveParentContexts = ((mask & MRSaveParentContexts) == MRSaveParentContexts);
 
     if (![self hasChanges]) {
@@ -79,17 +82,14 @@
                     });
                 }
             } else {
-                // If we're the default context, save to disk too (the user expects it to persist)
-                BOOL isDefaultContext = (self == [[self class] MR_defaultContext]);
-                BOOL shouldSaveParentContext = ((YES == saveParentContexts) || isDefaultContext);
-                
-                if (shouldSaveParentContext && [self parentContext]) {
+                // If we're saving parent contexts, do so
+                if (saveParentContexts && [self parentContext]) {
                     [[self parentContext] MR_saveWithOptions:mask completion:completion];
                 }
-                // If we should not save the parent context, or there is not a parent context to save (root context), call the completion block
+                // Do the completion action if one was specified
                 else {
                     MRLog(@"→ Finished saving: %@", [self MR_description]);
-                    
+
                     if (completion) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             completion(saved, error);
