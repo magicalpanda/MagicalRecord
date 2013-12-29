@@ -38,4 +38,8 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
 	}
 }
 
++ (void) MR_clearContextForCurrentThread {
+    [[[NSThread currentThread] threadDictionary] removeObjectForKey:kMagicalRecordManagedObjectContextKey];
+}
+
 @end
