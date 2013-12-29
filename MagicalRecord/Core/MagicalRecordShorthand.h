@@ -22,13 +22,7 @@
 - (instancetype) objectWithMinValueFor:(NSString *)property;
 - (instancetype) objectWithMinValueFor:(NSString *)property inContext:(NSManagedObjectContext *)context;
 @end
-@interface NSManagedObject (MagicalRecord_DataImportShortHand)
-- (BOOL) importValuesForKeysWithObject:(id)objectData;
-+ (instancetype) importFromObject:(id)data;
-+ (instancetype) importFromObject:(id)data inContext:(NSManagedObjectContext *)context;
-+ (NSArray *) importFromArray:(NSArray *)listOfObjectData;
-+ (NSArray *) importFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context;
-@end
+
 @interface NSManagedObject (MagicalFindersShortHand)
 + (NSArray *) findAll;
 + (NSArray *) findAllInContext:(NSManagedObjectContext *)context;
@@ -123,15 +117,15 @@
 + (NSManagedObjectContext *) context NS_RETURNS_RETAINED;
 + (NSManagedObjectContext *) contextWithParent:(NSManagedObjectContext *)parentContext NS_RETURNS_RETAINED;
 + (NSManagedObjectContext *) newMainQueueContext NS_RETURNS_RETAINED;
-+ (NSManagedObjectContext *) contextThatPushesChangesToDefaultContext NS_RETURNS_RETAINED;
 + (NSManagedObjectContext *) contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator NS_RETURNS_RETAINED;
 + (void) resetDefaultContext;
 + (NSManagedObjectContext *) rootSavingContext;
 + (NSManagedObjectContext *) defaultContext;
-+ (void) cleanUp;
 - (NSString *) description;
+- (NSString *) parentChain;
+- (void) setWorkingName:(NSString *)workingName;
+- (NSString *) workingName;
 @end
-#import "NSManagedObjectContext+MagicalSaves.h"
 @interface NSManagedObjectContext (MagicalSavesShortHand)
 - (void) saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;
 - (void) saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion;
@@ -149,10 +143,9 @@
 @end
 @interface NSManagedObjectContext (MagicalThreadingShortHand)
 + (NSManagedObjectContext *) contextForCurrentThread;
-+ (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThread;
-+ (NSManagedObjectContext *) contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
-+ (void) resetContextForCurrentThread;
 + (void) clearNonMainThreadContextsCache;
++ (void) resetContextForCurrentThread;
++ (void) clearContextForCurrentThread;
 @end
 @interface NSManagedObjectModel (MagicalRecordShortHand)
 + (NSManagedObjectModel *) defaultManagedObjectModel;
