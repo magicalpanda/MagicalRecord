@@ -20,6 +20,8 @@ const struct SingleEntityWithNoRelationshipsAttributes SingleEntityWithNoRelatio
 	.nullTestAttribute = @"nullTestAttribute",
 	.numberAsStringTestAttribute = @"numberAsStringTestAttribute",
 	.stringTestAttribute = @"stringTestAttribute",
+	.unixTime13TestAttribute = @"unixTime13TestAttribute",
+	.unixTimeTestAttribute = @"unixTimeTestAttribute",
 };
 
 
@@ -349,13 +351,23 @@ const struct SingleEntityWithNoRelationshipsAttributes SingleEntityWithNoRelatio
 
 
 
+@dynamic unixTime13TestAttribute;
+
+
+
+
+
+
+@dynamic unixTimeTestAttribute;
+
+
+
+
+
+
 
 
 
 
 
 @end
-
-
-
-

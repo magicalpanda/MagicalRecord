@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>unixTime13TestAttribute</key>
+	<integer>1388349427543</integer>
+	<key>unixTimeTestAttribute</key>
+	<real>1388349428</real>
 	<key>numberAsStringTestAttribute</key>
 	<integer>10248909829</integer>
 	<key>int64TestAttribute</key>
