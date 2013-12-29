@@ -7,7 +7,7 @@ In general, your app should save to it's persistent store(s) when data changes. 
 If you find that saving is taking a long time, there are a couple of things you should consider doing:
 
 1. **Save in a background thread**: MagicalRecord provides a simple, clean API for making changes to your entities and subsequently saving them in a background thread — for example:
-
+	````objective-c
 	[MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
 		// Do your work to be saved here, against the `localContext` instance
 		// 	Everything you do in this block will occur on a background thread
@@ -16,11 +16,9 @@ If you find that saving is taking a long time, there are a couple of things you 
 		[application endBackgroundTask:bgTask];
 		bgTask = UIBackgroundTaskInvalid;
 	}];
-
+	````
 	
 2. **Break the task into smaller saves**: tasks like importing lots of data should always be broken down into smaller chunks. There's no one-size-fits all rule for how much data you should be saving in one go, so you'll need to measure your application's performance using a tool like Apple's Instruments.
-
-
 
 
 ## Handling long-running saves
@@ -29,20 +27,22 @@ If you find that saving is taking a long time, there are a couple of things you 
 
 When an application terminates on iOS, it is given a small window of opportunity to tidy up and save any data to disk. If you know that a save operation is likely to take a while, the best approach is to request an extension to your application's expiration, like so:
 
-	UIApplication *application = [UIApplication sharedApplication];
-	
-	__block UIBackgroundTaskIdentifier bgTask = [application beginBackgroundTaskWithExpirationHandler:^{
-	    [application endBackgroundTask:bgTask];
-	    bgTask = UIBackgroundTaskInvalid;
-	}];
-	
-	[MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-		// Do your work to be saved here
-	
-	} completion:^(BOOL success, NSError *error) {
-		[application endBackgroundTask:bgTask];
-		bgTask = UIBackgroundTaskInvalid;
-	}];
+````objective-c
+UIApplication *application = [UIApplication sharedApplication];
+
+__block UIBackgroundTaskIdentifier bgTask = [application beginBackgroundTaskWithExpirationHandler:^{
+    [application endBackgroundTask:bgTask];
+    bgTask = UIBackgroundTaskInvalid;
+}];
+
+[MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+	// Do your work to be saved here
+
+} completion:^(BOOL success, NSError *error) {
+	[application endBackgroundTask:bgTask];
+	bgTask = UIBackgroundTaskInvalid;
+}];
+````
 
 Be sure to carefully [read the documentation for `beginBackgroundTaskWithExpirationHandler`](https://developer.apple.com/library/iOS/documentation/UIKit/Reference/UIApplication_Class/Reference/Reference.html#//apple_ref/occ/instm/UIApplication/beginBackgroundTaskWithExpirationHandler:), as inappropriately or unnecessarily extending your application's lifetime may earn your app a rejection.
 
@@ -50,18 +50,20 @@ Be sure to carefully [read the documentation for `beginBackgroundTaskWithExpirat
 
 On OS X Mavericks (10.9) and later, App Nap can cause your application to be effectively terminated when it is in the background. If you know that a save operation is likely to take a while, the best approach is to disable automatic and sudden termination temporarily (assuming that your app supports these features):
 
-	NSProcessInfo *processInfo = [NSProcessInfo processInfo];
-	
-	[processInfo disableSuddenTermination];
-	[processInfo disableAutomaticTermination:@"Application is currently saving to persistent store"];
-	
-	[MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-		// Do your work to be saved here
-	
-	} completion:^(BOOL success, NSError *error) {
-		[processInfo enableSuddenTermination];
-		[processInfo enableAutomaticTermination:@"Application has finished saving to the persistent store"];
-	}];
+````objective-c
+NSProcessInfo *processInfo = [NSProcessInfo processInfo];
+
+[processInfo disableSuddenTermination];
+[processInfo disableAutomaticTermination:@"Application is currently saving to persistent store"];
+
+[MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+	// Do your work to be saved here
+
+} completion:^(BOOL success, NSError *error) {
+	[processInfo enableSuddenTermination];
+	[processInfo enableAutomaticTermination:@"Application has finished saving to the persistent store"];
+}];
+````
 
 As with the iOS approach, be sure to [read the documentation on NSProcessInfo](https://developer.apple.com/library/mac/documentation/cocoa/reference/foundation/Classes/NSProcessInfo_Class/Reference/Reference.html) before implementing this approach in your app.
 
