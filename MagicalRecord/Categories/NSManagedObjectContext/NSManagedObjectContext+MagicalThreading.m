@@ -52,7 +52,7 @@ static volatile int32_t contextsCacheVersion = 0;
                  @"The Magical Record keys should either both be present or neither be present, otherwise we're in an inconsistent state!");
 		if ((threadContext == nil) || (currentCacheVersionForContext == nil) || ((int32_t)[currentCacheVersionForContext integerValue] != targetCacheVersionForContext))
 		{
-			threadContext = [self MR_contextWithParent:[NSManagedObjectContext MR_defaultContext]];
+			threadContext = [self MR_contextWithParent:[NSManagedObjectContext MR_rootSavingContext]];
 			[threadDict setObject:threadContext forKey:kMagicalRecordManagedObjectContextKey];
 			[threadDict setObject:[NSNumber numberWithInteger:targetCacheVersionForContext]
                            forKey:kMagicalRecordManagedObjectContextCacheVersionKey];
