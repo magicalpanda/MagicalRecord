@@ -43,6 +43,15 @@ NSDate * dateFromString(NSString *value, NSString *format)
     return parsedDate;
 }
 
+NSDate * dateFromNumber(NSNumber *value, BOOL milliseconds)
+{
+    NSTimeInterval timeInterval = [value doubleValue];
+    if (milliseconds) {
+        timeInterval = timeInterval / 1000.00f;
+    }
+    return [NSDate dateWithTimeIntervalSince1970:timeInterval];
+}
+
 NSNumber * numberFromString(NSString *value) {
     return [NSNumber numberWithDouble:[value doubleValue]];
 }

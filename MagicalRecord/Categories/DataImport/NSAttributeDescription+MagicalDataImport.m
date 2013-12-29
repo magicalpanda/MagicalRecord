@@ -37,7 +37,12 @@
             if (![value isKindOfClass:[NSDate class]]) 
             {
                 NSString *dateFormat = [[self userInfo] valueForKey:kMagicalRecordImportCustomDateFormatKey];
-                value = dateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
+                if ([value isKindOfClass:[NSNumber class]]) {
+                    value = dateFromNumber(value, [dateFormat isEqualToString:kMagicalRecordImportUnixDate13String]);
+                }
+                else {
+                    value = dateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
+                }
             }
         }
         else if (attributeType == NSInteger16AttributeType ||

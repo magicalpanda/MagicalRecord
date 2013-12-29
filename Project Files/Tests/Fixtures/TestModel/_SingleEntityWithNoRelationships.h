@@ -21,6 +21,8 @@ extern const struct SingleEntityWithNoRelationshipsAttributes {
 	__unsafe_unretained NSString *nullTestAttribute;
 	__unsafe_unretained NSString *numberAsStringTestAttribute;
 	__unsafe_unretained NSString *stringTestAttribute;
+	__unsafe_unretained NSString *unixTime13TestAttribute;
+	__unsafe_unretained NSString *unixTimeTestAttribute;
 } SingleEntityWithNoRelationshipsAttributes;
 
 
@@ -268,10 +270,32 @@ extern const struct SingleEntityWithNoRelationshipsAttributes {
 
 
 
+@property (nonatomic, strong) NSDate* unixTime13TestAttribute;
+
+
+
+//- (BOOL)validateUnixTime13TestAttribute:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSDate* unixTimeTestAttribute;
+
+
+
+//- (BOOL)validateUnixTimeTestAttribute:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 
 @end
 
+@interface _SingleEntityWithNoRelationships (CoreDataGeneratedAccessors)
 
+@end
 
 @interface _SingleEntityWithNoRelationships (CoreDataGeneratedPrimitiveAccessors)
 
@@ -383,6 +407,18 @@ extern const struct SingleEntityWithNoRelationshipsAttributes {
 
 - (NSString*)primitiveStringTestAttribute;
 - (void)setPrimitiveStringTestAttribute:(NSString*)value;
+
+
+
+
+- (NSDate*)primitiveUnixTime13TestAttribute;
+- (void)setPrimitiveUnixTime13TestAttribute:(NSDate*)value;
+
+
+
+
+- (NSDate*)primitiveUnixTimeTestAttribute;
+- (void)setPrimitiveUnixTimeTestAttribute:(NSDate*)value;
 
 
 
