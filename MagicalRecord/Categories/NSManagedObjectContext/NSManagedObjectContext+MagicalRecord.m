@@ -248,5 +248,12 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
     return workingName;
 }
 
+- (void)MR_deleteObjectsInArray:(NSArray *)managedObjects
+{
+    for (NSManagedObject *managedObject in managedObjects)
+    {
+        [self deleteObject:managedObject];
+    }
+}
 
 @end
