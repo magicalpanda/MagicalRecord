@@ -83,7 +83,6 @@
 		9099496217C2F42100BC2B5C /* SingleEntityWithNoRelationships.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099493617C2F42100BC2B5C /* SingleEntityWithNoRelationships.m */; };
 		9099496317C2F42100BC2B5C /* SingleRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099493817C2F42100BC2B5C /* SingleRelatedEntity.m */; };
 		9099496417C2F42100BC2B5C /* SingleRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099493817C2F42100BC2B5C /* SingleRelatedEntity.m */; };
-		9099496A17C2FD5000BC2B5C /* liblibMagicalRecord-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7CF97AB17498414008D9D13 /* liblibMagicalRecord-iOS.a */; };
 		9099496B17C2FD5500BC2B5C /* libMagicalRecord-OSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C7CF97BB1749843F008D9D13 /* libMagicalRecord-OSX.dylib */; };
 		90BB1C3A1864F341001BBFBB /* ImportSingleEntityRelatedToMappedEntityUsingDefaultsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF9787174982AD008D9D13 /* ImportSingleEntityRelatedToMappedEntityUsingDefaultsTests.m */; };
 		90BB1C3B1864F341001BBFBB /* ImportSingleEntityRelatedToMappedEntityUsingDefaultsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF9787174982AD008D9D13 /* ImportSingleEntityRelatedToMappedEntityUsingDefaultsTests.m */; };
@@ -447,7 +446,6 @@
 				90EFB46C1863DBD000B04F5C /* UIKit.framework in Frameworks */,
 				90EFB46A1863BE2300B04F5C /* CoreData.framework in Frameworks */,
 				90EFB47D1863DE1B00B04F5C /* XCTest.framework in Frameworks */,
-				9099496A17C2FD5000BC2B5C /* liblibMagicalRecord-iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
