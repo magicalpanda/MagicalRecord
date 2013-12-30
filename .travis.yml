@@ -1,1 +1,2 @@
 language: objective-c
+script: Scripts/objc-build-scripts/cibuild
