@@ -1412,8 +1412,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(BUILT_PRODUCTS_DIR)",
-					"\"$(SRCROOT)/Tests/Support/Vendor/Expecta/src\"/**",
-					"\"$(SRCROOT)/Tests/Support/Vendor/Specta/src\"/**",
+					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
+					"\"$(SRCROOT)/Tests/Vendor/Specta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Supporting Files/MagicalRecordTests-iOS-Info.plist";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
@@ -1443,8 +1443,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(BUILT_PRODUCTS_DIR)",
-					"\"$(SRCROOT)/Tests/Support/Vendor/Expecta/src\"/**",
-					"\"$(SRCROOT)/Tests/Support/Vendor/Specta/src\"/**",
+					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
+					"\"$(SRCROOT)/Tests/Vendor/Specta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Supporting Files/MagicalRecordTests-iOS-Info.plist";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
@@ -1481,8 +1481,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(BUILT_PRODUCTS_DIR)",
-					"\"$(SRCROOT)/Tests/Support/Vendor/Expecta/src\"/**",
-					"\"$(SRCROOT)/Tests/Support/Vendor/Specta/src\"/**",
+					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
+					"\"$(SRCROOT)/Tests/Vendor/Specta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Supporting Files/MagicalRecordTests-OSX-Info.plist";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
@@ -1511,8 +1511,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(BUILT_PRODUCTS_DIR)",
-					"\"$(SRCROOT)/Tests/Support/Vendor/Expecta/src\"/**",
-					"\"$(SRCROOT)/Tests/Support/Vendor/Specta/src\"/**",
+					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
+					"\"$(SRCROOT)/Tests/Vendor/Specta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Supporting Files/MagicalRecordTests-OSX-Info.plist";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
