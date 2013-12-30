@@ -13,6 +13,11 @@
 		90171E1C17C329CD00E7084A /* FixtureHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF9B6C17498B5C008D9D13 /* FixtureHelpers.m */; };
 		90171E1D17C32ACE00E7084A /* TestModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 9099490817C2F3D400BC2B5C /* TestModel.xcdatamodeld */; };
 		90171E1E17C32AD300E7084A /* TestModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 9099490817C2F3D400BC2B5C /* TestModel.xcdatamodeld */; };
+		904254A718710ADE0066DA41 /* libExpecta-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90425480187103F00066DA41 /* libExpecta-iOS.a */; };
+		904254A818710ADE0066DA41 /* libSpecta-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9042548F187103F40066DA41 /* libSpecta-iOS.a */; };
+		904254A918710B1A0066DA41 /* libExpecta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9042547E187103F00066DA41 /* libExpecta.a */; };
+		904254AA18710B1A0066DA41 /* libSpecta-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90425491187103F40066DA41 /* libSpecta-OSX.a */; };
+		904254AB18710B210066DA41 /* libMagicalRecord-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7CF97AB17498414008D9D13 /* libMagicalRecord-iOS.a */; };
 		90542E121863F20900916224 /* MagicalDataImportTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF978E174982AD008D9D13 /* MagicalDataImportTestCase.m */; };
 		90542E131863F20900916224 /* MagicalDataImportTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF978E174982AD008D9D13 /* MagicalDataImportTestCase.m */; };
 		90542E141863F20C00916224 /* ImportSingleEntityWithNoRelationshipsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF978B174982AD008D9D13 /* ImportSingleEntityWithNoRelationshipsTests.m */; };
@@ -347,7 +352,7 @@
 		C7CF978B174982AD008D9D13 /* ImportSingleEntityWithNoRelationshipsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportSingleEntityWithNoRelationshipsTests.m; sourceTree = "<group>"; };
 		C7CF978D174982AD008D9D13 /* MagicalDataImportTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalDataImportTestCase.h; sourceTree = "<group>"; };
 		C7CF978E174982AD008D9D13 /* MagicalDataImportTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalDataImportTestCase.m; sourceTree = "<group>"; };
-		C7CF97AB17498414008D9D13 /* liblibMagicalRecord-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "liblibMagicalRecord-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7CF97AB17498414008D9D13 /* libMagicalRecord-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMagicalRecord-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CF97BB1749843F008D9D13 /* libMagicalRecord-OSX.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libMagicalRecord-OSX.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CF97FF174984CA008D9D13 /* MagicalRecordTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MagicalRecordTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CF9816174984E4008D9D13 /* MagicalRecordTests-OSX.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MagicalRecordTests-OSX.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -442,6 +447,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				904254AB18710B210066DA41 /* libMagicalRecord-iOS.a in Frameworks */,
+				904254A718710ADE0066DA41 /* libExpecta-iOS.a in Frameworks */,
+				904254A818710ADE0066DA41 /* libSpecta-iOS.a in Frameworks */,
 				90EFB46E1863DBD400B04F5C /* Foundation.framework in Frameworks */,
 				90EFB46C1863DBD000B04F5C /* UIKit.framework in Frameworks */,
 				90EFB46A1863BE2300B04F5C /* CoreData.framework in Frameworks */,
@@ -453,6 +461,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				904254A918710B1A0066DA41 /* libExpecta.a in Frameworks */,
+				904254AA18710B1A0066DA41 /* libSpecta-OSX.a in Frameworks */,
 				90FE37081863BC7800C9E638 /* Cocoa.framework in Frameworks */,
 				90FE37091863BC7E00C9E638 /* CoreData.framework in Frameworks */,
 				90FE37071863BC7100C9E638 /* XCTest.framework in Frameworks */,
@@ -600,9 +610,9 @@
 			isa = PBXGroup;
 			children = (
 				C7DD7299150F832A00216827 /* MagicalRecord */,
-				C721C7B113D0A3AF0097AB6F /* Products */,
 				C77E5FA513D0CBA600298F87 /* Tests */,
 				90425374187102DC0066DA41 /* Supporting Files */,
+				C721C7B113D0A3AF0097AB6F /* Products */,
 				C721C7B313D0A3AF0097AB6F /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -610,7 +620,7 @@
 		C721C7B113D0A3AF0097AB6F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C7CF97AB17498414008D9D13 /* liblibMagicalRecord-iOS.a */,
+				C7CF97AB17498414008D9D13 /* libMagicalRecord-iOS.a */,
 				C7CF97BB1749843F008D9D13 /* libMagicalRecord-OSX.dylib */,
 				C7CF97FF174984CA008D9D13 /* MagicalRecordTests-iOS.xctest */,
 				C7CF9816174984E4008D9D13 /* MagicalRecordTests-OSX.xctest */,
@@ -838,7 +848,7 @@
 			);
 			name = "libMagicalRecord-iOS";
 			productName = libMagicalRecord;
-			productReference = C7CF97AB17498414008D9D13 /* liblibMagicalRecord-iOS.a */;
+			productReference = C7CF97AB17498414008D9D13 /* libMagicalRecord-iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		C7CF97BA1749843F008D9D13 /* libMagicalRecord-OSX */ = {
@@ -901,7 +911,7 @@
 		C721C7A213D0A3750097AB6F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Magical Panda Software LLC";
 			};
 			buildConfigurationList = C721C7A513D0A3750097AB6F /* Build configuration list for PBXProject "MagicalRecord" */;
@@ -1325,7 +1335,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "MagicalRecord-iOS";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
@@ -1345,7 +1355,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Supporting Files/MagicalRecord-iOS-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "MagicalRecord-iOS";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
