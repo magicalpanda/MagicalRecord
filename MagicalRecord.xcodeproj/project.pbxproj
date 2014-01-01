@@ -13,6 +13,11 @@
 		90171E1C17C329CD00E7084A /* FixtureHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF9B6C17498B5C008D9D13 /* FixtureHelpers.m */; };
 		90171E1D17C32ACE00E7084A /* TestModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 9099490817C2F3D400BC2B5C /* TestModel.xcdatamodeld */; };
 		90171E1E17C32AD300E7084A /* TestModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 9099490817C2F3D400BC2B5C /* TestModel.xcdatamodeld */; };
+		904254A718710ADE0066DA41 /* libExpecta-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90425480187103F00066DA41 /* libExpecta-iOS.a */; };
+		904254A818710ADE0066DA41 /* libSpecta-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9042548F187103F40066DA41 /* libSpecta-iOS.a */; };
+		904254A918710B1A0066DA41 /* libExpecta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9042547E187103F00066DA41 /* libExpecta.a */; };
+		904254AA18710B1A0066DA41 /* libSpecta-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90425491187103F40066DA41 /* libSpecta-OSX.a */; };
+		904254AB18710B210066DA41 /* libMagicalRecord-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7CF97AB17498414008D9D13 /* libMagicalRecord-iOS.a */; };
 		90542E121863F20900916224 /* MagicalDataImportTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF978E174982AD008D9D13 /* MagicalDataImportTestCase.m */; };
 		90542E131863F20900916224 /* MagicalDataImportTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF978E174982AD008D9D13 /* MagicalDataImportTestCase.m */; };
 		90542E141863F20C00916224 /* ImportSingleEntityWithNoRelationshipsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF978B174982AD008D9D13 /* ImportSingleEntityWithNoRelationshipsTests.m */; };
@@ -33,7 +38,6 @@
 		90542E251864894D00916224 /* NSPersisentStoreHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF977017498275008D9D13 /* NSPersisentStoreHelperTests.m */; };
 		90542E2618648AAF00916224 /* NSPersistentStoreCoordinatorHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF977217498275008D9D13 /* NSPersistentStoreCoordinatorHelperTests.m */; };
 		90542E2718648AB000916224 /* NSPersistentStoreCoordinatorHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF977217498275008D9D13 /* NSPersistentStoreCoordinatorHelperTests.m */; };
-		9069F698186317BB0092E58C /* libSpecta-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90B281D5186316E8004D9550 /* libSpecta-OSX.a */; };
 		909948F717C2EFA100BC2B5C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 909B48C817C2EB5C00CE8C5E /* Cocoa.framework */; };
 		909948F817C2EFA500BC2B5C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C7E213D0C3A00097AB6F /* CoreData.framework */; };
 		9099490217C2F0B700BC2B5C /* MagicalRecord+ActionsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 909948FF17C2F0B700BC2B5C /* MagicalRecord+ActionsSpec.m */; };
@@ -84,11 +88,7 @@
 		9099496217C2F42100BC2B5C /* SingleEntityWithNoRelationships.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099493617C2F42100BC2B5C /* SingleEntityWithNoRelationships.m */; };
 		9099496317C2F42100BC2B5C /* SingleRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099493817C2F42100BC2B5C /* SingleRelatedEntity.m */; };
 		9099496417C2F42100BC2B5C /* SingleRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099493817C2F42100BC2B5C /* SingleRelatedEntity.m */; };
-		9099496A17C2FD5000BC2B5C /* liblibMagicalRecord-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7CF97AB17498414008D9D13 /* liblibMagicalRecord-iOS.a */; };
 		9099496B17C2FD5500BC2B5C /* libMagicalRecord-OSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C7CF97BB1749843F008D9D13 /* libMagicalRecord-OSX.dylib */; };
-		909B48C617C2EB5000CE8C5E /* libExpecta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7CF9B01174988D0008D9D13 /* libExpecta.a */; };
-		90B281DA18631710004D9550 /* libExpecta-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7CF9B03174988D0008D9D13 /* libExpecta-iOS.a */; };
-		90B281DB18631710004D9550 /* libSpecta-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 909B48C117C2EB4400CE8C5E /* libSpecta-iOS.a */; };
 		90BB1C3A1864F341001BBFBB /* ImportSingleEntityRelatedToMappedEntityUsingDefaultsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF9787174982AD008D9D13 /* ImportSingleEntityRelatedToMappedEntityUsingDefaultsTests.m */; };
 		90BB1C3B1864F341001BBFBB /* ImportSingleEntityRelatedToMappedEntityUsingDefaultsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF9787174982AD008D9D13 /* ImportSingleEntityRelatedToMappedEntityUsingDefaultsTests.m */; };
 		90BB1C3C1864F3E9001BBFBB /* ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF9786174982AD008D9D13 /* ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests.m */; };
@@ -158,7 +158,6 @@
 		C7CF97F7174984A5008D9D13 /* MagicalRecord+Options.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CC150F832A00216827 /* MagicalRecord+Options.m */; };
 		C7CF97F8174984A5008D9D13 /* MagicalRecord+Setup.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CE150F832A00216827 /* MagicalRecord+Setup.m */; };
 		C7CF97F9174984A5008D9D13 /* MagicalRecord+ShorthandSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72D0150F832A00216827 /* MagicalRecord+ShorthandSupport.m */; };
-		C7CF9AE6174986B5008D9D13 /* MagicalRecord-OSX-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = C7CF9AE4174986B5008D9D13 /* MagicalRecord-OSX-Prefix.pch */; };
 		C7CF9B5317498985008D9D13 /* SampleJSONDataForImport.json in Resources */ = {isa = PBXBuildFile; fileRef = C7CF9B4917498985008D9D13 /* SampleJSONDataForImport.json */; };
 		C7CF9B5417498985008D9D13 /* SampleJSONDataForImport.json in Resources */ = {isa = PBXBuildFile; fileRef = C7CF9B4917498985008D9D13 /* SampleJSONDataForImport.json */; };
 		C7CF9B5517498985008D9D13 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json in Resources */ = {isa = PBXBuildFile; fileRef = C7CF9B4A17498985008D9D13 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json */; };
@@ -182,6 +181,69 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		9042547D187103F00066DA41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90425475187103EF0066DA41 /* Expecta.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E9ACDF0C13B2DD520010F4D7;
+			remoteInfo = Expecta;
+		};
+		9042547F187103F00066DA41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90425475187103EF0066DA41 /* Expecta.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E93067CE13B2E6D100EA26FF;
+			remoteInfo = "Expecta-iOS";
+		};
+		90425481187103F00066DA41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90425475187103EF0066DA41 /* Expecta.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E9ACDF1D13B2DD520010F4D7;
+			remoteInfo = ExpectaTests;
+		};
+		90425483187103F00066DA41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90425475187103EF0066DA41 /* Expecta.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E93067DA13B2E6D100EA26FF;
+			remoteInfo = "Expecta-iOSTests";
+		};
+		90425485187103F00066DA41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90425475187103EF0066DA41 /* Expecta.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9C4416F917FF3F4A00978F09;
+			remoteInfo = "ExpectaTests-XCTest";
+		};
+		9042548E187103F40066DA41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90425487187103F40066DA41 /* Specta.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E9901BFD18205A3500844A05;
+			remoteInfo = "Specta-iOS";
+		};
+		90425490187103F40066DA41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90425487187103F40066DA41 /* Specta.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E9901C2A18205AB100844A05;
+			remoteInfo = "Specta-OSX";
+		};
+		90425492187103F40066DA41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90425487187103F40066DA41 /* Specta.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E9901C0D18205A3500844A05;
+			remoteInfo = "SpectaTests-iOS";
+		};
+		90425494187103F40066DA41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90425487187103F40066DA41 /* Specta.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E9901C3B18205AB100844A05;
+			remoteInfo = "Specta-OSXTests";
+		};
 		9099496C17C2FD5C00BC2B5C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C721C7A213D0A3750097AB6F /* Project object */;
@@ -195,69 +257,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = C7CF97AA17498414008D9D13;
 			remoteInfo = "libMagicalRecord-iOS";
-		};
-		909B48C017C2EB4400CE8C5E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 909B48AF17C2EB4300CE8C5E /* Specta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E9B777A414BA294B00D8DC76;
-			remoteInfo = "Specta-iOS";
-		};
-		90B281CE186316E8004D9550 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C7CF9AF9174988CF008D9D13 /* Expecta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9C4416F917FF3F4A00978F09;
-			remoteInfo = "ExpectaTests-XCTest";
-		};
-		90B281D4186316E8004D9550 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 909B48AF17C2EB4300CE8C5E /* Specta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E9901C2A18205AB100844A05;
-			remoteInfo = "Specta-OSX";
-		};
-		90B281D6186316E8004D9550 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 909B48AF17C2EB4300CE8C5E /* Specta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E9901C0D18205A3500844A05;
-			remoteInfo = "SpectaTests-iOS";
-		};
-		90B281D8186316E8004D9550 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 909B48AF17C2EB4300CE8C5E /* Specta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E9901C3B18205AB100844A05;
-			remoteInfo = "Specta-OSXTests";
-		};
-		C7CF9B00174988D0008D9D13 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C7CF9AF9174988CF008D9D13 /* Expecta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E9ACDF0C13B2DD520010F4D7;
-			remoteInfo = Expecta;
-		};
-		C7CF9B02174988D0008D9D13 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C7CF9AF9174988CF008D9D13 /* Expecta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E93067CE13B2E6D100EA26FF;
-			remoteInfo = "Expecta-iOS";
-		};
-		C7CF9B04174988D0008D9D13 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C7CF9AF9174988CF008D9D13 /* Expecta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E9ACDF1D13B2DD520010F4D7;
-			remoteInfo = ExpectaTests;
-		};
-		C7CF9B06174988D0008D9D13 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C7CF9AF9174988CF008D9D13 /* Expecta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E93067DA13B2E6D100EA26FF;
-			remoteInfo = "Expecta-iOSTests";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -274,7 +273,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9042530D187002710066DA41 /* BuildConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuildConfig.h; sourceTree = SOURCE_ROOT; };
+		90425375187102DC0066DA41 /* MagicalRecord-iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MagicalRecord-iOS-Prefix.pch"; sourceTree = "<group>"; };
+		90425376187102DC0066DA41 /* MagicalRecord-OSX-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MagicalRecord-OSX-Prefix.pch"; sourceTree = "<group>"; };
+		90425377187103060066DA41 /* MagicalRecordVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MagicalRecordVersion.h; sourceTree = "<group>"; };
+		90425379187103D00066DA41 /* MagicalRecordTests-iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagicalRecordTests-iOS-Info.plist"; sourceTree = "<group>"; };
+		9042537A187103D00066DA41 /* MagicalRecordTests-iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MagicalRecordTests-iOS-Prefix.pch"; sourceTree = "<group>"; };
+		9042537B187103D00066DA41 /* MagicalRecordTests-OSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagicalRecordTests-OSX-Info.plist"; sourceTree = "<group>"; };
+		9042537C187103D00066DA41 /* MagicalRecordTests-OSX-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MagicalRecordTests-OSX-Prefix.pch"; sourceTree = "<group>"; };
+		90425475187103EF0066DA41 /* Expecta.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Expecta.xcodeproj; path = Expecta/Expecta.xcodeproj; sourceTree = "<group>"; };
+		90425487187103F40066DA41 /* Specta.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Specta.xcodeproj; path = Specta/Specta.xcodeproj; sourceTree = "<group>"; };
 		909948F517C2EF9800BC2B5C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
 		909948FF17C2F0B700BC2B5C /* MagicalRecord+ActionsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MagicalRecord+ActionsSpec.m"; path = "Tests/MagicalRecord+ActionsSpec.m"; sourceTree = SOURCE_ROOT; };
 		9099490017C2F0B700BC2B5C /* NSManagedObjectContext+MagicalSavesSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectContext+MagicalSavesSpec.m"; path = "Tests/NSManagedObjectContext+MagicalSavesSpec.m"; sourceTree = SOURCE_ROOT; };
@@ -324,7 +331,6 @@
 		9099493717C2F42100BC2B5C /* SingleRelatedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleRelatedEntity.h; sourceTree = "<group>"; };
 		9099493817C2F42100BC2B5C /* SingleRelatedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleRelatedEntity.m; sourceTree = "<group>"; };
 		9099497217C3044700BC2B5C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		909B48AF17C2EB4300CE8C5E /* Specta.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Specta.xcodeproj; path = Specta/Specta.xcodeproj; sourceTree = "<group>"; };
 		909B48C817C2EB5C00CE8C5E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		909B48CA17C2EC7E00CE8C5E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		90BB1C3E1864F662001BBFBB /* ImportSingleRelatedEntityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportSingleRelatedEntityTests.m; sourceTree = "<group>"; };
@@ -333,8 +339,6 @@
 		90EFB46D1863DBD400B04F5C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		C721C7E213D0C3A00097AB6F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C721C7E313D0C3A00097AB6F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		C75C7D69147220D300D0C2FE /* generateShorthandFile.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = generateShorthandFile.rb; sourceTree = "<group>"; };
-		C7CF963C174963D0008D9D13 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C7CF976817498275008D9D13 /* MagicalRecordStackTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalRecordStackTests.m; sourceTree = "<group>"; };
 		C7CF976A17498275008D9D13 /* NSManagedObjectContextHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSManagedObjectContextHelperTests.m; sourceTree = "<group>"; };
 		C7CF976C17498275008D9D13 /* NSManagedObjectHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSManagedObjectHelperTests.m; sourceTree = "<group>"; };
@@ -348,15 +352,10 @@
 		C7CF978B174982AD008D9D13 /* ImportSingleEntityWithNoRelationshipsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportSingleEntityWithNoRelationshipsTests.m; sourceTree = "<group>"; };
 		C7CF978D174982AD008D9D13 /* MagicalDataImportTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalDataImportTestCase.h; sourceTree = "<group>"; };
 		C7CF978E174982AD008D9D13 /* MagicalDataImportTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalDataImportTestCase.m; sourceTree = "<group>"; };
-		C7CF97AB17498414008D9D13 /* liblibMagicalRecord-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "liblibMagicalRecord-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7CF97AB17498414008D9D13 /* libMagicalRecord-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMagicalRecord-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CF97BB1749843F008D9D13 /* libMagicalRecord-OSX.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libMagicalRecord-OSX.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CF97FF174984CA008D9D13 /* MagicalRecordTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MagicalRecordTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CF9816174984E4008D9D13 /* MagicalRecordTests-OSX.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MagicalRecordTests-OSX.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7CF9ADF17498650008D9D13 /* MagicalRecordTests-iOS-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MagicalRecordTests-iOS-Prefix.pch"; sourceTree = "<group>"; };
-		C7CF9AE017498650008D9D13 /* MagicalRecordTests-OSX-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MagicalRecordTests-OSX-Prefix.pch"; sourceTree = "<group>"; };
-		C7CF9AE3174986B5008D9D13 /* MagicalRecord-iOS-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MagicalRecord-iOS-Prefix.pch"; sourceTree = "<group>"; };
-		C7CF9AE4174986B5008D9D13 /* MagicalRecord-OSX-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MagicalRecord-OSX-Prefix.pch"; sourceTree = "<group>"; };
-		C7CF9AF9174988CF008D9D13 /* Expecta.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Expecta.xcodeproj; path = Expecta/Expecta.xcodeproj; sourceTree = "<group>"; };
 		C7CF9B4917498985008D9D13 /* SampleJSONDataForImport.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SampleJSONDataForImport.json; path = Fixtures/SampleJSONDataForImport.json; sourceTree = "<group>"; };
 		C7CF9B4A17498985008D9D13 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json; path = Fixtures/SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json; sourceTree = "<group>"; };
 		C7CF9B4B17498985008D9D13 /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json; path = Fixtures/SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json; sourceTree = "<group>"; };
@@ -369,8 +368,6 @@
 		C7CF9B5217498985008D9D13 /* SingleRelatedEntity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleRelatedEntity.json; path = Fixtures/SingleRelatedEntity.json; sourceTree = "<group>"; };
 		C7CF9B6B17498B5C008D9D13 /* FixtureHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FixtureHelpers.h; path = Fixtures/FixtureHelpers.h; sourceTree = "<group>"; };
 		C7CF9B6C17498B5C008D9D13 /* FixtureHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FixtureHelpers.m; path = Fixtures/FixtureHelpers.m; sourceTree = "<group>"; };
-		C7CF9B6F17498B83008D9D13 /* MagicalRecordTests-iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagicalRecordTests-iOS-Info.plist"; sourceTree = "<group>"; };
-		C7CF9B7017498B83008D9D13 /* MagicalRecordTests-OSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagicalRecordTests-OSX-Info.plist"; sourceTree = "<group>"; };
 		C7DD729C150F832A00216827 /* MagicalImportFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalImportFunctions.h; sourceTree = "<group>"; };
 		C7DD729D150F832A00216827 /* MagicalImportFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalImportFunctions.m; sourceTree = "<group>"; };
 		C7DD729E150F832A00216827 /* NSAttributeDescription+MagicalDataImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributeDescription+MagicalDataImport.h"; sourceTree = "<group>"; };
@@ -450,13 +447,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				904254AB18710B210066DA41 /* libMagicalRecord-iOS.a in Frameworks */,
+				904254A718710ADE0066DA41 /* libExpecta-iOS.a in Frameworks */,
+				904254A818710ADE0066DA41 /* libSpecta-iOS.a in Frameworks */,
 				90EFB46E1863DBD400B04F5C /* Foundation.framework in Frameworks */,
 				90EFB46C1863DBD000B04F5C /* UIKit.framework in Frameworks */,
 				90EFB46A1863BE2300B04F5C /* CoreData.framework in Frameworks */,
 				90EFB47D1863DE1B00B04F5C /* XCTest.framework in Frameworks */,
-				9099496A17C2FD5000BC2B5C /* liblibMagicalRecord-iOS.a in Frameworks */,
-				90B281DA18631710004D9550 /* libExpecta-iOS.a in Frameworks */,
-				90B281DB18631710004D9550 /* libSpecta-iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,18 +461,70 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				904254A918710B1A0066DA41 /* libExpecta.a in Frameworks */,
+				904254AA18710B1A0066DA41 /* libSpecta-OSX.a in Frameworks */,
 				90FE37081863BC7800C9E638 /* Cocoa.framework in Frameworks */,
 				90FE37091863BC7E00C9E638 /* CoreData.framework in Frameworks */,
 				90FE37071863BC7100C9E638 /* XCTest.framework in Frameworks */,
 				9099496B17C2FD5500BC2B5C /* libMagicalRecord-OSX.dylib in Frameworks */,
-				909B48C617C2EB5000CE8C5E /* libExpecta.a in Frameworks */,
-				9069F698186317BB0092E58C /* libSpecta-OSX.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		90425374187102DC0066DA41 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				90425375187102DC0066DA41 /* MagicalRecord-iOS-Prefix.pch */,
+				90425376187102DC0066DA41 /* MagicalRecord-OSX-Prefix.pch */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		90425378187103D00066DA41 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				90425379187103D00066DA41 /* MagicalRecordTests-iOS-Info.plist */,
+				9042537A187103D00066DA41 /* MagicalRecordTests-iOS-Prefix.pch */,
+				9042537B187103D00066DA41 /* MagicalRecordTests-OSX-Info.plist */,
+				9042537C187103D00066DA41 /* MagicalRecordTests-OSX-Prefix.pch */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		9042537E187103E60066DA41 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				90425475187103EF0066DA41 /* Expecta.xcodeproj */,
+				90425487187103F40066DA41 /* Specta.xcodeproj */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		90425476187103EF0066DA41 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9042547E187103F00066DA41 /* libExpecta.a */,
+				90425480187103F00066DA41 /* libExpecta-iOS.a */,
+				90425482187103F00066DA41 /* ExpectaTests.octest */,
+				90425484187103F00066DA41 /* Expecta-iOSTests.octest */,
+				90425486187103F00066DA41 /* ExpectaTests-XCTest.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		90425488187103F40066DA41 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9042548F187103F40066DA41 /* libSpecta-iOS.a */,
+				90425491187103F40066DA41 /* libSpecta-OSX.a */,
+				90425493187103F40066DA41 /* SpectaTests-iOS.xctest */,
+				90425495187103F40066DA41 /* Specta-OSXTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		9099490C17C2F42100BC2B5C /* TestModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -528,17 +577,6 @@
 			path = Fixtures/TestModel;
 			sourceTree = "<group>";
 		};
-		909B48B017C2EB4300CE8C5E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				909B48C117C2EB4400CE8C5E /* libSpecta-iOS.a */,
-				90B281D5186316E8004D9550 /* libSpecta-OSX.a */,
-				90B281D7186316E8004D9550 /* SpectaTests-iOS.xctest */,
-				90B281D9186316E8004D9550 /* Specta-OSXTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		90BB1C4418651512001BBFBB /* Specs */ = {
 			isa = PBXGroup;
 			children = (
@@ -571,20 +609,18 @@
 		C721C7A013D0A3750097AB6F = {
 			isa = PBXGroup;
 			children = (
-				C7CF963C174963D0008D9D13 /* Default-568h@2x.png */,
-				C75C7D69147220D300D0C2FE /* generateShorthandFile.rb */,
-				C7CF9AE11749867D008D9D13 /* Library */,
 				C7DD7299150F832A00216827 /* MagicalRecord */,
 				C77E5FA513D0CBA600298F87 /* Tests */,
-				C721C7B313D0A3AF0097AB6F /* Frameworks */,
+				90425374187102DC0066DA41 /* Support */,
 				C721C7B113D0A3AF0097AB6F /* Products */,
+				C721C7B313D0A3AF0097AB6F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		C721C7B113D0A3AF0097AB6F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C7CF97AB17498414008D9D13 /* liblibMagicalRecord-iOS.a */,
+				C7CF97AB17498414008D9D13 /* libMagicalRecord-iOS.a */,
 				C7CF97BB1749843F008D9D13 /* libMagicalRecord-OSX.dylib */,
 				C7CF97FF174984CA008D9D13 /* MagicalRecordTests-iOS.xctest */,
 				C7CF9816174984E4008D9D13 /* MagicalRecordTests-OSX.xctest */,
@@ -605,10 +641,11 @@
 		C77E5FA513D0CBA600298F87 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				C7CF9826174985FC008D9D13 /* Support */,
 				C7CF976617498275008D9D13 /* Core */,
 				C7CF9785174982AD008D9D13 /* DataImport */,
 				C77E5FA913D0CBE300298F87 /* Fixtures */,
+				90425378187103D00066DA41 /* Support */,
+				9042537E187103E60066DA41 /* Vendor */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -681,66 +718,15 @@
 			path = DataImport;
 			sourceTree = "<group>";
 		};
-		C7CF9826174985FC008D9D13 /* Support */ = {
-			isa = PBXGroup;
-			children = (
-				C7CF9B6F17498B83008D9D13 /* MagicalRecordTests-iOS-Info.plist */,
-				C7CF9B7017498B83008D9D13 /* MagicalRecordTests-OSX-Info.plist */,
-				C7CF9ADF17498650008D9D13 /* MagicalRecordTests-iOS-Prefix.pch */,
-				C7CF9AE017498650008D9D13 /* MagicalRecordTests-OSX-Prefix.pch */,
-				C7CF982B174985FC008D9D13 /* Vendor */,
-			);
-			path = Support;
-			sourceTree = "<group>";
-		};
-		C7CF982B174985FC008D9D13 /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				C7CF9AF9174988CF008D9D13 /* Expecta.xcodeproj */,
-				909B48AF17C2EB4300CE8C5E /* Specta.xcodeproj */,
-			);
-			path = Vendor;
-			sourceTree = "<group>";
-		};
-		C7CF9AE11749867D008D9D13 /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				C7CF9AE21749867D008D9D13 /* Support */,
-			);
-			path = Library;
-			sourceTree = "<group>";
-		};
-		C7CF9AE21749867D008D9D13 /* Support */ = {
-			isa = PBXGroup;
-			children = (
-				9042530D187002710066DA41 /* BuildConfig.h */,
-				C7CF9AE3174986B5008D9D13 /* MagicalRecord-iOS-Prefix.pch */,
-				C7CF9AE4174986B5008D9D13 /* MagicalRecord-OSX-Prefix.pch */,
-			);
-			path = Support;
-			sourceTree = "<group>";
-		};
-		C7CF9AFA174988CF008D9D13 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C7CF9B01174988D0008D9D13 /* libExpecta.a */,
-				C7CF9B03174988D0008D9D13 /* libExpecta-iOS.a */,
-				C7CF9B05174988D0008D9D13 /* ExpectaTests.octest */,
-				C7CF9B07174988D0008D9D13 /* Expecta-iOSTests.octest */,
-				90B281CF186316E8004D9550 /* ExpectaTests-XCTest.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		C7DD7299150F832A00216827 /* MagicalRecord */ = {
 			isa = PBXGroup;
 			children = (
 				C7DD729A150F832A00216827 /* Categories */,
 				C7DD72C4150F832A00216827 /* Core */,
 				C7DD72D4150F832A00216827 /* CoreData+MagicalRecord.h */,
+				90425377187103060066DA41 /* MagicalRecordVersion.h */,
 			);
-			name = MagicalRecord;
-			path = ../MagicalRecord;
+			path = MagicalRecord;
 			sourceTree = "<group>";
 		};
 		C7DD729A150F832A00216827 /* Categories */ = {
@@ -841,7 +827,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7CF9AE6174986B5008D9D13 /* MagicalRecord-OSX-Prefix.pch in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -863,7 +848,7 @@
 			);
 			name = "libMagicalRecord-iOS";
 			productName = libMagicalRecord;
-			productReference = C7CF97AB17498414008D9D13 /* liblibMagicalRecord-iOS.a */;
+			productReference = C7CF97AB17498414008D9D13 /* libMagicalRecord-iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		C7CF97BA1749843F008D9D13 /* libMagicalRecord-OSX */ = {
@@ -926,7 +911,7 @@
 		C721C7A213D0A3750097AB6F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Magical Panda Software LLC";
 			};
 			buildConfigurationList = C721C7A513D0A3750097AB6F /* Build configuration list for PBXProject "MagicalRecord" */;
@@ -941,12 +926,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = C7CF9AFA174988CF008D9D13 /* Products */;
-					ProjectRef = C7CF9AF9174988CF008D9D13 /* Expecta.xcodeproj */;
+					ProductGroup = 90425476187103EF0066DA41 /* Products */;
+					ProjectRef = 90425475187103EF0066DA41 /* Expecta.xcodeproj */;
 				},
 				{
-					ProductGroup = 909B48B017C2EB4300CE8C5E /* Products */;
-					ProjectRef = 909B48AF17C2EB4300CE8C5E /* Specta.xcodeproj */;
+					ProductGroup = 90425488187103F40066DA41 /* Products */;
+					ProjectRef = 90425487187103F40066DA41 /* Specta.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -960,67 +945,67 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		909B48C117C2EB4400CE8C5E /* libSpecta-iOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libSpecta-iOS.a";
-			remoteRef = 909B48C017C2EB4400CE8C5E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		90B281CF186316E8004D9550 /* ExpectaTests-XCTest.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "ExpectaTests-XCTest.xctest";
-			remoteRef = 90B281CE186316E8004D9550 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		90B281D5186316E8004D9550 /* libSpecta-OSX.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libSpecta-OSX.a";
-			remoteRef = 90B281D4186316E8004D9550 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		90B281D7186316E8004D9550 /* SpectaTests-iOS.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "SpectaTests-iOS.xctest";
-			remoteRef = 90B281D6186316E8004D9550 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		90B281D9186316E8004D9550 /* Specta-OSXTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Specta-OSXTests.xctest";
-			remoteRef = 90B281D8186316E8004D9550 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C7CF9B01174988D0008D9D13 /* libExpecta.a */ = {
+		9042547E187103F00066DA41 /* libExpecta.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libExpecta.a;
-			remoteRef = C7CF9B00174988D0008D9D13 /* PBXContainerItemProxy */;
+			remoteRef = 9042547D187103F00066DA41 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C7CF9B03174988D0008D9D13 /* libExpecta-iOS.a */ = {
+		90425480187103F00066DA41 /* libExpecta-iOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libExpecta-iOS.a";
-			remoteRef = C7CF9B02174988D0008D9D13 /* PBXContainerItemProxy */;
+			remoteRef = 9042547F187103F00066DA41 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C7CF9B05174988D0008D9D13 /* ExpectaTests.octest */ = {
+		90425482187103F00066DA41 /* ExpectaTests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = ExpectaTests.octest;
-			remoteRef = C7CF9B04174988D0008D9D13 /* PBXContainerItemProxy */;
+			remoteRef = 90425481187103F00066DA41 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C7CF9B07174988D0008D9D13 /* Expecta-iOSTests.octest */ = {
+		90425484187103F00066DA41 /* Expecta-iOSTests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "Expecta-iOSTests.octest";
-			remoteRef = C7CF9B06174988D0008D9D13 /* PBXContainerItemProxy */;
+			remoteRef = 90425483187103F00066DA41 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		90425486187103F00066DA41 /* ExpectaTests-XCTest.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "ExpectaTests-XCTest.xctest";
+			remoteRef = 90425485187103F00066DA41 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9042548F187103F40066DA41 /* libSpecta-iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libSpecta-iOS.a";
+			remoteRef = 9042548E187103F40066DA41 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		90425491187103F40066DA41 /* libSpecta-OSX.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libSpecta-OSX.a";
+			remoteRef = 90425490187103F40066DA41 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		90425493187103F40066DA41 /* SpectaTests-iOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SpectaTests-iOS.xctest";
+			remoteRef = 90425492187103F40066DA41 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		90425495187103F40066DA41 /* Specta-OSXTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Specta-OSXTests.xctest";
+			remoteRef = 90425494187103F40066DA41 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1077,7 +1062,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "#!/bin/bash\n\n# This script automatically sets the version and short version string of\n# an Xcode project from the Git repository containing the project.\n#\n# To use this script in Xcode 4, add the contents to a \"Run Script\" build\n# phase for your application target.\n\nset -o errexit\nset -o nounset\n\n# Use the latest tag for short version (You'll have to make sure that all your tags are of the format 0.0.0,\n# this is to satisfy Apple's rule that short version be three integers separated by dots)\nSHORT_VERSION=$(git --git-dir=\"${SRCROOT}/../.git\" --work-tree=\"${SRCROOT}/../\" describe --abbrev=0)\n\n# I'd like to use the Git commit hash for CFBundleVersion.\n# VERSION=$(git --git-dir=\"${PROJECT_DIR}/.git\" --work-tree=\"${PROJECT_DIR}\" rev-parse --short HEAD)\n\n# But Apple wants this value to be a monotonically increasing integer, so\n# instead use the number of commits on the master branch. If you like to\n# play fast and loose with your Git history, this may cause you problems.\n# Thanks to @amrox for pointing out the issue and fix.\nVERSION=$(git --git-dir=\"${SRCROOT}/../.git\" --work-tree=\"${SRCROOT}\" rev-list HEAD | wc -l | xargs)\n\necho \"VERSION: ${VERSION}\"\necho \"SHORT VERSION: ${SHORT_VERSION}\"\n\n# Output header file\nHEADER=\"${SRCROOT}/BuildConfig.h\"\ncd \"${SRCROOT}/../\"\necho \"// Do not edit\" > \"${HEADER}\"\necho \"#define MAGICAL_RECORD_DISPLAY_VERSION @\\\"${SHORT_VERSION}\\\"\" >> \"${HEADER}\"\necho \"#define MAGICAL_RECORD_VERSION ${VERSION}\" >> \"${HEADER}\"\necho \"// Updated on \"`date` >> \"${HEADER}\"\n";
+			shellScript = "#!/bin/bash\n\n# This script automatically sets the version and short version string of\n# an Xcode project from the Git repository containing the project.\n#\n# To use this script in Xcode 4, add the contents to a \"Run Script\" build\n# phase for your application target.\n\nset -o errexit\nset -o nounset\n\n# Use the latest tag for short version (You'll have to make sure that all your tags are of the format 0.0.0,\n# this is to satisfy Apple's rule that short version be three integers separated by dots)\nSHORT_VERSION=$(git --git-dir=\"${SRCROOT}/.git\" --work-tree=\"${SRCROOT}\" describe --abbrev=0 | xargs)\n\n# I'd like to use the Git commit hash for CFBundleVersion.\nBUILD=$(git --git-dir=\"${PROJECT_DIR}/.git\" --work-tree=\"${PROJECT_DIR}\" rev-parse --short HEAD | xargs)\n\n# But Apple wants this value to be a monotonically increasing integer, so\n# instead use the number of commits on the master branch. If you like to\n# play fast and loose with your Git history, this may cause you problems.\n# Thanks to @amrox for pointing out the issue and fix.\nVERSION=$(git --git-dir=\"${SRCROOT}/.git\" --work-tree=\"${SRCROOT}\" rev-list HEAD | wc -l | xargs)\n\n# For non-master branch builds, tag the display version with the branch name\nBRANCH_NAME=$(git --git-dir=\"${SRCROOT}/.git\" --work-tree=\"${SRCROOT}\" symbolic-ref --short HEAD | xargs)\n\necho \"VERSION: ${VERSION}\"\necho \"SHORT VERSION: ${SHORT_VERSION}\"\necho \"BUILD: ${BUILD}\"\n\n# Output header file\nHEADER=\"${SRCROOT}/MagicalRecord/MagicalRecordVersion.h\"\ncd \"${SRCROOT}\"\necho \"// Do not edit\" > \"${HEADER}\"\necho \"#define MAGICAL_RECORD_DISPLAY_VERSION @\\\"${SHORT_VERSION}${BRANCH_NAME#master}\\\"\" >> \"${HEADER}\"\necho \"#define MAGICAL_RECORD_VERSION ${VERSION}\" >> \"${HEADER}\"\necho \"#define MAGICAL_RECORD_BUILD @\\\"${BUILD}\\\"\" >> \"${HEADER}\"\necho \"// Updated on \"`date` >> \"${HEADER}\"\n";
 		};
 		908FFE1B186FB3DF0073F316 /* Update Version Information */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1091,7 +1076,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "#!/bin/bash\n\n# This script automatically sets the version and short version string of\n# an Xcode project from the Git repository containing the project.\n#\n# To use this script in Xcode 4, add the contents to a \"Run Script\" build\n# phase for your application target.\n\nset -o errexit\nset -o nounset\n\n# Use the latest tag for short version (You'll have to make sure that all your tags are of the format 0.0.0,\n# this is to satisfy Apple's rule that short version be three integers separated by dots)\nSHORT_VERSION=$(git --git-dir=\"${SRCROOT}/../.git\" --work-tree=\"${SRCROOT}/../\" describe --abbrev=0)\n\n# I'd like to use the Git commit hash for CFBundleVersion.\n# VERSION=$(git --git-dir=\"${PROJECT_DIR}/.git\" --work-tree=\"${PROJECT_DIR}\" rev-parse --short HEAD)\n\n# But Apple wants this value to be a monotonically increasing integer, so\n# instead use the number of commits on the master branch. If you like to\n# play fast and loose with your Git history, this may cause you problems.\n# Thanks to @amrox for pointing out the issue and fix.\nVERSION=$(git --git-dir=\"${SRCROOT}/../.git\" --work-tree=\"${SRCROOT}\" rev-list HEAD | wc -l | xargs)\n\necho \"VERSION: ${VERSION}\"\necho \"SHORT VERSION: ${SHORT_VERSION}\"\n\n# Output header file\nHEADER=\"${SRCROOT}/BuildConfig.h\"\ncd \"${SRCROOT}/../\"\necho \"// Do not edit\" > \"${HEADER}\"\necho \"#define MAGICAL_RECORD_DISPLAY_VERSION @\\\"${SHORT_VERSION}\\\"\" >> \"${HEADER}\"\necho \"#define MAGICAL_RECORD_VERSION ${VERSION}\" >> \"${HEADER}\"\necho \"// Updated on \"`date` >> \"${HEADER}\"\n";
+			shellScript = "#!/bin/bash\n\n# This script automatically sets the version and short version string of\n# an Xcode project from the Git repository containing the project.\n#\n# To use this script in Xcode 4, add the contents to a \"Run Script\" build\n# phase for your application target.\n\nset -o errexit\nset -o nounset\n\n# Use the latest tag for short version (You'll have to make sure that all your tags are of the format 0.0.0,\n# this is to satisfy Apple's rule that short version be three integers separated by dots)\nSHORT_VERSION=$(git --git-dir=\"${SRCROOT}/.git\" --work-tree=\"${SRCROOT}\" describe --abbrev=0 | xargs)\n\n# I'd like to use the Git commit hash for CFBundleVersion.\nBUILD=$(git --git-dir=\"${PROJECT_DIR}/.git\" --work-tree=\"${PROJECT_DIR}\" rev-parse --short HEAD | xargs)\n\n# But Apple wants this value to be a monotonically increasing integer, so\n# instead use the number of commits on the master branch. If you like to\n# play fast and loose with your Git history, this may cause you problems.\n# Thanks to @amrox for pointing out the issue and fix.\nVERSION=$(git --git-dir=\"${SRCROOT}/.git\" --work-tree=\"${SRCROOT}\" rev-list HEAD | wc -l | xargs)\n\n# For non-master branch builds, tag the display version with the branch name\nBRANCH_NAME=$(git --git-dir=\"${SRCROOT}/.git\" --work-tree=\"${SRCROOT}\" symbolic-ref --short HEAD | xargs)\n\necho \"VERSION: ${VERSION}\"\necho \"SHORT VERSION: ${SHORT_VERSION}\"\necho \"BUILD: ${BUILD}\"\n\n# Output header file\nHEADER=\"${SRCROOT}/MagicalRecord/MagicalRecordVersion.h\"\ncd \"${SRCROOT}\"\necho \"// Do not edit\" > \"${HEADER}\"\necho \"#define MAGICAL_RECORD_DISPLAY_VERSION @\\\"${SHORT_VERSION}${BRANCH_NAME#master}\\\"\" >> \"${HEADER}\"\necho \"#define MAGICAL_RECORD_VERSION ${VERSION}\" >> \"${HEADER}\"\necho \"#define MAGICAL_RECORD_BUILD @\\\"${BUILD}\\\"\" >> \"${HEADER}\"\necho \"// Updated on \"`date` >> \"${HEADER}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1343,14 +1328,14 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Library/Support/MagicalRecord-iOS-Prefix.pch";
+				GCC_PREFIX_HEADER = "Support/MagicalRecord-iOS-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "MagicalRecord-iOS";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
@@ -1368,9 +1353,9 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Library/Support/MagicalRecord-iOS-Prefix.pch";
+				GCC_PREFIX_HEADER = "Support/MagicalRecord-iOS-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "MagicalRecord-iOS";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
@@ -1387,7 +1372,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Library/Support/MagicalRecord-OSX-Prefix.pch";
+				GCC_PREFIX_HEADER = "Support/MagicalRecord-OSX-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1406,7 +1391,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Library/Support/MagicalRecord-OSX-Prefix.pch";
+				GCC_PREFIX_HEADER = "Support/MagicalRecord-OSX-Prefix.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -1435,8 +1420,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(BUILT_PRODUCTS_DIR)",
-					"\"$(SRCROOT)/Tests/Support/Vendor/Expecta/src\"/**",
-					"\"$(SRCROOT)/Tests/Support/Vendor/Specta/src\"/**",
+					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
+					"\"$(SRCROOT)/Tests/Vendor/Specta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-iOS-Info.plist";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
@@ -1466,8 +1451,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(BUILT_PRODUCTS_DIR)",
-					"\"$(SRCROOT)/Tests/Support/Vendor/Expecta/src\"/**",
-					"\"$(SRCROOT)/Tests/Support/Vendor/Specta/src\"/**",
+					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
+					"\"$(SRCROOT)/Tests/Vendor/Specta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-iOS-Info.plist";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
@@ -1504,8 +1489,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(BUILT_PRODUCTS_DIR)",
-					"\"$(SRCROOT)/Tests/Support/Vendor/Expecta/src\"/**",
-					"\"$(SRCROOT)/Tests/Support/Vendor/Specta/src\"/**",
+					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
+					"\"$(SRCROOT)/Tests/Vendor/Specta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-OSX-Info.plist";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
@@ -1534,8 +1519,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(BUILT_PRODUCTS_DIR)",
-					"\"$(SRCROOT)/Tests/Support/Vendor/Expecta/src\"/**",
-					"\"$(SRCROOT)/Tests/Support/Vendor/Specta/src\"/**",
+					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
+					"\"$(SRCROOT)/Tests/Vendor/Specta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-OSX-Info.plist";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
