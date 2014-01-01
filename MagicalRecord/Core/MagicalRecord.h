@@ -51,6 +51,7 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
 + (NSInteger)version;
 + (NSString *)displayVersion;
++ (NSString *)build;
 
 + (NSString *) currentStack;
 

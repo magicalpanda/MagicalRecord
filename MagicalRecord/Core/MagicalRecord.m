@@ -36,6 +36,11 @@ NSString * const kMagicalRecordCleanedUpNotification = @"kMagicalRecordCleanedUp
     return MAGICAL_RECORD_DISPLAY_VERSION;
 }
 
++ (NSString *)build
+{
+    return MAGICAL_RECORD_BUILD;
+}
+
 + (void) cleanUp
 {
     [self cleanUpErrorHanding];
