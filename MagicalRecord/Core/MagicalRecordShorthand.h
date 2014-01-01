@@ -19,6 +19,8 @@
 + (BOOL) hasAtLeastOneEntityInContext:(NSManagedObjectContext *)context;
 + (NSNumber *)aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
 + (NSNumber *)aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate;
++ (NSArray *) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString*)groupingKeyPath inContext:(NSManagedObjectContext *)context;
++ (NSArray *) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString*)groupingKeyPath;
 - (instancetype) objectWithMinValueFor:(NSString *)property;
 - (instancetype) objectWithMinValueFor:(NSString *)property inContext:(NSManagedObjectContext *)context;
 @end
