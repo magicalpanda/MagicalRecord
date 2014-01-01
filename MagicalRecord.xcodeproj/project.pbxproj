@@ -473,16 +473,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		90425374187102DC0066DA41 /* Supporting Files */ = {
+		90425374187102DC0066DA41 /* Support */ = {
 			isa = PBXGroup;
 			children = (
 				90425375187102DC0066DA41 /* MagicalRecord-iOS-Prefix.pch */,
 				90425376187102DC0066DA41 /* MagicalRecord-OSX-Prefix.pch */,
 			);
-			path = "Supporting Files";
+			path = Support;
 			sourceTree = "<group>";
 		};
-		90425378187103D00066DA41 /* Supporting Files */ = {
+		90425378187103D00066DA41 /* Support */ = {
 			isa = PBXGroup;
 			children = (
 				90425379187103D00066DA41 /* MagicalRecordTests-iOS-Info.plist */,
@@ -490,7 +490,7 @@
 				9042537B187103D00066DA41 /* MagicalRecordTests-OSX-Info.plist */,
 				9042537C187103D00066DA41 /* MagicalRecordTests-OSX-Prefix.pch */,
 			);
-			path = "Supporting Files";
+			path = Support;
 			sourceTree = "<group>";
 		};
 		9042537E187103E60066DA41 /* Vendor */ = {
@@ -611,7 +611,7 @@
 			children = (
 				C7DD7299150F832A00216827 /* MagicalRecord */,
 				C77E5FA513D0CBA600298F87 /* Tests */,
-				90425374187102DC0066DA41 /* Supporting Files */,
+				90425374187102DC0066DA41 /* Support */,
 				C721C7B113D0A3AF0097AB6F /* Products */,
 				C721C7B313D0A3AF0097AB6F /* Frameworks */,
 			);
@@ -644,7 +644,7 @@
 				C7CF976617498275008D9D13 /* Core */,
 				C7CF9785174982AD008D9D13 /* DataImport */,
 				C77E5FA913D0CBE300298F87 /* Fixtures */,
-				90425378187103D00066DA41 /* Supporting Files */,
+				90425378187103D00066DA41 /* Support */,
 				9042537E187103E60066DA41 /* Vendor */,
 			);
 			path = Tests;
@@ -1328,7 +1328,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Supporting Files/MagicalRecord-iOS-Prefix.pch";
+				GCC_PREFIX_HEADER = "Support/MagicalRecord-iOS-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1353,7 +1353,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Supporting Files/MagicalRecord-iOS-Prefix.pch";
+				GCC_PREFIX_HEADER = "Support/MagicalRecord-iOS-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "MagicalRecord-iOS";
 				SDKROOT = iphoneos;
@@ -1372,7 +1372,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Supporting Files/MagicalRecord-OSX-Prefix.pch";
+				GCC_PREFIX_HEADER = "Support/MagicalRecord-OSX-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1391,7 +1391,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Supporting Files/MagicalRecord-OSX-Prefix.pch";
+				GCC_PREFIX_HEADER = "Support/MagicalRecord-OSX-Prefix.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -1411,7 +1411,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Tests/Supporting Files/MagicalRecordTests-iOS-Prefix.pch";
+				GCC_PREFIX_HEADER = "Tests/Support/MagicalRecordTests-iOS-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1423,7 +1423,7 @@
 					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
 					"\"$(SRCROOT)/Tests/Vendor/Specta/src\"/**",
 				);
-				INFOPLIST_FILE = "Tests/Supporting Files/MagicalRecordTests-iOS-Info.plist";
+				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-iOS-Info.plist";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1447,14 +1447,14 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Tests/Supporting Files/MagicalRecordTests-iOS-Prefix.pch";
+				GCC_PREFIX_HEADER = "Tests/Support/MagicalRecordTests-iOS-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(BUILT_PRODUCTS_DIR)",
 					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
 					"\"$(SRCROOT)/Tests/Vendor/Specta/src\"/**",
 				);
-				INFOPLIST_FILE = "Tests/Supporting Files/MagicalRecordTests-iOS-Info.plist";
+				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-iOS-Info.plist";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1480,7 +1480,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Tests/Supporting Files/MagicalRecordTests-OSX-Prefix.pch";
+				GCC_PREFIX_HEADER = "Tests/Support/MagicalRecordTests-OSX-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1492,7 +1492,7 @@
 					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
 					"\"$(SRCROOT)/Tests/Vendor/Specta/src\"/**",
 				);
-				INFOPLIST_FILE = "Tests/Supporting Files/MagicalRecordTests-OSX-Info.plist";
+				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-OSX-Info.plist";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1515,14 +1515,14 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Tests/Supporting Files/MagicalRecordTests-OSX-Prefix.pch";
+				GCC_PREFIX_HEADER = "Tests/Support/MagicalRecordTests-OSX-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(BUILT_PRODUCTS_DIR)",
 					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
 					"\"$(SRCROOT)/Tests/Vendor/Specta/src\"/**",
 				);
-				INFOPLIST_FILE = "Tests/Supporting Files/MagicalRecordTests-OSX-Info.plist";
+				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-OSX-Info.plist";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
