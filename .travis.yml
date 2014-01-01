@@ -1,2 +1,2 @@
 language: objective-c
-script: Supporting\ Files/Scripts/objc-build-scripts/cibuild
+script: Support/Scripts/objc-build-scripts/cibuild
