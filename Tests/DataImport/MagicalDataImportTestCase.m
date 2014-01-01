@@ -21,9 +21,7 @@
     [MagicalRecord setDefaultModelFromClass:[self class]];
     [MagicalRecord setupCoreDataStackWithInMemoryStore];
 
-    if ([self respondsToSelector:@selector(setupTestData)]) {
-        [self performSelector:@selector(setupTestData)];
-    }
+    [self setupTestData];
 
     self.testEntityData = [self dataFromJSONFixture];
 }
@@ -38,6 +36,11 @@
 - (Class)testEntityClass;
 {
     return [NSManagedObject class];
+}
+
+- (void)setupTestData
+{
+    // Implement this in your subclasses
 }
 
 @end

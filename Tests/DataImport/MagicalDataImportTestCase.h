@@ -14,5 +14,6 @@
 @property (nonatomic, strong) id testEntity;
 
 - (Class) testEntityClass;
+- (void) setupTestData;
 
 @end

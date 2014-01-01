@@ -48,3 +48,10 @@
 
 @end
 
+@protocol MagicalRecord_MOGenerator <NSObject>
+
+@optional
+- (instancetype) entityInManagedObjectContext:(NSManagedObjectContext *)object;
+- (instancetype) insertInManagedObjectContext:(NSManagedObjectContext *)object;
+
+@end
