@@ -9,6 +9,15 @@
 #import "NSObject+MagicalDataImport.h"
 #import <objc/runtime.h>
 
+@protocol MogeneratorImport <NSObject>
+
+- (BOOL)shouldImport:(id)object;
+- (void)willImport:(id)object;
+- (void)didImport:(id)object;
+- (id)MR_valueForUndefinedKey:(id)object;
+
+@end
+
 void MR_swapMethodsFromClass(Class c, SEL orig, SEL new);
 
 NSString * const kMagicalRecordImportCustomDateFormatKey            = @"dateFormat";

@@ -5,6 +5,12 @@
 
 #import "CoreData+MagicalRecord.h"
 
+@protocol Mogenerator <NSObject>
+
+- (id)entityInManagedObjectContext:(NSManagedObjectContext *)object;
+- (id)insertInManagedObjectContext:(NSManagedObjectContext *)object;
+@end
+
 static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 
