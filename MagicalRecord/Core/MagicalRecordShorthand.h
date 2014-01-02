@@ -127,6 +127,7 @@
 - (NSString *) workingName;
 - (void) MR_deleteObjects:(id <NSFastEnumeration>)managedObjects;
 @end
+#import "NSManagedObjectContext+MagicalSaves.h"
 @interface NSManagedObjectContext (MagicalSavesShortHand)
 - (void) saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;
 - (void) saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion;
