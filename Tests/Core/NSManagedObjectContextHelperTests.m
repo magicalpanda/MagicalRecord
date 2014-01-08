@@ -48,5 +48,22 @@
     XCTAssertFalse([[entity objectID] isTemporaryID], @"Entity should not have a temporary ID after saving");
 }
 
+- (void) testCanObserveContextAndSaveChanges
+{
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_contextWithStoreCoordinator:[NSPersistentStoreCoordinator MR_defaultStoreCoordinator]];
+    
+    NSManagedObject *testEntity = [SingleEntityWithNoRelationships MR_createInContext:context];
+    
+    XCTAssertTrue([context hasChanges], @"The context should have the test entity marked as changes.");
+    XCTAssertFalse([testEntity isDeleted], @"The test entity shouldn't be deleted.");
+    
+    [[NSManagedObjectContext MR_defaultContext] MR_observeContextAndSaveSelf:context];
+    
+    [context MR_saveOnlySelfAndWait];
+    
+    XCTAssertFalse([context hasChanges], @"The local context shouldn't have changes unsaved.");
+    XCTAssertFalse([[NSManagedObjectContext MR_defaultContext] hasChanges], @"The observer shouldn't have unsaved changes.");
+}
+
 
 @end
