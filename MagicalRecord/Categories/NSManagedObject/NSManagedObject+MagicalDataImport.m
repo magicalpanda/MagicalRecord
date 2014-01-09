@@ -42,8 +42,12 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
         [invocation setSelector:selector];
         [invocation setArgument:&value atIndex:2];
         [invocation invoke];
-//        [self performSelector:selector withObject:value];
-        return YES;
+        // import callbacks must return a BOOL indicating whether they have 
+        // handled the import themselves (YES) or whether MR still needs to handle it (NO).
+        // the default is YES for backwards compatibility.
+        BOOL returnValue = YES;
+        [invocation getReturnValue:&returnValue];
+        return returnValue;
     }
     return NO;
 }
