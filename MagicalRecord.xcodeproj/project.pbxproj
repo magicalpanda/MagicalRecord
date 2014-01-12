@@ -93,7 +93,6 @@
 		C781812E17E64BB600ADD31C /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099493417C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.m */; };
 		C781812F17E64BB600ADD31C /* SingleEntityWithNoRelationships.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099493617C2F42100BC2B5C /* SingleEntityWithNoRelationships.m */; };
 		C781813017E64BB600ADD31C /* SingleRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099493817C2F42100BC2B5C /* SingleRelatedEntity.m */; };
-		C781813317E6555300ADD31C /* NSManagedObject+MagicalFetching.h in Headers */ = {isa = PBXBuildFile; fileRef = C781813117E6555300ADD31C /* NSManagedObject+MagicalFetching.h */; };
 		C781813417E6555300ADD31C /* NSManagedObject+MagicalFetching.m in Sources */ = {isa = PBXBuildFile; fileRef = C781813217E6555300ADD31C /* NSManagedObject+MagicalFetching.m */; };
 		C781813817E6606F00ADD31C /* MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = C7790F9B17E63C3100D20ACF /* MagicalRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C781813B17E6606F00ADD31C /* MagicalRecord+Options.h in Headers */ = {isa = PBXBuildFile; fileRef = C7790F9517E63C3100D20ACF /* MagicalRecord+Options.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -113,7 +112,6 @@
 		C781814917E6606F00ADD31C /* NSObject+MagicalDataImport.h in Headers */ = {isa = PBXBuildFile; fileRef = C7790F5A17E63C3000D20ACF /* NSObject+MagicalDataImport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C781814A17E6606F00ADD31C /* NSRelationshipDescription+MagicalDataImport.h in Headers */ = {isa = PBXBuildFile; fileRef = C7790F5C17E63C3000D20ACF /* NSRelationshipDescription+MagicalDataImport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C781814B17E6606F00ADD31C /* NSString+MagicalDataImport.h in Headers */ = {isa = PBXBuildFile; fileRef = C7790F5E17E63C3000D20ACF /* NSString+MagicalDataImport.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C781814C17E6606F00ADD31C /* NSFetchedResultsController+MagicalFetching.h in Headers */ = {isa = PBXBuildFile; fileRef = C7790F6017E63C3000D20ACF /* NSFetchedResultsController+MagicalFetching.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C781814D17E6606F00ADD31C /* NSManagedObject+MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = C7790F6917E63C3000D20ACF /* NSManagedObject+MagicalRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C781814E17E6606F00ADD31C /* NSManagedObject+MagicalAggregation.h in Headers */ = {isa = PBXBuildFile; fileRef = C7790F6317E63C3000D20ACF /* NSManagedObject+MagicalAggregation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C781814F17E6606F00ADD31C /* NSManagedObject+MagicalFinders.h in Headers */ = {isa = PBXBuildFile; fileRef = C7790F6717E63C3000D20ACF /* NSManagedObject+MagicalFinders.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -130,7 +128,6 @@
 		C781815A17E6606F00ADD31C /* NSPersistentStore+MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = C7790F7617E63C3100D20ACF /* NSPersistentStore+MagicalRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C781815B17E6606F00ADD31C /* NSDictionary+MagicalRecordAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = C7790F8417E63C3100D20ACF /* NSDictionary+MagicalRecordAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C781815C17E6606F00ADD31C /* NSError+MagicalRecordErrorHandling.h in Headers */ = {isa = PBXBuildFile; fileRef = C7790F8617E63C3100D20ACF /* NSError+MagicalRecordErrorHandling.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C781815D17E6606F00ADD31C /* MGPFetchedResultsTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C7790F8917E63C3100D20ACF /* MGPFetchedResultsTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C781815E17E6606F00ADD31C /* UITableViewCell+MGPAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = C7790F8B17E63C3100D20ACF /* UITableViewCell+MGPAdditions.h */; };
 		C781815F17E6606F00ADD31C /* MagicalMigrationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C7790F8E17E63C3100D20ACF /* MagicalMigrationManager.h */; };
 		C781816017E6608A00ADD31C /* CoreData+MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = C7790F8D17E63C3100D20ACF /* CoreData+MagicalRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -155,7 +152,6 @@
 		C781817517E660DE00ADD31C /* NSManagedObject+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C7790F6A17E63C3000D20ACF /* NSManagedObject+MagicalRecord.m */; };
 		C781817617E660DE00ADD31C /* NSManagedObject+MagicalAggregation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7790F6417E63C3000D20ACF /* NSManagedObject+MagicalAggregation.m */; };
 		C781817717E660DE00ADD31C /* NSManagedObject+MagicalFinders.m in Sources */ = {isa = PBXBuildFile; fileRef = C7790F6817E63C3000D20ACF /* NSManagedObject+MagicalFinders.m */; };
-		C781817817E660DE00ADD31C /* NSManagedObject+MagicalFetching.m in Sources */ = {isa = PBXBuildFile; fileRef = C781813217E6555300ADD31C /* NSManagedObject+MagicalFetching.m */; };
 		C781817917E660DE00ADD31C /* NSManagedObject+MagicalRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7790F6C17E63C3000D20ACF /* NSManagedObject+MagicalRequests.m */; };
 		C781817A17E660DE00ADD31C /* NSManagedObjectContext+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C7790F7117E63C3100D20ACF /* NSManagedObjectContext+MagicalRecord.m */; };
 		C781817B17E660DE00ADD31C /* NSManagedObjectContext+MagicalObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = C7790F6F17E63C3100D20ACF /* NSManagedObjectContext+MagicalObserving.m */; };
@@ -199,13 +195,6 @@
 			remoteGlobalIDString = C7CF97AA17498414008D9D13;
 			remoteInfo = "libMagicalRecord-iOS";
 		};
-		909B48BE17C2EB4400CE8C5E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 909B48AF17C2EB4300CE8C5E /* Specta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E9D96A2614B6B8AB007D9521;
-			remoteInfo = Specta;
-		};
 		909B48C017C2EB4400CE8C5E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 909B48AF17C2EB4300CE8C5E /* Specta.xcodeproj */;
@@ -213,26 +202,40 @@
 			remoteGlobalIDString = E9B777A414BA294B00D8DC76;
 			remoteInfo = "Specta-iOS";
 		};
-		909B48C217C2EB4400CE8C5E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 909B48AF17C2EB4300CE8C5E /* Specta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E9D96A3A14B6B8AB007D9521;
-			remoteInfo = SpectaTests;
-		};
-		909B48C417C2EB4400CE8C5E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 909B48AF17C2EB4300CE8C5E /* Specta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E9B777B314BA294C00D8DC76;
-			remoteInfo = "Specta-iOSTests";
-		};
 		C779109617E63C8900D20ACF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C721C7A213D0A3750097AB6F /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C779107E17E63C8900D20ACF;
 			remoteInfo = MagicalRecord;
+		};
+		C77992CE1881B09F0033B1E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7CF9AF9174988CF008D9D13 /* Expecta.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9C4416F917FF3F4A00978F09;
+			remoteInfo = "ExpectaTests-XCTest";
+		};
+		C77992D41881B09F0033B1E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 909B48AF17C2EB4300CE8C5E /* Specta.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E9901C2A18205AB100844A05;
+			remoteInfo = "Specta-OSX";
+		};
+		C77992D61881B09F0033B1E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 909B48AF17C2EB4300CE8C5E /* Specta.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E9901C0D18205A3500844A05;
+			remoteInfo = "SpectaTests-iOS";
+		};
+		C77992D81881B09F0033B1E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 909B48AF17C2EB4300CE8C5E /* Specta.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E9901C3B18205AB100844A05;
+			remoteInfo = "Specta-OSXTests";
 		};
 		C7CF9B00174988D0008D9D13 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -619,10 +622,10 @@
 		909B48B017C2EB4300CE8C5E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				909B48BF17C2EB4400CE8C5E /* libSpecta.a */,
 				909B48C117C2EB4400CE8C5E /* libSpecta-iOS.a */,
-				909B48C317C2EB4400CE8C5E /* SpectaTests.octest */,
-				909B48C517C2EB4400CE8C5E /* Specta-iOSTests.octest */,
+				C77992D51881B09F0033B1E7 /* libSpecta-OSX.a */,
+				C77992D71881B09F0033B1E7 /* SpectaTests-iOS.xctest */,
+				C77992D91881B09F0033B1E7 /* Specta-OSXTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -995,6 +998,7 @@
 				C7CF9B03174988D0008D9D13 /* libExpecta-iOS.a */,
 				C7CF9B05174988D0008D9D13 /* ExpectaTests.octest */,
 				C7CF9B07174988D0008D9D13 /* Expecta-iOSTests.octest */,
+				C77992CF1881B09F0033B1E7 /* ExpectaTests-XCTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1028,7 +1032,6 @@
 				C771EB2D17E6951900D2E984 /* SQLiteWithSavingContextMagicalRecordStack.h in Headers */,
 				C781814A17E6606F00ADD31C /* NSRelationshipDescription+MagicalDataImport.h in Headers */,
 				C781814B17E6606F00ADD31C /* NSString+MagicalDataImport.h in Headers */,
-				C781814C17E6606F00ADD31C /* NSFetchedResultsController+MagicalFetching.h in Headers */,
 				C771EB3B17E6AD3100D2E984 /* MagicalRecordStack+Actions.h in Headers */,
 				C781814D17E6606F00ADD31C /* NSManagedObject+MagicalRecord.h in Headers */,
 				C781814E17E6606F00ADD31C /* NSManagedObject+MagicalAggregation.h in Headers */,
@@ -1047,11 +1050,9 @@
 				C781815A17E6606F00ADD31C /* NSPersistentStore+MagicalRecord.h in Headers */,
 				C781815B17E6606F00ADD31C /* NSDictionary+MagicalRecordAdditions.h in Headers */,
 				C781815C17E6606F00ADD31C /* NSError+MagicalRecordErrorHandling.h in Headers */,
-				C781815D17E6606F00ADD31C /* MGPFetchedResultsTableViewController.h in Headers */,
 				C771EB4017E6AD5000D2E984 /* MagicalRecord+Actions.h in Headers */,
 				C781815E17E6606F00ADD31C /* UITableViewCell+MGPAdditions.h in Headers */,
 				C781815F17E6606F00ADD31C /* MagicalMigrationManager.h in Headers */,
-				C781813317E6555300ADD31C /* NSManagedObject+MagicalFetching.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1175,13 +1176,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		909B48BF17C2EB4400CE8C5E /* libSpecta.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSpecta.a;
-			remoteRef = 909B48BE17C2EB4400CE8C5E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		909B48C117C2EB4400CE8C5E /* libSpecta-iOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1189,18 +1183,32 @@
 			remoteRef = 909B48C017C2EB4400CE8C5E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		909B48C317C2EB4400CE8C5E /* SpectaTests.octest */ = {
+		C77992CF1881B09F0033B1E7 /* ExpectaTests-XCTest.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = SpectaTests.octest;
-			remoteRef = 909B48C217C2EB4400CE8C5E /* PBXContainerItemProxy */;
+			path = "ExpectaTests-XCTest.xctest";
+			remoteRef = C77992CE1881B09F0033B1E7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		909B48C517C2EB4400CE8C5E /* Specta-iOSTests.octest */ = {
+		C77992D51881B09F0033B1E7 /* libSpecta-OSX.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libSpecta-OSX.a";
+			remoteRef = C77992D41881B09F0033B1E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C77992D71881B09F0033B1E7 /* SpectaTests-iOS.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "Specta-iOSTests.octest";
-			remoteRef = 909B48C417C2EB4400CE8C5E /* PBXContainerItemProxy */;
+			path = "SpectaTests-iOS.xctest";
+			remoteRef = C77992D61881B09F0033B1E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C77992D91881B09F0033B1E7 /* Specta-OSXTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Specta-OSXTests.xctest";
+			remoteRef = C77992D81881B09F0033B1E7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		C7CF9B01174988D0008D9D13 /* libExpecta.a */ = {
@@ -1312,7 +1320,6 @@
 				C781817617E660DE00ADD31C /* NSManagedObject+MagicalAggregation.m in Sources */,
 				C781817717E660DE00ADD31C /* NSManagedObject+MagicalFinders.m in Sources */,
 				C79D63E4180880A9006C29E3 /* AutoMigratingWithSourceAndTargetModelMagicalRecordStack.m in Sources */,
-				C781817817E660DE00ADD31C /* NSManagedObject+MagicalFetching.m in Sources */,
 				C781817917E660DE00ADD31C /* NSManagedObject+MagicalRequests.m in Sources */,
 				C781817A17E660DE00ADD31C /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				C781817B17E660DE00ADD31C /* NSManagedObjectContext+MagicalObserving.m in Sources */,
