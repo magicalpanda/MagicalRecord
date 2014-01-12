@@ -21,12 +21,15 @@
     #import "MagicalRecordStack+Actions.h"
     #import "SQLiteMagicalRecordStack.h"
     #import "SQLiteWithSavingContextMagicalRecordStack.h"
+    #import "ClassicSQLiteMagicalRecordStack.h"
+    #import "ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.h"
+
     #import "InMemoryMagicalRecordStack.h"
     #import "iCloudMagicalRecordStack.h"
+
     #import "AutoMigratingMagicalRecordStack.h"
-    #import "ManuallyMigratingMagicalRecordStack.h"
     #import "AutoMigratingWithSourceAndTargetModelMagicalRecordStack.h"
-    #import "ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.h"
+    #import "ManuallyMigratingMagicalRecordStack.h"
 
     #ifdef MR_SHORTHAND
         #import "MagicalRecordShorthand.h"
