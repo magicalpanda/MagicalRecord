@@ -20,7 +20,7 @@
 
 + (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
 {
-    NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
+    NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_rootSavingContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
 
     [localContext performBlock:^{
@@ -28,7 +28,7 @@
             block(localContext);
         }
 
-        [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:completion];
+        [localContext MR_saveWithOptions:MRSaveParentContexts completion:completion];
     }];
 }
 
@@ -41,7 +41,7 @@
             block(localContext);
         }
 
-        [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:completion];
+        [localContext MR_saveWithOptions:MRSaveParentContexts completion:completion];
     }];
 }
 
@@ -50,7 +50,7 @@
 
 + (void) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
 {
-    NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
+    NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_rootSavingContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
 
     [localContext performBlockAndWait:^{
