@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13D21" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D33" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AbstractRelatedEntity" representedClassName="AbstractRelatedEntity" isAbstract="YES" syncable="YES">
         <attribute name="sampleBaseAttribute" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -97,7 +97,7 @@
         <attribute name="stringTestAttribute" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="unixTime13TestAttribute" optional="YES" attributeType="Date" syncable="YES">
             <userInfo>
-                <entry key="dateFormat" value="unixTime13"/>
+                <entry key="dateFormat" value="UnixTime"/>
             </userInfo>
         </attribute>
         <attribute name="unixTimeTestAttribute" optional="YES" attributeType="Date" syncable="YES"/>
