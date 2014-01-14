@@ -7,7 +7,7 @@
 //
 
 #import "NSString+MagicalDataImport.h"
-#import <CoreData/CoreData.h>
+
 
 @implementation NSString (MagicalRecord_DataImport)
 
