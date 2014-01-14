@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'MagicalRecord'
-  s.version  = '2.2.0'
+  s.version  = '2.2'
   s.license  = 'MIT'
   s.summary  = 'Super Awesome Easy Fetching for Core Data 1!!!11!!!!1!.'
   s.homepage = 'http://github.com/magicalpanda/MagicalRecord'
@@ -10,5 +10,5 @@ Pod::Spec.new do |s|
   s.source_files = 'MagicalRecord/**/*.{h,m}'
   s.framework    = 'CoreData'
   s.requires_arc = true
-  s.prefix_header_contents = '#ifdef __OBJC__\n#define MR_SHORTHAND\n#import "CoreData+MagicalRecord.h"\n#endif'
+  s.prefix_header_contents = "#ifdef __OBJC__\n#define MR_SHORTHAND\n#import \"CoreData+MagicalRecord.h\"\n#endif"
 end

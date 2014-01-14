@@ -34,7 +34,7 @@ MagicalRecord is provided free of charge. For Support, you have a few choices:
 
 
 * Ask your support question on [Stackoverflow.com](http://stackoverflow.com), and tag your question with **MagicalRecord**. The core team will be notified of your question only if you mark your question with this tag. The general Stack Overflow community is provided the opportunity to answer the question to help you faster, and to reap the reputation points. If the community is unable to answer, we'll try to step in and answer your question. 
-* If you believe you have found a bug in MagicalRecord, please submit a support ticket on the [Github Issues page for MagicalRecord](http://github.com/magicalpanda/magicalrecord/issues). We'll get to them as soon as we can. Please do **NOT** as general questions on the issue tracker. All questions will be immedialy closed and unanswered. 
+* If you believe you have found a bug in MagicalRecord, please submit a support ticket on the [Github Issues page for MagicalRecord](http://github.com/magicalpanda/magicalrecord/issues). We'll get to them as soon as we can. Please do **NOT** as general questions on the issue tracker. All questions will be immediately closed and unanswered. 
 * For more personal or immediate support, [MagicalPanda](http://magicalpanda.com) is available for hire to consult on your project. 
 
 
