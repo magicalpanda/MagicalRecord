@@ -12,4 +12,17 @@ MagicalRecord was inspired by the ease of Ruby on Rails' Active Record fetching.
 * Allow for clear, simple, one-line fetches
 * Still allow the modification of the NSFetchRequest when request optimizations are needed
 
+# Cabbiepete Fork
 
+This fork was created so that I can install MagicalRecord using
+[Cocoapods](http://cocoapods.org) the pod spec on cocoapods is still
+currently pointing to the official MagicalRecord repo but I get an error
+when building with that one about the ddLogLevel const. The
+MagicalRecord guys assure me there is a good fix in the next major
+release for MagicalRecord (3.0) but its not out yet.
+
+My pod file reads like this for including my fork.
+
+```
+pod 'MagicalRecord', :git => 'https://github.com/cabbiepete/MagicalRecord.git'
+```
