@@ -11,6 +11,7 @@
 #import "MagicalRecord.h"
 #import "MagicalRecord+iCloud.h"
 
+
 NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalRecordDidMergeChangesFromiCloudNotification";
 
 
