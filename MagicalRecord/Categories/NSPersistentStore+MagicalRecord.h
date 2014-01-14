@@ -6,6 +6,7 @@
 //
 
 #import "MagicalRecord.h"
+#import <CoreData/CoreData.h>
 
 // option to autodelete store if it already exists
 
