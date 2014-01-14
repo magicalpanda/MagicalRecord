@@ -18,6 +18,12 @@ Or, to have the results sorted by multiple properties:
 
         NSArray *peopleSorted = [Person MR_findAllSortedBy:@"LastName,FirstName" ascending:YES];
 
+Or, to have the results sorted by multiple properties with difference attributes - will default to whatever you set it to:
+
+        NSArray *peopleSorted = [Person MR_findAllSortedBy:@"LastName:NO,FirstName" ascending:YES];
+
+        NSArray *peopleSorted = [Person MR_findAllSortedBy:@"LastName,FirstName:YES" ascending:NO];
+
 If you have a unique way of retrieving a single object from your data store, you can get that object directly:
 
 	Person *person = [Person MR_findFirstByAttribute:@"FirstName" withValue:@"Forrest"];

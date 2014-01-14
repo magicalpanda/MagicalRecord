@@ -39,7 +39,6 @@
                 NSString *dateFormat = [[self userInfo] valueForKey:kMagicalRecordImportCustomDateFormatKey];
                 value = dateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
             }
-            //            value = adjustDateForDST(value);
         }
         else if (attributeType == NSInteger16AttributeType ||
                  attributeType == NSInteger32AttributeType ||
@@ -49,6 +48,11 @@
                  attributeType == NSFloatAttributeType) {
             if (![value isKindOfClass:[NSNumber class]] && value != [NSNull null]) {
                 value = numberFromString([value description]);
+            }
+        }
+        else if (attributeType == NSStringAttributeType) {
+            if (![value isKindOfClass:[NSString class]] && value != [NSNull null]) {
+                value = [value description];
             }
         }
     }

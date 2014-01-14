@@ -26,7 +26,7 @@
 + (NSNumber *)MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
 + (NSNumber *)MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate;
 
-- (id) MR_objectWithMinValueFor:(NSString *)property;
-- (id) MR_objectWithMinValueFor:(NSString *)property inContext:(NSManagedObjectContext *)context;
+- (instancetype) MR_objectWithMinValueFor:(NSString *)property;
+- (instancetype) MR_objectWithMinValueFor:(NSString *)property inContext:(NSManagedObjectContext *)context;
 
 @end

@@ -320,15 +320,12 @@
 
 + (NSFetchedResultsController *) MR_fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context
 {
-	NSFetchedResultsController *controller = [self MR_fetchAllGroupedBy:groupingKeyPath 
-                                                          withPredicate:searchTerm
-                                                               sortedBy:sortTerm 
-                                                              ascending:ascending
-                                                               delegate:delegate
-                                                              inContext:context];
-	
-	[self MR_performFetch:controller];
-	return controller;
+	return [self MR_fetchAllGroupedBy:groupingKeyPath
+                        withPredicate:searchTerm
+                             sortedBy:sortTerm
+                            ascending:ascending
+                             delegate:delegate
+                            inContext:context];
 }
 
 + (NSFetchedResultsController *) MR_fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate
