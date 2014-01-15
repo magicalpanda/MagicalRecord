@@ -96,21 +96,21 @@
         @try
         {
             saved = [self save:&error];
+            
+            if ([self MR_shouldDisableRootChangeObservingForChild:child])
+            {
+                [self MR_reenableRootChangeObserving];
+            }
         }
         @catch(NSException *exception)
         {
             MRLog(@"Unable to perform save: %@", (id)[exception userInfo] ? : (id)[exception reason]);
         }
-        
         @finally
         {
             if (!saved) {
                 [MagicalRecord handleErrors:error];
                 
-                if ([self MR_shouldDisableRootChangeObservingForChild:child])
-                {
-                    [self MR_reenableRootChangeObserving];
-                }
                 if (completion) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         completion(saved, error);
@@ -128,10 +128,6 @@
                 else {
                     MRLog(@"→ Finished saving: %@", [self MR_description]);
                     
-                    if ([self MR_shouldDisableRootChangeObservingForChild:child])
-                    {
-                        [self MR_reenableRootChangeObserving];
-                    }
                     if (completion) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             completion(saved, error);
