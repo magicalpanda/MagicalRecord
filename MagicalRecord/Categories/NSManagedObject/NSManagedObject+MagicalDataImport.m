@@ -286,6 +286,12 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     
     id value = [objectData MR_valueForAttribute:primaryAttribute];
     
+    // Convert Number to String if the classes don't match
+    if ([[primaryAttribute attributeValueClassName] isKindOfClass:[NSString class]] &&
+        [value isKindOfClass:[NSNumber class]]) {
+        value = [value description];
+    }
+    
     NSManagedObject *managedObject = [self MR_findFirstByAttribute:[primaryAttribute name] withValue:value inContext:context];
     if (managedObject == nil) 
     {
