@@ -215,6 +215,19 @@
     }
 }
 
+- (id) MR_inContextIfTempObject:(NSManagedObjectContext *)otherContext;
+{
+    NSManagedObjectID *objectID = [self objectID];
+    if ([objectID isTemporaryID])
+    {
+        return self;
+    }
+    else
+    {
+        return [self MR_inContext:otherContext];
+    }
+}
+
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext;
 {
     NSManagedObject *inContext = nil;
