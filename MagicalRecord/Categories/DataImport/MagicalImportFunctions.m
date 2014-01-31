@@ -47,7 +47,7 @@ NSDate * dateFromNumber(NSNumber *value, BOOL milliseconds)
 {
     NSTimeInterval timeInterval = [value doubleValue];
     if (milliseconds) {
-        timeInterval = timeInterval / 1000.00f;
+        timeInterval = timeInterval / 1000.00;
     }
     return [NSDate dateWithTimeIntervalSince1970:timeInterval];
 }
