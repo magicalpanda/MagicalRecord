@@ -33,14 +33,43 @@
     [self MR_saveWithOptions:MRSaveParentContexts | MRSaveSynchronously completion:nil];
 }
 
-- (void)MR_saveWithOptions:(MRSaveContextOptions)mask completion:(MRSaveCompletionHandler)completion;
+- (void)MR_disableRootChangeObserving
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:[self class] name:NSManagedObjectContextDidSaveNotification object:[NSManagedObjectContext MR_rootSavingContext]];
+}
+
+- (void)MR_reenableRootChangeObserving
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:[self class]
+                                                    name:NSManagedObjectContextDidSaveNotification
+                                                  object:[NSManagedObjectContext MR_rootSavingContext]];
+    [[NSNotificationCenter defaultCenter] addObserver:[self class]
+                                             selector:@selector(rootContextChanged:)
+                                                 name:NSManagedObjectContextDidSaveNotification
+                                               object:[NSManagedObjectContext MR_rootSavingContext]];
+}
+
+- (BOOL)MR_shouldDisableRootChangeObservingForChild:(NSManagedObjectContext *)child
+{
+    if (self == [[self class] MR_rootSavingContext] && child == [[self class] MR_defaultContext]) {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)MR_saveWithOptions:(MRSaveContextOptions)mask completion:(MRSaveCompletionHandler)completion
+{
+    [self MR_saveWithOptions:mask child:nil completion:completion];
+}
+
+- (void)MR_saveWithOptions:(MRSaveContextOptions)mask child:(NSManagedObjectContext *)child completion:(MRSaveCompletionHandler)completion
 {
     BOOL syncSave           = ((mask & MRSaveSynchronously) == MRSaveSynchronously);
     BOOL saveParentContexts = ((mask & MRSaveParentContexts) == MRSaveParentContexts);
-
+    
     if (![self hasChanges]) {
         MRLog(@"NO CHANGES IN ** %@ ** CONTEXT - NOT SAVING", [self MR_workingName]);
-
+        
         if (completion)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -50,29 +79,38 @@
         
         return;
     }
-
+    
     MRLog(@"→ Saving %@", [self MR_description]);
     MRLog(@"→ Save Parents? %@", @(saveParentContexts));
     MRLog(@"→ Save Synchronously? %@", @(syncSave));
-
+    
     id saveBlock = ^{
         NSError *error = nil;
         BOOL     saved = NO;
-
+        
+        if ([self MR_shouldDisableRootChangeObservingForChild:child])
+        {
+            [self MR_disableRootChangeObserving];
+        }
+        
         @try
         {
             saved = [self save:&error];
+            
+            if ([self MR_shouldDisableRootChangeObservingForChild:child])
+            {
+                [self MR_reenableRootChangeObserving];
+            }
         }
         @catch(NSException *exception)
         {
             MRLog(@"Unable to perform save: %@", (id)[exception userInfo] ? : (id)[exception reason]);
         }
-
         @finally
         {
             if (!saved) {
                 [MagicalRecord handleErrors:error];
-
+                
                 if (completion) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         completion(saved, error);
@@ -84,7 +122,7 @@
                 BOOL shouldSaveParentContext = ((YES == saveParentContexts) || isDefaultContext);
                 
                 if (shouldSaveParentContext && [self parentContext]) {
-                    [[self parentContext] MR_saveWithOptions:mask completion:completion];
+                    [[self parentContext] MR_saveWithOptions:mask child:self completion:completion];
                 }
                 // If we should not save the parent context, or there is not a parent context to save (root context), call the completion block
                 else {
@@ -99,7 +137,7 @@
             }
         }
     };
-
+    
     if (YES == syncSave) {
         [self performBlockAndWait:saveBlock];
     } else {
