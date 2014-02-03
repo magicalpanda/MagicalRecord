@@ -13,6 +13,7 @@ Pod::Spec.new do |s|
   s.prefix_header_contents = <<-EOS
 #ifdef __OBJC__
 #define MR_SHORTHAND
+#define MR_ENABLE_ACTIVE_RECORD_LOGGING 0
 #import "CoreData+MagicalRecord.h"
 #endif
 EOS
