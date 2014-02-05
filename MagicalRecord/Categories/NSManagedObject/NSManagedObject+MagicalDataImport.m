@@ -101,8 +101,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
         if ([relationshipInfo respondsToSelector:@selector(isOrdered)] && [relationshipInfo isOrdered])
         {
             //Need to get the ordered set
-            NSString *selectorName = [[relationshipInfo name] stringByAppendingString:@"Set"];
-            relationshipSource = [self performSelector:NSSelectorFromString(selectorName)];
+            relationshipSource = [self performSelector:NSSelectorFromString([relationshipInfo name])];
             addRelationMessageFormat = @"addObject:";
         }
     }
