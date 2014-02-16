@@ -6,11 +6,10 @@
 //  Copyright (c) 2013 Magical Panda Software LLC. All rights reserved.
 //
 
-#import "SQLiteMagicalRecordStack.h"
+#import "ClassicSQLiteMagicalRecordStack.h"
 
-@interface DualContextDualCoordinatorMagicalRecordStack : SQLiteMagicalRecordStack
+@interface ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack : ClassicSQLiteMagicalRecordStack
 
-@property (nonatomic, strong, readonly) NSManagedObjectContext *backgroundContext;
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *backgroundCoordinator;
 
 @end

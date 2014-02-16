@@ -15,7 +15,6 @@ static dispatch_queue_t save_queue;
 static dispatch_once_t save_queue_once_token;
 static dispatch_once_t *save_queue_reset_token;
 
-dispatch_queue_t MR_saveQueue(void);
 void MR_releaseSaveQueue(void);
 dispatch_queue_t MR_newSaveQueue(void);
 

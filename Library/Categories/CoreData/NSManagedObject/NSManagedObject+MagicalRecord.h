@@ -37,7 +37,18 @@
 
 - (void) MR_obtainPermanentObjectID;
 - (void) MR_refresh;
+
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext;
+- (id) MR_inContextIfTempObject:(NSManagedObjectContext *)otherContext;
+
+- (BOOL) MR_isValidForInsert;
+- (BOOL) MR_isValidForUpdate;
+
+@end
+
+@interface NSManagedObject (MagicalRecordOptional)
+
+- (void) MR_awakeFromCreation;
 
 @end
 

@@ -78,6 +78,10 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
                 [self MR_validationError],
                 [self MR_validationErrorObject]];
     }
+    else if (errorCode == NSManagedObjectMergeError)
+    {
+        return [[self userInfo] valueForKey:@"conflictList"];
+    }
     return [NSString stringWithFormat:@"(%zd) %@ [%@]", errorCode, MR_errorSummaryFromErrorCode(errorCode), [self MR_validationErrorObject] ?: [[self userInfo] valueForKey:@"reason"]];
 }
 

@@ -9,6 +9,9 @@
 #import "NSManagedObjectContext+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalSaves.h"
 
+dispatch_queue_t MR_saveQueue(void);
+
+
 @interface MagicalRecordStack (Actions)
 
 /* For all background saving operations. These calls will be sent to a different thread/queue.

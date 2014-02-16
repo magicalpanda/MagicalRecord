@@ -128,7 +128,12 @@
 
 + (id) MR_createInContext:(NSManagedObjectContext *)context
 {
-    return [NSEntityDescription insertNewObjectForEntityForName:[self MR_entityName] inManagedObjectContext:context];
+    id managedObject = [NSEntityDescription insertNewObjectForEntityForName:[self MR_entityName] inManagedObjectContext:context];
+    if ([managedObject respondsToSelector:@selector(MR_awakeFromCreation)])
+    {
+        [managedObject MR_awakeFromCreation];
+    }
+    return managedObject;
 }
 
 + (id) MR_createEntity
@@ -210,6 +215,19 @@
     }
 }
 
+- (id) MR_inContextIfTempObject:(NSManagedObjectContext *)otherContext;
+{
+    NSManagedObjectID *objectID = [self objectID];
+    if ([objectID isTemporaryID])
+    {
+        return self;
+    }
+    else
+    {
+        return [self MR_inContext:otherContext];
+    }
+}
+
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext;
 {
     NSManagedObject *inContext = nil;
@@ -237,6 +255,30 @@
         }
     }
     return inContext;
+}
+
+- (BOOL) MR_isValidForInsert;
+{
+    NSError *error = nil;
+    BOOL isValid = [self validateForInsert:&error];
+    if (!isValid)
+    {
+        [[error MR_coreDataDescription] MR_logToConsole];
+    }
+    
+    return isValid;
+}
+
+- (BOOL) MR_isValidForUpdate;
+{
+    NSError *error = nil;
+    BOOL isValid = [self validateForUpdate:&error];
+    if (!isValid)
+    {
+        [[error MR_coreDataDescription] MR_logToConsole];
+    }
+
+    return isValid;
 }
 
 @end
