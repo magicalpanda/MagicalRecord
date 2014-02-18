@@ -6,6 +6,7 @@
 
 
 extern const struct SingleEntityWithNoRelationshipsAttributes {
+	__unsafe_unretained NSString *booleanAsStringTestAttribute;
 	__unsafe_unretained NSString *booleanTestAttribute;
 	__unsafe_unretained NSString *colorTestAttribute;
 	__unsafe_unretained NSString *dateTestAttribute;
@@ -71,6 +72,22 @@ extern const struct SingleEntityWithNoRelationshipsAttributes {
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (SingleEntityWithNoRelationshipsID*)objectID;
+
+
+
+
+
+@property (nonatomic, strong) NSNumber* booleanAsStringTestAttribute;
+
+
+
+
+@property (atomic) BOOL booleanAsStringTestAttributeValue;
+- (BOOL)booleanAsStringTestAttributeValue;
+- (void)setBooleanAsStringTestAttributeValue:(BOOL)value_;
+
+
+//- (BOOL)validateBooleanAsStringTestAttribute:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -274,6 +291,15 @@ extern const struct SingleEntityWithNoRelationshipsAttributes {
 
 
 @interface _SingleEntityWithNoRelationships (CoreDataGeneratedPrimitiveAccessors)
+
+
+- (NSNumber*)primitiveBooleanAsStringTestAttribute;
+- (void)setPrimitiveBooleanAsStringTestAttribute:(NSNumber*)value;
+
+- (BOOL)primitiveBooleanAsStringTestAttributeValue;
+- (void)setPrimitiveBooleanAsStringTestAttributeValue:(BOOL)value_;
+
+
 
 
 - (NSNumber*)primitiveBooleanTestAttribute;

@@ -67,6 +67,7 @@
         </relationship>
     </entity>
     <entity name="SingleEntityWithNoRelationships" representedClassName="SingleEntityWithNoRelationships" syncable="YES">
+        <attribute name="booleanAsStringTestAttribute" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="booleanTestAttribute" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="colorTestAttribute" optional="YES" attributeType="Transformable" syncable="YES">
             <userInfo>

@@ -5,6 +5,7 @@
 
 
 const struct SingleEntityWithNoRelationshipsAttributes SingleEntityWithNoRelationshipsAttributes = {
+	.booleanAsStringTestAttribute = @"booleanAsStringTestAttribute",
 	.booleanTestAttribute = @"booleanTestAttribute",
 	.colorTestAttribute = @"colorTestAttribute",
 	.dateTestAttribute = @"dateTestAttribute",
@@ -55,6 +56,11 @@ const struct SingleEntityWithNoRelationshipsAttributes SingleEntityWithNoRelatio
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
+	if ([key isEqualToString:@"booleanAsStringTestAttributeValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"booleanAsStringTestAttribute"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"booleanTestAttributeValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"booleanTestAttribute"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -93,6 +99,34 @@ const struct SingleEntityWithNoRelationshipsAttributes SingleEntityWithNoRelatio
 
 	return keyPaths;
 }
+
+
+
+
+@dynamic booleanAsStringTestAttribute;
+
+
+
+- (BOOL)booleanAsStringTestAttributeValue {
+	NSNumber *result = [self booleanAsStringTestAttribute];
+	return [result boolValue];
+}
+
+
+- (void)setBooleanAsStringTestAttributeValue:(BOOL)value_ {
+	[self setBooleanAsStringTestAttribute:@(value_)];
+}
+
+
+- (BOOL)primitiveBooleanAsStringTestAttributeValue {
+	NSNumber *result = [self primitiveBooleanAsStringTestAttribute];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveBooleanAsStringTestAttributeValue:(BOOL)value_ {
+	[self setPrimitiveBooleanAsStringTestAttribute:@(value_)];
+}
+
 
 
 
