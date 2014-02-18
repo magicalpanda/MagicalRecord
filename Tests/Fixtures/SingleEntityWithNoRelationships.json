@@ -19,4 +19,5 @@
     "doubleAsStringTestAttribute": "124.3",
     "floatAsStringTestAttribute": "10000000000",
     "numberAsStringTestAttribute" : 10248909829,
+    "booleanAsStringTestAttribute": "true",
 }
