@@ -61,17 +61,20 @@ dispatch_queue_t MR_saveQueue()
 {
     MRLogVerbose(@"Dispatching save request: %@", contextWorkingName);
     dispatch_async(MR_saveQueue(), ^{
-        MRLogVerbose(@"%@ save starting", contextWorkingName);
-        
-        NSManagedObjectContext *localContext = [self newConfinementContext];
-        [localContext MR_setWorkingName:contextWorkingName];
-        
-        if (block)
+        @autoreleasepool
         {
-            block(localContext);
-        }
+            MRLogVerbose(@"%@ save starting", contextWorkingName);
+            
+            NSManagedObjectContext *localContext = [self newConfinementContext];
+            [localContext MR_setWorkingName:contextWorkingName];
+            
+            if (block)
+            {
+                block(localContext);
+            }
 
-        [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:completion];
+            [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:completion];
+        }
     });
 }
 
