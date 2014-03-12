@@ -6,6 +6,9 @@
 //
 
 #import "CoreData+MagicalRecord.h"
+#import "MagicalRecordVersion.h"
+
+NSString * const kMagicalRecordCleanedUpNotification = @"kMagicalRecordCleanedUpNotification";
 
 @interface MagicalRecord (Internal)
 
@@ -23,10 +26,29 @@
 
 @implementation MagicalRecord
 
++ (NSInteger)version
+{
+    return MAGICAL_RECORD_VERSION;
+}
+
++ (NSString *)displayVersion
+{
+    return MAGICAL_RECORD_DISPLAY_VERSION;
+}
+
++ (NSString *)build
+{
+    return MAGICAL_RECORD_BUILD;
+}
+
 + (void) cleanUp
 {
     [self cleanUpErrorHanding];
     [self cleanUpStack];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:kMagicalRecordCleanedUpNotification
+                                      object:nil
+                                    userInfo:nil];
 }
 
 + (void) cleanUpStack;
