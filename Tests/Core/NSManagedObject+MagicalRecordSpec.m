@@ -37,7 +37,7 @@ describe(@"NSManagedObject+MagicalRecord", ^{
 
             expect([[insertedEntity objectID] isTemporaryID]).to.beTruthy();
 
-            [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+            [[MagicalRecordStack defaultStack] saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
 
                 NSManagedObject *localEntity = [insertedEntity MR_inContext:localContext];
                 expect([[localEntity objectID] isTemporaryID]).to.beFalsy();
