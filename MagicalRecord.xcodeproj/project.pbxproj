@@ -8,11 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		909948F617C2EF9800BC2B5C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 909948F517C2EF9800BC2B5C /* CoreData.framework */; };
-		9099496A17C2FD5000BC2B5C /* libMagicalRecord-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7CF97AB17498414008D9D13 /* libMagicalRecord-iOS.a */; };
-		9099497017C2FD6D00BC2B5C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 909948F517C2EF9800BC2B5C /* CoreData.framework */; };
-		909B48CB17C2EC7E00CE8C5E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 909B48CA17C2EC7E00CE8C5E /* UIKit.framework */; };
-		909B48CC17C2EC8700CE8C5E /* libExpecta-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7CF9B03174988D0008D9D13 /* libExpecta-iOS.a */; };
-		909B48CD17C2EC8700CE8C5E /* libSpecta-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 909B48C117C2EB4400CE8C5E /* libSpecta-iOS.a */; };
 		C73A7CDD180CF7A700E305D8 /* ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.h in Headers */ = {isa = PBXBuildFile; fileRef = C73A7CDB180CF7A700E305D8 /* ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C73A7CDE180CF7A700E305D8 /* ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = C73A7CDC180CF7A700E305D8 /* ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.m */; };
 		C73A7CDF180CF7A700E305D8 /* ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = C73A7CDC180CF7A700E305D8 /* ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.m */; };
@@ -61,37 +56,7 @@
 		C779106A17E63C3100D20ACF /* MagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = C7790FA617E63C3100D20ACF /* MagicalRecordStack.m */; };
 		C779106F17E63C3100D20ACF /* ManuallyMigratingMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = C7790FA817E63C3100D20ACF /* ManuallyMigratingMagicalRecordStack.m */; };
 		C779107417E63C3100D20ACF /* SQLiteMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = C7790FAA17E63C3100D20ACF /* SQLiteMagicalRecordStack.m */; };
-		C779109417E63C8900D20ACF /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9099497217C3044700BC2B5C /* XCTest.framework */; };
-		C779109817E63C8900D20ACF /* MagicalRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C779107F17E63C8900D20ACF /* MagicalRecord.framework */; };
 		C77910AA17E63DC900D20ACF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 909B48CA17C2EC7E00CE8C5E /* UIKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		C781810817E64BB600ADD31C /* MagicalRecord+ActionsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 909948FF17C2F0B700BC2B5C /* MagicalRecord+ActionsSpec.m */; };
-		C781810F17E64BB600ADD31C /* NSManagedObject+MagicalRecordSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 90171E1F17C3300500E7084A /* NSManagedObject+MagicalRecordSpec.m */; };
-		C781811017E64BB600ADD31C /* NSManagedObjectContext+MagicalSavesSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099490017C2F0B700BC2B5C /* NSManagedObjectContext+MagicalSavesSpec.m */; };
-		C781811117E64BB600ADD31C /* NSManagedObject+MagicalDataImportSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D4B0E717C436E00043AB41 /* NSManagedObject+MagicalDataImportSpec.m */; };
-		C781811917E64BB600ADD31C /* ImportSingleRelatedEntitySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 90171E1817C3283C00E7084A /* ImportSingleRelatedEntitySpec.m */; };
-		C781811A17E64BB600ADD31C /* FixtureHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF9B6C17498B5C008D9D13 /* FixtureHelpers.m */; };
-		C781811B17E64BB600ADD31C /* _AbstractRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099490E17C2F42100BC2B5C /* _AbstractRelatedEntity.m */; };
-		C781811C17E64BB600ADD31C /* _ConcreteRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099491017C2F42100BC2B5C /* _ConcreteRelatedEntity.m */; };
-		C781811D17E64BB600ADD31C /* _DifferentClassNameMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099491217C2F42100BC2B5C /* _DifferentClassNameMapping.m */; };
-		C781811E17E64BB600ADD31C /* _MappedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099491417C2F42100BC2B5C /* _MappedEntity.m */; };
-		C781811F17E64BB600ADD31C /* _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099491617C2F42100BC2B5C /* _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m */; };
-		C781812017E64BB600ADD31C /* _SingleEntityRelatedToMappedEntityUsingDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099491817C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityUsingDefaults.m */; };
-		C781812117E64BB600ADD31C /* _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099491A17C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m */; };
-		C781812217E64BB600ADD31C /* _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099491C17C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m */; };
-		C781812317E64BB600ADD31C /* _SingleEntityRelatedToMappedEntityWithSecondaryMappings.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099491E17C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityWithSecondaryMappings.m */; };
-		C781812417E64BB600ADD31C /* _SingleEntityWithNoRelationships.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099492017C2F42100BC2B5C /* _SingleEntityWithNoRelationships.m */; };
-		C781812517E64BB600ADD31C /* _SingleRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099492217C2F42100BC2B5C /* _SingleRelatedEntity.m */; };
-		C781812617E64BB600ADD31C /* AbstractRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099492417C2F42100BC2B5C /* AbstractRelatedEntity.m */; };
-		C781812717E64BB600ADD31C /* ConcreteRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099492617C2F42100BC2B5C /* ConcreteRelatedEntity.m */; };
-		C781812817E64BB600ADD31C /* DifferentClassNameMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099492817C2F42100BC2B5C /* DifferentClassNameMapping.m */; };
-		C781812917E64BB600ADD31C /* MappedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099492A17C2F42100BC2B5C /* MappedEntity.m */; };
-		C781812A17E64BB600ADD31C /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099492C17C2F42100BC2B5C /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m */; };
-		C781812B17E64BB600ADD31C /* SingleEntityRelatedToMappedEntityUsingDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099492E17C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityUsingDefaults.m */; };
-		C781812C17E64BB600ADD31C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099493017C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m */; };
-		C781812D17E64BB600ADD31C /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099493217C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m */; };
-		C781812E17E64BB600ADD31C /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099493417C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.m */; };
-		C781812F17E64BB600ADD31C /* SingleEntityWithNoRelationships.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099493617C2F42100BC2B5C /* SingleEntityWithNoRelationships.m */; };
-		C781813017E64BB600ADD31C /* SingleRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099493817C2F42100BC2B5C /* SingleRelatedEntity.m */; };
 		C781813417E6555300ADD31C /* NSManagedObject+MagicalFetching.m in Sources */ = {isa = PBXBuildFile; fileRef = C781813217E6555300ADD31C /* NSManagedObject+MagicalFetching.m */; };
 		C781813817E6606F00ADD31C /* MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = C7790F9B17E63C3100D20ACF /* MagicalRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C781813B17E6606F00ADD31C /* MagicalRecord+Options.h in Headers */ = {isa = PBXBuildFile; fileRef = C7790F9517E63C3100D20ACF /* MagicalRecord+Options.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -174,98 +139,7 @@
 		C7B687FD181594140002C92E /* ClassicSQLiteMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B687FB181594140002C92E /* ClassicSQLiteMagicalRecordStack.m */; };
 		C7B687FE181594140002C92E /* ClassicSQLiteMagicalRecordStack.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B687FB181594140002C92E /* ClassicSQLiteMagicalRecordStack.m */; };
 		C7CF97AC17498414008D9D13 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C7E313D0C3A00097AB6F /* Foundation.framework */; };
-		C7CF9800174984CA008D9D13 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90DD201E167AA4350033BA25 /* SenTestingKit.framework */; };
-		C7CF9B5317498985008D9D13 /* SampleJSONDataForImport.json in Resources */ = {isa = PBXBuildFile; fileRef = C7CF9B4917498985008D9D13 /* SampleJSONDataForImport.json */; };
-		C7CF9B5517498985008D9D13 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json in Resources */ = {isa = PBXBuildFile; fileRef = C7CF9B4A17498985008D9D13 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json */; };
-		C7CF9B5717498985008D9D13 /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json in Resources */ = {isa = PBXBuildFile; fileRef = C7CF9B4B17498985008D9D13 /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json */; };
-		C7CF9B5917498985008D9D13 /* SingleEntityRelatedToMappedEntityUsingDefaults.json in Resources */ = {isa = PBXBuildFile; fileRef = C7CF9B4C17498985008D9D13 /* SingleEntityRelatedToMappedEntityUsingDefaults.json */; };
-		C7CF9B5B17498985008D9D13 /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.json in Resources */ = {isa = PBXBuildFile; fileRef = C7CF9B4D17498985008D9D13 /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.json */; };
-		C7CF9B5D17498985008D9D13 /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json in Resources */ = {isa = PBXBuildFile; fileRef = C7CF9B4E17498985008D9D13 /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json */; };
-		C7CF9B5F17498985008D9D13 /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.json in Resources */ = {isa = PBXBuildFile; fileRef = C7CF9B4F17498985008D9D13 /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.json */; };
-		C7CF9B6117498985008D9D13 /* SingleEntityWithNoRelationships.json in Resources */ = {isa = PBXBuildFile; fileRef = C7CF9B5017498985008D9D13 /* SingleEntityWithNoRelationships.json */; };
-		C7CF9B6317498986008D9D13 /* SingleEntityWithNoRelationships.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7CF9B5117498985008D9D13 /* SingleEntityWithNoRelationships.plist */; };
-		C7CF9B6517498986008D9D13 /* SingleRelatedEntity.json in Resources */ = {isa = PBXBuildFile; fileRef = C7CF9B5217498985008D9D13 /* SingleRelatedEntity.json */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		9099496E17C2FD6100BC2B5C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C721C7A213D0A3750097AB6F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C7CF97AA17498414008D9D13;
-			remoteInfo = "libMagicalRecord-iOS";
-		};
-		909B48C017C2EB4400CE8C5E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 909B48AF17C2EB4300CE8C5E /* Specta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E9B777A414BA294B00D8DC76;
-			remoteInfo = "Specta-iOS";
-		};
-		C779109617E63C8900D20ACF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C721C7A213D0A3750097AB6F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C779107E17E63C8900D20ACF;
-			remoteInfo = MagicalRecord;
-		};
-		C77992CE1881B09F0033B1E7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C7CF9AF9174988CF008D9D13 /* Expecta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9C4416F917FF3F4A00978F09;
-			remoteInfo = "ExpectaTests-XCTest";
-		};
-		C77992D41881B09F0033B1E7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 909B48AF17C2EB4300CE8C5E /* Specta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E9901C2A18205AB100844A05;
-			remoteInfo = "Specta-OSX";
-		};
-		C77992D61881B09F0033B1E7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 909B48AF17C2EB4300CE8C5E /* Specta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E9901C0D18205A3500844A05;
-			remoteInfo = "SpectaTests-iOS";
-		};
-		C77992D81881B09F0033B1E7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 909B48AF17C2EB4300CE8C5E /* Specta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E9901C3B18205AB100844A05;
-			remoteInfo = "Specta-OSXTests";
-		};
-		C7CF9B00174988D0008D9D13 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C7CF9AF9174988CF008D9D13 /* Expecta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E9ACDF0C13B2DD520010F4D7;
-			remoteInfo = Expecta;
-		};
-		C7CF9B02174988D0008D9D13 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C7CF9AF9174988CF008D9D13 /* Expecta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E93067CE13B2E6D100EA26FF;
-			remoteInfo = "Expecta-iOS";
-		};
-		C7CF9B04174988D0008D9D13 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C7CF9AF9174988CF008D9D13 /* Expecta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E9ACDF1D13B2DD520010F4D7;
-			remoteInfo = ExpectaTests;
-		};
-		C7CF9B06174988D0008D9D13 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C7CF9AF9174988CF008D9D13 /* Expecta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E93067DA13B2E6D100EA26FF;
-			remoteInfo = "Expecta-iOSTests";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		C7CF97A917498414008D9D13 /* CopyFiles */ = {
@@ -280,62 +154,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		90171E1817C3283C00E7084A /* ImportSingleRelatedEntitySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportSingleRelatedEntitySpec.m; sourceTree = "<group>"; };
-		90171E1F17C3300500E7084A /* NSManagedObject+MagicalRecordSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+MagicalRecordSpec.m"; sourceTree = "<group>"; };
 		909948F517C2EF9800BC2B5C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
-		909948FF17C2F0B700BC2B5C /* MagicalRecord+ActionsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MagicalRecord+ActionsSpec.m"; path = "Tests/MagicalRecord+ActionsSpec.m"; sourceTree = SOURCE_ROOT; };
-		9099490017C2F0B700BC2B5C /* NSManagedObjectContext+MagicalSavesSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectContext+MagicalSavesSpec.m"; path = "Tests/NSManagedObjectContext+MagicalSavesSpec.m"; sourceTree = SOURCE_ROOT; };
-		9099490917C2F3D400BC2B5C /* TestModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TestModel.xcdatamodel; sourceTree = "<group>"; };
-		9099490D17C2F42100BC2B5C /* _AbstractRelatedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _AbstractRelatedEntity.h; sourceTree = "<group>"; };
-		9099490E17C2F42100BC2B5C /* _AbstractRelatedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _AbstractRelatedEntity.m; sourceTree = "<group>"; };
-		9099490F17C2F42100BC2B5C /* _ConcreteRelatedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ConcreteRelatedEntity.h; sourceTree = "<group>"; };
-		9099491017C2F42100BC2B5C /* _ConcreteRelatedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ConcreteRelatedEntity.m; sourceTree = "<group>"; };
-		9099491117C2F42100BC2B5C /* _DifferentClassNameMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DifferentClassNameMapping.h; sourceTree = "<group>"; };
-		9099491217C2F42100BC2B5C /* _DifferentClassNameMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DifferentClassNameMapping.m; sourceTree = "<group>"; };
-		9099491317C2F42100BC2B5C /* _MappedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MappedEntity.h; sourceTree = "<group>"; };
-		9099491417C2F42100BC2B5C /* _MappedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MappedEntity.m; sourceTree = "<group>"; };
-		9099491517C2F42100BC2B5C /* _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.h; sourceTree = "<group>"; };
-		9099491617C2F42100BC2B5C /* _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m; sourceTree = "<group>"; };
-		9099491717C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityUsingDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SingleEntityRelatedToMappedEntityUsingDefaults.h; sourceTree = "<group>"; };
-		9099491817C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityUsingDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SingleEntityRelatedToMappedEntityUsingDefaults.m; sourceTree = "<group>"; };
-		9099491917C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.h; sourceTree = "<group>"; };
-		9099491A17C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m; sourceTree = "<group>"; };
-		9099491B17C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.h; sourceTree = "<group>"; };
-		9099491C17C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m; sourceTree = "<group>"; };
-		9099491D17C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityWithSecondaryMappings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SingleEntityRelatedToMappedEntityWithSecondaryMappings.h; sourceTree = "<group>"; };
-		9099491E17C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityWithSecondaryMappings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SingleEntityRelatedToMappedEntityWithSecondaryMappings.m; sourceTree = "<group>"; };
-		9099491F17C2F42100BC2B5C /* _SingleEntityWithNoRelationships.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SingleEntityWithNoRelationships.h; sourceTree = "<group>"; };
-		9099492017C2F42100BC2B5C /* _SingleEntityWithNoRelationships.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SingleEntityWithNoRelationships.m; sourceTree = "<group>"; };
-		9099492117C2F42100BC2B5C /* _SingleRelatedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SingleRelatedEntity.h; sourceTree = "<group>"; };
-		9099492217C2F42100BC2B5C /* _SingleRelatedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SingleRelatedEntity.m; sourceTree = "<group>"; };
-		9099492317C2F42100BC2B5C /* AbstractRelatedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractRelatedEntity.h; sourceTree = "<group>"; };
-		9099492417C2F42100BC2B5C /* AbstractRelatedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractRelatedEntity.m; sourceTree = "<group>"; };
-		9099492517C2F42100BC2B5C /* ConcreteRelatedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcreteRelatedEntity.h; sourceTree = "<group>"; };
-		9099492617C2F42100BC2B5C /* ConcreteRelatedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcreteRelatedEntity.m; sourceTree = "<group>"; };
-		9099492717C2F42100BC2B5C /* DifferentClassNameMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DifferentClassNameMapping.h; sourceTree = "<group>"; };
-		9099492817C2F42100BC2B5C /* DifferentClassNameMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DifferentClassNameMapping.m; sourceTree = "<group>"; };
-		9099492917C2F42100BC2B5C /* MappedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MappedEntity.h; sourceTree = "<group>"; };
-		9099492A17C2F42100BC2B5C /* MappedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MappedEntity.m; sourceTree = "<group>"; };
-		9099492B17C2F42100BC2B5C /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.h; sourceTree = "<group>"; };
-		9099492C17C2F42100BC2B5C /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m; sourceTree = "<group>"; };
-		9099492D17C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityUsingDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleEntityRelatedToMappedEntityUsingDefaults.h; sourceTree = "<group>"; };
-		9099492E17C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityUsingDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntityRelatedToMappedEntityUsingDefaults.m; sourceTree = "<group>"; };
-		9099492F17C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.h; sourceTree = "<group>"; };
-		9099493017C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m; sourceTree = "<group>"; };
-		9099493117C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.h; sourceTree = "<group>"; };
-		9099493217C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m; sourceTree = "<group>"; };
-		9099493317C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleEntityRelatedToMappedEntityWithSecondaryMappings.h; sourceTree = "<group>"; };
-		9099493417C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntityRelatedToMappedEntityWithSecondaryMappings.m; sourceTree = "<group>"; };
-		9099493517C2F42100BC2B5C /* SingleEntityWithNoRelationships.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleEntityWithNoRelationships.h; sourceTree = "<group>"; };
-		9099493617C2F42100BC2B5C /* SingleEntityWithNoRelationships.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntityWithNoRelationships.m; sourceTree = "<group>"; };
-		9099493717C2F42100BC2B5C /* SingleRelatedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleRelatedEntity.h; sourceTree = "<group>"; };
-		9099493817C2F42100BC2B5C /* SingleRelatedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleRelatedEntity.m; sourceTree = "<group>"; };
-		9099497217C3044700BC2B5C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		909B48AF17C2EB4300CE8C5E /* Specta.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Specta.xcodeproj; path = Specta/Specta.xcodeproj; sourceTree = "<group>"; };
 		909B48CA17C2EC7E00CE8C5E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		90D4B0E717C436E00043AB41 /* NSManagedObject+MagicalDataImportSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+MagicalDataImportSpec.m"; sourceTree = "<group>"; };
-		90DD201E167AA4350033BA25 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		C721C7E213D0C3A00097AB6F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C721C7E313D0C3A00097AB6F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C73A7CDB180CF7A700E305D8 /* ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.h; sourceTree = "<group>"; };
 		C73A7CDC180CF7A700E305D8 /* ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.m; sourceTree = "<group>"; };
@@ -427,7 +247,6 @@
 		C7790FAC17E63C3100D20ACF /* MagicalRecord-iOS-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MagicalRecord-iOS-Prefix.pch"; sourceTree = "<group>"; };
 		C7790FAD17E63C3100D20ACF /* MagicalRecord-OSX-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MagicalRecord-OSX-Prefix.pch"; sourceTree = "<group>"; };
 		C779107F17E63C8900D20ACF /* MagicalRecord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MagicalRecord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C779109317E63C8900D20ACF /* MagicalRecordTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MagicalRecordTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C77910AD17E63E2300D20ACF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		C781810017E6462500ADD31C /* MagicalRecord.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = MagicalRecord.podspec; sourceTree = SOURCE_ROOT; };
 		C781810117E6462500ADD31C /* Rakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Rakefile; sourceTree = SOURCE_ROOT; };
@@ -447,43 +266,7 @@
 		C79F9C2717FF6FE2007CDA6F /* MagicalRecordLogging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MagicalRecordLogging.h; sourceTree = "<group>"; };
 		C7B687FA181594140002C92E /* ClassicSQLiteMagicalRecordStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassicSQLiteMagicalRecordStack.h; sourceTree = "<group>"; };
 		C7B687FB181594140002C92E /* ClassicSQLiteMagicalRecordStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassicSQLiteMagicalRecordStack.m; sourceTree = "<group>"; };
-		C7CF976717498275008D9D13 /* MagicalRecordTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordTests.h; sourceTree = "<group>"; };
-		C7CF976817498275008D9D13 /* MagicalRecordTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalRecordTests.m; sourceTree = "<group>"; };
-		C7CF976917498275008D9D13 /* NSManagedObjectContextHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSManagedObjectContextHelperTests.h; sourceTree = "<group>"; };
-		C7CF976A17498275008D9D13 /* NSManagedObjectContextHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSManagedObjectContextHelperTests.m; sourceTree = "<group>"; };
-		C7CF976B17498275008D9D13 /* NSManagedObjectHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSManagedObjectHelperTests.h; sourceTree = "<group>"; };
-		C7CF976C17498275008D9D13 /* NSManagedObjectHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSManagedObjectHelperTests.m; sourceTree = "<group>"; };
-		C7CF976D17498275008D9D13 /* NSManagedObjectModelHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSManagedObjectModelHelperTests.h; sourceTree = "<group>"; };
-		C7CF976E17498275008D9D13 /* NSManagedObjectModelHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSManagedObjectModelHelperTests.m; sourceTree = "<group>"; };
-		C7CF976F17498275008D9D13 /* NSPersisentStoreHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPersisentStoreHelperTests.h; sourceTree = "<group>"; };
-		C7CF977017498275008D9D13 /* NSPersisentStoreHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSPersisentStoreHelperTests.m; sourceTree = "<group>"; };
-		C7CF977117498275008D9D13 /* NSPersistentStoreCoordinatorHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPersistentStoreCoordinatorHelperTests.h; sourceTree = "<group>"; };
-		C7CF977217498275008D9D13 /* NSPersistentStoreCoordinatorHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSPersistentStoreCoordinatorHelperTests.m; sourceTree = "<group>"; };
-		C7CF9786174982AD008D9D13 /* ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests.m; sourceTree = "<group>"; };
-		C7CF9787174982AD008D9D13 /* ImportSingleEntityRelatedToMappedEntityUsingDefaultsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportSingleEntityRelatedToMappedEntityUsingDefaultsTests.m; sourceTree = "<group>"; };
-		C7CF9788174982AD008D9D13 /* ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests.m; sourceTree = "<group>"; };
-		C7CF9789174982AD008D9D13 /* ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m; sourceTree = "<group>"; };
-		C7CF978A174982AD008D9D13 /* ImportSingleEntityRelatedToMappedEntityWithSecondaryMappingsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportSingleEntityRelatedToMappedEntityWithSecondaryMappingsTests.m; sourceTree = "<group>"; };
-		C7CF978B174982AD008D9D13 /* ImportSingleEntityWithNoRelationshipsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportSingleEntityWithNoRelationshipsTests.m; sourceTree = "<group>"; };
-		C7CF978D174982AD008D9D13 /* MagicalDataImportTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalDataImportTestCase.h; sourceTree = "<group>"; };
-		C7CF978E174982AD008D9D13 /* MagicalDataImportTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalDataImportTestCase.m; sourceTree = "<group>"; };
 		C7CF97AB17498414008D9D13 /* libMagicalRecord-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMagicalRecord-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7CF97FF174984CA008D9D13 /* libMagicalRecordTests-iOS.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "libMagicalRecordTests-iOS.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7CF9ADF17498650008D9D13 /* MagicalRecordTests-iOS-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MagicalRecordTests-iOS-Prefix.pch"; sourceTree = "<group>"; };
-		C7CF9AF9174988CF008D9D13 /* Expecta.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Expecta.xcodeproj; path = Expecta/Expecta.xcodeproj; sourceTree = "<group>"; };
-		C7CF9B4917498985008D9D13 /* SampleJSONDataForImport.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SampleJSONDataForImport.json; path = Fixtures/SampleJSONDataForImport.json; sourceTree = "<group>"; };
-		C7CF9B4A17498985008D9D13 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json; path = Fixtures/SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json; sourceTree = "<group>"; };
-		C7CF9B4B17498985008D9D13 /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json; path = Fixtures/SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json; sourceTree = "<group>"; };
-		C7CF9B4C17498985008D9D13 /* SingleEntityRelatedToMappedEntityUsingDefaults.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityRelatedToMappedEntityUsingDefaults.json; path = Fixtures/SingleEntityRelatedToMappedEntityUsingDefaults.json; sourceTree = "<group>"; };
-		C7CF9B4D17498985008D9D13 /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.json; path = Fixtures/SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.json; sourceTree = "<group>"; };
-		C7CF9B4E17498985008D9D13 /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json; path = Fixtures/SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json; sourceTree = "<group>"; };
-		C7CF9B4F17498985008D9D13 /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityRelatedToMappedEntityWithSecondaryMappings.json; path = Fixtures/SingleEntityRelatedToMappedEntityWithSecondaryMappings.json; sourceTree = "<group>"; };
-		C7CF9B5017498985008D9D13 /* SingleEntityWithNoRelationships.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityWithNoRelationships.json; path = Fixtures/SingleEntityWithNoRelationships.json; sourceTree = "<group>"; };
-		C7CF9B5117498985008D9D13 /* SingleEntityWithNoRelationships.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SingleEntityWithNoRelationships.plist; path = Fixtures/SingleEntityWithNoRelationships.plist; sourceTree = "<group>"; };
-		C7CF9B5217498985008D9D13 /* SingleRelatedEntity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleRelatedEntity.json; path = Fixtures/SingleRelatedEntity.json; sourceTree = "<group>"; };
-		C7CF9B6B17498B5C008D9D13 /* FixtureHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FixtureHelpers.h; path = Fixtures/FixtureHelpers.h; sourceTree = "<group>"; };
-		C7CF9B6C17498B5C008D9D13 /* FixtureHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FixtureHelpers.m; path = Fixtures/FixtureHelpers.m; sourceTree = "<group>"; };
-		C7CF9B6F17498B83008D9D13 /* MagicalRecordTests-iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagicalRecordTests-iOS-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -492,15 +275,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C781818817E6615200ADD31C /* Cocoa.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C779109017E63C8900D20ACF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C779109417E63C8900D20ACF /* XCTest.framework in Frameworks */,
-				C779109817E63C8900D20ACF /* MagicalRecord.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,133 +288,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C7CF97FB174984CA008D9D13 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				909B48CB17C2EC7E00CE8C5E /* UIKit.framework in Frameworks */,
-				9099497017C2FD6D00BC2B5C /* CoreData.framework in Frameworks */,
-				C7CF9800174984CA008D9D13 /* SenTestingKit.framework in Frameworks */,
-				9099496A17C2FD5000BC2B5C /* libMagicalRecord-iOS.a in Frameworks */,
-				909B48CC17C2EC8700CE8C5E /* libExpecta-iOS.a in Frameworks */,
-				909B48CD17C2EC8700CE8C5E /* libSpecta-iOS.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		909948FC17C2F08B00BC2B5C /* Needs Porting */ = {
-			isa = PBXGroup;
-			children = (
-				C7CF976717498275008D9D13 /* MagicalRecordTests.h */,
-				C7CF976817498275008D9D13 /* MagicalRecordTests.m */,
-				C7CF976917498275008D9D13 /* NSManagedObjectContextHelperTests.h */,
-				C7CF976A17498275008D9D13 /* NSManagedObjectContextHelperTests.m */,
-				C7CF976B17498275008D9D13 /* NSManagedObjectHelperTests.h */,
-				C7CF976C17498275008D9D13 /* NSManagedObjectHelperTests.m */,
-				C7CF976D17498275008D9D13 /* NSManagedObjectModelHelperTests.h */,
-				C7CF976E17498275008D9D13 /* NSManagedObjectModelHelperTests.m */,
-				C7CF976F17498275008D9D13 /* NSPersisentStoreHelperTests.h */,
-				C7CF977017498275008D9D13 /* NSPersisentStoreHelperTests.m */,
-				C7CF977117498275008D9D13 /* NSPersistentStoreCoordinatorHelperTests.h */,
-				C7CF977217498275008D9D13 /* NSPersistentStoreCoordinatorHelperTests.m */,
-			);
-			name = "Needs Porting";
-			sourceTree = "<group>";
-		};
-		909948FD17C2F09500BC2B5C /* Needs Porting */ = {
-			isa = PBXGroup;
-			children = (
-				C7CF9786174982AD008D9D13 /* ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests.m */,
-				C7CF9787174982AD008D9D13 /* ImportSingleEntityRelatedToMappedEntityUsingDefaultsTests.m */,
-				C7CF9788174982AD008D9D13 /* ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests.m */,
-				C7CF9789174982AD008D9D13 /* ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m */,
-				C7CF978A174982AD008D9D13 /* ImportSingleEntityRelatedToMappedEntityWithSecondaryMappingsTests.m */,
-				C7CF978B174982AD008D9D13 /* ImportSingleEntityWithNoRelationshipsTests.m */,
-				C7CF978D174982AD008D9D13 /* MagicalDataImportTestCase.h */,
-				C7CF978E174982AD008D9D13 /* MagicalDataImportTestCase.m */,
-			);
-			name = "Needs Porting";
-			sourceTree = "<group>";
-		};
-		909948FE17C2F0A100BC2B5C /* Needs Porting */ = {
-			isa = PBXGroup;
-			children = (
-				C7CF9B6B17498B5C008D9D13 /* FixtureHelpers.h */,
-				C7CF9B6C17498B5C008D9D13 /* FixtureHelpers.m */,
-			);
-			name = "Needs Porting";
-			sourceTree = "<group>";
-		};
-		9099490C17C2F42100BC2B5C /* TestModel */ = {
-			isa = PBXGroup;
-			children = (
-				9099490D17C2F42100BC2B5C /* _AbstractRelatedEntity.h */,
-				9099490E17C2F42100BC2B5C /* _AbstractRelatedEntity.m */,
-				9099490F17C2F42100BC2B5C /* _ConcreteRelatedEntity.h */,
-				9099491017C2F42100BC2B5C /* _ConcreteRelatedEntity.m */,
-				9099491117C2F42100BC2B5C /* _DifferentClassNameMapping.h */,
-				9099491217C2F42100BC2B5C /* _DifferentClassNameMapping.m */,
-				9099491317C2F42100BC2B5C /* _MappedEntity.h */,
-				9099491417C2F42100BC2B5C /* _MappedEntity.m */,
-				9099491517C2F42100BC2B5C /* _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.h */,
-				9099491617C2F42100BC2B5C /* _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m */,
-				9099491717C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityUsingDefaults.h */,
-				9099491817C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityUsingDefaults.m */,
-				9099491917C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.h */,
-				9099491A17C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m */,
-				9099491B17C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.h */,
-				9099491C17C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m */,
-				9099491D17C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityWithSecondaryMappings.h */,
-				9099491E17C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityWithSecondaryMappings.m */,
-				9099491F17C2F42100BC2B5C /* _SingleEntityWithNoRelationships.h */,
-				9099492017C2F42100BC2B5C /* _SingleEntityWithNoRelationships.m */,
-				9099492117C2F42100BC2B5C /* _SingleRelatedEntity.h */,
-				9099492217C2F42100BC2B5C /* _SingleRelatedEntity.m */,
-				9099492317C2F42100BC2B5C /* AbstractRelatedEntity.h */,
-				9099492417C2F42100BC2B5C /* AbstractRelatedEntity.m */,
-				9099492517C2F42100BC2B5C /* ConcreteRelatedEntity.h */,
-				9099492617C2F42100BC2B5C /* ConcreteRelatedEntity.m */,
-				9099492717C2F42100BC2B5C /* DifferentClassNameMapping.h */,
-				9099492817C2F42100BC2B5C /* DifferentClassNameMapping.m */,
-				9099492917C2F42100BC2B5C /* MappedEntity.h */,
-				9099492A17C2F42100BC2B5C /* MappedEntity.m */,
-				9099492B17C2F42100BC2B5C /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.h */,
-				9099492C17C2F42100BC2B5C /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m */,
-				9099492D17C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityUsingDefaults.h */,
-				9099492E17C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityUsingDefaults.m */,
-				9099492F17C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.h */,
-				9099493017C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m */,
-				9099493117C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.h */,
-				9099493217C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m */,
-				9099493317C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.h */,
-				9099493417C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.m */,
-				9099493517C2F42100BC2B5C /* SingleEntityWithNoRelationships.h */,
-				9099493617C2F42100BC2B5C /* SingleEntityWithNoRelationships.m */,
-				9099493717C2F42100BC2B5C /* SingleRelatedEntity.h */,
-				9099493817C2F42100BC2B5C /* SingleRelatedEntity.m */,
-			);
-			name = TestModel;
-			path = Fixtures/TestModel;
-			sourceTree = "<group>";
-		};
-		909B48B017C2EB4300CE8C5E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				909B48C117C2EB4400CE8C5E /* libSpecta-iOS.a */,
-				C77992D51881B09F0033B1E7 /* libSpecta-OSX.a */,
-				C77992D71881B09F0033B1E7 /* SpectaTests-iOS.xctest */,
-				C77992D91881B09F0033B1E7 /* Specta-OSXTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		C721C7A013D0A3750097AB6F = {
 			isa = PBXGroup;
 			children = (
 				C7790F4E17E63C3000D20ACF /* Library */,
-				C77E5FA513D0CBA600298F87 /* Tests */,
 				C798D4841882308300A0FD4F /* Frameworks */,
 				C721C7B113D0A3AF0097AB6F /* Products */,
 			);
@@ -650,9 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				C7CF97AB17498414008D9D13 /* libMagicalRecord-iOS.a */,
-				C7CF97FF174984CA008D9D13 /* libMagicalRecordTests-iOS.octest */,
 				C779107F17E63C8900D20ACF /* MagicalRecord.framework */,
-				C779109317E63C8900D20ACF /* MagicalRecordTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -866,69 +518,12 @@
 			path = Support;
 			sourceTree = "<group>";
 		};
-		C77910A717E63D6B00D20ACF /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				90DD201E167AA4350033BA25 /* SenTestingKit.framework */,
-				C721C7E213D0C3A00097AB6F /* CoreData.framework */,
-				9099497217C3044700BC2B5C /* XCTest.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		C77910AB17E63E2300D20ACF /* en.lproj */ = {
 			isa = PBXGroup;
 			children = (
 				C77910AC17E63E2300D20ACF /* InfoPlist.strings */,
 			);
 			path = en.lproj;
-			sourceTree = "<group>";
-		};
-		C77E5FA513D0CBA600298F87 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				C7CF9826174985FC008D9D13 /* Support */,
-				C7CF976617498275008D9D13 /* Core */,
-				C7CF9785174982AD008D9D13 /* DataImport */,
-				C77E5FA913D0CBE300298F87 /* Fixtures */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
-		C77E5FA913D0CBE300298F87 /* Fixtures */ = {
-			isa = PBXGroup;
-			children = (
-				909948FE17C2F0A100BC2B5C /* Needs Porting */,
-				C77E5FB113D0D18D00298F87 /* Sample Data Files */,
-				C77E5FB013D0D18000298F87 /* Sample Models */,
-			);
-			name = Fixtures;
-			sourceTree = "<group>";
-		};
-		C77E5FB013D0D18000298F87 /* Sample Models */ = {
-			isa = PBXGroup;
-			children = (
-				9099490817C2F3D400BC2B5C /* TestModel.xcdatamodeld */,
-				9099490C17C2F42100BC2B5C /* TestModel */,
-			);
-			name = "Sample Models";
-			sourceTree = "<group>";
-		};
-		C77E5FB113D0D18D00298F87 /* Sample Data Files */ = {
-			isa = PBXGroup;
-			children = (
-				C7CF9B4917498985008D9D13 /* SampleJSONDataForImport.json */,
-				C7CF9B4A17498985008D9D13 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json */,
-				C7CF9B4B17498985008D9D13 /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json */,
-				C7CF9B4C17498985008D9D13 /* SingleEntityRelatedToMappedEntityUsingDefaults.json */,
-				C7CF9B4D17498985008D9D13 /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.json */,
-				C7CF9B4E17498985008D9D13 /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json */,
-				C7CF9B4F17498985008D9D13 /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.json */,
-				C7CF9B5017498985008D9D13 /* SingleEntityWithNoRelationships.json */,
-				C7CF9B5117498985008D9D13 /* SingleEntityWithNoRelationships.plist */,
-				C7CF9B5217498985008D9D13 /* SingleRelatedEntity.json */,
-			);
-			name = "Sample Data Files";
 			sourceTree = "<group>";
 		};
 		C78180FD17E645B900ADD31C /* NSFetchedResultsController */ = {
@@ -976,59 +571,6 @@
 				C798D48A1882308300A0FD4F /* AppKit.framework */,
 			);
 			name = "Other Frameworks";
-			sourceTree = "<group>";
-		};
-		C7CF976617498275008D9D13 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				909948FF17C2F0B700BC2B5C /* MagicalRecord+ActionsSpec.m */,
-				909948FC17C2F08B00BC2B5C /* Needs Porting */,
-				90171E1F17C3300500E7084A /* NSManagedObject+MagicalRecordSpec.m */,
-				9099490017C2F0B700BC2B5C /* NSManagedObjectContext+MagicalSavesSpec.m */,
-				90D4B0E717C436E00043AB41 /* NSManagedObject+MagicalDataImportSpec.m */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
-		C7CF9785174982AD008D9D13 /* DataImport */ = {
-			isa = PBXGroup;
-			children = (
-				909948FD17C2F09500BC2B5C /* Needs Porting */,
-				90171E1817C3283C00E7084A /* ImportSingleRelatedEntitySpec.m */,
-			);
-			path = DataImport;
-			sourceTree = "<group>";
-		};
-		C7CF9826174985FC008D9D13 /* Support */ = {
-			isa = PBXGroup;
-			children = (
-				C77910A717E63D6B00D20ACF /* Frameworks */,
-				C7CF9B6F17498B83008D9D13 /* MagicalRecordTests-iOS-Info.plist */,
-				C7CF9ADF17498650008D9D13 /* MagicalRecordTests-iOS-Prefix.pch */,
-				C7CF982B174985FC008D9D13 /* Vendor */,
-			);
-			path = Support;
-			sourceTree = "<group>";
-		};
-		C7CF982B174985FC008D9D13 /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				C7CF9AF9174988CF008D9D13 /* Expecta.xcodeproj */,
-				909B48AF17C2EB4300CE8C5E /* Specta.xcodeproj */,
-			);
-			path = Vendor;
-			sourceTree = "<group>";
-		};
-		C7CF9AFA174988CF008D9D13 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C7CF9B01174988D0008D9D13 /* libExpecta.a */,
-				C7CF9B03174988D0008D9D13 /* libExpecta-iOS.a */,
-				C7CF9B05174988D0008D9D13 /* ExpectaTests.octest */,
-				C7CF9B07174988D0008D9D13 /* Expecta-iOSTests.octest */,
-				C77992CF1881B09F0033B1E7 /* ExpectaTests-XCTest.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1105,24 +647,6 @@
 			productReference = C779107F17E63C8900D20ACF /* MagicalRecord.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		C779109217E63C8900D20ACF /* MagicalRecordTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C77910A417E63C8A00D20ACF /* Build configuration list for PBXNativeTarget "MagicalRecordTests" */;
-			buildPhases = (
-				C779108F17E63C8900D20ACF /* Sources */,
-				C779109017E63C8900D20ACF /* Frameworks */,
-				C779109117E63C8900D20ACF /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				C779109717E63C8900D20ACF /* PBXTargetDependency */,
-			);
-			name = MagicalRecordTests;
-			productName = MagicalRecordTests;
-			productReference = C779109317E63C8900D20ACF /* MagicalRecordTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		C7CF97AA17498414008D9D13 /* libMagicalRecord-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7CF97B417498414008D9D13 /* Build configuration list for PBXNativeTarget "libMagicalRecord-iOS" */;
@@ -1140,25 +664,6 @@
 			productReference = C7CF97AB17498414008D9D13 /* libMagicalRecord-iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		C7CF97FE174984CA008D9D13 /* libMagicalRecordTests-iOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C7CF980E174984CA008D9D13 /* Build configuration list for PBXNativeTarget "libMagicalRecordTests-iOS" */;
-			buildPhases = (
-				C7CF97FA174984CA008D9D13 /* Sources */,
-				C7CF97FB174984CA008D9D13 /* Frameworks */,
-				C7CF97FC174984CA008D9D13 /* Resources */,
-				C7CF97FD174984CA008D9D13 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9099496F17C2FD6100BC2B5C /* PBXTargetDependency */,
-			);
-			name = "libMagicalRecordTests-iOS";
-			productName = MagicalRecordTests;
-			productReference = C7CF97FF174984CA008D9D13 /* libMagicalRecordTests-iOS.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1167,11 +672,6 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Magical Panda Software LLC";
-				TargetAttributes = {
-					C779109217E63C8900D20ACF = {
-						TestTargetID = C779107E17E63C8900D20ACF;
-					};
-				};
 			};
 			buildConfigurationList = C721C7A513D0A3750097AB6F /* Build configuration list for PBXProject "MagicalRecord" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1183,91 +683,13 @@
 			mainGroup = C721C7A013D0A3750097AB6F;
 			productRefGroup = C721C7B113D0A3AF0097AB6F /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = C7CF9AFA174988CF008D9D13 /* Products */;
-					ProjectRef = C7CF9AF9174988CF008D9D13 /* Expecta.xcodeproj */;
-				},
-				{
-					ProductGroup = 909B48B017C2EB4300CE8C5E /* Products */;
-					ProjectRef = 909B48AF17C2EB4300CE8C5E /* Specta.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				C7CF97AA17498414008D9D13 /* libMagicalRecord-iOS */,
-				C7CF97FE174984CA008D9D13 /* libMagicalRecordTests-iOS */,
 				C779107E17E63C8900D20ACF /* MagicalRecord */,
-				C779109217E63C8900D20ACF /* MagicalRecordTests */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		909B48C117C2EB4400CE8C5E /* libSpecta-iOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libSpecta-iOS.a";
-			remoteRef = 909B48C017C2EB4400CE8C5E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C77992CF1881B09F0033B1E7 /* ExpectaTests-XCTest.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "ExpectaTests-XCTest.xctest";
-			remoteRef = C77992CE1881B09F0033B1E7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C77992D51881B09F0033B1E7 /* libSpecta-OSX.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libSpecta-OSX.a";
-			remoteRef = C77992D41881B09F0033B1E7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C77992D71881B09F0033B1E7 /* SpectaTests-iOS.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "SpectaTests-iOS.xctest";
-			remoteRef = C77992D61881B09F0033B1E7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C77992D91881B09F0033B1E7 /* Specta-OSXTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Specta-OSXTests.xctest";
-			remoteRef = C77992D81881B09F0033B1E7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C7CF9B01174988D0008D9D13 /* libExpecta.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libExpecta.a;
-			remoteRef = C7CF9B00174988D0008D9D13 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C7CF9B03174988D0008D9D13 /* libExpecta-iOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libExpecta-iOS.a";
-			remoteRef = C7CF9B02174988D0008D9D13 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C7CF9B05174988D0008D9D13 /* ExpectaTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = ExpectaTests.octest;
-			remoteRef = C7CF9B04174988D0008D9D13 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C7CF9B07174988D0008D9D13 /* Expecta-iOSTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Expecta-iOSTests.octest";
-			remoteRef = C7CF9B06174988D0008D9D13 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		C779107D17E63C8900D20ACF /* Resources */ = {
@@ -1277,47 +699,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C779109117E63C8900D20ACF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C7CF97FC174984CA008D9D13 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C7CF9B5317498985008D9D13 /* SampleJSONDataForImport.json in Resources */,
-				C7CF9B5517498985008D9D13 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json in Resources */,
-				C7CF9B5717498985008D9D13 /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json in Resources */,
-				C7CF9B5917498985008D9D13 /* SingleEntityRelatedToMappedEntityUsingDefaults.json in Resources */,
-				C7CF9B5B17498985008D9D13 /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.json in Resources */,
-				C7CF9B5D17498985008D9D13 /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.json in Resources */,
-				C7CF9B5F17498985008D9D13 /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.json in Resources */,
-				C7CF9B6117498985008D9D13 /* SingleEntityWithNoRelationships.json in Resources */,
-				C7CF9B6317498986008D9D13 /* SingleEntityWithNoRelationships.plist in Resources */,
-				C7CF9B6517498986008D9D13 /* SingleRelatedEntity.json in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		C7CF97FD174984CA008D9D13 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C779107A17E63C8900D20ACF /* Sources */ = {
@@ -1365,13 +747,6 @@
 				C7B687FE181594140002C92E /* ClassicSQLiteMagicalRecordStack.m in Sources */,
 				C781818517E660DE00ADD31C /* NSError+MagicalRecordErrorHandling.m in Sources */,
 				C781818617E660DE00ADD31C /* MagicalMigrationManager.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C779108F17E63C8900D20ACF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1426,55 +801,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C7CF97FA174984CA008D9D13 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C781810817E64BB600ADD31C /* MagicalRecord+ActionsSpec.m in Sources */,
-				C781810F17E64BB600ADD31C /* NSManagedObject+MagicalRecordSpec.m in Sources */,
-				C781811017E64BB600ADD31C /* NSManagedObjectContext+MagicalSavesSpec.m in Sources */,
-				C781811117E64BB600ADD31C /* NSManagedObject+MagicalDataImportSpec.m in Sources */,
-				C781811917E64BB600ADD31C /* ImportSingleRelatedEntitySpec.m in Sources */,
-				C781811A17E64BB600ADD31C /* FixtureHelpers.m in Sources */,
-				C781811B17E64BB600ADD31C /* _AbstractRelatedEntity.m in Sources */,
-				C781811C17E64BB600ADD31C /* _ConcreteRelatedEntity.m in Sources */,
-				C781811D17E64BB600ADD31C /* _DifferentClassNameMapping.m in Sources */,
-				C781811E17E64BB600ADD31C /* _MappedEntity.m in Sources */,
-				C781811F17E64BB600ADD31C /* _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m in Sources */,
-				C781812017E64BB600ADD31C /* _SingleEntityRelatedToMappedEntityUsingDefaults.m in Sources */,
-				C781812117E64BB600ADD31C /* _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m in Sources */,
-				C781812217E64BB600ADD31C /* _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m in Sources */,
-				C781812317E64BB600ADD31C /* _SingleEntityRelatedToMappedEntityWithSecondaryMappings.m in Sources */,
-				C781812417E64BB600ADD31C /* _SingleEntityWithNoRelationships.m in Sources */,
-				C781812517E64BB600ADD31C /* _SingleRelatedEntity.m in Sources */,
-				C781812617E64BB600ADD31C /* AbstractRelatedEntity.m in Sources */,
-				C781812717E64BB600ADD31C /* ConcreteRelatedEntity.m in Sources */,
-				C781812817E64BB600ADD31C /* DifferentClassNameMapping.m in Sources */,
-				C781812917E64BB600ADD31C /* MappedEntity.m in Sources */,
-				C781812A17E64BB600ADD31C /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.m in Sources */,
-				C781812B17E64BB600ADD31C /* SingleEntityRelatedToMappedEntityUsingDefaults.m in Sources */,
-				C781812C17E64BB600ADD31C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m in Sources */,
-				C781812D17E64BB600ADD31C /* SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.m in Sources */,
-				C781812E17E64BB600ADD31C /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.m in Sources */,
-				C781812F17E64BB600ADD31C /* SingleEntityWithNoRelationships.m in Sources */,
-				C781813017E64BB600ADD31C /* SingleRelatedEntity.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		9099496F17C2FD6100BC2B5C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C7CF97AA17498414008D9D13 /* libMagicalRecord-iOS */;
-			targetProxy = 9099496E17C2FD6100BC2B5C /* PBXContainerItemProxy */;
-		};
-		C779109717E63C8900D20ACF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C779107E17E63C8900D20ACF /* MagicalRecord */;
-			targetProxy = C779109617E63C8900D20ACF /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		C77910AC17E63E2300D20ACF /* InfoPlist.strings */ = {
@@ -1640,88 +967,6 @@
 			};
 			name = Release;
 		};
-		C77910A517E63C8A00D20ACF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MagicalRecord.framework/Versions/A/MagicalRecord";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MagicalRecord/MagicalRecord-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				INFOPLIST_FILE = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		C77910A617E63C8A00D20ACF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MagicalRecord.framework/Versions/A/MagicalRecord";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MagicalRecord/MagicalRecord-Prefix.pch";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				INFOPLIST_FILE = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 		C7CF97B517498414008D9D13 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1785,85 +1030,6 @@
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		C7CF980F174984CA008D9D13 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_FRAMEWORKS_DIR_QUOTED)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Tests/Support/MagicalRecordTests-iOS-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(BUILT_PRODUCTS_DIR)",
-				);
-				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-iOS-Info.plist";
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		C7CF9810174984CA008D9D13 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_FRAMEWORKS_DIR_QUOTED)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Tests/Support/MagicalRecordTests-iOS-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(BUILT_PRODUCTS_DIR)",
-				);
-				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-iOS-Info.plist";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
@@ -1935,49 +1101,6 @@
 			};
 			name = Beta;
 		};
-		C7FCB37818BA350F005E6259 /* Beta */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_FRAMEWORKS_DIR_QUOTED)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Tests/Support/MagicalRecordTests-iOS-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(BUILT_PRODUCTS_DIR)",
-				);
-				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-iOS-Info.plist";
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Beta;
-		};
 		C7FCB37918BA350F005E6259 /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2024,50 +1147,6 @@
 			};
 			name = Beta;
 		};
-		C7FCB37A18BA350F005E6259 /* Beta */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MagicalRecord.framework/Versions/A/MagicalRecord";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MagicalRecord/MagicalRecord-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				INFOPLIST_FILE = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Beta;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2091,16 +1170,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C77910A417E63C8A00D20ACF /* Build configuration list for PBXNativeTarget "MagicalRecordTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C77910A517E63C8A00D20ACF /* Debug */,
-				C7FCB37A18BA350F005E6259 /* Beta */,
-				C77910A617E63C8A00D20ACF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		C7CF97B417498414008D9D13 /* Build configuration list for PBXNativeTarget "libMagicalRecord-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2111,31 +1180,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C7CF980E174984CA008D9D13 /* Build configuration list for PBXNativeTarget "libMagicalRecordTests-iOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C7CF980F174984CA008D9D13 /* Debug */,
-				C7FCB37818BA350F005E6259 /* Beta */,
-				C7CF9810174984CA008D9D13 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		9099490817C2F3D400BC2B5C /* TestModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				9099490917C2F3D400BC2B5C /* TestModel.xcdatamodel */,
-			);
-			currentVersion = 9099490917C2F3D400BC2B5C /* TestModel.xcdatamodel */;
-			name = TestModel.xcdatamodeld;
-			path = Fixtures/TestModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = C721C7A213D0A3750097AB6F /* Project object */;
 }
