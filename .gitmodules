@@ -3,4 +3,4 @@
 	url = https://github.com/specta/specta.git
 [submodule "Tests/Support/Vendor/Expecta"]
 	path = Tests/Support/Vendor/Expecta
-url=https://github.com/tonyarnold/expecta.git
+	url = https://github.com/specta/expecta.git
