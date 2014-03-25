@@ -46,7 +46,13 @@
                     }
                     index++;
                     dateFormat = [[self userInfo] valueForKey:dateFormatKey];
-                    convertedValue = dateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
+
+                    if ([value isKindOfClass:[NSNumber class]]) {
+                        convertedValue = dateFromNumber(value, [dateFormat isEqualToString:kMagicalRecordImportUnixDate13String]);
+                    } else {
+                        convertedValue = dateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
+                    }
+
                 } while (!convertedValue && dateFormat);
                 value = convertedValue;
             }

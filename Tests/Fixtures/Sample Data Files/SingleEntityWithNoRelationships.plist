@@ -32,5 +32,9 @@
 	<string></string>
     <key>booleanAsStringTestAttribute</key>
 	<string>true</string>
+	<key>unixTime13TestAttribute</key>
+	<integer>1388349427543</integer>
+	<key>unixTimeTestAttribute</key>
+	<real>1388349428</real>
 </dict>
 </plist>

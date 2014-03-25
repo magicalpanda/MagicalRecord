@@ -147,6 +147,16 @@
     expect(self.testEntity.dateWithCustomFormat).to.equal([@"2011-08-05 01:56:04 +0000" MRTests_dateFromString]);
 }
 
+- (void)testImportEpochDate
+{
+    expect(self.testEntity.unixTimeTestAttribute).to.equal([NSDate dateWithTimeIntervalSince1970:1388349428]);
+}
+
+- (void)testImportEpochDate13
+{
+    expect(self.testEntity.unixTime13TestAttribute).to.equal([NSDate dateWithTimeIntervalSince1970:1388349427.543]);
+}
+
 @end
 
 @implementation NSString (MagicalRecordDateFormatter)

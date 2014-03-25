@@ -95,6 +95,12 @@
         <attribute name="nullTestAttribute" optional="YES" attributeType="Integer 64" defaultValueString="100" syncable="YES"/>
         <attribute name="numberAsStringTestAttribute" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stringTestAttribute" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unixTime13TestAttribute" optional="YES" attributeType="Date" syncable="YES">
+            <userInfo>
+                <entry key="dateFormat" value="unixTime13"/>
+            </userInfo>
+        </attribute>
+        <attribute name="unixTimeTestAttribute" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <entity name="SingleRelatedEntity" representedClassName="SingleRelatedEntity" syncable="YES">
         <attribute name="mappedStringAttribute" optional="YES" attributeType="String" syncable="YES"/>
@@ -129,7 +135,7 @@
         <element name="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" positionX="0" positionY="0" width="128" height="60"/>
         <element name="SingleEntityRelatedToMappedEntityWithNestedMappedAttributes" positionX="0" positionY="0" width="128" height="60"/>
         <element name="SingleEntityRelatedToMappedEntityWithSecondaryMappings" positionX="0" positionY="0" width="128" height="75"/>
-        <element name="SingleEntityWithNoRelationships" positionX="0" positionY="0" width="128" height="270"/>
+        <element name="SingleEntityWithNoRelationships" positionX="0" positionY="0" width="128" height="315"/>
         <element name="SingleRelatedEntity" positionX="0" positionY="0" width="128" height="118"/>
     </elements>
 </model>
