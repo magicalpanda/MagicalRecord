@@ -6,6 +6,7 @@
 //
 
 #import "MagicalRecord.h"
+#import "MagicalRecordDeprecated.h"
 
 extern NSString * const kMagicalRecordDefaultStoreFileName;
 
@@ -46,8 +47,8 @@ extern NSString * const kMagicalRecordDefaultStoreFileName;
 
 @interface NSPersistentStore (MagicalRecordDeprecated)
 
-+ (NSURL *) MR_defaultURLForStoreName:(NSString *)storeFileName __attribute__((deprecated("Please use + (NSURL *) MR_fileURLForStoreName:")));
-+ (NSURL *) MR_urlForStoreName:(NSString *)storeFileName __attribute__((deprecated("Please use + (NSURL *) MR_fileURLForStoreNameIfExistsOnDisk:")));
++ (NSURL *) MR_defaultURLForStoreName:(NSString *)storeFileName MRDeprecated("Please use + (NSURL *) MR_fileURLForStoreName:");
++ (NSURL *) MR_urlForStoreName:(NSString *)storeFileName MRDeprecated("Please use + (NSURL *) MR_fileURLForStoreNameIfExistsOnDisk:");
 
 @end
 

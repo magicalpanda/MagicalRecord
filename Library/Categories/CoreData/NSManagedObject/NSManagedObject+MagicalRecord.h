@@ -6,6 +6,7 @@
 
 #import <CoreData/CoreData.h>
 #import "MagicalRecord.h"
+#import "MagicalRecordDeprecated.h"
 
 @interface NSManagedObject (MagicalRecord)
 
@@ -79,10 +80,10 @@
 
 @interface NSManagedObject (MagicalRecordDeprecated)
 
-+ (instancetype) MR_createInContext:(NSManagedObjectContext *)context __attribute__((deprecated("Please use +MR_createEntityInContext:")));
-- (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context __attribute__((deprecated("Please use +MR_deleteEntityInContext:")));
++ (instancetype) MR_createInContext:(NSManagedObjectContext *)context MRDeprecated("Please use +MR_createEntityInContext:");
+- (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context MRDeprecated("Please use +MR_deleteEntityInContext:");
 
-- (instancetype) MR_inContextIfTempObject:(NSManagedObjectContext *)otherContext __attribute__((deprecated("Please use +MR_inContextIfTemporaryObject:")));
+- (instancetype) MR_inContextIfTempObject:(NSManagedObjectContext *)otherContext MRDeprecated("Please use +MR_inContextIfTemporaryObject:");
 
 @end
 
