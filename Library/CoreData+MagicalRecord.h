@@ -14,7 +14,6 @@
     #import <CoreData/CoreData.h>
     #import "MagicalRecord.h"
     #import "MagicalRecord+Options.h"
-    #import "MagicalRecord+ShorthandSupport.h"
     #import "MagicalRecord+Setup.h"
 
     #import "MagicalRecordStack.h"
@@ -30,10 +29,6 @@
     #import "AutoMigratingMagicalRecordStack.h"
     #import "AutoMigratingWithSourceAndTargetModelMagicalRecordStack.h"
     #import "ManuallyMigratingMagicalRecordStack.h"
-
-    #ifdef MR_SHORTHAND
-        #import "MagicalRecordShorthand.h"
-    #endif
 
     #import "NSManagedObject+MagicalRecord.h"
     #import "NSManagedObject+MagicalRequests.h"

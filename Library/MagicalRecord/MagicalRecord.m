@@ -31,16 +31,6 @@
     return defaultName;
 }
 
-+ (void) initialize;
-{
-    if (self == [MagicalRecord class]) 
-    {
-#ifdef MR_SHORTHAND
-        [self swizzleShorthandMethods];
-#endif
-    }
-}
-
 - (NSString *) version;
 {
     return [[self class] version];
