@@ -1,5 +1,80 @@
 # Changelog
 
+## Version 3.0
+
+MagicalRecord 3.0 is a major release with new features and breaking changes.
+
+### Stacks
+
+MagicalRecord 3.0 introduces the concept of a 'Stack'. Applications can have a single stack, or many stacks. Library style applications like iPhoto or iTunes might only use a single stack, whereas a document-based application like TextEdit would usually use a stack for every open document.
+
+It's easiest to think about a stack as all of the components necessary to interact with a single persistent store.
+
+A stack includes the following basic objects:
+
+```objc
+@property (nonatomic, copy) NSString *stackName;
+
+@property (nonatomic, strong) NSManagedObjectContext *context;
+@property (nonatomic, strong) NSManagedObjectModel *model;
+@property (nonatomic, strong) NSPersistentStoreCoordinator *coordinator;
+@property (nonatomic, strong) NSPersistentStore *store;
+```
+
+To migrate a simple, existing MagicalRecord-based application to use stacks, it's as simple as replacing this:
+
+```objc
+[MagicalRecord setupAutoMigratingCoreDataStack];
+```
+
+with:
+
+```objc
+[MagicalRecordStack setDefaultStack:[AutoMigratingMagicalRecordStack stack]];
+```
+
+We recommend that you keep a reference to your stack somewhere other than the `defaultStack` property of the MagicalRecordStack class, so that if you need to add more than one stack it's an easier upgrade path. Also, Saul gets a bit crazy when people use singletons.
+
+There are 9 stacks included by default:
+
+#### SQLite Backed Stacks
+
+All of the stacks below use SQLite-backed persistent stores (NSSQLiteStoreType).
+
+1. **AutoMigratingMagicalRecordStack** will automatically perform all migrations provided by your project.
+
+2. **AutoMigratingWithSourceAndTargetModelMagicalRecordStack** allows you define source and target managed object models to migrate directly between. It will not perform any additional migrations beyond those necessary to upgrade from the source model to the target.
+
+3. **SQLiteMagicalRecordStack** provides a context that uses main queue concurrency.
+
+4. **SQLiteWithSavingContextMagicalRecordStack** in addition to the main queue context, this stack provides a second, private background context that can be used to save changes without blocking the main thread.
+
+3. **ClassicSQLiteMagicalRecordStack** provides a context that uses confinement concurrency when saving.
+
+4. **ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack** in addition to the main queue context, provides a second, private background context that can be used to save changes without blocking the main thread.
+
+4. **ManuallyMigratingMagicalRecordStack** does not automatically infer the mapping models to be used when performing migrations (`NSInferMappingModelAutomaticallyOption : NO` ).
+
+#### iCloud Stack
+
+**iCloudMagicalRecordStack** provides a SQLite-backed persistent store that configures a Ubiquity Container for iCloud.
+
+#### In-Memory Stack
+
+**InMemoryMagicalRecordStack** provides an in-memory persistent store. In-memory stacks are great for running import processes, or for use in your tests.
+
+
+## Deprecations
+
+* `MR_SHORTHAND` is deprecated in this release. You can continue using the shorthand methods, however clang will show a warning. If you absolutely must silence the deprecation warning, define `WE_PROMISE_TO_MIGRATE_TO_MAGICALRECORD_3_0` before you import any MagicalRecord header. Any method marked as deprecated in this release will be removed entirely in MagicalRecord 4.0, so please use these warnings to migrate your code to the non-shorthand methods.
+* The **NSManagedObjectContext+MagicalThreading category has been removed entirely**. These methods are unnecessary alongside GCD, NSOperation and the `-performBlock:` and `-performBlockAndWait:` methods on NSManagedObjectContext. This includes the following methods:
+    - `+ (NSManagedObjectContext *) MR_contextForCurrentThread;`
+    - `+ (void) MR_clearNonMainThreadContextsCache;`
+    - `+ (void) MR_resetContextForCurrentThread;`
+    - `+ (void) MR_clearContextForCurrentThread;`
+
+
+
 ## Version 2.2
 * Updated examples and fixed errors in README - [Tony Arnold](mailto:tony@thecocoabots.com)
 * Changes block saves to use child context of rootSavingContext so that large saves do not channel through the default context and block the main thread - r-peck
