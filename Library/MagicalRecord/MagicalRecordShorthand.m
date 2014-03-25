@@ -83,18 +83,18 @@
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
-+ (NSFetchedResultsController *) fetchAllSortedBy:(NSString *)sortTerm
++ (NSFetchedResultsController *) fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate;
 {
-    return [self MR_fetchAllSortedBy:sortTerm];
+    return [self MR_fetchAllSortedBy:sortTerm ascending:ascending withPredicate:searchTerm groupBy:groupingKeyPath delegate:delegate];
 }
 
 #endif /* TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR */
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
-+ (NSFetchedResultsController *) fetchAllSortedBy:(NSString *)sortTerm
++ (NSFetchedResultsController *) fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context;
 {
-    return [self MR_fetchAllSortedBy:sortTerm];
+    return [self MR_fetchAllSortedBy:sortTerm ascending:ascending withPredicate:searchTerm groupBy:groupingKeyPath delegate:delegate inContext:context];
 }
 
 #endif /* TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR */

@@ -29,13 +29,13 @@
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
-+ (NSFetchedResultsController *) fetchAllSortedBy:(NSString *)sortTerm MRDeprecated("Use +MR_fetchAllSortedBy: instead");
++ (NSFetchedResultsController *) fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate MRDeprecated("Use +MR_fetchAllSortedBy:ascending:withPredicate:groupBy:delegate: instead");
 
 #endif /* TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR */
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
-+ (NSFetchedResultsController *) fetchAllSortedBy:(NSString *)sortTerm MRDeprecated("Use +MR_fetchAllSortedBy: instead");
++ (NSFetchedResultsController *) fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context MRDeprecated("Use +MR_fetchAllSortedBy:ascending:withPredicate:groupBy:delegate:inContext: instead");
 
 #endif /* TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR */
 
