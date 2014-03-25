@@ -30,7 +30,7 @@ NSString * const MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey = @"
 
 - (NSPersistentStore *) MR_addSqliteStoreNamed:(id)storeFileName withOptions:(__autoreleasing NSDictionary *)options;
 {
-    NSURL *url = [storeFileName isKindOfClass:[NSURL class]] ? storeFileName : [NSPersistentStore MR_urlForStoreName:storeFileName];
+    NSURL *url = [storeFileName isKindOfClass:[NSURL class]] ? storeFileName : [NSPersistentStore MR_fileURLForStoreName:storeFileName];
     return [self MR_addSqliteStoreAtURL:url withOptions:options];
 }
 

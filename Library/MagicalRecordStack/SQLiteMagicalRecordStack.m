@@ -57,7 +57,7 @@
 
 - (instancetype) initWithStoreNamed:(NSString *)name;
 {
-    NSURL *storeURL = [NSPersistentStore MR_defaultURLForStoreName:name];
+    NSURL *storeURL = [NSPersistentStore MR_fileURLForStoreName:name];
     return [self initWithStoreAtURL:storeURL];
 }
 
@@ -80,7 +80,7 @@
 
 - (instancetype) initWithStoreNamed:(NSString *)name model:(NSManagedObjectModel *)model;
 {
-    NSURL *storeURL = [NSPersistentStore MR_defaultURLForStoreName:name];
+    NSURL *storeURL = [NSPersistentStore MR_fileURLForStoreName:name];
     return [self initWithStoreAtURL:storeURL model:model];
 }
 
