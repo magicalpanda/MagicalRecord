@@ -115,7 +115,11 @@
         expect([inserted hasChanges]).to.beFalsy();
         expect([inserted managedObjectContext]).to.beNil;
 
-        expect([localContext obtainPermanentIDsForObjects:@[inserted] error:nil]).to.beFalsy;
+        NSError *obtainPermanentIDsError;
+        BOOL obtainIDsResult = [localContext obtainPermanentIDsForObjects:@[inserted] error:&obtainPermanentIDsError];
+        expect(obtainIDsResult).to.beFalsy;
+        expect(obtainPermanentIDsError).to.beNil();
+        
         objectId = [inserted objectID];
     }];
 
