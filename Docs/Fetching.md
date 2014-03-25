@@ -65,7 +65,7 @@ You can also perform a count of entities in your Store, that will be performed o
 Or, if you're looking for a count of entities based on a predicate or some filter:
 
 	NSNumber *count = [Person MR_numberOfEntitiesWithPredicate:...];
-	
+
 There are also counterpart methods which return NSUInteger rather than NSNumbers:
 
 * countOfEntities
@@ -78,7 +78,7 @@ There are also counterpart methods which return NSUInteger rather than NSNumbers
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"diaryEntry.date == %@", today];
     int totalFat = [[CTFoodDiaryEntry MR_aggregateOperation:@"sum:" onAttribute:@"fatColories" withPredicate:predicate] intValue];
     int fattest  = [[CTFoodDiaryEntry MR_aggregateOperation:@"max:" onAttribute:@"fatColories" withPredicate:predicate] intValue];
-    
+
 #### Finding from a different context
 
 All find, fetch, and request methods have an inContext: method parameter
@@ -106,7 +106,7 @@ or, to specify a context:
 
 	NSManagedObjectContext *otherContext = ...;
 
-	Person *myPerson = [Person MR_createInContext:otherContext];
+	Person *myPerson = [Person MR_createEntityInContext:otherContext];
 
 
 ## Deleting Entities
@@ -121,7 +121,7 @@ or, to specify a context:
 	NSManagedObjectContext *otherContext = ...;
 	Person *deleteMe = ...;
 
-	[deleteMe MR_deleteInContext:otherContext];
+	[deleteMe MR_deleteEntityInContext:otherContext];
 
 There is no delete *All Entities* or *truncate* operation in core data, so one is provided for you with Active Record for Core Data:
 
