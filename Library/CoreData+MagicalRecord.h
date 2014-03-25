@@ -4,12 +4,6 @@
 #endif
 
 #ifdef __OBJC__
-//#if defined(__has_feature)
-//    #if !( __has_feature(objc_arc))
-//        #warning MagicalRecord now requires ARC to be enabled
-//    #endif
-//#endif
-
     #import <CoreFoundation/CoreFoundation.h>
     #import <CoreData/CoreData.h>
     #import "MagicalRecord.h"
