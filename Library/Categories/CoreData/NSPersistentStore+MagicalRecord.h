@@ -22,6 +22,26 @@ extern NSString * const kMagicalRecordDefaultStoreFileName;
 
 - (BOOL) copyToURL:(NSURL *)destinationUrl error:(NSError **)error;
 
+/**
+ *  Removes the store files for this persistent store.
+ *  Please refer to the documentation for 
+ *  `+ (BOOL) MR_removePersistentStoreFilesAtURL:` for more information
+ *
+ *  @return YES if removing all items was successful
+ */
+- (BOOL) MR_removePersistentStoreFiles;
+
+/**
+ *  Removes the persistent store files at the specified URL, as well as any 
+ *  sidecar files that are present, such as STORENAME.sqlite-shm and
+ *  STORENAME.sqlite-wal
+ *
+ *  @param url File URL pointing to an NSPersistentStore file
+ *
+ *  @return YES if removing all items was successful
+ */
++ (BOOL) MR_removePersistentStoreFilesAtURL:(NSURL*)url;
+
 @end
 
 @interface NSPersistentStore (MagicalRecordDeprecated)

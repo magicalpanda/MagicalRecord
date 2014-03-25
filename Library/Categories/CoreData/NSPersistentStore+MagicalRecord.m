@@ -16,7 +16,7 @@ NSString * const kMagicalRecordDefaultStoreFileName = @"CoreDataStore.sqlite";
 
 + (NSURL *) MR_defaultLocalStoreUrl;
 {
-    return [self MR_fileURLForStoreNameIfExistsOnDisk:kMagicalRecordDefaultStoreFileName];
+    return [self MR_fileURLForStoreName:kMagicalRecordDefaultStoreFileName];
 }
 
 + (NSURL *) MR_fileURLForStoreName:(NSString *)storeFileName;
@@ -119,6 +119,31 @@ NSString * const kMagicalRecordDefaultStoreFileName = @"CoreDataStore.sqlite";
     return [NSArray arrayWithArray:storeURLs];
 }
 
+#pragma mark - Remove Store File(s)
+
+- (BOOL) MR_removePersistentStoreFiles;
+{
+    return [[self class] MR_removePersistentStoreFilesAtURL:self.URL];
+}
+
++ (BOOL) MR_removePersistentStoreFilesAtURL:(NSURL*)url;
+{
+    NSCAssert([url isFileURL], @"URL must be a file URL");
+
+    NSString *rawURL = [url absoluteString];
+    NSURL *shmSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-shm"]];
+    NSURL *walSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-wal"]];
+
+    BOOL removeItemResult = YES;
+
+    for (NSURL *toRemove in [NSArray arrayWithObjects:url, shmSidecar, walSidecar, nil])
+    {
+        removeItemResult = removeItemResult && [[NSFileManager defaultManager] removeItemAtURL:toRemove error:nil];
+    }
+
+    return removeItemResult;
+}
+
 #pragma mark - Private Methods
 
 + (NSString *) MRPrivate_directoryInUserDomain:(NSSearchPathDirectory)directory;
@@ -133,7 +158,7 @@ NSString * const kMagicalRecordDefaultStoreFileName = @"CoreDataStore.sqlite";
 
 + (NSString *) MRPrivate_applicationSupportDirectory;
 {
-    NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
+    NSString *applicationName = [[[NSBundle bundleForClass:[MagicalRecord class]] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
     return [[self MRPrivate_directoryInUserDomain:NSApplicationSupportDirectory] stringByAppendingPathComponent:applicationName];
 }
 

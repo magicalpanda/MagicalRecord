@@ -43,15 +43,7 @@ NSString * const MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey = @"
         if ([[error domain] isEqualToString:NSCocoaErrorDomain] && isMigrationError)
         {
             // Could not open the database, so... kill it! (AND WAL bits)
-            NSString *rawURL = [url absoluteString];
-            NSURL *shmSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-shm"]];
-            NSURL *walSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-wal"]];
-
-            for (NSURL *toRemove in [NSArray arrayWithObjects:url, shmSidecar, walSidecar, nil])
-            {
-                [[NSFileManager defaultManager] removeItemAtURL:toRemove error:nil];
-            }
-
+            [NSPersistentStore MR_removePersistentStoreFilesAtURL:url];
             MRLogInfo(@"Removed incompatible model version: %@", [url lastPathComponent]);
         }
 
@@ -102,7 +94,6 @@ NSString * const MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey = @"
     }
     return nil;
 }
-
 
 + (NSPersistentStoreCoordinator *) MR_newPersistentStoreCoordinator
 {
