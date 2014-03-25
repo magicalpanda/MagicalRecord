@@ -62,6 +62,16 @@
                 value = numberFromString([value description]);
             }
         }
+        else if (attributeType == NSBooleanAttributeType) {
+            if (![value isKindOfClass:[NSNumber class]] && value != [NSNull null]) {
+                value = [NSNumber numberWithBool:[value boolValue]];
+            }
+        }
+        else if (attributeType == NSStringAttributeType) {
+            if (![value isKindOfClass:[NSString class]] && value != [NSNull null]) {
+                value = [value description];
+            }
+        }
     }
     
     return value == [NSNull null] ? nil : value;   
