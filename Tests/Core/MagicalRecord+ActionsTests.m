@@ -102,7 +102,7 @@
     expect([fetchedObject valueForKey:kTestAttributeKey]).will.beFalsy();
 }
 
-- (void)testSynchronousSaveActionDoesNotAssignTemporaryInsertedEntitiesWithoutAContextToAnyContext
+- (void)testSaveActionDoesNotAssignEntitiesWithoutAContextToAContext
 {
     MagicalRecordStack *currentStack = self.stack;
 
