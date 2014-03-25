@@ -168,7 +168,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 
 - (BOOL) MR_shouldImportData:(id)relatedObjectData forRelationshipNamed:(NSString *)relationshipName;
 {
-    BOOL shouldImport = NO;
+    BOOL shouldImport = YES; // By default, we always import
     SEL shouldImportSelector = NSSelectorFromString([NSString stringWithFormat:@"shouldImport%@:", [relationshipName MR_capitalizedFirstCharacterString]]);
     BOOL implementsShouldImport = (BOOL)[self respondsToSelector:shouldImportSelector];
 
