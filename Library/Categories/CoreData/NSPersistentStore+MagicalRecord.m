@@ -121,7 +121,7 @@ NSString * const kMagicalRecordDefaultStoreFileName = @"CoreDataStore.sqlite";
 
 #pragma mark - Private Methods
 
-+ (NSString *) MRPrivate_directoryInUserDomain:(NSSearchPathDirectory) directory
++ (NSString *) MRPrivate_directoryInUserDomain:(NSSearchPathDirectory)directory;
 {
     return [NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES) firstObject];
 }
