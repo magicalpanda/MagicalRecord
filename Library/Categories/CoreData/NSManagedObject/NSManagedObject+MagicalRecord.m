@@ -157,6 +157,11 @@
 
 #pragma mark - Entity Deletion
 
+- (BOOL) MR_isEntityDeleted
+{
+    return [self isDeleted] || [self managedObjectContext] == nil;
+}
+
 - (BOOL) MR_deleteEntity
 {
 	return [self MR_deleteEntityInContext:[self managedObjectContext]];
@@ -164,14 +169,14 @@
 
 - (BOOL) MR_deleteEntityInContext:(NSManagedObjectContext *)context
 {
-    NSError *error = nil;
-    NSManagedObject *inContext = [context existingObjectWithID:[self objectID] error:&error];
+    NSError *retrieveExistingObjectError;
+    NSManagedObject *objectInContext = [context existingObjectWithID:[self objectID] error:&retrieveExistingObjectError];
 
-    [[error MR_coreDataDescription] MR_logToConsole];
+    [[retrieveExistingObjectError MR_coreDataDescription] MR_logToConsole];
 
-    [context deleteObject:inContext];
+    [context deleteObject:objectInContext];
 
-    return YES;
+    return [objectInContext MR_isEntityDeleted];
 }
 
 + (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context

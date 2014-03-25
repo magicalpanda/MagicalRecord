@@ -40,6 +40,14 @@
  */
 + (instancetype) MR_createEntityWithDescription:(NSEntityDescription *)entityDescription inContext:(NSManagedObjectContext *)context;
 
+/**
+ *  Checks the `isDeleted` and `managedObjectContext` methods to determine if
+ *    the managed object has been deleted
+ *
+ *  @return YES if the object has been deleted, otherwise NO
+ */
+- (BOOL) MR_isEntityDeleted;
+
 - (BOOL) MR_deleteEntity;
 - (BOOL) MR_deleteEntityInContext:(NSManagedObjectContext *)context;
 
