@@ -50,7 +50,6 @@
                 } while (!convertedValue && dateFormat);
                 value = convertedValue;
             }
-            //            value = adjustDateForDST(value);
         }
         else if (attributeType == NSInteger16AttributeType ||
                  attributeType == NSInteger32AttributeType ||
