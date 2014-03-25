@@ -6,4 +6,5 @@
     #import <CoreData/CoreData.h>
 
     #define MR_LOGGING_ENABLED 1
+    #define MR_SHORTHAND 1
 #endif

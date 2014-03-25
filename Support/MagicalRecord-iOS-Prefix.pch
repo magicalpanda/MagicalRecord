@@ -13,4 +13,5 @@
     #define MR_LOGGING_ENABLED 0
 #endif
 
+    #define MR_SHORTHAND 1
 #endif
