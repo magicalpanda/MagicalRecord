@@ -39,14 +39,16 @@
     return self;
 }
 
-- (NSPersistentStoreCoordinator *) createCoordinator;
+- (NSPersistentStoreCoordinator *) createCoordinatorWithOptions:(NSDictionary *)options
 {
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self model]];
+
     [coordinator MR_addiCloudContainerID:self.containerID
                           contentNameKey:self.contentNameKey
                          localStoreNamed:self.localStoreName
                  cloudStorePathComponent:self.cloudStorePathComponent
                               completion:self.setupCompletionBlock];
+
     return coordinator;
 }
 

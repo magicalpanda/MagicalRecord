@@ -16,12 +16,22 @@
 - (NSPersistentStore *) MR_addAutoMigratingSqliteStoreNamed:(NSString *)storeFileName;
 {
     NSDictionary *options = [NSDictionary MR_autoMigrationOptions];
+    return [self MR_addAutoMigratingSqliteStoreNamed:storeFileName withOptions:options];
+}
+
+- (NSPersistentStore *) MR_addAutoMigratingSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *)options;
+{
     return [self MR_addSqliteStoreNamed:storeFileName withOptions:options];
 }
 
 - (NSPersistentStore *) MR_addAutoMigratingSqliteStoreAtURL:(NSURL *)url;
 {
     NSDictionary *options = [NSDictionary MR_autoMigrationOptions];
+    return [self MR_addAutoMigratingSqliteStoreAtURL:url withOptions:options];
+}
+
+- (NSPersistentStore *) MR_addAutoMigratingSqliteStoreAtURL:(NSURL *)url withOptions:(NSDictionary *)options;
+{
     return [self MR_addSqliteStoreAtURL:url withOptions:options];
 }
 

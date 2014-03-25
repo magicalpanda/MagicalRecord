@@ -103,12 +103,18 @@
     return options;
 }
 
-- (NSPersistentStoreCoordinator *) createCoordinator;
+- (NSPersistentStoreCoordinator *)createCoordinator
+{
+    return [self createCoordinatorWithOptions:[self defaultStoreOptions]];
+}
+
+- (NSPersistentStoreCoordinator *)createCoordinatorWithOptions:(NSDictionary *)options;
 {
     MRLogVerbose(@"Loading Store at URL: %@", self.storeURL);
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self model]];
 
-    [coordinator MR_addSqliteStoreAtURL:self.storeURL withOptions:[self defaultStoreOptions]];
+    [coordinator MR_addSqliteStoreAtURL:self.storeURL withOptions:options];
+    
     return coordinator;
 }
 
