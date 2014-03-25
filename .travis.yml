@@ -1,0 +1,2 @@
+language: objective-c
+script: Support/Scripts/objc-build-scripts/cibuild
