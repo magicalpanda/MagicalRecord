@@ -544,9 +544,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C7CF965E17496EDC008D9D13 /* Recipies */ = {
+		C7CF965E17496EDC008D9D13 /* Recipes */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C7CF967C17496EDC008D9D13 /* Build configuration list for PBXNativeTarget "Recipies" */;
+			buildConfigurationList = C7CF967C17496EDC008D9D13 /* Build configuration list for PBXNativeTarget "Recipes" */;
 			buildPhases = (
 				C7CF96F017497178008D9D13 /* Regenerate Core Data Entities */,
 				C7CF965B17496EDC008D9D13 /* Sources */,
@@ -557,7 +557,7 @@
 			);
 			dependencies = (
 			);
-			name = Recipies;
+			name = Recipes;
 			productName = Recipies;
 			productReference = C7CF965F17496EDC008D9D13 /* Recipies.app */;
 			productType = "com.apple.product-type.application";
@@ -582,7 +582,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C7CF965E17496EDC008D9D13 /* Recipies */,
+				C7CF965E17496EDC008D9D13 /* Recipes */,
 			);
 		};
 /* End PBXProject section */
@@ -811,7 +811,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C7CF967C17496EDC008D9D13 /* Build configuration list for PBXNativeTarget "Recipies" */ = {
+		C7CF967C17496EDC008D9D13 /* Build configuration list for PBXNativeTarget "Recipes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C7CF967A17496EDC008D9D13 /* Debug */,
