@@ -420,11 +420,6 @@
     return [self MR_privateQueueContextWithStoreCoordinator:coordinator];
 }
 
-- (NSString *) description;
-{
-    return [self MR_description];
-}
-
 - (NSString *) parentChain;
 {
     return [self MR_parentChain];

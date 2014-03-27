@@ -149,7 +149,6 @@
 + (NSManagedObjectContext *) confinementContext MRDeprecated("Use +MR_confinementContext instead");
 + (NSManagedObjectContext *) confinementContextWithParent:(NSManagedObjectContext *)parentContext MRDeprecated("Use +MR_confinementContextWithParent: instead");
 + (NSManagedObjectContext *) privateQueueContextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator NS_RETURNS_RETAINED MRDeprecated("Use +MR_privateQueueContextWithStoreCoordinator:NS_RETURNS_RETAINED instead");
-- (NSString *) description MRDeprecated("Use -MR_description instead");
 - (NSString *) parentChain MRDeprecated("Use -MR_parentChain instead");
 - (void) setWorkingName:(NSString *)workingName MRDeprecated("Use -MR_setWorkingName: instead");
 - (NSString *) workingName MRDeprecated("Use -MR_workingName instead");
