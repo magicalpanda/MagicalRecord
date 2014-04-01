@@ -71,7 +71,7 @@
         <attribute name="booleanTestAttribute" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="colorTestAttribute" optional="YES" attributeType="Transformable" syncable="YES">
             <userInfo>
-                <entry key="attributeValueClassName" value="*Color"/>
+                <entry key="attributeValueClassName" value="UIColor"/>
             </userInfo>
         </attribute>
         <attribute name="dateTestAttribute" optional="YES" attributeType="Date" syncable="YES"/>

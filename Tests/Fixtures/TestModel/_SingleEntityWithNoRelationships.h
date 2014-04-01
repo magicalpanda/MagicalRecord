@@ -36,7 +36,7 @@ extern const struct SingleEntityWithNoRelationshipsAttributes {
 
 
 
-@class NSObject;
+@class UIColor;
 
 
 
@@ -109,7 +109,7 @@ extern const struct SingleEntityWithNoRelationshipsAttributes {
 
 
 
-@property (nonatomic, strong) id colorTestAttribute;
+@property (nonatomic, strong) UIColor* colorTestAttribute;
 
 
 
@@ -311,8 +311,8 @@ extern const struct SingleEntityWithNoRelationshipsAttributes {
 
 
 
-- (id)primitiveColorTestAttribute;
-- (void)setPrimitiveColorTestAttribute:(id)value;
+- (UIColor*)primitiveColorTestAttribute;
+- (void)setPrimitiveColorTestAttribute:(UIColor*)value;
 
 
 
