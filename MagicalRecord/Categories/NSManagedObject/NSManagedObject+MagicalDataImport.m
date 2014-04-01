@@ -268,7 +268,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
             if (relatedByAttribute)
             {
 				
-                if (![weakself MR_importValue:localObjectData forKey:relatedByAttribute])
+                if (![relatedObject MR_importValue:localObjectData forKey:relatedByAttribute])
                 {
                     [relatedObject setValue:localObjectData forKey:relatedByAttribute];
                 }
