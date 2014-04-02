@@ -3,17 +3,6 @@
 
 #import <CoreData/CoreData.h>
 
-
-
-
-
-
-
-
-
-
-
-
 @interface DifferentClassNameMappingID : NSManagedObjectID {}
 @end
 
@@ -23,16 +12,8 @@
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (DifferentClassNameMappingID*)objectID;
 
-
-
-
-
-
 @end
 
-
-
 @interface _DifferentClassNameMapping (CoreDataGeneratedPrimitiveAccessors)
-
 
 @end

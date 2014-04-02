@@ -3,21 +3,13 @@
 
 #import "_SingleEntityRelatedToMappedEntityWithSecondaryMappings.h"
 
-
 const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsAttributes SingleEntityRelatedToMappedEntityWithSecondaryMappingsAttributes = {
 	.secondaryMappedAttribute = @"secondaryMappedAttribute",
 };
 
-
-
 const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsRelationships SingleEntityRelatedToMappedEntityWithSecondaryMappingsRelationships = {
 	.mappedRelationship = @"mappedRelationship",
 };
-
-
-
-
-
 
 @implementation SingleEntityRelatedToMappedEntityWithSecondaryMappingsID
 @end
@@ -42,34 +34,9 @@ const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsRelationships
 	return (SingleEntityRelatedToMappedEntityWithSecondaryMappingsID*)[super objectID];
 }
 
-+ (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
-	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
-	
-
-	return keyPaths;
-}
-
-
-
-
 @dynamic secondaryMappedAttribute;
-
-
-
-
-
 
 @dynamic mappedRelationship;
 
-	
-
-
-
-
-
-
 @end
-
-
-
 

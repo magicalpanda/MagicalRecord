@@ -3,21 +3,11 @@
 
 #import <CoreData/CoreData.h>
 
-
-
-
-
 extern const struct SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyRelationships {
 	__unsafe_unretained NSString *mappedEntity;
 } SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyRelationships;
 
-
-
-
-
-
 @class MappedEntity;
-
 
 @interface SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyID : NSManagedObjectID {}
 @end
@@ -28,28 +18,15 @@ extern const struct SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyRelati
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyID*)objectID;
 
-
-
-
-
 @property (nonatomic, strong) MappedEntity *mappedEntity;
 
 //- (BOOL)validateMappedEntity:(id*)value_ error:(NSError**)error_;
 
-
-
-
-
 @end
-
-
 
 @interface _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey (CoreDataGeneratedPrimitiveAccessors)
 
-
-
 - (MappedEntity*)primitiveMappedEntity;
 - (void)setPrimitiveMappedEntity:(MappedEntity*)value;
-
 
 @end

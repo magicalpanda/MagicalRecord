@@ -3,22 +3,9 @@
 
 #import <CoreData/CoreData.h>
 
-
-
 extern const struct AbstractRelatedEntityAttributes {
 	__unsafe_unretained NSString *sampleBaseAttribute;
 } AbstractRelatedEntityAttributes;
-
-
-
-
-
-
-
-
-
-
-
 
 @interface AbstractRelatedEntityID : NSManagedObjectID {}
 @end
@@ -29,32 +16,15 @@ extern const struct AbstractRelatedEntityAttributes {
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (AbstractRelatedEntityID*)objectID;
 
-
-
-
-
 @property (nonatomic, strong) NSString* sampleBaseAttribute;
-
-
 
 //- (BOOL)validateSampleBaseAttribute:(id*)value_ error:(NSError**)error_;
 
-
-
-
-
-
 @end
-
-
 
 @interface _AbstractRelatedEntity (CoreDataGeneratedPrimitiveAccessors)
 
-
 - (NSString*)primitiveSampleBaseAttribute;
 - (void)setPrimitiveSampleBaseAttribute:(NSString*)value;
-
-
-
 
 @end

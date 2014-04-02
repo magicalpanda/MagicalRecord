@@ -3,14 +3,6 @@
 
 #import "_DifferentClassNameMapping.h"
 
-
-
-
-
-
-
-
-
 @implementation DifferentClassNameMappingID
 @end
 
@@ -34,23 +26,5 @@
 	return (DifferentClassNameMappingID*)[super objectID];
 }
 
-+ (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
-	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
-	
-
-	return keyPaths;
-}
-
-
-
-
-
-
-
-
-
 @end
-
-
-
 

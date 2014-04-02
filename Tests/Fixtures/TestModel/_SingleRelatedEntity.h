@@ -3,13 +3,9 @@
 
 #import <CoreData/CoreData.h>
 
-
-
 extern const struct SingleRelatedEntityAttributes {
 	__unsafe_unretained NSString *mappedStringAttribute;
 } SingleRelatedEntityAttributes;
-
-
 
 extern const struct SingleRelatedEntityRelationships {
 	__unsafe_unretained NSString *testAbstractToManyRelationship;
@@ -18,18 +14,10 @@ extern const struct SingleRelatedEntityRelationships {
 	__unsafe_unretained NSString *testConcreteToOneRelationship;
 } SingleRelatedEntityRelationships;
 
-
-
-
-
-
 @class AbstractRelatedEntity;
 @class AbstractRelatedEntity;
 @class ConcreteRelatedEntity;
 @class ConcreteRelatedEntity;
-
-
-
 
 @interface SingleRelatedEntityID : NSManagedObjectID {}
 @end
@@ -40,51 +28,27 @@ extern const struct SingleRelatedEntityRelationships {
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (SingleRelatedEntityID*)objectID;
 
-
-
-
-
 @property (nonatomic, strong) NSString* mappedStringAttribute;
 
-
-
 //- (BOOL)validateMappedStringAttribute:(id*)value_ error:(NSError**)error_;
-
-
-
-
 
 @property (nonatomic, strong) NSSet *testAbstractToManyRelationship;
 
 - (NSMutableSet*)testAbstractToManyRelationshipSet;
 
-
-
-
 @property (nonatomic, strong) AbstractRelatedEntity *testAbstractToOneRelationship;
 
 //- (BOOL)validateTestAbstractToOneRelationship:(id*)value_ error:(NSError**)error_;
-
-
-
 
 @property (nonatomic, strong) NSSet *testConcreteToManyRelationship;
 
 - (NSMutableSet*)testConcreteToManyRelationshipSet;
 
-
-
-
 @property (nonatomic, strong) ConcreteRelatedEntity *testConcreteToOneRelationship;
 
 //- (BOOL)validateTestConcreteToOneRelationship:(id*)value_ error:(NSError**)error_;
 
-
-
-
-
 @end
-
 
 @interface _SingleRelatedEntity (TestAbstractToManyRelationshipCoreDataGeneratedAccessors)
 - (void)addTestAbstractToManyRelationship:(NSSet*)value_;
@@ -100,34 +64,21 @@ extern const struct SingleRelatedEntityRelationships {
 - (void)removeTestConcreteToManyRelationshipObject:(ConcreteRelatedEntity*)value_;
 @end
 
-
 @interface _SingleRelatedEntity (CoreDataGeneratedPrimitiveAccessors)
-
 
 - (NSString*)primitiveMappedStringAttribute;
 - (void)setPrimitiveMappedStringAttribute:(NSString*)value;
 
-
-
-
-
 - (NSMutableSet*)primitiveTestAbstractToManyRelationship;
 - (void)setPrimitiveTestAbstractToManyRelationship:(NSMutableSet*)value;
-
-
 
 - (AbstractRelatedEntity*)primitiveTestAbstractToOneRelationship;
 - (void)setPrimitiveTestAbstractToOneRelationship:(AbstractRelatedEntity*)value;
 
-
-
 - (NSMutableSet*)primitiveTestConcreteToManyRelationship;
 - (void)setPrimitiveTestConcreteToManyRelationship:(NSMutableSet*)value;
 
-
-
 - (ConcreteRelatedEntity*)primitiveTestConcreteToOneRelationship;
 - (void)setPrimitiveTestConcreteToOneRelationship:(ConcreteRelatedEntity*)value;
-
 
 @end

@@ -3,17 +3,9 @@
 
 #import "_ConcreteRelatedEntity.h"
 
-
 const struct ConcreteRelatedEntityAttributes ConcreteRelatedEntityAttributes = {
 	.sampleConcreteAttribute = @"sampleConcreteAttribute",
 };
-
-
-
-
-
-
-
 
 @implementation ConcreteRelatedEntityID
 @end
@@ -38,30 +30,7 @@ const struct ConcreteRelatedEntityAttributes ConcreteRelatedEntityAttributes = {
 	return (ConcreteRelatedEntityID*)[super objectID];
 }
 
-+ (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
-	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
-	
-
-	return keyPaths;
-}
-
-
-
-
 @dynamic sampleConcreteAttribute;
 
-
-
-
-
-
-
-
-
-
-
 @end
-
-
-
 

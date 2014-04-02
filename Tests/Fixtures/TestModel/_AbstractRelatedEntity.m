@@ -3,17 +3,9 @@
 
 #import "_AbstractRelatedEntity.h"
 
-
 const struct AbstractRelatedEntityAttributes AbstractRelatedEntityAttributes = {
 	.sampleBaseAttribute = @"sampleBaseAttribute",
 };
-
-
-
-
-
-
-
 
 @implementation AbstractRelatedEntityID
 @end
@@ -38,30 +30,7 @@ const struct AbstractRelatedEntityAttributes AbstractRelatedEntityAttributes = {
 	return (AbstractRelatedEntityID*)[super objectID];
 }
 
-+ (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
-	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
-	
-
-	return keyPaths;
-}
-
-
-
-
 @dynamic sampleBaseAttribute;
 
-
-
-
-
-
-
-
-
-
-
 @end
-
-
-
 

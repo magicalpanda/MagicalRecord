@@ -3,17 +3,9 @@
 
 #import "_SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.h"
 
-
-
-
 const struct SingleEntityRelatedToMappedEntityWithNestedMappedAttributesRelationships SingleEntityRelatedToMappedEntityWithNestedMappedAttributesRelationships = {
 	.mappedEntity = @"mappedEntity",
 };
-
-
-
-
-
 
 @implementation SingleEntityRelatedToMappedEntityWithNestedMappedAttributesID
 @end
@@ -38,27 +30,7 @@ const struct SingleEntityRelatedToMappedEntityWithNestedMappedAttributesRelation
 	return (SingleEntityRelatedToMappedEntityWithNestedMappedAttributesID*)[super objectID];
 }
 
-+ (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
-	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
-	
-
-	return keyPaths;
-}
-
-
-
-
 @dynamic mappedEntity;
 
-	
-
-
-
-
-
-
 @end
-
-
-
 
