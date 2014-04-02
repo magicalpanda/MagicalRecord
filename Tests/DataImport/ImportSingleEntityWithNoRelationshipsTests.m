@@ -81,7 +81,7 @@
 
 - (void)testImportBooleanAttributeToEntity
 {
-    XCTAssertFalse(testEntity.booleanTestAttributeValue, @"booleanTestAttribute did not contain expected value, instead found: %@", testEntity.booleanTestAttribute);
+    XCTAssertFalse([testEntity.booleanTestAttribute boolValue], @"booleanTestAttribute did not contain expected value, instead found: %@", testEntity.booleanTestAttribute);
 }
 
 - (void)testImportMappedStringAttributeToEntity
@@ -176,6 +176,14 @@
     NSDate *expectedDate = [self dateFromString:@"2011-08-05 01:56:04 +0000"];
 
     XCTAssertEqualObjects(testEntity.dateWithCustomFormat, expectedDate, @"Unexpected value returned");
+}
+
+- (void)testImportEpochDate {
+    XCTAssertEqualObjects(testEntity.unixTimeTestAttribute, [NSDate dateWithTimeIntervalSince1970:1388349428], @"unixTimeTestAttribute did not contain the expected value, instead found: %@", testEntity.unixTimeTestAttribute);
+}
+
+- (void)testImportEpochDate13 {
+    XCTAssertEqualObjects(testEntity.unixTime13TestAttribute, [NSDate dateWithTimeIntervalSince1970:1388349427.543], @"unixTimeTest13Attribute did not contain the expected value, instead found: %@", testEntity.unixTime13TestAttribute);
 }
 
 @end

@@ -11,6 +11,7 @@
 
 NSDate * adjustDateForDST(NSDate *date);
 NSDate * dateFromString(NSString *value, NSString *format);
+NSDate * dateFromNumber(NSNumber *value, BOOL milliseconds);
 NSNumber * numberFromString(NSString *value);
 NSString * attributeNameFromString(NSString *value);
 NSString * primaryKeyNameFromString(NSString *value);

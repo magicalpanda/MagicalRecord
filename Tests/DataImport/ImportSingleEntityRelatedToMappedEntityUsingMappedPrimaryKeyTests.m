@@ -22,7 +22,7 @@
 
     MappedEntity *testMappedEntity = [MappedEntity MR_createInContext:context];
 
-    testMappedEntity.testMappedEntityIDValue = 42;
+    testMappedEntity.testMappedEntityID = @42;
     testMappedEntity.sampleAttribute = @"This attribute created as part of the test case setup";
 
     [context MR_saveToPersistentStoreAndWait];

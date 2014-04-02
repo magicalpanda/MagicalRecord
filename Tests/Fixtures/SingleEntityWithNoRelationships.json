@@ -20,4 +20,6 @@
     "floatAsStringTestAttribute": "10000000000",
     "numberAsStringTestAttribute" : 10248909829,
     "booleanAsStringTestAttribute": "true",
+    "unixTimeTestAttribute" : 1388349428,
+    "unixTime13TestAttribute" : 1388349427543
 }
