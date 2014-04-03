@@ -11,19 +11,19 @@
 
 #pragma mark - Data import helper functions
 
-NSString * attributeNameFromString(NSString *value)
+NSString * MR_attributeNameFromString(NSString *value)
 {
     NSString *firstCharacter = [[value substringToIndex:1] capitalizedString];
     return [firstCharacter stringByAppendingString:[value substringFromIndex:1]];
 }
 
-NSString * primaryKeyNameFromString(NSString *value)
+NSString * MR_primaryKeyNameFromString(NSString *value)
 {
     NSString *firstCharacter = [[value substringToIndex:1] lowercaseString];
     return [firstCharacter stringByAppendingFormat:@"%@ID", [value substringFromIndex:1]];
 }
 
-NSDate * adjustDateForDST(NSDate *date)
+NSDate * MR_adjustDateForDST(NSDate *date)
 {
     NSTimeInterval dstOffset = [[NSTimeZone localTimeZone] daylightSavingTimeOffsetForDate:date];
     NSDate *actualDate = [date dateByAddingTimeInterval:dstOffset];
@@ -31,7 +31,7 @@ NSDate * adjustDateForDST(NSDate *date)
     return actualDate;
 }
 
-NSDate * dateFromString(NSString *value, NSString *format)
+NSDate * MR_dateFromString(NSString *value, NSString *format)
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
@@ -43,7 +43,7 @@ NSDate * dateFromString(NSString *value, NSString *format)
     return parsedDate;
 }
 
-NSDate * dateFromNumber(NSNumber *value, BOOL milliseconds)
+NSDate * MR_dateFromNumber(NSNumber *value, BOOL milliseconds)
 {
     NSTimeInterval timeInterval = [value doubleValue];
     if (milliseconds) {
@@ -52,7 +52,7 @@ NSDate * dateFromNumber(NSNumber *value, BOOL milliseconds)
     return [NSDate dateWithTimeIntervalSince1970:timeInterval];
 }
 
-NSNumber * numberFromString(NSString *value) {
+NSNumber * MR_numberFromString(NSString *value) {
     return [NSNumber numberWithDouble:[value doubleValue]];
 }
 
@@ -88,7 +88,7 @@ NSInteger* newColorComponentsFromString(NSString *serializedColor)
 
 #if TARGET_OS_IPHONE
 
-UIColor * UIColorFromString(NSString *serializedColor)
+UIColor * MR_UIColorFromString(NSString *serializedColor)
 {
     NSInteger *componentValues = newColorComponentsFromString(serializedColor);
     if (componentValues == NULL)
@@ -104,7 +104,7 @@ UIColor * UIColorFromString(NSString *serializedColor)
     free(componentValues);
     return color;
 }
-id (*colorFromString)(NSString *) = UIColorFromString;
+id (*colorFromString)(NSString *) = MR_UIColorFromString;
 
 #else
 
