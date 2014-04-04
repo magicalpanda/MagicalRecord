@@ -8,6 +8,7 @@
 
 #import "NSManagedObjectContext+MagicalObserving.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
+#import "NSManagedObjectContext+MagicalSaves.h"
 #import "MagicalRecord.h"
 #import "MagicalRecord+iCloud.h"
 
@@ -45,6 +46,30 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
                                   name:NSManagedObjectContextDidSaveNotification
                                 object:otherContext];
 }
+
+
+- (void) MR_observeContextAndSaveSelf:(NSManagedObjectContext *)otherContext
+{
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+	[notificationCenter addObserver:self
+                           selector:@selector(MR_mergeChangesFromNotificationAndSaveSelfOnly:)
+                               name:NSManagedObjectContextDidSaveNotification
+                             object:otherContext];
+}
+
+- (void) MR_mergeChangesFromNotificationAndSaveSelfOnly:(NSNotification *)notification
+{
+    MRLog(@"Merging changes to %@context%@",
+          self == [NSManagedObjectContext MR_defaultContext] ? @"*** DEFAULT *** " : @"",
+          ([NSThread isMainThread] ? @" *** on Main Thread ***" : @"Background Thread"));
+    
+	[self mergeChangesFromContextDidSaveNotification:notification];
+    
+    //If the observer it's the default context, let's merge the changes to its parent
+    //or save directly to the persistant store (for the case of MR's root context)
+    [self MR_saveOnlySelfAndWait];
+}
+
 
 #pragma mark - Context iCloud Merge Helpers
 
