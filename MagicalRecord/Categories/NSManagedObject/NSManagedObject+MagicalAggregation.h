@@ -26,6 +26,9 @@
 + (NSNumber *)MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
 + (NSNumber *)MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate;
 
++ (NSArray *) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString*)groupingKeyPath inContext:(NSManagedObjectContext *)context;
++ (NSArray *) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString*)groupingKeyPath;
+
 - (instancetype) MR_objectWithMinValueFor:(NSString *)property;
 - (instancetype) MR_objectWithMinValueFor:(NSString *)property inContext:(NSManagedObjectContext *)context;
 
