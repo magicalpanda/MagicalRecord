@@ -28,6 +28,8 @@
 #import "AutoMigratingWithSourceAndTargetModelMagicalRecordStack.h"
 #import "ManuallyMigratingMagicalRecordStack.h"
 
+#import "NSArray+MagicalRecord.h"
+
 #import "NSManagedObject+MagicalRecord.h"
 #import "NSManagedObject+MagicalRequests.h"
 #import "NSManagedObject+MagicalFinders.h"
