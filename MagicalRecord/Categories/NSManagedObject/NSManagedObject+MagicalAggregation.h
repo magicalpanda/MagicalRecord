@@ -23,6 +23,9 @@
 + (BOOL) MR_hasAtLeastOneEntity;
 + (BOOL) MR_hasAtLeastOneEntityInContext:(NSManagedObjectContext *)context;
 
+- (id) MR_minValueFor:(NSString *)property;
+- (id) MR_maxValueFor:(NSString *)property;
+
 + (id) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
 + (id) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate;
 

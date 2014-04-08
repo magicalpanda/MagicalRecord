@@ -83,11 +83,19 @@
     return [[self MR_numberOfEntitiesWithContext:context] intValue] > 0;
 }
 
-- (NSNumber *) MR_maxValueFor:(NSString *)property
+- (id) MR_minValueFor:(NSString *)property
+{
+	NSManagedObject *obj = [[self class] MR_findFirstByAttribute:property
+                                                       withValue:[NSString stringWithFormat:@"min(%@)", property]];
+
+	return [obj valueForKey:property];
+}
+
+- (id) MR_maxValueFor:(NSString *)property
 {
 	NSManagedObject *obj = [[self class] MR_findFirstByAttribute:property
                                                        withValue:[NSString stringWithFormat:@"max(%@)", property]];
-	
+
 	return [obj valueForKey:property];
 }
 
