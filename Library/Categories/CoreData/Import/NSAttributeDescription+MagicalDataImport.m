@@ -48,7 +48,7 @@
                     dateFormat = [[self userInfo] valueForKey:dateFormatKey];
 
                     if ([value isKindOfClass:[NSNumber class]]) {
-                        convertedValue = MR_dateFromNumber(value, [dateFormat isEqualToString:kMagicalRecordImportUnixDate13String]);
+                        convertedValue = MR_dateFromNumber(value, [dateFormat isEqualToString:kMagicalRecordImportUnixTimeString]);
                     } else {
                         convertedValue = MR_dateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
                     }
