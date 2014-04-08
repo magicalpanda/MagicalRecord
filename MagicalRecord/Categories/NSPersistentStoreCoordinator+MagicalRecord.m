@@ -6,6 +6,7 @@
 //
 
 #import "CoreData+MagicalRecord.h"
+#import "MagicalRecordLogging.h"
 
 static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
 NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagicalRecordPSCDidCompleteiCloudSetupNotification";
@@ -90,7 +91,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
                 [[NSFileManager defaultManager] removeItemAtURL:shmSidecar error:nil];
                 [[NSFileManager defaultManager] removeItemAtURL:walSidecar error:nil];
 
-                MRLog(@"Removed incompatible model version: %@", [url lastPathComponent]);
+                MRLogWarn(@"Removed incompatible model version: %@", [url lastPathComponent]);
                 
                 // Try one more time to create the store
                 store = [self addPersistentStoreWithType:NSSQLiteStoreType
@@ -216,7 +217,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
         }
         else 
         {
-            MRLog(@"iCloud is not enabled");
+            MRLogWarn(@"iCloud is not enabled");
         }
         
         [self lock];

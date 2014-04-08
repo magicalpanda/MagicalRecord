@@ -10,6 +10,7 @@
 #import "NSManagedObjectContext+MagicalRecord.h"
 #import "MagicalRecord.h"
 #import "MagicalRecord+iCloud.h"
+#import "MagicalRecordLogging.h"
 
 
 NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalRecordDidMergeChangesFromiCloudNotification";
@@ -52,7 +53,7 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 {
     [self performBlock:^{
         
-        MRLog(@"Merging changes From iCloud %@context%@", 
+        MRLogVerbose(@"Merging changes From iCloud %@context%@",
               self == [NSManagedObjectContext MR_defaultContext] ? @"*** DEFAULT *** " : @"",
               ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
         
@@ -68,7 +69,7 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 
 - (void) MR_mergeChangesFromNotification:(NSNotification *)notification;
 {
-	MRLog(@"Merging changes to %@context%@", 
+	MRLogVerbose(@"Merging changes to %@context%@",
           self == [NSManagedObjectContext MR_defaultContext] ? @"*** DEFAULT *** " : @"",
           ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
     

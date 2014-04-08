@@ -8,6 +8,16 @@
 
 #import "MagicalRecord.h"
 
+typedef NS_ENUM(NSInteger, MagicalRecordLogLevel)
+{
+    MagicalRecordLogLevelOff        = 0,
+    MagicalRecordLogLevelFatal      = 1 << 0,
+    MagicalRecordLogLevelError      = 1 << 1,
+    MagicalRecordLogLevelWarn       = 1 << 2,
+    MagicalRecordLogLevelInfo       = 1 << 3,
+    MagicalRecordLogLevelVerbose    = 1 << 4,
+};
+
 @interface MagicalRecord (Options)
 
 //global options
@@ -20,14 +30,35 @@
 + (void) setShouldAutoCreateManagedObjectModel:(BOOL)shouldAutoCreate;
 + (BOOL) shouldAutoCreateDefaultPersistentStoreCoordinator;
 + (void) setShouldAutoCreateDefaultPersistentStoreCoordinator:(BOOL)shouldAutoCreate;
-+ (void) setShouldDeleteStoreOnModelMismatch:(BOOL)shouldDeleteStoreOnModelMismatch;
 
-/*!
- @method shouldDeleteStoreOnModelMistmatch
- @abstract If true, when configuring the persistant store coordinator, and Magical Record encounters a store that does not match the model, it will attempt to remove it and re-create a new store.
- This is extremely useful during development where every model change could potentially require a delete/reinstall of the app.
+/**
+ *  If this is true and MagicalRecord encounters a store with a version that does not match that of the model, the store will be removed from the disk.
+ *  This is extremely useful during development where frequent model changes can potentially require a delete and reinstall of the app.
+ *
+ *  @return current value of shouldDeleteStoreOnModelMismatch
  */
 + (BOOL) shouldDeleteStoreOnModelMismatch;
 
+/**
+ *  Setting this to true will make MagicalRecord delete any stores that it encounters which do not match the version of their model.
+ *  This is extremely useful during development where frequent model changes can potentially require a delete and reinstall of the app.
+ *
+ *  @param shouldDeleteStoreOnModelMismatch BOOL value that flags whether mismatched stores should be deleted
+ */
++ (void) setShouldDeleteStoreOnModelMismatch:(BOOL)shouldDeleteStoreOnModelMismatch;
+
+/**
+ *  Returns the current logging level.
+ *
+ *  @return the current logging level
+ */
++ (MagicalRecordLogLevel) logLevel;
+
+/**
+ *  Sets the desired logging level.
+ *
+ *  @param level MagicalRecordLogLevel value
+ */
++ (void) setLogLevel:(MagicalRecordLogLevel)level;
 
 @end

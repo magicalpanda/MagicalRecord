@@ -4,6 +4,7 @@
 //
 
 #import "CoreData+MagicalRecord.h"
+#import "MagicalRecordLogging.h"
 
 static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
@@ -114,7 +115,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 			}
 			else
 			{
-				MRLog(@"Property '%@' not found in %lx properties for %@", propertyName, (unsigned long)[propDict count], NSStringFromClass(self));
+				MRLogWarn(@"Property '%@' not found in %lx properties for %@", propertyName, (unsigned long)[propDict count], NSStringFromClass(self));
 			}
 		}
 	}
