@@ -23,8 +23,8 @@
 + (BOOL) MR_hasAtLeastOneEntity;
 + (BOOL) MR_hasAtLeastOneEntityInContext:(NSManagedObjectContext *)context;
 
-+ (NSNumber *) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
-+ (NSNumber *) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate;
++ (id) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
++ (id) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate;
 
 /**
  *  Supports aggregating values using a key-value collection operator that can be grouped by an attribute.
