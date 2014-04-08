@@ -38,7 +38,7 @@
             {
                 NSString *dateFormat = [[self userInfo] valueForKey:kMagicalRecordImportCustomDateFormatKey];
                 if ([value isKindOfClass:[NSNumber class]]) {
-                    value = MR_dateFromNumber(value, [dateFormat isEqualToString:kMagicalRecordImportUnixDate13String]);
+                    value = MR_dateFromNumber(value, [dateFormat isEqualToString:kMagicalRecordImportUnixTimeString]);
                 }
                 else {
                     value = MR_dateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
