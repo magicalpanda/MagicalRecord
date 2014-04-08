@@ -523,31 +523,6 @@
 @end
 
 
-@implementation NSPersistentStoreCoordinator (MagicaliCloudAdditionsShortHand)
-
-+ (NSPersistentStoreCoordinator *) coordinatorWithiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent;
-{
-    return [self MR_coordinatorWithiCloudContainerID:containerID contentNameKey:contentNameKey localStoreNamed:localStoreName cloudStorePathComponent:subPathComponent];
-}
-
-+ (NSPersistentStoreCoordinator *) coordinatorWithiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent completion:(void(^)(void))completionHandler;
-{
-    return [self MR_coordinatorWithiCloudContainerID:containerID contentNameKey:contentNameKey localStoreNamed:localStoreName cloudStorePathComponent:subPathComponent completion:completionHandler];
-}
-
-- (void) addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent;
-{
-    return [self MR_addiCloudContainerID:containerID contentNameKey:contentNameKey localStoreNamed:localStoreName cloudStorePathComponent:subPathComponent];
-}
-
-- (void) addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent completion:(void(^)(void))completionBlock;
-{
-    return [self MR_addiCloudContainerID:containerID contentNameKey:contentNameKey localStoreNamed:localStoreName cloudStorePathComponent:subPathComponent completion:completionBlock];
-}
-
-@end
-
-
 @implementation NSPersistentStoreCoordinator (MagicalInMemoryStoreAdditionsShortHand)
 
 + (NSPersistentStoreCoordinator *) coordinatorWithInMemoryStore;

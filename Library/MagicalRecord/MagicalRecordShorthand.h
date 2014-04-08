@@ -188,16 +188,6 @@
 @end
 
 
-@interface NSPersistentStoreCoordinator (MagicaliCloudAdditionsShortHand)
-
-+ (NSPersistentStoreCoordinator *) coordinatorWithiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent MRDeprecated("Use +MR_coordinatorWithiCloudContainerID:contentNameKey:localStoreNamed:cloudStorePathComponent: instead");
-+ (NSPersistentStoreCoordinator *) coordinatorWithiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent completion:(void(^)(void))completionHandler MRDeprecated("Use +MR_coordinatorWithiCloudContainerID:contentNameKey:localStoreNamed:cloudStorePathComponent:completion: instead");
-- (void) addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent MRDeprecated("Use -MR_addiCloudContainerID:contentNameKey:localStoreNamed:cloudStorePathComponent: instead");
-- (void) addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent completion:(void(^)(void))completionBlock MRDeprecated("Use -MR_addiCloudContainerID:contentNameKey:localStoreNamed:cloudStorePathComponent:completion: instead");
-
-@end
-
-
 @interface NSPersistentStoreCoordinator (MagicalInMemoryStoreAdditionsShortHand)
 
 + (NSPersistentStoreCoordinator *) coordinatorWithInMemoryStore MRDeprecated("Use +MR_coordinatorWithInMemoryStore instead");
