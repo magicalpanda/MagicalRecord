@@ -16,7 +16,7 @@
 - (NSString *) MR_primaryKey;
 {
     NSString *primaryKeyName = [[self userInfo] valueForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: 
-    primaryKeyNameFromString([[self destinationEntity] name]);
+    MR_primaryKeyNameFromString([[self destinationEntity] name]);
     
     return primaryKeyName;
 }
