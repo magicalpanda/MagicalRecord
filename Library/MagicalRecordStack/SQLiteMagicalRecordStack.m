@@ -113,8 +113,11 @@
     MRLogVerbose(@"Loading Store at URL: %@", self.storeURL);
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self model]];
 
-    [coordinator MR_addSqliteStoreAtURL:self.storeURL withOptions:options];
+    NSMutableDictionary *storeOptions = [[self defaultStoreOptions] mutableCopy];
+    [storeOptions addEntriesFromDictionary:self.storeOptions];
     
+    [coordinator MR_addSqliteStoreAtURL:self.storeURL withOptions:storeOptions];
+
     return coordinator;
 }
 

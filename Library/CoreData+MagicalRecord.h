@@ -18,7 +18,6 @@
     #import "ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.h"
 
     #import "InMemoryMagicalRecordStack.h"
-    #import "iCloudMagicalRecordStack.h"
 
     #import "AutoMigratingMagicalRecordStack.h"
     #import "AutoMigratingWithSourceAndTargetModelMagicalRecordStack.h"
@@ -36,7 +35,6 @@
     #import "NSPersistentStoreCoordinator+MagicalAutoMigrations.h"
     #import "NSPersistentStoreCoordinator+MagicalManualMigrations.h"
     #import "NSPersistentStoreCoordinator+MagicalInMemoryStoreAdditions.h"
-    #import "NSPersistentStoreCoordinator+MagicaliCloudAdditions.h"
 
     #import "NSManagedObjectModel+MagicalRecord.h"
     #import "NSPersistentStore+MagicalRecord.h"

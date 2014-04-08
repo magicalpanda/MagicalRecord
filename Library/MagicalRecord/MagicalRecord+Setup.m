@@ -15,7 +15,6 @@
 #import "ManuallyMigratingMagicalRecordStack.h"
 #import "ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.h"
 #import "InMemoryMagicalRecordStack.h"
-#import "iCloudMagicalRecordStack.h"
 #import "MagicalRecordLogging.h"
 
 
@@ -112,28 +111,10 @@
     return stack;
 }
 
-+ (MagicalRecordStack *) setupStackWithiCloudContainer:(NSString *)icloudBucket localStoreNamed:(NSString *)localStore;
++ (MagicalRecordStack *) setupiCloudStackWithLocalStoreNamed:(NSString *)localStore;
 {
-    MagicalRecordStack *stack = [[iCloudMagicalRecordStack alloc] initWithContainerID:icloudBucket localStoreName:localStore];
-    [MagicalRecordStack setDefaultStack:stack];
-    return stack;
-}
-
-+ (MagicalRecordStack *) setupStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent;
-{
-    MagicalRecordStack *stack = [[iCloudMagicalRecordStack alloc] initWithContainerID:containerID
-                                                                       contentNameKey:contentNameKey
-                                                              cloudStorePathComponent:pathSubcomponent
-                                                                       localStoreName:localStoreName];
-    [MagicalRecordStack setDefaultStack:stack];
-    return stack;
-}
-
-+ (MagicalRecordStack *) setupStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent completion:(void(^)(void))completion;
-{
-    iCloudMagicalRecordStack *stack = [[iCloudMagicalRecordStack alloc] initWithContainerID:containerID contentNameKey:contentNameKey cloudStorePathComponent:pathSubcomponent localStoreName:localStoreName];
-    stack.setupCompletionBlock = completion;
-
+    ClassicSQLiteMagicalRecordStack *stack = [[ClassicSQLiteMagicalRecordStack alloc] initWithStoreNamed:localStore];
+    stack.storeOptions = @{ NSPersistentStoreUbiquitousContentNameKey: localStore};
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }

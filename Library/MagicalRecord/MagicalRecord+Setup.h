@@ -28,9 +28,7 @@
 + (MagicalRecordStack *) setupClassicStackWithSQLiteStoreNamed:(NSString *)storeName;
 + (MagicalRecordStack *) setupClassicStackWithSQLiteStoreAtURL:(NSURL *)storeURL;
 
-+ (MagicalRecordStack *) setupStackWithiCloudContainer:(NSString *)icloudBucket localStoreNamed:(NSString *)localStore;
-+ (MagicalRecordStack *) setupStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent;
-+ (MagicalRecordStack *) setupStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent completion:(void(^)(void))completion;
++ (MagicalRecordStack *) setupiCloudStackWithLocalStoreNamed:(NSString *)localStore;
 
 + (MagicalRecordStack *) setupStackWithInMemoryStore;
 
