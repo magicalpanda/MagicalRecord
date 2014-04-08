@@ -9,7 +9,7 @@
 #import "MagicalRecord+ErrorHandling.h"
 
 
-static id errorHandlerTarget = nil;
+__weak static id errorHandlerTarget = nil;
 static SEL errorHandlerAction = nil;
 
 
