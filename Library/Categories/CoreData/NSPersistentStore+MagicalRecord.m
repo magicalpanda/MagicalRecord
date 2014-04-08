@@ -6,17 +6,16 @@
 //
 
 #import "NSPersistentStore+MagicalRecord.h"
+#import "MagicalRecord.h"
 #import "NSError+MagicalRecordErrorHandling.h"
 #import "MagicalRecordLogging.h"
 
-
-NSString * const kMagicalRecordDefaultStoreFileName = @"CoreDataStore.sqlite";
 
 @implementation NSPersistentStore (MagicalRecord)
 
 + (NSURL *) MR_defaultLocalStoreUrl;
 {
-    return [self MR_fileURLForStoreName:kMagicalRecordDefaultStoreFileName];
+    return [self MR_fileURLForStoreName:[MagicalRecord defaultStoreName]];
 }
 
 + (NSURL *) MR_fileURLForStoreName:(NSString *)storeFileName;

@@ -8,6 +8,8 @@
 #define EXP_SHORTHAND
 #import "Expecta.h"
 
+#import "MagicalRecord.h"
+
 @interface MagicalRecordTests : MagicalRecordTestBase
 
 @end
@@ -38,7 +40,7 @@
 
 - (void)testCreateDefaultCoreDataStack
 {
-    NSURL *testStoreURL = [NSPersistentStore MR_fileURLForStoreName:kMagicalRecordDefaultStoreFileName];
+    NSURL *testStoreURL = [NSPersistentStore MR_fileURLForStoreName:[MagicalRecord defaultStoreName]];
 
     expect(testStoreURL).toNot.beNil();
 

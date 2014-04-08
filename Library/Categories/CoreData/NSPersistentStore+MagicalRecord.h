@@ -8,8 +8,6 @@
 #import "MagicalRecord.h"
 #import "MagicalRecordDeprecated.h"
 
-extern NSString * const kMagicalRecordDefaultStoreFileName;
-
 @interface NSPersistentStore (MagicalRecord)
 
 + (NSURL *) MR_defaultLocalStoreUrl;

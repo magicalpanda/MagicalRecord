@@ -8,6 +8,7 @@
 #import "Expecta.h"
 
 #import "NSPersistentStore+MagicalRecord.h"
+#import "MagicalRecord.h"
 
 @interface NSPersistentStoreMagicalRecordTests : XCTestCase
 
@@ -18,7 +19,7 @@
 - (void)testDefaultStoreFolderIsNSApplicationSupportDirectory
 {
     NSString *applicationSupportDirectory = [[self class] NSPersistentStoreMagicalRecordTests_applicationSupportDirectory];
-    NSString *defaultStoreName = kMagicalRecordDefaultStoreFileName;
+    NSString *defaultStoreName = [MagicalRecord defaultStoreName];
 
     NSURL *expectedStoreUrl = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", applicationSupportDirectory, defaultStoreName]];
 
