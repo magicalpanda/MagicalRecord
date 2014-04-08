@@ -12,4 +12,16 @@ MagicalRecord was inspired by the ease of Ruby on Rails' Active Record fetching.
 * Allow for clear, simple, one-line fetches
 * Still allow the modification of the NSFetchRequest when request optimizations are needed
 
+#### Documentation
 
+* [Installation](Docs/Installation.md)
+* [Getting Started](Docs/GettingStarted.md)
+* [Fetching](Docs/Fetching.md)
+* [Importing](Docs/Importing.md)
+* [Logging](Docs/Logging.md)
+* [Resources](Docs/Resources.md)
+* [Saving](Docs/Saving.md)
+* [Support](Docs/Support.md)
+* [Threads](Docs/Threads.md)
+* [iCloud](Docs/iCloud.md)
+* [Default NSManagedObjectContext](Docs/DefaultManagedObjectContext.md)
