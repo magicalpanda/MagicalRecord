@@ -9,6 +9,9 @@
 #ifndef MagicalRecord_MagicalRecordLogging_h
 #define MagicalRecord_MagicalRecordLogging_h
 
+#import "MagicalRecordInternal.h"
+#import "MagicalRecord+Options.h"
+
 #define MR_LOG_FLAG_FATAL   (1 << 0)  // 0...0001
 #define MR_LOG_FLAG_ERROR   (1 << 1)  // 0...0010
 #define MR_LOG_FLAG_WARN    (1 << 2)  // 0...0100
