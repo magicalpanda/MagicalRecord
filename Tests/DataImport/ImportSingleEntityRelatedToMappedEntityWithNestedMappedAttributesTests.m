@@ -1,35 +1,27 @@
 //
-//  ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m
-//  Magical Record
-//
 //  Created by Saul Mora on 8/16/11.
 //  Copyright (c) 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-
-#import "MagicalDataImportTestCase.h"
-#import "MappedEntity.h"
+#import "MagicalRecordDataImportTestCase.h"
 #import "SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.h"
+#import "MappedEntity.h"
 
-@interface ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests : MagicalDataImportTestCase
+@interface ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests : MagicalRecordDataImportTestCase
 
 @end
 
 @implementation ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests
 
-- (Class) testEntityClass
+- (void)testDataImport
 {
-    return [SingleEntityRelatedToMappedEntityWithNestedMappedAttributes class];
-}
+    NSManagedObjectContext *stackContext = self.stack.context;
 
-- (void) testDataImport
-{
-    SingleEntityRelatedToMappedEntityWithNestedMappedAttributes *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
-    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-    
-    assertThat(entity.mappedEntity, is(notNilValue()));
-    assertThat(entity.mappedEntity.mappedEntityID, is(equalToInteger(42)));
-    assertThat(entity.mappedEntity.nestedAttribute, containsString(@"nested value"));
+    SingleEntityRelatedToMappedEntityWithNestedMappedAttributes *entity = [SingleEntityRelatedToMappedEntityWithNestedMappedAttributes MR_importFromObject:self.testEntityData inContext:stackContext];
+
+    expect(entity.mappedEntity).toNot.beNil();
+    expect(entity.mappedEntity.mappedEntityID).to.equal(@42);
+    expect(entity.mappedEntity.nestedAttribute).to.contain(@"nested value");
 }
 
 @end

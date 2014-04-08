@@ -46,11 +46,16 @@
                     }
                     index++;
                     dateFormat = [[self userInfo] valueForKey:dateFormatKey];
-                    convertedValue = dateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
+
+                    if ([value isKindOfClass:[NSNumber class]]) {
+                        convertedValue = MR_dateFromNumber(value, [dateFormat isEqualToString:kMagicalRecordImportUnixDate13String]);
+                    } else {
+                        convertedValue = MR_dateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
+                    }
+
                 } while (!convertedValue && dateFormat);
                 value = convertedValue;
             }
-            //            value = adjustDateForDST(value);
         }
         else if (attributeType == NSInteger16AttributeType ||
                  attributeType == NSInteger32AttributeType ||
@@ -59,7 +64,17 @@
                  attributeType == NSDoubleAttributeType ||
                  attributeType == NSFloatAttributeType) {
             if (![value isKindOfClass:[NSNumber class]] && value != [NSNull null]) {
-                value = numberFromString([value description]);
+                value = MR_numberFromString([value description]);
+            }
+        }
+        else if (attributeType == NSBooleanAttributeType) {
+            if (![value isKindOfClass:[NSNumber class]] && value != [NSNull null]) {
+                value = [NSNumber numberWithBool:[value boolValue]];
+            }
+        }
+        else if (attributeType == NSStringAttributeType) {
+            if (![value isKindOfClass:[NSString class]] && value != [NSNull null]) {
+                value = [value description];
             }
         }
     }

@@ -57,7 +57,12 @@
     return self.model;
 }
 
-- (NSPersistentStoreCoordinator *)createCoordinator;
+- (NSPersistentStoreCoordinator *)createCoordinator
+{
+    return [self createCoordinatorWithOptions:[self defaultStoreOptions]];
+}
+
+- (NSPersistentStoreCoordinator *)createCoordinatorWithOptions:(NSDictionary *)options;
 {
     NSMigrationManager *migrationManager = [[NSMigrationManager alloc] initWithSourceModel:self.sourceModel destinationModel:self.targetModel];
     NSError *error = nil;
@@ -95,7 +100,7 @@
         [fileManager moveItemAtURL:targetStoreURL toURL:self.storeURL error:&error];
         
         coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.targetModel];
-        [coordinator MR_addSqliteStoreAtURL:self.storeURL withOptions:[self defaultStoreOptions]];
+        [coordinator MR_addSqliteStoreAtURL:self.storeURL withOptions:options];
         MRLogInfo(@"Migrated store at URL [%@]", self.storeURL);
     }
     else

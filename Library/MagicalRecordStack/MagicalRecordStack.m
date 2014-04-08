@@ -149,6 +149,11 @@ static MagicalRecordStack *defaultStack;
 
 - (NSPersistentStoreCoordinator *) createCoordinator;
 {
+    return [self createCoordinatorWithOptions:nil];
+}
+
+- (NSPersistentStoreCoordinator *) createCoordinatorWithOptions:(NSDictionary *)options;
+{
     MRLogError(@"%@ must be overridden in %@", NSStringFromSelector(_cmd), NSStringFromClass([self class]));
     return nil;
 }

@@ -1,0 +1,10 @@
+//
+// Prefix header for all source files of the 'MagicalRecordTests' target in the 'MagicalRecordTests' project
+//
+
+#ifdef __OBJC__
+    #import <CoreData/CoreData.h>
+
+    #define MR_LOGGING_ENABLED 1
+    #define MR_SHORTHAND 1
+#endif

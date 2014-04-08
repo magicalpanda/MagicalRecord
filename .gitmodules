@@ -1,6 +1,3 @@
-[submodule "Tests/Support/Vendor/Specta"]
-	path = Tests/Support/Vendor/Specta
-	url = https://github.com/specta/specta.git
-[submodule "Tests/Support/Vendor/Expecta"]
-	path = Tests/Support/Vendor/Expecta
+[submodule "Tests/Vendor/Expecta"]
+	path = Tests/Vendor/Expecta
 	url = https://github.com/specta/expecta.git

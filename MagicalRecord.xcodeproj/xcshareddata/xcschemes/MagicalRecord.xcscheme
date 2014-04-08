@@ -28,6 +28,16 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "909BBC7D18E03FCB007BA3F1"
+               BuildableName = "MagicalRecordTests-OSX.xctest"
+               BlueprintName = "MagicalRecordTests-OSX"
+               ReferencedContainer = "container:MagicalRecord.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

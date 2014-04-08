@@ -15,6 +15,7 @@ void MR_swapMethodsFromClass(Class c, SEL orig, SEL new);
 
 NSString * const kMagicalRecordImportCustomDateFormatKey            = @"dateFormat";
 NSString * const kMagicalRecordImportDefaultDateFormatString        = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
+NSString * const kMagicalRecordImportUnixDate13String               = @"unixTime13";
 
 NSString * const kMagicalRecordImportAttributeKeyMapKey             = @"mappedKeyName";
 NSString * const kMagicalRecordImportAttributeValueClassNameKey     = @"attributeValueClassName";
@@ -145,7 +146,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
         }
     }
 
-    NSString *addRelatedObjectToSetMessage = [NSString stringWithFormat:addRelationMessageFormat, attributeNameFromString([relationshipInfo name])];
+    NSString *addRelatedObjectToSetMessage = [NSString stringWithFormat:addRelationMessageFormat, MR_attributeNameFromString([relationshipInfo name])];
  
     SEL selector = NSSelectorFromString(addRelatedObjectToSetMessage);
     
@@ -168,7 +169,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 
 - (BOOL) MR_shouldImportData:(id)relatedObjectData forRelationshipNamed:(NSString *)relationshipName;
 {
-    BOOL shouldImport = NO;
+    BOOL shouldImport = YES; // By default, we always import
     SEL shouldImportSelector = NSSelectorFromString([NSString stringWithFormat:@"shouldImport%@:", [relationshipName MR_capitalizedFirstCharacterString]]);
     BOOL implementsShouldImport = (BOOL)[self respondsToSelector:shouldImportSelector];
 
@@ -285,11 +286,11 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
         
         if ((localObjectData) && (![localObjectData isKindOfClass:[NSDictionary class]]))
         {
-			NSString * relatedByAttribute = [[relationshipInfo userInfo] objectForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: primaryKeyNameFromString([[relationshipInfo destinationEntity] name]);
+			NSString * relatedByAttribute = [[relationshipInfo userInfo] objectForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: MR_primaryKeyNameFromString([[relationshipInfo destinationEntity] name]);
 			
             if (relatedByAttribute)
             {
-                if (![weakself MR_importValue:localObjectData forKey:relatedByAttribute])
+                if (![relatedObject MR_importValue:localObjectData forKey:relatedByAttribute])
                 {
                     [relatedObject setValue:localObjectData forKey:relatedByAttribute];
                 }
@@ -302,14 +303,20 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 
 + (id) MR_importFromObject:(id)objectData inContext:(NSManagedObjectContext *)context;
 {
-    NSAttributeDescription *primaryAttribute = [[self MR_entityDescription] MR_primaryAttributeToRelateBy];
+    NSAttributeDescription *primaryAttribute = [[self MR_entityDescriptionInContext:context] MR_primaryAttributeToRelateBy]; // TODO: Call out this bug
     
     id value = [objectData MR_valueForAttribute:primaryAttribute];
     
-    NSManagedObject *managedObject = [self MR_findFirstByAttribute:[primaryAttribute name] withValue:value inContext:context];
-    if (managedObject == nil) 
+    NSManagedObject *managedObject = nil;
+    
+    if (primaryAttribute != nil)
     {
-        managedObject = [self MR_createInContext:context];
+        managedObject = [self MR_findFirstByAttribute:[primaryAttribute name] withValue:value inContext:context];
+    }
+
+    if (managedObject == nil)
+    {
+        managedObject = [self MR_createEntityInContext:context];
     }
 
     [managedObject MR_importValuesForKeysWithObject:objectData];

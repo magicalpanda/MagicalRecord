@@ -1,193 +1,179 @@
 //
-//  DataImportTests.m
-//  Magical Record
-//
 //  Created by Saul Mora on 7/15/11.
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
+#import "MagicalRecordDataImportTestCase.h"
 #import "SingleEntityWithNoRelationships.h"
 
-@interface ImportSingleEntityWithNoRelationshipsTests : GHTestCase
+#define EXP_SHORTHAND
+#import "Expecta.h"
 
-@property (nonatomic, retain) SingleEntityWithNoRelationships *testEntity;
+#import "MagicalImportFunctions.h"
+
+@interface NSString (MagicalRecordDateFormatter)
+
+- (NSDate *)MRTests_dateFromString;
+
+@end
+
+@interface ImportSingleEntityWithNoRelationshipsTests : MagicalRecordDataImportTestCase
+
+@property(readwrite, nonatomic, strong) SingleEntityWithNoRelationships *testEntity;
 
 @end
 
 @implementation ImportSingleEntityWithNoRelationshipsTests
 
-@synthesize testEntity;
-
-- (void) setUpClass
+- (void)setUp
 {
-    [NSManagedObjectModel MR_setDefaultManagedObjectModel:[NSManagedObjectModel MR_managedObjectModelNamed:@"TestModel.momd"]];
-    [MagicalRecord setupCoreDataStackWithInMemoryStore];
+    [super setUp];
 
-    id singleEntity = [self dataFromJSONFixture];
-    
-    testEntity = [SingleEntityWithNoRelationships MR_importFromObject:singleEntity];
+    NSManagedObjectContext *stackContext = self.stack.context;
+
+    self.testEntity = [SingleEntityWithNoRelationships MR_importFromObject:self.testEntityData inContext:stackContext];
 }
 
-- (void) tearDownClass
+- (void)testImportASingleEntity
 {
-    [MagicalRecord cleanUp];
+    expect(self.testEntity).toNot.beNil();
 }
 
-- (void) testImportASingleEntity
+- (void)testImportStringAttributeToEntity
 {
-    assertThat(testEntity, is(notNilValue()));
+    expect(self.testEntity.stringTestAttribute).to.equal(@"This is a test value");
 }
 
-- (void) testImportStringAttributeToEntity
+- (void)testImportInt16AttributeToEntity
 {
-    assertThat(testEntity.stringTestAttribute, is(equalTo(@"This is a test value")));
+    XCTAssertEqualObjects(self.testEntity.int16TestAttribute, @256, @"int16TestAttribute did not contain expected value, instead found: %@", self.testEntity.int16TestAttribute);
 }
 
-- (void) testImportInt16AttributeToEntity
+- (void)testImportInt32AttributeToEntity
 {
-    assertThat(testEntity.int16TestAttribute, is(equalToInteger(256)));
+    XCTAssertEqualObjects(self.testEntity.int32TestAttribute, @32, @"int32TestAttribute did not contain expected value, instead found: %@", self.testEntity.int32TestAttribute);
 }
 
-- (void) testImportInt32AttributeToEntity
+- (void)testImportInt64AttributeToEntity
 {
-    assertThat(testEntity.int32TestAttribute, is(equalToInt(32)));
+    XCTAssertEqualObjects(self.testEntity.int64TestAttribute, @42, @"int64TestAttribute did not contain expected value, instead found: %@", self.testEntity.int64TestAttribute);
 }
 
-- (void) testImportInt64AttributeToEntity
+- (void)testImportDecimalAttributeToEntity
 {
-    assertThat(testEntity.int64TestAttribute, is(equalToInteger(42)));
+    XCTAssertEqualObjects(self.testEntity.decimalTestAttribute, @1.2, @"decimalTestAttribute did not contain expected value, instead found: %@", self.testEntity.decimalTestAttribute);
 }
 
-- (void) testImportDecimalAttributeToEntity
+- (void)testImportDoubleAttributeToEntity
 {
-    assertThat(testEntity.decimalTestAttribute, is(equalToDouble(1.2)));
+    XCTAssertEqualObjects(self.testEntity.doubleTestAttribute, @124.3, @"doubleTestAttribute did not contain expected value, instead found: %@", self.testEntity.doubleTestAttribute);
 }
 
-- (void) testImportDoubleAttributeToEntity
+- (void)testImportFloatAttributeToEntity
 {
-    assertThat(testEntity.doubleTestAttribute, is(equalToDouble(124.3)));
+    XCTAssertEqualObjects(self.testEntity.floatTestAttribute, @10000000000, @"floatTestAttribute did not contain expected value, instead found: %@", self.testEntity.floatTestAttribute);
 }
 
-- (void) testImportFloatAttributeToEntity
+- (void)testImportBooleanAttributeToEntity
 {
-    assertThat(testEntity.floatTestAttribute, is(equalToFloat(10000000000)));
+    XCTAssertFalse([self.testEntity.booleanTestAttribute boolValue], @"booleanTestAttribute did not contain expected value, instead found: %@", self.testEntity.booleanTestAttribute);
 }
 
-- (void) testImportBooleanAttributeToEntity
+- (void)testImportMappedStringAttributeToEntity
 {
-    assertThat(testEntity.booleanTestAttribute, is(equalToBool(NO)));
+    XCTAssertEqualObjects(self.testEntity.mappedStringAttribute, @"Mapped value", @"mappedStringAttribute did not contain expected value, instead found: %@", self.testEntity.mappedStringAttribute);
 }
 
-- (void) testImportMappedStringAttributeToEntity
+- (void)testImportStringAttributeWithNullValue
 {
-    assertThat(testEntity.mappedStringAttribute, is(equalTo(@"Mapped value")));
+    XCTAssertNil(self.testEntity.nullTestAttribute, @"nullTestAttribute did not contain expected value, instead found: %@", self.testEntity.nullTestAttribute);
 }
 
-- (void) testImportStringAttributeWithNullValue
+- (void)testImportNumberAsStringAttributeToEntity
 {
-    assertThat(testEntity.nullTestAttribute, is(nilValue()));
+    XCTAssertEqualObjects(self.testEntity.numberAsStringTestAttribute, @"10248909829", @"numberAsStringTestAttribute did not contain expected value, instead found: %@", self.testEntity.numberAsStringTestAttribute);
 }
 
-- (void) testImportAttributeNotInJsonData
+- (void)testImportBooleanAsStringAttributeToEntity
 {
-    assertThat(testEntity.notInJsonAttribute, containsString(@"Core Data Model"));
+    XCTAssertTrue(self.testEntity.booleanAsStringTestAttribute, @"booleanFromStringTestAttribute did not contain expected value, instead found: %@", self.testEntity.booleanAsStringTestAttribute);
 }
 
-#if TARGET_OS_IPHONE 
-
-#if defined(__IPHONE_5_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_5_0
-
-- (void) testImportUIColorAttributeToEntity
+- (void)testImportAttributeNotInJsonData
 {
-    UIColor *actualColor = testEntity.colorTestAttribute;
- 
-    if ([actualColor respondsToSelector:@selector(getRed:green:blue:alpha:)]) 
-    {
+    NSRange rangeOfString = [self.testEntity.notInJsonAttribute rangeOfString:@"Core Data Model"];
+
+    XCTAssertNotEqual(@(rangeOfString.length), @0, @"notInJsonAttribute did not contain expected string, instead received: %@", self.testEntity.notInJsonAttribute);
+}
+
+#if TARGET_OS_IPHONE
+
+- (void)testImportUIColorAttributeToEntity
+{
+    UIColor *actualColor = self.testEntity.colorTestAttribute;
+
+    if ([actualColor respondsToSelector:@selector(getRed:green:blue:alpha:)]) {
         CGFloat red, blue, green, alpha;
         [actualColor getRed:&red green:&green blue:&blue alpha:&alpha];
 
-        assertThatFloat(alpha, is(equalToFloat(1.)));
-        assertThatFloat(red, is(equalToFloat(64.0f/255.0f)));
-        assertThatFloat(green, is(equalToFloat(128.0f/255.0f)));
-        assertThatFloat(blue, is(equalToFloat(225.0f/255.0f)));
+        XCTAssertEqual(alpha, (CGFloat)1.0, @"Unexpected value returned: %f", alpha);
+        XCTAssertEqual(red, (CGFloat)(64.0f / 255.0f), @"Unexpected value returned: %f", red);
+        XCTAssertEqual(green, (CGFloat)(128.0f / 255.0f), @"Unexpected value returned: %f", green);
+        XCTAssertEqual(blue, (CGFloat)(225.0f / 255.0f), @"Unexpected value returned: %f", blue);
     }
-}
-#endif
-
-- (NSDate *) dateFromString:(NSString *)date
-{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss ZZZ";
-    formatter.timeZone = [NSTimeZone timeZoneWithName:@"GMT"];
-    formatter.locale = [NSLocale currentLocale];
-    
-    NSDate *expectedDate = [formatter dateFromString:date];
-
-    return expectedDate;
 }
 
 #else
 
-- (void) testImportNSColorAttributeToEntity
+- (void)testImportNSColorAttributeToEntity
 {
-#warning Proper fix is to extract out color tests to seperate mac and iOS specific model files with proper configurations
-    NSColor *actualColor = (NSColor *)[testEntity colorTestAttribute];
-    
-    assertThatDouble([actualColor alphaComponent], is(equalToDouble(255.0/255.0)));
-    assertThatDouble([actualColor redComponent], is(equalToFloat(64.0f/255.0f)));
-    assertThatDouble([actualColor greenComponent], is(equalToFloat(128.0f/255.0f)));
-    assertThatDouble([actualColor blueComponent], is(equalToFloat(225.0f/255.0f)));
+    NSColor *actualColor = self.testEntity.colorTestAttribute;
+
+    XCTAssertEqual([actualColor alphaComponent], (CGFloat)(255.0 / 255.0), @"Unexpected value returned");
+    XCTAssertEqual([actualColor redComponent], (CGFloat)(64.0f / 255.0f), @"Unexpected value returned");
+    XCTAssertEqual([actualColor greenComponent], (CGFloat)(128.0f / 255.0f), @"Unexpected value returned");
+    XCTAssertEqual([actualColor blueComponent], (CGFloat)(225.0f / 255.0f), @"Unexpected value returned");
 }
 
-- (NSDate *) dateFromString:(NSString *)date
+#endif /* if TARGET_OS_IPHONE */
+
+- (void)testImportDateAttributeToEntity
 {
-    NSDate *expectedDate = [NSDate dateWithString:date];
-    return expectedDate;
+    expect(self.testEntity.dateTestAttribute).to.equal([@"2011-07-23 22:30:40 +0000" MRTests_dateFromString]);
 }
 
-#endif
-
-- (void) testImportDateAttributeToEntity
+- (void)testImportDateAttributeWithCustomFormat
 {
-    NSDate *expectedDate = [self dateFromString:@"2011-07-23 22:30:40 +0000"];
-    assertThat(testEntity.dateTestAttribute, is(equalTo(expectedDate)));
+    expect(self.testEntity.dateWithCustomFormat).to.equal([@"2011-08-05 01:56:04 +0000" MRTests_dateFromString]);
 }
 
-- (void) testImportDateAttributeWithCustomFormat
+- (void)testImportEpochDate
 {
-    NSDate *expectedDate = [self dateFromString:@"2011-08-05 00:56:04 +0000"];
-    assertThat(testEntity.dateWithCustomFormat, is(equalTo(expectedDate)));
-    
+    expect(self.testEntity.unixTimeTestAttribute).to.equal([NSDate dateWithTimeIntervalSince1970:1388349428]);
 }
 
-- (void) testImportInt16AsStringAttributeToEntity
+- (void)testImportEpochDate13
 {
-    assertThat(testEntity.int16AsStringTestAttribute, is(equalToInteger(256)));
-}
-
-- (void) testImportInt32AsStringAttributeToEntity
-{
-    assertThat(testEntity.int32AsStringTestAttribute, is(equalToInt(32)));
-}
-
-- (void) testImportInt64AsStringAttributeToEntity
-{
-    assertThat(testEntity.int64AsStringTestAttribute, is(equalToInteger(42)));
-}
-
-- (void) testImportDecimalAsStringAttributeToEntity
-{
-    assertThat(testEntity.decimalAsStringTestAttribute, is(equalToDouble(1.2)));
-}
-
-- (void) testImportDoubleAsStringAttributeToEntity
-{
-    assertThat(testEntity.doubleAsStringTestAttribute, is(equalToDouble(124.3)));
-}
-
-- (void) testImportFloatAsStringAttributeToEntity
-{
-    assertThat(testEntity.floatAsStringTestAttribute, is(equalToFloat(10000000000)));
+    expect(self.testEntity.unixTime13TestAttribute).to.equal([NSDate dateWithTimeIntervalSince1970:1388349427.543]);
 }
 
 @end
+
+@implementation NSString (MagicalRecordDateFormatter)
+
+- (NSDate *)MRTests_dateFromString
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+
+    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss ZZZ";
+    formatter.timeZone = [NSTimeZone timeZoneWithName:@"GMT"];
+    formatter.locale = [NSLocale currentLocale];
+
+    NSDate *expectedDate = [formatter dateFromString:self];
+
+    return expectedDate;
+}
+
+@end
+
+

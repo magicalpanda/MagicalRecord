@@ -4,17 +4,10 @@
 #endif
 
 #ifdef __OBJC__
-//#if defined(__has_feature)
-//    #if !( __has_feature(objc_arc))
-//        #warning MagicalRecord now requires ARC to be enabled
-//    #endif
-//#endif
-
     #import <CoreFoundation/CoreFoundation.h>
     #import <CoreData/CoreData.h>
     #import "MagicalRecord.h"
     #import "MagicalRecord+Options.h"
-    #import "MagicalRecord+ShorthandSupport.h"
     #import "MagicalRecord+Setup.h"
 
     #import "MagicalRecordStack.h"
@@ -29,10 +22,6 @@
     #import "AutoMigratingMagicalRecordStack.h"
     #import "AutoMigratingWithSourceAndTargetModelMagicalRecordStack.h"
     #import "ManuallyMigratingMagicalRecordStack.h"
-
-    #ifdef MR_SHORTHAND
-        #import "MagicalRecordShorthand.h"
-    #endif
 
     #import "NSManagedObject+MagicalRecord.h"
     #import "NSManagedObject+MagicalRequests.h"
@@ -64,6 +53,9 @@
         #import "NSManagedObject+MagicalFetching.h"
         #import "NSFetchedResultsController+MagicalFetching.h"
     #endif
+
+    #define MR_SHORTHAND 1
+    #import "MagicalRecordShorthand.h"
 
 #endif
 

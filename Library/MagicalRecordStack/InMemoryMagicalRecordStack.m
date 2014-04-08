@@ -12,10 +12,11 @@
 
 @implementation InMemoryMagicalRecordStack
 
-- (NSPersistentStoreCoordinator *) createCoordinator;
+- (NSPersistentStoreCoordinator *) createCoordinatorWithOptions:(NSDictionary *)options
 {
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self model]];
-    [coordinator MR_addInMemoryStore];
+
+    [coordinator MR_addInMemoryStoreWithOptions:options];
 
     return coordinator;
 }

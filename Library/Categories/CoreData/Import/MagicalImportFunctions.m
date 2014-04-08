@@ -11,19 +11,19 @@
 
 #pragma mark - Data import helper functions
 
-NSString * attributeNameFromString(NSString *value)
+NSString * MR_attributeNameFromString(NSString *value)
 {
     NSString *firstCharacter = [[value substringToIndex:1] capitalizedString];
     return [firstCharacter stringByAppendingString:[value substringFromIndex:1]];
 }
 
-NSString * primaryKeyNameFromString(NSString *value)
+NSString * MR_primaryKeyNameFromString(NSString *value)
 {
     NSString *firstCharacter = [[value substringToIndex:1] lowercaseString];
     return [firstCharacter stringByAppendingFormat:@"%@ID", [value substringFromIndex:1]];
 }
 
-NSDate * adjustDateForDST(NSDate *date)
+NSDate * MR_adjustDateForDST(NSDate *date)
 {
     NSTimeInterval dstOffset = [[NSTimeZone localTimeZone] daylightSavingTimeOffsetForDate:date];
     NSDate *actualDate = [date dateByAddingTimeInterval:dstOffset];
@@ -31,10 +31,10 @@ NSDate * adjustDateForDST(NSDate *date)
     return actualDate;
 }
 
-NSDate * dateFromString(NSString *value, NSString *format)
+NSDate * MR_dateFromString(NSString *value, NSString *format)
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setTimeZone:[NSTimeZone localTimeZone]];
+    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     [formatter setLocale:[NSLocale currentLocale]];
     [formatter setDateFormat:format];
     
@@ -43,12 +43,22 @@ NSDate * dateFromString(NSString *value, NSString *format)
     return parsedDate;
 }
 
-NSNumber * numberFromString(NSString *value) {
+NSDate * MR_dateFromNumber(NSNumber *value, BOOL milliseconds)
+{
+    NSTimeInterval timeInterval = [value doubleValue];
+
+    if (milliseconds) {
+        timeInterval = timeInterval / 1000.00;
+    }
+
+    return [NSDate dateWithTimeIntervalSince1970:timeInterval];
+}
+
+NSNumber * MR_numberFromString(NSString *value) {
     return [NSNumber numberWithDouble:[value doubleValue]];
 }
 
-NSInteger* newColorComponentsFromString(NSString *serializedColor);
-NSInteger* newColorComponentsFromString(NSString *serializedColor)
+NSInteger* MR_newColorComponentsFromString(NSString *serializedColor)
 {
     NSScanner *colorScanner = [NSScanner scannerWithString:serializedColor];
     NSString *colorType;
@@ -72,16 +82,14 @@ NSInteger* newColorComponentsFromString(NSString *serializedColor)
             componentValue++;
         }
     }
-    //else if ([colorType hasPrefix:@"hsba"])
-    //else if ([colorType hasPrefix:@""])
     return componentValues;
 }
 
 #if TARGET_OS_IPHONE
 
-UIColor * UIColorFromString(NSString *serializedColor)
+UIColor * MR_colorFromString(NSString *serializedColor)
 {
-    NSInteger *componentValues = newColorComponentsFromString(serializedColor);
+    NSInteger *componentValues = MR_newColorComponentsFromString(serializedColor);
     if (componentValues == NULL)
     {
         return nil;
@@ -95,13 +103,12 @@ UIColor * UIColorFromString(NSString *serializedColor)
     free(componentValues);
     return color;
 }
-id (*colorFromString)(NSString *) = UIColorFromString;
 
 #else
 
-NSColor * NSColorFromString(NSString *serializedColor)
+NSColor * MR_colorFromString(NSString *serializedColor)
 {
-    NSInteger *componentValues = newColorComponentsFromString(serializedColor);
+    NSInteger *componentValues = MR_newColorComponentsFromString(serializedColor);
     if (componentValues == NULL)
     {
         return nil;
@@ -114,7 +121,7 @@ NSColor * NSColorFromString(NSString *serializedColor)
     free(componentValues);
     return color;
 }
-id (*colorFromString)(NSString *) = NSColorFromString;
-
 
 #endif
+
+id (*colorFromString)(NSString *) = MR_colorFromString;

@@ -65,15 +65,15 @@
     return NSStringFromClass(self);
 }
 
++ (NSEntityDescription *) MR_entityDescription
+{
+	return [self MR_entityDescriptionInContext:[[MagicalRecordStack defaultStack] context]];
+}
+
 + (NSEntityDescription *) MR_entityDescriptionInContext:(NSManagedObjectContext *)context
 {
     NSString *entityName = [self MR_entityName];
     return [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
-}
-
-+ (NSEntityDescription *) MR_entityDescription
-{
-	return [self MR_entityDescriptionInContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (NSArray *) MR_propertiesNamed:(NSArray *)properties
@@ -124,35 +124,59 @@
 	return [self MR_sortAscending:NO attributes:attributesToSortBy];
 }
 
-#pragma mark -
+#pragma mark - Entity Creation
 
-+ (id) MR_createInContext:(NSManagedObjectContext *)context
++ (instancetype) MR_createEntity
 {
-    id managedObject = [NSEntityDescription insertNewObjectForEntityForName:[self MR_entityName] inManagedObjectContext:context];
+	return [self MR_createEntityInContext:[[MagicalRecordStack defaultStack] context]];
+}
+
++ (instancetype) MR_createEntityInContext:(NSManagedObjectContext *)context
+{
+    return [self MR_createEntityWithDescription:nil inContext:context];
+}
+
++ (instancetype) MR_createEntityWithDescription:(NSEntityDescription *)entityDescription inContext:(NSManagedObjectContext *)context
+{
+    NSEntityDescription *entity = entityDescription;
+
+    if (!entity)
+    {
+        entity = [self MR_entityDescriptionInContext:context];
+    }
+
+    NSManagedObject *managedObject = [[self alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+
     if ([managedObject respondsToSelector:@selector(MR_awakeFromCreation)])
     {
         [managedObject MR_awakeFromCreation];
     }
+
     return managedObject;
 }
 
-+ (id) MR_createEntity
-{	
-	NSManagedObject *newEntity = [self MR_createInContext:[[MagicalRecordStack defaultStack] context]];
+#pragma mark - Entity Deletion
 
-	return newEntity;
-}
-
-- (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context
+- (BOOL) MR_isEntityDeleted
 {
-	[context deleteObject:self];
-	return YES;
+    return [self isDeleted] || [self managedObjectContext] == nil;
 }
 
 - (BOOL) MR_deleteEntity
 {
-	[self MR_deleteInContext:[self managedObjectContext]];
-	return YES;
+	return [self MR_deleteEntityInContext:[self managedObjectContext]];
+}
+
+- (BOOL) MR_deleteEntityInContext:(NSManagedObjectContext *)context
+{
+    NSError *retrieveExistingObjectError;
+    NSManagedObject *objectInContext = [context existingObjectWithID:[self objectID] error:&retrieveExistingObjectError];
+
+    [[retrieveExistingObjectError MR_coreDataDescription] MR_logToConsole];
+
+    [context deleteObject:objectInContext];
+
+    return [objectInContext MR_isEntityDeleted];
 }
 
 + (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context
@@ -185,7 +209,7 @@
     NSArray *objectsToDelete = [self MR_executeFetchRequest:request inContext:context];
     for (NSManagedObject *objectToDelete in objectsToDelete)
     {
-        [objectToDelete MR_deleteInContext:context];
+        [objectToDelete MR_deleteEntityInContext:context];
     }
     return YES;
 }
@@ -215,20 +239,7 @@
     }
 }
 
-- (id) MR_inContextIfTempObject:(NSManagedObjectContext *)otherContext;
-{
-    NSManagedObjectID *objectID = [self objectID];
-    if ([objectID isTemporaryID])
-    {
-        return self;
-    }
-    else
-    {
-        return [self MR_inContext:otherContext];
-    }
-}
-
-- (id) MR_inContext:(NSManagedObjectContext *)otherContext;
+- (instancetype) MR_inContext:(NSManagedObjectContext *)otherContext;
 {
     NSManagedObject *inContext = nil;
     NSManagedObjectID *objectID = [self objectID];
@@ -257,6 +268,19 @@
     return inContext;
 }
 
+- (instancetype) MR_inContextIfTemporaryObject:(NSManagedObjectContext *)otherContext
+{
+    NSManagedObjectID *objectID = [self objectID];
+    if ([objectID isTemporaryID])
+    {
+        return self;
+    }
+    else
+    {
+        return [self MR_inContext:otherContext];
+    }
+}
+
 - (BOOL) MR_isValidForInsert;
 {
     NSError *error = nil;
@@ -279,6 +303,26 @@
     }
 
     return isValid;
+}
+
+@end
+
+@implementation NSManagedObject (MagicalRecordDeprecated)
+#pragma mark - Deprecated Methods
+
++ (instancetype) MR_createInContext:(NSManagedObjectContext *)context
+{
+    return [self MR_createEntityInContext:context];
+}
+
+- (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context
+{
+    return [self MR_deleteEntityInContext:context];
+}
+
+- (instancetype) MR_inContextIfTempObject:(NSManagedObjectContext *)otherContext;
+{
+    return [self MR_inContextIfTemporaryObject:otherContext];
 }
 
 @end

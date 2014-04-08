@@ -57,7 +57,7 @@
 
 - (instancetype) initWithStoreNamed:(NSString *)name;
 {
-    NSURL *storeURL = [NSPersistentStore MR_defaultURLForStoreName:name];
+    NSURL *storeURL = [NSPersistentStore MR_fileURLForStoreName:name];
     return [self initWithStoreAtURL:storeURL];
 }
 
@@ -80,7 +80,7 @@
 
 - (instancetype) initWithStoreNamed:(NSString *)name model:(NSManagedObjectModel *)model;
 {
-    NSURL *storeURL = [NSPersistentStore MR_defaultURLForStoreName:name];
+    NSURL *storeURL = [NSPersistentStore MR_fileURLForStoreName:name];
     return [self initWithStoreAtURL:storeURL model:model];
 }
 
@@ -103,14 +103,21 @@
     return options;
 }
 
-- (NSPersistentStoreCoordinator *) createCoordinator;
+- (NSPersistentStoreCoordinator *)createCoordinator
+{
+    return [self createCoordinatorWithOptions:[self defaultStoreOptions]];
+}
+
+- (NSPersistentStoreCoordinator *)createCoordinatorWithOptions:(NSDictionary *)options;
 {
     MRLogVerbose(@"Loading Store at URL: %@", self.storeURL);
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self model]];
+
     NSMutableDictionary *storeOptions = [[self defaultStoreOptions] mutableCopy];
     [storeOptions addEntriesFromDictionary:self.storeOptions];
     
     [coordinator MR_addSqliteStoreAtURL:self.storeURL withOptions:storeOptions];
+
     return coordinator;
 }
 
