@@ -8,6 +8,7 @@
 #import "CoreData+MagicalRecord.h"
 #import "MagicalRecordStack.h"
 
+const double MagicalRecordVersionNumber = MagicalRecordVersionNumber3_0;
 
 @implementation MagicalRecord
 
@@ -31,14 +32,9 @@
     return defaultName;
 }
 
-- (NSString *) version;
++ (double) version;
 {
-    return [[self class] version];
-}
-
-+ (NSString *) version;
-{
-    return @"3.0";
+    return MagicalRecordVersionNumber;
 }
 
 @end

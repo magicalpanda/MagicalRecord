@@ -11,6 +11,7 @@
 
 #ifdef NS_BLOCKS_AVAILABLE
 
+
 @class NSManagedObjectContext;
 typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
@@ -26,6 +27,12 @@ typedef NS_ENUM(NSInteger, MagicalRecordLogLevel)
     MagicalRecordLogLevelVerbose    = 1 << 4,
 };
 
+#define MagicalRecordVersionNumber2_2 220
+#define MagicalRecordVersionNumber2_3 230
+#define MagicalRecordVersionNumber3_0 300
+
+extern const double MagicalRecordVersionNumber;
+
 /*!
  *  @class MagicalRecord
  *
@@ -33,8 +40,7 @@ typedef NS_ENUM(NSInteger, MagicalRecordLogLevel)
  */
 @interface MagicalRecord : NSObject
 
-+ (NSString *) version;
-- (NSString *) version;
++ (double) version;
 + (void) cleanUp;
 
 /*!
