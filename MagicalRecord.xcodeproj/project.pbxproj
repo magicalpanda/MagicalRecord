@@ -176,7 +176,6 @@
 		C779101D17E63C3100D20ACF /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C7790F8217E63C3100D20ACF /* NSPersistentStoreCoordinator+MagicalRecord.m */; };
 		C779102217E63C3100D20ACF /* NSDictionary+MagicalRecordAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C7790F8517E63C3100D20ACF /* NSDictionary+MagicalRecordAdditions.m */; };
 		C779102717E63C3100D20ACF /* NSError+MagicalRecordErrorHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = C7790F8717E63C3100D20ACF /* NSError+MagicalRecordErrorHandling.m */; };
-		C779103117E63C3100D20ACF /* UITableViewCell+MGPAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C7790F8C17E63C3100D20ACF /* UITableViewCell+MGPAdditions.m */; };
 		C779103717E63C3100D20ACF /* MagicalMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C7790F8F17E63C3100D20ACF /* MagicalMigrationManager.m */; };
 		C779104617E63C3100D20ACF /* MagicalRecord+Options.m in Sources */ = {isa = PBXBuildFile; fileRef = C7790F9617E63C3100D20ACF /* MagicalRecord+Options.m */; };
 		C779104B17E63C3100D20ACF /* MagicalRecord+Setup.m in Sources */ = {isa = PBXBuildFile; fileRef = C7790F9817E63C3100D20ACF /* MagicalRecord+Setup.m */; };
@@ -491,10 +490,6 @@
 		C7790F8517E63C3100D20ACF /* NSDictionary+MagicalRecordAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+MagicalRecordAdditions.m"; sourceTree = "<group>"; };
 		C7790F8617E63C3100D20ACF /* NSError+MagicalRecordErrorHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+MagicalRecordErrorHandling.h"; sourceTree = "<group>"; };
 		C7790F8717E63C3100D20ACF /* NSError+MagicalRecordErrorHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+MagicalRecordErrorHandling.m"; sourceTree = "<group>"; };
-		C7790F8917E63C3100D20ACF /* MGPFetchedResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGPFetchedResultsTableViewController.h; sourceTree = "<group>"; };
-		C7790F8A17E63C3100D20ACF /* MGPFetchedResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGPFetchedResultsTableViewController.m; sourceTree = "<group>"; };
-		C7790F8B17E63C3100D20ACF /* UITableViewCell+MGPAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+MGPAdditions.h"; sourceTree = "<group>"; };
-		C7790F8C17E63C3100D20ACF /* UITableViewCell+MGPAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+MGPAdditions.m"; sourceTree = "<group>"; };
 		C7790F8E17E63C3100D20ACF /* MagicalMigrationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalMigrationManager.h; sourceTree = "<group>"; };
 		C7790F8F17E63C3100D20ACF /* MagicalMigrationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalMigrationManager.m; sourceTree = "<group>"; };
 		C7790F9517E63C3100D20ACF /* MagicalRecord+Options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MagicalRecord+Options.h"; sourceTree = "<group>"; };
@@ -783,7 +778,6 @@
 			children = (
 				C7790F5017E63C3000D20ACF /* CoreData */,
 				C7790F8317E63C3100D20ACF /* Foundation */,
-				C7790F8817E63C3100D20ACF /* UIKit */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -881,17 +875,6 @@
 				C7790F8717E63C3100D20ACF /* NSError+MagicalRecordErrorHandling.m */,
 			);
 			path = Foundation;
-			sourceTree = "<group>";
-		};
-		C7790F8817E63C3100D20ACF /* UIKit */ = {
-			isa = PBXGroup;
-			children = (
-				C7790F8917E63C3100D20ACF /* MGPFetchedResultsTableViewController.h */,
-				C7790F8A17E63C3100D20ACF /* MGPFetchedResultsTableViewController.m */,
-				C7790F8B17E63C3100D20ACF /* UITableViewCell+MGPAdditions.h */,
-				C7790F8C17E63C3100D20ACF /* UITableViewCell+MGPAdditions.m */,
-			);
-			path = UIKit;
 			sourceTree = "<group>";
 		};
 		C7790F9017E63C3100D20ACF /* MagicalRecord */ = {
@@ -1409,7 +1392,6 @@
 				C779101D17E63C3100D20ACF /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
 				C779104617E63C3100D20ACF /* MagicalRecord+Options.m in Sources */,
 				C7790FAF17E63C3100D20ACF /* MagicalImportFunctions.m in Sources */,
-				C779103117E63C3100D20ACF /* UITableViewCell+MGPAdditions.m in Sources */,
 				C7790FC817E63C3100D20ACF /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
 				C779100417E63C3100D20ACF /* NSPersistentStore+MagicalRecord.m in Sources */,
 				C7790FE117E63C3100D20ACF /* NSManagedObject+MagicalFinders.m in Sources */,
