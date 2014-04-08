@@ -8,6 +8,16 @@
 
 #import "MagicalRecord.h"
 
+typedef NS_ENUM(NSInteger, MagicalRecordLogLevel)
+{
+    MagicalRecordLogLevelOff        = 0,
+    MagicalRecordLogLevelFatal      = 1 << 0,
+    MagicalRecordLogLevelError      = 1 << 1,
+    MagicalRecordLogLevelWarn       = 1 << 2,
+    MagicalRecordLogLevelInfo       = 1 << 3,
+    MagicalRecordLogLevelVerbose    = 1 << 4,
+};
+
 @interface MagicalRecord (Options)
 
 + (void) setLogLevel:(MagicalRecordLogLevel)level;
