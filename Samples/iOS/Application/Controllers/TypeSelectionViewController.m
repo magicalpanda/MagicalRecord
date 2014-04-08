@@ -103,7 +103,7 @@
     }
     
     // Configure the cell
-	NSManagedObject *recipeType = [self.recipeTypes objectAtIndex:indexPath.row];
+	NSManagedObject *recipeType = (self.recipeTypes)[indexPath.row];
     cell.textLabel.text = [recipeType valueForKey:@"name"];
     
     if (recipeType == self.recipe.type) {
@@ -130,7 +130,7 @@
     [[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryCheckmark];    
 
      // Update the type of the recipe instance
-    self.recipe.type = [self.recipeTypes objectAtIndex:indexPath.row];
+    self.recipe.type = (self.recipeTypes)[indexPath.row];
     
     // Deselect the row.
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

@@ -1,6 +1,6 @@
 //
 //  MGPAppDelegate.h
-//  Recipies
+//  Recipes
 //
 //  Created by Saul Mora on 5/19/13.
 //

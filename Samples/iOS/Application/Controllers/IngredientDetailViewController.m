@@ -135,7 +135,7 @@
     if (!_ingredient) {
         self.ingredient = [Ingredient MR_createInContext:context];
         [_recipe addIngredientsObject:_ingredient];
-		_ingredient.displayOrder = [NSNumber numberWithInteger:[_recipe.ingredients count]];
+		_ingredient.displayOrder = @([_recipe.ingredients count]);
     }
 	
 	/*

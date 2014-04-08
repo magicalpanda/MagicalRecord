@@ -56,9 +56,9 @@
 
 - (void)setTemperatureDataFromDictionary:(NSDictionary *)temperatureDictionary {
     // Update text in labels from the dictionary
-    cLabel.text = [temperatureDictionary objectForKey:@"c"];
-    fLabel.text = [temperatureDictionary objectForKey:@"f"];
-    gLabel.text = [temperatureDictionary objectForKey:@"g"];
+    cLabel.text = temperatureDictionary[@"c"];
+    fLabel.text = temperatureDictionary[@"f"];
+    gLabel.text = temperatureDictionary[@"g"];
 }
 
 

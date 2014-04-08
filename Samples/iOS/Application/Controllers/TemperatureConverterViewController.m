@@ -97,7 +97,7 @@
     }
     
     // Configure the temperature cell with the relevant data
-    NSDictionary *temperatureDictionary = [self.temperatureData objectAtIndex:indexPath.row];
+    NSDictionary *temperatureDictionary = (self.temperatureData)[indexPath.row];
     [cell setTemperatureDataFromDictionary:temperatureDictionary];
     return cell;
 }

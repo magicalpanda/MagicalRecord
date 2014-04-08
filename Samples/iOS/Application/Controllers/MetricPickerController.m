@@ -145,7 +145,7 @@
 	}
 	
 	// The text shown in the component is just the number of the component.
-	NSString *text = [NSString stringWithFormat:@"%d", row];
+	NSString *text = [NSString stringWithFormat:@"%zd", row];
 	
 	// Where to set the text in depends on what sort of view it is.
 	UILabel *theLabel = nil;
@@ -215,7 +215,7 @@
         }
         ouncesDecimal = [[NSDecimalNumber alloc] initWithFloat:ounces];
         roundedOunces = [ouncesDecimal decimalNumberByRoundingAccordingToBehavior:roundingBehavior];
-        self.label.text = [NSString stringWithFormat:@"%d lbs  %@ oz", lbs, roundedOunces];
+        self.label.text = [NSString stringWithFormat:@"%zd lbs  %@ oz", lbs, roundedOunces];
     }
     else {
         ouncesDecimal = [[NSDecimalNumber alloc] initWithFloat:ounces];
