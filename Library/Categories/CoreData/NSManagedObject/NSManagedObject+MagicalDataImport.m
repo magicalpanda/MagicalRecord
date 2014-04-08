@@ -146,7 +146,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
         }
     }
 
-    NSString *addRelatedObjectToSetMessage = [NSString stringWithFormat:addRelationMessageFormat, attributeNameFromString([relationshipInfo name])];
+    NSString *addRelatedObjectToSetMessage = [NSString stringWithFormat:addRelationMessageFormat, MR_attributeNameFromString([relationshipInfo name])];
  
     SEL selector = NSSelectorFromString(addRelatedObjectToSetMessage);
     
@@ -286,7 +286,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
         
         if ((localObjectData) && (![localObjectData isKindOfClass:[NSDictionary class]]))
         {
-			NSString * relatedByAttribute = [[relationshipInfo userInfo] objectForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: primaryKeyNameFromString([[relationshipInfo destinationEntity] name]);
+			NSString * relatedByAttribute = [[relationshipInfo userInfo] objectForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: MR_primaryKeyNameFromString([[relationshipInfo destinationEntity] name]);
 			
             if (relatedByAttribute)
             {

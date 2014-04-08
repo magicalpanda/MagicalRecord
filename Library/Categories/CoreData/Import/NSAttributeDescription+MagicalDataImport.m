@@ -48,9 +48,9 @@
                     dateFormat = [[self userInfo] valueForKey:dateFormatKey];
 
                     if ([value isKindOfClass:[NSNumber class]]) {
-                        convertedValue = dateFromNumber(value, [dateFormat isEqualToString:kMagicalRecordImportUnixDate13String]);
+                        convertedValue = MR_dateFromNumber(value, [dateFormat isEqualToString:kMagicalRecordImportUnixDate13String]);
                     } else {
-                        convertedValue = dateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
+                        convertedValue = MR_dateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
                     }
 
                 } while (!convertedValue && dateFormat);
@@ -64,7 +64,7 @@
                  attributeType == NSDoubleAttributeType ||
                  attributeType == NSFloatAttributeType) {
             if (![value isKindOfClass:[NSNumber class]] && value != [NSNull null]) {
-                value = numberFromString([value description]);
+                value = MR_numberFromString([value description]);
             }
         }
         else if (attributeType == NSBooleanAttributeType) {
