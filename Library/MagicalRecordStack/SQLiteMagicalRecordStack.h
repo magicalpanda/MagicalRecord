@@ -18,7 +18,7 @@
 
 @property (nonatomic, assign) BOOL shouldDeletePersistentStoreOnModelMismatch;
 
-
+@property (nonatomic, copy, readwrite) NSDictionary *storeOptions;
 @property (nonatomic, copy, readonly) NSURL *storeURL;
 
 + (instancetype) stackWithStoreNamed:(NSString *)name model:(NSManagedObjectModel *)model;
