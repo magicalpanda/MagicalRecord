@@ -138,4 +138,35 @@
                              inContext:[NSManagedObjectContext MR_defaultContext]];    
 }
 
++ (NSArray *) MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString *)groupingKeyPath inContext:(NSManagedObjectContext *)context;
+{
+    NSExpression *expression = [NSExpression expressionForFunction:collectionOperator arguments:[NSArray arrayWithObject:[NSExpression expressionForKeyPath:attributeName]]];
+
+    NSExpressionDescription *expressionDescription = [[NSExpressionDescription alloc] init];
+
+    [expressionDescription setName:@"result"];
+    [expressionDescription setExpression:expression];
+
+    NSAttributeDescription *attributeDescription = [[[self MR_entityDescription] attributesByName] objectForKey:attributeName];
+    [expressionDescription setExpressionResultType:[attributeDescription attributeType]];
+    NSArray *properties = [NSArray arrayWithObjects:groupingKeyPath, expressionDescription, nil];
+
+    NSFetchRequest *fetchRequest = [self MR_requestAllWithPredicate:predicate];
+    [fetchRequest setPropertiesToFetch:properties];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    [fetchRequest setPropertiesToGroupBy:[NSArray arrayWithObject:groupingKeyPath]];
+
+    NSArray *results = [self MR_executeFetchRequest:fetchRequest inContext:context];
+
+    return results;
+}
+
++ (NSArray *) MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString *)groupingKeyPath;
+{
+    return [self MR_aggregateOperation:collectionOperator
+                           onAttribute:attributeName
+                         withPredicate:predicate groupBy:groupingKeyPath
+                             inContext:[NSManagedObjectContext MR_defaultContext]];
+}
+
 @end
