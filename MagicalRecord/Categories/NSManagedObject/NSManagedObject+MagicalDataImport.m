@@ -37,6 +37,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 {
     NSString *selectorString = [NSString stringWithFormat:@"import%@:", [key MR_capitalizedFirstCharacterString]];
     SEL selector = NSSelectorFromString(selectorString);
+
     if ([self respondsToSelector:selector])
     {
         NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:selector]];
@@ -44,9 +45,12 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
         [invocation setSelector:selector];
         [invocation setArgument:&value atIndex:2];
         [invocation invoke];
-//        [self performSelector:selector withObject:value];
-        return YES;
+
+        BOOL returnValue = YES;
+        [invocation getReturnValue:&returnValue];
+        return returnValue;
     }
+
     return NO;
 }
 
