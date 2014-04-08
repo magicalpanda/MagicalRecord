@@ -107,7 +107,7 @@
 	return [self MR_objectWithMinValueFor:property inContext:[self  managedObjectContext]];
 }
 
-+ (NSNumber *) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context 
++ (id) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context
 {
     NSExpression *ex = [NSExpression expressionForFunction:function 
                                                  arguments:[NSArray arrayWithObject:[NSExpression expressionForKeyPath:attributeName]]];
@@ -126,12 +126,11 @@
     [request setResultType:NSDictionaryResultType];    
     
     NSDictionary *resultsDictionary = [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
-    NSNumber *resultValue = [resultsDictionary objectForKey:@"result"];
     
-    return resultValue;    
+    return [resultsDictionary objectForKey:@"result"];
 }
 
-+ (NSNumber *) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate 
++ (id) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate 
 {
     return [self MR_aggregateOperation:function 
                            onAttribute:attributeName 
