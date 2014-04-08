@@ -40,6 +40,11 @@
 
 #ifdef NS_BLOCKS_AVAILABLE
 
+#define MagicalRecordVersionNumber2_2 220
+#define MagicalRecordVersionNumber2_3 230
+
+extern const double MagicalRecordVersionNumber;
+
 extern NSString * const kMagicalRecordCleanedUpNotification;
 
 @class NSManagedObjectContext;
@@ -49,9 +54,7 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
 @interface MagicalRecord : NSObject
 
-+ (NSInteger)version;
-+ (NSString *)displayVersion;
-+ (NSString *)build;
++ (double) version;
 
 + (NSString *) currentStack;
 

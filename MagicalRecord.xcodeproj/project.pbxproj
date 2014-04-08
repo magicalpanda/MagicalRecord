@@ -281,7 +281,6 @@
 		581ECBF6187F660B00084FEE /* MultipleEntitiesWithNoPrimaryKey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = MultipleEntitiesWithNoPrimaryKey.json; path = Fixtures/MultipleEntitiesWithNoPrimaryKey.json; sourceTree = "<group>"; };
 		90425375187102DC0066DA41 /* MagicalRecord-iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MagicalRecord-iOS-Prefix.pch"; sourceTree = "<group>"; };
 		90425376187102DC0066DA41 /* MagicalRecord-OSX-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MagicalRecord-OSX-Prefix.pch"; sourceTree = "<group>"; };
-		90425377187103060066DA41 /* MagicalRecordVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MagicalRecordVersion.h; sourceTree = "<group>"; };
 		90425379187103D00066DA41 /* MagicalRecordTests-iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagicalRecordTests-iOS-Info.plist"; sourceTree = "<group>"; };
 		9042537A187103D00066DA41 /* MagicalRecordTests-iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MagicalRecordTests-iOS-Prefix.pch"; sourceTree = "<group>"; };
 		9042537B187103D00066DA41 /* MagicalRecordTests-OSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagicalRecordTests-OSX-Info.plist"; sourceTree = "<group>"; };
@@ -732,7 +731,6 @@
 				C7DD729A150F832A00216827 /* Categories */,
 				C7DD72C4150F832A00216827 /* Core */,
 				C7DD72D4150F832A00216827 /* CoreData+MagicalRecord.h */,
-				90425377187103060066DA41 /* MagicalRecordVersion.h */,
 			);
 			path = MagicalRecord;
 			sourceTree = "<group>";
@@ -845,7 +843,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7CF97B417498414008D9D13 /* Build configuration list for PBXNativeTarget "libMagicalRecord-iOS" */;
 			buildPhases = (
-				908FFE1A186FB3A10073F316 /* Update Version Information */,
 				C7CF97A717498414008D9D13 /* Sources */,
 				C7CF97A817498414008D9D13 /* Frameworks */,
 				C7CF97A917498414008D9D13 /* CopyFiles */,
@@ -863,7 +860,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7CF97C31749843F008D9D13 /* Build configuration list for PBXNativeTarget "libMagicalRecord-OSX" */;
 			buildPhases = (
-				908FFE1B186FB3DF0073F316 /* Update Version Information */,
 				C7CF97B71749843F008D9D13 /* Sources */,
 				C7CF97B81749843F008D9D13 /* Frameworks */,
 				C7CF97B91749843F008D9D13 /* Headers */,
@@ -1058,37 +1054,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		908FFE1A186FB3A10073F316 /* Update Version Information */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Update Version Information";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "#!/bin/bash\n\n# This script automatically sets the version and short version string of\n# an Xcode project from the Git repository containing the project.\n#\n# To use this script in Xcode 4, add the contents to a \"Run Script\" build\n# phase for your application target.\n\nset -o errexit\nset -o nounset\n\n# Use the latest tag for short version (You'll have to make sure that all your tags are of the format 0.0.0,\n# this is to satisfy Apple's rule that short version be three integers separated by dots)\nSHORT_VERSION=$(git --git-dir=\"${SRCROOT}/.git\" --work-tree=\"${SRCROOT}\" describe --abbrev=0 | xargs)\n\n# I'd like to use the Git commit hash for CFBundleVersion.\nBUILD=$(git --git-dir=\"${PROJECT_DIR}/.git\" --work-tree=\"${PROJECT_DIR}\" rev-parse --short HEAD | xargs)\n\n# But Apple wants this value to be a monotonically increasing integer, so\n# instead use the number of commits on the master branch. If you like to\n# play fast and loose with your Git history, this may cause you problems.\n# Thanks to @amrox for pointing out the issue and fix.\nVERSION=$(git --git-dir=\"${SRCROOT}/.git\" --work-tree=\"${SRCROOT}\" rev-list HEAD | wc -l | xargs)\n\n# For non-master branch builds, tag the display version with the branch name\nBRANCH_NAME=$(git --git-dir=\"${SRCROOT}/.git\" --work-tree=\"${SRCROOT}\" symbolic-ref --short HEAD | xargs)\n\necho \"VERSION: ${VERSION}\"\necho \"SHORT VERSION: ${SHORT_VERSION}\"\necho \"BUILD: ${BUILD}\"\n\n# Output header file\nHEADER=\"${SRCROOT}/MagicalRecord/MagicalRecordVersion.h\"\ncd \"${SRCROOT}\"\necho \"// Do not edit\" > \"${HEADER}\"\necho \"#define MAGICAL_RECORD_DISPLAY_VERSION @\\\"${SHORT_VERSION}${BRANCH_NAME#master}\\\"\" >> \"${HEADER}\"\necho \"#define MAGICAL_RECORD_VERSION ${VERSION}\" >> \"${HEADER}\"\necho \"#define MAGICAL_RECORD_BUILD @\\\"${BUILD}\\\"\" >> \"${HEADER}\"\necho \"// Updated on \"`date` >> \"${HEADER}\"\n";
-		};
-		908FFE1B186FB3DF0073F316 /* Update Version Information */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Update Version Information";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "#!/bin/bash\n\n# This script automatically sets the version and short version string of\n# an Xcode project from the Git repository containing the project.\n#\n# To use this script in Xcode 4, add the contents to a \"Run Script\" build\n# phase for your application target.\n\nset -o errexit\nset -o nounset\n\n# Use the latest tag for short version (You'll have to make sure that all your tags are of the format 0.0.0,\n# this is to satisfy Apple's rule that short version be three integers separated by dots)\nSHORT_VERSION=$(git --git-dir=\"${SRCROOT}/.git\" --work-tree=\"${SRCROOT}\" describe --abbrev=0 | xargs)\n\n# I'd like to use the Git commit hash for CFBundleVersion.\nBUILD=$(git --git-dir=\"${PROJECT_DIR}/.git\" --work-tree=\"${PROJECT_DIR}\" rev-parse --short HEAD | xargs)\n\n# But Apple wants this value to be a monotonically increasing integer, so\n# instead use the number of commits on the master branch. If you like to\n# play fast and loose with your Git history, this may cause you problems.\n# Thanks to @amrox for pointing out the issue and fix.\nVERSION=$(git --git-dir=\"${SRCROOT}/.git\" --work-tree=\"${SRCROOT}\" rev-list HEAD | wc -l | xargs)\n\n# For non-master branch builds, tag the display version with the branch name\nBRANCH_NAME=$(git --git-dir=\"${SRCROOT}/.git\" --work-tree=\"${SRCROOT}\" symbolic-ref --short HEAD | xargs)\n\necho \"VERSION: ${VERSION}\"\necho \"SHORT VERSION: ${SHORT_VERSION}\"\necho \"BUILD: ${BUILD}\"\n\n# Output header file\nHEADER=\"${SRCROOT}/MagicalRecord/MagicalRecordVersion.h\"\ncd \"${SRCROOT}\"\necho \"// Do not edit\" > \"${HEADER}\"\necho \"#define MAGICAL_RECORD_DISPLAY_VERSION @\\\"${SHORT_VERSION}${BRANCH_NAME#master}\\\"\" >> \"${HEADER}\"\necho \"#define MAGICAL_RECORD_VERSION ${VERSION}\" >> \"${HEADER}\"\necho \"#define MAGICAL_RECORD_BUILD @\\\"${BUILD}\\\"\" >> \"${HEADER}\"\necho \"// Updated on \"`date` >> \"${HEADER}\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C7CF97A717498414008D9D13 /* Sources */ = {
