@@ -134,10 +134,18 @@
     NSURL *walSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-wal"]];
 
     BOOL removeItemResult = YES;
+    NSError *removeItemError;
 
     for (NSURL *toRemove in [NSArray arrayWithObjects:url, shmSidecar, walSidecar, nil])
     {
-        removeItemResult = removeItemResult && [[NSFileManager defaultManager] removeItemAtURL:toRemove error:nil];
+        BOOL itemResult = [[NSFileManager defaultManager] removeItemAtURL:toRemove error:&removeItemError];
+
+        if (NO == itemResult)
+        {
+            [[removeItemError localizedDescription] MR_logToConsole];
+        }
+
+        removeItemResult = removeItemResult && itemResult;
     }
 
     return removeItemResult;
