@@ -266,7 +266,7 @@ File.open("#{output_file}.h", "w") { |file|
 File.open("#{output_file}.m", "w") { |file|
     file.write("#ifdef MR_SHORTHAND\n\n")
     file.write("#import \"#{output_file}.h\"\n")
-    file.write("#import \"CoreData+MagicalRecord.h\"\n\n")
+    file.write("#import \"MagicalRecord.h\"\n\n")
     file.write(implementations.compact.join("\n"))
     file.write("#endif\n")
 }

@@ -6,7 +6,7 @@
 //
 
 #import "MagicalRecordStack+Actions.h"
-#import "CoreData+MagicalRecord.h"
+#import "MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
 #import "MagicalRecordStack.h"
 #import "MagicalRecordLogging.h"

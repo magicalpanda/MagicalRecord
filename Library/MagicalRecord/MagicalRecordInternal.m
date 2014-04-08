@@ -1,14 +1,10 @@
 //
-//  MagicalRecord.m
-//
 //  Created by Saul Mora on 3/11/10.
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "CoreData+MagicalRecord.h"
+#import "MagicalRecordInternal.h"
 #import "MagicalRecordStack.h"
-
-const double MagicalRecordVersionNumber = MagicalRecordVersionNumber3_0;
 
 @implementation MagicalRecord
 
@@ -20,11 +16,13 @@ const double MagicalRecordVersionNumber = MagicalRecordVersionNumber3_0;
 + (NSString *) defaultStoreName;
 {
     NSString *defaultName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(id)kCFBundleNameKey];
+
     if (defaultName == nil)
     {
-        defaultName = kMagicalRecordDefaultStoreFileName;
+        defaultName = @"CoreDataStore.sqlite";
     }
-    if (![defaultName hasSuffix:@"sqlite"]) 
+
+    if (![defaultName hasSuffix:@"sqlite"])
     {
         defaultName = [defaultName stringByAppendingPathExtension:@"sqlite"];
     }
@@ -32,11 +30,4 @@ const double MagicalRecordVersionNumber = MagicalRecordVersionNumber3_0;
     return defaultName;
 }
 
-+ (double) version;
-{
-    return MagicalRecordVersionNumber;
-}
-
 @end
-
-

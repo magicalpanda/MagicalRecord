@@ -6,7 +6,7 @@
 //
 
 #import "MagicalRecordStack.h"
-#import "CoreData+MagicalRecord.h"
+#import "MagicalRecord.h"
 #import "NSObject+MagicalDataImport.h"
 #import "MagicalRecordLogging.h"
 #import <objc/runtime.h>

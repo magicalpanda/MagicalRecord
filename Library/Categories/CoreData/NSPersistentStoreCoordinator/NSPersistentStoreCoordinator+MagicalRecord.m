@@ -5,9 +5,8 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "CoreData+MagicalRecord.h"
 #import "NSDictionary+MagicalRecordAdditions.h"
-#import "MagicalRecordStack.h"
+#import "MagicalRecord.h"
 #import "MagicalRecordLogging.h"
 
 NSString * const MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey = @"MagicalRecordShouldDeletePersistentStoreOnModelMistachKey";

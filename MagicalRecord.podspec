@@ -11,5 +11,5 @@ Pod::Spec.new do |s|
   s.osx.exclude_files = 'Library/Categories/UIKit/**'
   s.framework    = 'CoreData'
   s.requires_arc = true
-  s.prefix_header_contents = "#ifdef __OBJC__\n#import \"CoreData+MagicalRecord.h\"\n#endif"
+  s.prefix_header_contents = "#ifdef __OBJC__\n#import \"MagicalRecord.h\"\n#endif"
 end

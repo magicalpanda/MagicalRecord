@@ -1,7 +1,7 @@
 #ifdef MR_SHORTHAND
 
 #import "MagicalRecordShorthand.h"
-#import "CoreData+MagicalRecord.h"
+#import "MagicalRecord.h"
 
 
 @implementation NSManagedObject (MagicalAggregationShortHand)

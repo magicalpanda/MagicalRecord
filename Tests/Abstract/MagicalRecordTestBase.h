@@ -9,7 +9,7 @@
 #define EXP_SHORTHAND
 #import "Expecta.h"
 
-#import "CoreData+MagicalRecord.h"
+#import "MagicalRecord.h"
 
 @class MagicalRecordStack;
 
