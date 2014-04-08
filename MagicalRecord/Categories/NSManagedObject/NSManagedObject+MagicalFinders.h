@@ -42,6 +42,8 @@
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
++ (NSFetchedResultsController *) MR_fetchController:(NSFetchRequest *)request delegate:(id<NSFetchedResultsControllerDelegate>)delegate useFileCache:(BOOL)useFileCache groupedBy:(NSString *)groupKeyPath inContext:(NSManagedObjectContext *)context;
+
 + (NSFetchedResultsController *) MR_fetchAllWithDelegate:(id<NSFetchedResultsControllerDelegate>)delegate;
 + (NSFetchedResultsController *) MR_fetchAllWithDelegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context;
 
