@@ -48,17 +48,17 @@
 + (instancetype) MR_findFirstOrCreateByAttribute:(NSString *)attribute withValue:(id)searchValue;
 + (instancetype) MR_findFirstOrCreateByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context;
 
-+ (instancetype) MR_findLargestValueForAttribute:(NSString *)attribute;
-+ (instancetype) MR_findLargestValueForAttribute:(NSString *)attribute inContext:(NSManagedObjectContext *)context;
-+ (instancetype) MR_findLargestValueForAttribute:(NSString *)attribute withPredicate:(NSPredicate *)predicate;
-+ (instancetype) MR_findLargestValueForAttribute:(NSString *)attribute withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
-+ (instancetype) MR_findSmallestValueForAttribute:(NSString *)attribute;
-+ (instancetype) MR_findSmallestValueForAttribute:(NSString *)attribute inContext:(NSManagedObjectContext *)context;
++ (id) MR_findLargestValueForAttribute:(NSString *)attribute;
++ (id) MR_findLargestValueForAttribute:(NSString *)attribute inContext:(NSManagedObjectContext *)context;
++ (id) MR_findLargestValueForAttribute:(NSString *)attribute withPredicate:(NSPredicate *)predicate;
++ (id) MR_findLargestValueForAttribute:(NSString *)attribute withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
++ (id) MR_findSmallestValueForAttribute:(NSString *)attribute;
++ (id) MR_findSmallestValueForAttribute:(NSString *)attribute inContext:(NSManagedObjectContext *)context;
 
-+ (instancetype) MR_selectAttribute:(NSString *)attribute ascending:(BOOL)ascending;
-+ (instancetype) MR_selectAttribute:(NSString *)attribute ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
-+ (instancetype) MR_selectAttribute:(NSString *)attribute ascending:(BOOL)ascending withPredicate:(NSPredicate *)predicate;
-+ (instancetype) MR_selectAttribute:(NSString *)attribute ascending:(BOOL)ascending withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
++ (id) MR_selectAttribute:(NSString *)attribute ascending:(BOOL)ascending;
++ (id) MR_selectAttribute:(NSString *)attribute ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
++ (id) MR_selectAttribute:(NSString *)attribute ascending:(BOOL)ascending withPredicate:(NSPredicate *)predicate;
++ (id) MR_selectAttribute:(NSString *)attribute ascending:(BOOL)ascending withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
 
 + (NSArray *) MR_findByAttribute:(NSString *)attribute withValue:(id)searchValue;
 + (NSArray *) MR_findByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context;
