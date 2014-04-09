@@ -1,5 +1,2 @@
 language: objective-c
 script: Support/Scripts/objc-build-scripts/cibuild
-before_script:
-  - brew update
-  - brew upgrade xctool
