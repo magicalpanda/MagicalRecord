@@ -63,6 +63,7 @@ static volatile int32_t contextsCacheVersion = 0;
 
 + (void) MR_clearContextForCurrentThread {
     [[[NSThread currentThread] threadDictionary] removeObjectForKey:kMagicalRecordManagedObjectContextKey];
+    [[[NSThread currentThread] threadDictionary] removeObjectForKey:kMagicalRecordManagedObjectContextCacheVersionKey];
 }
 
 @end
