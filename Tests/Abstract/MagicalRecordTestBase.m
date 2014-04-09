@@ -11,6 +11,10 @@
 {
     [super setUp];
 
+    // Don't pollute the tests with logging
+    [MagicalRecord setLogLevel:MagicalRecordLogLevelFatal];
+
+    // Setup a usable stack
     self.stack = [[self class] newMagicalRecordStack];
     [self.stack setModelFromClass:[self class]];
 }
