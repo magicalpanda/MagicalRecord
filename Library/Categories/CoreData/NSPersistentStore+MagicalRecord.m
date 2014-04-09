@@ -143,6 +143,7 @@
         if (NO == itemResult)
         {
             [[removeItemError localizedDescription] MR_logToConsole];
+            [[removeItemError localizedRecoverySuggestion] MR_logToConsole];
         }
 
         removeItemResult = removeItemResult && itemResult;
