@@ -81,7 +81,29 @@
     expect([testEntity MR_isEntityDeleted]).will.beTruthy();
 }
 
-- (void)testThatRetrievingManagedObjectFromAnotherContextHasAPermanentObjectID
+- (void)testRetrievingManagedObjectFromAnotherContextWithAPermanentObjectID
+{
+    MagicalRecordStack *currentStack = self.stack;
+    NSManagedObjectContext *currentStackContext = currentStack.context;
+
+    NSManagedObject *insertedEntity = [SingleRelatedEntity MR_createEntityInContext:currentStackContext];
+
+    expect([[insertedEntity objectID] isTemporaryID]).to.beTruthy();
+
+    [insertedEntity MR_obtainPermanentObjectID];
+
+    expect([[insertedEntity objectID] isTemporaryID]).to.beFalsy();
+
+    [currentStack saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+        NSManagedObject *localEntity = [insertedEntity MR_inContext:localContext];
+
+        expect([[localEntity objectID] isTemporaryID]).to.beFalsy();
+    }];
+
+    expect([[insertedEntity objectID] isTemporaryID]).to.beFalsy();
+}
+
+- (void)testRetrievingManagedObjectFromAnotherContextWithATemporaryObjectID
 {
     MagicalRecordStack *currentStack = self.stack;
     NSManagedObjectContext *currentStackContext = currentStack.context;
@@ -91,12 +113,12 @@
     expect([[insertedEntity objectID] isTemporaryID]).to.beTruthy();
 
     [currentStack saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-        NSManagedObject *localEntity = [insertedEntity MR_inContext:localContext];
+        NSString *reason = [NSString stringWithFormat:@"Cannot load a temporary object '%@' [%@] across managed object contexts. Please obtain a permanent ID for this object first.", insertedEntity, [insertedEntity objectID]];
 
-        expect([[localEntity objectID] isTemporaryID]).to.beFalsy();
+        expect(^{
+            [insertedEntity MR_inContext:localContext];
+        }).to.raiseWithReason(NSObjectInaccessibleException, reason);
     }];
-
-    expect([[insertedEntity objectID] isTemporaryID]).to.beFalsy();
 }
 
 @end

@@ -61,6 +61,9 @@
 + (NSArray *) MR_ascendingSortDescriptors:(NSArray *)attributesToSortBy;
 + (NSArray *) MR_descendingSortDescriptors:(NSArray *)attributesToSortBy;
 
+/**
+ *  If the object has a temporary object identifier, this method requests a permanent object identifier from the object's current context.
+ */
 - (void) MR_obtainPermanentObjectID;
 - (void) MR_refresh;
 

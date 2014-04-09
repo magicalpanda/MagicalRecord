@@ -249,7 +249,8 @@
     }
     else if ([objectID isTemporaryID])
     {
-        MRTransferObjectToContextError(self);
+        NSString *reason = [NSString stringWithFormat:@"Cannot load a temporary object '%@' [%@] across managed object contexts. Please obtain a permanent ID for this object first.", self, [self objectID]];
+        @throw [NSException exceptionWithName:NSObjectInaccessibleException reason:reason userInfo:@{@"object" : self}];
     }
     else
     {
@@ -327,8 +328,3 @@
 
 @end
 
-void MRTransferObjectToContextError(NSManagedObject *object)
-{
-    MRLogCFatal(@"Cannot load a temporary object '%@' [%@] across Managed Object Contexts", object, [object objectID]);
-    MRLogCFatal(@"Break in MRTransferObjectToContextError for more information");
-}
