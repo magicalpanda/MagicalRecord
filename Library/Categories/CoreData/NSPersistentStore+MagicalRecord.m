@@ -136,7 +136,7 @@
     BOOL removeItemResult = YES;
     NSError *removeItemError;
 
-    for (NSURL *toRemove in [NSArray arrayWithObjects:url, shmSidecar, walSidecar, nil])
+    for (NSURL *toRemove in @[url, shmSidecar, walSidecar])
     {
         BOOL itemResult = [[NSFileManager defaultManager] removeItemAtURL:toRemove error:&removeItemError];
 
@@ -147,7 +147,8 @@
             [[removeItemError localizedRecoverySuggestion] MR_logToConsole];
         }
 
-        removeItemResult = removeItemResult && itemResult;
+        // If the file doesn't exist, that's OK — that's still a successful result!
+        removeItemResult = removeItemResult && (itemResult || [removeItemError code] == NSFileNoSuchFileError);
     }
 
     return removeItemResult;
