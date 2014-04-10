@@ -61,21 +61,18 @@
     }
 
     void (^saveBlock)(void) = ^{
-        
-#if MR_LOGGING_ENABLED > 0
-
         NSString *optionsSummary = @"";
-        optionsSummary = [optionsSummary stringByAppendingString:saveParentContexts ? @"Save Parents," : @""];
-        optionsSummary = [optionsSummary stringByAppendingString:syncSave ? @"Sync Save" : @""];
+        optionsSummary = [optionsSummary stringByAppendingString:saveParentContexts ? @"Save Parents,":@""];
+        optionsSummary = [optionsSummary stringByAppendingString:syncSave ? @"Sync Save":@""];
 
         MRLogVerbose(@"→ Saving %@ [%@]", [self MR_description], optionsSummary);
 
         NSInteger numberOfInsertedObjects = [[self insertedObjects] count];
         NSInteger numberOfUpdatedObjects = [[self updatedObjects] count];
         NSInteger numberOfDeletedObjects = [[self deletedObjects] count];
-#endif
+
         NSError *error = nil;
-        BOOL     saved = NO;
+        BOOL saved = NO;
 
         @try
         {
@@ -110,7 +107,7 @@
                 {
                     MRLogInfo(@"→ Finished saving: %@", [self MR_description]);
                     MRLogVerbose(@"Objects - Inserted %zd, Updated %zd, Deleted %zd", numberOfInsertedObjects, numberOfUpdatedObjects, numberOfDeletedObjects);
-                    
+
                     if (completion)
                     {
                         dispatch_async(dispatch_get_main_queue(), ^{
