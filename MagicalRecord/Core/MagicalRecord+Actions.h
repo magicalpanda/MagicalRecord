@@ -23,8 +23,8 @@
 /*
  If you want to reuse the context on the current thread, use these methods.
  */
-+ (void) saveUsingCurrentThreadContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
-+ (void) saveUsingCurrentThreadContextWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block;
++ (void) saveUsingCurrentThreadContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
++ (void) saveUsingCurrentThreadContextWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
 
 
 /* DEPRECATION NOTICE:
@@ -33,12 +33,12 @@
 
 /* For all background saving operations. These calls will be sent to a different thread/queue.
  */
-+ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block __attribute__((deprecated));
-+ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))completion __attribute__((deprecated));
++ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
++ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))completion MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
 
 /*
  If you want to reuse the context on the current thread, use this method.
  */
-+ (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *error))errorHandler __attribute__((deprecated));
++ (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *error))errorHandler MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
 
 @end

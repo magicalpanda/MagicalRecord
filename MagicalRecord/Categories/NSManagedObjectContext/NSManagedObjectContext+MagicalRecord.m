@@ -31,7 +31,10 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
 {
     [self MR_setDefaultContext:nil];
     [self MR_setRootSavingContext:nil];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     [self MR_clearNonMainThreadContextsCache];
+#pragma clang diagnostic pop
 }
 
 - (NSString *) MR_description;

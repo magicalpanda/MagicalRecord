@@ -27,24 +27,32 @@
 
 + (NSNumber *) MR_numberOfEntities
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 	return [self MR_numberOfEntitiesWithContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+#pragma clang diagnostic pop
 }
 
 + (NSNumber *) MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
 {
-    
 	return [NSNumber numberWithUnsignedInteger:[self MR_countOfEntitiesWithPredicate:searchTerm inContext:context]];
 }
 
 + (NSNumber *) MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm;
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 	return [self MR_numberOfEntitiesWithPredicate:searchTerm
                                         inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+#pragma clang diagnostic pop
 }
 
 + (NSUInteger) MR_countOfEntities;
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     return [self MR_countOfEntitiesWithContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+#pragma clang diagnostic pop
 }
 
 + (NSUInteger) MR_countOfEntitiesWithContext:(NSManagedObjectContext *)context;
@@ -75,7 +83,10 @@
 
 + (BOOL) MR_hasAtLeastOneEntity
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     return [self MR_hasAtLeastOneEntityInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+#pragma clang diagnostic pop
 }
 
 + (BOOL) MR_hasAtLeastOneEntityInContext:(NSManagedObjectContext *)context

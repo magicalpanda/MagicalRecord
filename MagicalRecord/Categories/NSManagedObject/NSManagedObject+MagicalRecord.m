@@ -44,7 +44,10 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 	return [self MR_executeFetchRequest:request inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+#pragma clang diagnostic pop
 }
 
 + (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
@@ -61,7 +64,10 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+#pragma clang diagnostic pop
 }
 
 #if TARGET_OS_IPHONE
@@ -94,7 +100,10 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (NSEntityDescription *) MR_entityDescription
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 	return [self MR_entityDescriptionInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+#pragma clang diagnostic pop
 }
 
 + (NSArray *) MR_propertiesNamed:(NSArray *)properties
@@ -176,8 +185,11 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 }
 
 + (id) MR_createEntity
-{	
+{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 	NSManagedObject *newEntity = [self MR_createInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+#pragma clang diagnostic pop
 
 	return newEntity;
 }
@@ -218,7 +230,10 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     return [self MR_deleteAllMatchingPredicate:predicate inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+#pragma clang diagnostic pop
 }
 
 + (BOOL) MR_truncateAllInContext:(NSManagedObjectContext *)context
@@ -237,7 +252,11 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (BOOL) MR_truncateAll
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     [self MR_truncateAllInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+#pragma clang diagnostic pop
+
     return YES;
 }
 
@@ -266,7 +285,10 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 - (id) MR_inThreadContext
 {
     NSManagedObject *weakSelf = self;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     return [weakSelf MR_inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+#pragma clang diagnostic pop
 }
 
 @end

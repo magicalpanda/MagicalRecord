@@ -13,6 +13,7 @@
     #endif
 
     #import "MagicalRecord.h"
+    #import "MagicalRecordDeprecated.h"
     #import "MagicalRecord+Actions.h"
     #import "MagicalRecord+ErrorHandling.h"
     #import "MagicalRecord+Options.h"
