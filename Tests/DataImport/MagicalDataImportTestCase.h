@@ -6,9 +6,9 @@
 //  Copyright (c) 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+#import "MagicalRecordTestBase.h"
 
-@interface MagicalDataImportTestCase : XCTestCase
+@interface MagicalDataImportTestCase : MagicalRecordTestBase
 
 @property (nonatomic, strong) id testEntityData;
 @property (nonatomic, strong) id testEntity;

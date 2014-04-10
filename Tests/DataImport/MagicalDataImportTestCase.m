@@ -11,26 +11,13 @@
 
 @implementation MagicalDataImportTestCase
 
-@synthesize testEntityData = testEntityData__;
-@synthesize testEntity = testEntity__;
-
 - (void)setUp
 {
     [super setUp];
 
-    [MagicalRecord setDefaultModelFromClass:[self class]];
-    [MagicalRecord setupCoreDataStackWithInMemoryStore];
-
     [self setupTestData];
 
     self.testEntityData = [self dataFromJSONFixture];
-}
-
-- (void)tearDown
-{
-    [super tearDown];
-
-    [MagicalRecord cleanUp];
 }
 
 - (Class)testEntityClass;

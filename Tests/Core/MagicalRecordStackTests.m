@@ -3,9 +3,15 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import "MagicalRecordTestBase.h"
+#import <XCTest/XCTest.h>
+#import <CoreData/CoreData.h>
 
-@interface MagicalRecordTests : MagicalRecordTestBase
+#define EXP_SHORTHAND
+#import "Expecta.h"
+
+#import "MagicalRecord.h"
+
+@interface MagicalRecordTests : XCTestCase
 
 @end
 
@@ -42,6 +48,8 @@
 
     XCTAssertTrue([[[defaultStore URL] absoluteString] hasSuffix:@".sqlite"], @"Default store URL must have an extension of 'sqlite'");
     XCTAssertEqual([defaultStore type], NSSQLiteStoreType, @"Default store should be of type NSSQLiteStoreType");
+
+    [MagicalRecord cleanUp];
 }
 
 - (void) testCreateInMemoryCoreDataStack
@@ -52,6 +60,8 @@
     
     NSPersistentStore *defaultStore = [NSPersistentStore MR_defaultPersistentStore];
     XCTAssertEqual([defaultStore type], NSInMemoryStoreType, @"Default store should be of type NSInMemoryStoreType");
+
+    [MagicalRecord cleanUp];
 }
 
 - (void) testCreateSqliteStackWithCustomName
@@ -68,6 +78,7 @@
     NSPersistentStore *defaultStore = [NSPersistentStore MR_defaultPersistentStore];
     XCTAssertEqual([defaultStore type], NSSQLiteStoreType, @"Default store should be of type NSSQLiteStoreType");
     XCTAssertTrue([[[defaultStore URL] absoluteString] hasSuffix:testStoreName], @"Default store URL expects to have a suffix of '%@'", testStoreName);
+    [MagicalRecord cleanUp];
 }
 
 - (void) customErrorHandler:(id)error;
@@ -100,19 +111,5 @@
 
     XCTAssertTrue(errorHandlerWasCalled_, @"Expected error handler to have been called");
 }
-
-//- (void) testLogsErrorsToLogger
-//{
-//    NSError *testError = [NSError errorWithDomain:@"Cocoa" code:1000 userInfo:nil];
-//    id mockErrorHandler = [OCMockObject mockForProtocol:@protocol(MagicalRecordErrorHandlerProtocol)];
-//    [[mockErrorHandler expect] testHandlingError:testError];
-//    
-//    //    [[mockErrorHandler expect] performSelector:@selector(testErrorHandler:) withObject:[OCMArg any]];
-//    
-//    [MagicalRecord setErrorHandlerTarget:mockErrorHandler action:@selector(testHandlingError:)];
-//    [MagicalRecord handleErrors:testError];
-//
-//    [mockErrorHandler verify];
-//}
 
 @end

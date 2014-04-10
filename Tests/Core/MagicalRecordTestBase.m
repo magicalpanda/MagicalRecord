@@ -1,7 +1,4 @@
 //
-//  MagicalRecordTestBase.m
-//  MagicalRecord
-//
 //  Created by Tony Arnold on 21/12/2013.
 //  Copyright (c) 2013 Magical Panda Software LLC. All rights reserved.
 //
@@ -10,7 +7,7 @@
 
 @implementation MagicalRecordTestBase
 
-- (void) setUp
+- (void)setUp
 {
     [super setUp];
 
@@ -19,13 +16,16 @@
 
     // Setup the default model from the current class' bundle
     [MagicalRecord setDefaultModelFromClass:[self class]];
+
+    // Setup a default in-memory store
+    [MagicalRecord setupCoreDataStackWithInMemoryStore];
 }
 
-- (void) tearDown
+- (void)tearDown
 {
-    [super tearDown];
-
     [MagicalRecord cleanUp];
+
+    [super tearDown];
 }
 
 @end

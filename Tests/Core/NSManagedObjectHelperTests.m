@@ -15,13 +15,6 @@
 
 @implementation NSManagedObjectHelperTests
 
-- (void)setUp
-{
-    [super setUp];
-
-    [MagicalRecord setupCoreDataStackWithInMemoryStore];
-}
-
 - (void)testCreateFetchRequestForEntity
 {
     NSFetchRequest *testRequest = [SingleRelatedEntity MR_requestAll];

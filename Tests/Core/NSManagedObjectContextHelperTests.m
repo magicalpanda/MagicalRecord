@@ -16,13 +16,6 @@
 
 @implementation NSManagedObjectContextHelperTests
 
-- (void) setUp
-{
-    [super setUp];
-
-    [MagicalRecord setupCoreDataStackWithInMemoryStore];
-}
-
 - (void) testCanCreateContextForCurrentThead
 {
     NSManagedObjectContext *firstContext = [NSManagedObjectContext MR_contextForCurrentThread];
