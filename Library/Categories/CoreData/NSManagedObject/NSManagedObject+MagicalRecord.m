@@ -56,7 +56,7 @@
 	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
-+ (NSString *) MR_entityName;
++ (NSString *) MR_internalEntityName;
 {
     if ([self respondsToSelector:@selector(entityName)])
     {
@@ -72,7 +72,7 @@
 
 + (NSEntityDescription *) MR_entityDescriptionInContext:(NSManagedObjectContext *)context
 {
-    NSString *entityName = [self MR_entityName];
+    NSString *entityName = [self MR_internalEntityName];
     return [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
 }
 
@@ -310,6 +310,11 @@
 
 @implementation NSManagedObject (MagicalRecordDeprecated)
 #pragma mark - Deprecated Methods
+
++ (NSString *) MR_entityName
+{
+    return [self MR_internalEntityName];
+}
 
 + (instancetype) MR_createInContext:(NSManagedObjectContext *)context
 {

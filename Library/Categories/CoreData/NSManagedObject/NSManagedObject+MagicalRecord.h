@@ -10,7 +10,7 @@
 
 @interface NSManagedObject (MagicalRecord)
 
-+ (NSString *) MR_entityName;
++ (NSString *) MR_internalEntityName;
 
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request;
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
@@ -83,6 +83,7 @@
 
 @interface NSManagedObject (MagicalRecordDeprecated)
 
++ (NSString *) MR_entityName MRDeprecated("Please use +MR_internalEntityName");
 + (instancetype) MR_createInContext:(NSManagedObjectContext *)context MRDeprecated("Please use +MR_createEntityInContext:");
 - (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context MRDeprecated("Please use +MR_deleteEntityInContext:");
 

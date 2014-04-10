@@ -32,7 +32,7 @@ NSArray *MR_NSSortDescriptorsFromString(NSString *string, BOOL defaultAscendingV
 
 + (NSFetchRequest *) MR_requestAll
 {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[self MR_entityName]];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[self MR_internalEntityName]];
     return request;
 }
 
