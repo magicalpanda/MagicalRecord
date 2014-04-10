@@ -105,7 +105,7 @@
 - (void)testCanDeleteEntityInstanceInOtherContext
 {
     NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
-    NSManagedObject *testEntity = [SingleRelatedEntity MR_createInContext:defaultContext];
+    NSManagedObject *testEntity = [SingleRelatedEntity MR_createEntityInContext:defaultContext];
 
     [defaultContext MR_saveToPersistentStoreAndWait];
 
@@ -118,7 +118,7 @@
         XCTAssertFalse([otherEntity isDeleted], @"Entity should not be deleted at this point");
 
         // Delete the object in the other context
-        [testEntity MR_deleteInContext:localContext];
+        [testEntity MR_deleteEntityInContext:localContext];
 
         // The nested context entity should now be deleted
         XCTAssertTrue([otherEntity isDeleted], @"Entity should now be deleted");

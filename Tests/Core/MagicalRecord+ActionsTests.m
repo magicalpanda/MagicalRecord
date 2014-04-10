@@ -19,7 +19,7 @@
     __block NSManagedObjectID *objectId;
 
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
+        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
 
         expect([inserted hasChanges]).to.beTruthy();
 
@@ -42,7 +42,7 @@
     __block NSManagedObjectID *objectId;
 
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
+        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
 
         expect([inserted hasChanges]).to.beTruthy();
 
@@ -68,7 +68,7 @@
     NSString *const kTestAttributeKey = @"booleanTestAttribute";
 
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
+        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
 
         [inserted setValue:@YES forKey:kTestAttributeKey];
 
@@ -104,7 +104,7 @@
     __block NSError *existingObjectError;
 
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
+        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
 
         expect([inserted hasChanges]).to.beTruthy();
 
@@ -129,7 +129,7 @@
     __block BOOL completionBlockIsOnMainThread = NO;
 
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
+        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
 
         expect(inserted).toNot.beNil();
     } completion:^(BOOL success, NSError *error) {
@@ -149,7 +149,7 @@
     __block NSManagedObject *fetchedObject;
 
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
+        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
 
         expect([inserted hasChanges]).to.beTruthy();
 
@@ -173,7 +173,7 @@
     NSString *const kTestAttributeKey = @"booleanTestAttribute";
 
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
+        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
 
         [inserted setValue:@YES forKey:kTestAttributeKey];
 
@@ -202,7 +202,7 @@
     __block NSManagedObjectID *objectId;
 
     [MagicalRecord saveUsingCurrentThreadContextWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
+        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
 
         expect([inserted hasChanges]).to.beTruthy();
 
@@ -227,7 +227,7 @@
     __block NSManagedObjectID *objectId;
 
     [MagicalRecord saveUsingCurrentThreadContextWithBlock:^(NSManagedObjectContext *localContext) {
-        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:localContext];
+        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
 
         expect([inserted hasChanges]).to.beTruthy();
 
@@ -254,7 +254,7 @@
     __block BOOL completionBlockIsOnMainThread = NO;
 
     [MagicalRecord saveUsingCurrentThreadContextWithBlock:^(NSManagedObjectContext *localContext) {
-        [SingleEntityWithNoRelationships MR_createInContext:localContext];
+        [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
     } completion:^(BOOL success, NSError *error) {
         // Ignore the success state — we only care that this block is executed on the main thread
         completionBlockCalled = YES;

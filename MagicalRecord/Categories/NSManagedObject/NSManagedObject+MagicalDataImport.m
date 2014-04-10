@@ -299,7 +299,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     }
     if (managedObject == nil)
     {
-        managedObject = [self MR_createInContext:context];
+        managedObject = [self MR_createEntityInContext:context];
     }
 
     [managedObject MR_importValuesForKeysWithObject:objectData];

@@ -30,9 +30,10 @@
 + (NSArray *) MR_propertiesNamed:(NSArray *)properties;
 
 + (instancetype) MR_createEntity;
-+ (instancetype) MR_createInContext:(NSManagedObjectContext *)context;
++ (instancetype) MR_createEntityInContext:(NSManagedObjectContext *)context;
+
 - (BOOL) MR_deleteEntity;
-- (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context;
+- (BOOL) MR_deleteEntityInContext:(NSManagedObjectContext *)context;
 
 + (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate;
 + (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
@@ -45,6 +46,13 @@
 
 - (instancetype) MR_inContext:(NSManagedObjectContext *)otherContext;
 - (instancetype) MR_inThreadContext;
+
+@end
+
+@interface NSManagedObject (MagicalRecordDeprecated)
+
++ (instancetype) MR_createInContext:(NSManagedObjectContext *)context __attribute__((deprecated("Please use +MR_createEntityInContext: instead.")));
+- (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context __attribute__((deprecated("Please use -MR_deleteEntityInContext: instead.")));
 
 @end
 

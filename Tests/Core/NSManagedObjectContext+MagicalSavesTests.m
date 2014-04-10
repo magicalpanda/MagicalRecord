@@ -17,7 +17,7 @@
     NSManagedObjectContext *parentContext = [NSManagedObjectContext MR_defaultContext];
     NSManagedObjectContext *childContext = [NSManagedObjectContext MR_contextWithParent:parentContext];
 
-    SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createInContext:childContext];
+    SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
 
     expect([insertedObject hasChanges]).to.beTruthy();
 
@@ -53,7 +53,7 @@
     NSManagedObjectContext *parentContext = [NSManagedObjectContext MR_defaultContext];
     NSManagedObjectContext *childContext = [NSManagedObjectContext MR_contextWithParent:parentContext];
 
-    SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createInContext:childContext];
+    SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
 
     expect([insertedObject hasChanges]).to.beTruthy();
 
@@ -96,7 +96,7 @@
     __block BOOL completionBlockCalled = NO;
     __block BOOL completionBlockIsOnMainThread = NO;
 
-    NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createInContext:defaultContext];
+    NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityInContext:defaultContext];
 
     expect([inserted hasChanges]).to.beTruthy();
 
@@ -114,7 +114,7 @@
     NSManagedObjectContext *parentContext = [NSManagedObjectContext MR_defaultContext];
     NSManagedObjectContext *childContext = [NSManagedObjectContext MR_contextWithParent:parentContext];
 
-    SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createInContext:childContext];
+    SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
 
     expect([insertedObject hasChanges]).to.beTruthy();
 
@@ -152,7 +152,7 @@
     NSManagedObjectContext *parentContext = [NSManagedObjectContext MR_defaultContext];
     NSManagedObjectContext *childContext = [NSManagedObjectContext MR_contextWithParent:parentContext];
 
-    SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createInContext:childContext];
+    SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
 
     expect([insertedObject hasChanges]).to.beTruthy();
 
@@ -193,7 +193,7 @@
 - (void)testThatSavedObjectsHavePermanentIDs
 {
     NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
-    SingleEntityWithNoRelationships *entity = [SingleEntityWithNoRelationships MR_createInContext:defaultContext];
+    SingleEntityWithNoRelationships *entity = [SingleEntityWithNoRelationships MR_createEntityInContext:defaultContext];
     
     expect([[entity objectID] isTemporaryID]).to.beTruthy();
     

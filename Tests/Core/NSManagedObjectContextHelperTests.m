@@ -34,7 +34,7 @@
 - (void) testThatSavedObjectsHavePermanentIDs
 {
     NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
-    SingleEntityWithNoRelationships *entity = [SingleEntityWithNoRelationships MR_createInContext:context];
+    SingleEntityWithNoRelationships *entity = [SingleEntityWithNoRelationships MR_createEntityInContext:context];
 
     XCTAssertTrue([[entity objectID] isTemporaryID], @"Entity should have a temporary ID before saving");
     [context MR_saveOnlySelfAndWait];

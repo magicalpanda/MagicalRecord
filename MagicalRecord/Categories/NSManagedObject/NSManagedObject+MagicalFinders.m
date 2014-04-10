@@ -157,7 +157,7 @@
         return result;
     }
 
-    result = [self MR_createInContext:context];
+    result = [self MR_createEntityInContext:context];
     [result setValue:searchValue forKey:attribute];
 
     return result;

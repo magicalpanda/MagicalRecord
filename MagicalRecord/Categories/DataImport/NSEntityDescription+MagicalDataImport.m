@@ -21,7 +21,7 @@
 - (NSManagedObject *) MR_createInstanceInContext:(NSManagedObjectContext *)context;
 {
     Class relatedClass = NSClassFromString([self managedObjectClassName]);
-    NSManagedObject *newInstance = [relatedClass MR_createInContext:context];
+    NSManagedObject *newInstance = [relatedClass MR_createEntityInContext:context];
    
     return newInstance;
 }

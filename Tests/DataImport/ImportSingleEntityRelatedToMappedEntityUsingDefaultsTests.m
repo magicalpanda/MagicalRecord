@@ -25,12 +25,12 @@
 {
     NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
 
-    MappedEntity *testMappedEntity = [MappedEntity MR_createInContext:context];
+    MappedEntity *testMappedEntity = [MappedEntity MR_createEntityInContext:context];
 
     testMappedEntity.mappedEntityID = @42;
     testMappedEntity.sampleAttribute = @"This attribute created as part of the test case setup";
 
-    SingleEntityRelatedToMappedEntityUsingDefaults *entity = [SingleEntityRelatedToMappedEntityUsingDefaults MR_createInContext:context];
+    SingleEntityRelatedToMappedEntityUsingDefaults *entity = [SingleEntityRelatedToMappedEntityUsingDefaults MR_createEntityInContext:context];
     entity.singleEntityRelatedToMappedEntityUsingDefaultsID = @24;
 
     [context MR_saveToPersistentStoreAndWait];
@@ -54,18 +54,5 @@
     NSNumber *numberOfEntities = [MappedEntity MR_numberOfEntities];
     XCTAssertEqualObjects(numberOfEntities, @1, @"Expected 1 entity, got %@", numberOfEntities);
 }
-
-//- (void) testUpdateMappedEntity
-//{
-//    SingleEntityRelatedToMappedEntityUsingDefaults *testEntity =
-//    [SingleEntityRelatedToMappedEntityUsingDefaults findFirstByAttribute:@"singleEntityRelatedToMappedEntityUsingDefaultsID" withValue:[NSNumber numberWithInt:24]];
-//
-//    [testEntity MR_updateValuesForKeysWithObject:self.testEntityData];
-//
-//    assertThat([MappedEntity numberOfEntities], is(equalToInteger(1)));
-//
-//    assertThat(testEntity, is(notNilValue()));
-//
-//}
 
 @end
