@@ -186,7 +186,10 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (id) MR_createEntity
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 	NSManagedObject *newEntity = [self MR_createEntityInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+#pragma clang diagnostic pop
 
 	return newEntity;
 }
