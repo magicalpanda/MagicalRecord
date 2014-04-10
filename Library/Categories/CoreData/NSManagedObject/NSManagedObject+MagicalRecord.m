@@ -187,7 +187,7 @@
     
 	NSArray *objectsToTruncate = [self MR_executeFetchRequest:request inContext:context];
     
-	for (id objectToTruncate in objectsToTruncate) 
+	for (NSManagedObject *objectToTruncate in objectsToTruncate)
     {
 		[objectToTruncate MR_deleteInContext:context];
 	}

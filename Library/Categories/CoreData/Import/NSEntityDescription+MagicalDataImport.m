@@ -28,7 +28,7 @@
 
 - (NSAttributeDescription *) MR_attributeDescriptionForName:(NSString *)name;
 {
-    __block NSAttributeDescription *attributeDescription;
+    __block NSAttributeDescription *description;
 
     NSDictionary *attributesByName = [self attributesByName];
 
@@ -36,15 +36,15 @@
         return nil;
     }
 
-    [attributesByName enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        if ([key isEqualToString:name]) {
-            attributeDescription = obj;
+    [attributesByName enumerateKeysAndObjectsUsingBlock:^(NSString *attributeName, NSAttributeDescription *attributeDescription, BOOL *stop) {
+        if ([attributeName isEqualToString:name]) {
+            description = attributeDescription;
 
             *stop = YES;
         }
     }];
 
-    return attributeDescription;
+    return description;
 }
 
 @end
