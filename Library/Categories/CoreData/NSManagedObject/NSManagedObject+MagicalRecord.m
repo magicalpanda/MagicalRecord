@@ -189,7 +189,7 @@
     
 	for (NSManagedObject *objectToTruncate in objectsToTruncate)
     {
-		[objectToTruncate MR_deleteInContext:context];
+		[objectToTruncate MR_deleteEntityInContext:context];
 	}
     
 	return YES;
