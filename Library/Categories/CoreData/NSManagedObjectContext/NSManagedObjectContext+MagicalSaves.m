@@ -84,32 +84,25 @@
         }
         @finally
         {
-            if (!saved)
-            {
+            if (!saved) {
                 [[error MR_coreDataDescription] MR_logToConsole];
 
-                if (completion)
-                {
+                if (completion) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         completion(saved, error);
                     });
                 }
-            }
-            else
-            {
+            } else {
                 // If we should not save the parent context, or there is not a parent context to save (root context), call the completion block
-                if ((YES == saveParentContexts) && [self parentContext])
-                {
+                if ((YES == saveParentContexts) && [self parentContext]) {
                     [[self parentContext] MR_saveWithOptions:MRSaveSynchronously | MRSaveParentContexts completion:completion];
                 }
                 // If we are not the default context (And therefore need to save the root context, do the completion action if one was specified
-                else
-                {
+                else {
                     MRLogInfo(@"→ Finished saving: %@", [self MR_description]);
                     MRLogVerbose(@"Objects - Inserted %zd, Updated %zd, Deleted %zd", numberOfInsertedObjects, numberOfUpdatedObjects, numberOfDeletedObjects);
 
-                    if (completion)
-                    {
+                    if (completion) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             completion(saved, error);
                         });
