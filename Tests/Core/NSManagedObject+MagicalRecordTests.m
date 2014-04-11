@@ -17,13 +17,13 @@
 
 - (void)testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented
 {
-    expect([EntityWithoutEntityNameMethod class]).toNot.respondTo(@selector(entityName));
+    expect([EntityWithoutEntityNameMethod MR_internalEntityName]).toNot.beNil();
     expect([EntityWithoutEntityNameMethod MR_internalEntityName]).to.equal(NSStringFromClass([EntityWithoutEntityNameMethod class]));
 }
 
 - (void)testThatInternalEntityNameReturnsProvidedNameWhenEntityNameMethodIsImplemented
 {
-    expect([DifferentClassNameMapping class]).to.respondTo(@selector(entityName));
+    expect([EntityWithoutEntityNameMethod MR_internalEntityName]).toNot.beNil();
     expect([DifferentClassNameMapping MR_internalEntityName]).toNot.equal(NSStringFromClass([DifferentClassNameMapping class]));
     expect([DifferentClassNameMapping MR_internalEntityName]).to.equal([DifferentClassNameMapping entityName]);
 }
