@@ -74,6 +74,8 @@
 		909BBF0218E04164007BA3F1 /* MagicalRecordStackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 909BBDDF18E040E2007BA3F1 /* MagicalRecordStackTests.m */; };
 		909BBF0818E04185007BA3F1 /* MagicalRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C779107F17E63C8900D20ACF /* MagicalRecord.framework */; };
 		909BBF0B18E041F3007BA3F1 /* MagicalRecord.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C779107F17E63C8900D20ACF /* MagicalRecord.framework */; };
+		90AA772918F79CD700D49377 /* EntityWithoutEntityNameMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 90AA772818F79CD700D49377 /* EntityWithoutEntityNameMethod.m */; };
+		90AA772A18F79CD700D49377 /* EntityWithoutEntityNameMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 90AA772818F79CD700D49377 /* EntityWithoutEntityNameMethod.m */; };
 		90C4BD8F18E11E73009FAF9C /* SampleJSONDataForImport.json in Resources */ = {isa = PBXBuildFile; fileRef = 90470E0118E102A200CCE9DD /* SampleJSONDataForImport.json */; };
 		90C4BD9018E11E73009FAF9C /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json in Resources */ = {isa = PBXBuildFile; fileRef = 90470E0218E102A200CCE9DD /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json */; };
 		90C4BD9118E11E73009FAF9C /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json in Resources */ = {isa = PBXBuildFile; fileRef = 90470E0318E102A200CCE9DD /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json */; };
@@ -423,6 +425,8 @@
 		909BBE3218E040E2007BA3F1 /* MagicalRecordTests-OSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagicalRecordTests-OSX-Info.plist"; sourceTree = "<group>"; };
 		909BBE3318E040E2007BA3F1 /* MagicalRecordTests-OSX-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MagicalRecordTests-OSX-Prefix.pch"; sourceTree = "<group>"; };
 		909BBEC318E040EB007BA3F1 /* Expecta.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Expecta.xcodeproj; path = Expecta/Expecta.xcodeproj; sourceTree = "<group>"; };
+		90AA772718F79CD700D49377 /* EntityWithoutEntityNameMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityWithoutEntityNameMethod.h; sourceTree = "<group>"; };
+		90AA772818F79CD700D49377 /* EntityWithoutEntityNameMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityWithoutEntityNameMethod.m; sourceTree = "<group>"; };
 		90C4BD7518E11DFA009FAF9C /* MagicalRecordTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MagicalRecordTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90C4BDCD18E139CA009FAF9C /* NSManagedObject+MagicalRequestsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+MagicalRequestsTests.m"; sourceTree = "<group>"; };
 		90C4BDD118E13A6D009FAF9C /* NSManagedObject+MagicalRecordTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+MagicalRecordTests.m"; sourceTree = "<group>"; };
@@ -611,6 +615,8 @@
 				90470E2618E102A200CCE9DD /* ConcreteRelatedEntity.m */,
 				90470E2718E102A200CCE9DD /* DifferentClassNameMapping.h */,
 				90470E2818E102A200CCE9DD /* DifferentClassNameMapping.m */,
+				90AA772718F79CD700D49377 /* EntityWithoutEntityNameMethod.h */,
+				90AA772818F79CD700D49377 /* EntityWithoutEntityNameMethod.m */,
 				90470E2918E102A200CCE9DD /* MappedEntity.h */,
 				90470E2A18E102A200CCE9DD /* MappedEntity.m */,
 				90470E2B18E102A200CCE9DD /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.h */,
@@ -1241,6 +1247,7 @@
 				909BBEFA18E0415F007BA3F1 /* ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests.m in Sources */,
 				90470E5618E102A200CCE9DD /* _SingleEntityRelatedToMappedEntityWithSecondaryMappings.m in Sources */,
 				90470E6E18E102A200CCE9DD /* SingleEntityWithNoRelationships.m in Sources */,
+				90AA772A18F79CD700D49377 /* EntityWithoutEntityNameMethod.m in Sources */,
 				90470E6818E102A200CCE9DD /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m in Sources */,
 				90D2BAD018EC433E0018D550 /* ImportMultipleEntitiesWithNoPrimaryKeyTests.m in Sources */,
 				909BBEFE18E0415F007BA3F1 /* ImportSingleEntityRelatedToMappedEntityWithSecondaryMappingsTests.m in Sources */,
@@ -1293,6 +1300,7 @@
 				90C4BDA018E11E80009FAF9C /* ImportSingleRelatedEntityTests.m in Sources */,
 				90C4BD9C18E11E80009FAF9C /* ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests.m in Sources */,
 				90C4BDB418E11E9C009FAF9C /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m in Sources */,
+				90AA772918F79CD700D49377 /* EntityWithoutEntityNameMethod.m in Sources */,
 				90C4BDB918E11EA5009FAF9C /* MagicalRecord+ActionsTests.m in Sources */,
 				90D2BACF18EC433E0018D550 /* ImportMultipleEntitiesWithNoPrimaryKeyTests.m in Sources */,
 				90C4BDA318E11E9C009FAF9C /* _AbstractRelatedEntity.m in Sources */,

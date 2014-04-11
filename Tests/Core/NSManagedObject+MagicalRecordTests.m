@@ -6,11 +6,27 @@
 #import "MagicalRecordTestBase.h"
 #import "SingleRelatedEntity.h"
 
+#import "EntityWithoutEntityNameMethod.h"
+#import "DifferentClassNameMapping.h"
+
 @interface NSManagedObjectMagicalRecordTests : MagicalRecordTestBase
 
 @end
 
 @implementation NSManagedObjectMagicalRecordTests
+
+- (void)testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented
+{
+    expect([EntityWithoutEntityNameMethod MR_internalEntityName]).toNot.beNil();
+    expect([EntityWithoutEntityNameMethod MR_internalEntityName]).to.equal(NSStringFromClass([EntityWithoutEntityNameMethod class]));
+}
+
+- (void)testThatInternalEntityNameReturnsProvidedNameWhenEntityNameMethodIsImplemented
+{
+    expect([EntityWithoutEntityNameMethod MR_internalEntityName]).toNot.beNil();
+    expect([DifferentClassNameMapping MR_internalEntityName]).toNot.equal(NSStringFromClass([DifferentClassNameMapping class]));
+    expect([DifferentClassNameMapping MR_internalEntityName]).to.equal([DifferentClassNameMapping entityName]);
+}
 
 - (void)testCanGetEntityDescriptionFromEntityClass
 {

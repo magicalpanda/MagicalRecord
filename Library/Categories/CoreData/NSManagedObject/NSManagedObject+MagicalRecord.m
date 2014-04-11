@@ -58,11 +58,18 @@
 
 + (NSString *) MR_internalEntityName;
 {
+    NSString *entityName;
+    
     if ([self respondsToSelector:@selector(entityName)])
     {
-        return [self performSelector:@selector(entityName)];
+        entityName = [self performSelector:@selector(entityName)];
     }
-    return NSStringFromClass(self);
+    
+    if ([entityName length] == 0) {
+        entityName = NSStringFromClass(self);
+    }
+    
+    return entityName;
 }
 
 + (NSEntityDescription *) MR_entityDescription
