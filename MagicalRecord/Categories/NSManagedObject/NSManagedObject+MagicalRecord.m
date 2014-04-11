@@ -11,6 +11,15 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 @implementation NSManagedObject (MagicalRecord)
 
++ (NSString *) MR_internalEntityName;
+{
+    if ([self respondsToSelector:@selector(entityName)])
+    {
+        return [self performSelector:@selector(entityName)];
+    }
+    return NSStringFromClass(self);
+}
+
 + (void) MR_setDefaultBatchSize:(NSUInteger)newBatchSize
 {
 	@synchronized(self)
@@ -83,18 +92,9 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 #endif
 
-+ (NSString *) MR_bestGuessAtAnEntityName
-{
-    if ([self respondsToSelector:@selector(entityName)])
-    {
-        return [self performSelector:@selector(entityName)];
-    }
-    return NSStringFromClass(self);
-}
-
 + (NSEntityDescription *) MR_entityDescriptionInContext:(NSManagedObjectContext *)context
 {
-    NSString *entityName = [self MR_bestGuessAtAnEntityName];
+    NSString *entityName = [self MR_internalEntityName];
     return [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
 }
 

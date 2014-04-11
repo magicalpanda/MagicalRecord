@@ -11,6 +11,14 @@
 
 @interface NSManagedObject (MagicalRecord)
 
+/**
+ *  If the NSManagedObject subclass calling this method has implemented the `entityName` method, then the return value of that will be used.
+ *  If `entityName` is not implemented, then the name of the class is returned.
+ *
+ *  @return String based name for the entity
+ */
++ (NSString *) MR_internalEntityName;
+
 + (NSUInteger) MR_defaultBatchSize;
 + (void) MR_setDefaultBatchSize:(NSUInteger)newBatchSize;
 

@@ -10,16 +10,16 @@
 
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
 	NSParameterAssert(moc_);
-	return [NSEntityDescription insertNewObjectForEntityForName:@"EntityWithDiffernentClassName" inManagedObjectContext:moc_];
+	return [NSEntityDescription insertNewObjectForEntityForName:@"EntityWithDifferentClassName" inManagedObjectContext:moc_];
 }
 
 + (NSString*)entityName {
-	return @"EntityWithDiffernentClassName";
+	return @"EntityWithDifferentClassName";
 }
 
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_ {
 	NSParameterAssert(moc_);
-	return [NSEntityDescription entityForName:@"EntityWithDiffernentClassName" inManagedObjectContext:moc_];
+	return [NSEntityDescription entityForName:@"EntityWithDifferentClassName" inManagedObjectContext:moc_];
 }
 
 - (DifferentClassNameMappingID*)objectID {
