@@ -9,20 +9,20 @@
 
 @implementation NSManagedObject (MagicalRecord)
 
-+ (NSString *) MR_nameOfEntity;
++ (NSString *) MR_entityName;
 {
-    NSString *internalEntityName;
+    NSString *entityName;
 
-    if ([self respondsToSelector:@selector(nameOfEntity)])
+    if ([self respondsToSelector:@selector(entityName)])
     {
-        internalEntityName = [self performSelector:@selector(nameOfEntity)];
+        entityName = [self performSelector:@selector(entityName)];
     }
 
-    if ([internalEntityName length] == 0) {
-        internalEntityName = NSStringFromClass(self);
+    if ([entityName length] == 0) {
+        entityName = NSStringFromClass(self);
     }
 
-    return internalEntityName;
+    return entityName;
 }
 
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
@@ -79,7 +79,7 @@
 
 + (NSEntityDescription *) MR_entityDescriptionInContext:(NSManagedObjectContext *)context
 {
-    NSString *entityName = [self MR_nameOfEntity];
+    NSString *entityName = [self MR_entityName];
     return [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
 }
 
@@ -317,16 +317,6 @@
 
 @implementation NSManagedObject (MagicalRecordDeprecated)
 #pragma mark - Deprecated Methods
-
-+ (NSString *) MR_internalEntityName
-{
-    return [self MR_nameOfEntity];
-}
-
-+ (NSString *) MR_entityName
-{
-    return [self MR_nameOfEntity];
-}
 
 + (instancetype) MR_createInContext:(NSManagedObjectContext *)context
 {

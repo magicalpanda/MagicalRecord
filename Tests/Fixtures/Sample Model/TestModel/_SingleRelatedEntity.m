@@ -24,7 +24,7 @@ const struct SingleRelatedEntityRelationships SingleRelatedEntityRelationships =
 	return [NSEntityDescription insertNewObjectForEntityForName:@"SingleRelatedEntity" inManagedObjectContext:moc_];
 }
 
-+ (NSString*)nameOfEntity {
++ (NSString*)entityName {
 	return @"SingleRelatedEntity";
 }
 

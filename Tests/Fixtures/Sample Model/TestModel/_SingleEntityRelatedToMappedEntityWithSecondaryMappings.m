@@ -21,7 +21,7 @@ const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsRelationships
 	return [NSEntityDescription insertNewObjectForEntityForName:@"SingleEntityRelatedToMappedEntityWithSecondaryMappings" inManagedObjectContext:moc_];
 }
 
-+ (NSString*)nameOfEntity {
++ (NSString*)entityName {
 	return @"SingleEntityRelatedToMappedEntityWithSecondaryMappings";
 }
 

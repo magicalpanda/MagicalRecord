@@ -24,7 +24,7 @@ extern const struct SingleRelatedEntityRelationships {
 
 @interface _SingleRelatedEntity : NSManagedObject {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
-+ (NSString*)nameOfEntity;
++ (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (SingleRelatedEntityID*)objectID;
 

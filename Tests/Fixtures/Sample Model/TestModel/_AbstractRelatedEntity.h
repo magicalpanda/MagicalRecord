@@ -12,7 +12,7 @@ extern const struct AbstractRelatedEntityAttributes {
 
 @interface _AbstractRelatedEntity : NSManagedObject {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
-+ (NSString*)nameOfEntity;
++ (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (AbstractRelatedEntityID*)objectID;
 

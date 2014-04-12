@@ -14,7 +14,7 @@ extern const struct SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyRelati
 
 @interface _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey : NSManagedObject {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
-+ (NSString*)nameOfEntity;
++ (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyID*)objectID;
 

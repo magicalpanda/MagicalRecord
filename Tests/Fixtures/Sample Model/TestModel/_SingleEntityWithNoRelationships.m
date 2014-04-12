@@ -34,7 +34,7 @@ const struct SingleEntityWithNoRelationshipsAttributes SingleEntityWithNoRelatio
 	return [NSEntityDescription insertNewObjectForEntityForName:@"SingleEntityWithNoRelationships" inManagedObjectContext:moc_];
 }
 
-+ (NSString*)nameOfEntity {
++ (NSString*)entityName {
 	return @"SingleEntityWithNoRelationships";
 }
 

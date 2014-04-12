@@ -14,7 +14,7 @@ extern const struct SingleEntityRelatedToMappedEntityWithNestedMappedAttributesR
 
 @interface _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes : NSManagedObject {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
-+ (NSString*)nameOfEntity;
++ (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (SingleEntityRelatedToMappedEntityWithNestedMappedAttributesID*)objectID;
 
