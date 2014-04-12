@@ -94,24 +94,26 @@
     expect([childContextFetchedObject hasChanges]).will.beFalsy();
 }
 
-- (void)testSaveToSelfOnlyWhenSaveIsAsynchronousCallsMainThreadOnCompletion
+- (void)testSaveToSelfOnlyWhenSaveIsAsynchronousCallsCorrectThreadOnCompletion
 {
     NSManagedObjectContext *stackContext = self.stack.context;
 
     __block BOOL completionBlockCalled = NO;
-    __block BOOL completionBlockIsOnMainThread = NO;
+    __block BOOL completionBlockIsOnCallingThread = NO;
 
     NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityInContext:stackContext];
 
     expect([inserted hasChanges]).to.beTruthy();
 
+    NSThread *callingThread = [NSThread currentThread];
+
     [stackContext MR_saveOnlySelfWithCompletion:^(BOOL success, NSError *error) {
         completionBlockCalled = YES;
-        completionBlockIsOnMainThread = [NSThread isMainThread];
+        completionBlockIsOnCallingThread = [[NSThread currentThread] isEqual:callingThread];
     }];
 
     expect(completionBlockCalled).will.beTruthy();
-    expect(completionBlockIsOnMainThread).will.beTruthy();
+    expect(completionBlockIsOnCallingThread).will.beTruthy();
 }
 
 - (void)testSaveToPersistentStoreWhenSaveIsSynchronous

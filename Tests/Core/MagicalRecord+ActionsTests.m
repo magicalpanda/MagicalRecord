@@ -154,27 +154,6 @@
     expect([existingObject hasChanges]).will.beFalsy();
 }
 
-- (void)testAsynchronousSaveActionCallsCompletionBlockOnTheMainThread
-{
-    MagicalRecordStack *currentStack = self.stack;
-
-    __block BOOL completionBlockCalled = NO;
-    __block BOOL completionBlockIsOnMainThread = NO;
-
-    [currentStack saveWithBlock:^(NSManagedObjectContext *localContext) {
-        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
-
-        expect(inserted).toNot.beNil();
-    } completion:^(BOOL success, NSError *error) {
-        // Ignore the success state — we only care that this block is executed on the main thread
-        completionBlockCalled = YES;
-        completionBlockIsOnMainThread = [NSThread isMainThread];
-    }];
-
-    expect(completionBlockCalled).will.beTruthy();
-    expect(completionBlockIsOnMainThread).will.beTruthy();
-}
-
 - (void)testAsynchronousSaveActionMakesInsertedEntitiesAvailableInTheDefaultContext
 {
     MagicalRecordStack *currentStack = self.stack;
