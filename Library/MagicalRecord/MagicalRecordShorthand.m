@@ -140,11 +140,6 @@
 
 @implementation NSManagedObject (MagicalRecordShortHand)
 
-+ (NSString *) internalEntityName;
-{
-    return [self MR_nameOfEntity];
-}
-
 + (NSArray *) executeFetchRequest:(NSFetchRequest *)request;
 {
     return [self MR_executeFetchRequest:request];

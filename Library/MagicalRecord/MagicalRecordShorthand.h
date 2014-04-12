@@ -68,7 +68,6 @@
 
 @interface NSManagedObject (MagicalRecordShortHand)
 
-+ (NSString *) internalEntityName;
 + (NSArray *) executeFetchRequest:(NSFetchRequest *)request MRDeprecated("Use +MR_executeFetchRequest: instead");
 + (NSArray *) executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context MRDeprecated("Use +MR_executeFetchRequest:inContext: instead");
 + (id) executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request MRDeprecated("Use +MR_executeFetchRequestAndReturnFirstObject: instead");
