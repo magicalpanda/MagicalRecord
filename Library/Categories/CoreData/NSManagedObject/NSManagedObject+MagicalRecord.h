@@ -8,12 +8,6 @@
 #import "MagicalRecord.h"
 #import "MagicalRecordDeprecated.h"
 
-@interface NSManagedObject (MOGeneratorProvidedMethods)
-
-+ (NSString *)nameOfEntity;
-
-@end
-
 @interface NSManagedObject (MagicalRecord)
 
 /**
@@ -103,4 +97,11 @@
 
 @end
 
-void MRTransferObjectToContextError(NSManagedObject *object);
+@protocol MagicalRecord_MOGenerator <NSObject>
+
+@optional
++ (NSString *)nameOfEntity;
+- (instancetype) entityInManagedObjectContext:(NSManagedObjectContext *)object;
+- (instancetype) insertInManagedObjectContext:(NSManagedObjectContext *)object;
+
+@end
