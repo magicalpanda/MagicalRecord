@@ -11,20 +11,20 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 @implementation NSManagedObject (MagicalRecord)
 
-+ (NSString *) MR_internalEntityName;
++ (NSString *) MR_nameOfEntity;
 {
-    NSString *entityName;
-    
-    if ([self respondsToSelector:@selector(entityName)])
+    NSString *internalEntityName;
+
+    if ([self respondsToSelector:@selector(nameOfEntity)])
     {
-        entityName = [self performSelector:@selector(entityName)];
+        internalEntityName = [self performSelector:@selector(nameOfEntity)];
     }
-    
-    if ([entityName length] == 0) {
-        entityName = NSStringFromClass(self);
+
+    if ([internalEntityName length] == 0) {
+        internalEntityName = NSStringFromClass(self);
     }
-    
-    return entityName;
+
+    return internalEntityName;
 }
 
 + (void) MR_setDefaultBatchSize:(NSUInteger)newBatchSize
@@ -101,7 +101,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (NSEntityDescription *) MR_entityDescriptionInContext:(NSManagedObjectContext *)context
 {
-    NSString *entityName = [self MR_internalEntityName];
+    NSString *entityName = [self MR_nameOfEntity];
     return [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
 }
 
@@ -301,6 +301,11 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 @end
 
 @implementation NSManagedObject (MagicalRecordDeprecated)
+
++ (NSString *) MR_internalEntityName
+{
+    return [self MR_nameOfEntity];
+}
 
 + (instancetype) MR_createInContext:(NSManagedObjectContext *)context
 {

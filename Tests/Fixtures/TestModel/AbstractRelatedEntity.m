@@ -1,12 +1,10 @@
 #import "AbstractRelatedEntity.h"
 
-
 @interface AbstractRelatedEntity ()
 
 // Private interface goes here.
 
 @end
-
 
 @implementation AbstractRelatedEntity
 

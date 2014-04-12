@@ -1,12 +1,10 @@
 #import "MappedEntity.h"
 
-
 @interface MappedEntity ()
 
 // Private interface goes here.
 
 @end
-
 
 @implementation MappedEntity
 

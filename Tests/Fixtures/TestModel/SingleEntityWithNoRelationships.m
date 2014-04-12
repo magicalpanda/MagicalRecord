@@ -1,12 +1,10 @@
 #import "SingleEntityWithNoRelationships.h"
 
-
 @interface SingleEntityWithNoRelationships ()
 
 // Private interface goes here.
 
 @end
-
 
 @implementation SingleEntityWithNoRelationships
 

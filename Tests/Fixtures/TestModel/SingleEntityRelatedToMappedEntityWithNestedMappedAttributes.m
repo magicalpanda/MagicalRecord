@@ -1,12 +1,10 @@
 #import "SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.h"
 
-
 @interface SingleEntityRelatedToMappedEntityWithNestedMappedAttributes ()
 
 // Private interface goes here.
 
 @end
-
 
 @implementation SingleEntityRelatedToMappedEntityWithNestedMappedAttributes
 

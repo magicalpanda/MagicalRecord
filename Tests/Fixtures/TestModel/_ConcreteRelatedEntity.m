@@ -17,7 +17,7 @@ const struct ConcreteRelatedEntityAttributes ConcreteRelatedEntityAttributes = {
 	return [NSEntityDescription insertNewObjectForEntityForName:@"ConcreteRelatedEntity" inManagedObjectContext:moc_];
 }
 
-+ (NSString*)entityName {
++ (NSString*)nameOfEntity {
 	return @"ConcreteRelatedEntity";
 }
 

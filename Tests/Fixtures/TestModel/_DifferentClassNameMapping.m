@@ -13,7 +13,7 @@
 	return [NSEntityDescription insertNewObjectForEntityForName:@"EntityWithDifferentClassName" inManagedObjectContext:moc_];
 }
 
-+ (NSString*)entityName {
++ (NSString*)nameOfEntity {
 	return @"EntityWithDifferentClassName";
 }
 

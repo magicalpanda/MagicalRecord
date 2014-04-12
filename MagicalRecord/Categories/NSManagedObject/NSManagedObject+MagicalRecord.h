@@ -6,6 +6,7 @@
 
 #import <CoreData/CoreData.h>
 #import "MagicalRecord.h"
+#import "MagicalRecordDeprecated.h"
 
 #define kMagicalRecordDefaultBatchSize 20
 
@@ -17,7 +18,7 @@
  *
  *  @return String based name for the entity
  */
-+ (NSString *) MR_internalEntityName;
++ (NSString *) MR_nameOfEntity;
 
 + (NSUInteger) MR_defaultBatchSize;
 + (void) MR_setDefaultBatchSize:(NSUInteger)newBatchSize;
@@ -59,6 +60,7 @@
 
 @interface NSManagedObject (MagicalRecordDeprecated)
 
++ (NSString *) MR_internalEntityName MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0_USE("Please use +MR_nameOfEntity instead.");
 + (instancetype) MR_createInContext:(NSManagedObjectContext *)context __attribute__((deprecated("Please use +MR_createEntityInContext: instead.")));
 - (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context __attribute__((deprecated("Please use -MR_deleteEntityInContext: instead.")));
 
@@ -67,7 +69,9 @@
 @protocol MagicalRecord_MOGenerator <NSObject>
 
 @optional
++ (NSString *)nameOfEntity;
 - (instancetype) entityInManagedObjectContext:(NSManagedObjectContext *)object;
 - (instancetype) insertInManagedObjectContext:(NSManagedObjectContext *)object;
 
 @end
+

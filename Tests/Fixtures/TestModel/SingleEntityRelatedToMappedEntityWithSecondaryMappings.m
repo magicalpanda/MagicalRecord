@@ -1,12 +1,10 @@
 #import "SingleEntityRelatedToMappedEntityWithSecondaryMappings.h"
 
-
 @interface SingleEntityRelatedToMappedEntityWithSecondaryMappings ()
 
 // Private interface goes here.
 
 @end
-
 
 @implementation SingleEntityRelatedToMappedEntityWithSecondaryMappings
 

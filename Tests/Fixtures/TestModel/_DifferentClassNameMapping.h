@@ -8,7 +8,7 @@
 
 @interface _DifferentClassNameMapping : NSManagedObject {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
-+ (NSString*)entityName;
++ (NSString*)nameOfEntity;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (DifferentClassNameMappingID*)objectID;
 

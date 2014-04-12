@@ -29,7 +29,7 @@ extern const struct SingleEntityWithNoRelationshipsAttributes {
 
 @interface _SingleEntityWithNoRelationships : NSManagedObject {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
-+ (NSString*)entityName;
++ (NSString*)nameOfEntity;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (SingleEntityWithNoRelationshipsID*)objectID;
 
@@ -41,10 +41,10 @@ extern const struct SingleEntityWithNoRelationshipsAttributes {
 
 //- (BOOL)validateBooleanTestAttribute:(id*)value_ error:(NSError**)error_;
 
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
-@property (nonatomic, strong) UIColor* colorTestAttribute;
+#if TARGET_OS_IPHONE
+@property (nonatomic, strong) UIColor *colorTestAttribute;
 #else
-@property (nonatomic, strong) NSColor* colorTestAttribute;
+@property (nonatomic, strong) NSColor *colorTestAttribute;
 #endif
 
 //- (BOOL)validateColorTestAttribute:(id*)value_ error:(NSError**)error_;
@@ -119,12 +119,12 @@ extern const struct SingleEntityWithNoRelationshipsAttributes {
 - (NSNumber*)primitiveBooleanTestAttribute;
 - (void)setPrimitiveBooleanTestAttribute:(NSNumber*)value;
 
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
-- (UIColor*)primitiveColorTestAttribute;
-- (void)setPrimitiveColorTestAttribute:(UIColor*)value;
+#if TARGET_OS_IPHONE
+- (UIColor *)primitiveColorTestAttribute;
+- (void)setPrimitiveColorTestAttribute:(UIColor *)value;
 #else
-- (NSColor*)primitiveColorTestAttribute;
-- (void)setPrimitiveColorTestAttribute:(NSColor*)value;
+- (NSColor *)primitiveColorTestAttribute;
+- (void)setPrimitiveColorTestAttribute:(NSColor *)value;
 #endif
 
 - (NSDate*)primitiveDateTestAttribute;

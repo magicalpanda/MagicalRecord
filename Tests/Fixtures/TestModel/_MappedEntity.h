@@ -19,7 +19,7 @@ extern const struct MappedEntityUserInfo {
 
 @interface _MappedEntity : NSManagedObject {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
-+ (NSString*)entityName;
++ (NSString*)nameOfEntity;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (MappedEntityID*)objectID;
 

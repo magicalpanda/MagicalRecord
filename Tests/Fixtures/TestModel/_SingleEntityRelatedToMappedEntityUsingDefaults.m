@@ -21,7 +21,7 @@ const struct SingleEntityRelatedToMappedEntityUsingDefaultsRelationships SingleE
 	return [NSEntityDescription insertNewObjectForEntityForName:@"SingleEntityRelatedToMappedEntityUsingDefaults" inManagedObjectContext:moc_];
 }
 
-+ (NSString*)entityName {
++ (NSString*)nameOfEntity {
 	return @"SingleEntityRelatedToMappedEntityUsingDefaults";
 }
 
