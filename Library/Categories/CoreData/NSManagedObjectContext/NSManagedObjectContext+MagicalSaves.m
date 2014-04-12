@@ -91,9 +91,7 @@
 
         if (completion)
         {
-            dispatch_async(dispatch_get_main_queue(), ^{
             completion(YES, nil);
-            });
         }
 
         if (saveParentContexts && [self parentContext])
@@ -113,9 +111,9 @@
 
         MRLogVerbose(@"→ Saving %@ [%@]", [self MR_description], optionsSummary);
 
-        NSInteger numberOfInsertedObjects = [[self insertedObjects] count];
-        NSInteger numberOfUpdatedObjects = [[self updatedObjects] count];
-        NSInteger numberOfDeletedObjects = [[self deletedObjects] count];
+        NSUInteger numberOfInsertedObjects = [[self insertedObjects] count];
+        NSUInteger numberOfUpdatedObjects = [[self updatedObjects] count];
+        NSUInteger numberOfDeletedObjects = [[self deletedObjects] count];
 
         NSError *error = nil;
         BOOL saved = NO;
@@ -134,9 +132,7 @@
                 [[error MR_coreDataDescription] MR_logToConsole];
 
                 if (completion) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
                     completion(saved, error);
-                    });
                 }
             } else {
                 // If we should not save the parent context, or there is not a parent context to save (root context), call the completion block
@@ -146,12 +142,10 @@
                 // If we are not the default context (And therefore need to save the root context, do the completion action if one was specified
                 else {
                     MRLogInfo(@"→ Finished saving: %@", [self MR_description]);
-                    MRLogVerbose(@"Objects - Inserted %zd, Updated %zd, Deleted %zd", numberOfInsertedObjects, numberOfUpdatedObjects, numberOfDeletedObjects);
+                    MRLogVerbose(@"Objects - Inserted %tu, Updated %tu, Deleted %tu", numberOfInsertedObjects, numberOfUpdatedObjects, numberOfDeletedObjects);
 
                     if (completion) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
                         completion(saved, error);
-                        });
                     }
                 }
             }
