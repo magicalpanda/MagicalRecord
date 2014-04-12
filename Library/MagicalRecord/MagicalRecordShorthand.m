@@ -142,7 +142,7 @@
 
 + (NSString *) internalEntityName;
 {
-    return [self MR_internalEntityName];
+    return [self MR_nameOfEntity];
 }
 
 + (NSArray *) executeFetchRequest:(NSFetchRequest *)request;

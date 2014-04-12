@@ -29,7 +29,7 @@ extern const struct SingleEntityWithNoRelationshipsAttributes {
 
 @interface _SingleEntityWithNoRelationships : NSManagedObject {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
-+ (NSString*)entityName;
++ (NSString*)nameOfEntity;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (SingleEntityWithNoRelationshipsID*)objectID;
 

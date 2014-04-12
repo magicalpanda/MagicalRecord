@@ -8,9 +8,20 @@
 #import "MagicalRecord.h"
 #import "MagicalRecordDeprecated.h"
 
+@interface NSManagedObject (MOGeneratorProvidedMethods)
+
++ (NSString *)nameOfEntity;
+
+@end
+
 @interface NSManagedObject (MagicalRecord)
 
-+ (NSString *) MR_internalEntityName;
+/**
+ *  If you want to customize the entity name that is returned, you can override either `+ (NSString *) MR_internalEntityName` or `+ (NSString *) nameOfEntity` in your `NSManagedObject` subclasses. `+ (NSString *) nameOfEntity` is declared in the default mogenerator templates.
+ *
+ *  @return Name of the managed object's entity, or if that is unavailable the name of the managed object's class as a string
+ */
++ (NSString *) MR_nameOfEntity;
 
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request;
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
@@ -83,6 +94,7 @@
 
 @interface NSManagedObject (MagicalRecordDeprecated)
 
++ (NSString *) MR_internalEntityName MRDeprecated("Please use +MR_nameOfEntity");
 + (NSString *) MR_entityName MRDeprecated("Please use +MR_internalEntityName");
 + (instancetype) MR_createInContext:(NSManagedObjectContext *)context MRDeprecated("Please use +MR_createEntityInContext:");
 - (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context MRDeprecated("Please use +MR_deleteEntityInContext:");

@@ -17,7 +17,7 @@ const struct AbstractRelatedEntityAttributes AbstractRelatedEntityAttributes = {
 	return [NSEntityDescription insertNewObjectForEntityForName:@"AbstractRelatedEntity" inManagedObjectContext:moc_];
 }
 
-+ (NSString*)entityName {
++ (NSString*)nameOfEntity {
 	return @"AbstractRelatedEntity";
 }
 
