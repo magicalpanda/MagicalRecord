@@ -17,7 +17,7 @@ const struct SingleEntityRelatedToMappedEntityWithNestedMappedAttributesRelation
 	return [NSEntityDescription insertNewObjectForEntityForName:@"SingleEntityRelatedToMappedEntityWithNestedMappedAttributes" inManagedObjectContext:moc_];
 }
 
-+ (NSString*)nameOfEntity {
++ (NSString*)entityName {
 	return @"SingleEntityRelatedToMappedEntityWithNestedMappedAttributes";
 }
 

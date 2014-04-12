@@ -17,7 +17,7 @@ const struct SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyRelationships
 	return [NSEntityDescription insertNewObjectForEntityForName:@"SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" inManagedObjectContext:moc_];
 }
 
-+ (NSString*)nameOfEntity {
++ (NSString*)entityName {
 	return @"SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey";
 }
 

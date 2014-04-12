@@ -24,7 +24,7 @@ const struct MappedEntityUserInfo MappedEntityUserInfo = {
 	return [NSEntityDescription insertNewObjectForEntityForName:@"MappedEntity" inManagedObjectContext:moc_];
 }
 
-+ (NSString*)nameOfEntity {
++ (NSString*)entityName {
 	return @"MappedEntity";
 }
 
