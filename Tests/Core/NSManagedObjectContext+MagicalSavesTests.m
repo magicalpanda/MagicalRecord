@@ -33,7 +33,10 @@
     expect(insertedObjectID).toNot.beNil();
     expect([insertedObjectID isTemporaryID]).to.beFalsy();
 
-    [childContext MR_saveOnlySelfAndWait];
+    NSError *saveError;
+    BOOL saveResult = [childContext MR_saveOnlySelfAndWaitWithError:&saveError];
+    expect(saveResult).to.beTruthy();
+    expect(saveError).to.beNil();
 
     NSManagedObject *parentContextFetchedObject = [parentContext objectRegisteredForID:insertedObjectID];
 
@@ -132,7 +135,10 @@
     expect(insertedObjectID).toNot.beNil();
     expect([insertedObjectID isTemporaryID]).to.beFalsy();
 
-    [childContext MR_saveToPersistentStoreAndWait];
+    NSError *saveError;
+    BOOL saveResult = [childContext MR_saveToPersistentStoreAndWaitWithError:&saveError];
+    expect(saveResult).to.beTruthy();
+    expect(saveError).to.beNil();
 
     NSError *fetchExistingObjectFromParentContextError;
     NSManagedObject *parentContextFetchedObject = [parentContext existingObjectWithID:insertedObjectID error:&fetchExistingObjectFromParentContextError];
@@ -200,8 +206,11 @@
     SingleEntityWithNoRelationships *entity = [SingleEntityWithNoRelationships MR_createEntityInContext:stackContext];
 
     expect([[entity objectID] isTemporaryID]).to.beTruthy();
-
-    [stackContext MR_saveOnlySelfAndWait];
+    
+    NSError *saveError;
+    BOOL saveResult = [stackContext MR_saveOnlySelfAndWaitWithError:&saveError];
+    expect(saveResult).to.beTruthy();
+    expect(saveError).to.beNil();
 
     expect([[entity objectID] isTemporaryID]).to.beFalsy();
 }

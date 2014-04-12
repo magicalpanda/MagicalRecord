@@ -14,9 +14,32 @@
 
 @implementation NSManagedObjectContext (MagicalSaves)
 
-- (void) MR_saveOnlySelfAndWait;
+- (BOOL) MR_saveOnlySelfAndWait;
 {
-    [self MR_saveWithOptions:MRSaveSynchronously completion:nil];
+    __block BOOL saveResult = NO;
+
+    [self MR_saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
+        saveResult = success;
+    }];
+
+    return saveResult;
+}
+
+- (BOOL) MR_saveOnlySelfAndWaitWithError:(NSError **)error;
+{
+    __block BOOL saveResult = NO;
+    __block NSError *saveError;
+
+    [self MR_saveWithOptions:MRSaveSynchronously completion:^(BOOL localSuccess, NSError *localError) {
+        saveResult = localSuccess;
+        saveError = localError;
+    }];
+
+    if (error != nil) {
+        *error = saveError;
+    }
+
+    return saveResult;
 }
 
 - (void) MR_saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;
@@ -29,9 +52,32 @@
     [self MR_saveWithOptions:MRSaveParentContexts completion:completion];
 }
 
-- (void) MR_saveToPersistentStoreAndWait;
+- (BOOL) MR_saveToPersistentStoreAndWait;
 {
-    [self MR_saveWithOptions:MRSaveParentContexts | MRSaveSynchronously completion:nil];
+    __block BOOL saveResult = NO;
+
+    [self MR_saveWithOptions:MRSaveParentContexts | MRSaveSynchronously completion:^(BOOL success, NSError *error) {
+        saveResult = success;
+    }];
+
+    return saveResult;
+}
+
+- (BOOL) MR_saveToPersistentStoreAndWaitWithError:(NSError **)error;
+{
+    __block BOOL saveResult = NO;
+    __block NSError *saveError;
+
+    [self MR_saveWithOptions:MRSaveParentContexts | MRSaveSynchronously completion:^(BOOL localSuccess, NSError *localError) {
+        saveResult = localSuccess;
+        saveError = localError;
+    }];
+
+    if (error != nil) {
+        *error = saveError;
+    }
+
+    return saveResult;
 }
 
 - (void) MR_saveWithOptions:(MRSaveContextOptions)mask completion:(MRSaveCompletionHandler)completion;
@@ -46,7 +92,7 @@
         if (completion)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                completion(YES, nil);
+            completion(YES, nil);
             });
         }
 
@@ -89,7 +135,7 @@
 
                 if (completion) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completion(saved, error);
+                    completion(saved, error);
                     });
                 }
             } else {
@@ -104,7 +150,7 @@
 
                     if (completion) {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            completion(saved, error);
+                        completion(saved, error);
                         });
                     }
                 }

@@ -37,23 +37,30 @@
 + (void) saveWithBlock:(void (^)(NSManagedObjectContext *))block identifier:(NSString *)identifier completion:(MRSaveCompletionHandler)completion;
 
 /*!
- *  @method saveWithIdentifier:block:
+ *  @discussion The identifier is printed out when logging is enabled, and the context is being saved.
  *
  *  @param identifier A string to identify the context
  *  @param block Make changes to CoreData objects in this block using the passed in localContext. The block will be performed on a background queue, and once complete, the context will be saved.
- *
- *  @discussion The identifier is printed out when logging is enabled, and the context is being saved.
  */
 + (void) saveWithIdentifier:(NSString *)identifier block:(void(^)(NSManagedObjectContext *))block;
 
 /*!
- *  @method saveWithBlockAndWait:
- *
- *  @discussion For saving on the current thread as the caller, only with a seperate context. Useful when you're managing your own threads/queues and need a serial call to create or change data
+ *  Synchronously saves the default managed object context (if there is one) and any parent contexts
  *
  *  @param block Make changes to CoreData objects in this block using the passed in localContext. The block will be performed on a background queue, and once complete, the context will be saved.
  *
+ *  @return Whether the save was successful
  */
-+ (void) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
++ (BOOL) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
+
+/**
+ *  Synchronously saves the default managed object context (if there is one) and any parent contexts
+ *
+ *  @param block Make changes to CoreData objects in this block using the passed in localContext. The block will be performed on a background queue, and once complete, the context will be saved.
+ *  @param error Pass in an NSError by reference to receive any errors encountered during the save.
+ *
+ *  @return Whether the save was successful
+ */
++ (BOOL) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block error:(NSError **)error;
 
 @end
