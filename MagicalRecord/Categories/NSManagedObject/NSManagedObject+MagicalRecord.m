@@ -300,6 +300,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 @end
 
+#pragma mark - Deprecated Methods — DO NOT USE
 @implementation NSManagedObject (MagicalRecordDeprecated)
 
 + (instancetype) MR_createInContext:(NSManagedObjectContext *)context

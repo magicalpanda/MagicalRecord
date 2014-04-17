@@ -58,13 +58,6 @@
 
 @end
 
-@interface NSManagedObject (MagicalRecordDeprecated)
-
-+ (instancetype) MR_createInContext:(NSManagedObjectContext *)context __attribute__((deprecated("Please use +MR_createEntityInContext: instead.")));
-- (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context __attribute__((deprecated("Please use -MR_deleteEntityInContext: instead.")));
-
-@end
-
 @protocol MagicalRecord_MOGenerator <NSObject>
 
 @optional
@@ -74,3 +67,10 @@
 
 @end
 
+#pragma mark - Deprecated Methods — DO NOT USE
+@interface NSManagedObject (MagicalRecordDeprecated)
+
++ (instancetype) MR_createInContext:(NSManagedObjectContext *)context __attribute__((deprecated("Please use +MR_createEntityInContext: instead.")));
+- (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context __attribute__((deprecated("Please use -MR_deleteEntityInContext: instead.")));
+
+@end
