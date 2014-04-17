@@ -15,6 +15,7 @@ static NSString * const kRecipesStoreName = @"Recipes.sqlite";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self copyDefaultStoreIfNecessary];
+    [MagicalRecord setLogLevel:MagicalRecordLogLevelVerbose];
     [MagicalRecord setupCoreDataStackWithStoreNamed:kRecipesStoreName];
 
     // Override point for customization after application launch.
