@@ -27,15 +27,6 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
                              object:otherContext];
 }
 
-- (void) MR_observeContextOnMainThread:(NSManagedObjectContext *)otherContext
-{
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-	[notificationCenter addObserver:self
-                           selector:@selector(MR_mergeChangesOnMainThread:)
-                               name:NSManagedObjectContextDidSaveNotification
-                             object:otherContext];
-}
-
 - (void) MR_stopObservingContext:(NSManagedObjectContext *)otherContext
 {
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
@@ -43,6 +34,15 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 	[notificationCenter removeObserver:self
                                   name:NSManagedObjectContextDidSaveNotification
                                 object:otherContext];
+}
+
+- (void) MR_observeContextOnMainThread:(NSManagedObjectContext *)otherContext
+{
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+	[notificationCenter addObserver:self
+                           selector:@selector(MR_mergeChangesOnMainThread:)
+                               name:NSManagedObjectContextDidSaveNotification
+                             object:otherContext];
 }
 
 #pragma mark - Context iCloud Merge Helpers
