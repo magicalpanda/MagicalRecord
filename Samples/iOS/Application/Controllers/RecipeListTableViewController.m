@@ -115,7 +115,7 @@
     RecipeAddViewController *addController = [[RecipeAddViewController alloc] initWithNibName:@"RecipeAddView" bundle:nil];
     addController.delegate = self;
 	
-	Recipe *newRecipe = [Recipe MR_createInContext:self.managedObjectContext];
+	Recipe *newRecipe = [Recipe MR_createEntityInContext:self.managedObjectContext];
 	addController.recipe = newRecipe;
 
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addController];
