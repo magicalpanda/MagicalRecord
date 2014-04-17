@@ -12,9 +12,7 @@
 #import "MagicalRecord+iCloud.h"
 #import "MagicalRecordLogging.h"
 
-
 NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalRecordDidMergeChangesFromiCloudNotification";
-
 
 @implementation NSManagedObjectContext (MagicalObserving)
 

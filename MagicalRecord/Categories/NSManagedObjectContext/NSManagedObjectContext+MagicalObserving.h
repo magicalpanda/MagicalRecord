@@ -8,6 +8,8 @@
 
 #import <CoreData/CoreData.h>
 
+extern NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification;
+
 @interface NSManagedObjectContext (MagicalObserving)
 
 - (void) MR_observeContext:(NSManagedObjectContext *)otherContext;

@@ -8,8 +8,6 @@
 #import "MagicalRecord.h"
 #import "MagicalRecordDeprecated.h"
 
-extern NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification;
-
 @interface NSManagedObjectContext (MagicalRecord)
 
 #pragma mark - Setup
