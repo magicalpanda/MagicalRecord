@@ -10,7 +10,7 @@
 #import "NSManagedObject+MagicalDataImport.h"
 #import "MagicalImportFunctions.h"
 
-@implementation NSAttributeDescription (MagicalRecord_DataImport)
+@implementation NSAttributeDescription (MagicalRecordDataImport)
 
 - (NSString *) MR_primaryKey;
 {

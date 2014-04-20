@@ -8,9 +8,7 @@
 
 #import "NSNumber+MagicalDataImport.h"
 
-
-
-@implementation NSNumber (MagicalRecord_DataImport)
+@implementation NSNumber (MagicalRecordDataImport)
 
 - (id) MR_relatedValueForRelationship:(NSRelationshipDescription *)relationshipInfo
 {

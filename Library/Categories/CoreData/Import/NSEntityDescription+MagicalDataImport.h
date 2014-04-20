@@ -6,7 +6,7 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-@interface NSEntityDescription (MagicalDataImport)
+@interface NSEntityDescription (MagicalRecordDataImport)
 
 ///-------------------------------
 /// @name Managed Object Creation

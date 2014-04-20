@@ -6,7 +6,7 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-@interface NSAttributeDescription (MagicalRecord_DataImport)
+@interface NSAttributeDescription (MagicalRecordDataImport)
 
 - (NSString *) MR_primaryKey;
 - (id) MR_valueForKeyPath:(NSString *)keyPath fromObjectData:(id)objectData;

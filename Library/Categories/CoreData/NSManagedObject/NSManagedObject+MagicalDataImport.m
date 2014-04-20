@@ -26,20 +26,20 @@ NSString * const kMagicalRecordImportRelationshipTypeKey            = @"type";  
 
 NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"useDefaultValueWhenNotPresent";
 
-@interface NSObject (MagicalRecord_DataImportControls)
+@interface NSObject (MagicalRecordDataImportControls)
 
 - (id) MR_valueForUndefinedKey:(NSString *)key;
 
 @end
 
 
-@interface NSObject (MagicalRecord_DataImportInternal)
+@interface NSObject (MagicalRecordDataImportInternal)
 
 - (id) MR_valueForUndefinedKey:(NSString *)key;
 
 @end
 
-@implementation NSManagedObject (MagicalRecord_DataImport)
+@implementation NSManagedObject (MagicalRecordDataImport)
 
 - (BOOL) MR_importValue:(id)value forKey:(NSString *)key
 {

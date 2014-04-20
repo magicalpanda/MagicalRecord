@@ -11,7 +11,7 @@
 #import "MagicalImportFunctions.h"
 #import "MagicalRecord.h"
 
-@implementation NSRelationshipDescription (MagicalRecord_DataImport)
+@implementation NSRelationshipDescription (MagicalRecordDataImport)
 
 - (NSString *) MR_primaryKey;
 {

@@ -5,6 +5,7 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
+#import <CoreData/CoreData.h>
 
 extern NSString * const kMagicalRecordImportCustomDateFormatKey;
 extern NSString * const kMagicalRecordImportDefaultDateFormatString;
@@ -16,7 +17,16 @@ extern NSString * const kMagicalRecordImportRelationshipMapKey;
 extern NSString * const kMagicalRecordImportRelationshipLinkedByKey;
 extern NSString * const kMagicalRecordImportRelationshipTypeKey;
 
-@interface NSManagedObject (MagicalRecord_DataImport)
+@protocol MagicalRecordDataImportProtocol <NSObject>
+
+@optional
+- (BOOL) shouldImport:(id)data;
+- (void) willImport:(id)data;
+- (void) didImport:(id)data;
+
+@end
+
+@interface NSManagedObject (MagicalRecordDataImport) <MagicalRecordDataImportProtocol>
 
 - (BOOL) MR_importValuesForKeysWithObject:(id)objectData;
 
@@ -28,10 +38,3 @@ extern NSString * const kMagicalRecordImportRelationshipTypeKey;
 
 @end
 
-@interface NSManagedObject (MagicalRecord_DataImportControls)
-
-- (BOOL) shouldImport:(id)data;
-- (void) willImport:(id)data;
-- (void) didImport:(id)data;
-
-@end

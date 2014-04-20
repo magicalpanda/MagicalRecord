@@ -9,7 +9,7 @@
 #import "MagicalRecord.h"
 #import "NSEntityDescription+MagicalDataImport.h"
 
-@implementation NSEntityDescription (MagicalDataImport)
+@implementation NSEntityDescription (MagicalRecordDataImport)
 
 - (NSManagedObject *) MR_createInstanceInContext:(NSManagedObjectContext *)context;
 {

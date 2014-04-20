@@ -8,8 +8,7 @@
 
 #import "NSString+MagicalDataImport.h"
 
-
-@implementation NSString (MagicalRecord_DataImport)
+@implementation NSString (MagicalRecordDataImport)
 
 - (NSString *) MR_capitalizedFirstCharacterString;
 {
