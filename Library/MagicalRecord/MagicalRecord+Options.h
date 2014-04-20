@@ -21,16 +21,16 @@ typedef NS_ENUM(NSInteger, MagicalRecordLogLevel)
 @interface MagicalRecord (Options)
 
 /**
- *  Returns the current logging level.
+ *  Returns the logging level for MagicalRecord in the current application.
  *
- *  @return the current logging level
+ *  @return Current MagicalRecordLogLevel
  */
 + (MagicalRecordLogLevel) logLevel;
 
 /**
- *  Sets the desired logging level.
+ *  Sets the logging level for MagicalRecord in the current application.
  *
- *  @param level MagicalRecordLogLevel value
+ *  @param level Any value from MagicalRecordLogLevel
  */
 + (void) setLogLevel:(MagicalRecordLogLevel)level;
 
