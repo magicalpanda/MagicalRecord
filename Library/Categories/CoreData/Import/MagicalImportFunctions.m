@@ -59,9 +59,9 @@ NSNumber *MRNumberFromString(NSString *value)
 
 #if TARGET_OS_IPHONE
 
-UIColor *MR_colorFromString(NSString *serializedColor)
+UIColor *MRColorFromString(NSString *serializedColor)
 {
-    NSInteger *componentValues = MR_newColorComponentsFromString(serializedColor);
+    NSInteger *componentValues = MRNewColorComponentsFromString(serializedColor);
     if (componentValues == NULL)
     {
         return nil;
