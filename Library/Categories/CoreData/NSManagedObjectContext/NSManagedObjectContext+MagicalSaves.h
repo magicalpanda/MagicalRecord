@@ -8,9 +8,14 @@
 
 #import <CoreData/CoreData.h>
 
+/**
+ *  @abstract Options that can be passed when saving a context
+ *  @constant MRSaveParentContexts When saving, continue saving parent contexts until the changes are present in the persistent store.
+ *  @constant MRSaveSynchronously Peform saves synchronously, blocking execution on the current thread until the save is complete.
+ */
 typedef NS_OPTIONS(NSUInteger, MRSaveContextOptions) {
-    MRSaveParentContexts = 1 << 0,   ///< When saving, continue saving parent contexts until the changes are present in the persistent store
-    MRSaveSynchronously = 1 << 1     ///< Peform saves synchronously, blocking execution on the current thread until the save is complete
+    MRSaveParentContexts = 1 << 0,
+    MRSaveSynchronously = 1 << 1,
 };
 
 typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
@@ -18,8 +23,8 @@ typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
 @interface NSManagedObjectContext (MagicalSaves)
 
 /**
- *  Asynchronously save changes in the current context and it's parent.,
- * Executes a save on the current context's dispatch queue asynchronously. This method only saves the current context, and the parent of the current context if one is set. The completion block will always be called on the main queue.
+ *  Asynchronously save changes in the current context and it's parent.
+ *  Executes a save on the current context's dispatch queue asynchronously. This method only saves the current context, and the parent of the current context if one is set.
  *
  *  @param completion Completion block that is called after the save has completed. The block is passed a success state as a `BOOL` and an `NSError` instance if an error occurs.
  */

@@ -8,29 +8,53 @@
 
 #import "MagicalRecord.h"
 
-typedef NS_ENUM(NSInteger, MagicalRecordLogLevel)
-{
-    MagicalRecordLogLevelOff        = 0,
-    MagicalRecordLogLevelFatal      = 1 << 0,
-    MagicalRecordLogLevelError      = 1 << 1,
-    MagicalRecordLogLevelWarn       = 1 << 2,
-    MagicalRecordLogLevelInfo       = 1 << 3,
-    MagicalRecordLogLevelVerbose    = 1 << 4,
-};
-
-@interface MagicalRecord (Options)
 
 /**
- *  Returns the logging level for MagicalRecord in the current application.
- *
- *  @return Current MagicalRecordLogLevel
+ Defines "levels" of logging that will be used by MagicalRecord while running.
+
+ @constant MagicalRecordLogLevelOff Disable all logging
+ @constant MagicalRecordLogLevelFatal Log fatal errors
+ @constant MagicalRecordLogLevelError Log all errors
+ @constant MagicalRecordLogLevelWarn Log warnings, and all errors
+ @constant MagicalRecordLogLevelInfo Log informative messages, warnings and all errors
+ @constant MagicalRecordLogLevelVerbose Log verbose diagnostic information, messages, warnings and all errors
+
+ @since 2.3.0
+ */
+typedef NS_ENUM(NSInteger, MagicalRecordLogLevel)
+{
+    MagicalRecordLogLevelOff = 0,
+    MagicalRecordLogLevelFatal = 1 << 0,
+    MagicalRecordLogLevelError = 1 << 1,
+    MagicalRecordLogLevelWarn = 1 << 2,
+    MagicalRecordLogLevelInfo = 1 << 3,
+    MagicalRecordLogLevelVerbose = 1 << 4,
+};
+
+/**
+ Provides options for configuring MagicalRecord.
+ */
+@interface MagicalRecord (Options)
+
+///------------------
+/// @name Log Levels
+///------------------
+
+/**
+ Returns the logging level for MagicalRecord in the current application.
+
+ @return Current MagicalRecordLogLevel
+ 
+ @since 2.3.0
  */
 + (MagicalRecordLogLevel) logLevel;
 
 /**
- *  Sets the logging level for MagicalRecord in the current application.
- *
- *  @param level Any value from MagicalRecordLogLevel
+ Sets the logging level for MagicalRecord in the current application.
+
+ @param level Any value from MagicalRecordLogLevel
+
+ @since 2.3.0
  */
 + (void) setLogLevel:(MagicalRecordLogLevel)level;
 

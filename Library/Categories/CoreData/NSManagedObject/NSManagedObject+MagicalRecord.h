@@ -6,51 +6,81 @@
 
 #import <CoreData/CoreData.h>
 #import "MagicalRecord.h"
+#import "MagicalRecordMOGeneratorProtocol.h"
 #import "MagicalRecordDeprecated.h"
 
-@interface NSManagedObject (MagicalRecord)
+@protocol MagicalRecordManagedObjectProtocol <NSObject>
+
+@optional
+- (void) MR_awakeFromCreation;
+
+@end
 
 /**
- *  If you want to customize the entity name that is returned, you can override either `+ (NSString *) MR_entityName` or `+ (NSString *) entityName` in your `NSManagedObject` subclasses. `+ (NSString *) entityName` is declared in the default mogenerator templates.
- *
- *  @return Name of the managed object's entity, or if that is unavailable the name of the managed object's class as a string
+ Categories that simplify working with the NSManagedObject class.
+
+ @since 1.0.0
+ */
+@interface NSManagedObject (MagicalRecord) <MagicalRecordMOGeneratorProtocol, MagicalRecordManagedObjectProtocol>
+
+///--------------------------
+/// @name Entity Information
+///--------------------------
+
+/**
+ If you want to customize the entity name that is returned, you can override either `+ (NSString *) MR_entityName` or `+ (NSString *) entityName` in your `NSManagedObject` subclasses. `+ (NSString *) entityName` is declared in the default mogenerator templates.
+
+ @return Name of the managed object's entity, or if that is unavailable the name of the managed object's class as a string
+
+ @since 2.0.0
  */
 + (NSString *) MR_entityName;
-
-+ (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request;
-+ (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
-+ (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request;
-+ (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
 
 + (NSEntityDescription *) MR_entityDescription;
 + (NSEntityDescription *) MR_entityDescriptionInContext:(NSManagedObjectContext *)context;
 
 + (NSArray *) MR_propertiesNamed:(NSArray *)properties;
 
+///----------------------
+/// @name Fetch Requests
+///----------------------
+
++ (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request;
++ (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
++ (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request;
++ (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
+
+///-------------------------
+/// @name Creating Entities
+///-------------------------
+
 + (instancetype) MR_createEntity;
 + (instancetype) MR_createEntityInContext:(NSManagedObjectContext *)context;
 
 /**
- *  Create a new entity using the provided entity description.
- *
- *  @discussion Useful for creating entities that are not attached to a managed 
- *              object context — just pass a valid entity description and a nil
- *              context.
- *
- *  @param entityDescription Entity description or nil. A valid context must be 
- *                           provided if this parameter is nil.
- *  @param context           Managed Object Context or nil. A valid entity 
- *                           description must be provided if this parameter is nil.
- *
- *  @return a new instance of the current NSManagedObject subclass
+ Create a new entity using the provided entity description.
+
+ @discussion Useful for creating entities that are not attached to a managed object context — just pass a valid entity description and a nil context.
+
+ @param entityDescription 
+    Entity description or nil. A valid context must be provided if this parameter is nil.
+ @param context 
+    Managed Object Context or nil. A valid entity description must be provided if this parameter is nil.
+
+ @return a new instance of the current NSManagedObject subclass
  */
 + (instancetype) MR_createEntityWithDescription:(NSEntityDescription *)entityDescription inContext:(NSManagedObjectContext *)context;
 
+///-------------------------
+/// @name Deleting Entities
+///-------------------------
+
 /**
- *  Checks the `isDeleted` and `managedObjectContext` methods to determine if
- *    the managed object has been deleted
- *
- *  @return YES if the object has been deleted, otherwise NO
+ Checks the `isDeleted` and `managedObjectContext` methods to determine if the managed object has been deleted.
+
+ @return YES if the object has been deleted, otherwise NO
+
+ @since 2.3.0
  */
 - (BOOL) MR_isEntityDeleted;
 
@@ -63,26 +93,59 @@
 + (BOOL) MR_truncateAll;
 + (BOOL) MR_truncateAllInContext:(NSManagedObjectContext *)context;
 
+///------------------------
+/// @name Sorting Entities
+///------------------------
+
 + (NSArray *) MR_ascendingSortDescriptors:(NSArray *)attributesToSortBy;
 + (NSArray *) MR_descendingSortDescriptors:(NSArray *)attributesToSortBy;
++ (NSArray *) MR_sortAscending:(BOOL)ascending attributes:(NSArray *)attributesToSortBy;
+
+///-------------------------------
+/// @name Working Across Contexts
+///-------------------------------
 
 /**
- *  If the object has a temporary object identifier, this method requests a permanent object identifier from the object's current context.
+ If the object has a temporary object identifier, this method requests a permanent object identifier from the object's current context.
+
+ @since 2.1.0
  */
 - (void) MR_obtainPermanentObjectID;
+
+/**
+ Updates the persistent properties of a managed object to use the latest values from the persistent store.
+
+ @since 2.1.0
+ */
 - (void) MR_refresh;
 
+/**
+ Retrieves an instance of the current managed object from another context.
+
+ If the current managed object's context matches `otherContext`, self will be returned immediately.
+
+ If the current managed object has a temporary ID, an exception with name "NSObjectInaccessibleException" will be thrown.
+
+ @param otherContext Valid managed object context
+ @return Managed object from the supplied context
+ @since 2.1.0
+ */
 - (instancetype) MR_inContext:(NSManagedObjectContext *)otherContext;
+
+/**
+ If the current managed object has a temporary ID, returns self immediately otherwise calls `- MR_inContext:` on self with the supplied managed object context.
+
+ @param otherContext Valid managed object context
+ @return Managed object from the supplied context
+ */
 - (instancetype) MR_inContextIfTemporaryObject:(NSManagedObjectContext *)otherContext;
+
+///------------------
+/// @name Validation
+///------------------
 
 - (BOOL) MR_isValidForInsert;
 - (BOOL) MR_isValidForUpdate;
-
-@end
-
-@interface NSManagedObject (MagicalRecordOptional)
-
-- (void) MR_awakeFromCreation;
 
 @end
 
@@ -92,14 +155,5 @@
 - (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context MRDeprecated("Please use +MR_deleteEntityInContext:");
 
 - (instancetype) MR_inContextIfTempObject:(NSManagedObjectContext *)otherContext MRDeprecated("Please use +MR_inContextIfTemporaryObject:");
-
-@end
-
-@protocol MagicalRecord_MOGenerator <NSObject>
-
-@optional
-+ (NSString *) entityName;
-- (instancetype) entityInManagedObjectContext:(NSManagedObjectContext *)object;
-- (instancetype) insertInManagedObjectContext:(NSManagedObjectContext *)object;
 
 @end

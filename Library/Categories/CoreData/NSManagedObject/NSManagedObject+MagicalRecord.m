@@ -9,6 +9,8 @@
 
 @implementation NSManagedObject (MagicalRecord)
 
+#pragma mark - Entity Information
+
 + (NSString *) MR_entityName;
 {
     NSString *entityName;
@@ -23,53 +25,6 @@
     }
 
     return entityName;
-}
-
-+ (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
-{
-    __block NSArray *results = nil;
-    void (^requestBlock)(void) = ^{
-
-        NSError *error = nil;
-        results = [context executeFetchRequest:request error:&error];
-
-        if (results == nil)
-        {
-            [[error MR_coreDataDescription] MR_logToConsole];
-        }  
-    };
-
-    if ([context concurrencyType] == NSConfinementConcurrencyType)
-    {
-        requestBlock();
-    }
-    else
-    {
-        [context performBlockAndWait:requestBlock];
-    }
-	return results;
-}
-
-+ (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request
-{
-	return [self MR_executeFetchRequest:request inContext:[[MagicalRecordStack defaultStack] context]];
-}
-
-+ (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
-{
-	[request setFetchLimit:1];
-	
-	NSArray *results = [self MR_executeFetchRequest:request inContext:context];
-	if ([results count] == 0)
-	{
-		return nil;
-	}
-	return [results objectAtIndex:0];
-}
-
-+ (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request
-{
-	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 + (NSEntityDescription *) MR_entityDescription
@@ -108,30 +63,56 @@
 	return propertiesWanted;
 }
 
-+ (NSArray *) MR_sortAscending:(BOOL)ascending attributes:(NSArray *)attributesToSortBy
+#pragma mark - Fetch Requests
+
++ (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
 {
-	NSMutableArray *attributes = [NSMutableArray array];
-    
-    for (NSString *attributeName in attributesToSortBy) 
+    __block NSArray *results = nil;
+    void (^requestBlock)(void) = ^{
+
+        NSError *error = nil;
+        results = [context executeFetchRequest:request error:&error];
+
+        if (results == nil)
+        {
+            [[error MR_coreDataDescription] MR_logToConsole];
+        }
+    };
+
+    if ([context concurrencyType] == NSConfinementConcurrencyType)
     {
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:attributeName ascending:ascending];
-        [attributes addObject:sortDescriptor];
+        requestBlock();
     }
-    
-	return attributes;
+    else
+    {
+        [context performBlockAndWait:requestBlock];
+    }
+	return results;
 }
 
-+ (NSArray *) MR_ascendingSortDescriptors:(NSArray *)attributesToSortBy
++ (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request
 {
-	return [self MR_sortAscending:YES attributes:attributesToSortBy];
+	return [self MR_executeFetchRequest:request inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
-+ (NSArray *) MR_descendingSortDescriptors:(NSArray *)attributesToSortBy
++ (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
 {
-	return [self MR_sortAscending:NO attributes:attributesToSortBy];
+	[request setFetchLimit:1];
+
+	NSArray *results = [self MR_executeFetchRequest:request inContext:context];
+	if ([results count] == 0)
+	{
+		return nil;
+	}
+	return [results objectAtIndex:0];
 }
 
-#pragma mark - Entity Creation
++ (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request
+{
+	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:[[MagicalRecordStack defaultStack] context]];
+}
+
+#pragma mark - Creating Entities
 
 + (instancetype) MR_createEntity
 {
@@ -162,7 +143,7 @@
     return managedObject;
 }
 
-#pragma mark - Entity Deletion
+#pragma mark - Deleting Entities
 
 - (BOOL) MR_isEntityDeleted
 {
@@ -191,14 +172,14 @@
     NSFetchRequest *request = [self MR_requestAllWithPredicate:predicate];
     [request setReturnsObjectsAsFaults:YES];
 	[request setIncludesPropertyValues:NO];
-    
+
 	NSArray *objectsToTruncate = [self MR_executeFetchRequest:request inContext:context];
-    
+
 	for (NSManagedObject *objectToTruncate in objectsToTruncate)
     {
 		[objectToTruncate MR_deleteEntityInContext:context];
 	}
-    
+
 	return YES;
 }
 
@@ -226,6 +207,33 @@
     [self MR_truncateAllInContext:[[MagicalRecordStack defaultStack] context]];
     return YES;
 }
+
+#pragma mark - Sorting Entities
+
++ (NSArray *) MR_ascendingSortDescriptors:(NSArray *)attributesToSortBy
+{
+	return [self MR_sortAscending:YES attributes:attributesToSortBy];
+}
+
++ (NSArray *) MR_descendingSortDescriptors:(NSArray *)attributesToSortBy
+{
+	return [self MR_sortAscending:NO attributes:attributesToSortBy];
+}
+
++ (NSArray *) MR_sortAscending:(BOOL)ascending attributes:(NSArray *)attributesToSortBy
+{
+	NSMutableArray *attributes = [NSMutableArray array];
+
+    for (NSString *attributeName in attributesToSortBy)
+    {
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:attributeName ascending:ascending];
+        [attributes addObject:sortDescriptor];
+    }
+
+	return attributes;
+}
+
+#pragma mark - Working Across Contexts
 
 - (void) MR_refresh;
 {
@@ -289,6 +297,8 @@
     }
 }
 
+#pragma mark - Validation
+
 - (BOOL) MR_isValidForInsert;
 {
     NSError *error = nil;
@@ -315,8 +325,8 @@
 
 @end
 
-@implementation NSManagedObject (MagicalRecordDeprecated)
 #pragma mark - Deprecated Methods
+@implementation NSManagedObject (MagicalRecordDeprecated)
 
 + (instancetype) MR_createInContext:(NSManagedObjectContext *)context
 {

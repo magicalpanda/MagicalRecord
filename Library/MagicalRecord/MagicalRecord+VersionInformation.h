@@ -13,10 +13,16 @@ extern const double MagicalRecordVersionNumber;
 
 @interface MagicalRecord (VersionInformation)
 
+///---------------------------
+/// @name Version Information
+///---------------------------
+
 /**
- *  Use this class method to retrieve the current library version. See the `MagicalRecordVersionNumber` for more information and valid values.
- *
- *  @return Double value representing the current library version.
+ Use this class method to retrieve the current library version. See the `MagicalRecordVersionNumber` for more information and valid values.
+
+ @return Double value representing the current library version.
+ 
+ @since 2.3.0
  */
 + (double) version;
 

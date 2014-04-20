@@ -174,6 +174,7 @@
 
 @end
 
+#pragma mark - Deprecated Methods
 @implementation NSPersistentStore (MagicalRecordDeprecated)
 
 + (NSURL *) MR_defaultURLForStoreName:(NSString *)storeFileName;
