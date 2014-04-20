@@ -840,8 +840,6 @@
 				C781813217E6555300ADD31C /* NSManagedObject+MagicalFetching.m */,
 				C7790F6B17E63C3000D20ACF /* NSManagedObject+MagicalRequests.h */,
 				C7790F6C17E63C3000D20ACF /* NSManagedObject+MagicalRequests.m */,
-				90610E3C18F41B1400E2C328 /* NSArray+MagicalRecord.h */,
-				90610E3D18F41B1400E2C328 /* NSArray+MagicalRecord.m */,
 			);
 			path = NSManagedObject;
 			sourceTree = "<group>";
@@ -877,6 +875,8 @@
 		C7790F8317E63C3100D20ACF /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				90610E3C18F41B1400E2C328 /* NSArray+MagicalRecord.h */,
+				90610E3D18F41B1400E2C328 /* NSArray+MagicalRecord.m */,
 				C7790F8417E63C3100D20ACF /* NSDictionary+MagicalRecordAdditions.h */,
 				C7790F8517E63C3100D20ACF /* NSDictionary+MagicalRecordAdditions.m */,
 				C7790F8617E63C3100D20ACF /* NSError+MagicalRecordErrorHandling.h */,
