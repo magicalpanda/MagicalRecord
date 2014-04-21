@@ -167,6 +167,11 @@
     return [objectInContext MR_isEntityDeleted];
 }
 
++ (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate
+{
+    return [self MR_deleteAllMatchingPredicate:predicate inContext:[[MagicalRecordStack defaultStack] context]];
+}
+
 + (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *request = [self MR_requestAllWithPredicate:predicate];
@@ -183,9 +188,10 @@
 	return YES;
 }
 
-+ (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate
++ (BOOL) MR_truncateAll
 {
-    return [self MR_deleteAllMatchingPredicate:predicate inContext:[[MagicalRecordStack defaultStack] context]];
+    [self MR_truncateAllInContext:[[MagicalRecordStack defaultStack] context]];
+    return YES;
 }
 
 + (BOOL) MR_truncateAllInContext:(NSManagedObjectContext *)context
@@ -199,12 +205,6 @@
     {
         [objectToDelete MR_deleteEntityInContext:context];
     }
-    return YES;
-}
-
-+ (BOOL) MR_truncateAll
-{
-    [self MR_truncateAllInContext:[[MagicalRecordStack defaultStack] context]];
     return YES;
 }
 

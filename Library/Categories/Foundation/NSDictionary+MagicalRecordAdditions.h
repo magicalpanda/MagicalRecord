@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ NSDictionary category methods to support various aspects of MagicalRecord.
+
+ @since Available in v3.0 and later.
+ */
 @interface NSDictionary (MagicalRecordAdditions)
 
 /**

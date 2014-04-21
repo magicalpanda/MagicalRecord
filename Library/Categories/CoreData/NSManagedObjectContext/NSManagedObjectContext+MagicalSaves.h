@@ -23,6 +23,11 @@ typedef NS_OPTIONS(NSUInteger, MRSaveContextOptions) {
 
 typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
 
+/**
+ Category methods to simplify saving managed object contexts.
+
+ @since Available in 2.0 and later.
+ */
 @interface NSManagedObjectContext (MagicalSaves)
 
 /**
@@ -30,6 +35,8 @@ typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
  Executes a save on the current context's dispatch queue asynchronously. This method only saves the current context, and the parent of the current context if one is set.
 
  @param completion Completion block that is called after the save has completed. The block is passed a success state as a `BOOL` and an `NSError` instance if an error occurs.
+ 
+ @since Available in 2.1 and later.
  */
 - (void) MR_saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;
 
@@ -38,6 +45,8 @@ typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
  Executes asynchronous saves on the current context, and any ancestors, until the changes have been persisted to the assigned persistent store.
 
  @param completion Completion block that is called after the save has completed. The block is passed a success state as a `BOOL` and an `NSError` instance if an error occurs.
+ 
+ @since Available in 2.1 and later.
  */
 - (void) MR_saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion;
 
@@ -45,7 +54,9 @@ typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
  Synchronously save changes in the current context and it's parent.
  Executes a save on the current context's dispatch queue. This method only saves the current context, and the parent of the current context if one is set. The method will not return until the save is complete.
 
- @return Success state of the save
+ @return Success state of the save.
+ 
+ @since Available in 2.1 and later.
  */
 - (BOOL) MR_saveOnlySelfAndWait;
 
@@ -55,6 +66,8 @@ typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
  @param error Pass in an NSError by reference to receive any errors encountered during the save.
 
  @return Success state of the save
+ 
+ @since Available in 2.1 and later.
  */
 - (BOOL) MR_saveOnlySelfAndWaitWithError:(NSError **)error;
 
@@ -62,7 +75,9 @@ typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
  Synchronously save changes in the current context all the way back to the persistent store.
  Executes saves on the current context, and any ancestors, until the changes have been persisted to the assigned persistent store. The method will not return until the save is complete.
 
- @return Success state of the save
+ @return Success state of the save.
+ 
+ @since Available in 2.1 and later.
  */
 - (BOOL) MR_saveToPersistentStoreAndWait;
 
@@ -71,15 +86,19 @@ typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
 
  @param error Pass in an NSError by reference to receive any errors encountered during the save.
 
- @return Success state of the save
+ @return Success state of the save.
+ 
+ @since Available in 2.1 and later.
  */
 - (BOOL) MR_saveToPersistentStoreAndWaitWithError:(NSError **)error;
 
 /**
  Save the current context with options. All other save methods are convenience wrappers around this method.
 
- @param mask       bitmasked options for the save process
- @param completion Completion block that is called after the save has completed. The block is passed a success state as a `BOOL` and an `NSError` instance if an error occurs
+ @param mask       Values from MRSaveContextOptions bitmasked for the save process.
+ @param completion Completion block that is called after the save has completed. The block is passed a success state as a `BOOL` and an `NSError` instance if an error occurs.
+ 
+ @since Available in 2.1 and later.
  */
  - (void) MR_saveWithOptions:(MRSaveContextOptions)mask completion:(MRSaveCompletionHandler)completion;
 

@@ -62,10 +62,8 @@
 
  @discussion Useful for creating entities that are not attached to a managed object context — just pass a valid entity description and a nil context.
 
- @param entityDescription 
-    Entity description or nil. A valid context must be provided if this parameter is nil.
- @param context 
-    Managed Object Context or nil. A valid entity description must be provided if this parameter is nil.
+ @param entityDescription Entity description or nil. A valid context must be provided if this parameter is nil.
+ @param context Managed Object Context or nil. A valid entity description must be provided if this parameter is nil.
 
  @return a new instance of the current NSManagedObject subclass
  */
@@ -91,33 +89,100 @@
 
  @return YES if the delete was performed successfully, otherwise NO.
 
- @since Available in v1.0 and later.
+ @since Available in v1.8 and later.
  */
 - (BOOL) MR_deleteEntity;
 
 /**
- Deletes the entity from the specified context.
+ Deletes the entity from the supplied context.
 
  @param context Managed object context
 
- @return <#return value description#>
+ @return YES if the delete was performed successfully, otherwise NO.
 
- @since <#version number#>
+ @since Available in v2.3 and later.
  */
 - (BOOL) MR_deleteEntityInContext:(NSManagedObjectContext *)context;
 
+/**
+ Deletes any entities matching the passed predicate from the default context of the default stack.
+
+ @param predicate Predicate to evaluate objects against
+
+ @return YES if the delete was performed successfully, otherwise NO.
+
+ @since Available in v1.8 and later.
+ */
 + (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate;
+
+/**
+ Deletes all entities matching the passed predicate from the supplied context.
+
+ @param predicate Predicate to evaluate objects against
+ @param context   Managed object context
+
+ @return YES if the delete was performed successfully, otherwise NO.
+
+ @since Available in v1.8 and later.
+ */
 + (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
 
+/**
+ Deletes all entities with a class that matches this subclass from the default context of the default stack.
+
+ @return YES if the delete was performed successfully, otherwise NO.
+
+ @since Available in v1.8 and later.
+ */
 + (BOOL) MR_truncateAll;
+
+/**
+ Deletes all entities with a class that matches this subclass from the supplied context.
+
+ @param context Managed object context
+
+ @return YES if the delete was performed successfully, otherwise NO.
+
+ @since Available in v1.8 and later.
+ */
 + (BOOL) MR_truncateAllInContext:(NSManagedObjectContext *)context;
 
 /**
  @name Sorting Entities
  */
 
+/**
+ Initializes an array of ascending sort descriptors for the supplied attributes.
+
+ @param attributesToSortBy Array of attribute names to sort by.
+
+ @return Array of sort descriptors.
+
+ @since Available in v1.8 and later.
+ */
 + (NSArray *) MR_ascendingSortDescriptors:(NSArray *)attributesToSortBy;
+
+/**
+ Initializes an array of descending sort descriptors for the supplied attributes.
+
+ @param attributesToSortBy Array of attribute names to sort by.
+
+ @return Array of sort descriptors.
+
+ @since Available in v1.8 and later.
+ */
 + (NSArray *) MR_descendingSortDescriptors:(NSArray *)attributesToSortBy;
+
+/**
+ Initializes an array of sort descriptors for the supplied attributes, sorted according to the supplied `ascending` value.
+
+ @param ascending          Whether to sort the descriptors ascending (`YES`) or descending (`NO`).
+ @param attributesToSortBy Array of attribute names to sort by.
+
+ @return Array of sort descriptors.
+
+ @since Available in v2.3 and later.
+ */
 + (NSArray *) MR_sortAscending:(BOOL)ascending attributes:(NSArray *)attributesToSortBy;
 
 /**

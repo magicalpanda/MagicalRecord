@@ -6,7 +6,7 @@
 #import <CoreData/CoreData.h>
 
 /**
- Methods for working with NSManagedObjects within NSArray instances.
+ Category methods for working with NSManagedObjects within NSArray instances.
  
  @since Available in v2.3 and later.
  */

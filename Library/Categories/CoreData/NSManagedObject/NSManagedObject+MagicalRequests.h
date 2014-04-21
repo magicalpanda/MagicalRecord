@@ -8,7 +8,16 @@
 
 #import <CoreData/CoreData.h>
 
+/**
+ Category methods to make creating fetch requests easier.
+
+ @since Available in v1.8 and later.
+ */
 @interface NSManagedObject (MagicalRequests)
+
+/**
+ @name Global Options
+ */
 
 /**
  The current default batch size.
@@ -31,18 +40,87 @@
 + (void) MR_setDefaultBatchSize:(NSUInteger)newBatchSize;
 
 /**
+ @name Fetch Request Creation
+ */
+
+/**
  Initializes a fetch request that queries a context for all entities of the current type.
 
  @return Fetch request
 
- @since Available in v2.0 and later.
+ @since Available in v1.8 and later.
  */
 + (NSFetchRequest *) MR_requestAll;
-+ (NSFetchRequest *) MR_requestAllWithPredicate:(NSPredicate *)searchTerm;
-+ (NSFetchRequest *) MR_requestAllWhere:(NSString *)property isEqualTo:(id)value;
-+ (NSFetchRequest *) MR_requestFirstWithPredicate:(NSPredicate *)searchTerm;
-+ (NSFetchRequest *) MR_requestFirstByAttribute:(NSString *)attribute withValue:(id)searchValue;
+
+/**
+ Initializes a fetch request that queries a context for all entities of the current type that match the supplied predicate.
+
+ @param predicate Predicate to evaluate objects against
+
+ @return Fetch request
+
+ @since Available in v1.8 and later.
+ */
++ (NSFetchRequest *) MR_requestAllWithPredicate:(NSPredicate *)predicate;
+
+/**
+ Initializes a fetch request that queries a context for all entities of the current type where the supplied property has the supplied value.
+
+ @param attributeName Attribute or property name to match the supplied value against.
+ @param value         Value to match against.
+
+ @return Fetch request
+
+ @since Available in v1.8 and later.
+ */
++ (NSFetchRequest *) MR_requestAllWhere:(NSString *)attributeName isEqualTo:(id)value;
+
+/**
+ Initializes a fetch request that queries a context for the first entity of the current type that matches the supplied predicate.
+
+ @param predicate Predicate to evaluate objects against
+
+ @return Fetch request
+
+ @since Available in v1.8 and later.
+ */
++ (NSFetchRequest *) MR_requestFirstWithPredicate:(NSPredicate *)predicate;
+
+/**
+ Initializes a fetch request that queries a context for the first entity of the current type where the supplied property has the supplied value.
+
+ @param attributeName Attribute or property name to match the supplied value against.
+ @param value         Value to match against.
+
+ @return Fetch request
+
+ @since Available in v1.8 and later.
+ */
++ (NSFetchRequest *) MR_requestFirstByAttribute:(NSString *)attributeName withValue:(id)value;
+
+/**
+ Initializes a fetch request that queries a context for all entities of the current type, sorted by the supplied sort term in the supplied order.
+
+ @param sortTerm  Attribute name to sort by.
+ @param ascending `YES` if the attribute should be sorted ascending, `NO` for descending.
+
+ @return Fetch request
+
+ @since Available in v1.8 and later.
+ */
 + (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending;
-+ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm;
+
+/**
+ Initializes a fetch request that queries a context for all entities of the current type, sorted by the supplied sort term in the supplied order that match the supplied predicate.
+
+ @param sortTerm  Attribute name to sort by.
+ @param ascending `YES` if the attribute should be sorted ascending, `NO` for descending.
+ @param predicate Predicate to evaluate objects against
+
+ @return Fetch request
+
+ @since Available in v1.8 and later.
+ */
++ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)predicate;
 
 @end

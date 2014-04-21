@@ -11,6 +11,11 @@
 
 extern const double MagicalRecordVersionNumber;
 
+/**
+ Provides an way for developers to retrieve the version of MagicalRecord they are currently using within their apps.
+
+ @since Available in v2.3 and later.
+ */
 @interface MagicalRecord (VersionInformation)
 
 ///---------------------------

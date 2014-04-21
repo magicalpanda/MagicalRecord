@@ -17,6 +17,8 @@ NSArray *MR_NSSortDescriptorsFromString(NSString *string, BOOL defaultAscendingV
 
 @implementation NSManagedObject (MagicalRequests)
 
+#pragma mark - Global Options
+
 + (void) MR_setDefaultBatchSize:(NSUInteger)newBatchSize
 {
 	@synchronized(self)
@@ -30,40 +32,42 @@ NSArray *MR_NSSortDescriptorsFromString(NSString *string, BOOL defaultAscendingV
 	return defaultBatchSize;
 }
 
+#pragma mark - Fetch Request Creation
+
 + (NSFetchRequest *) MR_requestAll
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[self MR_entityName]];
     return request;
 }
 
-+ (NSFetchRequest *) MR_requestAllWithPredicate:(NSPredicate *)searchTerm;
++ (NSFetchRequest *) MR_requestAllWithPredicate:(NSPredicate *)predicate;
 {
     NSFetchRequest *request = [self MR_requestAll];
-    [request setPredicate:searchTerm];
+    [request setPredicate:predicate];
     
     return request;
 }
 
-+ (NSFetchRequest *) MR_requestAllWhere:(NSString *)property isEqualTo:(id)value;
++ (NSFetchRequest *) MR_requestAllWhere:(NSString *)attributeName isEqualTo:(id)value;
 {
     NSFetchRequest *request = [self MR_requestAll];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", property, value]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", attributeName, value]];
     
     return request;
 }
 
-+ (NSFetchRequest *) MR_requestFirstWithPredicate:(NSPredicate *)searchTerm;
++ (NSFetchRequest *) MR_requestFirstWithPredicate:(NSPredicate *)predicate;
 {
     NSFetchRequest *request = [self MR_requestAll];
-    [request setPredicate:searchTerm];
+    [request setPredicate:predicate];
     [request setFetchLimit:1];
     
     return request;
 }
 
-+ (NSFetchRequest *) MR_requestFirstByAttribute:(NSString *)attribute withValue:(id)searchValue;
++ (NSFetchRequest *) MR_requestFirstByAttribute:(NSString *)attributeName withValue:(id)value;
 {
-    NSFetchRequest *request = [self MR_requestAllWhere:attribute isEqualTo:searchValue];
+    NSFetchRequest *request = [self MR_requestAllWhere:attributeName isEqualTo:value];
     [request setFetchLimit:1];
     
     return request;
@@ -76,12 +80,12 @@ NSArray *MR_NSSortDescriptorsFromString(NSString *string, BOOL defaultAscendingV
                          withPredicate:nil];
 }
 
-+ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm;
++ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)predicate;
 {
 	NSFetchRequest *request = [self MR_requestAll];
-	if (searchTerm)
+	if (predicate)
     {
-        [request setPredicate:searchTerm];
+        [request setPredicate:predicate];
     }
 	[request setFetchBatchSize:[self MR_defaultBatchSize]];
 	[request setSortDescriptors:MR_NSSortDescriptorsFromString(sortTerm, ascending)];

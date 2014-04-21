@@ -6,6 +6,11 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
+/**
+ Category methods on NSEntityDescription used in MagicalRecord's data import process.
+
+ @since Available in v1.8 and later.
+ */
 @interface NSEntityDescription (MagicalRecordDataImport)
 
 ///-------------------------------
