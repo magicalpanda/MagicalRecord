@@ -9,40 +9,30 @@
 #import "NSDictionary+MagicalRecordAdditions.h"
 #import "NSPersistentStoreCoordinator+MagicalRecord.h"
 
-
 @implementation NSDictionary (MagicalRecordAdditions)
 
-- (NSMutableDictionary *) MR_dictionaryByMergingDictionary:(NSDictionary *)d;
+- (NSMutableDictionary *) MR_dictionaryByMergingDictionary:(NSDictionary *)dictionary;
 {
     NSMutableDictionary *mutDict = [self mutableCopy];
-    [mutDict addEntriesFromDictionary:d];
+    [mutDict addEntriesFromDictionary:dictionary];
     return mutDict;
 }
 
 + (NSDictionary *) MR_defaultSqliteStoreOptions;
 {
-    NSMutableDictionary *options = [NSMutableDictionary dictionary];
-    [options setObject:@"WAL" forKey:@"journal_mode"];
-
-    return options;
+    return @{ @"journal_mode" : @"WAL" };
 }
 
 + (NSDictionary *) MR_autoMigrationOptions;
 {
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-                             [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
-                             nil];
-    return options;
+    return @{ NSMigratePersistentStoresAutomaticallyOption : @YES,
+              NSInferMappingModelAutomaticallyOption : @YES };
 }
 
 + (NSDictionary *) MR_manualMigrationOptions;
 {
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-                             [NSNumber numberWithBool:NO], NSInferMappingModelAutomaticallyOption,
-                             nil];
-    return options;
+    return @{ NSMigratePersistentStoresAutomaticallyOption : @YES,
+              NSInferMappingModelAutomaticallyOption : @NO };
 }
 
 - (BOOL) MR_shouldDeletePersistentStoreOnModelMismatch;
