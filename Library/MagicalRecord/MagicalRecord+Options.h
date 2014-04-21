@@ -12,22 +12,26 @@
 /**
  Defines "levels" of logging that will be used by MagicalRecord while running.
 
- @constant MagicalRecordLogLevelOff Disable all logging
- @constant MagicalRecordLogLevelFatal Log fatal errors
- @constant MagicalRecordLogLevelError Log all errors
- @constant MagicalRecordLogLevelWarn Log warnings, and all errors
- @constant MagicalRecordLogLevelInfo Log informative messages, warnings and all errors
- @constant MagicalRecordLogLevelVerbose Log verbose diagnostic information, messages, warnings and all errors
-
- @since 2.3.0
+ @since Available in v2.3 and later.
  */
 typedef NS_ENUM(NSInteger, MagicalRecordLogLevel)
 {
+    /** Disable all logging */
     MagicalRecordLogLevelOff = 0,
+
+    /** Log fatal errors */
     MagicalRecordLogLevelFatal = 1 << 0,
+
+    /** Log all errors */
     MagicalRecordLogLevelError = 1 << 1,
+
+    /** Log warnings, and all errors */
     MagicalRecordLogLevelWarn = 1 << 2,
+
+    /** Log informative messages, warnings and all errors */
     MagicalRecordLogLevelInfo = 1 << 3,
+
+    /** Log verbose diagnostic information, messages, warnings and all errors */
     MagicalRecordLogLevelVerbose = 1 << 4,
 };
 
@@ -36,16 +40,16 @@ typedef NS_ENUM(NSInteger, MagicalRecordLogLevel)
  */
 @interface MagicalRecord (Options)
 
-///------------------
-/// @name Log Levels
-///------------------
+/**
+ @name Log Levels
+ */
 
 /**
  Returns the logging level for MagicalRecord in the current application.
 
  @return Current MagicalRecordLogLevel
  
- @since 2.3.0
+ @since Available in v2.3 and later.
  */
 + (MagicalRecordLogLevel) logLevel;
 
@@ -54,7 +58,7 @@ typedef NS_ENUM(NSInteger, MagicalRecordLogLevel)
 
  @param level Any value from MagicalRecordLogLevel
 
- @since 2.3.0
+ @since Available in v2.3 and later.
  */
 + (void) setLogLevel:(MagicalRecordLogLevel)level;
 

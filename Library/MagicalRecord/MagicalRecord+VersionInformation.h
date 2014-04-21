@@ -22,7 +22,7 @@ extern const double MagicalRecordVersionNumber;
 
  @return Double value representing the current library version.
  
- @since 2.3.0
+ @since Available in v2.3 and later.
  */
 + (double) version;
 

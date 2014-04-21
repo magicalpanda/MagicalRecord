@@ -8,7 +8,7 @@
 /**
  Methods for working with NSManagedObjects within NSArray instances.
  
- @since 2.3.0 and later
+ @since Available in v2.3 and later.
  */
 @interface NSArray (MagicalRecord)
 
@@ -23,7 +23,7 @@
  @param context Managed object context
  @return Array of NSManagedObjects in the specified context
  
- @since 2.3.0
+ @since Available in v2.3 and later.
  */
 - (NSArray *) MR_entitiesInContext:(NSManagedObjectContext *)context;
 
@@ -34,7 +34,7 @@
 /**
  Deletes any managed objects in the array instance from the default context.
  
- @since 2.3.0
+ @since Available in v2.3 and later.
  */
 - (void) MR_deleteEntities;
 
@@ -42,7 +42,7 @@
  Deletes any managed objects in the array instance from the specified context.
  @param context Managed object context
  
- @since 2.3.0
+ @since Available in v2.3 and later.
  */
 - (void) MR_deleteEntitiesInContext:(NSManagedObjectContext *)context;
 
