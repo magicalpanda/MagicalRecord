@@ -76,38 +76,35 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
                                                         options:options
                                                           error:&error];
     
-    if (!store) 
+    if (!store && [MagicalRecord shouldDeleteStoreOnModelMismatch]) 
     {
-        if ([MagicalRecord shouldDeleteStoreOnModelMismatch])
-        {
-            BOOL isMigrationError = (([error code] == NSPersistentStoreIncompatibleVersionHashError) || ([error code] == NSMigrationMissingSourceModelError));
-            if ([[error domain] isEqualToString:NSCocoaErrorDomain] && isMigrationError)
+	    BOOL isMigrationError = (([error code] == NSPersistentStoreIncompatibleVersionHashError) || ([error code] == NSMigrationMissingSourceModelError));
+	    if ([[error domain] isEqualToString:NSCocoaErrorDomain] && isMigrationError)
+	    {
+            // Could not open the database, so... kill it! (AND WAL bits)
+            NSString *rawURL = [url absoluteString];
+            NSURL *shmSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-shm"]];
+            NSURL *walSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-wal"]];
+            [[NSFileManager defaultManager] removeItemAtURL:url error:nil];
+            [[NSFileManager defaultManager] removeItemAtURL:shmSidecar error:nil];
+            [[NSFileManager defaultManager] removeItemAtURL:walSidecar error:nil];
+            
+            MRLogWarn(@"Removed incompatible model version: %@", [url lastPathComponent]);
+            
+            // Try one more time to create the store
+            store = [self addPersistentStoreWithType:NSSQLiteStoreType
+                                       configuration:nil
+                                                 URL:url
+                                             options:options
+                                               error:&error];
+            if (store)
             {
-                // Could not open the database, so... kill it! (AND WAL bits)
-                NSString *rawURL = [url absoluteString];
-                NSURL *shmSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-shm"]];
-                NSURL *walSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-wal"]];
-                [[NSFileManager defaultManager] removeItemAtURL:url error:nil];
-                [[NSFileManager defaultManager] removeItemAtURL:shmSidecar error:nil];
-                [[NSFileManager defaultManager] removeItemAtURL:walSidecar error:nil];
-
-                MRLogWarn(@"Removed incompatible model version: %@", [url lastPathComponent]);
-                
-                // Try one more time to create the store
-                store = [self addPersistentStoreWithType:NSSQLiteStoreType
-                                           configuration:nil
-                                                     URL:url
-                                                 options:options
-                                                   error:&error];
-                if (store)
-                {
-                    // If we successfully added a store, remove the error that was initially created
-                    error = nil;
-                }
+                // If we successfully added a store, remove the error that was initially created
+                error = nil;
             }
-        }
-        [MagicalRecord handleErrors:error];
+	    }
     }
+    [MagicalRecord handleErrors:error];
     return store;
 }
 
