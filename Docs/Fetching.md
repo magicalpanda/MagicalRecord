@@ -51,7 +51,7 @@ NSArray *people = [Person MR_findAllWithPredicate:peopleFilter];
 
 ```objective-c
 NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"department IN %@", departments];
-NSArray *people = [Person MR_findAllWithPredicate:peopleFilter];
+NSFetchRequest *people = [Person MR_requestAllWithPredicate:peopleFilter];
 ```
 
 For each of these single line calls, the full stack of NSFetchRequest, NSSortDescriptors and a simple default error handling scheme (ie. logging to the console) is created.
