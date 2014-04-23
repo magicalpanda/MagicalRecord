@@ -12,6 +12,9 @@
 @protocol MagicalRecordManagedObjectProtocol <NSObject>
 
 @optional
+/**
+ Work around for situation with inserting the same object into many nested contexts. This will be called once, while awakeFromInsert has the potential to be called mutliple times for the same insert.
+ */
 - (void) MR_awakeFromCreation;
 
 @end
