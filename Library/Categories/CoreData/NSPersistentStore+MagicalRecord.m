@@ -10,6 +10,8 @@
 #import "NSError+MagicalRecordErrorHandling.h"
 #import "MagicalRecordLogging.h"
 
+static inline NSString *MR_defaultApplicationStorePath(void);
+static inline NSString *MR_userDocumentsPath(void);
 
 @implementation NSPersistentStore (MagicalRecord)
 
@@ -24,7 +26,7 @@
 
     if (storeURL == nil)
     {
-        NSString *storePath = [[self MRPrivate_applicationSupportDirectory] stringByAppendingPathComponent:storeFileName];
+        NSString *storePath = [MR_defaultApplicationStorePath() stringByAppendingPathComponent:storeFileName];
         storeURL = [NSURL fileURLWithPath:storePath];
     }
 
@@ -33,7 +35,9 @@
 
 + (NSURL *) MR_fileURLForStoreNameIfExistsOnDisk:(NSString *)storeFileName;
 {
-	NSArray *paths = [NSArray arrayWithObjects:[self MRPrivate_applicationDocumentsDirectory], [self MRPrivate_applicationSupportDirectory], nil];
+	NSArray *paths = [NSArray arrayWithObjects:
+                      MR_defaultApplicationStorePath(),
+                      MR_userDocumentsPath(), nil];
     NSFileManager *fm = [[NSFileManager alloc] init];
 
     for (NSString *path in paths)
@@ -154,24 +158,6 @@
     return removeItemResult;
 }
 
-#pragma mark - Private Methods
-
-+ (NSString *) MRPrivate_directoryInUserDomain:(NSSearchPathDirectory)directory;
-{
-    return [NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES) firstObject];
-}
-
-+ (NSString *) MRPrivate_applicationDocumentsDirectory;
-{
-	return [self MRPrivate_directoryInUserDomain:NSDocumentDirectory];
-}
-
-+ (NSString *) MRPrivate_applicationSupportDirectory;
-{
-    NSString *applicationName = [[[NSBundle bundleForClass:[MagicalRecord class]] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
-    return [[self MRPrivate_directoryInUserDomain:NSApplicationSupportDirectory] stringByAppendingPathComponent:applicationName];
-}
-
 @end
 
 @implementation NSPersistentStore (MagicalRecordDeprecated)
@@ -187,3 +173,20 @@
 }
 
 @end
+
+
+NSString *MR_defaultApplicationStorePath(void)
+{
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(id)kCFBundleNameKey];
+    NSString *applicationStorePath = [documentPath stringByAppendingPathComponent:applicationName];
+
+    return applicationStorePath;
+}
+
+NSString *MR_userDocumentsPath(void)
+{
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) firstObject];
+    return documentPath;
+}
+
