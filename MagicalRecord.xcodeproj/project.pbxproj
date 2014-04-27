@@ -60,7 +60,7 @@
 		90610E5618F4222800E2C328 /* MagicalRecordInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 90610E5418F4222800E2C328 /* MagicalRecordInternal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		90610E5718F4222800E2C328 /* MagicalRecordInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 90610E5518F4222800E2C328 /* MagicalRecordInternal.m */; };
 		90610E5818F4222800E2C328 /* MagicalRecordInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 90610E5518F4222800E2C328 /* MagicalRecordInternal.m */; };
-		90723127190401B40012D0D0 /* MagicalRecordMOGeneratorProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 90723126190401B40012D0D0 /* MagicalRecordMOGeneratorProtocol.h */; };
+		90723127190401B40012D0D0 /* MagicalRecordMOGeneratorProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 90723126190401B40012D0D0 /* MagicalRecordMOGeneratorProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		90808E9718E068B300A4AFB0 /* MagicalRecord+ActionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 90808E9618E068B300A4AFB0 /* MagicalRecord+ActionsTests.m */; };
 		90808E9918E06CFC00A4AFB0 /* NSManagedObjectContext+MagicalSavesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 90808E9818E06CFC00A4AFB0 /* NSManagedObjectContext+MagicalSavesTests.m */; };
 		909BBED518E040F2007BA3F1 /* libExpecta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 909BBECC18E040EC007BA3F1 /* libExpecta.a */; };
@@ -985,7 +985,6 @@
 				90610E4818F41E9D00E2C328 /* MagicalRecord.h in Headers */,
 				C781813B17E6606F00ADD31C /* MagicalRecord+Options.h in Headers */,
 				C781813C17E6606F00ADD31C /* MagicalRecord+Setup.h in Headers */,
-				90723127190401B40012D0D0 /* MagicalRecordMOGeneratorProtocol.h in Headers */,
 				C781813E17E6606F00ADD31C /* MagicalRecordStack.h in Headers */,
 				C781813F17E6606F00ADD31C /* SQLiteMagicalRecordStack.h in Headers */,
 				C781814017E6606F00ADD31C /* AutoMigratingMagicalRecordStack.h in Headers */,
@@ -1025,6 +1024,7 @@
 				C781815B17E6606F00ADD31C /* NSDictionary+MagicalRecordAdditions.h in Headers */,
 				904EC65218E14B6F00F63687 /* MagicalRecordStack+Private.h in Headers */,
 				90610E5118F420BB00E2C328 /* MagicalRecord+VersionInformation.h in Headers */,
+				90723127190401B40012D0D0 /* MagicalRecordMOGeneratorProtocol.h in Headers */,
 				90610E3E18F41B1400E2C328 /* NSArray+MagicalRecord.h in Headers */,
 				C781815C17E6606F00ADD31C /* NSError+MagicalRecordErrorHandling.h in Headers */,
 				904EC65318E14B9400F63687 /* NSManagedObject+MagicalFetching.h in Headers */,
