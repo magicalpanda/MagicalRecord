@@ -19,7 +19,7 @@
 
 - (NSArray *) MR_sqliteURLs;
 
-- (BOOL) copyToURL:(NSURL *)destinationUrl error:(NSError **)error;
+- (BOOL) MR_copyToURL:(NSURL *)destinationUrl error:(NSError **)error;
 
 /**
  *  Removes the store files for this persistent store.

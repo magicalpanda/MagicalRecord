@@ -70,7 +70,7 @@ static inline NSString *MR_userDocumentsPath(void);
     return [[self type] isEqualToString:NSSQLiteStoreType];
 }
 
-- (BOOL) copyToURL:(NSURL *)destinationUrl error:(NSError **)error;
+- (BOOL) MR_copyToURL:(NSURL *)destinationUrl error:(NSError **)error;
 {
     if (![self MR_isSqliteStore])
     {
