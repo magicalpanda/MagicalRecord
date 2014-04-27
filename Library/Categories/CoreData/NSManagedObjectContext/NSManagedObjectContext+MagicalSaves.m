@@ -14,9 +14,32 @@
 
 @implementation NSManagedObjectContext (MagicalSaves)
 
-- (void) MR_saveOnlySelfAndWait;
+- (BOOL) MR_saveOnlySelfAndWait;
 {
-    [self MR_saveWithOptions:MRSaveSynchronously completion:nil];
+    __block BOOL saveResult = NO;
+
+    [self MR_saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
+        saveResult = success;
+    }];
+
+    return saveResult;
+}
+
+- (BOOL) MR_saveOnlySelfAndWaitWithError:(NSError **)error;
+{
+    __block BOOL saveResult = NO;
+    __block NSError *saveError;
+
+    [self MR_saveWithOptions:MRSaveSynchronously completion:^(BOOL localSuccess, NSError *localError) {
+        saveResult = localSuccess;
+        saveError = localError;
+    }];
+
+    if (error != nil) {
+        *error = saveError;
+    }
+
+    return saveResult;
 }
 
 - (void) MR_saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;
@@ -29,9 +52,32 @@
     [self MR_saveWithOptions:MRSaveParentContexts completion:completion];
 }
 
-- (void) MR_saveToPersistentStoreAndWait;
+- (BOOL) MR_saveToPersistentStoreAndWait;
 {
-    [self MR_saveWithOptions:MRSaveParentContexts | MRSaveSynchronously completion:nil];
+    __block BOOL saveResult = NO;
+
+    [self MR_saveWithOptions:MRSaveParentContexts | MRSaveSynchronously completion:^(BOOL success, NSError *error) {
+        saveResult = success;
+    }];
+
+    return saveResult;
+}
+
+- (BOOL) MR_saveToPersistentStoreAndWaitWithError:(NSError **)error;
+{
+    __block BOOL saveResult = NO;
+    __block NSError *saveError;
+
+    [self MR_saveWithOptions:MRSaveParentContexts | MRSaveSynchronously completion:^(BOOL localSuccess, NSError *localError) {
+        saveResult = localSuccess;
+        saveError = localError;
+    }];
+
+    if (error != nil) {
+        *error = saveError;
+    }
+
+    return saveResult;
 }
 
 - (void) MR_saveWithOptions:(MRSaveContextOptions)mask completion:(MRSaveCompletionHandler)completion;
@@ -45,9 +91,7 @@
 
         if (completion)
         {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                completion(YES, nil);
-            });
+            completion(YES, nil);
         }
 
         if (saveParentContexts && [self parentContext])
@@ -61,21 +105,18 @@
     }
 
     void (^saveBlock)(void) = ^{
-        
-#if MR_LOGGING_ENABLED > 0
-
         NSString *optionsSummary = @"";
-        optionsSummary = [optionsSummary stringByAppendingString:saveParentContexts ? @"Save Parents," : @""];
-        optionsSummary = [optionsSummary stringByAppendingString:syncSave ? @"Sync Save" : @""];
+        optionsSummary = [optionsSummary stringByAppendingString:saveParentContexts ? @"Save Parents,":@""];
+        optionsSummary = [optionsSummary stringByAppendingString:syncSave ? @"Sync Save":@""];
 
         MRLogVerbose(@"→ Saving %@ [%@]", [self MR_description], optionsSummary);
 
-        NSInteger numberOfInsertedObjects = [[self insertedObjects] count];
-        NSInteger numberOfUpdatedObjects = [[self updatedObjects] count];
-        NSInteger numberOfDeletedObjects = [[self deletedObjects] count];
-#endif
+        NSUInteger numberOfInsertedObjects = [[self insertedObjects] count];
+        NSUInteger numberOfUpdatedObjects = [[self updatedObjects] count];
+        NSUInteger numberOfDeletedObjects = [[self deletedObjects] count];
+
         NSError *error = nil;
-        BOOL     saved = NO;
+        BOOL saved = NO;
 
         @try
         {
@@ -87,35 +128,24 @@
         }
         @finally
         {
-            if (!saved)
-            {
+            if (!saved) {
                 [[error MR_coreDataDescription] MR_logToConsole];
 
-                if (completion)
-                {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        completion(saved, error);
-                    });
+                if (completion) {
+                    completion(saved, error);
                 }
-            }
-            else
-            {
+            } else {
                 // If we should not save the parent context, or there is not a parent context to save (root context), call the completion block
-                if ((YES == saveParentContexts) && [self parentContext])
-                {
+                if ((YES == saveParentContexts) && [self parentContext]) {
                     [[self parentContext] MR_saveWithOptions:MRSaveSynchronously | MRSaveParentContexts completion:completion];
                 }
                 // If we are not the default context (And therefore need to save the root context, do the completion action if one was specified
-                else
-                {
+                else {
                     MRLogInfo(@"→ Finished saving: %@", [self MR_description]);
-                    MRLogVerbose(@"Objects - Inserted %zd, Updated %zd, Deleted %zd", numberOfInsertedObjects, numberOfUpdatedObjects, numberOfDeletedObjects);
-                    
-                    if (completion)
-                    {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            completion(saved, error);
-                        });
+                    MRLogVerbose(@"Objects - Inserted %tu, Updated %tu, Deleted %tu", numberOfInsertedObjects, numberOfUpdatedObjects, numberOfDeletedObjects);
+
+                    if (completion) {
+                        completion(saved, error);
                     }
                 }
             }

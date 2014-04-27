@@ -68,7 +68,6 @@
 
 @interface NSManagedObject (MagicalRecordShortHand)
 
-+ (NSString *) entityName MRDeprecated("Use +MR_entityName instead");
 + (NSArray *) executeFetchRequest:(NSFetchRequest *)request MRDeprecated("Use +MR_executeFetchRequest: instead");
 + (NSArray *) executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context MRDeprecated("Use +MR_executeFetchRequest:inContext: instead");
 + (id) executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request MRDeprecated("Use +MR_executeFetchRequestAndReturnFirstObject: instead");
@@ -160,8 +159,10 @@
 
 - (void) saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion MRDeprecated("Use -MR_saveOnlySelfWithCompletion: instead");
 - (void) saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion MRDeprecated("Use -MR_saveToPersistentStoreWithCompletion: instead");
-- (void) saveOnlySelfAndWait MRDeprecated("Use -MR_saveOnlySelfAndWait instead");
-- (void) saveToPersistentStoreAndWait MRDeprecated("Use -MR_saveToPersistentStoreAndWait instead");
+- (BOOL) saveOnlySelfAndWait MRDeprecated("Use -MR_saveOnlySelfAndWait instead");
+- (BOOL) saveOnlySelfAndWaitWithError:(NSError **)error MRDeprecated("Use -saveOnlySelfAndWaitWithError: instead");
+- (BOOL) saveToPersistentStoreAndWait MRDeprecated("Use -MR_saveToPersistentStoreAndWait instead");
+- (BOOL) saveToPersistentStoreAndWaitWithError:(NSError **)error MRDeprecated("Use -MR_saveToPersistentStoreAndWaitWithError: instead");
 
 @end
 

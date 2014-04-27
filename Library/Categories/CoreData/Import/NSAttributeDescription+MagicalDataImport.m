@@ -10,7 +10,7 @@
 #import "NSManagedObject+MagicalDataImport.h"
 #import "MagicalImportFunctions.h"
 
-@implementation NSAttributeDescription (MagicalRecord_DataImport)
+@implementation NSAttributeDescription (MagicalRecordDataImport)
 
 - (NSString *) MR_primaryKey;
 {
@@ -27,7 +27,7 @@
     {
         if ([desiredAttributeType hasSuffix:@"Color"])
         {
-            value = colorFromString(value);
+            value = MRColorFromString(value);
         }
     }
     else 
@@ -48,9 +48,9 @@
                     dateFormat = [[self userInfo] valueForKey:dateFormatKey];
 
                     if ([value isKindOfClass:[NSNumber class]]) {
-                        convertedValue = MR_dateFromNumber(value, [dateFormat isEqualToString:kMagicalRecordImportUnixTimeString]);
+                        convertedValue = MRDateFromNumber(value, [dateFormat isEqualToString:kMagicalRecordImportUnixTimeString]);
                     } else {
-                        convertedValue = MR_dateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
+                        convertedValue = MRDateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
                     }
 
                 } while (!convertedValue && dateFormat);
@@ -64,7 +64,7 @@
                  attributeType == NSDoubleAttributeType ||
                  attributeType == NSFloatAttributeType) {
             if (![value isKindOfClass:[NSNumber class]] && value != [NSNull null]) {
-                value = MR_numberFromString([value description]);
+                value = MRNumberFromString([value description]);
             }
         }
         else if (attributeType == NSBooleanAttributeType) {

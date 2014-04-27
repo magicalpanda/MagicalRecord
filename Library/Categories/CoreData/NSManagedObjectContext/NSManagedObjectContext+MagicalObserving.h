@@ -8,20 +8,69 @@
 
 #import <CoreData/CoreData.h>
 
+/**
+ Category methods to aid in observing changes in other contexts.
+
+ @since Available in v3.0 and later.
+ */
 @interface NSManagedObjectContext (MagicalObserving)
 
+/**
+ Merge changes from another context into self.
+
+ @param otherContext Managed object context to observe.
+
+ @since Available in v3.0 and later.
+ */
 - (void) MR_observeContext:(NSManagedObjectContext *)otherContext;
+
+/**
+ Stops merging changes from the supplied context into self.
+
+ @param otherContext Managed object context to stop observing.
+
+ @since Available in v3.0 and later.
+ */
 - (void) MR_stopObservingContext:(NSManagedObjectContext *)otherContext;
+
+/**
+ Merges changes from another context into self on the main thread.
+
+ @param otherContext Managed object context to observe.
+
+ @since Available in v3.0 and later.
+ */
 - (void) MR_observeContextOnMainThread:(NSManagedObjectContext *)otherContext;
 
 /**
- *   Observes the 'NSManagedObjectContextDidSaveNotification' notification of the given context and perform a save action on the current managed context object. If the current object it's MR's rootContext, it will persist the changes to the persistant store.
- *
- *  @param otherContext Alternate context that the current context should observe
+ Merges changes from another context into self, saving after each change.
+ 
+ If self is MagicalRecord's `+MR_rootContext`, changes will be persisted to the store.
+
+ @param otherContext Alternate context that the current context should observe
  */
 - (void) MR_observeContextAndSaveChangesToSelf:(NSManagedObjectContext *)otherContext;
 
+/**
+ Merges changes from the supplied persistent store coordinator into self in response to changes from iCloud.
+
+ @param coordinator Persistent store coordinator
+ 
+ @see -MR_stopObservingiCloudChangesInCoordinator:
+
+ @since Available in v3.0 and later.
+ */
 - (void) MR_observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
+
+/**
+ Stops observation and merging of changes from the supplied persistent store coordinator in response to changes from iCloud.
+
+ @param coordinator Persistent store coordinator
+ 
+ @see -MR_observeiCloudChangesInCoordinator:
+
+ @since Available in v3.0 and later.
+ */
 - (void) MR_stopObservingiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 
 @end

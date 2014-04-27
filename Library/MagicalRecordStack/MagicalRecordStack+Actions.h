@@ -22,8 +22,26 @@ dispatch_queue_t MR_saveQueue(void);
 
 - (void) saveWithIdentifier:(NSString *)identifier block:(void(^)(NSManagedObjectContext *))block;
 
-/* For saving on the current thread as the caller, only with a seperate context. Useful when you're managing your own threads/queues and need a serial call to create or change data
+
+/**
+ *  Synchronously saves the default managed object context (if there is one) and any parent contexts.
+ *
+ *  @param block Make changes to CoreData objects in this block using the passed in localContext. The block will be performed on a background queue, and once complete, the context will be saved.
+ *
+ *  @return Success state of the save operation
  */
-- (void) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
+- (BOOL) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
+
+/**
+ *  @method saveWithBlockAndWait: error:
+ *
+ *  Synchronously saves the default managed object context (if there is one) and any parent contexts.
+ *
+ *  @param block Make changes to CoreData objects in this block using the passed in localContext. The block will be performed on a background queue, and once complete, the context will be saved.
+ *  @param error Pass in an NSError by reference to receive any errors encountered during the save.
+ *
+ *  @return Whether the save was successful
+ */
+- (BOOL) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block error:(NSError **)error;
 
 @end

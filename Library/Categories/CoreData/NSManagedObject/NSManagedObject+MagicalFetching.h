@@ -8,6 +8,11 @@
 
 #import <CoreData/CoreData.h>
 
+/**
+ Category methods on NSManagedObject to make working with NSFetchedResultsControllers easier.
+
+ @since Available in v3.0 and later.
+ */
 @interface NSManagedObject (MagicalFetching)
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR

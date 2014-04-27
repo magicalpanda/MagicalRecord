@@ -140,11 +140,6 @@
 
 @implementation NSManagedObject (MagicalRecordShortHand)
 
-+ (NSString *) entityName;
-{
-    return [self MR_entityName];
-}
-
 + (NSArray *) executeFetchRequest:(NSFetchRequest *)request;
 {
     return [self MR_executeFetchRequest:request];
@@ -450,14 +445,24 @@
     return [self MR_saveToPersistentStoreWithCompletion:completion];
 }
 
-- (void) saveOnlySelfAndWait;
+- (BOOL) saveOnlySelfAndWait;
 {
     return [self MR_saveOnlySelfAndWait];
 }
 
-- (void) saveToPersistentStoreAndWait;
+- (BOOL) saveOnlySelfAndWaitWithError:(NSError **)error;
+{
+    return [self MR_saveOnlySelfAndWaitWithError:error];
+}
+
+- (BOOL) saveToPersistentStoreAndWait;
 {
     return [self MR_saveToPersistentStoreAndWait];
+}
+
+- (BOOL) saveToPersistentStoreAndWaitWithError:(NSError **)error;
+{
+    return [self MR_saveToPersistentStoreAndWaitWithError:error];
 }
 
 @end

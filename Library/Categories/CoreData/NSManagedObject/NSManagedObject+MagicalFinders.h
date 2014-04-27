@@ -9,14 +9,19 @@
 #import <CoreFoundation/CoreFoundation.h>
 #import <CoreData/CoreData.h>
 
-@interface NSObject (MagicalFindersExtentions)
+@protocol MagicalFinderExtensions <NSObject>
 
+@optional
 - (NSString *) fetchedResultsControllerCacheName;
 
 @end
 
+/**
+ Category methods to make finding entities easier.
 
-@interface NSManagedObject (MagicalFinders)
+ @since Available since v1.8.
+ */
+@interface NSManagedObject (MagicalFinders) <MagicalFinderExtensions>
 
 + (NSArray *) MR_findAll;
 + (NSArray *) MR_findAllInContext:(NSManagedObjectContext *)context;

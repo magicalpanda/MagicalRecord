@@ -12,10 +12,8 @@
 
 NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
 
+@implementation NSObject (MagicalRecordDataImport)
 
-@implementation NSObject (MagicalRecord_DataImport)
-
-//#warning If you implement valueForUndefinedKey: in any NSObject in your code, this may be the problem if something broke
 - (id) MR_valueForUndefinedKey:(NSString *)key;
 {
     return nil;

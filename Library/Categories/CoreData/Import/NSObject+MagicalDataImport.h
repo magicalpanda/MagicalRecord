@@ -6,7 +6,7 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-@interface NSObject (MagicalRecord_DataImport)
+@interface NSObject (MagicalRecordDataImport)
 
 - (NSString *) MR_lookupKeyForAttribute:(NSAttributeDescription *)attributeInfo;
 - (id) MR_valueForAttribute:(NSAttributeDescription *)attributeInfo;
