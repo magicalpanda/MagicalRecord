@@ -13,29 +13,29 @@ NSArray *people = [Person MR_findAll];
 Or, to return the results sorted by a property:
 
 ```objective-c
-NSArray *peopleSorted = [Person MR_findAllSortedBy:@"lastName" ascending:YES];
+NSArray *peopleSorted = [Person MR_findAllSortedBy:@"LastName" ascending:YES];
 ```
 
 Or, to return the results sorted by multiple properties:
 
 ```objective-c
-NSArray *peopleSorted = [Person MR_findAllSortedBy:@"lastName,firstName" ascending:YES];
+NSArray *peopleSorted = [Person MR_findAllSortedBy:@"LastName,FirstName" ascending:YES];
 ```
 
 Or, to return the results sorted by multiple properties with different attributes (these will default to whatever you set them to):
 
 ```objective-c
-NSArray *peopleSorted = [Person MR_findAllSortedBy:@"lastName:NO,firstName" ascending:YES];
+NSArray *peopleSorted = [Person MR_findAllSortedBy:@"LastName:NO,FirstName" ascending:YES];
 
 // OR
 
-NSArray *peopleSorted = [Person MR_findAllSortedBy:@"lastName,firstName:YES" ascending:NO];
+NSArray *peopleSorted = [Person MR_findAllSortedBy:@"LastName,FirstName:YES" ascending:NO];
 ```
 
 If you have a unique way of retrieving a single object from your data store (such as via an identifier), you can use the following method:
 
 ```objective-c
-Person *person = [Person MR_findFirstByAttribute:@"firstName" withValue:@"Forrest"];
+Person *person = [Person MR_findFirstByAttribute:@"FirstName" withValue:@"Forrest"];
 ```
 
 #### Advanced Finding
@@ -43,15 +43,15 @@ Person *person = [Person MR_findFirstByAttribute:@"firstName" withValue:@"Forres
 If you want to be more specific with your search, you can send in a predicate:
 
 ```objective-c
-NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"department IN %@", @[dept1, dept2]];
+NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"Department IN %@", @[dept1, dept2]];
 NSArray *people = [Person MR_findAllWithPredicate:peopleFilter];
 ```
 
 #### Returning an NSFetchRequest
 
 ```objective-c
-NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"department IN %@", departments];
-NSArray *people = [Person MR_findAllWithPredicate:peopleFilter];
+NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"Department IN %@", departments];
+NSFetchRequest *people = [Person MR_requestAllWithPredicate:peopleFilter];
 ```
 
 For each of these single line calls, the full stack of NSFetchRequest, NSSortDescriptors and a simple default error handling scheme (ie. logging to the console) is created.
@@ -59,11 +59,11 @@ For each of these single line calls, the full stack of NSFetchRequest, NSSortDes
 #### Customizing the Request
 
 ```objective-c
-NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"department IN %@", departments];
+NSPredicate *peopleFilter = [NSPredicate predicateWithFormat:@"Department IN %@", departments];
 
 NSFetchRequest *peopleRequest = [Person MR_requestAllWithPredicate:peopleFilter];
 [peopleRequest setReturnsDistinctResults:NO];
-[peopleRequest setReturnPropertiesNamed:@[@"firstName", @"lastName"]];
+[peopleRequest setReturnPropertiesNamed:@[@"FirstName", @"LastName"]];
 
 NSArray *people = [Person MR_executeFetchRequest:peopleRequest];
 ```
