@@ -18,7 +18,7 @@
 
 - (void)testDefaultStoreFolderIsNSApplicationSupportDirectory
 {
-    NSString *applicationSupportDirectory = [[self class] NSPersistentStoreMagicalRecordTests_applicationSupportDirectory];
+    NSString *applicationSupportDirectory = MR_defaultApplicationStorePath();
     NSString *defaultStoreName = [MagicalRecord defaultStoreName];
 
     NSURL *expectedStoreUrl = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", applicationSupportDirectory, defaultStoreName]];
@@ -34,7 +34,7 @@
 - (void)testCanFindFileURLInNSApplicationSupportDirectoryWhenProvidingStoreName
 {
     NSString *storeFileName = @"NotTheDefaultStoreName.storefile";
-    NSString *applicationSupportDirectory = [[self class] NSPersistentStoreMagicalRecordTests_applicationSupportDirectory];
+    NSString *applicationSupportDirectory = MR_defaultApplicationStorePath();
     NSString *testStorePath = [applicationSupportDirectory stringByAppendingPathComponent:storeFileName];
 
     BOOL fileWasCreated = [[NSFileManager defaultManager] createFileAtPath:testStorePath contents:[storeFileName dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
@@ -56,7 +56,7 @@
 - (void)testCanFindFileURLInNSDocumentDirectoryWhenProvidingStoreName
 {
     NSString *storeFileName = @"NotTheDefaultStoreName.storefile";
-    NSString *applicationDocumentsDirectory = [[self class] NSPersistentStoreMagicalRecordTests_applicationDocumentsDirectory];
+    NSString *applicationDocumentsDirectory = MR_defaultApplicationStorePath();
     NSString *testStorePath = [applicationDocumentsDirectory stringByAppendingPathComponent:storeFileName];
 
     BOOL fileWasCreated = [[NSFileManager defaultManager] createFileAtPath:testStorePath contents:[storeFileName dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
@@ -73,25 +73,6 @@
     expect(foundStoreUrl).to.equal(expectedFoundStoreUrl);
 
     [[NSFileManager defaultManager] removeItemAtPath:testStorePath error:nil];
-}
-
-#pragma mark - Private Methods
-
-+ (NSString *) NSPersistentStoreMagicalRecordTests_directoryInUserDomain:(NSSearchPathDirectory) directory
-{
-    return [NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES) firstObject];
-}
-
-+ (NSString *) NSPersistentStoreMagicalRecordTests_applicationDocumentsDirectory
-{
-	return [self NSPersistentStoreMagicalRecordTests_directoryInUserDomain:NSDocumentDirectory];
-}
-
-+ (NSString *) NSPersistentStoreMagicalRecordTests_applicationSupportDirectory
-{
-    // We use the MagicalRecord class here so that there's an appropriate response from the bundle name
-    NSString *applicationName = [[[NSBundle bundleForClass:[MagicalRecord class]] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
-    return [[self NSPersistentStoreMagicalRecordTests_directoryInUserDomain:NSApplicationSupportDirectory] stringByAppendingPathComponent:applicationName];
 }
 
 @end

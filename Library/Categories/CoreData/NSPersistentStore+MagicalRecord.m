@@ -10,9 +10,6 @@
 #import "NSError+MagicalRecordErrorHandling.h"
 #import "MagicalRecordLogging.h"
 
-static inline NSString *MR_defaultApplicationStorePath(void);
-static inline NSString *MR_userDocumentsPath(void);
-
 @implementation NSPersistentStore (MagicalRecord)
 
 + (NSURL *) MR_defaultLocalStoreUrl;
