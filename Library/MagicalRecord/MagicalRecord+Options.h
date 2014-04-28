@@ -8,9 +8,8 @@
 
 #import "MagicalRecord.h"
 
-
 /**
- Defines "levels" of logging that will be used by MagicalRecord while running.
+ Defines "levels" of logging that will be used as values in a bitmask that filters log messages.
 
  @since Available in v2.3 and later.
  */
@@ -28,11 +27,37 @@ typedef NS_ENUM(NSInteger, MagicalRecordLogLevel)
     /** Log warnings, and all errors */
     MagicalRecordLogLevelWarn = 1 << 2,
 
-    /** Log informative messages, warnings and all errors */
+    /** Log informative messagess, warnings and all errors */
     MagicalRecordLogLevelInfo = 1 << 3,
 
     /** Log verbose diagnostic information, messages, warnings and all errors */
     MagicalRecordLogLevelVerbose = 1 << 4,
+};
+
+/**
+ Defines a mask for logging that will be used by to filter log messages.
+
+ @since Available in v2.3 and later.
+ */
+typedef NS_ENUM(NSInteger, MagicalRecordLogMask)
+{
+    /** Don't log anything */
+    MagicalRecordLogMaskOff        = 0,
+
+    /** Log all fatal messages */
+    MagicalRecordLogMaskFatal      = (MagicalRecordLogLevelFatal),
+
+    /** Log all errors and fatal messages */
+    MagicalRecordLogMaskError      = (MagicalRecordLogLevelFatal | MagicalRecordLogLevelError),
+
+    /** Log warnings, errors and fatal messages */
+    MagicalRecordLogMaskWarn       = (MagicalRecordLogLevelFatal | MagicalRecordLogLevelError | MagicalRecordLogLevelWarn),
+
+    /** Log informative, warning and error messages */
+    MagicalRecordLogMaskInfo       = (MagicalRecordLogLevelFatal | MagicalRecordLogLevelError | MagicalRecordLogLevelWarn | MagicalRecordLogLevelInfo),
+
+    /** Log verbose diagnostic, informative, warning and error messages */
+    MagicalRecordLogMaskVerbose    = (MagicalRecordLogLevelFatal | MagicalRecordLogLevelError | MagicalRecordLogLevelWarn | MagicalRecordLogLevelInfo | MagicalRecordLogLevelVerbose),
 };
 
 /**
@@ -41,25 +66,25 @@ typedef NS_ENUM(NSInteger, MagicalRecordLogLevel)
 @interface MagicalRecord (Options)
 
 /**
- @name Log Levels
+ @name Logging Mask
  */
 
 /**
- Returns the logging level for MagicalRecord in the current application.
+ Returns the logging mask set for MagicalRecord in the current application.
 
- @return Current MagicalRecordLogLevel
+ @return Current MagicalRecordLogMask
  
  @since Available in v2.3 and later.
  */
-+ (MagicalRecordLogLevel) logLevel;
++ (MagicalRecordLogMask) loggingMask;
 
 /**
- Sets the logging level for MagicalRecord in the current application.
+ Sets the logging mask set for MagicalRecord in the current application.
 
- @param level Any value from MagicalRecordLogLevel
+ @param mask Any value from MagicalRecordLogMask
 
  @since Available in v2.3 and later.
  */
-+ (void) setLogLevel:(MagicalRecordLogLevel)level;
++ (void) setLoggingMask:(MagicalRecordLogMask)mask;
 
 @end

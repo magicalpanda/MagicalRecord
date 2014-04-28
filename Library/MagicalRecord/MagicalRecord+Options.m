@@ -7,20 +7,19 @@
 //
 
 #import "MagicalRecord+Options.h"
-#import "MagicalRecordStack.h"
 
-static MagicalRecordLogLevel kMagicalRecordLogLevel = MagicalRecordLogLevelVerbose;
+static MagicalRecordLogMask kMagicalRecordLogMask = MagicalRecordLogMaskVerbose;
 
 @implementation MagicalRecord (Options)
 
-+ (MagicalRecordLogLevel) logLevel;
++ (MagicalRecordLogMask) loggingMask;
 {
-    return kMagicalRecordLogLevel;
+    return kMagicalRecordLogMask;
 }
 
-+ (void) setLogLevel:(MagicalRecordLogLevel)logLevel;
++ (void) setLoggingMask:(MagicalRecordLogMask)mask;
 {
-    kMagicalRecordLogLevel = logLevel;
+    kMagicalRecordLogMask = mask;
 }
 
 @end
