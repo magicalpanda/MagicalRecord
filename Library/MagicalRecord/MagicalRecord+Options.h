@@ -13,7 +13,7 @@
 
  @since Available in v2.3 and later.
  */
-typedef NS_ENUM(NSInteger, MagicalRecordLogLevel)
+typedef NS_ENUM (NSInteger, MagicalRecordLogLevel)
 {
     /** Disable all logging */
     MagicalRecordLogLevelOff = 0,
@@ -39,27 +39,26 @@ typedef NS_ENUM(NSInteger, MagicalRecordLogLevel)
 
  @since Available in v2.3 and later.
  */
-typedef NS_ENUM(NSInteger, MagicalRecordLogMask)
+typedef NS_ENUM (NSInteger, MagicalRecordLoggingMask)
 {
     /** Don't log anything */
-    MagicalRecordLogMaskOff        = 0,
+    MagicalRecordLogMaskOff = 0,
 
     /** Log all fatal messages */
-    MagicalRecordLogMaskFatal      = (MagicalRecordLogLevelFatal),
+    MagicalRecordLoggingMaskFatal = (MagicalRecordLogLevelFatal),
 
     /** Log all errors and fatal messages */
-    MagicalRecordLogMaskError      = (MagicalRecordLogLevelFatal | MagicalRecordLogLevelError),
+    MagicalRecordLoggingMaskError = (MagicalRecordLogLevelFatal | MagicalRecordLogLevelError),
 
     /** Log warnings, errors and fatal messages */
-    MagicalRecordLogMaskWarn       = (MagicalRecordLogLevelFatal | MagicalRecordLogLevelError | MagicalRecordLogLevelWarn),
+    MagicalRecordLoggingMaskWarn = (MagicalRecordLogLevelFatal | MagicalRecordLogLevelError | MagicalRecordLogLevelWarn),
 
     /** Log informative, warning and error messages */
-    MagicalRecordLogMaskInfo       = (MagicalRecordLogLevelFatal | MagicalRecordLogLevelError | MagicalRecordLogLevelWarn | MagicalRecordLogLevelInfo),
+    MagicalRecordLoggingMaskInfo = (MagicalRecordLogLevelFatal | MagicalRecordLogLevelError | MagicalRecordLogLevelWarn | MagicalRecordLogLevelInfo),
 
     /** Log verbose diagnostic, informative, warning and error messages */
-    MagicalRecordLogMaskVerbose    = (MagicalRecordLogLevelFatal | MagicalRecordLogLevelError | MagicalRecordLogLevelWarn | MagicalRecordLogLevelInfo | MagicalRecordLogLevelVerbose),
+    MagicalRecordLoggingMaskVerbose = (MagicalRecordLogLevelFatal | MagicalRecordLogLevelError | MagicalRecordLogLevelWarn | MagicalRecordLogLevelInfo | MagicalRecordLogLevelVerbose),
 };
-
 /**
  Provides options for configuring MagicalRecord.
  */
@@ -76,7 +75,7 @@ typedef NS_ENUM(NSInteger, MagicalRecordLogMask)
  
  @since Available in v2.3 and later.
  */
-+ (MagicalRecordLogMask) loggingMask;
++ (MagicalRecordLoggingMask) loggingMask;
 
 /**
  Sets the logging mask set for MagicalRecord in the current application.
@@ -85,6 +84,6 @@ typedef NS_ENUM(NSInteger, MagicalRecordLogMask)
 
  @since Available in v2.3 and later.
  */
-+ (void) setLoggingMask:(MagicalRecordLogMask)mask;
++ (void) setLoggingMask:(MagicalRecordLoggingMask)mask;
 
 @end
