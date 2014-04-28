@@ -31,7 +31,7 @@
     NSLog (frmt, ##__VA_ARGS__)
 
     #define LOG_MAYBE(async, lvl, flg, ctx, fnct, frmt, ...) \
-    do { if(lvl & flg) LOG_MACRO(async, lvl, flg, ctx, nil, fnct, frmt, ##__VA_ARGS__); } while(0)
+    do { if(lvl == (lvl & flg)) LOG_MACRO(async, lvl, flg, ctx, nil, fnct, frmt, ##__VA_ARGS__); } while(0)
 
     #define LOG_OBJC_MAYBE(async, lvl, flg, ctx, frmt, ...) \
     LOG_MAYBE(async, lvl, flg, ctx, sel_getName(_cmd), frmt, ##__VA_ARGS__)
