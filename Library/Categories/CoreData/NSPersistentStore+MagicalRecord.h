@@ -79,7 +79,3 @@
 + (NSURL *) MR_urlForStoreName:(NSString *)storeFileName MRDeprecated("Please use + (NSURL *) MR_fileURLForStoreNameIfExistsOnDisk:");
 
 @end
-
-
-NSString *MR_defaultApplicationStorePath(void);
-NSString *MR_userDocumentsPath(void);

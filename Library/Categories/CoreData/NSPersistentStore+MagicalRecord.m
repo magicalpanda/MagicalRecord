@@ -9,6 +9,7 @@
 #import "MagicalRecord.h"
 #import "NSError+MagicalRecordErrorHandling.h"
 #import "MagicalRecordLogging.h"
+#import "NSPersistentStore+MagicalRecordPrivate.h"
 
 @implementation NSPersistentStore (MagicalRecord)
 

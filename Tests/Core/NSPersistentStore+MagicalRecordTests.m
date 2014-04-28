@@ -8,6 +8,7 @@
 #import "Expecta.h"
 
 #import "NSPersistentStore+MagicalRecord.h"
+#import "NSPersistentStore+MagicalRecordPrivate.h"
 #import "MagicalRecord.h"
 
 @interface NSPersistentStoreMagicalRecordTests : XCTestCase

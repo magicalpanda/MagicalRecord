@@ -50,6 +50,7 @@
 		904EC66418E199A900F63687 /* MagicalRecordShorthand.h in Headers */ = {isa = PBXBuildFile; fileRef = 904EC66218E199A900F63687 /* MagicalRecordShorthand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		904EC66518E199A900F63687 /* MagicalRecordShorthand.m in Sources */ = {isa = PBXBuildFile; fileRef = 904EC66318E199A900F63687 /* MagicalRecordShorthand.m */; };
 		904EC66618E199A900F63687 /* MagicalRecordShorthand.m in Sources */ = {isa = PBXBuildFile; fileRef = 904EC66318E199A900F63687 /* MagicalRecordShorthand.m */; };
+		90601FBD190DD21A00E44235 /* NSPersistentStore+MagicalRecordPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 90601FBC190DD21A00E44235 /* NSPersistentStore+MagicalRecordPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		90610E3E18F41B1400E2C328 /* NSArray+MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 90610E3C18F41B1400E2C328 /* NSArray+MagicalRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		90610E3F18F41B1400E2C328 /* NSArray+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 90610E3D18F41B1400E2C328 /* NSArray+MagicalRecord.m */; };
 		90610E4018F41B1400E2C328 /* NSArray+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 90610E3D18F41B1400E2C328 /* NSArray+MagicalRecord.m */; };
@@ -401,6 +402,7 @@
 		904EC65C18E1609B00F63687 /* MagicalRecordDeprecated.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MagicalRecordDeprecated.h; sourceTree = "<group>"; };
 		904EC66218E199A900F63687 /* MagicalRecordShorthand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordShorthand.h; sourceTree = "<group>"; };
 		904EC66318E199A900F63687 /* MagicalRecordShorthand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalRecordShorthand.m; sourceTree = "<group>"; };
+		90601FBC190DD21A00E44235 /* NSPersistentStore+MagicalRecordPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPersistentStore+MagicalRecordPrivate.h"; sourceTree = "<group>"; };
 		90610E3C18F41B1400E2C328 /* NSArray+MagicalRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MagicalRecord.h"; sourceTree = "<group>"; };
 		90610E3D18F41B1400E2C328 /* NSArray+MagicalRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MagicalRecord.m"; sourceTree = "<group>"; };
 		90610E4618F41E9D00E2C328 /* MagicalRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecord.h; sourceTree = "<group>"; };
@@ -961,6 +963,7 @@
 			children = (
 				C7790F7617E63C3100D20ACF /* NSPersistentStore+MagicalRecord.h */,
 				C7790F7717E63C3100D20ACF /* NSPersistentStore+MagicalRecord.m */,
+				90601FBC190DD21A00E44235 /* NSPersistentStore+MagicalRecordPrivate.h */,
 			);
 			name = NSPersistentStore;
 			sourceTree = "<group>";
@@ -1013,6 +1016,7 @@
 				C781815517E6606F00ADD31C /* NSPersistentStoreCoordinator+MagicalAutoMigrations.h in Headers */,
 				C771EB4017E6AD5000D2E984 /* MagicalRecord+Actions.h in Headers */,
 				C781815717E6606F00ADD31C /* NSPersistentStoreCoordinator+MagicalInMemoryStoreAdditions.h in Headers */,
+				90601FBD190DD21A00E44235 /* NSPersistentStore+MagicalRecordPrivate.h in Headers */,
 				C79D63E2180880A9006C29E3 /* AutoMigratingWithSourceAndTargetModelMagicalRecordStack.h in Headers */,
 				C73A7CDD180CF7A700E305D8 /* ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.h in Headers */,
 				C771EB2D17E6951900D2E984 /* SQLiteWithSavingContextMagicalRecordStack.h in Headers */,
