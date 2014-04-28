@@ -8,14 +8,56 @@
 
 #import "MagicalRecord.h"
 
-typedef NS_ENUM(NSInteger, MagicalRecordLogLevel)
+/**
+ Defines "levels" of logging that will be used as values in a bitmask that filters log messages.
+
+ @since Available in v2.3 and later.
+ */
+typedef NS_ENUM (NSInteger, MagicalRecordLogLevel)
 {
-    MagicalRecordLogLevelOff        = 0,
-    MagicalRecordLogLevelFatal      = 1 << 0,
-    MagicalRecordLogLevelError      = 1 << 1,
-    MagicalRecordLogLevelWarn       = 1 << 2,
-    MagicalRecordLogLevelInfo       = 1 << 3,
-    MagicalRecordLogLevelVerbose    = 1 << 4,
+    /** Disable all logging */
+    MagicalRecordLogLevelOff = 0,
+
+    /** Log fatal errors */
+    MagicalRecordLogLevelFatal = 1 << 0,
+
+    /** Log all errors */
+    MagicalRecordLogLevelError = 1 << 1,
+
+    /** Log warnings, and all errors */
+    MagicalRecordLogLevelWarn = 1 << 2,
+
+    /** Log informative messagess, warnings and all errors */
+    MagicalRecordLogLevelInfo = 1 << 3,
+
+    /** Log verbose diagnostic information, messages, warnings and all errors */
+    MagicalRecordLogLevelVerbose = 1 << 4,
+};
+
+/**
+ Defines a mask for logging that will be used by to filter log messages.
+
+ @since Available in v2.3 and later.
+ */
+typedef NS_ENUM (NSInteger, MagicalRecordLoggingMask)
+{
+    /** Don't log anything */
+    MagicalRecordLogMaskOff = 0,
+
+    /** Log all fatal messages */
+    MagicalRecordLoggingMaskFatal = (MagicalRecordLogLevelFatal),
+
+    /** Log all errors and fatal messages */
+    MagicalRecordLoggingMaskError = (MagicalRecordLogLevelFatal | MagicalRecordLogLevelError),
+
+    /** Log warnings, errors and fatal messages */
+    MagicalRecordLoggingMaskWarn = (MagicalRecordLogLevelFatal | MagicalRecordLogLevelError | MagicalRecordLogLevelWarn),
+
+    /** Log informative, warning and error messages */
+    MagicalRecordLoggingMaskInfo = (MagicalRecordLogLevelFatal | MagicalRecordLogLevelError | MagicalRecordLogLevelWarn | MagicalRecordLogLevelInfo),
+
+    /** Log verbose diagnostic, informative, warning and error messages */
+    MagicalRecordLoggingMaskVerbose = (MagicalRecordLogLevelFatal | MagicalRecordLogLevelError | MagicalRecordLogLevelWarn | MagicalRecordLogLevelInfo | MagicalRecordLogLevelVerbose),
 };
 
 @interface MagicalRecord (Options)
@@ -48,17 +90,25 @@ typedef NS_ENUM(NSInteger, MagicalRecordLogLevel)
 + (void) setShouldDeleteStoreOnModelMismatch:(BOOL)shouldDeleteStoreOnModelMismatch;
 
 /**
- *  Returns the current logging level.
- *
- *  @return the current logging level
+ @name Logging Mask
  */
-+ (MagicalRecordLogLevel) logLevel;
 
 /**
- *  Sets the desired logging level.
- *
- *  @param level MagicalRecordLogLevel value
+ Returns the logging mask set for MagicalRecord in the current application.
+
+ @return Current MagicalRecordLogMask
+
+ @since Available in v2.3 and later.
  */
-+ (void) setLogLevel:(MagicalRecordLogLevel)level;
++ (MagicalRecordLoggingMask) loggingMask;
+
+/**
+ Sets the logging mask set for MagicalRecord in the current application.
+
+ @param mask Any value from MagicalRecordLogMask
+
+ @since Available in v2.3 and later.
+ */
++ (void) setLoggingMask:(MagicalRecordLoggingMask)mask;
 
 @end

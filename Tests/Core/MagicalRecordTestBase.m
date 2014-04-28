@@ -4,6 +4,7 @@
 //
 
 #import "MagicalRecordTestBase.h"
+#import "MagicalRecordLogging.h"
 
 @implementation MagicalRecordTestBase
 
@@ -12,7 +13,7 @@
     [super setUp];
 
     // Don't pollute the tests with logging
-    [MagicalRecord setLogLevel:MagicalRecordLogLevelOff];
+    [MagicalRecord setLoggingMask:MagicalRecordLoggingMaskInfo];
 
     // Setup the default model from the current class' bundle
     [MagicalRecord setDefaultModelFromClass:[self class]];
