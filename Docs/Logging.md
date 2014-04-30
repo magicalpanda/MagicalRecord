@@ -3,4 +3,6 @@ MagicalRecord has logging built in to every fetch request and other Core Data op
 
 All logging in MagicalRecord can be disabled by placing this define preprocessor statement prior to the main import of CoreData+MagicalRecord.h
 
-    #define MR_ENABLE_ACTIVE_RECORD_LOGGING 0
+```objc
+#define MR_ENABLE_ACTIVE_RECORD_LOGGING 0
+```
