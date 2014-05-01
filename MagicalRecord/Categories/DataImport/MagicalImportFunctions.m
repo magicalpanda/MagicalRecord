@@ -7,7 +7,9 @@
 //
 
 #import "MagicalImportFunctions.h"
-
+#ifdef COCOAPODS_POD_AVAILABLE_ISO8601DateFormatter
+#import "ISO8601DateFormatter.h"
+#endif
 
 #pragma mark - Data import helper functions
 
@@ -33,14 +35,32 @@ NSDate * MR_adjustDateForDST(NSDate *date)
 
 NSDate * MR_dateFromString(NSString *value, NSString *format)
 {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-    [formatter setLocale:[NSLocale currentLocale]];
-    [formatter setDateFormat:format];
-    
-    NSDate *parsedDate = [formatter dateFromString:value];
-    
-    return parsedDate;
+
+	#ifdef COCOAPODS_POD_AVAILABLE_ISO8601DateFormatter
+
+	// Support for ISO8601 date
+	// https://www.evernote.com/shard/s3/sh/2146a5e0-2440-45ab-9dc8-5f3800d7d1b8/a6fa0ff24d77ca1794a0a842b9f71aab
+	if ( [format isEqualToString:@"ISO8601"] ) {
+
+		// Save CPU and memory by re-using the same formatter
+		static ISO8601DateFormatter *formatter = nil;
+		static dispatch_once_t onceToken;
+		dispatch_once(&onceToken, ^{
+			formatter = [[ISO8601DateFormatter alloc] init];
+		});
+
+		return [formatter dateFromString:value];
+	}
+	#endif
+
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+	[formatter setLocale:[NSLocale currentLocale]];
+	[formatter setDateFormat:format];
+
+	NSDate *parsedDate = [formatter dateFromString:value];
+
+	return parsedDate;
 }
 
 NSDate * MR_dateFromNumber(NSNumber *value, BOOL milliseconds)
