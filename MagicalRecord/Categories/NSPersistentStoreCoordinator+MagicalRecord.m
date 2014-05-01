@@ -10,6 +10,8 @@
 
 static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
 NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagicalRecordPSCDidCompleteiCloudSetupNotification";
+NSString * const kMagicalRecordPSCWillDeleteStoreDueToModelMismatch = @"kMagicalRecordPSCWillDeleteStoreDueToModelMismatch";
+NSString * const kMagicalRecordPSCDidDeleteStoreDueToModelMismatch = @"kMagicalRecordPSCDidDeleteStoreDueToModelMismatch";
 
 @interface NSDictionary (MagicalRecordMerging)
 
@@ -83,6 +85,7 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
             BOOL isMigrationError = (([error code] == NSPersistentStoreIncompatibleVersionHashError) || ([error code] == NSMigrationMissingSourceModelError));
             if ([[error domain] isEqualToString:NSCocoaErrorDomain] && isMigrationError)
             {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCWillDeleteStoreDueToModelMismatch object:nil];
                 // Could not open the database, so... kill it! (AND WAL bits)
                 NSString *rawURL = [url absoluteString];
                 NSURL *shmSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-shm"]];
@@ -101,13 +104,14 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
                                                    error:&error];
                 if (store)
                 {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCDidDeleteStoreDueToModelMismatch object:nil];
                     // If we successfully added a store, remove the error that was initially created
                     error = nil;
                 }
             }
         }
+        [MagicalRecord handleErrors:error];
     }
-    [MagicalRecord handleErrors:error];
     return store;
 }
 
