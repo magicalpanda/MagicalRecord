@@ -9,6 +9,12 @@
 #import "NSPersistentStore+MagicalRecord.h"
 
 extern NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification;
+extern NSString * const kMagicalRecordPSCMismatchWillDeleteStore;
+extern NSString * const kMagicalRecordPSCMismatchDidDeleteStore;
+extern NSString * const kMagicalRecordPSCMismatchWillRecreateStore;
+extern NSString * const kMagicalRecordPSCMismatchDidRecreateStore;
+extern NSString * const kMagicalRecordPSCMismatchCouldNotDeleteStore;
+extern NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore;
 
 @interface NSPersistentStoreCoordinator (MagicalRecord)
 

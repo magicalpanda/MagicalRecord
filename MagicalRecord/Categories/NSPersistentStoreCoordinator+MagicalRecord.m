@@ -10,6 +10,12 @@
 
 static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
 NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagicalRecordPSCDidCompleteiCloudSetupNotification";
+NSString * const kMagicalRecordPSCMismatchWillDeleteStore = @"kMagicalRecordPSCMismatchWillDeleteStore";
+NSString * const kMagicalRecordPSCMismatchDidDeleteStore = @"kMagicalRecordPSCMismatchDidDeleteStore";
+NSString * const kMagicalRecordPSCMismatchWillRecreateStore = @"kMagicalRecordPSCMismatchWillRecreateStore";
+NSString * const kMagicalRecordPSCMismatchDidRecreateStore = @"kMagicalRecordPSCMismatchDidRecreateStore";
+NSString * const kMagicalRecordPSCMismatchCouldNotDeleteStore = @"kMagicalRecordPSCMismatchCouldNotDeleteStore";
+NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalRecordPSCMismatchCouldNotRecreateStore";
 
 @interface NSDictionary (MagicalRecordMerging)
 
@@ -83,16 +89,26 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
             BOOL isMigrationError = (([error code] == NSPersistentStoreIncompatibleVersionHashError) || ([error code] == NSMigrationMissingSourceModelError));
             if ([[error domain] isEqualToString:NSCocoaErrorDomain] && isMigrationError)
             {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchWillDeleteStore object:nil];
+                
+                NSError * deleteStoreError;
                 // Could not open the database, so... kill it! (AND WAL bits)
                 NSString *rawURL = [url absoluteString];
                 NSURL *shmSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-shm"]];
                 NSURL *walSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-wal"]];
-                [[NSFileManager defaultManager] removeItemAtURL:url error:nil];
+                [[NSFileManager defaultManager] removeItemAtURL:url error:&deleteStoreError];
                 [[NSFileManager defaultManager] removeItemAtURL:shmSidecar error:nil];
                 [[NSFileManager defaultManager] removeItemAtURL:walSidecar error:nil];
 
                 MRLogWarn(@"Removed incompatible model version: %@", [url lastPathComponent]);
+                if(deleteStoreError) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchCouldNotDeleteStore object:nil userInfo:@{@"Error":deleteStoreError}];
+                }
+                else {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchDidDeleteStore object:nil];
+                }
                 
+                [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchWillRecreateStore object:nil];
                 // Try one more time to create the store
                 store = [self addPersistentStoreWithType:NSSQLiteStoreType
                                            configuration:nil
@@ -101,8 +117,12 @@ NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagica
                                                    error:&error];
                 if (store)
                 {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchDidRecreateStore object:nil];
                     // If we successfully added a store, remove the error that was initially created
                     error = nil;
+                }
+                else {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchCouldNotRecreateStore object:nil userInfo:@{@"Error":error}];
                 }
             }
         }
