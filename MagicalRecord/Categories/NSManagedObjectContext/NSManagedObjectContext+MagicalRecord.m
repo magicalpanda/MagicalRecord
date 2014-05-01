@@ -149,9 +149,9 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
     [defaultContext reset];
 }
 
-- (void) MR_deleteObjects:(id <NSFastEnumeration>)managedObjects
+- (void) MR_deleteObjects:(id <NSFastEnumeration>)objects
 {
-    for (NSManagedObject *managedObject in managedObjects)
+    for (NSManagedObject *managedObject in objects)
     {
         [self deleteObject:managedObject];
     }
