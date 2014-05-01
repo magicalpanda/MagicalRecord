@@ -102,7 +102,7 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
 
                 MRLogWarn(@"Removed incompatible model version: %@", [url lastPathComponent]);
                 if(deleteStoreError) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchCouldNotDeleteStore object:deleteStoreError];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchCouldNotDeleteStore object:nil userInfo:@{@"Error":deleteStoreError}];
                 }
                 else {
                     [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchDidDeleteStore object:nil];
@@ -122,7 +122,7 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
                     error = nil;
                 }
                 else {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchCouldNotRecreateStore object:error];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchCouldNotRecreateStore object:nil userInfo:@{@"Error":error}];
                 }
             }
         }
