@@ -16,7 +16,7 @@ static BOOL shouldDeleteStoreOnModelMismatch_;
 
 @implementation MagicalRecord (Options)
 
-#pragma mark - Options
+#pragma mark - Configuration Options
 
 + (BOOL) shouldAutoCreateManagedObjectModel;
 {
