@@ -1,4 +1,3 @@
-
 ### Default Managed Object Context 
 
 When working with Core Data, you will regularly deal with two main objects: `NSManagedObject` and `NSManagedObjectContext`.
@@ -19,7 +18,7 @@ If you need to create a new managed object context for use in non-main threads, 
 NSManagedObjectContext *myNewContext = [NSManagedObjectContext MR_newContext];
 ```
 	
-This will create a new managed object context which has the same object model and persistent store as the default context, but is safe for use on another thread.
+This will create a new managed object context which has the same object model and persistent store as the default context, but is safe for use on another thread. It automatically sets the default context as it's parent context.
 
 If you'd like to make your `myNewContext` instance the default for all fetch requests, use the following class method:
 
