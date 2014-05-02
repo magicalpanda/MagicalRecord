@@ -35,27 +35,25 @@ NSDate * MR_adjustDateForDST(NSDate *date)
 
 NSDate * MR_dateFromString(NSString *value, NSString *format)
 {
+    #ifdef COCOAPODS_POD_AVAILABLE_ISO8601DateFormatter
+    // Support for ISO8601 date
+    // https://www.evernote.com/shard/s3/sh/2146a5e0-2440-45ab-9dc8-5f3800d7d1b8/a6fa0ff24d77ca1794a0a842b9f71aab
+    if ( [format isEqualToString:@"ISO8601"] ) {
 
-	#ifdef COCOAPODS_POD_AVAILABLE_ISO8601DateFormatter
+        // Save CPU and memory by re-using the same formatter
+        static ISO8601DateFormatter *formatter = nil;
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            formatter = [[ISO8601DateFormatter alloc] init];
+        });
 
-	// Support for ISO8601 date
-	// https://www.evernote.com/shard/s3/sh/2146a5e0-2440-45ab-9dc8-5f3800d7d1b8/a6fa0ff24d77ca1794a0a842b9f71aab
-	if ( [format isEqualToString:@"ISO8601"] ) {
+        return [formatter dateFromString:value];
+    }
+    #endif
 
-		// Save CPU and memory by re-using the same formatter
-		static ISO8601DateFormatter *formatter = nil;
-		static dispatch_once_t onceToken;
-		dispatch_once(&onceToken, ^{
-			formatter = [[ISO8601DateFormatter alloc] init];
-		});
-
-		return [formatter dateFromString:value];
-	}
-	#endif
-
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	[formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-	[formatter setLocale:[NSLocale currentLocale]];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    [formatter setLocale:[NSLocale currentLocale]];
 	[formatter setDateFormat:format];
 
 	NSDate *parsedDate = [formatter dateFromString:value];
