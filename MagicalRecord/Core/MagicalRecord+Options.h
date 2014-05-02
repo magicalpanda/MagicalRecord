@@ -78,11 +78,11 @@ typedef NS_ENUM (NSInteger, MagicalRecordLoggingMask)
 /**
  Setting this to true will make MagicalRecord create the default managed object model automatically if it doesn't exist when calling `[NSManagedObjectModel MR_defaultManagedObjectModel]`.
 
- @param shouldAutoCreate BOOL value that flags whether the default persistent store should be automatically created.
+ @param autoCreate BOOL value that flags whether the default persistent store should be automatically created.
 
  @since Available in v2.0.4 and later
  */
-+ (void) setShouldAutoCreateManagedObjectModel:(BOOL)shouldAutoCreate;
++ (void) setShouldAutoCreateManagedObjectModel:(BOOL)autoCreate;
 
 /**
  If this is true, the default persistent store will be automatically created if it doesn't exist when calling `[NSPersistentStoreCoordinator MR_defaultStoreCoordinator]`.
@@ -96,11 +96,11 @@ typedef NS_ENUM (NSInteger, MagicalRecordLoggingMask)
 /**
  Setting this to true will make MagicalRecord create the default persistent store automatically if it doesn't exist when calling `[NSPersistentStoreCoordinator MR_defaultStoreCoordinator]`.
 
- @param shouldAutoCreate BOOL value that flags whether the default persistent store should be automatically created.
+ @param autoCreate BOOL value that flags whether the default persistent store should be automatically created.
 
  @since Available in v2.0.4 and later
  */
-+ (void) setShouldAutoCreateDefaultPersistentStoreCoordinator:(BOOL)shouldAutoCreate;
++ (void) setShouldAutoCreateDefaultPersistentStoreCoordinator:(BOOL)autoCreate;
 
 /**
  If this is true and MagicalRecord encounters a store with a version that does not match that of the model, the store will be removed from the disk.
@@ -116,11 +116,11 @@ typedef NS_ENUM (NSInteger, MagicalRecordLoggingMask)
  Setting this to true will make MagicalRecord delete any stores that it encounters which do not match the version of their model.
  This is extremely useful during development where frequent model changes can potentially require a delete and reinstall of the app.
 
- @param shouldDeleteStoreOnModelMismatch BOOL value that flags whether mismatched stores should be deleted
+ @param shouldDelete BOOL value that flags whether mismatched stores should be deleted
  
  @since Available in v2.0.4 and later
  */
-+ (void) setShouldDeleteStoreOnModelMismatch:(BOOL)shouldDeleteStoreOnModelMismatch;
++ (void) setShouldDeleteStoreOnModelMismatch:(BOOL)shouldDelete;
 
 /**
  @name Logging Mask

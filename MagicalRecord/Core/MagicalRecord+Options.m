@@ -9,10 +9,9 @@
 #import "MagicalRecord+Options.h"
 
 static MagicalRecordLoggingMask kMagicalRecordLoggingMask = MagicalRecordLoggingMaskVerbose;
-
-static BOOL shouldAutoCreateManagedObjectModel_;
-static BOOL shouldAutoCreateDefaultPersistentStoreCoordinator_;
-static BOOL shouldDeleteStoreOnModelMismatch_;
+static BOOL kMagicalRecordShouldAutoCreateManagedObjectModel = NO;
+static BOOL kMagicalRecordShouldAutoCreateDefaultPersistentStoreCoordinator = NO;
+static BOOL kMagicalRecordShouldDeleteStoreOnModelMismatch = NO;
 
 @implementation MagicalRecord (Options)
 
@@ -20,32 +19,32 @@ static BOOL shouldDeleteStoreOnModelMismatch_;
 
 + (BOOL) shouldAutoCreateManagedObjectModel;
 {
-    return shouldAutoCreateManagedObjectModel_;
+    return kMagicalRecordShouldAutoCreateManagedObjectModel;
 }
 
-+ (void) setShouldAutoCreateManagedObjectModel:(BOOL)shouldAutoCreate;
++ (void) setShouldAutoCreateManagedObjectModel:(BOOL)autoCreate;
 {
-    shouldAutoCreateManagedObjectModel_ = shouldAutoCreate;
+    kMagicalRecordShouldAutoCreateManagedObjectModel = autoCreate;
 }
 
 + (BOOL) shouldAutoCreateDefaultPersistentStoreCoordinator;
 {
-    return shouldAutoCreateDefaultPersistentStoreCoordinator_;
+    return kMagicalRecordShouldAutoCreateDefaultPersistentStoreCoordinator;
 }
 
-+ (void) setShouldAutoCreateDefaultPersistentStoreCoordinator:(BOOL)shouldAutoCreate;
++ (void) setShouldAutoCreateDefaultPersistentStoreCoordinator:(BOOL)autoCreate;
 {
-    shouldAutoCreateDefaultPersistentStoreCoordinator_ = shouldAutoCreate;
+    kMagicalRecordShouldAutoCreateDefaultPersistentStoreCoordinator = autoCreate;
 }
 
 + (BOOL) shouldDeleteStoreOnModelMismatch;
 {
-    return shouldDeleteStoreOnModelMismatch_;
+    return kMagicalRecordShouldDeleteStoreOnModelMismatch;
 }
 
-+ (void) setShouldDeleteStoreOnModelMismatch:(BOOL)shouldDeleteStoreOnModelMismatch
++ (void) setShouldDeleteStoreOnModelMismatch:(BOOL)shouldDelete
 {
-    shouldDeleteStoreOnModelMismatch_ = shouldDeleteStoreOnModelMismatch;
+    kMagicalRecordShouldDeleteStoreOnModelMismatch = shouldDelete;
 }
 
 + (MagicalRecordLoggingMask) loggingMask;
