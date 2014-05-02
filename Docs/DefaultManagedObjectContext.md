@@ -1,26 +1,31 @@
 
-
 ### Default Managed Object Context 
 
-When using Core Data, you will deal with two types of objects the most: *NSManagedObject* and *NSManagedObjectContext*. MagicalRecord provides a single place for a default NSManagedObjectContext for use within your app. This is great for single threaded apps. You can easily get to this default context by calling:
+When working with Core Data, you will regularly deal with two main objects: `NSManagedObject` and `NSManagedObjectContext`.
 
-    [NSManagedObjectContext MR_defaultContext];
+MagicalRecord provides a simple class method to retrieve a default `NSManagedObjectContext` that can be used throughout your app. This context operates on the main thread, and is great for simple, single-threaded apps. 
 
-This context will be used if a find or request method (described below) does not specify a specific context using the **inContext:** method overload.
+To access the default context, call:
 
-If you need to create a new Managed Object Context for use in other threads, based on the default persistent store that was creating using one of the setup methods, use:
+```objective-c
+NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
+```
 
-	NSManagedObjectContext *myNewContext = [NSManagedObjectContext MR_context];
+This context will be used throughout MagicalRecord in any method that uses a context, but does not provde a specific managed object context parameter.
+
+If you need to create a new managed object context for use in non-main threads, use the following method:
+
+```objective-c
+NSManagedObjectContext *myNewContext = [NSManagedObjectContext MR_newContext];
+```
 	
-This will use the same object model and persistent store, but create an entirely new context for use with threads other than the main thread. 
+This will create a new managed object context which has the same object model and persistent store as the default context, but is safe for use on another thread.
 
-And, if you want to make *myNewContext* the default for all fetch requests on the main thread:
+If you'd like to make your `myNewContext` instance the default for all fetch requests, use the following class method:
 
-	[NSManagedObjectContext MR_setDefaultContext:myNewContext];
+```objective-c
+[NSManagedObjectContext MR_setDefaultContext:myNewContext];
+```
 
-MagicalRecord also has a helper method to hold on to a Managed Object Context in a thread's threadDictionary. This lets you access the correct NSManagedObjectContext instance no matter which thread you're calling from. This methods is:
-
-	[NSManagedObjectContext MR_contextForCurrentThread];
-
-**It is *highly* recommended that the default context is created and set using the main thread**
+> **NOTE:** It is *highly* recommended that the default context is created and set on the main thread using a managed object context with a concurrency type of `NSMainQueueConcurrencyType`.
 
