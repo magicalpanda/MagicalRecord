@@ -6,8 +6,10 @@
 
 **Note:** By default, all category methods added by MagicalRecord have a prefix of `MR_`. If you'd prefer to use the methods without a prefix (ie. `findAll` in lieu of `MR_findAll`) precede any instances of  `#import "CoreData+MagicalRecord.h"` with `#define MR_SHORTHAND`, like so:
 
-	#define MR_SHORTHAND
-	#import "CoreData+MagicalRecord.h"
+```objc
+#define MR_SHORTHAND
+#import "CoreData+MagicalRecord.h"
+```
 
 
 # Requirements
