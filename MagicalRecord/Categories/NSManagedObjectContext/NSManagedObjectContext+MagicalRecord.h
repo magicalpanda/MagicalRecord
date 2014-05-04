@@ -64,12 +64,14 @@
 
 /**
  Initializes a context of type `NSMainQueueConcurrencyType`.
+
  @return A context initialized using the `NSPrivateQueueConcurrencyType` concurrency type.
  */
 + (NSManagedObjectContext *) MR_newMainQueueContext NS_RETURNS_RETAINED;
 
 /**
  Initializes a context of type `NSPrivateQueueConcurrencyType`.
+
  @return A context initialized using the `NSPrivateQueueConcurrencyType` concurrency type.
  */
 + (NSManagedObjectContext *) MR_newPrivateQueueContext NS_RETURNS_RETAINED;
@@ -78,6 +80,7 @@
 
 /**
  Sets a working name for the context, which will be used in debug logs.
+
  @param workingName Name for the context
  */
 - (void) MR_setWorkingName:(NSString *)workingName;

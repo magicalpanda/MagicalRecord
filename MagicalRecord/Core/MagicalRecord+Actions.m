@@ -34,22 +34,6 @@
     }];
 }
 
-+ (void) saveUsingCurrentThreadContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
-{
-    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
-
-    [localContext MR_setWorkingName:NSStringFromSelector(_cmd)];
-
-    [localContext performBlock:^{
-        if (block) {
-            block(localContext);
-        }
-
-        [localContext MR_saveWithOptions:MRSaveParentContexts completion:completion];
-    }];
-}
-
-
 #pragma mark - Synchronous saving
 
 + (void) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
@@ -68,6 +52,26 @@
     }];
 }
 
+@end
+
+#pragma mark - Deprecated Methods — DO NOT USE
+@implementation MagicalRecord (ActionsDeprecated)
+
++ (void) saveUsingCurrentThreadContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
+{
+    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
+
+    [localContext MR_setWorkingName:NSStringFromSelector(_cmd)];
+
+    [localContext performBlock:^{
+        if (block) {
+            block(localContext);
+        }
+
+        [localContext MR_saveWithOptions:MRSaveParentContexts completion:completion];
+    }];
+}
+
 + (void) saveUsingCurrentThreadContextWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block;
 {
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
@@ -82,12 +86,6 @@
         [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:nil];
     }];
 }
-
-
-#pragma mark - Deprecated methods
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 
 + (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block
 {
@@ -141,7 +139,5 @@
         }];
     }];
 }
-
-#pragma clang diagnostic pop // ignored "-Wdeprecated-implementations"
 
 @end

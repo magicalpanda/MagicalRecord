@@ -108,11 +108,10 @@
     }
 }
 
-#pragma mark - Deprecated methods
-// These methods will be removed in MagicalRecord 3.0
+@end
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-implementations"
+#pragma mark - Deprecated Methods — DO NOT USE
+@implementation NSManagedObjectContext (MagicalSavesDeprecated)
 
 - (void)MR_save;
 {
@@ -197,7 +196,5 @@
         }
     }];
 }
-
-#pragma clang diagnostic pop // ignored "-Wdeprecated-implementations"
 
 @end
