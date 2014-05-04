@@ -15,7 +15,7 @@
 - (void)testSaveToSelfOnlyWhenSaveIsSynchronous
 {
     NSManagedObjectContext *parentContext = [NSManagedObjectContext MR_defaultContext];
-    NSManagedObjectContext *childContext = [NSManagedObjectContext MR_newContextWithParent:parentContext];
+    NSManagedObjectContext *childContext = [NSManagedObjectContext MR_contextWithParent:parentContext];
 
     SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
 
@@ -51,7 +51,7 @@
 - (void)testSaveToSelfOnlyWhenSaveIsAsynchronous
 {
     NSManagedObjectContext *parentContext = [NSManagedObjectContext MR_defaultContext];
-    NSManagedObjectContext *childContext = [NSManagedObjectContext MR_newContextWithParent:parentContext];
+    NSManagedObjectContext *childContext = [NSManagedObjectContext MR_contextWithParent:parentContext];
 
     SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
 
@@ -112,7 +112,7 @@
 - (void)testSaveToPersistentStoreWhenSaveIsSynchronous
 {
     NSManagedObjectContext *parentContext = [NSManagedObjectContext MR_defaultContext];
-    NSManagedObjectContext *childContext = [NSManagedObjectContext MR_newContextWithParent:parentContext];
+    NSManagedObjectContext *childContext = [NSManagedObjectContext MR_contextWithParent:parentContext];
 
     SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
 
@@ -150,7 +150,7 @@
 - (void)testSaveToPersistentStoreWhenSaveIsAsynchronous
 {
     NSManagedObjectContext *parentContext = [NSManagedObjectContext MR_defaultContext];
-    NSManagedObjectContext *childContext = [NSManagedObjectContext MR_newContextWithParent:parentContext];
+    NSManagedObjectContext *childContext = [NSManagedObjectContext MR_contextWithParent:parentContext];
 
     SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
 

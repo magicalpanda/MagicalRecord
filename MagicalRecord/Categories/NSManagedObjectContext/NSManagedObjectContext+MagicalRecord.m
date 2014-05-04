@@ -25,7 +25,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
     NSAssert(coordinator, @"Provided coordinator cannot be nil!");
     if (MagicalRecordDefaultContext == nil)
     {
-        NSManagedObjectContext *rootContext = [self MR_newContextWithStoreCoordinator:coordinator];
+        NSManagedObjectContext *rootContext = [self MR_contextWithStoreCoordinator:coordinator];
         [self MR_setRootSavingContext:rootContext];
 
         NSManagedObjectContext *defaultContext = [self MR_newMainQueueContext];
@@ -52,12 +52,12 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
 #pragma mark - Context Creation
 
-+ (NSManagedObjectContext *) MR_newContext
++ (NSManagedObjectContext *) MR_context
 {
-    return [self MR_newContextWithParent:[self MR_rootSavingContext]];
+    return [self MR_contextWithParent:[self MR_rootSavingContext]];
 }
 
-+ (NSManagedObjectContext *) MR_newContextWithParent:(NSManagedObjectContext *)parentContext
++ (NSManagedObjectContext *) MR_contextWithParent:(NSManagedObjectContext *)parentContext
 {
     NSManagedObjectContext *context = [self MR_newPrivateQueueContext];
     [context setParentContext:parentContext];
@@ -65,7 +65,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
     return context;
 }
 
-+ (NSManagedObjectContext *) MR_newContextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
++ (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
 	NSManagedObjectContext *context = nil;
     if (coordinator != nil)
@@ -275,24 +275,24 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 #pragma mark - Deprecated Methods — DO NOT USE
 @implementation NSManagedObjectContext (MagicalRecordDeprecated)
 
-+ (NSManagedObjectContext *) MR_context
-{
-    return [self MR_newContext];
-}
-
 + (NSManagedObjectContext *) MR_contextWithoutParent
 {
     return [self MR_newPrivateQueueContext];
 }
 
-+ (NSManagedObjectContext *) MR_contextWithParent:(NSManagedObjectContext *)parentContext
++ (NSManagedObjectContext *) MR_newContext
 {
-    return [self MR_newContextWithParent:parentContext];
+    return [self MR_context];
 }
 
-+ (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
++ (NSManagedObjectContext *) MR_newContextWithParent:(NSManagedObjectContext *)parentContext
 {
-    return [self MR_newContextWithStoreCoordinator:coordinator];
+    return [self MR_contextWithParent:parentContext];
+}
+
++ (NSManagedObjectContext *) MR_newContextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
+{
+    return [self MR_contextWithStoreCoordinator:coordinator];
 }
 
 @end

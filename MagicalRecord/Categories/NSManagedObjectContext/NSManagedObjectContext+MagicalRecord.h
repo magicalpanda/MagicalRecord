@@ -42,7 +42,7 @@
  Creates and returns a new managed object context of type `NSPrivateQueueConcurrencyType`, with it's parent context set to the root saving context.
  @return Private context with the parent set to the root saving context
  */
-+ (NSManagedObjectContext *) MR_newContext NS_RETURNS_RETAINED;
++ (NSManagedObjectContext *) MR_context;
 
 /**
  Creates and returns a new managed object context of type `NSPrivateQueueConcurrencyType`, with it's parent context set to the root saving context.
@@ -51,7 +51,7 @@
 
  @return Private context with the parent set to the provided context
  */
-+ (NSManagedObjectContext *) MR_newContextWithParent:(NSManagedObjectContext *)parentContext NS_RETURNS_RETAINED;
++ (NSManagedObjectContext *) MR_contextWithParent:(NSManagedObjectContext *)parentContext;
 
 /**
  Creates and returns a new managed object context of type `NSPrivateQueueConcurrencyType`, with it's persistent store coordinator set to the provided coordinator.
@@ -60,7 +60,7 @@
 
  @return Private context with it's persistent store coordinator set to the provided coordinator
  */
-+ (NSManagedObjectContext *) MR_newContextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator NS_RETURNS_RETAINED;
++ (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 
 /**
  Initializes a context of type `NSMainQueueConcurrencyType`.
@@ -117,9 +117,11 @@
 #pragma mark - Deprecated Methods — DO NOT USE
 @interface NSManagedObjectContext (MagicalRecordDeprecated)
 
-+ (NSManagedObjectContext *) MR_context MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0_USE("Please use +MR_newContext instead");
 + (NSManagedObjectContext *) MR_contextWithoutParent MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0_USE("Please use +MR_newPrivateQueueContext instead");
-+ (NSManagedObjectContext *) MR_contextWithParent:(NSManagedObjectContext *)parentContext MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0_USE("Please use +MR_newContextWithParent: instead");
-+ (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0_USE("Please use +MR_newContextWithStoreCoordinator: instead");
+
++ (NSManagedObjectContext *) MR_newContext MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0_USE("Please use +MR_context instead");
++ (NSManagedObjectContext *) MR_newContextWithParent:(NSManagedObjectContext *)parentContext MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0_USE("Please use +MR_contextWithParent: instead");
++ (NSManagedObjectContext *) MR_newContextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0_USE("Please use +MR_contextWithStoreCoordinator: instead");
+
 
 @end

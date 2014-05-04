@@ -26,7 +26,7 @@
 
 - (void) testCanNotifyDefaultContextOnSave
 {
-    NSManagedObjectContext *testContext = [NSManagedObjectContext MR_newContextWithParent:[NSManagedObjectContext MR_defaultContext]];
+    NSManagedObjectContext *testContext = [NSManagedObjectContext MR_contextWithParent:[NSManagedObjectContext MR_defaultContext]];
 
     XCTAssertEqualObjects([testContext parentContext], [NSManagedObjectContext MR_defaultContext], @"Parent context should be the default context");
 }
