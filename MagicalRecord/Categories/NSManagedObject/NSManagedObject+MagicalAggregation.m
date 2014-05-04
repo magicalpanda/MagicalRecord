@@ -66,7 +66,10 @@
 
 + (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter;
 {
-    return [self MR_countOfEntitiesWithPredicate:searchFilter inContext:[NSManagedObjectContext MR_defaultContext]];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    return [self MR_countOfEntitiesWithPredicate:searchFilter inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+#pragma clang diagnostic pop
 }
 
 + (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter inContext:(NSManagedObjectContext *)context;
@@ -150,10 +153,13 @@
 
 + (id) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate
 {
-    return [self MR_aggregateOperation:function 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    return [self MR_aggregateOperation:function
                            onAttribute:attributeName 
                          withPredicate:predicate
-                             inContext:[NSManagedObjectContext MR_defaultContext]];    
+                             inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+#pragma clang diagnostic pop
 }
 
 + (NSArray *) MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString *)groupingKeyPath inContext:(NSManagedObjectContext *)context;
@@ -181,10 +187,13 @@
 
 + (NSArray *) MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString *)groupingKeyPath;
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     return [self MR_aggregateOperation:collectionOperator
                            onAttribute:attributeName
                          withPredicate:predicate groupBy:groupingKeyPath
-                             inContext:[NSManagedObjectContext MR_defaultContext]];
+                             inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+#pragma clang diagnostic pop
 }
 
 @end
