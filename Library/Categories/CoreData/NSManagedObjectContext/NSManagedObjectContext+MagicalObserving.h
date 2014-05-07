@@ -22,7 +22,7 @@
 
  @since Available in v3.0 and later.
  */
-- (void) MR_observeContext:(NSManagedObjectContext *)otherContext;
+- (void) MR_observeContextDidSave:(NSManagedObjectContext *)otherContext;
 
 /**
  Stops merging changes from the supplied context into self.
@@ -31,7 +31,7 @@
 
  @since Available in v3.0 and later.
  */
-- (void) MR_stopObservingContext:(NSManagedObjectContext *)otherContext;
+- (void) MR_stopObservingContextDidSave:(NSManagedObjectContext *)otherContext;
 
 /**
  Merges changes from another context into self on the main thread.

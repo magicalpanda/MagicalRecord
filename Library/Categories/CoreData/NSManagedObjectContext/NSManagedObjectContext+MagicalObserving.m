@@ -42,7 +42,7 @@ NSString * const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagical
 
 #pragma mark - Context Observation Helpers
 
-- (void) MR_observeContext:(NSManagedObjectContext *)otherContext
+- (void) MR_observeContextDidSave:(NSManagedObjectContext *)otherContext
 {
     if (self == otherContext) return;
 
@@ -64,7 +64,7 @@ NSString * const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagical
                              object:otherContext];
 }
 
-- (void) MR_stopObservingContext:(NSManagedObjectContext *)otherContext
+- (void) MR_stopObservingContextDidSave:(NSManagedObjectContext *)otherContext
 {
     if (self == otherContext) return;
 
@@ -75,7 +75,7 @@ NSString * const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagical
 }
 
 
-- (void) MR_observeContextAndSaveChangesToSelf:(NSManagedObjectContext *)otherContext
+- (void) MR_observeContextDidSaveAndSaveChangesToSelf:(NSManagedObjectContext *)otherContext
 {
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
 

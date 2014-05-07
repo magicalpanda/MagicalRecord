@@ -18,6 +18,9 @@
 {
     NSManagedObjectContext *context = [NSManagedObjectContext MR_confinementContext];
     [context setPersistentStoreCoordinator:self.coordinator];
+    //TODO: This observation needs to be torn down by the user at this time :(
+    [self.context MR_observeContextDidSave:context];
+    
     return context;
 }
 
@@ -31,7 +34,7 @@
         NSManagedObjectContext *localContext = [self newConfinementContext];
         NSManagedObjectContext *mainContext = [self context];
 
-        [mainContext MR_observeContext:localContext];
+        [mainContext MR_observeContextDidSave:localContext];
         [mainContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
         [localContext MR_setWorkingName:contextWorkingName];
 
@@ -41,7 +44,7 @@
         }
 
         [localContext MR_saveWithOptions:MRSaveSynchronously completion:completion];
-        [mainContext MR_stopObservingContext:localContext];
+        [mainContext MR_stopObservingContextDidSave:localContext];
     });
 }
 

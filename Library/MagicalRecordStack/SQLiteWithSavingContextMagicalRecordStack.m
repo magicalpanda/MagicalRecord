@@ -24,7 +24,7 @@
 
 - (void)dealloc;
 {
-    [_savingContext MR_stopObservingContext:_context];
+    [_savingContext MR_stopObservingContextDidSave:_context];
 }
 
 - (NSManagedObjectContext *) context;
@@ -40,7 +40,7 @@
         _context = [NSManagedObjectContext MR_mainQueueContext];
         [_context setPersistentStoreCoordinator:[self coordinator]];
 
-        [_context MR_observeContext:_savingContext];
+        [_context MR_observeContextDidSave:_savingContext];
     }
 
     return _context;

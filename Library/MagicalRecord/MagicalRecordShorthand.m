@@ -352,12 +352,12 @@
 
 - (void) observeContext:(NSManagedObjectContext *)otherContext;
 {
-    return [self MR_observeContext:otherContext];
+    return [self MR_observeContextDidSave:otherContext];
 }
 
 - (void) stopObservingContext:(NSManagedObjectContext *)otherContext;
 {
-    return [self MR_stopObservingContext:otherContext];
+    return [self MR_stopObservingContextDidSave:otherContext];
 }
 
 - (void) observeContextOnMainThread:(NSManagedObjectContext *)otherContext;

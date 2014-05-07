@@ -24,7 +24,7 @@
     expect([otherContext hasChanges]).to.beTruthy();
     expect([stackContext hasChanges]).to.beFalsy();
 
-    [stackContext MR_observeContextAndSaveChangesToSelf:otherContext];
+    [stackContext MR_observeContextDidSaveAndSaveChangesToSelf:otherContext];
 
     [otherContext MR_saveOnlySelfAndWait];
 
