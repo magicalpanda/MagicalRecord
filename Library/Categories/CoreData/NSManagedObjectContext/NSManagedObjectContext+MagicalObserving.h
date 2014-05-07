@@ -49,7 +49,7 @@
 
  @param otherContext Alternate context that the current context should observe
  */
-- (void) MR_observeContextAndSaveChangesToSelf:(NSManagedObjectContext *)otherContext;
+- (void) MR_observeContextDidSaveAndSaveChangesToSelf:(NSManagedObjectContext *)otherContext;
 
 /**
  Merges changes from the supplied persistent store coordinator into self in response to changes from iCloud.
