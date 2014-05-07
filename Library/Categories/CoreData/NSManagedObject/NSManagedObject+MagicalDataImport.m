@@ -348,9 +348,9 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     [listOfObjectData enumerateObjectsWithOptions:0
                                        usingBlock:^(id obj, NSUInteger idx, BOOL *stop)
      {
-         NSDictionary* dict = obj;
+         NSDictionary *dict = obj;
          
-         if([dict isKindOfClass:[NSDictionary class]])
+         if ([dict isKindOfClass:[NSDictionary class]])
          {
              NSManagedObject *importedObject = [self MR_importFromObject:dict
                                                                inContext:context];

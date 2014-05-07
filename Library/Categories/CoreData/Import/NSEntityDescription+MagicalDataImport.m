@@ -25,12 +25,14 @@
 
     NSDictionary *attributesByName = [self attributesByName];
 
-    if ([attributesByName count] == 0) {
+    if ([attributesByName count] == 0)
+    {
         return nil;
     }
 
     [attributesByName enumerateKeysAndObjectsUsingBlock:^(NSString *attributeName, NSAttributeDescription *attributeDescription, BOOL *stop) {
-        if ([attributeName isEqualToString:name]) {
+        if ([attributeName isEqualToString:name])
+        {
             description = attributeDescription;
 
             *stop = YES;
