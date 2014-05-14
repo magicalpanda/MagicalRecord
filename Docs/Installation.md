@@ -9,6 +9,16 @@
 	#define MR_SHORTHAND
 	#import "CoreData+MagicalRecord.h"
 
+### CocoaPods
+Alternatively, **MagicalRecord** is available on [CocoaPods](http://cocoapods.org):
+```
+pod 'MagicalRecord'
+```
+Or if you'd prefer to use the category methods without a prefix:
+
+```
+pod 'MagicalRecord/Shorthand'
+```
 
 # Requirements
 
