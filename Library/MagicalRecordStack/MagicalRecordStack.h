@@ -16,6 +16,8 @@
 @property (nonatomic, strong) NSPersistentStore *store;
 
 @property (nonatomic, assign) BOOL loggingEnabled;
+@property (nonatomic, assign) BOOL saveOnApplicationWillTerminate;
+@property (nonatomic, assign) BOOL saveOnApplicationWillResignActive;
 
 + (instancetype) defaultStack;
 + (void) setDefaultStack:(MagicalRecordStack *)stack;

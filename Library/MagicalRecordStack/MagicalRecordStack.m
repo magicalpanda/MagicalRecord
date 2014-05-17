@@ -15,6 +15,12 @@
 
 static MagicalRecordStack *defaultStack;
 
+@interface MagicalRecordStack ()
+
+@property (nonatomic, strong) NSNotificationCenter *applicationWillTerminate;
+@property (nonatomic, strong) NSNotificationCenter *applicationWillResignActive;
+
+@end
 
 @implementation MagicalRecordStack
 
@@ -97,8 +103,8 @@ static MagicalRecordStack *defaultStack;
     {
         _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         [_context setPersistentStoreCoordinator:[self coordinator]];
+        [_context setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
         [_context MR_setWorkingName:[NSString stringWithFormat:@"Main Queue Context (%@)", [self stackName]]];
-        [_context setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
     }
     return _context;
 }
@@ -123,7 +129,6 @@ static MagicalRecordStack *defaultStack;
 - (NSManagedObjectContext *) newConfinementContext;
 {
     NSManagedObjectContext *context = [self createConfinementContext];
-    [context setParentContext:[self context]];
 
     return context;
 }
@@ -156,6 +161,57 @@ static MagicalRecordStack *defaultStack;
 {
     MRLogError(@"%@ must be overridden in %@", NSStringFromSelector(_cmd), NSStringFromClass([self class]));
     return nil;
+}
+
+#pragma mark - Handle System Notifications
+
+- (BOOL) saveOnApplicationWillResignActive;
+{
+    return self.applicationWillResignActive != nil;
+}
+
+- (void) setSaveOnApplicationWillResignActive:(BOOL)save;
+{
+    [self setApplicationWillTerminate:save ? [NSNotificationCenter defaultCenter] : nil];
+}
+
+-(void)setApplicationWillResignActive:(NSNotificationCenter *)applicationWillResignActive;
+{
+    [_applicationWillResignActive removeObserver:self
+                                         name:NSApplicationWillResignActiveNotification
+                                       object:NSApp];
+    _applicationWillResignActive = applicationWillResignActive;
+    [_applicationWillResignActive addObserver:self
+                                  selector:@selector(autoSaveHandle:)
+                                      name:NSApplicationWillResignActiveNotification
+                                    object:NSApp];
+}
+
+- (BOOL) saveOnApplicationWillTerminate;
+{
+    return self.applicationWillTerminate != nil;
+}
+
+- (void) setSaveOnApplicationWillTerminate:(BOOL)save;
+{
+    [self setApplicationWillTerminate:save ? [NSNotificationCenter defaultCenter] : nil];
+}
+
+- (void) setApplicationWillTerminate:(NSNotificationCenter *)willTerminate;
+{
+    [_applicationWillTerminate removeObserver:self
+                                         name:NSApplicationWillTerminateNotification
+                                       object:NSApp];
+    _applicationWillTerminate = willTerminate;
+    [_applicationWillTerminate addObserver:self
+                           selector:@selector(autoSaveHandle:)
+                               name:NSApplicationWillTerminateNotification
+                             object:NSApp];
+}
+
+- (void) autoSaveHandle:(NSNotification *)notification;
+{
+    [[self context] MR_saveToPersistentStoreAndWait];
 }
 
 @end
