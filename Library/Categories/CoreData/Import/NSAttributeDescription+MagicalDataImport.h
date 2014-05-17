@@ -11,4 +11,6 @@
 - (NSString *) MR_primaryKey;
 - (id) MR_valueForKeyPath:(NSString *)keyPath fromObjectData:(id)objectData;
 
+- (BOOL) MR_shouldUseDefaultValueIfNoValuePresent;
+
 @end

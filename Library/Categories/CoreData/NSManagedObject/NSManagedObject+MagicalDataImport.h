@@ -11,11 +11,14 @@ extern NSString * const kMagicalRecordImportCustomDateFormatKey;
 extern NSString * const kMagicalRecordImportDefaultDateFormatString;
 extern NSString * const kMagicalRecordImportUnixTimeString;
 extern NSString * const kMagicalRecordImportAttributeKeyMapKey;
+extern NSString * const kMagicalRecordImportUniquifyAttributeKey;
 extern NSString * const kMagicalRecordImportAttributeValueClassNameKey;
 
 extern NSString * const kMagicalRecordImportRelationshipMapKey;
 extern NSString * const kMagicalRecordImportRelationshipLinkedByKey;
 extern NSString * const kMagicalRecordImportRelationshipTypeKey;
+
+extern NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent;
 
 @protocol MagicalRecordDataImportProtocol <NSObject>
 
@@ -33,8 +36,8 @@ extern NSString * const kMagicalRecordImportRelationshipTypeKey;
 + (id) MR_importFromObject:(id)data;
 + (id) MR_importFromObject:(id)data inContext:(NSManagedObjectContext *)context;
 
-+ (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData;
-+ (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context;
++ (NSArray *) MR_importFromArray:(id<NSFastEnumeration>)listOfObjectData;
++ (NSArray *) MR_importFromArray:(id<NSFastEnumeration>)listOfObjectData inContext:(NSManagedObjectContext *)context;
 
 @end
 

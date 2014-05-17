@@ -21,14 +21,9 @@
 
 - (NSAttributeDescription *) MR_attributeDescriptionForName:(NSString *)name;
 {
-    __block NSAttributeDescription *description;
+    __block NSAttributeDescription *description = nil;
 
     NSDictionary *attributesByName = [self attributesByName];
-
-    if ([attributesByName count] == 0)
-    {
-        return nil;
-    }
 
     [attributesByName enumerateKeysAndObjectsUsingBlock:^(NSString *attributeName, NSAttributeDescription *attributeDescription, BOOL *stop) {
         if ([attributeName isEqualToString:name])
@@ -46,6 +41,12 @@
 {
     NSString *lookupKey = [[self userInfo] valueForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: MRPrimaryKeyNameFromString([self name]);
 
+    return [self MR_attributeDescriptionForName:lookupKey];
+}
+
+- (NSAttributeDescription *) MR_primaryAttribute;
+{
+    NSString *lookupKey = [[self userInfo] valueForKey:kMagicalRecordImportUniquifyAttributeKey];
     return [self MR_attributeDescriptionForName:lookupKey];
 }
 

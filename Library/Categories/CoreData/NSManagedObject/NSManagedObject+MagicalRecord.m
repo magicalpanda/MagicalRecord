@@ -20,7 +20,8 @@
         entityName = [self performSelector:@selector(entityName)];
     }
 
-    if ([entityName length] == 0) {
+    if ([entityName length] == 0)
+    {
         entityName = NSStringFromClass(self);
     }
 

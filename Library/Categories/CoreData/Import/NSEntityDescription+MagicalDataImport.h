@@ -47,4 +47,6 @@
  */
 - (NSAttributeDescription *)MR_primaryAttributeToRelateBy;
 
+- (NSAttributeDescription *) MR_primaryAttribute;
+
 @end
