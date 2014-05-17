@@ -13,25 +13,25 @@
 
  @since Available in v2.3 and later.
  */
-typedef NS_ENUM (NSInteger, MagicalRecordLogLevel)
+typedef NS_ENUM (NSInteger, MagicalRecordLoggingMask)
 {
     /** Disable all logging */
-    MagicalRecordLogLevelOff = 0,
+    MagicalRecordLoggingMaskOff = 0,
 
     /** Log fatal errors */
-    MagicalRecordLogLevelFatal = 1 << 0,
+    MagicalRecordLoggingMaskFatal = 1 << 0,
 
     /** Log all errors */
-    MagicalRecordLogLevelError = 1 << 1,
+    MagicalRecordLoggingMaskError = 1 << 1,
 
     /** Log warnings, and all errors */
-    MagicalRecordLogLevelWarn = 1 << 2,
+    MagicalRecordLoggingMaskWarn = 1 << 2,
 
     /** Log informative messagess, warnings and all errors */
-    MagicalRecordLogLevelInfo = 1 << 3,
+    MagicalRecordLoggingMaskInfo = 1 << 3,
 
     /** Log verbose diagnostic information, messages, warnings and all errors */
-    MagicalRecordLogLevelVerbose = 1 << 4,
+    MagicalRecordLoggingMaskVerbose = 1 << 4,
 };
 
 /**
@@ -39,25 +39,25 @@ typedef NS_ENUM (NSInteger, MagicalRecordLogLevel)
 
  @since Available in v2.3 and later.
  */
-typedef NS_ENUM (NSInteger, MagicalRecordLoggingMask)
+typedef NS_ENUM (NSInteger, MagicalRecordLoggingLevel)
 {
     /** Don't log anything */
-    MagicalRecordLogMaskOff = 0,
+    MagicalRecordLoggingLevelOff = 0,
 
     /** Log all fatal messages */
-    MagicalRecordLoggingMaskFatal = (MagicalRecordLogLevelFatal),
+    MagicalRecordLoggingLevelFatal = (MagicalRecordLoggingMaskFatal),
 
     /** Log all errors and fatal messages */
-    MagicalRecordLoggingMaskError = (MagicalRecordLogLevelFatal | MagicalRecordLogLevelError),
+    MagicalRecordLoggingLevelError = (MagicalRecordLoggingMaskFatal | MagicalRecordLoggingMaskError),
 
     /** Log warnings, errors and fatal messages */
-    MagicalRecordLoggingMaskWarn = (MagicalRecordLogLevelFatal | MagicalRecordLogLevelError | MagicalRecordLogLevelWarn),
+    MagicalRecordLoggingLevelWarn = (MagicalRecordLoggingMaskFatal | MagicalRecordLoggingMaskError | MagicalRecordLoggingMaskWarn),
 
     /** Log informative, warning and error messages */
-    MagicalRecordLoggingMaskInfo = (MagicalRecordLogLevelFatal | MagicalRecordLogLevelError | MagicalRecordLogLevelWarn | MagicalRecordLogLevelInfo),
+    MagicalRecordLoggingLevelInfo = (MagicalRecordLoggingMaskFatal | MagicalRecordLoggingMaskError | MagicalRecordLoggingMaskWarn | MagicalRecordLoggingMaskInfo),
 
     /** Log verbose diagnostic, informative, warning and error messages */
-    MagicalRecordLoggingMaskVerbose = (MagicalRecordLogLevelFatal | MagicalRecordLogLevelError | MagicalRecordLogLevelWarn | MagicalRecordLogLevelInfo | MagicalRecordLogLevelVerbose),
+    MagicalRecordLoggingLevelVerbose = (MagicalRecordLoggingMaskFatal | MagicalRecordLoggingMaskError | MagicalRecordLoggingMaskWarn | MagicalRecordLoggingMaskInfo | MagicalRecordLoggingMaskVerbose),
 };
 /**
  Provides options for configuring MagicalRecord.
@@ -71,19 +71,19 @@ typedef NS_ENUM (NSInteger, MagicalRecordLoggingMask)
 /**
  Returns the logging mask set for MagicalRecord in the current application.
 
- @return Current MagicalRecordLogMask
+ @return Current MagicalRecordLogLevel
  
  @since Available in v2.3 and later.
  */
-+ (MagicalRecordLoggingMask) loggingMask;
++ (MagicalRecordLoggingLevel) loggingLevel;
 
 /**
  Sets the logging mask set for MagicalRecord in the current application.
 
- @param mask Any value from MagicalRecordLogMask
+ @param level Any value from MagicalRecordLogLevel
 
  @since Available in v2.3 and later.
  */
-+ (void) setLoggingMask:(MagicalRecordLoggingMask)mask;
++ (void) setLoggingLevel:(MagicalRecordLoggingLevel)level;
 
 @end
