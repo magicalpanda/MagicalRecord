@@ -8,7 +8,7 @@
 
 #import "MagicalRecord+Options.h"
 
-static MagicalRecordLoggingMask kMagicalRecordLoggingMask = MagicalRecordLoggingMaskVerbose;
+static MagicalRecordLoggingLevel kMagicalRecordLoggingLevel = MagicalRecordLoggingLevelVerbose;
 static BOOL kMagicalRecordShouldAutoCreateManagedObjectModel = NO;
 static BOOL kMagicalRecordShouldAutoCreateDefaultPersistentStoreCoordinator = NO;
 static BOOL kMagicalRecordShouldDeleteStoreOnModelMismatch = NO;
@@ -42,19 +42,19 @@ static BOOL kMagicalRecordShouldDeleteStoreOnModelMismatch = NO;
     return kMagicalRecordShouldDeleteStoreOnModelMismatch;
 }
 
-+ (void) setShouldDeleteStoreOnModelMismatch:(BOOL)shouldDelete
++ (void) setShouldDeleteStoreOnModelMismatch:(BOOL)shouldDelete;
 {
     kMagicalRecordShouldDeleteStoreOnModelMismatch = shouldDelete;
 }
 
-+ (MagicalRecordLoggingMask) loggingMask;
++ (MagicalRecordLoggingLevel) loggingLevel;
 {
-    return kMagicalRecordLoggingMask;
+    return kMagicalRecordLoggingLevel;
 }
 
-+ (void) setLoggingMask:(MagicalRecordLoggingMask)mask;
++ (void) setLoggingLevel:(MagicalRecordLoggingLevel)level;
 {
-    kMagicalRecordLoggingMask = mask;
+    kMagicalRecordLoggingLevel = level;
 }
 
 @end
