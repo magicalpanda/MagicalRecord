@@ -59,6 +59,7 @@ dispatch_queue_t MR_saveQueue()
 
 - (void) saveWithBlock:(void (^)(NSManagedObjectContext *))block identifier:(NSString *)contextWorkingName completion:(MRSaveCompletionHandler)completion;
 {
+    NSParameterAssert(block);
     MRLogVerbose(@"Dispatching save request: %@", contextWorkingName);
     dispatch_async(MR_saveQueue(), ^{
         @autoreleasepool
@@ -68,10 +69,7 @@ dispatch_queue_t MR_saveQueue()
             NSManagedObjectContext *localContext = [self newConfinementContext];
             [localContext MR_setWorkingName:contextWorkingName];
             
-            if (block)
-            {
-                block(localContext);
-            }
+            block(localContext);
 
             [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:completion];
         }
@@ -87,12 +85,10 @@ dispatch_queue_t MR_saveQueue()
 
 - (BOOL) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block error:(NSError **)error;
 {
+    NSParameterAssert(block);
     NSManagedObjectContext *localContext = [self newConfinementContext];
 
-    if (block)
-    {
-        block(localContext);
-    }
+    block(localContext);
 
     if (NO == [localContext hasChanges])
     {
@@ -106,7 +102,8 @@ dispatch_queue_t MR_saveQueue()
     [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:^(BOOL localSuccess, NSError *localSaveError) {
         saveSuccess = localSuccess;
 
-        if (error != nil) {
+        if (error != nil)
+        {
             *error = localSaveError;
         }
     }];
