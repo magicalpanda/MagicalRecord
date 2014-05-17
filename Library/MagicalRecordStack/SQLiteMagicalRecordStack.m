@@ -99,13 +99,21 @@
 
 - (NSDictionary *) defaultStoreOptions;
 {
-    NSDictionary *options = @{ MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey: @(self.shouldDeletePersistentStoreOnModelMismatch) };
+    NSDictionary *options = @{ MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey:
+                                   @(self.shouldDeletePersistentStoreOnModelMismatch) };
     return options;
 }
 
 - (NSPersistentStoreCoordinator *)createCoordinator
 {
     return [self createCoordinatorWithOptions:[self defaultStoreOptions]];
+}
+
+- (NSManagedObjectContext *) newConfinementContext;
+{
+    NSManagedObjectContext *context = [super newConfinementContext];
+    [context setParentContext:[self context]];
+    return context;
 }
 
 - (NSPersistentStoreCoordinator *)createCoordinatorWithOptions:(NSDictionary *)options;

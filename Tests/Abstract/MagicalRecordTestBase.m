@@ -12,7 +12,7 @@
     [super setUp];
 
     // Don't pollute the tests with logging
-    [MagicalRecord setLoggingMask:MagicalRecordLogMaskOff];
+    [MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelOff];
 
     // Setup a usable stack
     self.stack = [[self class] newMagicalRecordStack];
