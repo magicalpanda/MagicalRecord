@@ -12,6 +12,13 @@
 
 @implementation InMemoryMagicalRecordStack
 
+- (NSManagedObjectContext *) newConfinementContext;
+{
+    NSManagedObjectContext *context = [super createConfinementContext];
+    [context setParentContext:[self context]];
+    return context;
+}
+
 - (NSPersistentStoreCoordinator *) createCoordinatorWithOptions:(NSDictionary *)options
 {
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self model]];
