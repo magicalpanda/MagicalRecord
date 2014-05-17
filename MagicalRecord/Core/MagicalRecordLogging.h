@@ -19,6 +19,8 @@
 #define LOG_ASYNC_INFO    (YES && LOG_ASYNC_ENABLED)
 #define LOG_ASYNC_VERBOSE (YES && LOG_ASYNC_ENABLED)
 
+#ifdef MR_LOGGING_ENABLED
+
 #ifndef LOG_MACRO
 
     #define LOG_MACRO(isAsynchronous, lvl, flg, ctx, atag, fnct, frmt, ...) \
@@ -46,6 +48,22 @@
 #define MRLogCWarn(frmt, ...)    LOG_C_MAYBE(LOG_ASYNC_WARN,    [MagicalRecord loggingMask], MagicalRecordLogLevelWarn,    0, frmt, ##__VA_ARGS__)
 #define MRLogCInfo(frmt, ...)    LOG_C_MAYBE(LOG_ASYNC_INFO,    [MagicalRecord loggingMask], MagicalRecordLogLevelInfo,    0, frmt, ##__VA_ARGS__)
 #define MRLogCVerbose(frmt, ...) LOG_C_MAYBE(LOG_ASYNC_VERBOSE, [MagicalRecord loggingMask], MagicalRecordLogLevelVerbose, 0, frmt, ##__VA_ARGS__)
+
+#else
+
+#define MRLogFatal(frmt, ...) ((void)0)
+#define MRLogError(frmt, ...) ((void)0)
+#define MRLogWarn(frmt, ...) ((void)0)
+#define MRLogInfo(frmt, ...) ((void)0)
+#define MRLogVerbose(frmt, ...) ((void)0)
+
+#define MRLogCFatal(frmt, ...) ((void)0)
+#define MRLogCError(frmt, ...) ((void)0)
+#define MRLogCWarn(frmt, ...) ((void)0)
+#define MRLogCInfo(frmt, ...) ((void)0)
+#define MRLogCVerbose(frmt, ...) ((void)0)
+
+#endif
 
 #endif
 
