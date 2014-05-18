@@ -9,9 +9,9 @@
 #import <CoreData/CoreData.h>
 #import "MagicalRecordDeprecated.h"
 
-typedef NS_OPTIONS(NSUInteger, MRSaveContextOptions) {
+typedef NS_OPTIONS(NSUInteger, MRSaveOptions) {
     /** No options — used for cleanliness only */
-    MRSaveWithoutOptions = 0,
+    MRSaveOptionNone = 0,
 
     /** When saving, continue saving parent contexts until the changes are present in the persistent store */
     MRSaveParentContexts = 1 << 1,
@@ -19,8 +19,8 @@ typedef NS_OPTIONS(NSUInteger, MRSaveContextOptions) {
     /** Perform saves synchronously, blocking execution on the current thread until the save is complete */
     MRSaveSynchronously = 1 << 2,
 
-    /** Perform saves synchronously, blocking execution on the current thread until the save is complete; however, save root context asynchronously */
-    MRSaveAllSynchronouslyExceptRoot = 1 << 3
+    /** Perform saves synchronously, blocking execution on the current thread until the save is complete; however, saves root context asynchronously */
+    MRSaveSynchronouslyExceptRootContext = 1 << 3
 };
 
 typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
@@ -72,7 +72,7 @@ typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
 
  @since Available in v2.1.0 and later.
  */
-- (void) MR_saveWithOptions:(MRSaveContextOptions)mask completion:(MRSaveCompletionHandler)completion;
+- (void) MR_saveWithOptions:(MRSaveOptions)mask completion:(MRSaveCompletionHandler)completion;
 
 @end
 
