@@ -59,6 +59,7 @@ typedef NS_ENUM (NSInteger, MagicalRecordLoggingLevel)
     /** Log verbose diagnostic, informative, warning and error messages */
     MagicalRecordLoggingLevelVerbose = (MagicalRecordLoggingMaskFatal | MagicalRecordLoggingMaskError | MagicalRecordLoggingMaskWarn | MagicalRecordLoggingMaskInfo | MagicalRecordLoggingMaskVerbose),
 };
+
 /**
  Provides options for configuring MagicalRecord.
  */
