@@ -7,6 +7,8 @@
 //
 
 #import "NSNumber+MagicalDataImport.h"
+#import "NSManagedObject+MagicalRecord.h"
+#import "MagicalImportFunctions.h"
 
 @implementation NSNumber (MagicalRecordDataImport)
 
@@ -18,6 +20,11 @@
 - (NSString *) MR_lookupKeyForAttribute:(NSAttributeDescription *)attributeInfo
 {
     return nil;
+}
+
+- (NSDate *) MR_dateWithFormat:(NSString *)dateFormat;
+{
+    return MRDateFromNumber(self, [dateFormat isEqualToString:kMagicalRecordImportUnixTimeString]);
 }
 
 @end
