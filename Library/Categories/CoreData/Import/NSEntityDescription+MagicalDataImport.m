@@ -46,7 +46,7 @@
 
 - (NSAttributeDescription *) MR_primaryAttribute;
 {
-    NSString *lookupKey = [[self userInfo] valueForKey:kMagicalRecordImportUniquifyAttributeKey];
+    NSString *lookupKey = [[self userInfo] valueForKey:kMagicalRecordImportDistinctAttributeKey];
     return [self MR_attributeDescriptionForName:lookupKey];
 }
 

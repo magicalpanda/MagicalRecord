@@ -11,7 +11,7 @@ extern NSString * const kMagicalRecordImportCustomDateFormatKey;
 extern NSString * const kMagicalRecordImportDefaultDateFormatString;
 extern NSString * const kMagicalRecordImportUnixTimeString;
 extern NSString * const kMagicalRecordImportAttributeKeyMapKey;
-extern NSString * const kMagicalRecordImportUniquifyAttributeKey;
+extern NSString * const kMagicalRecordImportDistinctAttributeKey;
 extern NSString * const kMagicalRecordImportAttributeValueClassNameKey;
 
 extern NSString * const kMagicalRecordImportRelationshipMapKey;
