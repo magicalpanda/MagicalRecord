@@ -37,6 +37,7 @@
 + (NSEntityDescription *) MR_entityDescription MR_INTERNALLY_USING_DEPRECATED_METHODS;
 + (NSEntityDescription *) MR_entityDescriptionInContext:(NSManagedObjectContext *)context;
 + (NSArray *) MR_propertiesNamed:(NSArray *)properties MR_INTERNALLY_USING_DEPRECATED_METHODS;
++ (NSArray *) MR_propertiesNamed:(NSArray *)properties inContext:(NSManagedObjectContext*)context;
 
 + (instancetype) MR_createEntity MR_INTERNALLY_USING_DEPRECATED_METHODS;
 + (instancetype) MR_createEntityInContext:(NSManagedObjectContext *)context;
