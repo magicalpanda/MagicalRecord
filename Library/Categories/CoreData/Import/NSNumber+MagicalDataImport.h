@@ -8,7 +8,7 @@
 
 @interface NSNumber (MagicalRecordDataImport)
 
-- (NSString *) MR_lookupKeyForAttribute:(NSAttributeDescription *)attributeInfo;
+- (NSString *) MR_lookupKeyForProperty:(NSPropertyDescription *)propertyDescription;
 - (id) MR_relatedValueForRelationship:(NSRelationshipDescription *)relationshipInfo;
 
 /**
