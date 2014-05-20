@@ -136,18 +136,20 @@
 	[request setFetchBatchSize:[self MR_defaultBatchSize]];
 	
     NSMutableArray* sortDescriptors = [[NSMutableArray alloc] init];
+    sortTerm = [sortTerm stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSArray* sortKeys = [sortTerm componentsSeparatedByString:@","];
     for (__strong NSString* sortKey in sortKeys)
     {
         NSArray * sortComponents = [sortKey componentsSeparatedByString:@":"];
+        BOOL isAscending = ascending;
         if (sortComponents.count > 1)
           {
               NSNumber * customAscending = sortComponents.lastObject;
-              ascending = customAscending.boolValue;
+              isAscending = customAscending.boolValue;
               sortKey = sortComponents[0];
           }
       
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:isAscending];
         [sortDescriptors addObject:sortDescriptor];
     }
     
