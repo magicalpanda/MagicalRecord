@@ -115,7 +115,37 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (NSArray *) MR_propertiesNamed:(NSArray *)properties
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 	NSEntityDescription *description = [self MR_entityDescription];
+#pragma clang diagnostic pop
+    
+	NSMutableArray *propertiesWanted = [NSMutableArray array];
+	
+	if (properties)
+	{
+		NSDictionary *propDict = [description propertiesByName];
+		
+		for (NSString *propertyName in properties)
+		{
+			NSPropertyDescription *property = [propDict objectForKey:propertyName];
+			if (property)
+			{
+				[propertiesWanted addObject:property];
+			}
+			else
+			{
+				MRLogWarn(@"Property '%@' not found in %lx properties for %@", propertyName, (unsigned long)[propDict count], NSStringFromClass(self));
+			}
+		}
+	}
+	return propertiesWanted;
+}
+
++ (NSArray *) MR_propertiesNamed:(NSArray *)properties inContext:(NSManagedObjectContext *)context
+{
+	NSEntityDescription *description = [self MR_entityDescriptionInContext:context];
+    
 	NSMutableArray *propertiesWanted = [NSMutableArray array];
 	
 	if (properties)
@@ -175,7 +205,10 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
         NSEntityDescription *entity = nil;
         if (context == nil)
         {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
             entity = [self MR_entityDescription];
+#pragma clang diagnostic pop
         }
         else
         {

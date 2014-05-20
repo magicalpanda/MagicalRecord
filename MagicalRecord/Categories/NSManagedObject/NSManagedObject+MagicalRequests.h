@@ -7,25 +7,26 @@
 //
 
 #import <CoreData/CoreData.h>
+#import "MagicalRecordDeprecated.h"
 
 @interface NSManagedObject (MagicalRequests)
 
-+ (NSFetchRequest *) MR_createFetchRequest;
++ (NSFetchRequest *) MR_createFetchRequest MR_INTERNALLY_USING_DEPRECATED_METHODS;
 + (NSFetchRequest *) MR_createFetchRequestInContext:(NSManagedObjectContext *)context;
 
-+ (NSFetchRequest *) MR_requestAll;
++ (NSFetchRequest *) MR_requestAll MR_INTERNALLY_USING_DEPRECATED_METHODS;
 + (NSFetchRequest *) MR_requestAllInContext:(NSManagedObjectContext *)context;
-+ (NSFetchRequest *) MR_requestAllWithPredicate:(NSPredicate *)searchTerm;
++ (NSFetchRequest *) MR_requestAllWithPredicate:(NSPredicate *)searchTerm MR_INTERNALLY_USING_DEPRECATED_METHODS;
 + (NSFetchRequest *) MR_requestAllWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
-+ (NSFetchRequest *) MR_requestAllWhere:(NSString *)property isEqualTo:(id)value;
++ (NSFetchRequest *) MR_requestAllWhere:(NSString *)property isEqualTo:(id)value MR_INTERNALLY_USING_DEPRECATED_METHODS;
 + (NSFetchRequest *) MR_requestAllWhere:(NSString *)property isEqualTo:(id)value inContext:(NSManagedObjectContext *)context;
-+ (NSFetchRequest *) MR_requestFirstWithPredicate:(NSPredicate *)searchTerm;
++ (NSFetchRequest *) MR_requestFirstWithPredicate:(NSPredicate *)searchTerm MR_INTERNALLY_USING_DEPRECATED_METHODS;
 + (NSFetchRequest *) MR_requestFirstWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
-+ (NSFetchRequest *) MR_requestFirstByAttribute:(NSString *)attribute withValue:(id)searchValue;
++ (NSFetchRequest *) MR_requestFirstByAttribute:(NSString *)attribute withValue:(id)searchValue MR_INTERNALLY_USING_DEPRECATED_METHODS;
 + (NSFetchRequest *) MR_requestFirstByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context;
-+ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending;
++ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending MR_INTERNALLY_USING_DEPRECATED_METHODS;
 + (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
-+ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm;
++ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm MR_INTERNALLY_USING_DEPRECATED_METHODS;
 + (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
 
 

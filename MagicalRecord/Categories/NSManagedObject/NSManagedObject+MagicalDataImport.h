@@ -6,6 +6,7 @@
 //
 
 #import <CoreData/CoreData.h>
+#import "MagicalRecordDeprecated.h"
 
 extern NSString * const kMagicalRecordImportCustomDateFormatKey;
 extern NSString * const kMagicalRecordImportDefaultDateFormatString;
@@ -21,10 +22,10 @@ extern NSString * const kMagicalRecordImportRelationshipTypeKey;
 
 - (BOOL) MR_importValuesForKeysWithObject:(id)objectData;
 
-+ (instancetype) MR_importFromObject:(id)data;
++ (instancetype) MR_importFromObject:(id)data MR_INTERNALLY_USING_DEPRECATED_METHODS;
 + (instancetype) MR_importFromObject:(id)data inContext:(NSManagedObjectContext *)context;
 
-+ (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData;
++ (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData MR_INTERNALLY_USING_DEPRECATED_METHODS;
 + (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context;
 
 @end
