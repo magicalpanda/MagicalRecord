@@ -37,6 +37,7 @@
 + (NSEntityDescription *) MR_entityDescription;
 + (NSEntityDescription *) MR_entityDescriptionInContext:(NSManagedObjectContext *)context;
 + (NSArray *) MR_propertiesNamed:(NSArray *)properties;
++ (NSArray *) MR_propertiesNamed:(NSArray *)properties inContext:(NSManagedObjectContext *)context;
 
 + (instancetype) MR_createEntity;
 + (instancetype) MR_createEntityInContext:(NSManagedObjectContext *)context;

@@ -288,7 +288,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 
 + (id) MR_importFromObject:(id)objectData inContext:(NSManagedObjectContext *)context;
 {
-    NSAttributeDescription *primaryAttribute = [[self MR_entityDescription] MR_primaryAttributeToRelateBy];
+    NSAttributeDescription *primaryAttribute = [[self MR_entityDescriptionInContext:context] MR_primaryAttributeToRelateBy];
     
     id value = [objectData MR_valueForAttribute:primaryAttribute];
     

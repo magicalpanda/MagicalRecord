@@ -99,12 +99,6 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 #endif
 
-+ (NSEntityDescription *) MR_entityDescriptionInContext:(NSManagedObjectContext *)context
-{
-    NSString *entityName = [self MR_entityName];
-    return [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
-}
-
 + (NSEntityDescription *) MR_entityDescription
 {
 #pragma clang diagnostic push
@@ -113,15 +107,29 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 #pragma clang diagnostic pop
 }
 
++ (NSEntityDescription *) MR_entityDescriptionInContext:(NSManagedObjectContext *)context
+{
+    NSString *entityName = [self MR_entityName];
+    return [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+}
+
 + (NSArray *) MR_propertiesNamed:(NSArray *)properties
 {
-	NSEntityDescription *description = [self MR_entityDescription];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    return [self MR_propertiesNamed:properties inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+#pragma clang diagnostic pop
+}
+
++ (NSArray *) MR_propertiesNamed:(NSArray *)properties inContext:(NSManagedObjectContext *)context
+{
+	NSEntityDescription *description = [self MR_entityDescriptionInContext:context];
 	NSMutableArray *propertiesWanted = [NSMutableArray array];
-	
+
 	if (properties)
 	{
 		NSDictionary *propDict = [description propertiesByName];
-		
+
 		for (NSString *propertyName in properties)
 		{
 			NSPropertyDescription *property = [propDict objectForKey:propertyName];

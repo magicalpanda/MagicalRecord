@@ -138,7 +138,7 @@
     [ed setExpression:ex];
     
     // determine the type of attribute, required to set the expression return type    
-    NSAttributeDescription *attributeDescription = [[self MR_entityDescription] MR_attributeDescriptionForName:attributeName];
+    NSAttributeDescription *attributeDescription = [[self MR_entityDescriptionInContext:context] MR_attributeDescriptionForName:attributeName];
     [ed setExpressionResultType:[attributeDescription attributeType]];    
     NSArray *properties = [NSArray arrayWithObject:ed];
     
@@ -171,7 +171,7 @@
     [expressionDescription setName:@"result"];
     [expressionDescription setExpression:expression];
 
-    NSAttributeDescription *attributeDescription = [[[self MR_entityDescription] attributesByName] objectForKey:attributeName];
+    NSAttributeDescription *attributeDescription = [[[self MR_entityDescriptionInContext:context] attributesByName] objectForKey:attributeName];
     [expressionDescription setExpressionResultType:[attributeDescription attributeType]];
     NSArray *properties = [NSArray arrayWithObjects:groupingKeyPath, expressionDescription, nil];
 
