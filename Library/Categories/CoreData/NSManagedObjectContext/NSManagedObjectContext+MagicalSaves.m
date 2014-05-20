@@ -111,10 +111,6 @@
 
         MRLogVerbose(@"→ Saving %@ [%@]", [self MR_description], optionsSummary);
 
-        NSUInteger numberOfInsertedObjects = [[self insertedObjects] count];
-        NSUInteger numberOfUpdatedObjects = [[self updatedObjects] count];
-        NSUInteger numberOfDeletedObjects = [[self deletedObjects] count];
-
         NSError *error = nil;
         BOOL saved = NO;
 
@@ -142,6 +138,14 @@
                 // If we are not the default context (And therefore need to save the root context, do the completion action if one was specified
                 else {
                     MRLogInfo(@"→ Finished saving: %@", [self MR_description]);
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-variable"
+                    NSUInteger numberOfInsertedObjects = [[self insertedObjects] count];
+                    NSUInteger numberOfUpdatedObjects = [[self updatedObjects] count];
+                    NSUInteger numberOfDeletedObjects = [[self deletedObjects] count];
+#pragma clang diagnostic pop
+                    
                     MRLogVerbose(@"Objects - Inserted %tu, Updated %tu, Deleted %tu", numberOfInsertedObjects, numberOfUpdatedObjects, numberOfDeletedObjects);
 
                     if (completion) {

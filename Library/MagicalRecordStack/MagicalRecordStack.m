@@ -64,6 +64,7 @@ static MagicalRecordStack *defaultStack;
 {
     NSManagedObjectContext *context = [self context];
     NSString *stackType = NSStringFromClass([self class]);
+#pragma unused(stackType)
     NSAssert(context, @"No NSManagedObjectContext for stack [%@]", stackType);
     NSAssert([self model], @"No NSManagedObjectModel loaded for stack [%@]", stackType);
     NSAssert([self store], @"No NSPersistentStore initialized for stack [%@]", stackType);

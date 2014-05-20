@@ -8,7 +8,19 @@
 
 @interface NSNumber (MagicalRecordDataImport)
 
-- (NSString *) MR_lookupKeyForAttribute:(NSAttributeDescription *)attributeInfo;
+- (NSString *) MR_lookupKeyForProperty:(NSPropertyDescription *)propertyDescription;
 - (id) MR_relatedValueForRelationship:(NSRelationshipDescription *)relationshipInfo;
+
+/**
+ If possible, converts the current number into a data using the specified format string.
+ See http://en.wikipedia.org/wiki/Date_(Unix) for usable date format specifiers.
+
+ @param dateFormat String containing a UNIX date format string.
+
+ @return The current number as a date.
+
+ @since Available in v3.0 and later.
+ */
+- (NSDate *) MR_dateWithFormat:(NSString *)dateFormat;
 
 @end

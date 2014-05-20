@@ -132,7 +132,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 }
 - (void) MR_setAttribute:(NSAttributeDescription *)attributeInfo withValueFromObject:(id)objectData
 {
-    NSString *lookupKeyPath = [objectData MR_lookupKeyForAttribute:attributeInfo];
+    NSString *lookupKeyPath = [objectData MR_lookupKeyForProperty:attributeInfo];
 
     if (lookupKeyPath)
     {
@@ -170,7 +170,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     id relatedObjectData = [relationshipData valueForKeyPath:lookupKey];
     if (relatedObjectData == nil)
     {
-        lookupKey = [relationshipData MR_lookupKeyForAttribute:relationshipInfo];
+        lookupKey = [relationshipData MR_lookupKeyForProperty:relationshipInfo];
         relatedObjectData = [relationshipData valueForKeyPath:lookupKey];
     }
     if (relatedObjectData == nil || [relatedObjectData isEqual:[NSNull null]]) return;

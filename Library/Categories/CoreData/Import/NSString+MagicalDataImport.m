@@ -7,6 +7,8 @@
 //
 
 #import "NSString+MagicalDataImport.h"
+#import "NSManagedObject+MagicalRecord.h"
+#import "MagicalImportFunctions.h"
 
 @implementation NSString (MagicalRecordDataImport)
 
@@ -25,9 +27,14 @@
     return self;
 }
 
-- (NSString *) MR_lookupKeyForAttribute:(NSAttributeDescription *)attributeInfo
+- (NSString *) MR_lookupKeyForProperty:(NSPropertyDescription *)propertyDescription
 {
     return nil;
+}
+
+- (NSDate *)MR_dateWithFormat:(NSString *)dateFormat;
+{
+    return MRDateFromString(self, dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
 }
 
 @end

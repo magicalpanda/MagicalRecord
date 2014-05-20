@@ -8,19 +8,9 @@
 
 #import "NSAttributeDescription+MagicalDataImport.h"
 #import "NSManagedObject+MagicalDataImport.h"
+#import "NSString+MagicalDataImport.h"
+#import "NSNumber+MagicalDataImport.h"
 #import "MagicalImportFunctions.h"
-
-@interface NSNumber (MagicalRecordDataImport)
-
-- (NSDate *) MR_dateWithFormat:(NSString *)dateFormat;
-
-@end
-
-@interface NSString (MagicalRecordDataImport)
-
-- (NSDate *) MR_dateWithFormat:(NSString *)dateFormat;
-
-@end
 
 @implementation NSAttributeDescription (MagicalRecordDataImport)
 
@@ -161,20 +151,3 @@
 
 @end
 
-@implementation NSNumber (MagicalRecordDataImport)
-
-- (NSDate *) MR_dateWithFormat:(NSString *)dateFormat;
-{
-    return MRDateFromNumber(self, [dateFormat isEqualToString:kMagicalRecordImportUnixTimeString]);
-}
-
-@end
-
-@implementation NSString (MagicalRecordDataImport)
-
-- (NSDate *)MR_dateWithFormat:(NSString *)dateFormat;
-{
-    return MRDateFromString(self, dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
-}
-
-@end
