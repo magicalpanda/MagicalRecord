@@ -41,13 +41,18 @@
 
 + (NSArray *) MR_propertiesNamed:(NSArray *)properties
 {
-	NSEntityDescription *description = [self MR_entityDescription];
+    return [self MR_propertiesNamed:properties inContext:[[MagicalRecordStack defaultStack] context]];
+}
+
++ (NSArray *) MR_propertiesNamed:(NSArray *)properties inContext:(NSManagedObjectContext *)context
+{
+	NSEntityDescription *description = [self MR_entityDescriptionInContext:context];
 	NSMutableArray *propertiesWanted = [NSMutableArray array];
-	
+
 	if (properties)
 	{
 		NSDictionary *propDict = [description propertiesByName];
-		
+
 		for (NSString *propertyName in properties)
 		{
 			NSPropertyDescription *property = [propDict objectForKey:propertyName];
