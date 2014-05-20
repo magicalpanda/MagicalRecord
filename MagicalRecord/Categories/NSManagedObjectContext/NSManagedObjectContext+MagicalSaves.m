@@ -42,9 +42,9 @@
 
         if (completion)
         {
-            dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                 completion(NO, nil);
-            });
+            }];
         }
 
         return;
@@ -90,9 +90,9 @@
 
                 if (completion)
                 {
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                         completion(saveResult, error);
-                    });
+                    }];
                 }
             }
         }
