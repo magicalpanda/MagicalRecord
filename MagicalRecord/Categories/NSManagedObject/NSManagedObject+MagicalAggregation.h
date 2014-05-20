@@ -7,27 +7,28 @@
 //
 
 #import <CoreData/CoreData.h>
+#import "MagicalRecordDeprecated.h"
 
 @interface NSManagedObject (MagicalAggregation)
 
-+ (NSNumber *) MR_numberOfEntities;
++ (NSNumber *) MR_numberOfEntities MR_INTERNALLY_USING_DEPRECATED_METHODS;
 + (NSNumber *) MR_numberOfEntitiesWithContext:(NSManagedObjectContext *)context;
-+ (NSNumber *) MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm;
++ (NSNumber *) MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm MR_INTERNALLY_USING_DEPRECATED_METHODS;
 + (NSNumber *) MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
 
-+ (NSUInteger) MR_countOfEntities;
++ (NSUInteger) MR_countOfEntities MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
 + (NSUInteger) MR_countOfEntitiesWithContext:(NSManagedObjectContext *)context;
-+ (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter;
++ (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
 + (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter inContext:(NSManagedObjectContext *)context;
 
-+ (BOOL) MR_hasAtLeastOneEntity;
++ (BOOL) MR_hasAtLeastOneEntity MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
 + (BOOL) MR_hasAtLeastOneEntityInContext:(NSManagedObjectContext *)context;
 
-- (id) MR_minValueFor:(NSString *)property;
-- (id) MR_maxValueFor:(NSString *)property;
+- (id) MR_minValueFor:(NSString *)property MR_INTERNALLY_USING_DEPRECATED_METHODS;
+- (id) MR_maxValueFor:(NSString *)property MR_INTERNALLY_USING_DEPRECATED_METHODS;
 
 + (id) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
-+ (id) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate;
++ (id) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate MR_INTERNALLY_USING_DEPRECATED_METHODS;
 
 /**
  *  Supports aggregating values using a key-value collection operator that can be grouped by an attribute.
