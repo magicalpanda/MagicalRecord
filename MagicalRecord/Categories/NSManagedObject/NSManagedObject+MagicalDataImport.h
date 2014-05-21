@@ -6,7 +6,6 @@
 //
 
 #import <CoreData/CoreData.h>
-#import "MagicalRecordDeprecated.h"
 
 extern NSString * const kMagicalRecordImportCustomDateFormatKey;
 extern NSString * const kMagicalRecordImportDefaultDateFormatString;

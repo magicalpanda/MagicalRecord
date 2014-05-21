@@ -7,7 +7,6 @@
 //
 
 #import <CoreData/CoreData.h>
-#import "MagicalRecordDeprecated.h"
 
 @interface NSManagedObject (MagicalFinders)
 

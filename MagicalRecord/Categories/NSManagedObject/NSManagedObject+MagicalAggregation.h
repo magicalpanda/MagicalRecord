@@ -7,7 +7,6 @@
 //
 
 #import <CoreData/CoreData.h>
-#import "MagicalRecordDeprecated.h"
 
 @interface NSManagedObject (MagicalAggregation)
 
@@ -16,12 +15,12 @@
 + (NSNumber *) MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm;
 + (NSNumber *) MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
 
-+ (NSUInteger) MR_countOfEntities MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
++ (NSUInteger) MR_countOfEntities;
 + (NSUInteger) MR_countOfEntitiesWithContext:(NSManagedObjectContext *)context;
-+ (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
++ (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter;
 + (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter inContext:(NSManagedObjectContext *)context;
 
-+ (BOOL) MR_hasAtLeastOneEntity MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
++ (BOOL) MR_hasAtLeastOneEntity;
 + (BOOL) MR_hasAtLeastOneEntityInContext:(NSManagedObjectContext *)context;
 
 - (id) MR_minValueFor:(NSString *)property;
