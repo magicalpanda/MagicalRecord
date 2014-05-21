@@ -23,9 +23,9 @@
 + (NSUInteger) MR_defaultBatchSize;
 + (void) MR_setDefaultBatchSize:(NSUInteger)newBatchSize;
 
-+ (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request MR_INTERNALLY_USING_DEPRECATED_METHODS;
++ (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request;
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
-+ (instancetype) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request MR_INTERNALLY_USING_DEPRECATED_METHODS;
++ (instancetype) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request;
 + (instancetype) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
@@ -34,28 +34,28 @@
 
 #endif
 
-+ (NSEntityDescription *) MR_entityDescription MR_INTERNALLY_USING_DEPRECATED_METHODS;
++ (NSEntityDescription *) MR_entityDescription;
 + (NSEntityDescription *) MR_entityDescriptionInContext:(NSManagedObjectContext *)context;
-+ (NSArray *) MR_propertiesNamed:(NSArray *)properties MR_INTERNALLY_USING_DEPRECATED_METHODS;
-+ (NSArray *) MR_propertiesNamed:(NSArray *)properties inContext:(NSManagedObjectContext*)context;
++ (NSArray *) MR_propertiesNamed:(NSArray *)properties;
++ (NSArray *) MR_propertiesNamed:(NSArray *)properties inContext:(NSManagedObjectContext *)context;
 
-+ (instancetype) MR_createEntity MR_INTERNALLY_USING_DEPRECATED_METHODS;
++ (instancetype) MR_createEntity;
 + (instancetype) MR_createEntityInContext:(NSManagedObjectContext *)context;
 
-- (BOOL) MR_deleteEntity MR_INTERNALLY_USING_DEPRECATED_METHODS;
+- (BOOL) MR_deleteEntity;
 - (BOOL) MR_deleteEntityInContext:(NSManagedObjectContext *)context;
 
-+ (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate MR_INTERNALLY_USING_DEPRECATED_METHODS;
++ (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate;
 + (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
 
-+ (BOOL) MR_truncateAll MR_INTERNALLY_USING_DEPRECATED_METHODS;
++ (BOOL) MR_truncateAll;
 + (BOOL) MR_truncateAllInContext:(NSManagedObjectContext *)context;
 
 + (NSArray *) MR_ascendingSortDescriptors:(NSArray *)attributesToSortBy;
 + (NSArray *) MR_descendingSortDescriptors:(NSArray *)attributesToSortBy;
 
 - (instancetype) MR_inContext:(NSManagedObjectContext *)otherContext;
-- (instancetype) MR_inThreadContext MR_INTERNALLY_USING_DEPRECATED_METHODS;
+- (instancetype) MR_inThreadContext;
 
 @end
 
