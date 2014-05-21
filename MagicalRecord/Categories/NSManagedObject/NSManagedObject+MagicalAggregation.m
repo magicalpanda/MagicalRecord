@@ -175,7 +175,7 @@
     [expressionDescription setExpressionResultType:[attributeDescription attributeType]];
     NSArray *properties = [NSArray arrayWithObjects:groupingKeyPath, expressionDescription, nil];
 
-    NSFetchRequest *fetchRequest = [self MR_requestAllWithPredicate:predicate];
+    NSFetchRequest *fetchRequest = [self MR_requestAllWithPredicate:predicate inContext:context];
     [fetchRequest setPropertiesToFetch:properties];
     [fetchRequest setResultType:NSDictionaryResultType];
     [fetchRequest setPropertiesToGroupBy:[NSArray arrayWithObject:groupingKeyPath]];
