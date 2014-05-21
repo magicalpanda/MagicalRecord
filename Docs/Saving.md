@@ -67,6 +67,22 @@ NSProcessInfo *processInfo = [NSProcessInfo processInfo];
 
 As with the iOS approach, be sure to [read the documentation on NSProcessInfo](https://developer.apple.com/library/mac/documentation/cocoa/reference/foundation/Classes/NSProcessInfo_Class/Reference/Reference.html) before implementing this approach in your app.
 
+## Warning
+Using saveWithBlock you should be aware to avoid MR_contextForCurrentThread because the context returned differs from that one provided as parameter of saveWithBlock.  In this [article](http://saulmora.com/2013/09/15/why-contextforcurrentthread-doesn-t-work-in-magicalrecord/) there is a full explanation of the problems and pitfalls related to contextForCurrentThread and why it is deprecated.
+
+MR_contextForCurrentThread is still used internally on many MagicalRecord methods. You should be aware of use them too if you are using the saveWithBlock approach to do background saves. You can recognize this kind of method from the fact that they don't have a managedObjectContext as parameter. For every method that is internally using MR_contextForCurrentThread is provided a version where the managedObjectContext is provided as parameter.
+
+For example
+
+````objective-c
++ (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending;
++ (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
+````
+
+Using the first method inside the block of saveWithBlock you get an array of managedObjects from the context return internally by MR_contextForCurrentThread. This can cause crashes if you try to create relationships between objects of different contexts or lose of data.
+
+In the version 3 the methods that are currently using MR_contextForCurrentThread will update to use the MR_defaultContext. In the meantime you should avoid them if you are following the suggested saveWithBlock pattern.
+
 ## Changes
 
 In MagicalRecord 2.2, the APIs for saving were revised to behave more consistently, and also to follow naming patterns present in Core Data. Extensive work has gone into adding automated tests that ensure the save methods (both new and deprecated) continue to work as expected through future updates. 
