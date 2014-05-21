@@ -124,6 +124,7 @@ static MagicalRecordStack *defaultStack;
     NSManagedObjectContext *context = [NSManagedObjectContext MR_confinementContext];
     NSString *workingName = [[context MR_workingName] stringByAppendingFormat:@" (%@)", [self stackName]];
     [context MR_setWorkingName:workingName];
+    [context setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
     return context;
 }
 
