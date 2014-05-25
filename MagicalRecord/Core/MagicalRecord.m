@@ -7,8 +7,6 @@
 
 #import "CoreData+MagicalRecord.h"
 
-const double MagicalRecordVersionNumber = MagicalRecordVersionNumber2_3;
-
 NSString * const kMagicalRecordCleanedUpNotification = @"kMagicalRecordCleanedUpNotification";
 
 @interface MagicalRecord (Internal)
@@ -27,9 +25,9 @@ NSString * const kMagicalRecordCleanedUpNotification = @"kMagicalRecordCleanedUp
 
 @implementation MagicalRecord
 
-+ (double) version
++ (MagicalRecordVersionNumber) version
 {
-    return MagicalRecordVersionNumber;
+    return MagicalRecordVersionNumber2_3;
 }
 
 + (void) cleanUp
