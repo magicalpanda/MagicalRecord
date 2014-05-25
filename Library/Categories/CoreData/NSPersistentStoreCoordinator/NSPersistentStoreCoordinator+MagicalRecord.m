@@ -5,9 +5,8 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "CoreData+MagicalRecord.h"
 #import "NSDictionary+MagicalRecordAdditions.h"
-#import "MagicalRecordStack.h"
+#import "MagicalRecord.h"
 #import "MagicalRecordLogging.h"
 
 NSString * const MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey = @"MagicalRecordShouldDeletePersistentStoreOnModelMistachKey";
@@ -30,7 +29,7 @@ NSString * const MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey = @"
 
 - (NSPersistentStore *) MR_addSqliteStoreNamed:(id)storeFileName withOptions:(__autoreleasing NSDictionary *)options;
 {
-    NSURL *url = [storeFileName isKindOfClass:[NSURL class]] ? storeFileName : [NSPersistentStore MR_urlForStoreName:storeFileName];
+    NSURL *url = [storeFileName isKindOfClass:[NSURL class]] ? storeFileName : [NSPersistentStore MR_fileURLForStoreName:storeFileName];
     return [self MR_addSqliteStoreAtURL:url withOptions:options];
 }
 
@@ -43,15 +42,7 @@ NSString * const MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey = @"
         if ([[error domain] isEqualToString:NSCocoaErrorDomain] && isMigrationError)
         {
             // Could not open the database, so... kill it! (AND WAL bits)
-            NSString *rawURL = [url absoluteString];
-            NSURL *shmSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-shm"]];
-            NSURL *walSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-wal"]];
-
-            for (NSURL *toRemove in [NSArray arrayWithObjects:url, shmSidecar, walSidecar, nil])
-            {
-                [[NSFileManager defaultManager] removeItemAtURL:toRemove error:nil];
-            }
-
+            [NSPersistentStore MR_removePersistentStoreFilesAtURL:url];
             MRLogInfo(@"Removed incompatible model version: %@", [url lastPathComponent]);
         }
 
@@ -109,36 +100,73 @@ NSString * const MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey = @"
 
     return coordinator;
 }
+
+#pragma mark - Persistent Store Initializers
+
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithPersistentStore:(NSPersistentStore *)persistentStore;
 {
-    NSManagedObjectModel *model = [[MagicalRecordStack defaultStack] model];
-    NSPersistentStoreCoordinator *psc = [[self alloc] initWithManagedObjectModel:model];
+    NSManagedObjectModel *defaultStackModel = [[MagicalRecordStack defaultStack] model];
 
-    [psc MR_addSqliteStoreNamed:[persistentStore URL] withOptions:nil];
-
-    return psc;
+    return [self MR_coordinatorWithPersistentStore:persistentStore andModel:defaultStackModel];;
 }
 
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *)options
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithPersistentStore:(NSPersistentStore *)persistentStore andModel:(NSManagedObjectModel *)model;
 {
-    NSManagedObjectModel *model = [[MagicalRecordStack defaultStack] model];
+    return [self MR_coordinatorWithPersistentStore:persistentStore andModel:model withOptions:nil];
+}
+
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithPersistentStore:(NSPersistentStore *)persistentStore andModel:(NSManagedObjectModel *)model withOptions:(NSDictionary *)options;
+{
     NSPersistentStoreCoordinator *psc = [[self alloc] initWithManagedObjectModel:model];
-    
-    [psc MR_addSqliteStoreNamed:storeFileName withOptions:options];
+
+    [psc MR_addSqliteStoreNamed:[persistentStore URL] withOptions:options];
+
     return psc;
 }
 
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreNamed:(NSString *)storeFileName
+#pragma mark - Store Name Initializers
+
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreNamed:(NSString *)storeFileName;
 {
 	return [self MR_coordinatorWithSqliteStoreNamed:storeFileName withOptions:nil];
 }
 
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreAtURL:(NSURL *)url;
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *)options;
 {
-    NSManagedObjectModel *model = [[MagicalRecordStack defaultStack] model];
+    NSManagedObjectModel *defaultStackModel = [[MagicalRecordStack defaultStack] model];
+
+    return [self MR_coordinatorWithSqliteStoreNamed:storeFileName andModel:defaultStackModel withOptions:options];
+}
+
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreNamed:(NSString *)storeFileName andModel:(NSManagedObjectModel *)model withOptions:(NSDictionary *)options;
+{
     NSPersistentStoreCoordinator *psc = [[self alloc] initWithManagedObjectModel:model];
 
-    [psc MR_addSqliteStoreAtURL:url withOptions:nil];
+    [psc MR_addSqliteStoreNamed:storeFileName withOptions:options];
+
+    return psc;
+}
+
+#pragma mark - URL Initializers
+
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreAtURL:(NSURL *)url;
+{
+    NSManagedObjectModel *defaultStackModel = [[MagicalRecordStack defaultStack] model];
+
+    return [self MR_coordinatorWithSqliteStoreAtURL:url andModel:defaultStackModel];
+}
+
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreAtURL:(NSURL *)url andModel:(NSManagedObjectModel *)model;
+{
+    return [self MR_coordinatorWithSqliteStoreAtURL:url andModel:model withOptions:nil];
+}
+
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreAtURL:(NSURL *)url andModel:(NSManagedObjectModel *)model withOptions:(NSDictionary *)options;
+{
+    NSPersistentStoreCoordinator *psc = [[self alloc] initWithManagedObjectModel:model];
+
+    [psc MR_addSqliteStoreAtURL:url withOptions:options];
+
     return psc;
 }
 

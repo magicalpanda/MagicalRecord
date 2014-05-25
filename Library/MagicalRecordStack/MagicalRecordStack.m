@@ -15,6 +15,12 @@
 
 static MagicalRecordStack *defaultStack;
 
+@interface MagicalRecordStack ()
+
+@property (nonatomic, strong) NSNotificationCenter *applicationWillTerminate;
+@property (nonatomic, strong) NSNotificationCenter *applicationWillResignActive;
+
+@end
 
 @implementation MagicalRecordStack
 
@@ -58,10 +64,17 @@ static MagicalRecordStack *defaultStack;
 {
     NSManagedObjectContext *context = [self context];
     NSString *stackType = NSStringFromClass([self class]);
+#pragma unused(stackType)
     NSAssert(context, @"No NSManagedObjectContext for stack [%@]", stackType);
     NSAssert([self model], @"No NSManagedObjectModel loaded for stack [%@]", stackType);
     NSAssert([self store], @"No NSPersistentStore initialized for stack [%@]", stackType);
     NSAssert([self coordinator], @"No NSPersistentStoreCoodinator initialized for stack [%@]", stackType);
+#ifndef DEBUG
+    if (context == nil)
+    {
+        MRLogError(@"No NSManagedObjectContext for stack [%@]", stackType);
+    }
+#endif
 }
 
 - (void) setModelFromClass:(Class)klass;
@@ -91,8 +104,8 @@ static MagicalRecordStack *defaultStack;
     {
         _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         [_context setPersistentStoreCoordinator:[self coordinator]];
+        [_context setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
         [_context MR_setWorkingName:[NSString stringWithFormat:@"Main Queue Context (%@)", [self stackName]]];
-        [_context setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
     }
     return _context;
 }
@@ -111,13 +124,13 @@ static MagicalRecordStack *defaultStack;
     NSManagedObjectContext *context = [NSManagedObjectContext MR_confinementContext];
     NSString *workingName = [[context MR_workingName] stringByAppendingFormat:@" (%@)", [self stackName]];
     [context MR_setWorkingName:workingName];
+    [context setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
     return context;
 }
 
 - (NSManagedObjectContext *) newConfinementContext;
 {
     NSManagedObjectContext *context = [self createConfinementContext];
-    [context setParentContext:[self context]];
 
     return context;
 }
@@ -143,8 +156,76 @@ static MagicalRecordStack *defaultStack;
 
 - (NSPersistentStoreCoordinator *) createCoordinator;
 {
+    return [self createCoordinatorWithOptions:nil];
+}
+
+- (NSPersistentStoreCoordinator *) createCoordinatorWithOptions:(NSDictionary *)options;
+{
     MRLogError(@"%@ must be overridden in %@", NSStringFromSelector(_cmd), NSStringFromClass([self class]));
     return nil;
+}
+
+#pragma mark - Handle System Notifications
+
+- (BOOL) saveOnApplicationWillResignActive;
+{
+    return self.applicationWillResignActive != nil;
+}
+
+- (void) setSaveOnApplicationWillResignActive:(BOOL)save;
+{
+    [self setApplicationWillTerminate:save ? [NSNotificationCenter defaultCenter] : nil];
+}
+
+-(void)setApplicationWillResignActive:(NSNotificationCenter *)applicationWillResignActive;
+{
+    NSString *notificationName = nil;
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+    notificationName = UIApplicationWillTerminateNotification;
+#elif TARGET_OS_MAC
+    notificationName = NSApplicationWillTerminateNotification;
+#endif
+    [_applicationWillResignActive removeObserver:self
+                                         name:notificationName
+                                       object:nil];
+    _applicationWillResignActive = applicationWillResignActive;
+    [_applicationWillResignActive addObserver:self
+                                  selector:@selector(autoSaveHandle:)
+                                      name:notificationName
+                                    object:nil];
+}
+
+- (BOOL) saveOnApplicationWillTerminate;
+{
+    return self.applicationWillTerminate != nil;
+}
+
+- (void) setSaveOnApplicationWillTerminate:(BOOL)save;
+{
+    [self setApplicationWillTerminate:save ? [NSNotificationCenter defaultCenter] : nil];
+}
+
+- (void) setApplicationWillTerminate:(NSNotificationCenter *)willTerminate;
+{
+    NSString *notificationName = nil;
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+    notificationName = UIApplicationWillTerminateNotification;
+#elif TARGET_OS_MAC
+    notificationName = NSApplicationWillTerminateNotification;
+#endif
+    [_applicationWillTerminate removeObserver:self
+                                         name:notificationName
+                                       object:nil];
+    _applicationWillTerminate = willTerminate;
+    [_applicationWillTerminate addObserver:self
+                           selector:@selector(autoSaveHandle:)
+                               name:notificationName
+                             object:nil];
+}
+
+- (void) autoSaveHandle:(NSNotification *)notification;
+{
+    [[self context] MR_saveToPersistentStoreAndWait];
 }
 
 @end

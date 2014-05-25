@@ -5,28 +5,33 @@
 //  Created by Saul Mora on 8/18/11.
 //  Copyright (c) 2011 Magical Panda Software LLC. All rights reserved.
 //
-#import "MagicalDataImportTestCase.h"
+#import "MagicalRecordDataImportTestCase.h"
 #import "SingleEntityRelatedToMappedEntityWithSecondaryMappings.h"
 #import "MappedEntity.h"
 
-@interface ImportSingleEntityRelatedToMappedEntityWithSecondaryMappingsTests : MagicalDataImportTestCase
+@interface ImportSingleEntityRelatedToMappedEntityWithSecondaryMappingsTests : MagicalRecordDataImportTestCase
 
 @end
 
 @implementation ImportSingleEntityRelatedToMappedEntityWithSecondaryMappingsTests
 
-- (Class) testEntityClass
+- (Class)testEntityClass
 {
     return [SingleEntityRelatedToMappedEntityWithSecondaryMappings class];
 }
 
-- (void) testImportMappedAttributeUsingSecondaryMappedKeyName
+- (void)testImportMappedAttributeUsingSecondaryMappedKeyName
 {
-    SingleEntityRelatedToMappedEntityWithSecondaryMappings *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
-    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-    
-    assertThat(entity, is(notNilValue()));
-    assertThat([entity secondaryMappedAttribute], containsString(@"sample json file"));
+    NSManagedObjectContext *stackContext = self.stack.context;
+
+    SingleEntityRelatedToMappedEntityWithSecondaryMappings *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData inContext:stackContext];
+
+    [stackContext MR_saveToPersistentStoreAndWait];
+
+    XCTAssertNotNil(entity, @"Entity should not be nil");
+
+    NSRange stringRange = [[entity secondaryMappedAttribute] rangeOfString:@"sample json file"];
+    XCTAssertTrue(stringRange.length > 0, @"Expected string not contained withing secondary mapped attribute. Got %@", [entity secondaryMappedAttribute]);
 }
 
 @end

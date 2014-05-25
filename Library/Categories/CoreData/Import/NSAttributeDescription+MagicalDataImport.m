@@ -8,63 +8,146 @@
 
 #import "NSAttributeDescription+MagicalDataImport.h"
 #import "NSManagedObject+MagicalDataImport.h"
+#import "NSString+MagicalDataImport.h"
+#import "NSNumber+MagicalDataImport.h"
 #import "MagicalImportFunctions.h"
 
-@implementation NSAttributeDescription (MagicalRecord_DataImport)
+@implementation NSAttributeDescription (MagicalRecordDataImport)
 
 - (NSString *) MR_primaryKey;
 {
     return nil;
 }
 
+- (id) MR_colorValueForKeyPath:(NSString *)keyPath fromObjectData:(id)objectData;
+{
+    id value = [objectData valueForKeyPath:keyPath];
+    return MRColorFromString(value);
+}
+
+- (NSDate *) MR_dateValueForKeyPath:(NSString *)keyPath fromObjectData:(id)objectData;
+{
+    id value = [objectData valueForKeyPath:keyPath];
+    if (![value isKindOfClass:[NSDate class]])
+    {
+        NSDate *convertedValue = nil;
+        NSString *dateFormat;
+        NSUInteger index = 0;
+        do {
+            NSMutableString *dateFormatKey = [kMagicalRecordImportCustomDateFormatKey mutableCopy];
+            if (index)
+            {
+                [dateFormatKey appendFormat:@".%tu", index];
+            }
+            index++;
+            dateFormat = [[self userInfo] valueForKey:dateFormatKey];
+
+            convertedValue = [value MR_dateWithFormat:dateFormat];
+
+        } while (!convertedValue && dateFormat);
+        value = convertedValue;
+    }
+    return value;
+}
+
+- (NSNumber *) MR_numberValueForKeyPath:(NSString *)keyPath fromObjectData:(id)objectData;
+{
+    id value = [objectData valueForKeyPath:keyPath];
+    if (![value isKindOfClass:[NSNumber class]])
+    {
+        value = MRNumberFromString([value description]);
+    }
+    return value;
+}
+
+- (NSNumber *) MR_booleanValueForKeyPath:(NSString *)keyPath fromObjectData:(id)objectData;
+{
+    id value = [objectData valueForKeyPath:keyPath];
+    return @([value boolValue]);
+}
+
+- (NSString *) MR_stringValueForKeyPath:(NSString *)keyPath fromObjectData:(id)objectData;
+{
+    id value = [objectData valueForKeyPath:keyPath];
+    return [value description];
+}
+
+- (BOOL) MR_isNumericAttributeType;
+{
+    NSAttributeType attributeType = [self attributeType];
+    return
+    attributeType == NSInteger16AttributeType ||
+    attributeType == NSInteger32AttributeType ||
+    attributeType == NSInteger64AttributeType ||
+    attributeType == NSDecimalAttributeType ||
+    attributeType == NSDoubleAttributeType ||
+    attributeType == NSFloatAttributeType;
+}
+
+- (BOOL) MR_isStringAttributeType;
+{
+    NSAttributeType attributeType = [self attributeType];
+    return attributeType == NSStringAttributeType;
+}
+
+- (BOOL) MR_isDateAttributeType;
+{
+    NSAttributeType attributeType = [self attributeType];
+    return attributeType == NSDateAttributeType;
+}
+
+- (BOOL) MR_isBooleanAttributeType;
+{
+    NSAttributeType attributeType = [self attributeType];
+    return attributeType == NSBooleanAttributeType;
+}
+
+- (BOOL) MR_isColorAttributeType;
+{
+    BOOL isColorAttributeType = NO;
+    NSString *desiredAttributeType = [[self userInfo] valueForKey:kMagicalRecordImportAttributeValueClassNameKey];
+    if (desiredAttributeType)
+    {
+        isColorAttributeType = [desiredAttributeType hasSuffix:@"Color"];
+    }
+    return isColorAttributeType;
+}
+
 - (id) MR_valueForKeyPath:(NSString *)keyPath fromObjectData:(id)objectData;
 {
     id value = [objectData valueForKeyPath:keyPath];
-    
-    NSAttributeType attributeType = [self attributeType];
-    NSString *desiredAttributeType = [[self userInfo] valueForKey:kMagicalRecordImportAttributeValueClassNameKey];
-    if (desiredAttributeType) 
+    if ([value isEqual:[NSNull null]])
     {
-        if ([desiredAttributeType hasSuffix:@"Color"])
-        {
-            value = colorFromString(value);
-        }
+        value = nil;
     }
-    else 
+    else if ([self MR_isColorAttributeType])
     {
-        if (attributeType == NSDateAttributeType)
-        {
-            if (![value isKindOfClass:[NSDate class]]) 
-            {
-                NSDate *convertedValue = nil;
-                NSString *dateFormat;
-                NSUInteger index = 0;
-                do {
-                    NSMutableString *dateFormatKey = [kMagicalRecordImportCustomDateFormatKey mutableCopy];
-                    if (index) {
-                        [dateFormatKey appendFormat:@".%tu", index];
-                    }
-                    index++;
-                    dateFormat = [[self userInfo] valueForKey:dateFormatKey];
-                    convertedValue = dateFromString([value description], dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
-                } while (!convertedValue && dateFormat);
-                value = convertedValue;
-            }
-            //            value = adjustDateForDST(value);
-        }
-        else if (attributeType == NSInteger16AttributeType ||
-                 attributeType == NSInteger32AttributeType ||
-                 attributeType == NSInteger64AttributeType ||
-                 attributeType == NSDecimalAttributeType ||
-                 attributeType == NSDoubleAttributeType ||
-                 attributeType == NSFloatAttributeType) {
-            if (![value isKindOfClass:[NSNumber class]] && value != [NSNull null]) {
-                value = numberFromString([value description]);
-            }
-        }
+        value = [self MR_colorValueForKeyPath:keyPath fromObjectData:objectData];
     }
-    
-    return value == [NSNull null] ? nil : value;   
+    else if ([self MR_isDateAttributeType])
+    {
+        value = [self MR_dateValueForKeyPath:keyPath fromObjectData:objectData];
+    }
+    else if ([self MR_isNumericAttributeType])
+    {
+        value = [self MR_numberValueForKeyPath:keyPath fromObjectData:objectData];
+    }
+    else if ([self MR_isStringAttributeType])
+    {
+        value = [self MR_stringValueForKeyPath:keyPath fromObjectData:objectData];
+    }
+    else if ([self MR_isBooleanAttributeType])
+    {
+        value = [self MR_booleanValueForKeyPath:keyPath fromObjectData:objectData];
+    }
+
+    return value;   
+}
+
+- (BOOL) MR_shouldUseDefaultValueIfNoValuePresent;
+{
+    return [[[self userInfo] objectForKey:kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent] boolValue];
 }
 
 @end
+

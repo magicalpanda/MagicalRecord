@@ -6,7 +6,7 @@
 //
 
 #import "MagicalRecordStack+Actions.h"
-#import "CoreData+MagicalRecord.h"
+#import "MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
 #import "MagicalRecordStack.h"
 #import "MagicalRecordLogging.h"
@@ -59,34 +59,56 @@ dispatch_queue_t MR_saveQueue()
 
 - (void) saveWithBlock:(void (^)(NSManagedObjectContext *))block identifier:(NSString *)contextWorkingName completion:(MRSaveCompletionHandler)completion;
 {
+    NSParameterAssert(block);
     MRLogVerbose(@"Dispatching save request: %@", contextWorkingName);
     dispatch_async(MR_saveQueue(), ^{
-        MRLogVerbose(@"%@ save starting", contextWorkingName);
-        
-        NSManagedObjectContext *localContext = [self newConfinementContext];
-        [localContext MR_setWorkingName:contextWorkingName];
-        
-        if (block)
+        @autoreleasepool
         {
+            MRLogVerbose(@"%@ save starting", contextWorkingName);
+            
+            NSManagedObjectContext *localContext = [self newConfinementContext];
+            [localContext MR_setWorkingName:contextWorkingName];
+            
             block(localContext);
-        }
 
-        [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:completion];
+            [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:completion];
+        }
     });
 }
 
 #pragma mark - Synchronous saving
 
-- (void) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
+- (BOOL) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
 {
+    return [self saveWithBlockAndWait:block error:nil];
+}
+
+- (BOOL) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block error:(NSError **)error;
+{
+    NSParameterAssert(block);
     NSManagedObjectContext *localContext = [self newConfinementContext];
 
-    if (block)
+    block(localContext);
+
+    if (NO == [localContext hasChanges])
     {
-        block(localContext);
+        MRLogInfo(@"NO CHANGES IN ** %@ ** CONTEXT - NOT SAVING", [localContext MR_workingName]);
+
+        return YES;
     }
 
-    [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:nil];
+    __block BOOL saveSuccess = YES;
+
+    [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:^(BOOL localSuccess, NSError *localSaveError) {
+        saveSuccess = localSuccess;
+
+        if (error != nil)
+        {
+            *error = localSaveError;
+        }
+    }];
+
+    return saveSuccess;
 }
 
 @end

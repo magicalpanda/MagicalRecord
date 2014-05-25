@@ -1,32 +1,25 @@
 //
-//  Import SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests.m
-//  Magical Record
-//
 //  Created by Saul Mora on 8/16/11.
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
+#import "MagicalRecordDataImportTestCase.h"
 #import "SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.h"
-#import "MagicalDataImportTestCase.h"
 
-@interface ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests : MagicalDataImportTestCase
+@interface ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests : MagicalRecordDataImportTestCase
 
 @end
 
 @implementation ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests
 
-- (Class) testEntityClass
+- (void)testImportData
 {
-    return [SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey class];
-}
+    NSManagedObjectContext *stackContext = self.stack.context;
 
-- (void) testImportData
-{
-    SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
-    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-    
-    assertThat(entity, is(notNilValue()));
-    assertThat(entity.mappedEntities, hasCountOf(4));
+    SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey *entity = [SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey MR_importFromObject:self.testEntityData inContext:stackContext];
+
+    expect(entity).toNot.beNil();
+    expect(entity.mappedEntities).to.haveCountOf(4);
 }
 
 @end

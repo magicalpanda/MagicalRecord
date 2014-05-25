@@ -6,20 +6,19 @@
 //  Copyright (c) 2012 Magical Panda Software LLC. All rights reserved.
 //
 
-NSDate * adjustDateForDST(NSDate *date);
-NSDate * dateFromString(NSString *value, NSString *format);
-NSNumber * numberFromString(NSString *value);
-NSString * attributeNameFromString(NSString *value);
-NSString * primaryKeyNameFromString(NSString *value);
+NSDate *MRAdjustDateForDST(NSDate *date);
+NSDate *MRDateFromString(NSString *value, NSString *format);
+NSDate *MRDateFromNumber(NSNumber *value, BOOL milliseconds);
+NSNumber *MRNumberFromString(NSString *value);
+NSString *MRAttributeNameFromString(NSString *value);
+NSString *MRPrimaryKeyNameFromString(NSString *value);
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
-UIColor * UIColorFromString(NSString *serializedColor);
-
+UIColor *MRColorFromString(NSString *serializedColor);
 #else
 #import <AppKit/AppKit.h>
-NSColor * NSColorFromString(NSString *serializedColor);
-
+NSColor *MRColorFromString(NSString *serializedColor);
 #endif
-extern id (*colorFromString)(NSString *);
 
+NSInteger *MRNewColorComponentsFromString(NSString *serializedColor);

@@ -6,7 +6,7 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 @interface FixtureHelpers : NSObject
 
@@ -15,7 +15,7 @@
 
 @end
 
-@interface SenTest (FixtureHelpers)
+@interface XCTestCase (FixtureHelpers)
 
 - (id) dataFromJSONFixture;
 

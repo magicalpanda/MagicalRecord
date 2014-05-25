@@ -31,9 +31,14 @@
     [[MagicalRecordStack defaultStack] saveWithIdentifier:identifier block:block];
 }
 
-+ (void) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
++ (BOOL) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
 {
-    [[MagicalRecordStack defaultStack] saveWithBlockAndWait:block];
+    return [self saveWithBlockAndWait:block error:nil];
+}
+
++ (BOOL) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block error:(NSError **)error
+{
+    return [[MagicalRecordStack defaultStack] saveWithBlockAndWait:block error:error];
 }
 
 @end

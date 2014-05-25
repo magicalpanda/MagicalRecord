@@ -84,7 +84,15 @@
     return [[self MR_numberOfEntitiesWithContext:context] intValue] > 0;
 }
 
-- (NSNumber *) MR_maxValueFor:(NSString *)property
+- (id) MR_minValueFor:(NSString *)property
+{
+	NSManagedObject *obj = [[self class] MR_findFirstByAttribute:property
+                                                       withValue:[NSString stringWithFormat:@"min(%@)", property]];
+
+	return [obj valueForKey:property];
+}
+
+- (id) MR_maxValueFor:(NSString *)property
 {
 	NSManagedObject *obj = [[self class] MR_findFirstByAttribute:property
                                                        withValue:[NSString stringWithFormat:@"max(%@)", property]];
@@ -107,7 +115,7 @@
 	return [self MR_objectWithMinValueFor:property inContext:[self  managedObjectContext]];
 }
 
-+ (NSNumber *) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context 
++ (id) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context
 {
     NSExpression *ex = [NSExpression expressionForFunction:function 
                                                  arguments:[NSArray arrayWithObject:[NSExpression expressionForKeyPath:attributeName]]];
@@ -117,7 +125,7 @@
     [ed setExpression:ex];
     
     // determine the type of attribute, required to set the expression return type    
-    NSAttributeDescription *attributeDescription = [[self MR_entityDescription] MR_attributeDescriptionForName:attributeName];
+    NSAttributeDescription *attributeDescription = [[self MR_entityDescriptionInContext:context] MR_attributeDescriptionForName:attributeName];
     [ed setExpressionResultType:[attributeDescription attributeType]];    
     NSArray *properties = [NSArray arrayWithObject:ed];
     
@@ -126,16 +134,46 @@
     [request setResultType:NSDictionaryResultType];    
     
     NSDictionary *resultsDictionary = [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
-    NSNumber *resultValue = [resultsDictionary objectForKey:@"result"];
-    
-    return resultValue;    
+
+    return [resultsDictionary objectForKey:@"result"];
 }
 
-+ (NSNumber *) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate 
++ (id) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate 
 {
     return [self MR_aggregateOperation:function 
                            onAttribute:attributeName 
                          withPredicate:predicate
+                             inContext:[[MagicalRecordStack defaultStack] context]];
+}
+
++ (NSArray *) MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString *)groupingKeyPath inContext:(NSManagedObjectContext *)context;
+{
+    NSExpression *expression = [NSExpression expressionForFunction:collectionOperator arguments:[NSArray arrayWithObject:[NSExpression expressionForKeyPath:attributeName]]];
+
+    NSExpressionDescription *expressionDescription = [[NSExpressionDescription alloc] init];
+
+    [expressionDescription setName:@"result"];
+    [expressionDescription setExpression:expression];
+
+    NSAttributeDescription *attributeDescription = [[[self MR_entityDescriptionInContext:context] attributesByName] objectForKey:attributeName];
+    [expressionDescription setExpressionResultType:[attributeDescription attributeType]];
+    NSArray *properties = [NSArray arrayWithObjects:groupingKeyPath, expressionDescription, nil];
+
+    NSFetchRequest *fetchRequest = [self MR_requestAllWithPredicate:predicate];
+    [fetchRequest setPropertiesToFetch:properties];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    [fetchRequest setPropertiesToGroupBy:[NSArray arrayWithObject:groupingKeyPath]];
+
+    NSArray *results = [self MR_executeFetchRequest:fetchRequest inContext:context];
+
+    return results;
+}
+
++ (NSArray *) MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString *)groupingKeyPath;
+{
+    return [self MR_aggregateOperation:collectionOperator
+                           onAttribute:attributeName
+                         withPredicate:predicate groupBy:groupingKeyPath
                              inContext:[[MagicalRecordStack defaultStack] context]];
 }
 

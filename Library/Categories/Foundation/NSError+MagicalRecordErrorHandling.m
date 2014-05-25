@@ -52,7 +52,7 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
 - (NSDictionary *) MR_errorCollectionGroupedByObject;
 {
     NSMutableDictionary *collatedObjects = [NSMutableDictionary dictionary];
-    [[self MR_errorCollection] enumerateObjectsUsingBlock:^(id error, NSUInteger idx, BOOL *stop) {
+    [[self MR_errorCollection] enumerateObjectsUsingBlock:^(NSError *error, NSUInteger idx, BOOL *stop) {
         NSManagedObject *errorObject = [error MR_validationErrorObject];
 
         NSMutableArray *errorList = [collatedObjects objectForKey:[errorObject objectID]];
@@ -93,11 +93,11 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
     {
         [descriptionBuffer appendString:@"Multiple Validation Errors --\n"];
         NSDictionary *groupedErrors = [self MR_errorCollectionGroupedByObject];
-        [[groupedErrors allKeys] enumerateObjectsUsingBlock:^(id managedObject, NSUInteger idx, BOOL *stop) {
+        [[groupedErrors allKeys] enumerateObjectsUsingBlock:^(NSManagedObject *managedObject, NSUInteger idx, BOOL *stop) {
             
             [descriptionBuffer appendFormat:@" Object: %@ -", managedObject];
             NSArray *errors = [groupedErrors objectForKey:managedObject];
-            [errors enumerateObjectsUsingBlock:^(id error, NSUInteger inneridx, BOOL *innerstop) {
+            [errors enumerateObjectsUsingBlock:^(NSError *error, NSUInteger inneridx, BOOL *innerstop) {
                 [descriptionBuffer appendFormat:@" %@ [%@],",[error MR_validationError], MR_errorSummaryFromErrorCode([error code])];
             }];
             [descriptionBuffer deleteCharactersInRange:NSMakeRange([descriptionBuffer length] - 1, 1)];
@@ -106,8 +106,7 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
     }
     else
     {
-        [[self MR_errorCollection] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-           
+        [[self MR_errorCollection] enumerateObjectsUsingBlock:^(NSError *obj, NSUInteger idx, BOOL *stop) {
             [descriptionBuffer appendFormat:@" %@\n", [obj MR_summaryDescription]];
         }];
     }

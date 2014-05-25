@@ -6,45 +6,48 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import "CoreData+MagicalRecord.h"
+#import "MagicalRecord.h"
 #import "NSEntityDescription+MagicalDataImport.h"
 
-@implementation NSEntityDescription (MagicalRecord_DataImport)
-
-- (NSAttributeDescription *) MR_primaryAttributeToRelateBy;
-{
-    NSString *lookupKey = [[self userInfo] valueForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: primaryKeyNameFromString([self name]);
-
-    return [self MR_attributeDescriptionForName:lookupKey];
-}
+@implementation NSEntityDescription (MagicalRecordDataImport)
 
 - (NSManagedObject *) MR_createInstanceInContext:(NSManagedObjectContext *)context;
 {
     Class relatedClass = NSClassFromString([self managedObjectClassName]);
     NSManagedObject *newInstance = [relatedClass MR_createInContext:context];
-   
+
     return newInstance;
 }
 
 - (NSAttributeDescription *) MR_attributeDescriptionForName:(NSString *)name;
 {
-    __block NSAttributeDescription *attributeDescription;
+    __block NSAttributeDescription *description = nil;
 
     NSDictionary *attributesByName = [self attributesByName];
 
-    if ([attributesByName count] == 0) {
-        return nil;
-    }
-
-    [attributesByName enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        if ([key isEqualToString:name]) {
-            attributeDescription = obj;
+    [attributesByName enumerateKeysAndObjectsUsingBlock:^(NSString *attributeName, NSAttributeDescription *attributeDescription, BOOL *stop) {
+        if ([attributeName isEqualToString:name])
+        {
+            description = attributeDescription;
 
             *stop = YES;
         }
     }];
 
-    return attributeDescription;
+    return description;
+}
+
+- (NSAttributeDescription *) MR_primaryAttributeToRelateBy;
+{
+    NSString *lookupKey = [[self userInfo] valueForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: MRPrimaryKeyNameFromString([self name]);
+
+    return [self MR_attributeDescriptionForName:lookupKey];
+}
+
+- (NSAttributeDescription *) MR_primaryAttribute;
+{
+    NSString *lookupKey = [[self userInfo] valueForKey:kMagicalRecordImportDistinctAttributeKey];
+    return [self MR_attributeDescriptionForName:lookupKey];
 }
 
 @end

@@ -18,12 +18,18 @@
 {
     NSManagedObjectContext *context = [NSManagedObjectContext MR_confinementContext];
     [context setPersistentStoreCoordinator:self.coordinator];
+    [context setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
+
+    //TODO: This observation needs to be torn down by the user at this time :(
+    [self.context MR_observeContextDidSave:context];
+    
     return context;
 }
 
-//TODO: does this go somewhere else?
 - (void) saveWithBlock:(void (^)(NSManagedObjectContext *))block identifier:(NSString *)contextWorkingName completion:(MRSaveCompletionHandler)completion;
 {
+    NSParameterAssert(block);
+
     MRLogVerbose(@"Dispatching save request: %@", contextWorkingName);
     dispatch_async(MR_saveQueue(), ^{
         MRLogVerbose(@"%@ save starting", contextWorkingName);
@@ -31,17 +37,14 @@
         NSManagedObjectContext *localContext = [self newConfinementContext];
         NSManagedObjectContext *mainContext = [self context];
 
-        [mainContext MR_observeContext:localContext];
+        [mainContext MR_observeContextDidSave:localContext];
         [mainContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
         [localContext MR_setWorkingName:contextWorkingName];
 
-        if (block)
-        {
-            block(localContext);
-        }
+        block(localContext);
 
         [localContext MR_saveWithOptions:MRSaveSynchronously completion:completion];
-        [mainContext MR_stopObservingContext:localContext];
+        [mainContext MR_stopObservingContextDidSave:localContext];
     });
 }
 
