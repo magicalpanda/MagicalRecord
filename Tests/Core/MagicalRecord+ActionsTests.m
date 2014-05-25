@@ -215,7 +215,7 @@
     expect([fetchedObject valueForKey:kTestAttributeKey]).will.beFalsy();
 }
 
-- (void)testtAsynchronousSaveActionPerformedOnBackgroundQueue
+- (void)testAsynchronousSaveActionPerformedOnBackgroundQueue
 {
     MagicalRecordStack *currentStack = self.stack;
     
