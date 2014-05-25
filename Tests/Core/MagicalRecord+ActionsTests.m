@@ -121,15 +121,6 @@
     expect([objectId isTemporaryID]).to.beTruthy;
 }
 
-- (void)testSynchronousSaveActionPerformedOnBackgroundQueue
-{
-    MagicalRecordStack *currentStack = self.stack;
-    
-    [currentStack saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-        expect([NSThread currentThread]).toNot.equal([NSThread mainThread]);
-    }];
-}
-
 #pragma mark - Asynchronous Saves
 
 - (void)testAsynchronousSaveActionSaves
