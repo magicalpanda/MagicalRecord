@@ -121,6 +121,15 @@
     expect([objectId isTemporaryID]).to.beTruthy;
 }
 
+- (void)testSynchronousSaveActionPerformedOnBackgroundQueue
+{
+    MagicalRecordStack *currentStack = self.stack;
+    
+    [currentStack saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+        expect([NSThread currentThread]).toNot.equal([NSThread mainThread]);
+    }];
+}
+
 #pragma mark - Asynchronous Saves
 
 - (void)testAsynchronousSaveActionSaves
@@ -167,12 +176,14 @@
         NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
 
         expect([inserted hasChanges]).to.beTruthy();
+        expect([NSThread currentThread]).toNot.equal([NSThread mainThread]);
 
         [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
         objectId = [inserted objectID];
     } completion:^(BOOL success, NSError *error) {
         saveSuccessState = success;
         fetchedObject = [currentContext objectWithID:objectId];
+        expect([NSThread currentThread]).to.equal([NSThread mainThread]);
     }];
 
     expect(saveSuccessState).will.beTruthy();
@@ -213,6 +224,18 @@
     }];
 
     expect([fetchedObject valueForKey:kTestAttributeKey]).will.beFalsy();
+}
+
+- (void)testtAsynchronousSaveActionPerformedOnBackgroundQueue
+{
+    MagicalRecordStack *currentStack = self.stack;
+    
+    [currentStack saveWithBlock:^(NSManagedObjectContext *localContext) {
+        expect([NSThread currentThread]).toNot.equal([NSThread mainThread]);
+        
+    } completion:^(BOOL success, NSError *error) {
+        expect([NSThread currentThread]).to.equal([NSThread mainThread]);
+    }];
 }
 
 @end
