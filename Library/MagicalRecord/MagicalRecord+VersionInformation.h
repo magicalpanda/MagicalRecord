@@ -6,7 +6,7 @@
 #import "MagicalRecord.h"
 
 /**
- Defines current and history version numbers of MagicalRecord.
+ Defines current and historical version numbers of MagicalRecord.
 
  @since Available in v2.3 and later.
  */
