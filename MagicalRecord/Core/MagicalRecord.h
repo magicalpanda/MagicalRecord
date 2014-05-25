@@ -6,7 +6,7 @@
 //
 
 /**
- Defines current and history version numbers of MagicalRecord.
+ Defines current and historical version numbers for MagicalRecord.
 
  @since Available in v2.3 and later.
  */
