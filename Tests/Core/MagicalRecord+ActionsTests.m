@@ -176,14 +176,12 @@
         NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
 
         expect([inserted hasChanges]).to.beTruthy();
-        expect([NSThread currentThread]).toNot.equal([NSThread mainThread]);
 
         [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
         objectId = [inserted objectID];
     } completion:^(BOOL success, NSError *error) {
         saveSuccessState = success;
         fetchedObject = [currentContext objectWithID:objectId];
-        expect([NSThread currentThread]).to.equal([NSThread mainThread]);
     }];
 
     expect(saveSuccessState).will.beTruthy();
