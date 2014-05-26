@@ -135,7 +135,7 @@
 - (void) saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion;
 - (void) saveOnlySelfAndWait;
 - (void) saveToPersistentStoreAndWait;
-- (void) saveWithOptions:(MRSaveContextOptions)mask completion:(MRSaveCompletionHandler)completion;
+- (void) saveWithOptions:(MRSaveOptions)mask completion:(MRSaveCompletionHandler)completion;
 - (void) save MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
 - (void) saveWithErrorCallback:(void(^)(NSError *error))errorCallback MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
 - (void) saveInBackgroundCompletion:(void (^)(void))completion MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
