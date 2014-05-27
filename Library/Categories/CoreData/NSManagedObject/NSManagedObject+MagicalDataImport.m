@@ -165,8 +165,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 
     if ([self MR_importValue:relationshipData forKey:relationshipName]) return; //If custom import was used
 
-    NSString *lookupKey = //[relationshipData MR_lookupKeyForRelationship:relationshipInfo];
-        [[relationshipInfo userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey] ?: relationshipName;
+    NSString *lookupKey = [[relationshipInfo userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey] ?: relationshipName;
     id relatedObjectData = [relationshipData valueForKeyPath:lookupKey];
     if (relatedObjectData == nil)
     {
