@@ -24,7 +24,7 @@
 
 - (void)dealloc;
 {
-    [_savingContext MR_stopObservingContextDidSave:_context];
+    [_context MR_stopObservingContextDidSave:_savingContext];
 }
 
 - (NSManagedObjectContext *) context;
