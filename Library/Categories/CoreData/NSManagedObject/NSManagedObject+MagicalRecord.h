@@ -74,6 +74,13 @@
 + (instancetype) MR_createEntityWithDescription:(NSEntityDescription *)entityDescription inContext:(NSManagedObjectContext *)context;
 
 /**
+ Check if an object has been saved to at least one persistent store
+ 
+ @return YES if object has a permanent ID
+ */
+- (BOOL) MR_isTemporaryObject;
+
+/**
  @name Deleting Entities
  */
 

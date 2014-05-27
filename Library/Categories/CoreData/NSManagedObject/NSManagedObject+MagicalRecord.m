@@ -149,6 +149,11 @@
     return managedObject;
 }
 
+- (BOOL) MR_isTemporaryObject;
+{
+    return [[self objectID] isTemporaryID];
+}
+
 #pragma mark - Deleting Entities
 
 - (BOOL) MR_isEntityDeleted
