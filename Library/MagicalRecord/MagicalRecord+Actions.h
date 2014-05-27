@@ -57,7 +57,7 @@
 /**
  Synchronously saves the default managed object context (if there is one) and any parent contexts.
 
- @param block Make changes to your NSManagedObject instances in this block using the provided `localContext`. The block will be executed on a background queue, and once complete the context will be saved.
+ @param block Make changes to your NSManagedObject instances in this block using the provided `localContext`. The block may be executed on a background queue, and once complete the context will be saved.
 
  @return Whether the save was successful
  
@@ -68,7 +68,7 @@
 /**
  Synchronously saves the default managed object context (if there is one) and any parent contexts.
 
- @param block Make changes to your NSManagedObject instances in this block using the provided `localContext`. The block will be executed on a background queue, and once complete the context will be saved.
+ @param block Make changes to your NSManagedObject instances in this block using the provided `localContext`. The block may be executed on a background queue, and once complete the context will be saved.
  @param error Pass in an NSError by reference to receive any errors encountered during the save.
 
  @return Whether the save was successful

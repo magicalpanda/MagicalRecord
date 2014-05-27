@@ -5,13 +5,11 @@
 
 #import "MagicalRecord+VersionInformation.h"
 
-const double MagicalRecordVersionNumber = MagicalRecordVersionNumber3_0;
-
 @implementation MagicalRecord (VersionInformation)
 
-+ (double) version;
++ (MagicalRecordVersionNumber)version
 {
-    return MagicalRecordVersionNumber;
+    return MagicalRecordVersionNumber3_0;
 }
 
 @end

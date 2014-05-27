@@ -5,11 +5,22 @@
 
 #import "MagicalRecord.h"
 
-#define MagicalRecordVersionNumber2_2 220
-#define MagicalRecordVersionNumber2_3 230
-#define MagicalRecordVersionNumber3_0 300
+/**
+ Defines current and historical version numbers of MagicalRecord.
 
-extern const double MagicalRecordVersionNumber;
+ @since Available in v2.3 and later.
+ */
+typedef NS_ENUM(NSUInteger, MagicalRecordVersionNumber)
+{
+    /** Version 2.2.0 */
+    MagicalRecordVersionNumber2_2 = 220,
+
+    /** Version 2.3.0 */
+    MagicalRecordVersionNumber2_3 = 230,
+
+    /** Version 3.0.0 */
+    MagicalRecordVersionNumber3_0 = 300,
+};
 
 /**
  Provides an way for developers to retrieve the version of MagicalRecord they are currently using within their apps.
@@ -23,12 +34,12 @@ extern const double MagicalRecordVersionNumber;
 ///---------------------------
 
 /**
- Use this class method to retrieve the current library version. See the `MagicalRecordVersionNumber` for more information and valid values.
+ Returns the current version of MagicalRecord. See the MagicalRecordVersionNumber enumeration for valid current and historical values.
 
- @return Double value representing the current library version.
- 
- @since Available in v2.3 and later.
+ @return The current version as a double.
+
+ @since Available in v2.3 and later
  */
-+ (double) version;
++ (MagicalRecordVersionNumber)version;
 
 @end
