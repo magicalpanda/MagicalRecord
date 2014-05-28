@@ -7,6 +7,9 @@
 //
 
 #import <CoreData/CoreData.h>
+#import "MagicalRecordDeprecated.h"
+
+extern NSString * const MagicalRecordDidMergeChangesFromiCloudNotification;
 
 /**
  Category methods to aid in observing changes in other contexts.
@@ -38,7 +41,7 @@
 
  @param otherContext Managed object context to observe.
 
- @since Available in v3.0 and later.
+ @since Available in v2.0 and later.
  */
 - (void) MR_observeContextOnMainThread:(NSManagedObjectContext *)otherContext;
 
@@ -48,6 +51,8 @@
  If self is MagicalRecord's `+MR_rootContext`, changes will be persisted to the store.
 
  @param otherContext Alternate context that the current context should observe
+ 
+ @since Available in v3.0 and later.
  */
 - (void) MR_observeContextDidSaveAndSaveChangesToSelf:(NSManagedObjectContext *)otherContext;
 
@@ -58,7 +63,7 @@
  
  @see -MR_stopObservingiCloudChangesInCoordinator:
 
- @since Available in v3.0 and later.
+ @since Available in v2.0 and later.
  */
 - (void) MR_observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 
@@ -69,8 +74,16 @@
  
  @see -MR_observeiCloudChangesInCoordinator:
 
- @since Available in v3.0 and later.
+ @since Available in v2.0 and later.
  */
 - (void) MR_stopObservingiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 
 @end
+
+@interface NSManagedObjectContext (MagicalObservingDeprecated)
+
+- (void) MR_observeContext:(NSManagedObjectContext *)otherContext MR_DEPRECATED_IN_3_0_PLEASE_USE("MR_observeContextDidSave:");
+- (void) MR_stopObservingContext:(NSManagedObjectContext *)otherContext MR_DEPRECATED_IN_3_0_PLEASE_USE("MR_stopObservingContextDidSave");
+
+@end
+

@@ -13,7 +13,6 @@
 
 NSString * const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalRecordDidMergeChangesFromiCloudNotification";
 
-
 @implementation NSManagedObjectContext (MagicalObserving)
 
 - (void) MR_performBlock:(void(^)(void))block;
@@ -146,7 +145,6 @@ NSString * const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagical
 
 - (void) MR_observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 {
-//    if (![MagicalRecord isICloudEnabled]) return;
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter addObserver:self
                            selector:@selector(MR_mergeChangesFromiCloud:)
@@ -157,11 +155,25 @@ NSString * const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagical
 
 - (void) MR_stopObservingiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 {
-//    if (![MagicalRecord isICloudEnabled]) return;
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter removeObserver:self
                                   name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
                                 object:coordinator];
+}
+
+@end
+
+#pragma mark - Deprecated Methods — DO NOT USE
+@implementation NSManagedObjectContext (MagicalObservingDeprecated)
+
+- (void)MR_observeContext:(NSManagedObjectContext *)otherContext
+{
+    [self MR_observeContextDidSave:otherContext];
+}
+
+- (void)MR_stopObservingContext:(NSManagedObjectContext *)otherContext
+{
+    [self MR_stopObservingContextDidSave:otherContext];
 }
 
 @end
