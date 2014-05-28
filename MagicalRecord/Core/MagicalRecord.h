@@ -16,7 +16,10 @@ typedef NS_ENUM(NSUInteger, MagicalRecordVersionNumber)
     MagicalRecordVersionNumber2_2 = 220,
 
     /** Version 2.3.0 */
-    MagicalRecordVersionNumber2_3 = 230
+    MagicalRecordVersionNumber2_3 = 230,
+
+    /** Version 3.0.0 */
+    MagicalRecordVersionNumber3_0 = 300
 };
 
 // enable to use caches for the fetchedResultsControllers (iOS only)

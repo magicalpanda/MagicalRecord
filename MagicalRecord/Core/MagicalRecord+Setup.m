@@ -31,6 +31,8 @@
     [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
 	
     [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
+
+    [NSManagedObjectContext MR_newContext];
 }
 
 + (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName

@@ -71,7 +71,7 @@
 #pragma mark - Deprecated Methods — DO NOT USE
 @interface NSManagedObject (MagicalRecordDeprecated)
 
-+ (instancetype) MR_createInContext:(NSManagedObjectContext *)context MR_DEPRECATED_AND_REPLACED_BY("+MR_createEntityInContext:.");
-- (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context MR_DEPRECATED_AND_REPLACED_BY("-MR_deleteEntityInContext:.");
++ (instancetype) MR_createInContext:(NSManagedObjectContext *)context MR_DEPRECATED_AND_REPLACED_BY("MR_createEntityInContext:");
+- (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context MR_DEPRECATED_AND_REPLACED_BY("MR_deleteEntityInContext:");
 
 @end
