@@ -72,7 +72,7 @@ typedef NS_ENUM (NSInteger, MagicalRecordLoggingLevel)
 
  @return current value of shouldAutoCreateManagedObjectModel.
 
- @since Available in v2.0.4 and later
+ @since Available in v2.0.4 and later.
  */
 + (BOOL) shouldAutoCreateManagedObjectModel;
 
@@ -81,7 +81,7 @@ typedef NS_ENUM (NSInteger, MagicalRecordLoggingLevel)
 
  @param autoCreate BOOL value that flags whether the default persistent store should be automatically created.
 
- @since Available in v2.0.4 and later
+ @since Available in v2.0.4 and later.
  */
 + (void) setShouldAutoCreateManagedObjectModel:(BOOL)autoCreate;
 
@@ -90,7 +90,7 @@ typedef NS_ENUM (NSInteger, MagicalRecordLoggingLevel)
 
  @return current value of shouldAutoCreateDefaultPersistentStoreCoordinator.
 
- @since Available in v2.0.4 and later
+ @since Available in v2.0.4 and later.
  */
 + (BOOL) shouldAutoCreateDefaultPersistentStoreCoordinator;
 
@@ -99,7 +99,7 @@ typedef NS_ENUM (NSInteger, MagicalRecordLoggingLevel)
 
  @param autoCreate BOOL value that flags whether the default persistent store should be automatically created.
 
- @since Available in v2.0.4 and later
+ @since Available in v2.0.4 and later.
  */
 + (void) setShouldAutoCreateDefaultPersistentStoreCoordinator:(BOOL)autoCreate;
 
@@ -109,7 +109,7 @@ typedef NS_ENUM (NSInteger, MagicalRecordLoggingLevel)
 
  @return current value of shouldDeleteStoreOnModelMismatch
  
- @since Available in v2.0.4 and later
+ @since Available in v2.0.4 and later.
  */
 + (BOOL) shouldDeleteStoreOnModelMismatch;
 
@@ -119,7 +119,7 @@ typedef NS_ENUM (NSInteger, MagicalRecordLoggingLevel)
 
  @param shouldDelete BOOL value that flags whether mismatched stores should be deleted
  
- @since Available in v2.0.4 and later
+ @since Available in v2.0.4 and later.
  */
 + (void) setShouldDeleteStoreOnModelMismatch:(BOOL)shouldDelete;
 

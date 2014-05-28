@@ -37,7 +37,7 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 /**
  Provides class methods to help setup, save, handle errors and provide information about the currently loaded version of MagicalRecord.
 
- @since Available in v1.0 and later
+ @since Available in v1.0 and later.
  */
 @interface MagicalRecord : NSObject
 
@@ -46,7 +46,7 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
  @return The current version as a double.
 
- @since Available in v2.3 and later
+ @since Available in v2.3 and later.
  */
 + (MagicalRecordVersionNumber) version;
 
@@ -55,14 +55,14 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
  @return Description of the current state of the stack.
 
- @since Available in v2.3 and later
+ @since Available in v2.3 and later.
  */
 + (NSString *) currentStack;
 
 /**
  Cleans up the entire MagicalRecord stack. Sets the default model, store and context to nil before posting a kMagicalRecordCleanedUpNotification notification.
 
- @since Available in v1.0 and later
+ @since Available in v1.0 and later.
  */
 + (void) cleanUp;
 
@@ -71,7 +71,7 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
  @param klass Class to set the model from
 
- @since Available in v2.0 and later
+ @since Available in v2.0 and later.
  */
 + (void) setDefaultModelFromClass:(Class)klass;
 
@@ -80,16 +80,16 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
  @param modelName Model name as a string, including file extension
 
- @since Available in v1.0 and later
+ @since Available in v1.0 and later.
  */
 + (void) setDefaultModelNamed:(NSString *)modelName;
 
 /**
- Returns the default persistent store filename that will be used if none is provided. This will be the main bundle's `kCFBundleNameKey` if it is available, or "CoreDataStore.sqlite" if it is not.
+ Determines the store file name your app should use. This method is used by the MagicalRecord SQLite stacks when a store file is not specified. The file name returned is in the form "<ApplicationName>.sqlite". `<ApplicationName>` is taken from the application's info dictionary, which is retrieved from the method [[NSBundle mainBundle] infoDictionary]. If no bundle name is available, "CoreDataStore.sqlite" will be used.
 
- @return Default persistent store filename
+ @return String of the form <ApplicationName>.sqlite
 
- @since Available in v2.0 and later
+ @since Available in v2.0 and later.
  */
 + (NSString *) defaultStoreName;
 
