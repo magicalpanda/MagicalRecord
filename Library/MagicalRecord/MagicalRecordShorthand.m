@@ -282,17 +282,26 @@
 
 + (instancetype) createInContext:(NSManagedObjectContext *)context
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     return [self MR_createInContext:context];
+#pragma clang diagnostic pop
 }
 
 - (BOOL) deleteInContext:(NSManagedObjectContext *)context
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     return [self MR_deleteInContext:context];
+#pragma clang diagnostic pop
 }
 
 - (instancetype) inContextIfTempObject:(NSManagedObjectContext *)otherContext
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     return [self MR_inContextIfTempObject:otherContext];
+#pragma clang diagnostic pop
 }
 
 @end

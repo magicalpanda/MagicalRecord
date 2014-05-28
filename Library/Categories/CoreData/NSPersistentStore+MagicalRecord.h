@@ -75,7 +75,7 @@
 
 @interface NSPersistentStore (MagicalRecordDeprecated)
 
-+ (NSURL *) MR_defaultURLForStoreName:(NSString *)storeFileName MRDeprecated("Please use + (NSURL *) MR_fileURLForStoreName:");
-+ (NSURL *) MR_urlForStoreName:(NSString *)storeFileName MRDeprecated("Please use + (NSURL *) MR_fileURLForStoreNameIfExistsOnDisk:");
++ (NSURL *) MR_defaultURLForStoreName:(NSString *)storeFileName MR_DEPRECATED_IN_3_0_PLEASE_USE("MR_fileURLForStoreName:");
++ (NSURL *) MR_urlForStoreName:(NSString *)storeFileName MR_DEPRECATED_IN_3_0_PLEASE_USE("MR_fileURLForStoreNameIfExistsOnDisk:");
 
 @end

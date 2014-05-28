@@ -47,7 +47,7 @@ def processImplementation(headerFile)
                     ++processed_methods_count
                     methodName = matches[:MethodName].sub("MR_", "")
                     methodStart = matches[:Start].gsub(/^[\-|\+].*/, '')
-                    methodEnd = matches[:End].gsub(/\sNS_[^\s]+/, '').gsub(/\sMRDeprecated.*$/, '')
+                    methodEnd = matches[:End].gsub(/\sNS_[^\s]+/, '').gsub(/\sMR_DEPRECATED_IN_3_0_PLEASE_USE.*$/, '')
 
                     selfcall = "#{methodStart}#{matches[:MethodName]}#{methodEnd}"
 
@@ -87,7 +87,7 @@ EOS
     non_prefixed_methods.compact
 end
 
-def processHeader(headerFile)
+def processHeader(headerFile, include_deprecation_warnings)
     unless headerFile.end_with? ".h"
         puts "#{headerFile} not a header"
         return
@@ -127,14 +127,14 @@ def processHeader(headerFile)
                     methodEnd = matches[:End]
 
                     methodSuffix = nil
-                    unless methodEnd.include? "MRDeprecated"
+                    unless include_deprecation_warnings == false or methodEnd.include? "MR_DEPRECATED_IN_3_0_PLEASE_USE"
                       methodEnd = methodEnd.sub(";", '')
                       deprecationNoticeMethod = methodEnd.gsub(/:(\([^\)]+\)[\w]+)|:(\(.+)/, ':')
                       deprecationNoticeMethod = deprecationNoticeMethod.gsub(/:\s/, ':')
                       deprecationNoticeMethod = deprecationNoticeMethod.gsub(/ NS_[^\s]+/, '')
                       deprecationNoticeMethod = deprecationNoticeMethod.gsub(/;$/, '')
 
-                      methodSuffix = " MRDeprecated(\"Use #{methodStart}#{matches[:MethodName]}#{deprecationNoticeMethod} instead\");"
+                      methodSuffix = " MR_DEPRECATED_IN_3_0_PLEASE_USE(\"#{matches[:MethodName]}\");"
                     end
 
                     processed_line = "#{matches[:Start]}#{methodName}#{methodEnd}#{methodSuffix}"
@@ -164,7 +164,7 @@ def processHeader(headerFile)
     non_prefixed_methods.compact
 end
 
-def processDirectoryForHeaders(path)
+def processDirectoryForHeaders(path, include_deprecation_warnings)
 
     headers = File.join(path, "**", "*+*.h")
     processedHeaders = []
@@ -174,7 +174,7 @@ def processDirectoryForHeaders(path)
 
         processDirectory(file) if File.directory?(file)
         if file.end_with?(".h")
-            processedHeaders << processHeader(file)
+            processedHeaders << processHeader(file, include_deprecation_warnings)
         end
     }
 
@@ -199,21 +199,21 @@ def processDirectoryForImplementations(path)
 end
 
 
-def generateHeaders(startingPoint)
+def generateHeaders(startingPoint, include_deprecation_warnings)
 
     processedHeaders = []
     if startingPoint
         path = File.expand_path(startingPoint)
 
         if path.end_with?(".h")
-            processedHeaders << processHeader(path)
+            processedHeaders << processHeader(path, include_deprecation_warnings)
         else
             puts "Processing Headers in #{path}"
-            processedHeaders << processDirectoryForHeaders(path)
+            processedHeaders << processDirectoryForHeaders(path, include_deprecation_warnings)
         end
 
     else
-        processedHeaders << processDirectoryForHeaders(startingPoint || Dir.getwd())
+        processedHeaders << processDirectoryForHeaders(startingPoint || Dir.getwd(), include_deprecation_warnings)
     end
 
     processedHeaders
@@ -252,7 +252,7 @@ else
     puts "Generating shorthand headers"
 end
 
-headers = generateHeaders(ARGV[0]).collect &:compact
+headers = generateHeaders(ARGV[0], false).collect &:compact
 implementations = generateImplementations(ARGV[0]).collect &:compact
 
 File.open("#{output_file}.h", "w") { |file|
