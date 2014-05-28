@@ -59,10 +59,38 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
  */
 + (NSString *) currentStack;
 
+/**
+ Cleans up the entire MagicalRecord stack. Sets the default model, store and context to nil before posting a kMagicalRecordCleanedUpNotification notification.
+
+ @since Available in v1.0 and later
+ */
 + (void) cleanUp;
 
+/**
+ Calls NSBundle's -bundleForClass: to determine the bundle to search for the default model within.
+
+ @param klass Class to set the model from
+
+ @since Available in v2.0 and later
+ */
 + (void) setDefaultModelFromClass:(Class)klass;
+
+/**
+ Looks for a momd file with the specified name, and if found sets it as the default model.
+
+ @param modelName Model name as a string, including file extension
+
+ @since Available in v1.0 and later
+ */
 + (void) setDefaultModelNamed:(NSString *)modelName;
+
+/**
+ Returns the default persistent store filename that will be used if none is provided. This will be the main bundle's `kCFBundleNameKey` if it is available, or "CoreDataStore.sqlite" if it is not.
+
+ @return Default persistent store filename
+
+ @since Available in v2.0 and later
+ */
 + (NSString *) defaultStoreName;
 
 @end
