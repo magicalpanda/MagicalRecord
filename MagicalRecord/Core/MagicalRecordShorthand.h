@@ -76,9 +76,9 @@
 + (NSArray *) propertiesNamed:(NSArray *)properties;
 + (instancetype) createEntity;
 + (instancetype) createEntityInContext:(NSManagedObjectContext *)context;
-+ (instancetype) createInContext:(NSManagedObjectContext *)context __attribute__((deprecated("Please use +createEntityInContext: instead.")));
++ (instancetype) createInContext:(NSManagedObjectContext *)context MR_DEPRECATED_AND_REPLACED_BY("+createEntityInContext:");
 - (BOOL) deleteEntity;
-- (BOOL) deleteInContext:(NSManagedObjectContext *)context __attribute__((deprecated("Please use -deleteEntityInContext: instead.")));
+- (BOOL) deleteInContext:(NSManagedObjectContext *)context MR_DEPRECATED_AND_REPLACED_BY("Please use -deleteEntityInContext: instead.");
 - (BOOL) deleteEntityInContext:(NSManagedObjectContext *)context;
 + (BOOL) deleteAllMatchingPredicate:(NSPredicate *)predicate;
 + (BOOL) deleteAllMatchingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
