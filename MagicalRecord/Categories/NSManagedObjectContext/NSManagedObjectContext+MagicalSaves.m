@@ -36,7 +36,20 @@
 
 - (void) MR_saveWithOptions:(MRSaveOptions)mask completion:(MRSaveCompletionHandler)completion;
 {
-    if (![self hasChanges])
+    __block BOOL hasChanges = NO;
+
+    if ([self concurrencyType] == NSConfinementConcurrencyType)
+    {
+        hasChanges = [self hasChanges];
+    }
+    else
+    {
+        [self performBlockAndWait:^{
+            hasChanges = [self hasChanges];
+        }];
+    }
+
+    if (!hasChanges)
     {
         MRLogVerbose(@"NO CHANGES IN ** %@ ** CONTEXT - NOT SAVING", [self MR_workingName]);
 
