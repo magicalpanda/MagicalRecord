@@ -32,7 +32,7 @@ def processImplementation(headerFile)
             if objects_to_process.include?(matches[:ObjectName])
                 processed_line = "\n@implementation #{matches[:ObjectName]} (#{matches[:Category]}ShortHand)\n"
             else
-                puts "Skipping #{headerFile}"
+                puts "Skipping #{headerFile} because it didn't match any of the approved classes"
                 non_prefixed_methods = nil
                 return
             end
@@ -66,9 +66,9 @@ EOS
                     processed_line = "#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR\n\n#{processed_line}\n#endif /* TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR */\n"
                   end
                 else
-                    puts "Skipping #{headerFile}"
                     non_prefixed_methods = nil
                     return
+                    puts "Skipping #{headerFile} : #{matches[:MethodName]} because it doesn't start with MR_"
                 end
             end
         end
@@ -110,7 +110,7 @@ def processHeader(headerFile, include_deprecation_warnings)
             if objects_to_process.include?(matches[:ObjectName])
                 processed_line = "\n#{matches[:Interface]} #{matches[:ObjectName]} (#{matches[:Category]}ShortHand)\n"
             else
-                puts "Skipping #{headerFile}"
+                puts "Skipping #{headerFile} because it didn't match any of the approved classes"
                 non_prefixed_methods = nil
                 return
             end
@@ -143,9 +143,9 @@ def processHeader(headerFile, include_deprecation_warnings)
                       processed_line = "\n#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR\n\n#{processed_line}\n\n#endif /* TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR */"
                     end
                 else
-                    puts "Skipping #{headerFile}"
                     non_prefixed_methods = nil
                     return
+                    puts "Skipping #{headerFile} : #{matches[:MethodName]} because it doesn't start with MR_"
                 end
             end
         end
@@ -252,7 +252,7 @@ else
     puts "Generating shorthand headers"
 end
 
-headers = generateHeaders(ARGV[0], false).collect &:compact
+headers = generateHeaders(ARGV[0], true).collect &:compact
 implementations = generateImplementations(ARGV[0]).collect &:compact
 
 File.open("#{output_file}.h", "w") { |file|
