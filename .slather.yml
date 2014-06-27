@@ -1,0 +1,3 @@
+coverage_service: coveralls
+xcodeproj: MagicalRecord.xcodeproj/
+ignore: "Tests/*"

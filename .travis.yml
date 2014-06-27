@@ -1,2 +1,5 @@
 language: objective-c
+before_install:
+  - gem install slather --no-rdoc --no-ri --no-document --quiet
 script: Support/Scripts/objc-build-scripts/cibuild
+after_success: slather
