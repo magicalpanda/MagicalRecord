@@ -3,13 +3,15 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
+
+#ifdef __OBJC__
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
 #ifndef NS_BLOCKS_AVAILABLE
 #warning MagicalRecord requires blocks
 #endif
 
-#ifdef __OBJC__
-#import <CoreFoundation/CoreFoundation.h>
-#import <CoreData/CoreData.h>
 #import "MagicalRecordInternal.h"
 #import "MagicalRecord+Options.h"
 #import "MagicalRecord+Setup.h"
