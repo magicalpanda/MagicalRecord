@@ -176,7 +176,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
     }
 }
 
-+ (void)rootContextChanged:(NSNotification *)notification
++ (void) rootContextChanged:(NSNotification *)notification
 {
     if ([NSThread isMainThread] == NO) {
         dispatch_async(dispatch_get_main_queue(), ^{

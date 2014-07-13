@@ -16,7 +16,7 @@
 
 @implementation ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests
 
-- (void)setupTestData
+- (void) setupTestData
 {
     NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
 
@@ -28,12 +28,12 @@
     [context MR_saveToPersistentStoreAndWait];
 }
 
-- (Class)testEntityClass
+- (Class) testEntityClass
 {
     return [SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey class];
 }
 
-- (void)testImportMappedEntityRelatedViaToOneRelationship
+- (void) testImportMappedEntityRelatedViaToOneRelationship
 {
     SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
 
@@ -59,7 +59,7 @@
     XCTAssertTrue(stringRange.length > 0, @"Did not find 'sample json file' in %@", [testRelatedEntity sampleAttribute]);
 }
 
-- (void)testImportMappedEntityUsingPrimaryRelationshipKey
+- (void) testImportMappedEntityUsingPrimaryRelationshipKey
 {
     SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
 

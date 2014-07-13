@@ -16,12 +16,12 @@
 
 @implementation ImportSingleEntityRelatedToMappedEntityUsingDefaultsTests
 
-- (Class)testEntityClass
+- (Class) testEntityClass
 {
     return [SingleEntityRelatedToMappedEntityUsingDefaults class];
 }
 
-- (void)setupTestData
+- (void) setupTestData
 {
     NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
 
@@ -36,7 +36,7 @@
     [context MR_saveToPersistentStoreAndWait];
 }
 
-- (void)testImportMappedEntityViaToOneRelationship
+- (void) testImportMappedEntityViaToOneRelationship
 {
     SingleEntityRelatedToMappedEntityUsingDefaults *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
 

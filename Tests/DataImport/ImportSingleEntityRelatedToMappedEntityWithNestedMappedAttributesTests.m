@@ -16,12 +16,12 @@
 
 @implementation ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests
 
-- (Class)testEntityClass
+- (Class) testEntityClass
 {
     return [SingleEntityRelatedToMappedEntityWithNestedMappedAttributes class];
 }
 
-- (void)testDataImport
+- (void) testDataImport
 {
     SingleEntityRelatedToMappedEntityWithNestedMappedAttributes *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
 

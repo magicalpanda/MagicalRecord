@@ -15,12 +15,12 @@
 
 @implementation ImportSingleEntityRelatedToMappedEntityWithSecondaryMappingsTests
 
-- (Class)testEntityClass
+- (Class) testEntityClass
 {
     return [SingleEntityRelatedToMappedEntityWithSecondaryMappings class];
 }
 
-- (void)testImportMappedAttributeUsingSecondaryMappedKeyName
+- (void) testImportMappedAttributeUsingSecondaryMappedKeyName
 {
     SingleEntityRelatedToMappedEntityWithSecondaryMappings *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
 

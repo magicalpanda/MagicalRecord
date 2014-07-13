@@ -30,12 +30,12 @@ static NSPersistentStore *defaultPersistentStore_ = nil;
     return [NSSearchPathForDirectoriesInDomains(type, NSUserDomainMask, YES) lastObject];
 }
 
-+ (NSString *)MR_applicationDocumentsDirectory 
++ (NSString *) MR_applicationDocumentsDirectory
 {
 	return [self MR_directory:NSDocumentDirectory];
 }
 
-+ (NSString *)MR_applicationStorageDirectory
++ (NSString *) MR_applicationStorageDirectory
 {
     NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
     return [[self MR_directory:NSApplicationSupportDirectory] stringByAppendingPathComponent:applicationName];

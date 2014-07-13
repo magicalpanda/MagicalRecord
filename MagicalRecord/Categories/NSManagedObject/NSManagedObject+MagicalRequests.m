@@ -13,7 +13,7 @@
 @implementation NSManagedObject (MagicalRequests)
 
 
-+ (NSFetchRequest *)MR_createFetchRequestInContext:(NSManagedObjectContext *)context
++ (NSFetchRequest *) MR_createFetchRequestInContext:(NSManagedObjectContext *)context
 {
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
 	[request setEntity:[self MR_entityDescriptionInContext:context]];

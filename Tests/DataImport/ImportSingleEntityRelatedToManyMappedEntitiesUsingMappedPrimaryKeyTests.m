@@ -15,12 +15,12 @@
 
 @implementation ImportSingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyTests
 
-- (Class)testEntityClass
+- (Class) testEntityClass
 {
     return [SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey class];
 }
 
-- (void)testImportData
+- (void) testImportData
 {
     SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
 

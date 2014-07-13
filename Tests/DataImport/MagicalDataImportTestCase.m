@@ -11,7 +11,7 @@
 
 @implementation MagicalDataImportTestCase
 
-- (void)setUp
+- (void) setUp
 {
     [super setUp];
 
@@ -20,12 +20,12 @@
     self.testEntityData = [self dataFromJSONFixture];
 }
 
-- (Class)testEntityClass;
+- (Class) testEntityClass;
 {
     return [NSManagedObject class];
 }
 
-- (void)setupTestData
+- (void) setupTestData
 {
     // Implement this in your subclasses
 }
