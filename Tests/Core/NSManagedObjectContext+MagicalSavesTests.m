@@ -12,7 +12,7 @@
 
 @implementation NSManagedObjectContextMagicalSavesTests
 
-- (void)testSaveToSelfOnlyWhenSaveIsSynchronous
+- (void) testSaveToSelfOnlyWhenSaveIsSynchronous
 {
     NSManagedObjectContext *parentContext = [NSManagedObjectContext MR_defaultContext];
     NSManagedObjectContext *childContext = [NSManagedObjectContext MR_contextWithParent:parentContext];
@@ -48,7 +48,7 @@
     expect([childContextFetchedObject hasChanges]).to.beFalsy();
 }
 
-- (void)testSaveToSelfOnlyWhenSaveIsAsynchronous
+- (void) testSaveToSelfOnlyWhenSaveIsAsynchronous
 {
     NSManagedObjectContext *parentContext = [NSManagedObjectContext MR_defaultContext];
     NSManagedObjectContext *childContext = [NSManagedObjectContext MR_contextWithParent:parentContext];
@@ -89,7 +89,7 @@
     expect([childContextFetchedObject hasChanges]).will.beFalsy();
 }
 
-- (void)testSaveToSelfOnlyWhenSaveIsAsynchronousCallsMainThreadOnCompletion
+- (void) testSaveToSelfOnlyWhenSaveIsAsynchronousCallsMainThreadOnCompletion
 {
     NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
 
@@ -109,7 +109,7 @@
     expect(completionBlockIsOnMainThread).will.beTruthy();
 }
 
-- (void)testSaveToPersistentStoreWhenSaveIsSynchronous
+- (void) testSaveToPersistentStoreWhenSaveIsSynchronous
 {
     NSManagedObjectContext *parentContext = [NSManagedObjectContext MR_defaultContext];
     NSManagedObjectContext *childContext = [NSManagedObjectContext MR_contextWithParent:parentContext];
@@ -147,7 +147,7 @@
     expect([childContextFetchedObject hasChanges]).to.beFalsy();
 }
 
-- (void)testSaveToPersistentStoreWhenSaveIsAsynchronous
+- (void) testSaveToPersistentStoreWhenSaveIsAsynchronous
 {
     NSManagedObjectContext *parentContext = [NSManagedObjectContext MR_defaultContext];
     NSManagedObjectContext *childContext = [NSManagedObjectContext MR_contextWithParent:parentContext];
@@ -190,7 +190,7 @@
     expect([childContextFetchedObject hasChanges]).will.beFalsy();
 }
 
-- (void)testThatSavedObjectsHavePermanentIDs
+- (void) testThatSavedObjectsHavePermanentIDs
 {
     NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
     SingleEntityWithNoRelationships *entity = [SingleEntityWithNoRelationships MR_createEntityInContext:defaultContext];

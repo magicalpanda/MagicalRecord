@@ -14,7 +14,7 @@
 
 #pragma mark - Synchronous Saves
 
-- (void)testSynchronousSaveActionSaves
+- (void) testSynchronousSaveActionSaves
 {
     __block NSManagedObjectID *objectId;
 
@@ -37,7 +37,7 @@
     expect([fetchedObject hasChanges]).to.beFalsy();
 }
 
-- (void)testSynchronousSaveActionMakesInsertedEntitiesAvailableInTheDefaultContext
+- (void) testSynchronousSaveActionMakesInsertedEntitiesAvailableInTheDefaultContext
 {
     __block NSManagedObjectID *objectId;
 
@@ -60,7 +60,7 @@
     expect([fetchedObject hasChanges]).to.beFalsy();
 }
 
-- (void)testSynchronousSaveActionMakesUpdatesToEntitiesAvailableToTheDefaultContext
+- (void) testSynchronousSaveActionMakesUpdatesToEntitiesAvailableToTheDefaultContext
 {
     __block NSManagedObjectID *objectId;
     __block NSManagedObject *fetchedObject;
@@ -95,7 +95,7 @@
 
 #pragma mark - Asynchronous Saves
 
-- (void)testAsynchronousSaveActionSaves
+- (void) testAsynchronousSaveActionSaves
 {
     __block BOOL saveSuccessState = NO;
     __block NSError *saveError;
@@ -123,7 +123,7 @@
     expect([existingObject hasChanges]).will.beFalsy();
 }
 
-- (void)testAsynchronousSaveActionCallsCompletionBlockOnTheMainThread
+- (void) testAsynchronousSaveActionCallsCompletionBlockOnTheMainThread
 {
     __block BOOL completionBlockCalled = NO;
     __block BOOL completionBlockIsOnMainThread = NO;
@@ -142,7 +142,7 @@
     expect(completionBlockIsOnMainThread).will.beTruthy();
 }
 
-- (void)testAsynchronousSaveActionMakesInsertedEntitiesAvailableInTheDefaultContext
+- (void) testAsynchronousSaveActionMakesInsertedEntitiesAvailableInTheDefaultContext
 {
     __block BOOL saveSuccessState = NO;
     __block NSManagedObjectID *objectId;
@@ -165,7 +165,7 @@
     expect([fetchedObject hasChanges]).will.beFalsy();
 }
 
-- (void)testAsynchronousSaveActionMakesUpdatesToEntitiesAvailableToTheDefaultContext
+- (void) testAsynchronousSaveActionMakesUpdatesToEntitiesAvailableToTheDefaultContext
 {
     __block NSManagedObjectID *objectId;
     __block NSManagedObject *fetchedObject;
@@ -197,7 +197,7 @@
     expect([fetchedObject valueForKey:kTestAttributeKey]).will.beFalsy();
 }
 
-- (void)testCurrentThreadSynchronousSaveActionSaves
+- (void) testCurrentThreadSynchronousSaveActionSaves
 {
     __block NSManagedObjectID *objectId;
 
@@ -220,7 +220,7 @@
     expect([fetchedObject hasChanges]).to.beFalsy();
 }
 
-- (void)testCurrentThreadAsynchronousSaveActionSaves
+- (void) testCurrentThreadAsynchronousSaveActionSaves
 {
     __block BOOL               saveSuccessState = NO;
     __block NSError           *saveError;
@@ -248,7 +248,7 @@
     expect([fetchedObject hasChanges]).will.beFalsy();
 }
 
-- (void)testCurrentThreadAsynchronousSaveActionCallsCompletionBlockOnTheMainThread
+- (void) testCurrentThreadAsynchronousSaveActionCallsCompletionBlockOnTheMainThread
 {
     __block BOOL completionBlockCalled = NO;
     __block BOOL completionBlockIsOnMainThread = NO;

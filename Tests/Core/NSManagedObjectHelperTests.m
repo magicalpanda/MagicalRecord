@@ -15,14 +15,14 @@
 
 @implementation NSManagedObjectHelperTests
 
-- (void)testCreateFetchRequestForEntity
+- (void) testCreateFetchRequestForEntity
 {
     NSFetchRequest *testRequest = [SingleRelatedEntity MR_requestAll];
 
     XCTAssertEqualObjects([[testRequest entity] name], NSStringFromClass([SingleRelatedEntity class]), @"Entity name should be the string representation of the entity's class");
 }
 
-- (void)testCanRequestFirstEntityWithPredicate
+- (void) testCanRequestFirstEntityWithPredicate
 {
     NSPredicate *testPredicate = [NSPredicate predicateWithFormat:@"mappedStringAttribute = 'Test Predicate'"];
     NSFetchRequest *testRequest = [SingleRelatedEntity MR_requestFirstWithPredicate:testPredicate];
@@ -31,7 +31,7 @@
     XCTAssertEqualObjects([testRequest predicate], [NSPredicate predicateWithFormat:@"mappedStringAttribute = 'Test Predicate'"], @"Predicate objects should be equal");
 }
 
-- (void)testCreateRequestForFirstEntity
+- (void) testCreateRequestForFirstEntity
 {
     NSFetchRequest *testRequest = [SingleRelatedEntity MR_requestFirstByAttribute:@"mappedStringAttribute" withValue:nil];
 
@@ -41,21 +41,21 @@
     XCTAssertEqualObjects([testRequest predicate], [NSPredicate predicateWithFormat:@"mappedStringAttribute = nil"], @"Predicate objects should be equal");
 }
 
-- (void)testCanGetEntityDescriptionFromEntityClass
+- (void) testCanGetEntityDescriptionFromEntityClass
 {
     NSEntityDescription *testDescription = [SingleRelatedEntity MR_entityDescription];
 
     XCTAssertNotNil(testDescription, @"Entity description should not be nil");
 }
 
-- (void)testCanCreateEntityInstance
+- (void) testCanCreateEntityInstance
 {
     id testEntity = [SingleRelatedEntity MR_createEntity];
 
     XCTAssertNotNil(testEntity, @"Entity should not be nil");
 }
 
-- (void)testCanDeleteEntityInstance
+- (void) testCanDeleteEntityInstance
 {
     id testEntity = [SingleRelatedEntity MR_createEntity];
 
@@ -69,7 +69,7 @@
     XCTAssertTrue([testEntity isDeleted], @"Entity should return true for isDeleted before MR_deleteEntity is sent");
 }
 
-- (void)testCanSearchForNumberOfAllEntities
+- (void) testCanSearchForNumberOfAllEntities
 {
     NSInteger numberOfTestEntitiesToCreate = 20;
 
@@ -79,7 +79,7 @@
     XCTAssertEqualObjects(entityCount, @(numberOfTestEntitiesToCreate), @"Expected numberOfEntities to be %zd, got %@", numberOfTestEntitiesToCreate, entityCount);
 }
 
-- (void)testCanSearchForNumberOfEntitiesWithPredicate
+- (void) testCanSearchForNumberOfEntitiesWithPredicate
 {
     NSInteger numberOfTestEntitiesToCreate = 20;
 
@@ -90,7 +90,7 @@
     XCTAssertEqualObjects(entityCount, @5, @"Should return a count of 5, got %@", entityCount);
 }
 
-- (void)testRetrieveInstanceOfManagedObjectFromAnotherContextHasAPermanentObjectID
+- (void) testRetrieveInstanceOfManagedObjectFromAnotherContextHasAPermanentObjectID
 {
     NSManagedObject *insertedEntity = [SingleRelatedEntity MR_createEntity];
 
@@ -102,7 +102,7 @@
     }];
 }
 
-- (void)testCanDeleteEntityInstanceInOtherContext
+- (void) testCanDeleteEntityInstanceInOtherContext
 {
     NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
     NSManagedObject *testEntity = [SingleRelatedEntity MR_createEntityInContext:defaultContext];
@@ -131,7 +131,7 @@
 
 #pragma mark - Private Methods
 
-- (void)p_createSampleData:(NSInteger)numberOfTestEntitiesToCreate
+- (void) p_createSampleData:(NSInteger)numberOfTestEntitiesToCreate
 {
     for (int i = 0; i < numberOfTestEntitiesToCreate; i++) {
         SingleRelatedEntity *testEntity = [SingleRelatedEntity MR_createEntity];

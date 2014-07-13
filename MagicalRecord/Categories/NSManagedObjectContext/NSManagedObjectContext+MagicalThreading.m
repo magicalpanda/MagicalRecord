@@ -18,7 +18,7 @@ static volatile int32_t contextsCacheVersion = 0;
 
 @implementation NSManagedObjectContext (MagicalThreading)
 
-+ (void)MR_resetContextForCurrentThread
++ (void) MR_resetContextForCurrentThread
 {
     [[NSManagedObjectContext MR_contextForCurrentThread] reset];
 }

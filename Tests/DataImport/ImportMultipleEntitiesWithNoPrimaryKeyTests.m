@@ -19,19 +19,19 @@
 
 @implementation ImportMultipleEntitiesWithNoPrimaryKeyTests
 
-- (void)setUp
+- (void) setUp
 {
     [super setUp];
     
     self.arrayOfTestEntity = [SingleEntityWithNoRelationships MR_importFromArray:self.testEntityData];
 }
 
-- (void)tearDown
+- (void) tearDown
 {
     [super tearDown];
 }
 
-- (void)testImportOfMultipleEntities
+- (void) testImportOfMultipleEntities
 {
     XCTAssertNotNil(self.arrayOfTestEntity, @"arrayOfTestEntity should not be nil");
     XCTAssertEqual(self.arrayOfTestEntity.count, (NSUInteger)4, @"arrayOfTestEntity should have 4 entities");

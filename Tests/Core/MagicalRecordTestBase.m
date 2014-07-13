@@ -8,7 +8,7 @@
 
 @implementation MagicalRecordTestBase
 
-- (void)setUp
+- (void) setUp
 {
     [super setUp];
 
@@ -22,7 +22,7 @@
     [MagicalRecord setupCoreDataStackWithInMemoryStore];
 }
 
-- (void)tearDown
+- (void) tearDown
 {
     [MagicalRecord cleanUp];
 
