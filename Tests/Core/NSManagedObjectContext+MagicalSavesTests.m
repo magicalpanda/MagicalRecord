@@ -22,7 +22,7 @@
     expect([insertedObject hasChanges]).to.beTruthy();
 
     NSError *obtainIDsError;
-    BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[insertedObject] error:&obtainIDsError];
+    BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[ insertedObject ] error:&obtainIDsError];
 
     expect(obtainIDsResult).to.beTruthy();
     expect(obtainIDsError).to.beNil();
@@ -58,7 +58,7 @@
     expect([insertedObject hasChanges]).to.beTruthy();
 
     NSError *obtainIDsError;
-    BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[insertedObject] error:&obtainIDsError];
+    BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[ insertedObject ] error:&obtainIDsError];
 
     expect(obtainIDsResult).to.beTruthy();
     expect(obtainIDsError).to.beNil();
@@ -119,7 +119,7 @@
     expect([insertedObject hasChanges]).to.beTruthy();
 
     NSError *obtainIDsError;
-    BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[insertedObject] error:&obtainIDsError];
+    BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[ insertedObject ] error:&obtainIDsError];
 
     expect(obtainIDsResult).to.beTruthy();
     expect(obtainIDsError).to.beNil();
@@ -157,7 +157,7 @@
     expect([insertedObject hasChanges]).to.beTruthy();
 
     NSError *obtainIDsError;
-    BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[insertedObject] error:&obtainIDsError];
+    BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[ insertedObject ] error:&obtainIDsError];
 
     expect(obtainIDsResult).to.beTruthy();
     expect(obtainIDsError).to.beNil();
@@ -194,11 +194,11 @@
 {
     NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
     SingleEntityWithNoRelationships *entity = [SingleEntityWithNoRelationships MR_createEntityInContext:defaultContext];
-    
+
     expect([[entity objectID] isTemporaryID]).to.beTruthy();
-    
+
     [defaultContext MR_saveOnlySelfAndWait];
-    
+
     expect([[entity objectID] isTemporaryID]).to.beFalsy();
 }
 

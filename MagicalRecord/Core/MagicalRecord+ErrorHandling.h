@@ -10,11 +10,11 @@
 
 @interface MagicalRecord (ErrorHandling)
 
-+ (void) handleErrors:(NSError *)error;
-- (void) handleErrors:(NSError *)error;
++ (void)handleErrors:(NSError *)error;
+- (void)handleErrors:(NSError *)error;
 
-+ (void) setErrorHandlerTarget:(id)target action:(SEL)action;
-+ (SEL) errorHandlerAction;
-+ (id) errorHandlerTarget;
++ (void)setErrorHandlerTarget:(id)target action:(SEL)action;
++ (SEL)errorHandlerAction;
++ (id)errorHandlerTarget;
 
 @end

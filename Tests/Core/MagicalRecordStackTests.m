@@ -15,10 +15,9 @@
 
 @end
 
-
 @protocol MagicalRecordErrorHandlerProtocol <NSObject>
 
-- (void) testHandlingError:(NSError *)error;
+- (void)testHandlingError:(NSError *)error;
 
 @end
 
@@ -27,7 +26,7 @@
     BOOL errorHandlerWasCalled_;
 }
 
-- (void) assertDefaultStack
+- (void)assertDefaultStack
 {
     XCTAssertNotNil([NSManagedObjectContext MR_defaultContext], @"Default context cannot be nil");
     XCTAssertNotNil([NSManagedObjectModel MR_defaultManagedObjectModel], @"Default managed object model cannot be nil");
@@ -35,15 +34,15 @@
     XCTAssertNotNil([NSPersistentStore MR_defaultPersistentStore], @"Default persistent store cannot be nil");
 }
 
-- (void) testCreateDefaultCoreDataStack
+- (void)testCreateDefaultCoreDataStack
 {
     NSURL *testStoreURL = [NSPersistentStore MR_urlForStoreName:kMagicalRecordDefaultStoreFileName];
     [[NSFileManager defaultManager] removeItemAtPath:[testStoreURL path] error:nil];
-    
+
     [MagicalRecord setupCoreDataStack];
-    
+
     [self assertDefaultStack];
-    
+
     NSPersistentStore *defaultStore = [NSPersistentStore MR_defaultPersistentStore];
 
     XCTAssertTrue([[[defaultStore URL] absoluteString] hasSuffix:@".sqlite"], @"Default store URL must have an extension of 'sqlite'");
@@ -52,40 +51,40 @@
     [MagicalRecord cleanUp];
 }
 
-- (void) testCreateInMemoryCoreDataStack
+- (void)testCreateInMemoryCoreDataStack
 {
     [MagicalRecord setupCoreDataStackWithInMemoryStore];
-    
+
     [self assertDefaultStack];
-    
+
     NSPersistentStore *defaultStore = [NSPersistentStore MR_defaultPersistentStore];
     XCTAssertEqual([defaultStore type], NSInMemoryStoreType, @"Default store should be of type NSInMemoryStoreType");
 
     [MagicalRecord cleanUp];
 }
 
-- (void) testCreateSqliteStackWithCustomName
+- (void)testCreateSqliteStackWithCustomName
 {
     NSString *testStoreName = @"MyTestDataStore.sqlite";
-    
+
     NSURL *testStoreURL = [NSPersistentStore MR_urlForStoreName:testStoreName];
     [[NSFileManager defaultManager] removeItemAtPath:[testStoreURL path] error:nil];
-    
+
     [MagicalRecord setupCoreDataStackWithStoreNamed:testStoreName];
-    
+
     [self assertDefaultStack];
-    
+
     NSPersistentStore *defaultStore = [NSPersistentStore MR_defaultPersistentStore];
     XCTAssertEqual([defaultStore type], NSSQLiteStoreType, @"Default store should be of type NSSQLiteStoreType");
     XCTAssertTrue([[[defaultStore URL] absoluteString] hasSuffix:testStoreName], @"Default store URL expects to have a suffix of '%@'", testStoreName);
     [MagicalRecord cleanUp];
 }
 
-- (void) customErrorHandler:(id)error;
+- (void)customErrorHandler:(id)error;
 {
 }
 
-- (void) testCanSetAUserSpecifiedErrorHandler
+- (void)testCanSetAUserSpecifiedErrorHandler
 {
     [MagicalRecord setErrorHandlerTarget:self action:@selector(customErrorHandler:)];
 
@@ -93,7 +92,7 @@
     XCTAssertEqualObjects(NSStringFromSelector([MagicalRecord errorHandlerAction]), NSStringFromSelector(@selector(customErrorHandler:)), @"Error handler action expected to be `customErrorHandler:`");
 }
 
-- (void) magicalRecordErrorHandlerTest:(NSError *)error
+- (void)magicalRecordErrorHandlerTest:(NSError *)error
 {
     XCTAssertNotNil(error, @"Expected a non-nil error object");
     XCTAssertEqualObjects([error domain], @"MRTests", @"Expected an error domain of 'MRTests'");
@@ -101,11 +100,11 @@
     errorHandlerWasCalled_ = YES;
 }
 
-- (void) testUserSpecifiedErrorHandlersAreTriggeredOnError
+- (void)testUserSpecifiedErrorHandlersAreTriggeredOnError
 {
     errorHandlerWasCalled_ = NO;
     [MagicalRecord setErrorHandlerTarget:self action:@selector(magicalRecordErrorHandlerTest:)];
-    
+
     NSError *testError = [NSError errorWithDomain:@"MRTests" code:1000 userInfo:nil];
     [MagicalRecord handleErrors:testError];
 

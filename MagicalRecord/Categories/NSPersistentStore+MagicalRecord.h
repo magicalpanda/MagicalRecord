@@ -10,19 +10,16 @@
 
 // option to autodelete store if it already exists
 
-extern NSString * const kMagicalRecordDefaultStoreFileName;
-
+extern NSString *const kMagicalRecordDefaultStoreFileName;
 
 @interface NSPersistentStore (MagicalRecord)
 
-+ (NSURL *) MR_defaultLocalStoreUrl;
++ (NSURL *)MR_defaultLocalStoreUrl;
 
-+ (NSPersistentStore *) MR_defaultPersistentStore;
-+ (void) MR_setDefaultPersistentStore:(NSPersistentStore *) store;
++ (NSPersistentStore *)MR_defaultPersistentStore;
++ (void)MR_setDefaultPersistentStore:(NSPersistentStore *)store;
 
-+ (NSURL *) MR_urlForStoreName:(NSString *)storeFileName;
-+ (NSURL *) MR_cloudURLForUbiqutiousContainer:(NSString *)bucketName;
++ (NSURL *)MR_urlForStoreName:(NSString *)storeFileName;
++ (NSURL *)MR_cloudURLForUbiqutiousContainer:(NSString *)bucketName;
 
 @end
-
-

@@ -14,15 +14,15 @@
 
 @implementation NSPersistentStoreCoordinatorHelperTests
 
-- (void) setUp
+- (void)setUp
 {
     [super setUp];
-    
+
     NSURL *testStoreURL = [NSPersistentStore MR_urlForStoreName:@"TestStore.sqlite"];
     [[NSFileManager defaultManager] removeItemAtPath:[testStoreURL path] error:nil];
 }
 
-- (void) testCreateCoodinatorWithSqlitePersistentStore
+- (void)testCreateCoodinatorWithSqlitePersistentStore
 {
     NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreNamed:@"TestStore.sqlite"];
 
@@ -34,7 +34,7 @@
     XCTAssertEqualObjects(storeType, NSSQLiteStoreType, @"Store type should be NSSQLiteStoreType, instead is %@", storeType);
 }
 
-- (void) testCreateCoordinatorWithInMemoryStore
+- (void)testCreateCoordinatorWithInMemoryStore
 {
     NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator MR_coordinatorWithInMemoryStore];
 
@@ -46,7 +46,7 @@
     XCTAssertEqualObjects(storeType, NSInMemoryStoreType, @"Store type should be NSInMemoryStoreType, instead is %@", storeType);
 }
 
-- (void) testCanAddAnInMemoryStoreToAnExistingCoordinator
+- (void)testCanAddAnInMemoryStoreToAnExistingCoordinator
 {
     NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreNamed:@"TestStore.sqlite"];
 
@@ -58,7 +58,7 @@
     XCTAssertEqualObjects(firstStoreType, NSSQLiteStoreType, @"First store type should be NSSQLiteStoreType, instead is %@", firstStoreType);
 
     [testCoordinator MR_addInMemoryStore];
-    
+
     persistentStoreCount = [[testCoordinator persistentStores] count];
     XCTAssertEqual(persistentStoreCount, (NSUInteger)2, @"Expected there to be 2 persistent store, sadly there are %tu", persistentStoreCount);
 

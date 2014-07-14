@@ -18,44 +18,44 @@
  *
  *  @return String based name for the entity
  */
-+ (NSString *) MR_entityName;
++ (NSString *)MR_entityName;
 
-+ (NSUInteger) MR_defaultBatchSize;
-+ (void) MR_setDefaultBatchSize:(NSUInteger)newBatchSize;
++ (NSUInteger)MR_defaultBatchSize;
++ (void)MR_setDefaultBatchSize:(NSUInteger)newBatchSize;
 
-+ (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request;
-+ (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
-+ (instancetype) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request;
-+ (instancetype) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
++ (NSArray *)MR_executeFetchRequest:(NSFetchRequest *)request;
++ (NSArray *)MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
++ (instancetype)MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request;
++ (instancetype)MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
-+ (void) MR_performFetch:(NSFetchedResultsController *)controller;
++ (void)MR_performFetch:(NSFetchedResultsController *)controller;
 
 #endif
 
-+ (NSEntityDescription *) MR_entityDescription;
-+ (NSEntityDescription *) MR_entityDescriptionInContext:(NSManagedObjectContext *)context;
-+ (NSArray *) MR_propertiesNamed:(NSArray *)properties;
-+ (NSArray *) MR_propertiesNamed:(NSArray *)properties inContext:(NSManagedObjectContext *)context;
++ (NSEntityDescription *)MR_entityDescription;
++ (NSEntityDescription *)MR_entityDescriptionInContext:(NSManagedObjectContext *)context;
++ (NSArray *)MR_propertiesNamed:(NSArray *)properties;
++ (NSArray *)MR_propertiesNamed:(NSArray *)properties inContext:(NSManagedObjectContext *)context;
 
-+ (instancetype) MR_createEntity;
-+ (instancetype) MR_createEntityInContext:(NSManagedObjectContext *)context;
++ (instancetype)MR_createEntity;
++ (instancetype)MR_createEntityInContext:(NSManagedObjectContext *)context;
 
-- (BOOL) MR_deleteEntity;
-- (BOOL) MR_deleteEntityInContext:(NSManagedObjectContext *)context;
+- (BOOL)MR_deleteEntity;
+- (BOOL)MR_deleteEntityInContext:(NSManagedObjectContext *)context;
 
-+ (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate;
-+ (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
++ (BOOL)MR_deleteAllMatchingPredicate:(NSPredicate *)predicate;
++ (BOOL)MR_deleteAllMatchingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
 
-+ (BOOL) MR_truncateAll;
-+ (BOOL) MR_truncateAllInContext:(NSManagedObjectContext *)context;
++ (BOOL)MR_truncateAll;
++ (BOOL)MR_truncateAllInContext:(NSManagedObjectContext *)context;
 
-+ (NSArray *) MR_ascendingSortDescriptors:(NSArray *)attributesToSortBy;
-+ (NSArray *) MR_descendingSortDescriptors:(NSArray *)attributesToSortBy;
++ (NSArray *)MR_ascendingSortDescriptors:(NSArray *)attributesToSortBy;
++ (NSArray *)MR_descendingSortDescriptors:(NSArray *)attributesToSortBy;
 
-- (instancetype) MR_inContext:(NSManagedObjectContext *)otherContext;
-- (instancetype) MR_inThreadContext;
+- (instancetype)MR_inContext:(NSManagedObjectContext *)otherContext;
+- (instancetype)MR_inThreadContext;
 
 @end
 
@@ -63,15 +63,19 @@
 
 @optional
 + (NSString *)entityName;
-- (instancetype) entityInManagedObjectContext:(NSManagedObjectContext *)object;
-- (instancetype) insertInManagedObjectContext:(NSManagedObjectContext *)object;
+- (instancetype)entityInManagedObjectContext:(NSManagedObjectContext *)object;
+- (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)object;
 
 @end
 
 #pragma mark - Deprecated Methods — DO NOT USE
 @interface NSManagedObject (MagicalRecordDeprecated)
 
-+ (instancetype) MR_createInContext:(NSManagedObjectContext *)context MR_DEPRECATED_WILL_BE_REMOVED_IN_PLEASE_USE("4.0", "MR_createEntityInContext:");
-- (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context MR_DEPRECATED_WILL_BE_REMOVED_IN_PLEASE_USE("4.0", "MR_deleteEntityInContext:");
++ (instancetype)MR_createInContext:(NSManagedObjectContext *)context MR_DEPRECATED_WILL_BE_REMOVED_IN_PLEASE_USE(
+                                       "4.0",
+                                       "MR_createEntityInContext:");
+- (BOOL)MR_deleteInContext:(NSManagedObjectContext *)context MR_DEPRECATED_WILL_BE_REMOVED_IN_PLEASE_USE(
+                               "4.0",
+                               "MR_deleteEntityInContext:");
 
 @end

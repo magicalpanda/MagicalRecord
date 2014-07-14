@@ -9,7 +9,7 @@
 #import "MagicalRecordLogging.h"
 #import <objc/runtime.h>
 
-static NSString * const MagicalRecordContextWorkingName = @"MagicalRecordContextWorkingName";
+static NSString *const MagicalRecordContextWorkingName = @"MagicalRecordContextWorkingName";
 
 static NSManagedObjectContext *MagicalRecordRootSavingContext;
 static NSManagedObjectContext *MagicalRecordDefaultContext;
@@ -20,7 +20,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
 #pragma mark - Setup
 
-+ (void) MR_initializeDefaultContextWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
++ (void)MR_initializeDefaultContextWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 {
     NSAssert(coordinator, @"Provided coordinator cannot be nil!");
     if (MagicalRecordDefaultContext == nil)
@@ -37,27 +37,28 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
 #pragma mark - Default Contexts
 
-+ (NSManagedObjectContext *) MR_defaultContext
++ (NSManagedObjectContext *)MR_defaultContext
 {
-    @synchronized(self) {
+    @synchronized(self)
+    {
         NSAssert(MagicalRecordDefaultContext != nil, @"Default context is nil! Did you forget to initialize the Core Data Stack?");
         return MagicalRecordDefaultContext;
     }
 }
 
-+ (NSManagedObjectContext *) MR_rootSavingContext;
++ (NSManagedObjectContext *)MR_rootSavingContext;
 {
     return MagicalRecordRootSavingContext;
 }
 
 #pragma mark - Context Creation
 
-+ (NSManagedObjectContext *) MR_context
++ (NSManagedObjectContext *)MR_context
 {
     return [self MR_contextWithParent:[self MR_rootSavingContext]];
 }
 
-+ (NSManagedObjectContext *) MR_contextWithParent:(NSManagedObjectContext *)parentContext
++ (NSManagedObjectContext *)MR_contextWithParent:(NSManagedObjectContext *)parentContext
 {
     NSManagedObjectContext *context = [self MR_newPrivateQueueContext];
     [context setParentContext:parentContext];
@@ -65,29 +66,29 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
     return context;
 }
 
-+ (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
++ (NSManagedObjectContext *)MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
-	NSManagedObjectContext *context = nil;
+    NSManagedObjectContext *context = nil;
     if (coordinator != nil)
-	{
+    {
         context = [self MR_newPrivateQueueContext];
         [context performBlockAndWait:^{
             [context setPersistentStoreCoordinator:coordinator];
         }];
-        
+
         MRLogVerbose(@"Created new context %@ with store coordinator: %@", [context MR_workingName], coordinator);
     }
     return context;
 }
 
-+ (NSManagedObjectContext *) MR_newMainQueueContext
++ (NSManagedObjectContext *)MR_newMainQueueContext
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     MRLogInfo(@"Created new main queue context: %@", context);
     return context;
 }
 
-+ (NSManagedObjectContext *) MR_newPrivateQueueContext
++ (NSManagedObjectContext *)MR_newPrivateQueueContext
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     MRLogInfo(@"Created new private queue context: %@", context);
@@ -96,12 +97,12 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
 #pragma mark - Debugging
 
-- (void) MR_setWorkingName:(NSString *)workingName
+- (void)MR_setWorkingName:(NSString *)workingName
 {
     [[self userInfo] setObject:workingName forKey:MagicalRecordContextWorkingName];
 }
 
-- (NSString *) MR_workingName
+- (NSString *)MR_workingName
 {
     NSString *workingName = [[self userInfo] objectForKey:MagicalRecordContextWorkingName];
     if ([workingName length] == 0)
@@ -111,34 +112,34 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
     return workingName;
 }
 
-- (NSString *) MR_description
+- (NSString *)MR_description
 {
     NSString *onMainThread = [NSThread isMainThread] ? @"the main thread" : @"a background thread";
 
     return [NSString stringWithFormat:@"<%@ (%p): %@> on %@", NSStringFromClass([self class]), self, [self MR_workingName], onMainThread];
 }
 
-- (NSString *) MR_parentChain
+- (NSString *)MR_parentChain
 {
     NSMutableString *familyTree = [@"\n" mutableCopy];
     NSManagedObjectContext *currentContext = self;
     do
     {
         [familyTree appendFormat:@"- %@ (%p) %@\n", [currentContext MR_workingName], currentContext, (currentContext == self ? @"(*)" : @"")];
-    }
-    while ((currentContext = [currentContext parentContext]));
+    } while ((currentContext = [currentContext parentContext]));
 
     return [NSString stringWithString:familyTree];
 }
 
 #pragma mark - Helpers
 
-+ (void) MR_resetDefaultContext
++ (void)MR_resetDefaultContext
 {
     NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
     NSAssert(NSConfinementConcurrencyType == [defaultContext concurrencyType], @"Do not call this method on a confinement context.");
 
-    if ([NSThread isMainThread] == NO) {
+    if ([NSThread isMainThread] == NO)
+    {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self MR_resetDefaultContext];
         });
@@ -149,7 +150,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
     [defaultContext reset];
 }
 
-- (void) MR_deleteObjects:(id <NSFastEnumeration>)objects
+- (void)MR_deleteObjects:(id<NSFastEnumeration>)objects
 {
     for (NSManagedObject *managedObject in objects)
     {
@@ -159,7 +160,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
 #pragma mark - Notification Handlers
 
-- (void) MR_contextWillSave:(NSNotification *)notification
+- (void)MR_contextWillSave:(NSNotification *)notification
 {
     NSManagedObjectContext *context = [notification object];
     NSSet *insertedObjects = [context insertedObjects];
@@ -178,7 +179,8 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
 + (void)rootContextChanged:(NSNotification *)notification
 {
-    if ([NSThread isMainThread] == NO) {
+    if ([NSThread isMainThread] == NO)
+    {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self rootContextChanged:notification];
         });
@@ -191,17 +193,18 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
 #pragma mark - Private Methods
 
-+ (void) MR_cleanUp
++ (void)MR_cleanUp
 {
     [self MR_setDefaultContext:nil];
     [self MR_setRootSavingContext:nil];
 #pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#pragma clang diagnostic ignored \
+    "-Wdeprecated-declarations"
     [self MR_clearNonMainThreadContextsCache];
 #pragma clang diagnostic pop
 }
 
-- (void) MR_obtainPermanentIDsBeforeSaving
+- (void)MR_obtainPermanentIDsBeforeSaving
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(MR_contextWillSave:)
@@ -209,7 +212,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
                                                object:self];
 }
 
-+ (void) MR_setDefaultContext:(NSManagedObjectContext *)moc
++ (void)MR_setDefaultContext:(NSManagedObjectContext *)moc
 {
     if (MagicalRecordDefaultContext)
     {
@@ -231,7 +234,8 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
     MagicalRecordDefaultContext = moc;
     [MagicalRecordDefaultContext MR_setWorkingName:@"MagicalRecord Default Context"];
 
-    if ((MagicalRecordDefaultContext != nil) && ([self MR_rootSavingContext] != nil)) {
+    if ((MagicalRecordDefaultContext != nil) && ([self MR_rootSavingContext] != nil))
+    {
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(rootContextChanged:)
                                                      name:NSManagedObjectContextDidSaveNotification
@@ -247,16 +251,16 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
     {
         // If icloud is NOT enabled at the time of this method being called, listen for it to be setup later, and THEN set up observing cloud changes
         MagicalRecordUbiquitySetupNotificationObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kMagicalRecordPSCDidCompleteiCloudSetupNotification
-                                                                                            object:nil
-                                                                                             queue:[NSOperationQueue mainQueue]
-                                                                                        usingBlock:^(NSNotification *note) {
+                                                                                                           object:nil
+                                                                                                            queue:[NSOperationQueue mainQueue]
+                                                                                                       usingBlock:^(NSNotification *note) {
                                                                                             [[NSManagedObjectContext MR_defaultContext] MR_observeiCloudChangesInCoordinator:coordinator];
-                                                                                        }];
+                                                                                                       }];
     }
     MRLogInfo(@"Set default context: %@", MagicalRecordDefaultContext);
 }
 
-+ (void) MR_setRootSavingContext:(NSManagedObjectContext *)context
++ (void)MR_setRootSavingContext:(NSManagedObjectContext *)context
 {
     if (MagicalRecordRootSavingContext)
     {
@@ -275,22 +279,22 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 #pragma mark - Deprecated Methods — DO NOT USE
 @implementation NSManagedObjectContext (MagicalRecordDeprecated)
 
-+ (NSManagedObjectContext *) MR_contextWithoutParent
++ (NSManagedObjectContext *)MR_contextWithoutParent
 {
     return [self MR_newPrivateQueueContext];
 }
 
-+ (NSManagedObjectContext *) MR_newContext
++ (NSManagedObjectContext *)MR_newContext
 {
     return [self MR_context];
 }
 
-+ (NSManagedObjectContext *) MR_newContextWithParent:(NSManagedObjectContext *)parentContext
++ (NSManagedObjectContext *)MR_newContextWithParent:(NSManagedObjectContext *)parentContext
 {
     return [self MR_contextWithParent:parentContext];
 }
 
-+ (NSManagedObjectContext *) MR_newContextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
++ (NSManagedObjectContext *)MR_newContextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
     return [self MR_contextWithStoreCoordinator:coordinator];
 }

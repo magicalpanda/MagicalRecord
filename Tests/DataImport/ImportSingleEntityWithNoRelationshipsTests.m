@@ -119,7 +119,8 @@
 {
     UIColor *actualColor = testEntity.colorTestAttribute;
 
-    if ([actualColor respondsToSelector:@selector(getRed:green:blue:alpha:)]) {
+    if ([actualColor respondsToSelector:@selector(getRed:green:blue:alpha:)])
+    {
         CGFloat red, blue, green, alpha;
         [actualColor getRed:&red green:&green blue:&blue alpha:&alpha];
 
@@ -178,11 +179,13 @@
     XCTAssertEqualObjects(testEntity.dateWithCustomFormat, expectedDate, @"Unexpected value returned");
 }
 
-- (void)testImportEpochDate {
+- (void)testImportEpochDate
+{
     XCTAssertEqualObjects(testEntity.unixTimeTestAttribute, [NSDate dateWithTimeIntervalSince1970:1388349428], @"unixTimeTestAttribute did not contain the expected value, instead found: %@", testEntity.unixTimeTestAttribute);
 }
 
-- (void)testImportEpochDate13 {
+- (void)testImportEpochDate13
+{
     XCTAssertEqualObjects(testEntity.unixTime13TestAttribute, [NSDate dateWithTimeIntervalSince1970:1388349427.543], @"unixTimeTest13Attribute did not contain the expected value, instead found: %@", testEntity.unixTime13TestAttribute);
 }
 

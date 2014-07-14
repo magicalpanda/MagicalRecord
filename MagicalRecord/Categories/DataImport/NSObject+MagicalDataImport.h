@@ -11,10 +11,10 @@
 
 @interface NSObject (MagicalRecord_DataImport)
 
-- (NSString *) MR_lookupKeyForAttribute:(NSAttributeDescription *)attributeInfo;
-- (id) MR_valueForAttribute:(NSAttributeDescription *)attributeInfo;
+- (NSString *)MR_lookupKeyForAttribute:(NSAttributeDescription *)attributeInfo;
+- (id)MR_valueForAttribute:(NSAttributeDescription *)attributeInfo;
 
-- (NSString *) MR_lookupKeyForRelationship:(NSRelationshipDescription *)relationshipInfo;
-- (id) MR_relatedValueForRelationship:(NSRelationshipDescription *)relationshipInfo;
+- (NSString *)MR_lookupKeyForRelationship:(NSRelationshipDescription *)relationshipInfo;
+- (id)MR_relatedValueForRelationship:(NSRelationshipDescription *)relationshipInfo;
 
 @end

@@ -11,7 +11,7 @@
 @interface MagicalRecord (ShorthandSupport)
 
 #ifdef MR_SHORTHAND
-+ (void) swizzleShorthandMethods;
++ (void)swizzleShorthandMethods;
 #endif
 
 @end
