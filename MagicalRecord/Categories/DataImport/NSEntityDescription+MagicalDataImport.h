@@ -6,11 +6,10 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-
 @interface NSEntityDescription (MagicalRecord_DataImport)
 
-- (NSAttributeDescription *) MR_primaryAttributeToRelateBy;
-- (NSManagedObject *) MR_createInstanceInContext:(NSManagedObjectContext *)context;
+- (NSAttributeDescription *)MR_primaryAttributeToRelateBy;
+- (NSManagedObject *)MR_createInstanceInContext:(NSManagedObjectContext *)context;
 
 /**
  *	Safely returns an attribute description for the given name, otherwise returns nil. In certain circumstances, the keys of the dictionary returned by `attributesByName` are not standard NSStrings and won't match using object subscripting or standard `objectForKey:` lookups.
@@ -21,6 +20,6 @@
  *
  *	@return	The attribute description for the given name, otherwise nil
  */
-- (NSAttributeDescription *) MR_attributeDescriptionForName:(NSString *)name;
+- (NSAttributeDescription *)MR_attributeDescriptionForName:(NSString *)name;
 
 @end

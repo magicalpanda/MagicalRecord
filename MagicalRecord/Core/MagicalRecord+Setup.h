@@ -10,12 +10,11 @@
 
 @interface MagicalRecord (Setup)
 
-+ (void) setupCoreDataStack;
-+ (void) setupCoreDataStackWithInMemoryStore;
-+ (void) setupAutoMigratingCoreDataStack;
++ (void)setupCoreDataStack;
++ (void)setupCoreDataStackWithInMemoryStore;
++ (void)setupAutoMigratingCoreDataStack;
 
-+ (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName;
-+ (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName;
-
++ (void)setupCoreDataStackWithStoreNamed:(NSString *)storeName;
++ (void)setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName;
 
 @end

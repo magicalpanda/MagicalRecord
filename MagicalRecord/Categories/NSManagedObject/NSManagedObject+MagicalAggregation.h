@@ -10,24 +10,24 @@
 
 @interface NSManagedObject (MagicalAggregation)
 
-+ (NSNumber *) MR_numberOfEntities;
-+ (NSNumber *) MR_numberOfEntitiesWithContext:(NSManagedObjectContext *)context;
-+ (NSNumber *) MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm;
-+ (NSNumber *) MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
++ (NSNumber *)MR_numberOfEntities;
++ (NSNumber *)MR_numberOfEntitiesWithContext:(NSManagedObjectContext *)context;
++ (NSNumber *)MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm;
++ (NSNumber *)MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
 
-+ (NSUInteger) MR_countOfEntities;
-+ (NSUInteger) MR_countOfEntitiesWithContext:(NSManagedObjectContext *)context;
-+ (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter;
-+ (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter inContext:(NSManagedObjectContext *)context;
++ (NSUInteger)MR_countOfEntities;
++ (NSUInteger)MR_countOfEntitiesWithContext:(NSManagedObjectContext *)context;
++ (NSUInteger)MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter;
++ (NSUInteger)MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter inContext:(NSManagedObjectContext *)context;
 
-+ (BOOL) MR_hasAtLeastOneEntity;
-+ (BOOL) MR_hasAtLeastOneEntityInContext:(NSManagedObjectContext *)context;
++ (BOOL)MR_hasAtLeastOneEntity;
++ (BOOL)MR_hasAtLeastOneEntityInContext:(NSManagedObjectContext *)context;
 
-- (id) MR_minValueFor:(NSString *)property;
-- (id) MR_maxValueFor:(NSString *)property;
+- (id)MR_minValueFor:(NSString *)property;
+- (id)MR_maxValueFor:(NSString *)property;
 
-+ (id) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
-+ (id) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate;
++ (id)MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
++ (id)MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate;
 
 /**
  *  Supports aggregating values using a key-value collection operator that can be grouped by an attribute.
@@ -43,7 +43,7 @@
  *
  *  @return Results of the collection operator, filtered by the provided predicate and grouped by the provided key path
  */
-+ (NSArray *) MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString*)groupingKeyPath inContext:(NSManagedObjectContext *)context;
++ (NSArray *)MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString *)groupingKeyPath inContext:(NSManagedObjectContext *)context;
 
 /**
  *  Supports aggregating values using a key-value collection operator that can be grouped by an attribute.
@@ -60,9 +60,9 @@
  *
  *  @return Results of the collection operator, filtered by the provided predicate and grouped by the provided key path
  */
-+ (NSArray *) MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString*)groupingKeyPath;
++ (NSArray *)MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString *)groupingKeyPath;
 
-- (instancetype) MR_objectWithMinValueFor:(NSString *)property;
-- (instancetype) MR_objectWithMinValueFor:(NSString *)property inContext:(NSManagedObjectContext *)context;
+- (instancetype)MR_objectWithMinValueFor:(NSString *)property;
+- (instancetype)MR_objectWithMinValueFor:(NSString *)property inContext:(NSManagedObjectContext *)context;
 
 @end

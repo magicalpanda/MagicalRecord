@@ -193,7 +193,7 @@
     } completion:^(BOOL success, NSError *error) {
         fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectWithID:objectId];
     }];
-    
+
     expect([fetchedObject valueForKey:kTestAttributeKey]).will.beFalsy();
 }
 
@@ -222,8 +222,8 @@
 
 - (void)testCurrentThreadAsynchronousSaveActionSaves
 {
-    __block BOOL               saveSuccessState = NO;
-    __block NSError           *saveError;
+    __block BOOL saveSuccessState = NO;
+    __block NSError *saveError;
     __block NSManagedObjectID *objectId;
 
     [MagicalRecord saveUsingCurrentThreadContextWithBlock:^(NSManagedObjectContext *localContext) {

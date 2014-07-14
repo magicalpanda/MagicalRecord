@@ -10,6 +10,6 @@
 
 @interface NSRelationshipDescription (MagicalRecord_DataImport)
 
-- (NSString *) MR_primaryKey;
+- (NSString *)MR_primaryKey;
 
 @end

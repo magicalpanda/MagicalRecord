@@ -13,7 +13,7 @@
 
 @interface ImportMultipleEntitiesWithNoPrimaryKeyTests : MagicalDataImportTestCase
 
-@property (nonatomic, retain) NSArray * arrayOfTestEntity;
+@property (nonatomic, retain) NSArray *arrayOfTestEntity;
 
 @end
 
@@ -22,7 +22,7 @@
 - (void)setUp
 {
     [super setUp];
-    
+
     self.arrayOfTestEntity = [SingleEntityWithNoRelationships MR_importFromArray:self.testEntityData];
 }
 

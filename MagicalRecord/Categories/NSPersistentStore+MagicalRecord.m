@@ -8,31 +8,30 @@
 //#import "NSPersistentStore+MagicalRecord.h"
 #import "CoreData+MagicalRecord.h"
 
-NSString * const kMagicalRecordDefaultStoreFileName = @"CoreDataStore.sqlite";
+NSString *const kMagicalRecordDefaultStoreFileName = @"CoreDataStore.sqlite";
 
 static NSPersistentStore *defaultPersistentStore_ = nil;
 
-
 @implementation NSPersistentStore (MagicalRecord)
 
-+ (NSPersistentStore *) MR_defaultPersistentStore
++ (NSPersistentStore *)MR_defaultPersistentStore
 {
-	return defaultPersistentStore_;
+    return defaultPersistentStore_;
 }
 
-+ (void) MR_setDefaultPersistentStore:(NSPersistentStore *) store
++ (void)MR_setDefaultPersistentStore:(NSPersistentStore *)store
 {
-	defaultPersistentStore_ = store;
+    defaultPersistentStore_ = store;
 }
 
-+ (NSString *) MR_directory:(int) type
-{    
++ (NSString *)MR_directory:(int)type
+{
     return [NSSearchPathForDirectoriesInDomains(type, NSUserDomainMask, YES) lastObject];
 }
 
-+ (NSString *)MR_applicationDocumentsDirectory 
++ (NSString *)MR_applicationDocumentsDirectory
 {
-	return [self MR_directory:NSDocumentDirectory];
+    return [self MR_directory:NSDocumentDirectory];
 }
 
 + (NSString *)MR_applicationStorageDirectory
@@ -41,12 +40,12 @@ static NSPersistentStore *defaultPersistentStore_ = nil;
     return [[self MR_directory:NSApplicationSupportDirectory] stringByAppendingPathComponent:applicationName];
 }
 
-+ (NSURL *) MR_urlForStoreName:(NSString *)storeFileName
++ (NSURL *)MR_urlForStoreName:(NSString *)storeFileName
 {
-	NSArray *paths = [NSArray arrayWithObjects:[self MR_applicationDocumentsDirectory], [self MR_applicationStorageDirectory], nil];
+    NSArray *paths = [NSArray arrayWithObjects:[self MR_applicationDocumentsDirectory], [self MR_applicationStorageDirectory], nil];
     NSFileManager *fm = [[NSFileManager alloc] init];
-    
-    for (NSString *path in paths) 
+
+    for (NSString *path in paths)
     {
         NSString *filepath = [path stringByAppendingPathComponent:storeFileName];
         if ([fm fileExistsAtPath:filepath])
@@ -59,7 +58,7 @@ static NSPersistentStore *defaultPersistentStore_ = nil;
     return [NSURL fileURLWithPath:[[self MR_applicationStorageDirectory] stringByAppendingPathComponent:storeFileName]];
 }
 
-+ (NSURL *) MR_cloudURLForUbiqutiousContainer:(NSString *)bucketName;
++ (NSURL *)MR_cloudURLForUbiqutiousContainer:(NSString *)bucketName;
 {
     NSFileManager *fileManager = [[NSFileManager alloc] init];
     NSURL *cloudURL = nil;
@@ -71,7 +70,7 @@ static NSPersistentStore *defaultPersistentStore_ = nil;
     return cloudURL;
 }
 
-+ (NSURL *) MR_defaultLocalStoreUrl
++ (NSURL *)MR_defaultLocalStoreUrl
 {
     return [self MR_urlForStoreName:kMagicalRecordDefaultStoreFileName];
 }

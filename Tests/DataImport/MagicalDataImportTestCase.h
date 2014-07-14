@@ -13,7 +13,7 @@
 @property (nonatomic, strong) id testEntityData;
 @property (nonatomic, strong) id testEntity;
 
-- (Class) testEntityClass;
-- (void) setupTestData;
+- (Class)testEntityClass;
+- (void)setupTestData;
 
 @end

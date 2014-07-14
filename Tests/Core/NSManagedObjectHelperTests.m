@@ -133,7 +133,8 @@
 
 - (void)p_createSampleData:(NSInteger)numberOfTestEntitiesToCreate
 {
-    for (int i = 0; i < numberOfTestEntitiesToCreate; i++) {
+    for (int i = 0; i < numberOfTestEntitiesToCreate; i++)
+    {
         SingleRelatedEntity *testEntity = [SingleRelatedEntity MR_createEntity];
         testEntity.mappedStringAttribute = [NSString stringWithFormat:@"%d", i / 5];
     }
