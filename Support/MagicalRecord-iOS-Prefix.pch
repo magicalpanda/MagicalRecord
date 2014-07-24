@@ -3,14 +3,12 @@
 //
 
 #ifdef __OBJC__
-    #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
+    #import <UIKit/UIKit.h>
 
-#if DEBUG
+#if DEBUG == 1 || BETA == 1
     #define MR_LOGGING_ENABLED 1
-#else
-    #define MR_LOGGING_ENABLED 0
 #endif
 
     #define MR_SHORTHAND 1
