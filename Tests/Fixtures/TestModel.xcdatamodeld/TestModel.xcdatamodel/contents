@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D38" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6208.6" systemVersion="14A298i" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AbstractRelatedEntity" representedClassName="AbstractRelatedEntity" isAbstract="YES" syncable="YES">
         <attribute name="sampleBaseAttribute" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -52,6 +52,7 @@
         <relationship name="mappedEntity" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="MappedEntity" syncable="YES"/>
     </entity>
     <entity name="SingleEntityRelatedToMappedEntityWithSecondaryMappings" representedClassName="SingleEntityRelatedToMappedEntityWithSecondaryMappings" syncable="YES">
+        <attribute name="notImportedAttribute" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
         <attribute name="secondaryMappedAttribute" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="no_in_use"/>
@@ -130,14 +131,14 @@
         <element name="AbstractRelatedEntity" positionX="0" positionY="0" width="128" height="60"/>
         <element name="ConcreteRelatedEntity" positionX="0" positionY="0" width="128" height="60"/>
         <element name="EntityWithDifferentClassName" positionX="0" positionY="0" width="128" height="45"/>
+        <element name="EntityWithoutEntityNameMethodWithASuffix" positionX="18" positionY="144" width="128" height="45"/>
         <element name="MappedEntity" positionX="0" positionY="0" width="128" height="105"/>
         <element name="SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey" positionX="0" positionY="0" width="128" height="75"/>
         <element name="SingleEntityRelatedToMappedEntityUsingDefaults" positionX="0" positionY="0" width="128" height="75"/>
         <element name="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" positionX="0" positionY="0" width="128" height="60"/>
         <element name="SingleEntityRelatedToMappedEntityWithNestedMappedAttributes" positionX="0" positionY="0" width="128" height="60"/>
-        <element name="SingleEntityRelatedToMappedEntityWithSecondaryMappings" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="SingleEntityRelatedToMappedEntityWithSecondaryMappings" positionX="0" positionY="0" width="128" height="90"/>
         <element name="SingleEntityWithNoRelationships" positionX="0" positionY="0" width="128" height="315"/>
         <element name="SingleRelatedEntity" positionX="0" positionY="0" width="128" height="118"/>
-        <element name="EntityWithoutEntityNameMethodWithASuffix" positionX="18" positionY="144" width="128" height="45"/>
     </elements>
 </model>

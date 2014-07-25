@@ -10,8 +10,6 @@
 #import "MagicalRecordLogging.h"
 #import <objc/runtime.h>
 
-void MR_swapMethodsFromClass(Class c, SEL orig, SEL new);
-
 NSString * const kMagicalRecordImportCustomDateFormatKey            = @"dateFormat";
 NSString * const kMagicalRecordImportDefaultDateFormatString        = @"yyyy-MM-dd'T'HH:mm:ssz";
 NSString * const kMagicalRecordImportUnixTimeString                 = @"UnixTime";
@@ -25,13 +23,14 @@ NSString * const kMagicalRecordImportRelationshipTypeKey            = @"type";  
 
 NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"useDefaultValueWhenNotPresent";
 
-@interface NSObject (MagicalRecord_DataImportControls)
-
-- (id) MR_valueForUndefinedKey:(NSString *)key;
-
-@end
+static char const * const kMagicalRecordDataImportObjectIsImportingCount = "MagicalRecordDataImportObjectIsImportingCount";
 
 @implementation NSManagedObject (MagicalRecord_DataImport)
+
+- (BOOL) MR_isImporting
+{
+    return ([self MR_importInvolvementCount] > 0);
+}
 
 - (BOOL) MR_importValue:(id)value forKey:(NSString *)key
 {
@@ -220,21 +219,25 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
         }
     }   
 
+    [self MR_startImport];
+
     if ([self respondsToSelector:@selector(willImport:)])
     {
         [self willImport:objectData];
     }
-    MR_swapMethodsFromClass([objectData class], @selector(valueForUndefinedKey:), @selector(MR_valueForUndefinedKey:));
+
     return YES;
 }
 
 - (BOOL) MR_postImport:(id)objectData;
 {
-    MR_swapMethodsFromClass([objectData class], @selector(valueForUndefinedKey:), @selector(MR_valueForUndefinedKey:));
     if ([self respondsToSelector:@selector(didImport:)])
     {
         [self performSelector:@selector(didImport:) withObject:objectData];
     }
+
+    [self MR_endImport];
+
     return YES;
 }
 
@@ -339,18 +342,37 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     return dataObjects;
 }
 
-@end
-
-void MR_swapMethodsFromClass(Class c, SEL orig, SEL new)
+- (void) MR_startImport
 {
-    Method origMethod = class_getInstanceMethod(c, orig);
-    Method newMethod = class_getInstanceMethod(c, new);
-    if (class_addMethod(c, orig, method_getImplementation(newMethod), method_getTypeEncoding(newMethod)))
+    [self MR_setImportInvolvementCount:[self MR_importInvolvementCount] + 1];
+}
+
+- (void) MR_endImport
+{
+    NSInteger importCount = [self MR_importInvolvementCount];
+
+    if (importCount > 0)
     {
-        class_replaceMethod(c, new, method_getImplementation(origMethod), method_getTypeEncoding(origMethod));
-    }
-    else
-    {
-        method_exchangeImplementations(origMethod, newMethod);
+        [self MR_setImportInvolvementCount:importCount - 1];
     }
 }
+
+- (NSInteger) MR_importInvolvementCount
+{
+    [self willAccessValueForKey:@"MR_importing"];
+    NSNumber *number = objc_getAssociatedObject(self, kMagicalRecordDataImportObjectIsImportingCount);
+    [self didAccessValueForKey:@"MR_importing"];
+
+    return [number integerValue];
+}
+
+- (void) MR_setImportInvolvementCount:(NSInteger)count
+{
+    NSNumber *importCount = [NSNumber numberWithInteger:count];
+
+    [self willChangeValueForKey:@"MR_importing"];
+    objc_setAssociatedObject(self, kMagicalRecordDataImportObjectIsImportingCount, importCount, OBJC_ASSOCIATION_ASSIGN);
+    [self didChangeValueForKey:@"MR_importing"];
+}
+
+@end

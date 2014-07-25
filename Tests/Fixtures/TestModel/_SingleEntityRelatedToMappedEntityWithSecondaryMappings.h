@@ -5,6 +5,7 @@
 
 extern const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsAttributes {
 	__unsafe_unretained NSString *secondaryMappedAttribute;
+    __unsafe_unretained NSString *notImportedAttribute;
 } SingleEntityRelatedToMappedEntityWithSecondaryMappingsAttributes;
 
 extern const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsRelationships {
@@ -26,6 +27,10 @@ extern const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsRelati
 
 //- (BOOL)validateSecondaryMappedAttribute:(id*)value_ error:(NSError**)error_;
 
+@property (nonatomic, strong) NSNumber *notImportedAttribute;
+
+//- (BOOL)validateNotImportedAttribute:(id*)value_ error:(NSError**)error_;
+
 @property (nonatomic, strong) MappedEntity *mappedRelationship;
 
 //- (BOOL)validateMappedRelationship:(id*)value_ error:(NSError**)error_;
@@ -33,6 +38,9 @@ extern const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsRelati
 @end
 
 @interface _SingleEntityRelatedToMappedEntityWithSecondaryMappings (CoreDataGeneratedPrimitiveAccessors)
+
+- (NSNumber*)primitiveNotImportedAttribute;
+- (void)setPrimitiveNotImportedAttribute:(NSNumber*)value;
 
 - (NSString*)primitiveSecondaryMappedAttribute;
 - (void)setPrimitiveSecondaryMappedAttribute:(NSString*)value;

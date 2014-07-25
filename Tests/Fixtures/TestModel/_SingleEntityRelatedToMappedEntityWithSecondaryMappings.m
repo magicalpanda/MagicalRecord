@@ -5,6 +5,7 @@
 
 const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsAttributes SingleEntityRelatedToMappedEntityWithSecondaryMappingsAttributes = {
 	.secondaryMappedAttribute = @"secondaryMappedAttribute",
+    .notImportedAttribute = @"notImportedAttribute",
 };
 
 const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsRelationships SingleEntityRelatedToMappedEntityWithSecondaryMappingsRelationships = {
@@ -34,7 +35,23 @@ const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsRelationships
 	return (SingleEntityRelatedToMappedEntityWithSecondaryMappingsID*)[super objectID];
 }
 
+- (id)valueForUndefinedKey:(NSString *)key
+{
+    if ([key isEqualToString:@"secondaryMappedAttribute"])
+    {
+        return self.secondaryMappedAttribute;
+    }
+    else if ([key isEqualToString:@"notImportedAttribute"])
+    {
+        return self.notImportedAttribute;
+    }
+
+    return nil;
+}
+
 @dynamic secondaryMappedAttribute;
+
+@dynamic notImportedAttribute;
 
 @dynamic mappedRelationship;
 
