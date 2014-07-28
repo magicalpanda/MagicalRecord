@@ -19,15 +19,6 @@ extern NSString * const kMagicalRecordImportRelationshipTypeKey;
 
 @interface NSManagedObject (MagicalRecord_DataImport)
 
-/**
- When a managed object is the target of a MagicalRecord import, this property will be true.
- 
- @discussion We've observed issues during imports with NSManagedObject subclasses that implement `- (id)valueForUndefinedKey:`. If you experience problems, you can insert an early return at the start of that method that checks this property and returns `nil` if it is true.
-
- @since Available in v2.3 and later.
- */
-@property (readonly, nonatomic, assign, getter=MR_isImporting) BOOL MR_importing;
-
 - (BOOL) MR_importValuesForKeysWithObject:(id)objectData;
 
 + (instancetype) MR_importFromObject:(id)data;

@@ -23,14 +23,7 @@ NSString * const kMagicalRecordImportRelationshipTypeKey            = @"type";  
 
 NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"useDefaultValueWhenNotPresent";
 
-static char const * const kMagicalRecordDataImportObjectIsImportingCount = "MagicalRecordDataImportObjectIsImportingCount";
-
 @implementation NSManagedObject (MagicalRecord_DataImport)
-
-- (BOOL) MR_isImporting
-{
-    return ([self MR_importInvolvementCount] > 0);
-}
 
 - (BOOL) MR_importValue:(id)value forKey:(NSString *)key
 {
@@ -235,8 +228,6 @@ static char const * const kMagicalRecordDataImportObjectIsImportingCount = "Magi
         }
     }   
 
-    [self MR_startImport];
-
     if ([self respondsToSelector:@selector(willImport:)])
     {
         [self willImport:objectData];
@@ -251,8 +242,6 @@ static char const * const kMagicalRecordDataImportObjectIsImportingCount = "Magi
     {
         [self performSelector:@selector(didImport:) withObject:objectData];
     }
-
-    [self MR_endImport];
 
     return YES;
 }
@@ -356,39 +345,6 @@ static char const * const kMagicalRecordDataImportObjectIsImportingCount = "Magi
     }];
 
     return dataObjects;
-}
-
-- (void) MR_startImport
-{
-    [self MR_setImportInvolvementCount:[self MR_importInvolvementCount] + 1];
-}
-
-- (void) MR_endImport
-{
-    NSInteger importCount = [self MR_importInvolvementCount];
-
-    if (importCount > 0)
-    {
-        [self MR_setImportInvolvementCount:importCount - 1];
-    }
-}
-
-- (NSInteger) MR_importInvolvementCount
-{
-    [self willAccessValueForKey:@"MR_importing"];
-    NSNumber *number = objc_getAssociatedObject(self, kMagicalRecordDataImportObjectIsImportingCount);
-    [self didAccessValueForKey:@"MR_importing"];
-
-    return [number integerValue];
-}
-
-- (void) MR_setImportInvolvementCount:(NSInteger)count
-{
-    NSNumber *importCount = [NSNumber numberWithInteger:count];
-
-    [self willChangeValueForKey:@"MR_importing"];
-    objc_setAssociatedObject(self, kMagicalRecordDataImportObjectIsImportingCount, importCount, OBJC_ASSOCIATION_ASSIGN);
-    [self didChangeValueForKey:@"MR_importing"];
 }
 
 @end
