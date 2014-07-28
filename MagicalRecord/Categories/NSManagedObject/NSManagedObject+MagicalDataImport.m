@@ -174,11 +174,27 @@ static char const * const kMagicalRecordDataImportObjectIsImportingCount = "Magi
         NSRelationshipDescription *relationshipInfo = [relationships valueForKey:relationshipName];
         
         NSString *lookupKey = [[relationshipInfo userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey] ?: relationshipName;
-        id relatedObjectData = [relationshipData valueForKeyPath:lookupKey];
-        
-        if (relatedObjectData == nil || [relatedObjectData isEqual:[NSNull null]]) 
+
+        id relatedObjectData;
+
+        @try
         {
-            continue;
+            relatedObjectData = [relationshipData valueForKeyPath:lookupKey];
+        }
+        @catch (NSException *exception)
+        {
+            MRLogWarn(@"Looking up a key for relationship failed while importing: %@\n", relationshipInfo);
+            MRLogWarn(@"lookupKey: %@", lookupKey);
+            MRLogWarn(@"relationshipInfo.destinationEntity %@", [relationshipInfo destinationEntity]);
+            MRLogWarn(@"relationshipData: %@", relationshipData);
+            MRLogWarn(@"Exception:\n%@: %@", [exception name], [exception reason]);
+        }
+        @finally
+        {
+            if (relatedObjectData == nil || [relatedObjectData isEqual:[NSNull null]])
+            {
+                continue;
+            }
         }
         
         SEL shouldImportSelector = NSSelectorFromString([NSString stringWithFormat:@"shouldImport%@:", [relationshipName MR_capitalizedFirstCharacterString]]);
