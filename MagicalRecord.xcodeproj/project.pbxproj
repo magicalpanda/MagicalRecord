@@ -870,7 +870,7 @@
 			name = "MagicalRecordTests-iOS";
 			productName = MagicalRecordTests;
 			productReference = C7CF97FF174984CA008D9D13 /* MagicalRecordTests-iOS.xctest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		C7CF9815174984E4008D9D13 /* MagicalRecordTests-OSX */ = {
 			isa = PBXNativeTarget;
@@ -888,7 +888,7 @@
 			name = "MagicalRecordTests-OSX";
 			productName = "MagicalRecordTests-OSX";
 			productReference = C7CF9816174984E4008D9D13 /* MagicalRecordTests-OSX.xctest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
