@@ -9,7 +9,6 @@
 #import "MagicalRecord.h"
 #import "NSObject+MagicalDataImport.h"
 #import "MagicalRecordLogging.h"
-#import <objc/runtime.h>
 
 void MR_swapMethodsFromClass(Class c, SEL orig, SEL new);
 
@@ -26,19 +25,6 @@ NSString * const kMagicalRecordImportDistinctAttributeKey           = @"distinct
 NSString * const kMagicalRecordImportRelationshipTypeKey            = @"type";  //this needs to be revisited
 
 NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"useDefaultValueWhenNotPresent";
-
-@interface NSObject (MagicalRecordDataImportControls)
-
-- (id) MR_valueForUndefinedKey:(NSString *)key;
-
-@end
-
-
-@interface NSObject (MagicalRecordDataImportInternal)
-
-- (id) MR_valueForUndefinedKey:(NSString *)key;
-
-@end
 
 @implementation NSManagedObject (MagicalRecordDataImport)
 
@@ -170,7 +156,18 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     if (relatedObjectData == nil)
     {
         lookupKey = [relationshipData MR_lookupKeyForProperty:relationshipInfo];
-        relatedObjectData = [relationshipData valueForKeyPath:lookupKey];
+        @try
+        {
+            relatedObjectData = [relationshipData valueForKeyPath:lookupKey];
+        }
+        @catch (NSException *exception)
+        {
+            MRLogWarn(@"Looking up a key for relationship failed while importing: %@\n", relationshipInfo);
+            MRLogWarn(@"lookupKey: %@", lookupKey);
+            MRLogWarn(@"relationshipInfo.destinationEntity %@", relationshipInfo.destinationEntity);
+            MRLogWarn(@"relationshipData: %@", relationshipData);
+            MRLogWarn(@"Exception:\n%@: %@", exception.name, exception.reason);
+        }
     }
     if (relatedObjectData == nil || [relatedObjectData isEqual:[NSNull null]]) return;
 
@@ -235,17 +232,17 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     {
         [self willImport:objectData];
     }
-    MR_swapMethodsFromClass([objectData class], @selector(valueForUndefinedKey:), @selector(MR_valueForUndefinedKey:));
+
     return YES;
 }
 
 - (BOOL) MR_postImport:(id)objectData;
 {
-    MR_swapMethodsFromClass([objectData class], @selector(valueForUndefinedKey:), @selector(MR_valueForUndefinedKey:));
     if ([self respondsToSelector:@selector(didImport:)])
     {
         [self performSelector:@selector(didImport:) withObject:objectData];
     }
+
     return YES;
 }
 
@@ -381,18 +378,3 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 }
 
 @end
-
-
-void MR_swapMethodsFromClass(Class c, SEL orig, SEL new)
-{
-    Method origMethod = class_getInstanceMethod(c, orig);
-    Method newMethod = class_getInstanceMethod(c, new);
-    if (class_addMethod(c, orig, method_getImplementation(newMethod), method_getTypeEncoding(newMethod)))
-    {
-        class_replaceMethod(c, new, method_getImplementation(origMethod), method_getTypeEncoding(origMethod));
-    }
-    else
-    {
-        method_exchangeImplementations(origMethod, newMethod);
-    }
-}
