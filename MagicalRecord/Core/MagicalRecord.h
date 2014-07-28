@@ -69,11 +69,11 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 /**
  Calls NSBundle's -bundleForClass: to determine the bundle to search for the default model within.
 
- @param klass Class to set the model from
+ @param modelClass Class to set the model from
 
  @since Available in v2.0 and later.
  */
-+ (void) setDefaultModelFromClass:(Class)klass;
++ (void) setDefaultModelFromClass:(Class)modelClass;
 
 /**
  Looks for a momd file with the specified name, and if found sets it as the default model.
