@@ -17,20 +17,21 @@ extern NSString * const kMagicalRecordImportRelationshipMapKey;
 extern NSString * const kMagicalRecordImportRelationshipLinkedByKey;
 extern NSString * const kMagicalRecordImportRelationshipTypeKey;
 
-@interface NSManagedObject (MagicalRecord_DataImport)
+@protocol MagicalRecordDataImportProtocol <NSObject>
+
+@optional
+- (BOOL) shouldImport:(id)data;
+- (void) willImport:(id)data;
+- (void) didImport:(id)data;
+
+@end
+
+@interface NSManagedObject (MagicalRecord_DataImport) <MagicalRecordDataImportProtocol>
 
 + (instancetype) MR_importFromObject:(id)data;
 + (instancetype) MR_importFromObject:(id)data inContext:(NSManagedObjectContext *)context;
 
 + (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData;
 + (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context;
-
-@end
-
-@interface NSManagedObject (MagicalRecord_DataImportControls)
-
-- (BOOL) shouldImport:(id)data;
-- (void) willImport:(id)data;
-- (void) didImport:(id)data;
 
 @end
