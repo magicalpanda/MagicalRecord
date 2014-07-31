@@ -102,17 +102,17 @@
     {
         MRLogInfo(@"NO CHANGES IN ** %@ ** CONTEXT - NOT SAVING", [self MR_workingName]);
 
-        if (completion)
-        {
-            completion(YES, nil);
-        }
-
         if (saveParentContexts && [self parentContext])
         {
             MRLogVerbose(@"Proceeding to save parent context %@", [[self parentContext] MR_description]);
         }
         else
         {
+            if (completion)
+            {
+                completion(YES, nil);
+            }
+
             return;
         }
     }
