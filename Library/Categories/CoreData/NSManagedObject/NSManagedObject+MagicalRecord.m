@@ -139,6 +139,7 @@
         entity = [self MR_entityDescriptionInContext:context];
     }
 
+//    [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
     NSManagedObject *managedObject = [[self alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
 
     if ([managedObject respondsToSelector:@selector(MR_awakeFromCreation)])

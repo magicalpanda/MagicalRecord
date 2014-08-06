@@ -34,10 +34,10 @@
         NSString *dateFormat;
         NSUInteger index = 0;
         do {
-            NSMutableString *dateFormatKey = [kMagicalRecordImportCustomDateFormatKey mutableCopy];
+            NSString *dateFormatKey = kMagicalRecordImportCustomDateFormatKey;
             if (index)
             {
-                [dateFormatKey appendFormat:@".%tu", index];
+                dateFormatKey = [dateFormatKey stringByAppendingFormat:@".%tu", index];
             }
             index++;
             dateFormat = [[self userInfo] valueForKey:dateFormatKey];
