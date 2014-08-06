@@ -58,4 +58,30 @@ static BOOL _iCloudEnabled = NO;
     [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
 }
 
++ (void) setupCoreDataStackWithiCloudContainer:(NSString *)icloudBucket localStoreAtURL:(NSURL *)storeURL
+{
+    NSString *contentNameKey = [[[NSBundle mainBundle] infoDictionary] objectForKey:(id)kCFBundleIdentifierKey];
+    [self setupCoreDataStackWithiCloudContainer:icloudBucket
+                                 contentNameKey:contentNameKey
+                                localStoreAtURL:storeURL
+                        cloudStorePathComponent:nil];
+}
+
++ (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreAtURL:(NSURL *)storeURL cloudStorePathComponent:(NSString *)pathSubcomponent
+{
+    [self setupCoreDataStackWithiCloudContainer:containerID
+                                 contentNameKey:contentNameKey
+                                localStoreAtURL:storeURL
+                        cloudStorePathComponent:pathSubcomponent
+                                     completion:nil];
+}
+
++ (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreAtURL:(NSURL *)storeURL cloudStorePathComponent:(NSString *)pathSubcomponent completion:(void (^)(void))completion
+{
+    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithiCloudContainerID:containerID contentNameKey:contentNameKey localStoreAtURL:storeURL cloudStorePathComponent:pathSubcomponent completion:completion];
+    
+    [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
+    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
+}
+
 @end
