@@ -43,7 +43,7 @@
     NSString *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     path = [path stringByAppendingPathComponent:@"TestStore.sqlite"];
     
-    NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreAtURL:[NSURL URLWithString:path]];
+    NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreAtURL:[NSURL fileURLAtPath:path]];
     
     NSUInteger persistentStoreCount = [[testCoordinator persistentStores] count];
     XCTAssertEqual(persistentStoreCount, (NSUInteger)1, @"Expected there to be 1 persistent store, sadly there are %tu", persistentStoreCount);
