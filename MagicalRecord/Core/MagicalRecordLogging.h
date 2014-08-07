@@ -26,8 +26,8 @@
     #define LOG_MACRO(isAsynchronous, lvl, flg, ctx, atag, fnct, frmt, ...) \
     NSLog (frmt, ##__VA_ARGS__)
 
-    #define LOG_MAYBE(async, lvl, flg, ctx, fnct, frmt, ...) \
-    do { if ((lvl & flg) == flg) { LOG_MACRO(async, lvl, flg, ctx, nil, fnct, frmt, ##__VA_ARGS__); } } while(0)
+#define LOG_MAYBE(async, lvl, flg, ctx, fnct, frmt, ...) \
+do { if ((lvl & flg) == flg) { LOG_MACRO(async, lvl, flg, ctx, nil, fnct, frmt, ##__VA_ARGS__); } } while(0)
 
     #define LOG_OBJC_MAYBE(async, lvl, flg, ctx, frmt, ...) \
     LOG_MAYBE(async, lvl, flg, ctx, sel_getName(_cmd), frmt, ##__VA_ARGS__)
