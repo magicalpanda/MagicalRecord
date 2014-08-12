@@ -4,7 +4,7 @@
 
 
 
-
+#import "MagicalRecordDeprecated.h"
 
 @interface NSManagedObject (MagicalAggregationShortHand)
 + (NSNumber *) numberOfEntities;
@@ -136,14 +136,14 @@
 - (void) saveOnlySelfAndWait;
 - (void) saveToPersistentStoreAndWait;
 - (void) saveWithOptions:(MRSaveOptions)mask completion:(MRSaveCompletionHandler)completion;
-- (void) save MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
-- (void) saveWithErrorCallback:(void(^)(NSError *error))errorCallback MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
-- (void) saveInBackgroundCompletion:(void (^)(void))completion MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
-- (void) saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
-- (void) saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
-- (void) saveNestedContexts MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
-- (void) saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
-- (void) saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion MR_DEPRECATED_WILL_BE_REMOVED_IN_3_0;
+- (void) save MR_DEPRECATED_WILL_BE_REMOVED_IN("3.0");
+- (void) saveWithErrorCallback:(void(^)(NSError *error))errorCallback MR_DEPRECATED_WILL_BE_REMOVED_IN("3.0");
+- (void) saveInBackgroundCompletion:(void (^)(void))completion MR_DEPRECATED_WILL_BE_REMOVED_IN("3.0");
+- (void) saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback MR_DEPRECATED_WILL_BE_REMOVED_IN("3.0");
+- (void) saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion MR_DEPRECATED_WILL_BE_REMOVED_IN("3.0");
+- (void) saveNestedContexts MR_DEPRECATED_WILL_BE_REMOVED_IN("3.0");
+- (void) saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback MR_DEPRECATED_WILL_BE_REMOVED_IN("3.0");
+- (void) saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion MR_DEPRECATED_WILL_BE_REMOVED_IN("3.0");
 @end
 @interface NSManagedObjectContext (MagicalThreadingShortHand)
 + (NSManagedObjectContext *) contextForCurrentThread;
