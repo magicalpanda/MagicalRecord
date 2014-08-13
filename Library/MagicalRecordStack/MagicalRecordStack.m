@@ -77,9 +77,9 @@ static MagicalRecordStack *defaultStack;
 #endif
 }
 
-- (void) setModelFromClass:(Class)klass;
+- (void) setModelFromClass:(Class)modelClass;
 {
-    NSBundle *bundle = [NSBundle bundleForClass:klass];
+    NSBundle *bundle = [NSBundle bundleForClass:modelClass];
     NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:[NSArray arrayWithObject:bundle]];
     [self setModel:model];
 }

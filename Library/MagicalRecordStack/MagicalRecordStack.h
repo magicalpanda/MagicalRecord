@@ -28,7 +28,7 @@
 
 - (NSManagedObjectContext *) newConfinementContext;
 
-- (void) setModelFromClass:(Class)klass;
+- (void) setModelFromClass:(Class)modelClass;
 - (void) setModelNamed:(NSString *)modelName;
 
 @end

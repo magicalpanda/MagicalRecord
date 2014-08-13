@@ -3,6 +3,7 @@
 //
 
 #ifdef __OBJC__
+    #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
 
 #if DEBUG == 1 || BETA == 1

@@ -26,7 +26,7 @@
 NSLog (frmt, ##__VA_ARGS__)
 
 #define LOG_MAYBE(async, lvl, flg, ctx, fnct, frmt, ...) \
-do { if(lvl & flg) { LOG_MACRO(async, lvl, flg, ctx, nil, fnct, frmt, ##__VA_ARGS__); } } while(0)
+do { if ((lvl & flg) == flg) { LOG_MACRO(async, lvl, flg, ctx, nil, fnct, frmt, ##__VA_ARGS__); } } while(0)
 
 #define LOG_OBJC_MAYBE(async, lvl, flg, ctx, frmt, ...) \
 LOG_MAYBE(async, lvl, flg, ctx, sel_getName(_cmd), frmt, ##__VA_ARGS__)
@@ -36,17 +36,17 @@ LOG_MAYBE(async, lvl, flg, ctx, __FUNCTION__, frmt, ##__VA_ARGS__)
 
 #endif
 
-#define MRLogFatal(frmt, ...)   LOG_OBJC_MAYBE(LOG_ASYNC_ERROR,   [MagicalRecord loggingLevel], MagicalRecordLoggingLevelFatal,   0, frmt, ##__VA_ARGS__)
-#define MRLogError(frmt, ...)   LOG_OBJC_MAYBE(LOG_ASYNC_ERROR,   [MagicalRecord loggingLevel], MagicalRecordLoggingLevelError,   0, frmt, ##__VA_ARGS__)
-#define MRLogWarn(frmt, ...)    LOG_OBJC_MAYBE(LOG_ASYNC_WARN,    [MagicalRecord loggingLevel], MagicalRecordLoggingLevelWarn,    0, frmt, ##__VA_ARGS__)
-#define MRLogInfo(frmt, ...)    LOG_OBJC_MAYBE(LOG_ASYNC_INFO,    [MagicalRecord loggingLevel], MagicalRecordLoggingLevelInfo,    0, frmt, ##__VA_ARGS__)
-#define MRLogVerbose(frmt, ...) LOG_OBJC_MAYBE(LOG_ASYNC_VERBOSE, [MagicalRecord loggingLevel], MagicalRecordLoggingLevelVerbose, 0, frmt, ##__VA_ARGS__)
+#define MRLogFatal(frmt, ...)   LOG_OBJC_MAYBE(LOG_ASYNC_ERROR,   [MagicalRecord loggingLevel], MagicalRecordLoggingMaskFatal,   0, frmt, ##__VA_ARGS__)
+#define MRLogError(frmt, ...)   LOG_OBJC_MAYBE(LOG_ASYNC_ERROR,   [MagicalRecord loggingLevel], MagicalRecordLoggingMaskError,   0, frmt, ##__VA_ARGS__)
+#define MRLogWarn(frmt, ...)    LOG_OBJC_MAYBE(LOG_ASYNC_WARN,    [MagicalRecord loggingLevel], MagicalRecordLoggingMaskWarn,    0, frmt, ##__VA_ARGS__)
+#define MRLogInfo(frmt, ...)    LOG_OBJC_MAYBE(LOG_ASYNC_INFO,    [MagicalRecord loggingLevel], MagicalRecordLoggingMaskInfo,    0, frmt, ##__VA_ARGS__)
+#define MRLogVerbose(frmt, ...) LOG_OBJC_MAYBE(LOG_ASYNC_VERBOSE, [MagicalRecord loggingLevel], MagicalRecordLoggingMaskVerbose, 0, frmt, ##__VA_ARGS__)
 
-#define MRLogCFatal(frmt, ...)   LOG_C_MAYBE(LOG_ASYNC_ERROR,   [MagicalRecord loggingLevel], MagicalRecordLoggingLevelFatal,   0, frmt, ##__VA_ARGS__)
-#define MRLogCError(frmt, ...)   LOG_C_MAYBE(LOG_ASYNC_ERROR,   [MagicalRecord loggingLevel], MagicalRecordLoggingLevelError,   0, frmt, ##__VA_ARGS__)
-#define MRLogCWarn(frmt, ...)    LOG_C_MAYBE(LOG_ASYNC_WARN,    [MagicalRecord loggingLevel], MagicalRecordLoggingLevelWarn,    0, frmt, ##__VA_ARGS__)
-#define MRLogCInfo(frmt, ...)    LOG_C_MAYBE(LOG_ASYNC_INFO,    [MagicalRecord loggingLevel], MagicalRecordLoggingLevelInfo,    0, frmt, ##__VA_ARGS__)
-#define MRLogCVerbose(frmt, ...) LOG_C_MAYBE(LOG_ASYNC_VERBOSE, [MagicalRecord loggingLevel], MagicalRecordLoggingLevelVerbose, 0, frmt, ##__VA_ARGS__)
+#define MRLogCFatal(frmt, ...)   LOG_C_MAYBE(LOG_ASYNC_ERROR,   [MagicalRecord loggingLevel], MagicalRecordLoggingMaskFatal,   0, frmt, ##__VA_ARGS__)
+#define MRLogCError(frmt, ...)   LOG_C_MAYBE(LOG_ASYNC_ERROR,   [MagicalRecord loggingLevel], MagicalRecordLoggingMaskError,   0, frmt, ##__VA_ARGS__)
+#define MRLogCWarn(frmt, ...)    LOG_C_MAYBE(LOG_ASYNC_WARN,    [MagicalRecord loggingLevel], MagicalRecordLoggingMaskWarn,    0, frmt, ##__VA_ARGS__)
+#define MRLogCInfo(frmt, ...)    LOG_C_MAYBE(LOG_ASYNC_INFO,    [MagicalRecord loggingLevel], MagicalRecordLoggingMaskInfo,    0, frmt, ##__VA_ARGS__)
+#define MRLogCVerbose(frmt, ...) LOG_C_MAYBE(LOG_ASYNC_VERBOSE, [MagicalRecord loggingLevel], MagicalRecordLoggingMaskVerbose, 0, frmt, ##__VA_ARGS__)
 
 #else
 
