@@ -13,7 +13,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (NSString *) MR_entityName;
 {
-    NSString *entityName;
+    NSString *entityName = @"";
 
     if ([self respondsToSelector:@selector(entityName)])
     {
