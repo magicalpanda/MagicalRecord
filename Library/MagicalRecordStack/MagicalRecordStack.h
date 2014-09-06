@@ -6,6 +6,9 @@
 //  Copyright (c) 2013 Magical Panda Software LLC. All rights reserved.
 //
 
+@import Foundation;
+@import CoreData;
+
 @interface MagicalRecordStack : NSObject
 
 @property (nonatomic, copy) NSString *stackName;

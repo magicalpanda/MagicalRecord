@@ -6,6 +6,9 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
+@import Foundation;
+@import CoreData;
+
 @interface NSNumber (MagicalRecordDataImport)
 
 - (NSString *) MR_lookupKeyForProperty:(NSPropertyDescription *)propertyDescription;

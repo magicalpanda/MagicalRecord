@@ -6,6 +6,9 @@
 //  Copyright (c) 2011 Magical Panda Software LLC. All rights reserved.
 //
 
+@import Foundation;
+@import CoreData;
+
 @interface NSString (MagicalRecordDataImport)
 
 /**

@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 Magical Panda Software LLC. All rights reserved.
 //
 
+@import Foundation;
+@import CoreData;
+
 NSDate *MRAdjustDateForDST(NSDate *date);
 NSDate *MRDateFromString(NSString *value, NSString *format);
 NSDate *MRDateFromNumber(NSNumber *value, BOOL milliseconds);

@@ -6,10 +6,13 @@
 //  Copyright (c) 2013 Magical Panda Software LLC. All rights reserved.
 //
 
+@import Foundation;
+@import CoreData;
+
 #import "NSManagedObject+MagicalFetching.h"
 #import "NSManagedObject+MagicalRequests.h"
 #import "NSFetchedResultsController+MagicalFetching.h"
-
+#import "NSManagedObject+MagicalFinders.h"
 #import "MagicalRecordStack.h"
 
 @implementation NSManagedObject (MagicalFetching)
