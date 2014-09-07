@@ -131,6 +131,51 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
     return store;
 }
 
+- (void) MR_addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey storeIdentifier:(id)storeIdentifier cloudStorePathComponent:(NSString *)subPathComponent completion:(void(^)(void))completionBlock
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSURL *cloudURL = [NSPersistentStore MR_cloudURLForUbiqutiousContainer:containerID];
+        if (subPathComponent)
+        {
+            cloudURL = [cloudURL URLByAppendingPathComponent:subPathComponent];
+        }
+        
+        [MagicalRecord setICloudEnabled:cloudURL != nil];
+        
+        NSDictionary *options = [[self class] MR_autoMigrationOptions];
+        if (cloudURL)   //iCloud is available
+        {
+            NSDictionary *iCloudOptions = [NSDictionary dictionaryWithObjectsAndKeys:
+                                           contentNameKey, NSPersistentStoreUbiquitousContentNameKey,
+                                           cloudURL, NSPersistentStoreUbiquitousContentURLKey, nil];
+            options = [options MR_dictionaryByMergingDictionary:iCloudOptions];
+        }
+        else
+        {
+            MRLogWarn(@"iCloud is not enabled");
+        }
+        
+        [self lock];
+        [self MR_addSqliteStoreNamed:storeIdentifier withOptions:options];
+        [self unlock];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([NSPersistentStore MR_defaultPersistentStore] == nil)
+            {
+                [NSPersistentStore MR_setDefaultPersistentStore:[[self persistentStores] firstObject]];
+            }
+            if (completionBlock)
+            {
+                completionBlock();
+            }
+            NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+            [notificationCenter postNotificationName:kMagicalRecordPSCDidCompleteiCloudSetupNotification object:nil];
+        });
+    });
+}
+
+
 
 #pragma mark - Public Instance Methods
 
@@ -248,90 +293,20 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
 
 - (void) MR_addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)subPathComponent completion:(void(^)(void))completionBlock;
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        NSURL *cloudURL = [NSPersistentStore MR_cloudURLForUbiqutiousContainer:containerID];
-        if (subPathComponent) 
-        {
-            cloudURL = [cloudURL URLByAppendingPathComponent:subPathComponent];
-        }
-
-        [MagicalRecord setICloudEnabled:cloudURL != nil];
-        
-        NSDictionary *options = [[self class] MR_autoMigrationOptions];
-        if (cloudURL)   //iCloud is available
-        {
-            NSDictionary *iCloudOptions = [NSDictionary dictionaryWithObjectsAndKeys:
-                                           contentNameKey, NSPersistentStoreUbiquitousContentNameKey,
-                                           cloudURL, NSPersistentStoreUbiquitousContentURLKey, nil];
-            options = [options MR_dictionaryByMergingDictionary:iCloudOptions];
-        }
-        else 
-        {
-            MRLogWarn(@"iCloud is not enabled");
-        }
-        
-        [self lock];
-        [self MR_addSqliteStoreNamed:localStoreName withOptions:options];
-        [self unlock];
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if ([NSPersistentStore MR_defaultPersistentStore] == nil)
-            {
-                [NSPersistentStore MR_setDefaultPersistentStore:[[self persistentStores] firstObject]];
-            }
-            if (completionBlock)
-            {
-                completionBlock();
-            }
-            NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-            [notificationCenter postNotificationName:kMagicalRecordPSCDidCompleteiCloudSetupNotification object:nil];
-        });
-    });   
+    [self MR_addiCloudContainerID:containerID
+                   contentNameKey:contentNameKey
+                  storeIdentifier:localStoreName
+          cloudStorePathComponent:subPathComponent
+                       completion:completionBlock]; 
 }
 
 - (void) MR_addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreAtURL:(NSURL *)storeURL cloudStorePathComponent:(NSString *)subPathComponent completion:(void(^)(void))completionBlock;
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        NSURL *cloudURL = [NSPersistentStore MR_cloudURLForUbiqutiousContainer:containerID];
-        if (subPathComponent)
-        {
-            cloudURL = [cloudURL URLByAppendingPathComponent:subPathComponent];
-        }
-        
-        [MagicalRecord setICloudEnabled:cloudURL != nil];
-        
-        NSDictionary *options = [[self class] MR_autoMigrationOptions];
-        if (cloudURL)   //iCloud is available
-        {
-            NSDictionary *iCloudOptions = [NSDictionary dictionaryWithObjectsAndKeys:
-                                           contentNameKey, NSPersistentStoreUbiquitousContentNameKey,
-                                           cloudURL, NSPersistentStoreUbiquitousContentURLKey, nil];
-            options = [options MR_dictionaryByMergingDictionary:iCloudOptions];
-        }
-        else
-        {
-            MRLogWarn(@"iCloud is not enabled");
-        }
-        
-        [self lock];
-        [self MR_addSqliteStoreNamed:storeURL withOptions:options];
-        [self unlock];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if ([NSPersistentStore MR_defaultPersistentStore] == nil)
-            {
-                [NSPersistentStore MR_setDefaultPersistentStore:[[self persistentStores] firstObject]];
-            }
-            if (completionBlock)
-            {
-                completionBlock();
-            }
-            NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-            [notificationCenter postNotificationName:kMagicalRecordPSCDidCompleteiCloudSetupNotification object:nil];
-        });
-    });   
+    [self MR_addiCloudContainerID:containerID
+                   contentNameKey:contentNameKey
+                  storeIdentifier:storeURL
+          cloudStorePathComponent:subPathComponent
+                       completion:completionBlock];   
 }
 
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithiCloudContainerID:(NSString *)containerID 
