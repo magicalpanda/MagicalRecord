@@ -168,26 +168,21 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
         
         NSString *lookupKey = [[relationshipInfo userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey] ?: relationshipName;
 
-        id relatedObjectData;
-
-        @try
-        {
+        id relatedObjectData = nil;
+        
+        if ([relationshipData isKindOfClass:[NSDictionary class]]) {
             relatedObjectData = [relationshipData valueForKeyPath:lookupKey];
         }
-        @catch (NSException *exception)
-        {
+        else {
             MRLogWarn(@"Looking up a key for relationship failed while importing: %@\n", relationshipInfo);
             MRLogWarn(@"lookupKey: %@", lookupKey);
             MRLogWarn(@"relationshipInfo.destinationEntity %@", [relationshipInfo destinationEntity]);
             MRLogWarn(@"relationshipData: %@", relationshipData);
-            MRLogWarn(@"Exception:\n%@: %@", [exception name], [exception reason]);
         }
-        @finally
+        
+        if (relatedObjectData == nil || [relatedObjectData isEqual:[NSNull null]])
         {
-            if (relatedObjectData == nil || [relatedObjectData isEqual:[NSNull null]])
-            {
-                continue;
-            }
+            continue;
         }
         
         SEL shouldImportSelector = NSSelectorFromString([NSString stringWithFormat:@"shouldImport%@:", [relationshipName MR_capitalizedFirstCharacterString]]);
