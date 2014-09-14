@@ -22,6 +22,7 @@
 #import "SQLiteWithSavingContextMagicalRecordStack.h"
 #import "ClassicSQLiteMagicalRecordStack.h"
 #import "ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.h"
+#import "ModernMagicalRecordStack.h"
 
 #import "InMemoryMagicalRecordStack.h"
 
