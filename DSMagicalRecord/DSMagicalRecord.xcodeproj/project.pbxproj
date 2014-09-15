@@ -754,6 +754,7 @@
 		0987F96919C6C235007D1C55 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -769,6 +770,7 @@
 		0987F96A19C6C235007D1C55 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -830,6 +832,7 @@
 				0987F96A19C6C235007D1C55 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0987F96B19C6C235007D1C55 /* Build configuration list for PBXNativeTarget "DSMagicalRecordTests" */ = {
 			isa = XCConfigurationList;
@@ -838,6 +841,7 @@
 				0987F96D19C6C235007D1C55 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
