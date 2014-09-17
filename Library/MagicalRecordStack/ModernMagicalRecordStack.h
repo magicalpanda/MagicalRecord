@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Alexander Belyavskiy. All rights reserved.
 //
 
-#import <DSMagicalRecord/DSMagicalRecord.h>
+#import "SQLiteMagicalRecordStack.h"
 
 @interface ModernMagicalRecordStack : SQLiteMagicalRecordStack
 
