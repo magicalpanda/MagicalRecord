@@ -43,4 +43,17 @@
   return context;
 }
 
+- (NSPersistentStoreCoordinator *) createCoordinatorWithOptions:(NSDictionary *)options
+{
+  NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self model]];
+  
+  NSMutableDictionary *storeOptions = [[self defaultStoreOptions] mutableCopy];
+  [storeOptions addEntriesFromDictionary:self.storeOptions];
+  [storeOptions addEntriesFromDictionary:[NSDictionary MR_autoMigrationOptions]];
+    
+  [coordinator MR_addAutoMigratingSqliteStoreAtURL:self.storeURL withOptions:storeOptions];
+  
+  return coordinator;
+}
+
 @end
