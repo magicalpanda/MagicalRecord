@@ -12,7 +12,7 @@
 
 + (NSManagedObjectModel *) MR_managedObjectModelAtURL:(NSURL *)url;
 {
-    return [[self alloc] initWithContentsOfURL:url];
+    return [(NSManagedObjectModel *)[self alloc] initWithContentsOfURL:url];
 }
 
 + (NSManagedObjectModel *) MR_mergedObjectModelFromMainBundle;
@@ -27,7 +27,7 @@
                                                 inDirectory:bundleName];
     NSURL *modelUrl = [NSURL fileURLWithPath:path];
     
-    NSManagedObjectModel *mom = [[self alloc] initWithContentsOfURL:modelUrl];
+    NSManagedObjectModel *mom = [(NSManagedObjectModel *)[self alloc] initWithContentsOfURL:modelUrl];
     
     return mom;
 }
@@ -38,7 +38,7 @@
                                                      ofType:[modelFileName pathExtension]];
 	NSURL *momURL = [NSURL fileURLWithPath:path];
 	
-	NSManagedObjectModel *model = [[self alloc] initWithContentsOfURL:momURL];
+	NSManagedObjectModel *model = [(NSManagedObjectModel *)[self alloc] initWithContentsOfURL:momURL];
 	return model;
 }
 
