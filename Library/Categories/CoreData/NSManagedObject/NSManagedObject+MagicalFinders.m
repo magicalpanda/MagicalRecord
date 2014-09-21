@@ -256,7 +256,6 @@
 {
 	NSFetchRequest *request = [self MR_requestAll];
 	[request setPredicate:searchTerm];
-	[request setPropertiesToFetch:attributes];
 
 	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
 }
@@ -273,7 +272,6 @@
 	NSFetchRequest *request = [self MR_requestAllSortedBy:sortBy
                                                 ascending:ascending
                                             withPredicate:searchTerm];
-	[request setPropertiesToFetch:[self MR_propertiesNamed:attributes]];
 
 	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
 }
