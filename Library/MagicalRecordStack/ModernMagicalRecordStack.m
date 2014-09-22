@@ -11,6 +11,8 @@
 #import "SQLiteWithSavingContextMagicalRecordStack.h"
 #import "NSManagedObjectContext+MagicalObserving.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
+#import "NSDictionary+MagicalRecordAdditions.h"
+#import "NSPersistentStoreCoordinator+MagicalAutoMigrations.h"
 
 @interface ModernMagicalRecordStack ()
 @property (nonatomic, strong, readwrite) NSManagedObjectContext *savingContext;
