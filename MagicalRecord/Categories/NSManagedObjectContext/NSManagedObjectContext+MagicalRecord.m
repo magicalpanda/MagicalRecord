@@ -186,15 +186,11 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
 + (void)rootContextChanged:(NSNotification *)notification
 {
-    if ([NSThread isMainThread] == NO) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self rootContextChanged:notification];
-        });
+    NSManagedObjectContext *defaultContext = [self MR_defaultContext];
 
-        return;
-    }
-
-    [[self MR_defaultContext] mergeChangesFromContextDidSaveNotification:notification];
+    [defaultContext performBlockAndWait:^{
+        [defaultContext mergeChangesFromContextDidSaveNotification:notification];
+    }];
 }
 
 #pragma mark - Private Methods
@@ -264,7 +260,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
     MRLogInfo(@"Set default context: %@", MagicalRecordDefaultContext);
 }
 
-+ (void) MR_setRootSavingContext:(NSManagedObjectContext *)context
++ (void)MR_setRootSavingContext:(NSManagedObjectContext *)context
 {
     if (MagicalRecordRootSavingContext)
     {
@@ -272,9 +268,13 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
     }
 
     MagicalRecordRootSavingContext = context;
-    [context MR_obtainPermanentIDsBeforeSaving];
-    [MagicalRecordRootSavingContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
-    [MagicalRecordRootSavingContext MR_setWorkingName:@"MagicalRecord Root Saving Context"];
+    
+    [context performBlock:^{
+        [context MR_obtainPermanentIDsBeforeSaving];
+        [MagicalRecordRootSavingContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
+        [MagicalRecordRootSavingContext MR_setWorkingName:@"MagicalRecord Root Saving Context"];
+    }];
+
     MRLogInfo(@"Set root saving context: %@", MagicalRecordRootSavingContext);
 }
 

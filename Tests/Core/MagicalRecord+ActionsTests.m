@@ -100,8 +100,6 @@
     __block BOOL saveSuccessState = NO;
     __block NSError *saveError;
     __block NSManagedObjectID *objectId;
-    __block NSManagedObject *existingObject;
-    __block NSError *existingObjectError;
 
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
         NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
@@ -110,17 +108,27 @@
 
         [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
         objectId = [inserted objectID];
+
+        expect(objectId).toNot.beNil();
     } completion:^(BOOL success, NSError *error) {
         saveSuccessState = success;
         saveError = error;
-        existingObject = [[NSManagedObjectContext MR_rootSavingContext] existingObjectWithID:objectId error:&existingObjectError];
+
+        expect(saveSuccessState).to.beTruthy();
+        expect(saveError).to.beNil();
+
+        NSManagedObjectContext *rootSavingContext = [NSManagedObjectContext MR_rootSavingContext];
+
+        [rootSavingContext performBlock:^{
+            NSError *existingObjectError;
+            NSManagedObject *existingObject = [rootSavingContext existingObjectWithID:objectId error:&existingObjectError];
+
+            expect(existingObject).toNot.beNil();
+            expect([existingObject hasChanges]).to.beFalsy();
+            expect(existingObjectError).to.beNil();
+        }];
     }];
 
-    expect(saveSuccessState).will.beTruthy();
-    expect(saveError).will.beNil();
-    expect(existingObjectError).will.beNil();
-    expect(existingObject).willNot.beNil();
-    expect([existingObject hasChanges]).will.beFalsy();
 }
 
 - (void)testAsynchronousSaveActionCallsCompletionBlockOnTheMainThread
@@ -157,7 +165,12 @@
         objectId = [inserted objectID];
     } completion:^(BOOL success, NSError *error) {
         saveSuccessState = success;
-        fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectWithID:objectId];
+
+        NSManagedObjectContext *rootSavingContext = [NSManagedObjectContext MR_rootSavingContext];
+
+        [rootSavingContext performBlockAndWait:^{
+            fetchedObject = [rootSavingContext objectWithID:objectId];
+        }];
     }];
 
     expect(saveSuccessState).will.beTruthy();
@@ -183,18 +196,24 @@
         objectId = [inserted objectID];
     }];
 
-    fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectWithID:objectId];
-    expect([fetchedObject valueForKey:kTestAttributeKey]).to.beTruthy();
+    NSManagedObjectContext *rootSavingContext = [NSManagedObjectContext MR_rootSavingContext];
+
+    [rootSavingContext performBlockAndWait:^{
+        fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectWithID:objectId];
+        expect([fetchedObject valueForKey:kTestAttributeKey]).to.beTruthy();
+    }];
 
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
         NSManagedObject *changed = [localContext objectWithID:objectId];
         
         [changed setValue:@NO forKey:kTestAttributeKey];
     } completion:^(BOOL success, NSError *error) {
-        fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectWithID:objectId];
+        [rootSavingContext performBlockAndWait:^{
+            fetchedObject = [rootSavingContext objectWithID:objectId];
+            expect(fetchedObject).toNot.beNil();
+            expect([fetchedObject valueForKey:kTestAttributeKey]).to.beFalsy();
+        }];
     }];
-    
-    expect([fetchedObject valueForKey:kTestAttributeKey]).will.beFalsy();
 }
 
 - (void)testCurrentThreadSynchronousSaveActionSaves
@@ -238,13 +257,13 @@
         saveError = error;
     }];
 
-    expect(saveSuccessState).will.beTruthy();
-    expect(saveError).will.beNil();
-    expect(objectId).willNot.beNil();
+    expect(saveSuccessState).after(2).to.beTruthy();
+    expect(saveError).after(2).to.beNil();
+    expect(objectId).after(2).toNot.beNil();
 
     NSManagedObject *fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectRegisteredForID:objectId];
 
-    expect(fetchedObject).willNot.beNil();
+    expect(fetchedObject).after(2).toNot.beNil();
     expect([fetchedObject hasChanges]).will.beFalsy();
 }
 
@@ -259,9 +278,10 @@
         // Ignore the success state — we only care that this block is executed on the main thread
         completionBlockCalled = YES;
         completionBlockIsOnMainThread = [NSThread isMainThread];
-    }];
 
-    expect(completionBlockCalled).will.beTruthy();
+        expect(completionBlockCalled).to.beTruthy();
+        expect(completionBlockIsOnMainThread).to.beTruthy();
+    }];
 }
 
 @end
