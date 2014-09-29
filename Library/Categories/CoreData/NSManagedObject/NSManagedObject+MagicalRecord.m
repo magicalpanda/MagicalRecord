@@ -174,7 +174,9 @@
 
     [[retrieveExistingObjectError MR_coreDataDescription] MR_logToConsole];
 
-    [context deleteObject:objectInContext];
+    if (objectInContext) {
+      [context deleteObject:objectInContext];
+    }
 
     return [objectInContext MR_isEntityDeleted];
 }
