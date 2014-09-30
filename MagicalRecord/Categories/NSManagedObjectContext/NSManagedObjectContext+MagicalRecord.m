@@ -186,11 +186,15 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
 + (void)rootContextChanged:(NSNotification *)notification
 {
-    NSManagedObjectContext *defaultContext = [self MR_defaultContext];
-
-    [defaultContext performBlockAndWait:^{
-        [defaultContext mergeChangesFromContextDidSaveNotification:notification];
-    }];
+    if ([NSThread isMainThread] == NO) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self rootContextChanged:notification];
+        });
+        
+        return;
+    }
+    
+    [[self MR_defaultContext] mergeChangesFromContextDidSaveNotification:notification];
 }
 
 #pragma mark - Private Methods
