@@ -120,16 +120,27 @@ build_scheme ()
 
     local awkstatus=$?
 
+    if [ "$awkstatus" -eq "1" ]
+    then
+        # SDK not found, try for iphonesimulator.
+        sdkflag="-sdk iphonesimulator"
+
+        # Determine whether the unit tests will run with iphonesimulator
+        run_xctool $sdkflag -scheme "$scheme" run-tests | parse_build
+
+        awkstatus=$?
+
+        if [ "$awkstatus" -ne "0" ]
+        then
+            # Unit tests will not run on iphonesimulator.
+            sdkflag=""
+        fi
+    fi
+
     if [ "$awkstatus" -ne "0" ]
     then
         # Unit tests aren't supported.
         action=build
-    fi
-
-    if [ "$awkstatus" -eq "1" ]
-    then
-        # Build for iOS.
-        sdkflag="-sdk iphonesimulator"
     fi
 
     run_xctool $sdkflag -scheme "$scheme" $action
