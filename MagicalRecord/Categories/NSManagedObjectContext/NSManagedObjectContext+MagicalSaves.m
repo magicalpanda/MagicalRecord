@@ -67,13 +67,14 @@
     BOOL shouldSaveSynchronously = ((mask & MRSaveSynchronously) == MRSaveSynchronously);
     BOOL shouldSaveSynchronouslyExceptRoot = ((mask & MRSaveSynchronouslyExceptRootContext) == MRSaveSynchronouslyExceptRootContext);
 
-    BOOL saveSynchronously = (shouldSaveSynchronously && !shouldSaveSynchronouslyExceptRoot) || (shouldSaveSynchronouslyExceptRoot && (self != [[self class] MR_rootSavingContext]));
-
-    MRLogInfo(@"→ Saving %@", [self MR_description]);
-    MRLogVerbose(@"→ Save Parents? %@", shouldSaveParentContexts ? @"YES" : @"NO");
-    MRLogVerbose(@"→ Save Synchronously? %@", saveSynchronously ? @"YES" : @"NO");
+    BOOL saveSynchronously = (shouldSaveSynchronously && !shouldSaveSynchronouslyExceptRoot) ||
+                             (shouldSaveSynchronouslyExceptRoot && (self != [[self class] MR_rootSavingContext]));
 
     id saveBlock = ^{
+        MRLogInfo(@"→ Saving %@", [self MR_description]);
+        MRLogVerbose(@"→ Save Parents? %@", shouldSaveParentContexts ? @"YES" : @"NO");
+        MRLogVerbose(@"→ Save Synchronously? %@", saveSynchronously ? @"YES" : @"NO");
+
         BOOL saveResult = NO;
         NSError *error = nil;
 
