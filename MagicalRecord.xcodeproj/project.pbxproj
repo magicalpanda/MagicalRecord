@@ -897,6 +897,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0510;
+				CLASSPREFIX = MR;
 				ORGANIZATIONNAME = "Magical Panda Software LLC";
 			};
 			buildConfigurationList = C721C7A513D0A3750097AB6F /* Build configuration list for PBXProject "MagicalRecord" */;
