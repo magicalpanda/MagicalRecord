@@ -34,7 +34,7 @@
     [self MR_saveWithOptions:MRSaveParentContexts | MRSaveSynchronously completion:nil];
 }
 
-- (void) MR_saveWithOptions:(MRSaveOptions)mask completion:(MRSaveCompletionHandler)completion;
+- (void) MR_saveWithOptions:(MRSaveOptions)saveOptions completion:(MRSaveCompletionHandler)completion;
 {
     __block BOOL hasChanges = NO;
 
@@ -63,9 +63,9 @@
         return;
     }
 
-    BOOL shouldSaveParentContexts = ((mask & MRSaveParentContexts) == MRSaveParentContexts);
-    BOOL shouldSaveSynchronously = ((mask & MRSaveSynchronously) == MRSaveSynchronously);
-    BOOL shouldSaveSynchronouslyExceptRoot = ((mask & MRSaveSynchronouslyExceptRootContext) == MRSaveSynchronouslyExceptRootContext);
+    BOOL shouldSaveParentContexts = ((saveOptions & MRSaveParentContexts) == MRSaveParentContexts);
+    BOOL shouldSaveSynchronously = ((saveOptions & MRSaveSynchronously) == MRSaveSynchronously);
+    BOOL shouldSaveSynchronouslyExceptRoot = ((saveOptions & MRSaveSynchronouslyExceptRootContext) == MRSaveSynchronouslyExceptRootContext);
 
     BOOL saveSynchronously = (shouldSaveSynchronously && !shouldSaveSynchronouslyExceptRoot) ||
                              (shouldSaveSynchronouslyExceptRoot && (self != [[self class] MR_rootSavingContext]));
@@ -92,8 +92,20 @@
 
             if (saveResult && shouldSaveParentContexts && [self parentContext])
             {
+                // Add/remove the synchronous save option from the mask if necessary
+                MRSaveOptions modifiedOptions = saveOptions;
+
+                if (saveSynchronously)
+                {
+                    modifiedOptions |= MRSaveSynchronously;
+                }
+                else
+                {
+                    modifiedOptions &= MRSaveSynchronously;
+                }
+
                 // If we're saving parent contexts, do so
-                [[self parentContext] MR_saveWithOptions:mask completion:completion];
+                [[self parentContext] MR_saveWithOptions:modifiedOptions completion:completion];
             }
             else
             {
