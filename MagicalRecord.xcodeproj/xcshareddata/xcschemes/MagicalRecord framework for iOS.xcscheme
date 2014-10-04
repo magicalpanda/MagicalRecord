@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0510"
+   LastUpgradeVersion = "0610"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C779107E17E63C8900D20ACF"
+               BlueprintIdentifier = "9053F55919E0244C00137362"
                BuildableName = "MagicalRecord.framework"
-               BlueprintName = "MagicalRecord"
+               BlueprintName = "MagicalRecord for iOS"
+               ReferencedContainer = "container:MagicalRecord.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9053F56319E0244C00137362"
+               BuildableName = "MagicalRecord for iOS Tests.xctest"
+               BlueprintName = "MagicalRecord for iOS Tests"
                ReferencedContainer = "container:MagicalRecord.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,13 +46,22 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "909BBC7D18E03FCB007BA3F1"
-               BuildableName = "MagicalRecordTests-OSX.xctest"
-               BlueprintName = "MagicalRecordTests-OSX"
+               BlueprintIdentifier = "9053F56319E0244C00137362"
+               BuildableName = "MagicalRecord for iOS Tests.xctest"
+               BlueprintName = "MagicalRecord for iOS Tests"
                ReferencedContainer = "container:MagicalRecord.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "9053F55919E0244C00137362"
+            BuildableName = "MagicalRecord.framework"
+            BlueprintName = "MagicalRecord for iOS"
+            ReferencedContainer = "container:MagicalRecord.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -49,6 +72,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "9053F55919E0244C00137362"
+            BuildableName = "MagicalRecord.framework"
+            BlueprintName = "MagicalRecord for iOS"
+            ReferencedContainer = "container:MagicalRecord.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -58,6 +90,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "9053F55919E0244C00137362"
+            BuildableName = "MagicalRecord.framework"
+            BlueprintName = "MagicalRecord for iOS"
+            ReferencedContainer = "container:MagicalRecord.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

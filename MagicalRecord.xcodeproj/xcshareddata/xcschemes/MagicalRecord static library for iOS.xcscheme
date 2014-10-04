@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C7CF97AA17498414008D9D13"
-               BuildableName = "libMagicalRecord-iOS.a"
-               BlueprintName = "libMagicalRecord-iOS"
+               BuildableName = "libMagicalRecord for iOS.a"
+               BlueprintName = "libMagicalRecord for iOS"
                ReferencedContainer = "container:MagicalRecord.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "90C4BD7418E11DFA009FAF9C"
-               BuildableName = "MagicalRecordTests-iOS.xctest"
-               BlueprintName = "MagicalRecordTests-iOS"
+               BuildableName = "libMagicalRecord for iOS Tests.xctest"
+               BlueprintName = "libMagicalRecord for iOS Tests"
                ReferencedContainer = "container:MagicalRecord.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -49,6 +49,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "C7CF97AA17498414008D9D13"
+            BuildableName = "libMagicalRecord for iOS.a"
+            BlueprintName = "libMagicalRecord for iOS"
+            ReferencedContainer = "container:MagicalRecord.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
