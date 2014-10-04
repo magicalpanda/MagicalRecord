@@ -1351,7 +1351,6 @@
 					"$(inherited)",
 					"$(BUILT_PRODUCTS_DIR)",
 					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
-					"\"$(SRCROOT)/Tests/Vendor/Specta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-iOS-Info.plist";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
@@ -1381,7 +1380,6 @@
 					"$(inherited)",
 					"$(BUILT_PRODUCTS_DIR)",
 					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
-					"\"$(SRCROOT)/Tests/Vendor/Specta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-iOS-Info.plist";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
@@ -1419,7 +1417,6 @@
 					"$(inherited)",
 					"$(BUILT_PRODUCTS_DIR)",
 					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
-					"\"$(SRCROOT)/Tests/Vendor/Specta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-OSX-Info.plist";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
@@ -1449,7 +1446,6 @@
 					"$(inherited)",
 					"$(BUILT_PRODUCTS_DIR)",
 					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
-					"\"$(SRCROOT)/Tests/Vendor/Specta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-OSX-Info.plist";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
