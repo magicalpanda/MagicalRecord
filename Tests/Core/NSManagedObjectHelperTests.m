@@ -105,28 +105,29 @@
 - (void)testCanDeleteEntityInstanceInOtherContext
 {
     NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
-    NSManagedObject *testEntity = [SingleRelatedEntity MR_createEntityInContext:defaultContext];
 
-    [defaultContext MR_saveToPersistentStoreAndWait];
+    [defaultContext performBlockAndWait:^{
+        NSManagedObject *testEntity = [SingleRelatedEntity MR_createEntityInContext:defaultContext];
 
-    XCTAssertFalse([testEntity isDeleted], @"Entity should not be deleted at this point");
+        [defaultContext MR_saveToPersistentStoreAndWait];
 
-    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-        NSManagedObject *otherEntity = [testEntity MR_inContext:localContext];
+        XCTAssertFalse([testEntity isDeleted], @"Entity should not be deleted at this point");
 
-        XCTAssertNotNil(otherEntity, @"Entity should not be nil");
-        XCTAssertFalse([otherEntity isDeleted], @"Entity should not be deleted at this point");
+        [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+            NSManagedObject *otherEntity = [testEntity MR_inContext:localContext];
 
-        // Delete the object in the other context
-        [testEntity MR_deleteEntityInContext:localContext];
+            XCTAssertNotNil(otherEntity, @"Entity should not be nil");
+            XCTAssertFalse([otherEntity isDeleted], @"Entity should not be deleted at this point");
 
-        // The nested context entity should now be deleted
-        XCTAssertTrue([otherEntity isDeleted], @"Entity should now be deleted");
+            // Delete the object in the other context
+            [testEntity MR_deleteEntityInContext:localContext];
+            [localContext processPendingChanges];
+
+            // The nested context entity should now be deleted
+            XCTAssertTrue([localContext.deletedObjects containsObject:otherEntity], @"Entity should be listed as being deleted in the context");
+            XCTAssertTrue([otherEntity isDeleted], @"Entity should now be deleted");
+        }];
     }];
-
-    // The default context entity should now be deleted
-    XCTAssertNotNil(testEntity, @"Entity should not be nil");
-    XCTAssertTrue([testEntity isDeleted], @"Entity should now be deleted");
 }
 
 #pragma mark - Private Methods
