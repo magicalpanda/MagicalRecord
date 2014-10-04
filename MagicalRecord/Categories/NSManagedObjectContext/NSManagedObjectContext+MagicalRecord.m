@@ -73,9 +73,8 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
         context = [self MR_newPrivateQueueContext];
         [context performBlockAndWait:^{
             [context setPersistentStoreCoordinator:coordinator];
+            MRLogVerbose(@"Created new context %@ with store coordinator: %@", [context MR_workingName], coordinator);
         }];
-        
-        MRLogVerbose(@"Created new context %@ with store coordinator: %@", [context MR_workingName], coordinator);
     }
     return context;
 }
@@ -98,23 +97,17 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
 - (void) MR_setWorkingName:(NSString *)workingName
 {
-    [self performBlockAndWait:^{
-        [[self userInfo] setObject:workingName forKey:MagicalRecordContextWorkingName];
-    }];
+    [[self userInfo] setObject:workingName forKey:MagicalRecordContextWorkingName];
 }
 
 - (NSString *) MR_workingName
 {
-    __block NSString *workingName;
+    NSString *workingName = [[self userInfo] objectForKey:MagicalRecordContextWorkingName];
 
-    [self performBlockAndWait:^{
-        workingName = [[self userInfo] objectForKey:MagicalRecordContextWorkingName];
-
-        if ([workingName length] == 0)
-        {
-            workingName = @"Untitled Context";
-        }
-    }];
+    if ([workingName length] == 0)
+    {
+        workingName = @"Untitled Context";
+    }
 
     return workingName;
 }
@@ -123,7 +116,13 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 {
     NSString *onMainThread = [NSThread isMainThread] ? @"the main thread" : @"a background thread";
 
-    return [NSString stringWithFormat:@"<%@ (%p): %@> on %@", NSStringFromClass([self class]), self, [self MR_workingName], onMainThread];
+    __block NSString *workingName;
+
+    [self performBlockAndWait:^{
+        workingName = [self MR_workingName];
+    }];
+
+    return [NSString stringWithFormat:@"<%@ (%p): %@> on %@", NSStringFromClass([self class]), self, workingName, onMainThread];
 }
 
 - (NSString *) MR_parentChain
