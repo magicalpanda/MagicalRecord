@@ -133,8 +133,8 @@
 
 - (void) MR_saveWithErrorCallback:(void (^)(NSError *error))errorCallback;
 {
-    [self MR_saveWithOptions:MRSaveSynchronously | MRSaveParentContexts completion:^(BOOL success, NSError *error) {
-        if (!success && errorCallback)
+    [self MR_saveWithOptions:MRSaveSynchronously | MRSaveParentContexts completion:^(BOOL contextDidSave, NSError *error) {
+        if (!contextDidSave && errorCallback)
         {
             errorCallback(error);
         }
@@ -143,8 +143,8 @@
 
 - (void) MR_saveInBackgroundCompletion:(void (^)(void))completion;
 {
-    [self MR_saveOnlySelfWithCompletion:^(BOOL success, NSError *error) {
-        if (success && completion)
+    [self MR_saveOnlySelfWithCompletion:^(BOOL contextDidSave, NSError *error) {
+        if (contextDidSave && completion)
         {
             completion();
         }
@@ -153,8 +153,8 @@
 
 - (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback;
 {
-    [self MR_saveOnlySelfWithCompletion:^(BOOL success, NSError *error) {
-        if (!success && errorCallback)
+    [self MR_saveOnlySelfWithCompletion:^(BOOL contextDidSave, NSError *error) {
+        if (!contextDidSave && errorCallback)
         {
             errorCallback(error);
         }
@@ -163,8 +163,8 @@
 
 - (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion;
 {
-    [self MR_saveOnlySelfWithCompletion:^(BOOL success, NSError *error) {
-        if (success && completion)
+    [self MR_saveOnlySelfWithCompletion:^(BOOL contextDidSave, NSError *error) {
+        if (contextDidSave && completion)
         {
             completion();
         }
@@ -182,8 +182,8 @@
 
 - (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback;
 {
-    [self MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (!success && errorCallback)
+    [self MR_saveToPersistentStoreWithCompletion:^(BOOL contextDidSave, NSError *error) {
+        if (!contextDidSave && errorCallback)
         {
             errorCallback(error);
         }
@@ -192,8 +192,8 @@
 
 - (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion;
 {
-    [self MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (success && completion)
+    [self MR_saveToPersistentStoreWithCompletion:^(BOOL contextDidSave, NSError *error) {
+        if (contextDidSave && completion)
         {
             completion();
         }

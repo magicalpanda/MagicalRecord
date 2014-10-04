@@ -23,7 +23,7 @@ typedef NS_OPTIONS(NSUInteger, MRSaveOptions) {
     MRSaveSynchronouslyExceptRootContext = 1 << 3
 };
 
-typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
+typedef void (^MRSaveCompletionHandler)(BOOL contextDidSave, NSError *error);
 
 @interface NSManagedObjectContext (MagicalSaves)
 

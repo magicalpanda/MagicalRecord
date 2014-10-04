@@ -125,8 +125,8 @@
             block(localContext);
         }
 
-        [localContext MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-            if (success) {
+        [localContext MR_saveToPersistentStoreWithCompletion:^(BOOL contextDidSave, NSError *error) {
+            if (contextDidSave) {
                 if (completion) {
                     completion();
                 }
