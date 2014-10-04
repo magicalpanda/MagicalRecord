@@ -183,17 +183,25 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
     }
 }
 
-+ (void)rootContextChanged:(NSNotification *)notification
++ (void) rootContextDidSave:(NSNotification *)notification
 {
-    if ([NSThread isMainThread] == NO) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self rootContextChanged:notification];
-        });
-        
+    NSManagedObjectContext *defaultContext = [self MR_defaultContext];
+
+    if ([notification object] != defaultContext)
+    {
         return;
     }
-    
-    [[self MR_defaultContext] mergeChangesFromContextDidSaveNotification:notification];
+
+    if ([NSThread isMainThread] == NO)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self rootContextDidSave:notification];
+        });
+
+        return;
+    }
+
+    [defaultContext mergeChangesFromContextDidSaveNotification:notification];
 }
 
 #pragma mark - Private Methods
@@ -240,7 +248,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
     if ((MagicalRecordDefaultContext != nil) && ([self MR_rootSavingContext] != nil)) {
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(rootContextChanged:)
+                                                 selector:@selector(rootContextDidSave:)
                                                      name:NSManagedObjectContextDidSaveNotification
                                                    object:[self MR_rootSavingContext]];
     }
