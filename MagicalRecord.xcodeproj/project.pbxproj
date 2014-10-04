@@ -192,6 +192,7 @@
 		9053F63B19E0382C00137362 /* ManuallyMigratingMagicalRecordStack.h in Headers */ = {isa = PBXBuildFile; fileRef = C7790FA717E63C3100D20ACF /* ManuallyMigratingMagicalRecordStack.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9053F63C19E0382C00137362 /* AutoMigratingWithSourceAndTargetModelMagicalRecordStack.h in Headers */ = {isa = PBXBuildFile; fileRef = C79D63E0180880A9006C29E3 /* AutoMigratingWithSourceAndTargetModelMagicalRecordStack.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9053F63D19E0382C00137362 /* InMemoryMagicalRecordStack.h in Headers */ = {isa = PBXBuildFile; fileRef = C7790FA317E63C3100D20ACF /* InMemoryMagicalRecordStack.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9053F64719E03E7D00137362 /* MagicalRecord.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9053F55A19E0244C00137362 /* MagicalRecord.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		90601FBD190DD21A00E44235 /* NSPersistentStore+MagicalRecordPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 90601FBC190DD21A00E44235 /* NSPersistentStore+MagicalRecordPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		90610E3E18F41B1400E2C328 /* NSArray+MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 90610E3C18F41B1400E2C328 /* NSArray+MagicalRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		90610E3F18F41B1400E2C328 /* NSArray+MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 90610E3D18F41B1400E2C328 /* NSArray+MagicalRecord.m */; };
@@ -217,7 +218,7 @@
 		909BBF0018E0415F007BA3F1 /* ImportSingleRelatedEntityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 909BBDED18E040E2007BA3F1 /* ImportSingleRelatedEntityTests.m */; };
 		909BBF0218E04164007BA3F1 /* MagicalRecordStackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 909BBDDF18E040E2007BA3F1 /* MagicalRecordStackTests.m */; };
 		909BBF0818E04185007BA3F1 /* MagicalRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C779107F17E63C8900D20ACF /* MagicalRecord.framework */; };
-		909BBF0B18E041F3007BA3F1 /* MagicalRecord.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C779107F17E63C8900D20ACF /* MagicalRecord.framework */; };
+		909BBF0B18E041F3007BA3F1 /* MagicalRecord.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = C779107F17E63C8900D20ACF /* MagicalRecord.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		90AA772918F79CD700D49377 /* EntityWithoutEntityNameMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 90AA772818F79CD700D49377 /* EntityWithoutEntityNameMethod.m */; };
 		90AA772A18F79CD700D49377 /* EntityWithoutEntityNameMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 90AA772818F79CD700D49377 /* EntityWithoutEntityNameMethod.m */; };
 		90C4BD8F18E11E73009FAF9C /* SampleJSONDataForImport.json in Resources */ = {isa = PBXBuildFile; fileRef = 90470E0118E102A200CCE9DD /* SampleJSONDataForImport.json */; };
@@ -462,14 +463,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		909BBF0A18E041E8007BA3F1 /* CopyFiles */ = {
+		9053F64519E03E6A00137362 /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				909BBF0B18E041F3007BA3F1 /* MagicalRecord.framework in CopyFiles */,
+				9053F64719E03E7D00137362 /* MagicalRecord.framework in Copy Frameworks */,
 			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		909BBF0A18E041E8007BA3F1 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				909BBF0B18E041F3007BA3F1 /* MagicalRecord.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C7CF97A917498414008D9D13 /* CopyFiles */ = {
@@ -1287,6 +1300,7 @@
 			buildPhases = (
 				9053F56019E0244C00137362 /* Sources */,
 				9053F56119E0244C00137362 /* Frameworks */,
+				9053F64519E03E6A00137362 /* Copy Frameworks */,
 				9053F56219E0244C00137362 /* Resources */,
 			);
 			buildRules = (
@@ -1305,8 +1319,8 @@
 			buildPhases = (
 				909BBC7A18E03FCB007BA3F1 /* Sources */,
 				909BBC7B18E03FCB007BA3F1 /* Frameworks */,
+				909BBF0A18E041E8007BA3F1 /* Copy Frameworks */,
 				909BBED818E0413D007BA3F1 /* Resources */,
-				909BBF0A18E041E8007BA3F1 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -2196,6 +2210,7 @@
 				9053F57019E0244C00137362 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9053F57119E0244C00137362 /* Build configuration list for PBXNativeTarget "MagicalRecord for iOS Tests" */ = {
 			isa = XCConfigurationList;
@@ -2204,6 +2219,7 @@
 				9053F57419E0244C00137362 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		909BBC8B18E03FCB007BA3F1 /* Build configuration list for PBXNativeTarget "MagicalRecord for OS X Tests" */ = {
 			isa = XCConfigurationList;
