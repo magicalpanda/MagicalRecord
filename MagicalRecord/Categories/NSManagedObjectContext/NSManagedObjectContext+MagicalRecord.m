@@ -185,9 +185,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
 + (void) rootContextDidSave:(NSNotification *)notification
 {
-    NSManagedObjectContext *defaultContext = [self MR_defaultContext];
-
-    if ([notification object] != defaultContext)
+    if ([notification object] != [self MR_rootSavingContext])
     {
         return;
     }
@@ -201,7 +199,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
         return;
     }
 
-    [defaultContext mergeChangesFromContextDidSaveNotification:notification];
+    [[self MR_defaultContext] mergeChangesFromContextDidSaveNotification:notification];
 }
 
 #pragma mark - Private Methods
