@@ -10,6 +10,7 @@
 #import "NSManagedObject+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
 #include <libkern/OSAtomic.h>
+#import "MagicalRecord+Setup.h"
 
 static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_NSManagedObjectContextForThreadKey";
 static NSString const * kMagicalRecordManagedObjectContextCacheVersionKey = @"MagicalRecord_CacheVersionOfNSManagedObjectContextForThreadKey";
@@ -30,7 +31,7 @@ static volatile int32_t contextsCacheVersion = 0;
 
 + (NSManagedObjectContext *) MR_contextForCurrentThread;
 {
-	if ([NSThread isMainThread])
+	if ([NSOperationQueue currentQueue] == CoreDataMainThread)
 	{
 		return [self MR_defaultContext];
 	}

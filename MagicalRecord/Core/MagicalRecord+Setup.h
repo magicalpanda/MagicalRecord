@@ -8,7 +8,12 @@
 
 #import "MagicalRecord.h"
 
+#define CoreDataMainThread [MagicalRecord MR_mainThread]
+
 @interface MagicalRecord (Setup)
+
++ (void)MR_setMainThread:(NSOperationQueue*)queue;//default thread = MainQueue
++ (NSOperationQueue*)MR_mainThread;
 
 + (void) setupCoreDataStack;
 + (void) setupCoreDataStackWithInMemoryStore;

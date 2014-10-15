@@ -169,8 +169,7 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
             [self MR_addSqliteStoreNamed:storeIdentifier withOptions:options];
             [self unlock];
         }
-
-        dispatch_async(dispatch_get_main_queue(), ^{
+        [CoreDataMainThread addOperationWithBlock:^{
             if ([NSPersistentStore MR_defaultPersistentStore] == nil)
             {
                 [NSPersistentStore MR_setDefaultPersistentStore:[[self persistentStores] firstObject]];
@@ -181,7 +180,7 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
             }
             NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
             [notificationCenter postNotificationName:kMagicalRecordPSCDidCompleteiCloudSetupNotification object:nil];
-        });
+        }];
     });
 }
 

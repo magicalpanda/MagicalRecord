@@ -11,6 +11,7 @@
 #import "NSManagedObjectContext+MagicalRecord.h"
 #import "MagicalRecord.h"
 #import "MagicalRecordLogging.h"
+#import "MagicalRecord+Setup.h"
 
 @implementation NSManagedObjectContext (MagicalSaves)
 
@@ -31,7 +32,9 @@
 
 - (void) MR_saveToPersistentStoreAndWait;
 {
-    [self MR_saveWithOptions:MRSaveParentContexts | MRSaveSynchronously completion:nil];
+    @synchronized(self.class){
+        [self MR_saveWithOptions:MRSaveParentContexts | MRSaveSynchronously completion:nil];
+    }
 }
 
 - (void) MR_saveWithOptions:(MRSaveOptions)saveOptions completion:(MRSaveCompletionHandler)completion;
@@ -55,9 +58,9 @@
 
         if (completion)
         {
-            dispatch_async(dispatch_get_main_queue(), ^{
+            [CoreDataMainThread addOperationWithBlock:^{
                 completion(NO, nil);
-            });
+            }];
         }
 
         return;
@@ -116,9 +119,9 @@
 
                 if (completion)
                 {
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                    [CoreDataMainThread addOperationWithBlock:^{
                         completion(saveResult, error);
-                    });
+                    }];
                 }
             }
         }

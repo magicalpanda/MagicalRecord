@@ -13,6 +13,26 @@
 
 @implementation MagicalRecord (Setup)
 
+
+static NSOperationQueue *coreDataMainQueue;
+
++ (void)load
+{
+    coreDataMainQueue = [NSOperationQueue mainQueue];
+}
+
++ (void)MR_setMainThread:(NSOperationQueue*)queue
+{
+//    NSAssert([NSManagedObjectContext MR_defaultContext] == nil, @"main thread mast be seted before coreData stack setup");
+    coreDataMainQueue = queue;
+}
+
++ (NSOperationQueue*)MR_mainThread
+{
+    return coreDataMainQueue;
+}
+
+
 + (void) setupCoreDataStack
 {
     [self setupCoreDataStackWithStoreNamed:[self defaultStoreName]];

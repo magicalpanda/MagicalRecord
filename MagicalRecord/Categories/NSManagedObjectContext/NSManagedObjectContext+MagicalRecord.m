@@ -27,8 +27,12 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
     {
         NSManagedObjectContext *rootContext = [self MR_contextWithStoreCoordinator:coordinator];
         [self MR_setRootSavingContext:rootContext];
-
-        NSManagedObjectContext *defaultContext = [self MR_newMainQueueContext];
+        NSManagedObjectContext *defaultContext;
+        if ([NSOperationQueue currentQueue] == [NSOperationQueue mainQueue])
+            defaultContext = [self MR_newMainQueueContext];
+        else 
+            defaultContext = [self MR_newPrivateQueueContext];
+        
         [self MR_setDefaultContext:defaultContext];
 
         [defaultContext setParentContext:rootContext];
@@ -114,7 +118,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
 - (NSString *) MR_description
 {
-    NSString *onMainThread = [NSThread isMainThread] ? @"the main thread" : @"a background thread";
+    NSString *onMainThread = [NSOperationQueue currentQueue] == CoreDataMainThread ? @"the main thread" : @"a background thread";
 
     __block NSString *workingName;
 
@@ -145,10 +149,10 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
     NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
     NSAssert(NSConfinementConcurrencyType == [defaultContext concurrencyType], @"Do not call this method on a confinement context.");
 
-    if ([NSThread isMainThread] == NO) {
-        dispatch_async(dispatch_get_main_queue(), ^{
+    if ([NSOperationQueue currentQueue] != CoreDataMainThread) {
+        [CoreDataMainThread addOperationWithBlock:^{
             [self MR_resetDefaultContext];
-        });
+        }];
 
         return;
     }
@@ -190,11 +194,11 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
         return;
     }
 
-    if ([NSThread isMainThread] == NO)
+    if ([NSOperationQueue currentQueue] != CoreDataMainThread)
     {
-        dispatch_async(dispatch_get_main_queue(), ^{
+        [CoreDataMainThread addOperationWithBlock:^{
             [self rootContextDidSave:notification];
-        });
+        }];
 
         return;
     }
