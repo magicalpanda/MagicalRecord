@@ -13,8 +13,10 @@
 #pragma mark - Setup
 
 /**
- Initializes MagicalRecord's default contexts using the provided persistent store coordinator.
+ Initializes MagicalRecord's Root and default contexts using the provided persistent store coordinator.
 
+ @discussion If you want MagicalRecord to use your existing contexts set them using MR_setRootSavingContext and MR_setDefaultContext.
+ 
  @param coordinator Persistent Store Coordinator
  */
 + (void) MR_initializeDefaultContextWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
@@ -30,11 +32,33 @@
 + (NSManagedObjectContext *) MR_rootSavingContext;
 
 /**
+ Set the Root context responsible for sending changes to the main persistent store coordinator that will be saved to disk.
+ 
+ @discussion There is usually no need to set manually the Root context as one will be created on MR_initializeDefaultContextWithCoordinator.
+ 
+ @see MR_rootSavingContext.
+ 
+ @param context Context to be set as the Root context.
+ */
++ (void) MR_setRootSavingContext:(NSManagedObjectContext *)context;
+
+/**
  @discussion Please do not use this context for saving changes, as it will block the main thread when doing so.
 
  @return Main queue context that can be observed for changes
  */
 + (NSManagedObjectContext *) MR_defaultContext;
+
+/**
+ Set the default context.
+ 
+ @discussion There is usually no need to set manually the default context as one will be created on MR_initializeDefaultContextWithCoordinator.
+ 
+ @see MR_defaultContext.
+ 
+ @param context Context to be set as the deafult context.
+ */
++ (void) MR_setDefaultContext:(NSManagedObjectContext *)context;
 
 #pragma mark - Context Creation
 
