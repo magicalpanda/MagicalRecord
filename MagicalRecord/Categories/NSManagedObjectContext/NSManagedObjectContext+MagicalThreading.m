@@ -9,6 +9,7 @@
 #import "NSManagedObjectContext+MagicalThreading.h"
 #import "NSManagedObject+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
+#import "NSManagedObjectContext+MagicalObserving.h"
 #include <libkern/OSAtomic.h>
 
 static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_NSManagedObjectContextForThreadKey";
@@ -52,10 +53,13 @@ static volatile int32_t contextsCacheVersion = 0;
                  @"The Magical Record keys should either both be present or neither be present, otherwise we're in an inconsistent state!");
 		if ((threadContext == nil) || (currentCacheVersionForContext == nil) || ((int32_t)[currentCacheVersionForContext integerValue] != targetCacheVersionForContext))
 		{
-			threadContext = [self MR_contextWithParent:[NSManagedObjectContext MR_defaultContext]];
+            NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
+			threadContext = [self MR_contextWithParent:defaultContext];
 			[threadDict setObject:threadContext forKey:kMagicalRecordManagedObjectContextKey];
 			[threadDict setObject:[NSNumber numberWithInteger:targetCacheVersionForContext]
                            forKey:kMagicalRecordManagedObjectContextCacheVersionKey];
+            [threadContext MR_observeContext:defaultContext];
+            threadContext.thread = [NSThread currentThread];
 		}
 		return threadContext;
 	}
@@ -64,6 +68,19 @@ static volatile int32_t contextsCacheVersion = 0;
 + (void) MR_clearContextForCurrentThread {
     [[[NSThread currentThread] threadDictionary] removeObjectForKey:kMagicalRecordManagedObjectContextKey];
     [[[NSThread currentThread] threadDictionary] removeObjectForKey:kMagicalRecordManagedObjectContextCacheVersionKey];
+}
+
++ (void)load
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        SEL selector = NSSelectorFromString(@"dealloc");
+        IMP dealloc = class_getMethodImplementation(self, selector);
+        class_replaceMethod(self, selector, imp_implementationWithBlock(^(id _self) {
+            [_self MR_stopObservingContext:nil];
+            dealloc(_self, selector);
+        }), method_getTypeEncoding(class_getInstanceMethod(self, selector)));
+    });
 }
 
 @end

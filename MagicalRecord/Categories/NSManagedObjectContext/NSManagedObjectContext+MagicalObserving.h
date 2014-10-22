@@ -17,6 +17,7 @@ extern NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification;
  */
 @interface NSManagedObjectContext (MagicalObserving)
 
+@property (nonatomic, weak) NSThread *thread;
 /**
  Merge changes from another context into self.
 

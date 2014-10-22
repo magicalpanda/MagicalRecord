@@ -11,10 +11,24 @@
 #import "MagicalRecord.h"
 #import "MagicalRecord+iCloud.h"
 #import "MagicalRecordLogging.h"
+#import <objc/runtime.h>
 
 NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalRecordDidMergeChangesFromiCloudNotification";
 
 @implementation NSManagedObjectContext (MagicalObserving)
+
+@dynamic thread;
+static void *threadKey;
+
+- (void)setThread:(NSThread *)thread
+{
+    objc_setAssociatedObject(self, &threadKey, thread, OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (NSThread *)thread
+{
+    return objc_getAssociatedObject(self, &threadKey);
+}
 
 #pragma mark - Context Observation Helpers
 
@@ -70,8 +84,13 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 	MRLogVerbose(@"Merging changes to %@context%@",
           self == [NSManagedObjectContext MR_defaultContext] ? @"*** DEFAULT *** " : @"",
           ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
-    
-	[self mergeChangesFromContextDidSaveNotification:notification];
+
+    NSThread *thread = [self thread];
+    if (thread) {
+        [self performSelector:@selector(mergeChangesFromContextDidSaveNotification:) onThread:thread withObject:notification waitUntilDone:NO];
+    } else {
+        [self mergeChangesFromContextDidSaveNotification:notification];
+    }
 }
 
 - (void) MR_mergeChangesOnMainThread:(NSNotification *)notification;
