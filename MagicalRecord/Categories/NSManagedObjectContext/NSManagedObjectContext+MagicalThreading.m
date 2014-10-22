@@ -59,6 +59,7 @@ static volatile int32_t contextsCacheVersion = 0;
 			[threadDict setObject:[NSNumber numberWithInteger:targetCacheVersionForContext]
                            forKey:kMagicalRecordManagedObjectContextCacheVersionKey];
             [threadContext MR_observeContext:defaultContext];
+            threadContext.thread = [NSThread currentThread];
 		}
 		return threadContext;
 	}
