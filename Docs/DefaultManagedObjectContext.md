@@ -28,3 +28,4 @@ If you'd like to make your `myNewContext` instance the default for all fetch req
 
 > **NOTE:** It is *highly* recommended that the default context is created and set on the main thread using a managed object context with a concurrency type of `NSMainQueueConcurrencyType`.
 
+[Previous (iCloud)](iCloud.md)

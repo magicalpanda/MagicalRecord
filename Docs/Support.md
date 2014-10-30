@@ -42,3 +42,5 @@ MagicalRecord is provided free of charge. For Support, you have a few choices:
 
 Follow [@MagicalRecord](http://twitter.com/magicalrecord) on twitter to stay up to date on twitter with the latest updates to MagicalRecord.
 
+[Previous (Saving)](Saving.md)
+[Next (Threads)](Threads.md)

@@ -33,3 +33,6 @@ If it's available, MagicalRecord will direct it's logs to [CocoaLumberjack](http
 #define MR_LOGGING_ENABLED 1
 #import <MagicalRecord/CoreData+MagicalRecord.h>
 ```
+
+[Previous (Importing)](Importing.md)
+[Next (Resources)](Resources.md)

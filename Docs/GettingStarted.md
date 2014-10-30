@@ -26,3 +26,5 @@ New in Core Data is support for related contexts. This is a super neat, and supe
 
 MagicalRecord provides a background saving queue so that saving all data is performed off the main thread, in the background. This means that it may be necessary to use *MR_saveNestedContexts* rather than the typical *MR_save* method in order to persist your changes all the way to your persistent store;
 
+[Previous (Installaion)](Installation.md)
+[Next (Fetching)](Fetching.md)

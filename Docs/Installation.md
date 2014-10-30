@@ -15,3 +15,5 @@
 * iOS SDK 6.x or later; or
 * OS X SDK 10.8 or later
 * Xcode 5 is required to run the included tests, but the library builds under Xcode 4
+
+[Next (Getting Started)](GettingStarted.md)
