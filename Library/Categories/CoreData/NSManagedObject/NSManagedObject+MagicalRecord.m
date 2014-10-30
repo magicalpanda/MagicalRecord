@@ -159,7 +159,15 @@
 
 - (BOOL) MR_isEntityDeleted
 {
-    return [self isDeleted] || [self managedObjectContext] == nil;
+    // if object has been deleted, then it no longer exists
+    if ([self isDeleted]) return YES;
+    // otherwise, see if object with this ID exists in the database
+    NSManagedObjectContext *context = [self managedObjectContext];
+    if (context == nil) return YES;
+    NSManagedObjectID *objectID = [self objectID];
+    if (objectID == nil) return YES;
+    NSManagedObject *obj = [context objectRegisteredForID:objectID];
+    return obj == nil;
 }
 
 - (BOOL) MR_deleteEntity
