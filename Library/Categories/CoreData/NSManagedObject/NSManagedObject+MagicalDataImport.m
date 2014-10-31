@@ -304,22 +304,24 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 
 - (BOOL) MR_importValuesForKeysWithObject:(id)objectData
 {
-	__weak typeof(self) weakself = self;
+	__weak typeof(self) weakSelf = self;
+
     void (^esablishRelationship)(NSRelationshipDescription*,id) =^(NSRelationshipDescription *relationshipInfo, id localObjectData) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
 
         //Look up any existing objects
-        NSManagedObject *relatedObject = [weakself MR_lookupObjectForRelationship:relationshipInfo fromData:localObjectData];
+        NSManagedObject *relatedObject = [strongSelf MR_lookupObjectForRelationship:relationshipInfo fromData:localObjectData];
 
         if (relatedObject == nil)
         {
             //create if none exist
             NSEntityDescription *entityDescription = [relationshipInfo destinationEntity];
-            relatedObject = [entityDescription MR_createInstanceInContext:[weakself managedObjectContext]];
+            relatedObject = [entityDescription MR_createInstanceInContext:[strongSelf managedObjectContext]];
         }
         //import or update
         [relatedObject MR_importValuesForKeysWithObject:localObjectData];
 
-        [weakself MR_setObject:relatedObject forRelationship:relationshipInfo];
+        [strongSelf MR_setObject:relatedObject forRelationship:relationshipInfo];
 	};
 
     return [self MR_importValuesForKeysWithObject:objectData establishRelationshipBlock:esablishRelationship];
