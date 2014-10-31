@@ -43,7 +43,7 @@
 
         block(localContext);
 
-        [localContext MR_saveWithOptions:MRSaveSynchronously completion:completion];
+        [localContext MR_saveWithOptions:MRContextSaveOptionsSaveSynchronously completion:completion];
         [mainContext MR_stopObservingContextDidSave:localContext];
     });
 }

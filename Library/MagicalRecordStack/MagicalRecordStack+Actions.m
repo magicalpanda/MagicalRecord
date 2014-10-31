@@ -71,7 +71,8 @@ dispatch_queue_t MR_saveQueue()
             
             block(localContext);
 
-            [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:completion];
+            MRContextSaveOptions saveOptions = (MRContextSaveOptions)(MRContextSaveOptionsSaveParentContexts | MRContextSaveOptionsSaveSynchronously);
+            [localContext MR_saveWithOptions:saveOptions completion:completion];
         }
     });
 }
@@ -99,7 +100,8 @@ dispatch_queue_t MR_saveQueue()
 
     __block BOOL saveSuccess = YES;
 
-    [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:^(BOOL localSuccess, NSError *localSaveError) {
+    MRContextSaveOptions saveOptions = (MRContextSaveOptions)(MRContextSaveOptionsSaveParentContexts | MRContextSaveOptionsSaveSynchronously);
+    [localContext MR_saveWithOptions:saveOptions completion:^(BOOL localSuccess, NSError *localSaveError) {
         saveSuccess = localSuccess;
 
         if (error != nil)

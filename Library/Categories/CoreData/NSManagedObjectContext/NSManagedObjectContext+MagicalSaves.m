@@ -18,7 +18,7 @@
 {
     __block BOOL saveResult = NO;
 
-    [self MR_saveWithOptions:MRSaveSynchronously completion:^(BOOL success, NSError *error) {
+    [self MR_saveWithOptions:MRContextSaveOptionsSaveSynchronously completion:^(BOOL success, NSError *error) {
         saveResult = success;
     }];
 
@@ -30,7 +30,7 @@
     __block BOOL saveResult = NO;
     __block NSError *saveError;
 
-    [self MR_saveWithOptions:MRSaveSynchronously completion:^(BOOL localSuccess, NSError *localError) {
+    [self MR_saveWithOptions:MRContextSaveOptionsSaveSynchronously completion:^(BOOL localSuccess, NSError *localError) {
         saveResult = localSuccess;
         saveError = localError;
     }];
@@ -44,19 +44,20 @@
 
 - (void) MR_saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;
 {
-    [self MR_saveWithOptions:0 completion:completion];
+    [self MR_saveWithOptions:MRContextSaveOptionsNone completion:completion];
 }
 
 - (void) MR_saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion;
 {
-    [self MR_saveWithOptions:MRSaveParentContexts completion:completion];
+    [self MR_saveWithOptions:MRContextSaveOptionsSaveParentContexts completion:completion];
 }
 
 - (BOOL) MR_saveToPersistentStoreAndWait;
 {
     __block BOOL saveResult = NO;
 
-    [self MR_saveWithOptions:MRSaveParentContexts | MRSaveSynchronously completion:^(BOOL success, NSError *error) {
+    MRContextSaveOptions saveOptions = (MRContextSaveOptions)(MRContextSaveOptionsSaveParentContexts | MRContextSaveOptionsSaveSynchronously);
+    [self MR_saveWithOptions:saveOptions completion:^(BOOL success, NSError *error) {
         saveResult = success;
     }];
 
@@ -68,7 +69,9 @@
     __block BOOL saveResult = NO;
     __block NSError *saveError;
 
-    [self MR_saveWithOptions:MRSaveParentContexts | MRSaveSynchronously completion:^(BOOL localSuccess, NSError *localError) {
+    MRContextSaveOptions saveOptions = (MRContextSaveOptions)(MRContextSaveOptionsSaveParentContexts | MRContextSaveOptionsSaveSynchronously);
+
+    [self MR_saveWithOptions:saveOptions completion:^(BOOL localSuccess, NSError *localError) {
         saveResult = localSuccess;
         saveError = localError;
     }];
@@ -80,10 +83,10 @@
     return saveResult;
 }
 
-- (void) MR_saveWithOptions:(MRSaveContextOptions)mask completion:(MRSaveCompletionHandler)completion;
+- (void) MR_saveWithOptions:(MRContextSaveOptions)saveOptions completion:(MRSaveCompletionHandler)completion;
 {
-    BOOL syncSave           = ((mask & MRSaveSynchronously) == MRSaveSynchronously);
-    BOOL saveParentContexts = ((mask & MRSaveParentContexts) == MRSaveParentContexts);
+    BOOL saveParentContexts = ((saveOptions & MRContextSaveOptionsSaveParentContexts) == MRContextSaveOptionsSaveParentContexts);
+    BOOL saveSynchronously = ((saveOptions & MRContextSaveOptionsSaveSynchronously) == MRContextSaveOptionsSaveSynchronously);
 
     __block BOOL hasChanges = NO;
 
@@ -120,7 +123,7 @@
     void (^saveBlock)(void) = ^{
         NSString *optionsSummary = @"";
         optionsSummary = [optionsSummary stringByAppendingString:saveParentContexts ? @"Save Parents,":@""];
-        optionsSummary = [optionsSummary stringByAppendingString:syncSave ? @"Sync Save":@""];
+        optionsSummary = [optionsSummary stringByAppendingString:saveSynchronously ? @"Sync Save":@""];
 
         MRLogVerbose(@"→ Saving %@ [%@]", [self MR_description], optionsSummary);
 
@@ -146,7 +149,8 @@
             } else {
                 // If we should not save the parent context, or there is not a parent context to save (root context), call the completion block
                 if ((YES == saveParentContexts) && [self parentContext]) {
-                    [[self parentContext] MR_saveWithOptions:MRSaveSynchronously | MRSaveParentContexts completion:completion];
+                    MRContextSaveOptions parentContentSaveOptions = (MRContextSaveOptions)(MRContextSaveOptionsSaveParentContexts | MRContextSaveOptionsSaveSynchronously);
+                    [[self parentContext] MR_saveWithOptions:parentContentSaveOptions completion:completion];
                 }
                 // If we are not the default context (And therefore need to save the root context, do the completion action if one was specified
                 else {
@@ -173,7 +177,7 @@
     {
         saveBlock();
     }
-    else if (YES == syncSave)
+    else if (YES == saveSynchronously)
     {
         [self performBlockAndWait:saveBlock];
     }

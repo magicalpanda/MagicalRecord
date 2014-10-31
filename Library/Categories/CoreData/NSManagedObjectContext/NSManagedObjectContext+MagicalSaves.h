@@ -13,12 +13,15 @@
 
  @since Available in v2.1 and later.
  */
-typedef NS_OPTIONS(NSUInteger, MRSaveContextOptions) {
+typedef NS_OPTIONS(NSUInteger, MRContextSaveOptions) {
+    /** No options — used for cleanliness only */
+    MRContextSaveOptionsNone = 0,
+
     /** When saving, continue saving parent contexts until the changes are present in the persistent store. */
-    MRSaveParentContexts = 1 << 0,
+    MRContextSaveOptionsSaveParentContexts = 1 << 0,
 
     /** Peform saves synchronously, blocking execution on the current thread until the save is complete. */
-    MRSaveSynchronously = 1 << 1,
+    MRContextSaveOptionsSaveSynchronously = 1 << 1
 };
 
 typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
@@ -95,11 +98,11 @@ typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
 /**
  Save the current context with options. All other save methods are convenience wrappers around this method.
 
- @param mask       Values from MRSaveContextOptions bitmasked for the save process.
- @param completion Completion block that is called after the save has completed. The block is passed a success state as a `BOOL` and an `NSError` instance if an error occurs.
+ @param saveOptions Values from MRContextSaveOptions bitmasked for the save process.
+ @param completion  Completion block that is called after the save has completed. The block is passed a success state as a `BOOL` and an `NSError` instance if an error occurs.
  
  @since Available in 2.1 and later.
  */
- - (void) MR_saveWithOptions:(MRSaveContextOptions)mask completion:(MRSaveCompletionHandler)completion;
+ - (void) MR_saveWithOptions:(MRContextSaveOptions)saveOptions completion:(MRSaveCompletionHandler)completion;
 
 @end
