@@ -17,7 +17,10 @@
 
     if ([self respondsToSelector:@selector(entityName)])
     {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wselector"
         entityName = [self performSelector:@selector(entityName)];
+#pragma clang diagnostic pop
     }
 
     if ([entityName length] == 0)
