@@ -1,2 +1,6 @@
 language: objective-c
 script: Tests/Support/Scripts/objc-build-scripts/cibuild
+before_install:
+  - brew update
+  - if brew outdated | grep -qx xctool; then brew upgrade xctool; fi
+  
