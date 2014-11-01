@@ -79,6 +79,8 @@
 }
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
+
     // Configure the navigation bar
     self.title = @"Recipes";
 
@@ -99,6 +101,8 @@
 // clean up our new observers
 - (void)viewDidUnload {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+    [super viewDidUnload];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

@@ -124,6 +124,8 @@
 
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
+
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     // Create and set the table header view.

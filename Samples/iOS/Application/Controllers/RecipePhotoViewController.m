@@ -55,6 +55,8 @@
 
 
 - (void)loadView {
+    [super loadView];
+    
 	self.title = @"Photo";
 
     _imageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
@@ -67,6 +69,8 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
     _imageView.image = [_recipe.image valueForKey:@"image"];
 }
 
