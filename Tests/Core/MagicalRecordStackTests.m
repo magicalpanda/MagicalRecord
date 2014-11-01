@@ -52,6 +52,14 @@
     [MagicalRecord cleanUp];
 }
 
+- (void)testCreateBackgroundCoreDataStack
+{    
+    NSOperationQueue *backgroundQueue = [[NSOperationQueue alloc] init];    
+    [MagicalRecord MR_setMainThread:backgroundQueue];
+    
+    [self testCreateDefaultCoreDataStack];
+}
+
 - (void) testCreateInMemoryCoreDataStack
 {
     [MagicalRecord setupCoreDataStackWithInMemoryStore];
