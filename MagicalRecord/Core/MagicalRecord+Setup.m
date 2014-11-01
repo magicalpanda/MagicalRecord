@@ -24,7 +24,7 @@ static NSOperationQueue *coreDataMainQueue;
 + (void)MR_setMainThread:(NSOperationQueue*)queue
 {
     queue.maxConcurrentOperationCount = 1;
-//    NSAssert([NSManagedObjectContext MR_defaultContext] == nil, @"main thread mast be seted before coreData stack setup");
+    NSAssert([NSManagedObjectContext MR_defaultContext] == nil, @"main thread mast be seted before coreData stack setup");
     coreDataMainQueue = queue;
 }
 

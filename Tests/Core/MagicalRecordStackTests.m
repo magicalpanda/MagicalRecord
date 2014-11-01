@@ -54,8 +54,13 @@
 
 - (void)testCreateBackgroundCoreDataStack
 {    
+    XCTAssertTrue(CoreDataMainThread != nil, @"CoreDataMainThread mast not bee nil");
+    
     NSOperationQueue *backgroundQueue = [[NSOperationQueue alloc] init];    
     [MagicalRecord MR_setMainThread:backgroundQueue];
+    
+    XCTAssertTrue(CoreDataMainThread != nil, @"CoreDataMainThread mast not bee nil");
+    XCTAssertTrue(backgroundQueue == CoreDataMainThread, @"CoreDataMainThread mast not bee nil");
     
     [self testCreateDefaultCoreDataStack];
 }
