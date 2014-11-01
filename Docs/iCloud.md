@@ -12,3 +12,6 @@ For further details, and to ensure that your application is suitable for iCloud,
 In particular note that the first helper method, + (void) setupCoreDataStackWithiCloudContainer:(NSString \*)icloudBucket localStoreNamed:(NSString \*)localStore, automatically generates the **NSPersistentStoreUbiquitousContentNameKey** based on your application's Bundle Identifier. 
 
 If you are managing multiple different iCloud stores it is highly recommended that you use one of the other helper methods to specify your own **contentNameKey**
+
+[Previous (Threads)](Threads.md)
+[Next (Default NSManagedObjectContext)](DefaultManagedObjectContext.md)

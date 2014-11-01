@@ -143,3 +143,6 @@ The following methods have been deprecated in favour of newer alternatives, and 
 - `+ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block;`
 - `+ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))completion;`
 - `+ (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *error))errorHandler;`
+
+[Previous (Resources)](Resources.md)
+[Next (Support)](Support.md)

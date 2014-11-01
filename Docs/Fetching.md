@@ -148,3 +148,6 @@ or, to truncate all entities in a specific context:
 ```objective-c
 [Person MR_truncateAllInContext:otherContext];
 ```
+
+[Previous (Getting Started)](GettingStarted.md)
+[Next (Importing)](Importing.md)
