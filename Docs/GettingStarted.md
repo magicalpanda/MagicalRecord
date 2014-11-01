@@ -5,24 +5,65 @@
 To get started, first, import the header file *CoreData+MagicalRecord.h* in your project's pch file. This will allow a global include of all the required headers.
 Next, somewhere in your app delegate, in either the applicationDidFinishLaunching:(UIApplication \*) withOptions:(NSDictionary \*) method, or awakeFromNib, use **one** of the following setup calls with the **MagicalRecord** class:
 
-	+ (void) setupCoreDataStack;
-	+ (void) setupAutoMigratingCoreDataStack;
-	+ (void) setupCoreDataStackWithInMemoryStore;
-	+ (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName;
-	+ (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName;
+```objective-c
++ (void)setupCoreDataStack;
++ (void)setupAutoMigratingCoreDataStack;
++ (void)setupCoreDataStackWithInMemoryStore;
++ (void)setupCoreDataStackWithStoreNamed:(NSString *)storeName;
++ (void)setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName;
++ (void)setupCoreDataStackWithStoreAtURL:(NSURL *)storeURL;
++ (void)setupCoreDataStackWithAutoMigratingSqliteStoreAtURL:(NSURL *)storeURL;
+```
 
 Each call instantiates one of each piece of the Core Data stack, and provides getter and setter methods for these instances. These well known instances to MagicalRecord, and are recognized as "defaults".
 
-When using the default sqlite data store with the DEBUG flag set, if you change your model without creating a new model version, Magical Record will delete the old store and create a new one automatically. No more uninstall/reinstall every time you make a change!
+When using the default SQLite data store with the `DEBUG` flag set, changing your model without creating a new model version will cause MagicalRecord to delete the old store and create a new one automatically. This can be a huge time saver — no more needing to uninstall and reinstall your app every time you make a change your data model! **Please be sure not to ship your app with `DEBUG` enabled: Deleting your app's data without telling the user about it is really bad form!**
 
-And finally, before your app exits, you can use the clean up method:
+Before your app exits, you should call `+cleanUp` class method:
 
-	[MagicalRecord cleanUp];
-	
+```objective-c
+[MagicalRecord cleanUp];
+```
 
-## Nested Contexts
+This tidies up after MagicalRecord, tearing down our custom error handling and setting all of the Core Data stack created by MagicalRecord to nil.
 
-New in Core Data is support for related contexts. This is a super neat, and super fast feature. However, writing a wrapper that supports both is, frankly, more work that it's worth. However, the 1.8.3 version will be the last version that has dual support, and going forward, MagicalRecord will only work with the version of Core Data that supports nested managed object contexts.
+## iCloud-enabled Persistent Stores
 
-MagicalRecord provides a background saving queue so that saving all data is performed off the main thread, in the background. This means that it may be necessary to use *MR_saveNestedContexts* rather than the typical *MR_save* method in order to persist your changes all the way to your persistent store;
+To take advantage of Apple's iCloud Core Data syncing, use **one** of the following setup methods in place of the standard methods listed in the previous section:
 
+```objective-c
++ (void)setupCoreDataStackWithiCloudContainer:(NSString *)containerID
+                              localStoreNamed:(NSString *)localStore;
+
++ (void)setupCoreDataStackWithiCloudContainer:(NSString *)containerID
+                               contentNameKey:(NSString *)contentNameKey
+                              localStoreNamed:(NSString *)localStoreName
+                      cloudStorePathComponent:(NSString *)pathSubcomponent;
+
++ (void)setupCoreDataStackWithiCloudContainer:(NSString *)containerID
+                               contentNameKey:(NSString *)contentNameKey
+                              localStoreNamed:(NSString *)localStoreName
+                      cloudStorePathComponent:(NSString *)pathSubcomponent
+                                   completion:(void (^)(void))completion;
+
++ (void)setupCoreDataStackWithiCloudContainer:(NSString *)containerID
+                              localStoreAtURL:(NSURL *)storeURL;
+
++ (void)setupCoreDataStackWithiCloudContainer:(NSString *)containerID
+                               contentNameKey:(NSString *)contentNameKey
+                              localStoreAtURL:(NSURL *)storeURL
+                      cloudStorePathComponent:(NSString *)pathSubcomponent;
+
++ (void)setupCoreDataStackWithiCloudContainer:(NSString *)containerID
+                               contentNameKey:(NSString *)contentNameKey
+                              localStoreAtURL:(NSURL *)storeURL
+                      cloudStorePathComponent:(NSString *)pathSubcomponent
+                                   completion:(void (^)(void))completion;
+```
+
+For further details, please refer to [Apple's "iCloud Programming Guide for Core Data"](https://developer.apple.com/library/ios/documentation/DataManagement/Conceptual/UsingCoreDataWithiCloudPG/Introduction/Introduction.html#//apple_ref/doc/uid/TP40013491).
+
+
+### Notes
+
+If you are managing multiple iCloud-enabled stores, we recommended that you use one of the longer setup methods that allows you to specify your own **contentNameKey**. The shorter setup methods automatically generate the **NSPersistentStoreUbiquitousContentNameKey** based on your app's bundle identifier (`CFBundleIdentifier`):
