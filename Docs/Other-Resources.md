@@ -1,7 +1,6 @@
-
 # Resources
-## Third Party Blog Entries
-The following blog entries highlight how to install and use aspects of Magical Record.
+
+The following articles highlight how to install and use aspects of MagicalRecord:
 
 * [How to make Programming with Core Data Pleasant](http://yannickloriot.com/2012/03/magicalrecord-how-to-make-programming-with-core-data-pleasant/)
 * [Using Core Data with MagicalRecord](http://ablfx.com/blog/2012/03/using-coredata-magicalrecord/)

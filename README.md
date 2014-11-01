@@ -14,16 +14,29 @@ MagicalRecord was inspired by the ease of Ruby on Rails' Active Record fetching.
 * Allow for clear, simple, one-line fetches
 * Still allow the modification of the NSFetchRequest when request optimizations are needed
 
-#### Documentation
+## Documentation
 
-* [Installation](Docs/Installation.md)
-* [Getting Started](Docs/GettingStarted.md)
-* [Fetching](Docs/Fetching.md)
-* [Importing](Docs/Importing.md)
-* [Logging](Docs/Logging.md)
-* [Resources](Docs/Resources.md)
-* [Saving](Docs/Saving.md)
-* [Support](Docs/Support.md)
-* [Threads](Docs/Threads.md)
-* [iCloud](Docs/iCloud.md)
-* [Default NSManagedObjectContext](Docs/DefaultManagedObjectContext.md)
+- [Installation](Docs/Installing-MagicalRecord.md)
+- [Getting Started](Docs/Getting-Started.md)
+- [Working with Managed Object Contexts](Docs/Working-with-Managed-Object-Contexts.md)
+- [Creating Entities](Docs/Creating-Entities.md)
+- [Deleting Entities](Docs/Deleting-Entities.md)
+- [Fetching Entities](Docs/Fetching-Entities.md)
+- [Saving Entities](Docs/Saving-Entities.md)
+- [Usage Patterns](Docs/Usage-Patterns.md)
+- [Importing Data](Docs/Importing-Data.md)
+- [Logging](Docs/Logging.md)
+* [Other Resources](Docs/Other-Resources.md)
+
+## Support
+
+MagicalRecord is provided as-is, free of charge. For support, you have a few choices:
+
+- Ask your support question on [Stackoverflow.com](http://stackoverflow.com), and tag your question with **MagicalRecord**. The core team will be notified of your question only if you mark your question with this tag. The general Stack Overflow community is provided the opportunity to answer the question to help you faster, and to reap the reputation points. If the community is unable to answer, we'll try to step in and answer your question.
+- If you believe you have found a bug in MagicalRecord, please submit a support ticket on the [Github Issues page for MagicalRecord](http://github.com/magicalpanda/magicalrecord/issues). We'll get to them as soon as we can. Please do **NOT** ask general questions on the issue tracker. Support questions will be closed unanswered.
+- For more personal or immediate support, [MagicalPanda](http://magicalpanda.com/) is available for hire to consult on your project.
+
+
+## Twitter
+
+Follow [@MagicalRecord](http://twitter.com/magicalrecord) on twitter to stay up to date with the latest updates relating to MagicalRecord.

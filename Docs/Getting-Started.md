@@ -1,9 +1,20 @@
 # Getting Started
 
-## Setting up the Core Data Stack
+To get started, import the `MagicalRecord.h` header file in your project's pch file. This will allow a global include of all the required headers.
 
-To get started, first, import the header file *CoreData+MagicalRecord.h* in your project's pch file. This will allow a global include of all the required headers.
-Next, somewhere in your app delegate, in either the applicationDidFinishLaunching:(UIApplication \*) withOptions:(NSDictionary \*) method, or awakeFromNib, use **one** of the following setup calls with the **MagicalRecord** class:
+If you're using CocoaPods or MagicalRecord.framework, your import should look like:
+
+```objective-c
+#import <MagicalRecord/MagicalRecord.h>
+```
+
+Otherwise, if you've added MagicalRecord's source files directly to your project, your import should be:
+
+```objective-c
+#import "MagicalRecord.h"
+```
+
+Next, somewhere in your app delegate, in either the `- applicationDidFinishLaunching: withOptions:` method, or `-awakeFromNib`, use **one** of the following setup calls with the **MagicalRecord** class:
 
 ```objective-c
 + (void)setupCoreDataStack;
