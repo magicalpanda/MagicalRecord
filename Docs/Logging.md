@@ -9,20 +9,20 @@ Logging can be enabled by placing the following preprocessor statement before yo
 #import <MagicalRecord/CoreData+MagicalRecord.h>
 ```
 
-Logging can be configured by calling `[MagicalRecord setLoggingMask:…];` using one of the predefined logging masks:
+Logging can be configured by calling `[MagicalRecord setLoggingLevel:…];` using one of the predefined logging masks:
 
-- **MagicalRecordLogMaskOff**: Don't log anything
-- **MagicalRecordLoggingMaskFatal**: Log all fatal messages
-- **MagicalRecordLoggingMaskError**: Log all errors and fatal messages
-- **MagicalRecordLoggingMaskWarn**: Log warnings, errors and fatal messages
-- **MagicalRecordLoggingMaskInfo**: Log informative, warning and error messages
-- **MagicalRecordLoggingMaskVerbose**: Log verbose diagnostic, informative, warning and error messages
+- **MagicalRecordLoggingLevelOff**: Don't log anything
+- **MagicalRecordLoggingLevelFatal**: Log all fatal messages
+- **MagicalRecordLoggingLevelError**: Log all errors and fatal messages
+- **MagicalRecordLoggingLevelWarn**: Log warnings, errors and fatal messages
+- **MagicalRecordLoggingLevelInfo**: Log informative, warning and error messages
+- **MagicalRecordLoggingLevelVerbose**: Log verbose diagnostic, informative, warning and error messages
 
-The logging level defaults to `MagicalRecordLoggingMaskWarn`.
+The logging level defaults to `MagicalRecordLoggingLevelWarn`.
 
 ## Disabling Logs
 
-Setting the logging mask to **MagicalRecordLogMaskOff** completely disables MagicalRecord's logging.
+Setting the logging mask to **MagicalRecordLoggingLevelOff** completely disables MagicalRecord's logging.
 
 ## CocoaLumberjack
 
