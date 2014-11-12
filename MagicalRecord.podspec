@@ -28,9 +28,6 @@ EOS
     sp.source_files = 'MagicalRecord/**/*.{h,m}'
     sp.prefix_header_contents = <<-EOS
 #import <CoreData/CoreData.h>
-#if defined(COCOAPODS_POD_AVAILABLE_CocoaLumberjack)
-  #import "DDLog.h"
-#endif
 #define MR_LOGGING_ENABLED 1
 #import "CoreData+MagicalRecord.h"
 EOS
@@ -53,9 +50,6 @@ EOS
     sp.source_files = 'MagicalRecord/**/*.{h,m}'
     sp.prefix_header_contents = <<-EOS
 #import <CoreData/CoreData.h>
-#if defined(COCOAPODS_POD_AVAILABLE_CocoaLumberjack)
-  #import "DDLog.h"
-#endif
 #define MR_LOGGING_ENABLED 1
 #define MR_SHORTHAND 1
 #import "CoreData+MagicalRecord.h"
