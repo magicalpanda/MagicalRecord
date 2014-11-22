@@ -24,7 +24,7 @@ MagicalRecord was inspired by the ease of Ruby on Rails' Active Record fetching.
 - [Fetching Entities](Docs/Fetching-Entities.md)
 - [Saving Entities](Docs/Saving-Entities.md)
 - [Usage Patterns](Docs/Usage-Patterns.md)
-- [Importing Data](Docs/Importing-Data.md)
+- [Importing Data](Docs/Importing.md)
 - [Logging](Docs/Logging.md)
 * [Other Resources](Docs/Other-Resources.md)
 
