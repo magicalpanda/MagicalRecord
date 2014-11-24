@@ -15,10 +15,11 @@
 
 @implementation NSManagedObjectMagicalRecord
 
-- (void)testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented
+- (void)testThatInternalEntityNameReturnsEntityNameFromModelWhenEntityNameMethodIsNotImplemented
 {
     expect([EntityWithoutEntityNameMethod MR_entityName]).toNot.beNil();
-    expect([EntityWithoutEntityNameMethod MR_entityName]).to.equal(NSStringFromClass([EntityWithoutEntityNameMethod class]));
+    expect([EntityWithoutEntityNameMethod MR_entityName]).toNot.equal(NSStringFromClass([EntityWithoutEntityNameMethod class]));
+    expect([EntityWithoutEntityNameMethod MR_entityName]).to.equal(@"EntityWithoutEntityNameMethodWithASuffix");
 }
 
 - (void)testThatInternalEntityNameReturnsProvidedNameWhenEntityNameMethodIsImplemented
