@@ -20,8 +20,24 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
         entityName = [self performSelector:@selector(entityName)];
     }
 
-    if ([entityName length] == 0) {
-        entityName = NSStringFromClass(self);
+    if ([entityName length] == 0)
+    {
+        NSString *className = NSStringFromClass(self);
+
+        NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
+        for (NSEntityDescription *description in model)
+        {
+            if ([description.managedObjectClassName isEqualToString:className])
+            {
+                entityName = [description name];
+                break;
+            }
+        }
+
+        if ([entityName length] == 0)
+        {
+            entityName = className;
+        }
     }
 
     return entityName;
