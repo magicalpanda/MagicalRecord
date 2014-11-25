@@ -4,3 +4,4 @@ before_install:
   - brew update
   - if brew outdated | grep -qx xctool; then brew upgrade xctool; fi
   
+osx_image: xcode61
