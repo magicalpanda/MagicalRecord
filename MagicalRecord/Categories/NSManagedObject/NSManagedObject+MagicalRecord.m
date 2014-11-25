@@ -25,7 +25,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
         NSString *className = NSStringFromClass(self);
 
         NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
-        for (NSEntityDescription *description in model)
+        for (NSEntityDescription *description in model.entities)
         {
             if ([description.managedObjectClassName isEqualToString:className])
             {
