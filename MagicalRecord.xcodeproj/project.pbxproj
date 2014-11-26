@@ -1216,7 +1216,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = "-DMR_LOGGING_ENABLED=1";
+				OTHER_CFLAGS = (
+					"-DMR_LOGGING_ENABLED=1",
+					"-DDEBUG",
+				);
 			};
 			name = Debug;
 		};
@@ -1247,7 +1250,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				OTHER_CFLAGS = "-DMR_LOGGING_ENABLED=1";
+				OTHER_CFLAGS = (
+					"-DMR_LOGGING_ENABLED=1",
+					"-DNEBUG",
+				);
 			};
 			name = Release;
 		};
@@ -1289,6 +1295,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Support/MagicalRecord-iOS-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "MagicalRecord-iOS";
 				SDKROOT = iphoneos;
