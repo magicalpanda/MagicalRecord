@@ -25,24 +25,7 @@
 
     if ([entityName length] == 0)
     {
-        NSString *className = NSStringFromClass(self);
-
-        MagicalRecordStack *defaultStack = [MagicalRecordStack defaultStack];
-        NSManagedObjectModel *model = [defaultStack model];
-
-        for (NSEntityDescription *description in model.entities)
-        {
-            if ([description.managedObjectClassName isEqualToString:className])
-            {
-                entityName = [description name];
-                break;
-            }
-        }
-
-        if ([entityName length] == 0)
-        {
-            entityName = className;
-        }
+        entityName = NSStringFromClass(self);
     }
 
     return entityName;
