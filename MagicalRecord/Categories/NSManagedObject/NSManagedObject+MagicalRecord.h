@@ -14,7 +14,7 @@
 
 /**
  *  If the NSManagedObject subclass calling this method has implemented the `entityName` method, then the return value of that will be used.
- *  If `entityName` is not implemented, we try to lookup the entity name from the default managed object model, otherwise the name of the class is returned.
+ *  If `entityName` is not implemented, then the name of the class is returned.
  *
  *  @return String based name for the entity
  */
