@@ -1,20 +1,20 @@
 //
 //  MagicalRecord+ChainSave.m
-//  transformableTest
+//  Magical Record
 //
 //  Created by Lee on 8/27/14.
-//  Copyright (c) 2014 Lei. All rights reserved.
+//  Copyright (c) 2012 Magical Panda Software LLC. All rights reserved.
 //
 
-#import "NSManagedObjectContext+ChainSave.h"
+#import "NSManagedObjectContext+MagicalChainSave.h"
 
 @implementation NSManagedObjectContext(MagicalRecord_ChainSave)
-- (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
+- (void) MR_saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
 {
     [self saveWithBlock:block completion:nil];
 }
 
-- (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
+- (void) MR_saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
 {
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:self];
     
@@ -31,7 +31,7 @@
 
 #pragma mark - Synchronous saving
 
-- (void) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
+- (void) MR_saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
 {
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:self];
     
