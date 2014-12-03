@@ -11,7 +11,7 @@
 @implementation NSManagedObjectContext(MagicalRecord_ChainSave)
 - (void) MR_saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
 {
-    [self saveWithBlock:block completion:nil];
+    [self MR_saveWithBlock:block completion:nil];
 }
 
 - (void) MR_saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
