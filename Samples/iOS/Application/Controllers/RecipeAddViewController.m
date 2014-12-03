@@ -53,7 +53,8 @@
 @implementation RecipeAddViewController
 
 - (void)viewDidLoad {
-    
+    [super viewDidLoad];
+
     // Configure the navigation bar
     self.navigationItem.title = @"Add Recipe";
     
@@ -69,6 +70,7 @@
 
 - (void)viewDidUnload {
 	self.nameTextField = nil;
+    
 	[super viewDidUnload];
 }
 	

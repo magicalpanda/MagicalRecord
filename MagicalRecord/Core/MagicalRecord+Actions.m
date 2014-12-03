@@ -23,9 +23,9 @@
     NSManagedObjectContext *savingContext  = [NSManagedObjectContext MR_rootSavingContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:savingContext];
 
-    [localContext MR_setWorkingName:NSStringFromSelector(_cmd)];
-
     [localContext performBlock:^{
+        [localContext MR_setWorkingName:NSStringFromSelector(_cmd)];
+
         if (block) {
             block(localContext);
         }
@@ -41,9 +41,9 @@
     NSManagedObjectContext *savingContext  = [NSManagedObjectContext MR_rootSavingContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:savingContext];
 
-    [localContext MR_setWorkingName:NSStringFromSelector(_cmd)];
-
     [localContext performBlockAndWait:^{
+        [localContext MR_setWorkingName:NSStringFromSelector(_cmd)];
+
         if (block) {
             block(localContext);
         }
@@ -61,9 +61,9 @@
 {
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
 
-    [localContext MR_setWorkingName:NSStringFromSelector(_cmd)];
-
     [localContext performBlock:^{
+        [localContext MR_setWorkingName:NSStringFromSelector(_cmd)];
+
         if (block) {
             block(localContext);
         }
@@ -76,9 +76,9 @@
 {
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
 
-    [localContext MR_setWorkingName:NSStringFromSelector(_cmd)];
-
     [localContext performBlockAndWait:^{
+        [localContext MR_setWorkingName:NSStringFromSelector(_cmd)];
+
         if (block) {
             block(localContext);
         }
@@ -97,9 +97,9 @@
     NSManagedObjectContext *savingContext  = [NSManagedObjectContext MR_rootSavingContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:savingContext];
 
-    [localContext MR_setWorkingName:NSStringFromSelector(_cmd)];
-
     [localContext performBlock:^{
+        [localContext MR_setWorkingName:NSStringFromSelector(_cmd)];
+
         if (block)
         {
             block(localContext);
@@ -118,15 +118,15 @@
 {
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
 
-    [localContext MR_setWorkingName:NSStringFromSelector(_cmd)];
-
     [localContext performBlock:^{
+        [localContext MR_setWorkingName:NSStringFromSelector(_cmd)];
+
         if (block) {
             block(localContext);
         }
 
-        [localContext MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-            if (success) {
+        [localContext MR_saveToPersistentStoreWithCompletion:^(BOOL contextDidSave, NSError *error) {
+            if (contextDidSave) {
                 if (completion) {
                     completion();
                 }

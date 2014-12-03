@@ -34,7 +34,7 @@
     [self MR_saveWithOptions:MRSaveParentContexts | MRSaveSynchronously completion:nil];
 }
 
-- (void) MR_saveWithOptions:(MRSaveOptions)mask completion:(MRSaveCompletionHandler)completion;
+- (void) MR_saveWithOptions:(MRSaveOptions)saveOptions completion:(MRSaveCompletionHandler)completion;
 {
     __block BOOL hasChanges = NO;
 
@@ -63,17 +63,18 @@
         return;
     }
 
-    BOOL shouldSaveParentContexts = ((mask & MRSaveParentContexts) == MRSaveParentContexts);
-    BOOL shouldSaveSynchronously = ((mask & MRSaveSynchronously) == MRSaveSynchronously);
-    BOOL shouldSaveSynchronouslyExceptRoot = ((mask & MRSaveSynchronouslyExceptRootContext) == MRSaveSynchronouslyExceptRootContext);
+    BOOL shouldSaveParentContexts = ((saveOptions & MRSaveParentContexts) == MRSaveParentContexts);
+    BOOL shouldSaveSynchronously = ((saveOptions & MRSaveSynchronously) == MRSaveSynchronously);
+    BOOL shouldSaveSynchronouslyExceptRoot = ((saveOptions & MRSaveSynchronouslyExceptRootContext) == MRSaveSynchronouslyExceptRootContext);
 
-    BOOL saveSynchronously = (shouldSaveSynchronously && !shouldSaveSynchronouslyExceptRoot) || (shouldSaveSynchronouslyExceptRoot && (self != [[self class] MR_rootSavingContext]));
-
-    MRLogInfo(@"→ Saving %@", [self MR_description]);
-    MRLogVerbose(@"→ Save Parents? %@", shouldSaveParentContexts ? @"YES" : @"NO");
-    MRLogVerbose(@"→ Save Synchronously? %@", saveSynchronously ? @"YES" : @"NO");
+    BOOL saveSynchronously = (shouldSaveSynchronously && !shouldSaveSynchronouslyExceptRoot) ||
+                             (shouldSaveSynchronouslyExceptRoot && (self != [[self class] MR_rootSavingContext]));
 
     id saveBlock = ^{
+        MRLogInfo(@"→ Saving %@", [self MR_description]);
+        MRLogVerbose(@"→ Save Parents? %@", shouldSaveParentContexts ? @"YES" : @"NO");
+        MRLogVerbose(@"→ Save Synchronously? %@", saveSynchronously ? @"YES" : @"NO");
+
         BOOL saveResult = NO;
         NSError *error = nil;
 
@@ -91,8 +92,20 @@
 
             if (saveResult && shouldSaveParentContexts && [self parentContext])
             {
+                // Add/remove the synchronous save option from the mask if necessary
+                MRSaveOptions modifiedOptions = saveOptions;
+
+                if (saveSynchronously)
+                {
+                    modifiedOptions |= MRSaveSynchronously;
+                }
+                else
+                {
+                    modifiedOptions &= MRSaveSynchronously;
+                }
+
                 // If we're saving parent contexts, do so
-                [[self parentContext] MR_saveWithOptions:mask completion:completion];
+                [[self parentContext] MR_saveWithOptions:modifiedOptions completion:completion];
             }
             else
             {
@@ -133,8 +146,8 @@
 
 - (void) MR_saveWithErrorCallback:(void (^)(NSError *error))errorCallback;
 {
-    [self MR_saveWithOptions:MRSaveSynchronously | MRSaveParentContexts completion:^(BOOL success, NSError *error) {
-        if (!success && errorCallback)
+    [self MR_saveWithOptions:MRSaveSynchronously | MRSaveParentContexts completion:^(BOOL contextDidSave, NSError *error) {
+        if (!contextDidSave && errorCallback)
         {
             errorCallback(error);
         }
@@ -143,8 +156,8 @@
 
 - (void) MR_saveInBackgroundCompletion:(void (^)(void))completion;
 {
-    [self MR_saveOnlySelfWithCompletion:^(BOOL success, NSError *error) {
-        if (success && completion)
+    [self MR_saveOnlySelfWithCompletion:^(BOOL contextDidSave, NSError *error) {
+        if (contextDidSave && completion)
         {
             completion();
         }
@@ -153,8 +166,8 @@
 
 - (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback;
 {
-    [self MR_saveOnlySelfWithCompletion:^(BOOL success, NSError *error) {
-        if (!success && errorCallback)
+    [self MR_saveOnlySelfWithCompletion:^(BOOL contextDidSave, NSError *error) {
+        if (!contextDidSave && errorCallback)
         {
             errorCallback(error);
         }
@@ -163,8 +176,8 @@
 
 - (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion;
 {
-    [self MR_saveOnlySelfWithCompletion:^(BOOL success, NSError *error) {
-        if (success && completion)
+    [self MR_saveOnlySelfWithCompletion:^(BOOL contextDidSave, NSError *error) {
+        if (contextDidSave && completion)
         {
             completion();
         }
@@ -182,8 +195,8 @@
 
 - (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback;
 {
-    [self MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (!success && errorCallback)
+    [self MR_saveToPersistentStoreWithCompletion:^(BOOL contextDidSave, NSError *error) {
+        if (!contextDidSave && errorCallback)
         {
             errorCallback(error);
         }
@@ -192,8 +205,8 @@
 
 - (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion;
 {
-    [self MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if (success && completion)
+    [self MR_saveToPersistentStoreWithCompletion:^(BOOL contextDidSave, NSError *error) {
+        if (contextDidSave && completion)
         {
             completion();
         }

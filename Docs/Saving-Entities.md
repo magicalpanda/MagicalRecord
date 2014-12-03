@@ -1,6 +1,6 @@
-# Magical Saving
+# Saving Entities
 
-## When to save
+## When should I save?
 
 In general, your app should save to it's persistent store(s) when data changes. Some applications choose to save on application termination, however this shouldn't be necessary in most circumstances — in fact, **if you're only saving when your app terminates, you're risking data loss**! What happens if your app crashes? The user will lose all the changes they've made — that's a terrible experience, and easily avoided.
 
@@ -9,8 +9,9 @@ If you find that saving is taking a long time, there are a couple of things you 
 1. **Save in a background thread**: MagicalRecord provides a simple, clean API for making changes to your entities and subsequently saving them in a background thread — for example:
 	````objective-c
 	[MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+
 		// Do your work to be saved here, against the `localContext` instance
-		// 	Everything you do in this block will occur on a background thread
+		// Everything you do in this block will occur on a background thread
 
 	} completion:^(BOOL success, NSError *error) {
 		[application endBackgroundTask:bgTask];
@@ -18,10 +19,10 @@ If you find that saving is taking a long time, there are a couple of things you 
 	}];
 	````
 
-2. **Break the task into smaller saves**: tasks like importing lots of data should always be broken down into smaller chunks. There's no one-size-fits all rule for how much data you should be saving in one go, so you'll need to measure your application's performance using a tool like Apple's Instruments.
+2. **Break the task down into smaller saves**: tasks like importing large amounts of data should always be broken down into smaller chunks. There's no one-size-fits all rule for how much data you should be saving in one go, so you'll need to measure your application's performance using a tool like Apple's Instruments and tune appropriately.
 
 
-## Handling long-running saves
+## Handling Long-running Saves
 
 ### On iOS
 
@@ -36,6 +37,7 @@ __block UIBackgroundTaskIdentifier bgTask = [application beginBackgroundTaskWith
 }];
 
 [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+
 	// Do your work to be saved here
 
 } completion:^(BOOL success, NSError *error) {
@@ -44,11 +46,11 @@ __block UIBackgroundTaskIdentifier bgTask = [application beginBackgroundTaskWith
 }];
 ````
 
-Be sure to carefully [read the documentation for `beginBackgroundTaskWithExpirationHandler`](https://developer.apple.com/library/iOS/documentation/UIKit/Reference/UIApplication_Class/Reference/Reference.html#//apple_ref/occ/instm/UIApplication/beginBackgroundTaskWithExpirationHandler:), as inappropriately or unnecessarily extending your application's lifetime may earn your app a rejection.
+Be sure to carefully [read the documentation for `beginBackgroundTaskWithExpirationHandler`](https://developer.apple.com/library/iOS/documentation/UIKit/Reference/UIApplication_Class/Reference/Reference.html#//apple_ref/occ/instm/UIApplication/beginBackgroundTaskWithExpirationHandler:), as inappropriately or unnecessarily extending your application's lifetime may earn your app a rejection from the App Store.
 
 ### On OS X
 
-On OS X Mavericks (10.9) and later, App Nap can cause your application to be effectively terminated when it is in the background. If you know that a save operation is likely to take a while, the best approach is to disable automatic and sudden termination temporarily (assuming that your app supports these features):
+On OS X Mavericks (10.9) and later, App Nap can cause your application to act as though it is effectively terminated when it is in the background. If you know that a save operation is likely to take a while, the best approach is to disable automatic and sudden termination temporarily (assuming that your app supports these features):
 
 ````objective-c
 NSProcessInfo *processInfo = [NSProcessInfo processInfo];
@@ -57,6 +59,7 @@ NSProcessInfo *processInfo = [NSProcessInfo processInfo];
 [processInfo disableAutomaticTermination:@"Application is currently saving to persistent store"];
 
 [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+
 	// Do your work to be saved here
 
 } completion:^(BOOL success, NSError *error) {
@@ -111,35 +114,46 @@ In MagicalRecord 2.2, the APIs for saving were revised to behave more consistent
 The following methods have been added:
 
 #### NSManagedObjectContext+MagicalSaves
-- `- (void) MR_saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;`
-- `- (void) MR_saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion;`
-- `- (void) MR_saveOnlySelfAndWait;`
-- `- (void) MR_saveToPersistentStoreAndWait;`
-- `- (void) MR_saveWithOptions:(MRSaveContextOptions)mask completion:(MRSaveCompletionHandler)completion;`
+
+```objective-c
+- (void) MR_saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;
+- (void) MR_saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion;
+- (void) MR_saveOnlySelfAndWait;
+- (void) MR_saveToPersistentStoreAndWait;
+- (void) MR_saveWithOptions:(MRSaveContextOptions)mask completion:(MRSaveCompletionHandler)completion;
+```
 
 #### __MagicalRecord+Actions__
-- `+ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;`
-- `+ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;`
-- `+ (void) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;`
-- `+ (void) saveUsingCurrentThreadContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;`
-- `+ (void) saveUsingCurrentThreadContextWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block;`
+
+```objective-c
++ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
++ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
++ (void) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
++ (void) saveUsingCurrentThreadContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
++ (void) saveUsingCurrentThreadContextWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block;
+```
 
 ### Deprecations
 
 The following methods have been deprecated in favour of newer alternatives, and will be removed in MagicalRecord 3.0:
 
 #### NSManagedObjectContext+MagicalSaves
-- `- (void) MR_save;`
-- `- (void) MR_saveWithErrorCallback:(void(^)(NSError *error))errorCallback;`
-- `- (void) MR_saveInBackgroundCompletion:(void (^)(void))completion;`
-- `- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback;`
-- `- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion;`
-- `- (void) MR_saveNestedContexts;`
-- `- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback;`
-- `- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion;`
+
+```objective-c
+- (void) MR_save;
+- (void) MR_saveWithErrorCallback:(void(^)(NSError *error))errorCallback;
+- (void) MR_saveInBackgroundCompletion:(void (^)(void))completion;
+- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback;
+- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion;
+- (void) MR_saveNestedContexts;
+- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback;
+- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion;
+```
 
 ### MagicalRecord+Actions
-- `+ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;`
-- `+ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block;`
-- `+ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))completion;`
-- `+ (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *error))errorHandler;`
+```objective-c
++ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
++ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
++ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))completion;
++ (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *error))errorHandler;
+```

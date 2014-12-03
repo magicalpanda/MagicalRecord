@@ -908,7 +908,8 @@
 		C721C7A213D0A3750097AB6F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				CLASSPREFIX = MR;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Magical Panda Software LLC";
 			};
 			buildConfigurationList = C721C7A513D0A3750097AB6F /* Build configuration list for PBXProject "MagicalRecord" */;
@@ -1231,7 +1232,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = "-DMR_LOGGING_ENABLED=1";
+				OTHER_CFLAGS = (
+					"-DMR_LOGGING_ENABLED=1",
+					"-DDEBUG",
+				);
 			};
 			name = Debug;
 		};
@@ -1262,7 +1266,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				OTHER_CFLAGS = "-DMR_LOGGING_ENABLED=1";
+				OTHER_CFLAGS = (
+					"-DMR_LOGGING_ENABLED=1",
+					"-DNEBUG",
+				);
 			};
 			name = Release;
 		};
@@ -1304,6 +1311,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Support/MagicalRecord-iOS-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "MagicalRecord-iOS";
 				SDKROOT = iphoneos;
@@ -1316,6 +1324,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1335,6 +1344,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Support/MagicalRecord-OSX-Prefix.pch";
@@ -1366,7 +1376,6 @@
 					"$(inherited)",
 					"$(BUILT_PRODUCTS_DIR)",
 					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
-					"\"$(SRCROOT)/Tests/Vendor/Specta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-iOS-Info.plist";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
@@ -1396,7 +1405,6 @@
 					"$(inherited)",
 					"$(BUILT_PRODUCTS_DIR)",
 					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
-					"\"$(SRCROOT)/Tests/Vendor/Specta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-iOS-Info.plist";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
@@ -1434,7 +1442,6 @@
 					"$(inherited)",
 					"$(BUILT_PRODUCTS_DIR)",
 					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
-					"\"$(SRCROOT)/Tests/Vendor/Specta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-OSX-Info.plist";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
@@ -1464,7 +1471,6 @@
 					"$(inherited)",
 					"$(BUILT_PRODUCTS_DIR)",
 					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
-					"\"$(SRCROOT)/Tests/Vendor/Specta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-OSX-Info.plist";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;

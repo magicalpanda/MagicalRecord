@@ -23,7 +23,7 @@ typedef NS_OPTIONS(NSUInteger, MRSaveOptions) {
     MRSaveSynchronouslyExceptRootContext = 1 << 3
 };
 
-typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
+typedef void (^MRSaveCompletionHandler)(BOOL contextDidSave, NSError *error);
 
 @interface NSManagedObjectContext (MagicalSaves)
 
@@ -67,12 +67,12 @@ typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
  Save the current context with options.
  All other save methods are conveniences to this method.
 
- @param mask       Bitmasked options for the save process.
- @param completion Completion block that is called after the save has completed. The block is passed a success state as a `BOOL` and an `NSError` instance if an error occurs. Always called on the main queue.
+ @param saveOptions Bitmasked options for the save process.
+ @param completion  Completion block that is called after the save has completed. The block is passed a success state as a `BOOL` and an `NSError` instance if an error occurs. Always called on the main queue.
 
  @since Available in v2.1.0 and later.
  */
-- (void) MR_saveWithOptions:(MRSaveOptions)mask completion:(MRSaveCompletionHandler)completion;
+- (void) MR_saveWithOptions:(MRSaveOptions)saveOptions completion:(MRSaveCompletionHandler)completion;
 
 @end
 

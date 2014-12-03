@@ -372,14 +372,11 @@
                                                 ascending:ascending
                                             withPredicate:searchTerm
                                                 inContext:context];
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-	NSFetchedResultsController *controller = [self MR_fetchController:request 
+	NSFetchedResultsController *controller = [self MR_fetchController:request
                                                              delegate:nil
                                                          useFileCache:NO
                                                             groupedBy:groupingKeyPath
-                                                            inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
-#pragma clang diagnostic pop
+                                                            inContext:context];
 
     [self MR_performFetch:controller];
     return controller;
