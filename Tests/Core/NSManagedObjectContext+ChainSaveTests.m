@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "MagicalRecordTestBase.h"
 #import "NSManagedObjectContext+MagicalChainSave.h"
 #import "SingleEntityWithNoRelationships.h"
@@ -34,12 +33,12 @@
     NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
     
     [defaultContext MR_saveWithBlock:^(NSManagedObjectContext *localContext) {
-        SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
+        SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
         
         expect([insertedObject hasChanges]).to.beTruthy();
         
         NSError *obtainIDsError;
-        BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[insertedObject] error:&obtainIDsError];
+        BOOL obtainIDsResult = [localContext obtainPermanentIDsForObjects:@[insertedObject] error:&obtainIDsError];
         
         expect(obtainIDsResult).to.beTruthy();
         expect(obtainIDsError).to.beNil();
