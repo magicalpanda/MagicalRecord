@@ -10,6 +10,17 @@
 #import "MagicalRecordLogging.h"
 #import <objc/runtime.h>
 
+@protocol MagicalRecord_DataImport
+
+- (BOOL)shouldImport:(id)objectData;
+- (void)willImport:(id)objectData;
+- (void)didImport:(id)objectData;
+
+// Implemented in NSDictionary+MagicalDataImport.m, but is not visible.
+- (id)MR_valueForUndefinedKey:(NSString *)key;
+
+@end
+
 NSString * const kMagicalRecordImportCustomDateFormatKey            = @"dateFormat";
 NSString * const kMagicalRecordImportDefaultDateFormatString        = @"yyyy-MM-dd'T'HH:mm:ssz";
 NSString * const kMagicalRecordImportUnixTimeString                 = @"UnixTime";

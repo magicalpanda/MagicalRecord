@@ -6,6 +6,13 @@
 #import "CoreData+MagicalRecord.h"
 #import "MagicalRecordLogging.h"
 
+@protocol MagicalRecord
+
+- (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)context;
+- (NSEntityDescription *)insertInManagedObjectContext:(NSManagedObjectContext *)context;
+
+@end
+
 static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 
