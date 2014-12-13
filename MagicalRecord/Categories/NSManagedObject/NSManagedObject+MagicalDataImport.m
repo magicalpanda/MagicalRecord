@@ -10,7 +10,9 @@
 #import "MagicalRecordLogging.h"
 #import <objc/runtime.h>
 
-@protocol MagicalRecord_DataImport
+@protocol MagicalDataImport
+
+@optional
 
 - (BOOL)shouldImport:(id)objectData;
 - (void)willImport:(id)objectData;
