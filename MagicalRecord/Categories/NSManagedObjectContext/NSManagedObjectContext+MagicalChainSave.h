@@ -11,17 +11,27 @@
 #import "NSManagedObjectContext+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalSaves.h"
 
-@interface NSManagedObjectContext(MagicalRecord_ChainSave)
-/* Just like [MagicalRecord saveWithBlock…], this saving method start with the receiver context and creates a child context. Upon saving, the child context saves to parent and chain up the save operation to main context, and finally to saving context. This is to ensure that all changes made in background will pass through to main context and then to persistent store.
- */
-- (void) MR_saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
+@interface NSManagedObjectContext (MagicalRecord_ChainSave)
+/**
+ Creates a child context for the current context that you can make changes within, before saving up through all parent contexts to the main queue context, and finally to the saving context. This method will return immediately, and execute the save initially on a background thread, and then on the appropriate thread for each context it saves.
 
-/* Just like [MagicalRecord saveWithBlock…], this saving method start with the receiver context and creates a child context. Upon saving, the child context saves to parent and chain up the save operation to main context, and finally to saving context. This is to ensure that all changes made in background will pass through to main context and then to persistent store.
- */
-- (void) MR_saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
+ @param block Block that is passed a managed object context.
+*/
+- (void)MR_saveWithBlock:(void (^)(NSManagedObjectContext *localContext))block;
 
-/* Just like [MagicalRecord saveWithBlock…], this saving method start with the receiver context and creates a child context. Upon saving, the child context saves to parent and chain up the save operation to main context, and finally to saving context. This is to ensure that all changes made in background will pass through to main context and then to persistent store.
+/**
+ Creates a child context for the current context that you can make changes within, before saving up through all parent contexts to the main queue context, and finally to the saving context. This method will return immediately, and execute the save initially on a background thread, and then on the appropriate thread for each context it saves.
+
+ @param block      Block that is passed a managed object context.
+ @param completion Completion block that is called once all contexts have been saved, or if an error is encountered.
  */
-- (void) MR_saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
+- (void)MR_saveWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
+
+/**
+ Creates a child context for the current context that you can make changes within, before saving up through all parent contexts to the main queue context, and finally to the saving context. This method will not return until the save has completed, blocking the thread it is called on.
+
+ @param block Block that is passed a managed object context.
+ */
+- (void)MR_saveWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block;
 
 @end
