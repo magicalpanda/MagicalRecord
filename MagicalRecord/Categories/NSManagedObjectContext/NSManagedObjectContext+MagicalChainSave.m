@@ -3,7 +3,7 @@
 //  Magical Record
 //
 //  Created by Lee on 8/27/14.
-//  Copyright (c) 2012 Magical Panda Software LLC. All rights reserved.
+//  Copyright (c) 2014 Magical Panda Software LLC. All rights reserved.
 //
 
 #import "NSManagedObjectContext+MagicalChainSave.h"
