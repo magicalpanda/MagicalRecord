@@ -1,5 +1,5 @@
 //
-//  MagicalRecord+ChainSave.m
+//  NSManagedObjectContext+MagicalChainSave.m
 //  Magical Record
 //
 //  Created by Lee on 8/27/14.

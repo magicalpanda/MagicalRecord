@@ -1,5 +1,5 @@
 //
-//  MagicalRecord+ChainSave.h
+//  NSManagedObjectContext+MagicalChainSave.h
 //  Magical Record
 //
 //  Created by Lee on 8/27/14.
@@ -9,7 +9,7 @@
 #import <CoreData/CoreData.h>
 #import "NSManagedObjectContext+MagicalSaves.h"
 
-@interface NSManagedObjectContext (MagicalRecord_ChainSave)
+@interface NSManagedObjectContext (MagicalRecordChainSave)
 /**
  Creates a child context for the current context that you can make changes within, before saving up through all parent contexts to the main queue context, and finally to the saving context. This method will return immediately, and execute the save initially on a background thread, and then on the appropriate thread for each context it saves.
 
