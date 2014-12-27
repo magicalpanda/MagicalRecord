@@ -7,6 +7,7 @@
 //
 
 #import "NSManagedObjectContext+MagicalChainSave.h"
+#import "NSManagedObjectContext+MagicalRecord.h"
 
 @implementation NSManagedObjectContext (MagicalRecord_ChainSave)
 - (void)MR_saveWithBlock:(void (^)(NSManagedObjectContext *localContext))block;

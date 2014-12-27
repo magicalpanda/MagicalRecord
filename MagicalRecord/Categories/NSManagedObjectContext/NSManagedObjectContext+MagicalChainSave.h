@@ -7,8 +7,6 @@
 //
 
 #import <CoreData/CoreData.h>
-#import "CoreData+MagicalRecord.h"
-#import "NSManagedObjectContext+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalSaves.h"
 
 @interface NSManagedObjectContext (MagicalRecord_ChainSave)
