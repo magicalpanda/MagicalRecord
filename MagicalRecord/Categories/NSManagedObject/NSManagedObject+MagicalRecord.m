@@ -1,10 +1,19 @@
-
+//
 //  Created by Saul Mora on 11/15/09.
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
 #import "CoreData+MagicalRecord.h"
 #import "MagicalRecordLogging.h"
+
+@protocol MagicalRecord
+
+@optional
+
+- (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)context;
+- (NSEntityDescription *)insertInManagedObjectContext:(NSManagedObjectContext *)context;
+
+@end
 
 static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
