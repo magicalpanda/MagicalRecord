@@ -16,12 +16,13 @@
 
 @implementation NSManagedObjectContext_ChainSaveTests
 
-- (void)testChainSave {
+- (void)testChainSave
+{
     //Test if a new Object can save from child context to parent context
     __block NSManagedObjectID *childObjectID;
-    
+
     NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
-    
+
     [defaultContext MR_saveWithBlock:^(NSManagedObjectContext *localContext) {
         SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
         
@@ -33,22 +34,22 @@
         expect(obtainIDsResult).to.beTruthy();
         expect(obtainIDsError).to.beNil();
         
-        childObjectID = insertedObject.objectID;
+        childObjectID = [insertedObject objectID];
         
         expect(childObjectID).toNot.beNil();
         expect([childObjectID isTemporaryID]).to.beFalsy();
-        
+
     } completion:^(BOOL success, NSError *error) {
         
         //test parent and root saving context
-        SingleEntityWithNoRelationships *parentObject = [defaultContext objectWithID:childObjectID];
+        SingleEntityWithNoRelationships *parentObject = (SingleEntityWithNoRelationships *)[defaultContext objectWithID:childObjectID];
         
         expect(parentObject).toNot.beNil();
         
-        SingleEntityWithNoRelationships *rootObject = [[NSManagedObjectContext MR_rootSavingContext] objectWithID:childObjectID];
+        SingleEntityWithNoRelationships *rootObject = (SingleEntityWithNoRelationships *)[[NSManagedObjectContext MR_rootSavingContext] objectWithID:childObjectID];
         
         expect(rootObject).toNot.beNil();
-        
+
     }];
 }
 
