@@ -165,9 +165,15 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
         }
         else
         {
-            [self lock];
-            [self MR_addSqliteStoreNamed:storeIdentifier withOptions:options];
-            [self unlock];
+            if ([self respondsToSelector:@selector(performBlockAndWait:)]) {
+                [self performBlockAndWait:^{
+                    [self MR_addSqliteStoreNamed:storeIdentifier withOptions:options];
+                }];
+            } else {
+                [self lock];
+                [self MR_addSqliteStoreNamed:storeIdentifier withOptions:options];
+                [self unlock];
+            }
         }
 
         dispatch_async(dispatch_get_main_queue(), ^{
