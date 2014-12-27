@@ -17,10 +17,10 @@
 - (void) MR_saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
 {
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:self];
-    
-    [localContext MR_setWorkingName:NSStringFromSelector(_cmd)];
-    
+
     [localContext performBlock:^{
+        [localContext MR_setWorkingName:NSStringFromSelector(_cmd)];
+
         if (block) {
             block(localContext);
         }
@@ -34,10 +34,10 @@
 - (void) MR_saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
 {
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:self];
-    
-    [localContext MR_setWorkingName:NSStringFromSelector(_cmd)];
-    
+
     [localContext performBlockAndWait:^{
+        [localContext MR_setWorkingName:NSStringFromSelector(_cmd)];
+
         if (block) {
             block(localContext);
         }
