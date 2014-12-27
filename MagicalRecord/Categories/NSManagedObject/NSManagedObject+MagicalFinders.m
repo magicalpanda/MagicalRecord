@@ -104,8 +104,6 @@
 + (instancetype) MR_findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context
 {	
 	NSFetchRequest *request = [self MR_requestFirstByAttribute:attribute withValue:searchValue inContext:context];
-    //    [request setPropertiesToFetch:[NSArray arrayWithObject:attribute]];
-    
 	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
 }
 
