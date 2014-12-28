@@ -16,8 +16,11 @@
 {
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self model]];
 
-    [coordinator MR_addAutoMigratingSqliteStoreAtURL:self.storeURL];
-
+    NSMutableDictionary *storeOptions = [[self defaultStoreOptions] mutableCopy];
+    [storeOptions addEntriesFromDictionary:self.storeOptions];
+  
+    [coordinator MR_addAutoMigratingSqliteStoreAtURL:self.storeURL withOptions:storeOptions];
+  
     return coordinator;
 }
 

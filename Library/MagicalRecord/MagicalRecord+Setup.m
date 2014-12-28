@@ -119,4 +119,10 @@
     return stack;
 }
 
++ (MagicalRecordStack *)setupModernStackWithLocalStoreNamed:(NSString *)localStoreName
+{
+  ModernMagicalRecordStack *stack = [[ModernMagicalRecordStack alloc] initWithStoreNamed:localStoreName];
+  [MagicalRecordStack setDefaultStack:stack];
+  return stack;
+}
 @end

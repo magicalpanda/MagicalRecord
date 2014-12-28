@@ -32,4 +32,6 @@
 
 + (MagicalRecordStack *) setupStackWithInMemoryStore;
 
++ (MagicalRecordStack *)setupModernStackWithLocalStoreNamed:(NSString *)localStoreName;
+
 @end

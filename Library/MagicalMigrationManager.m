@@ -6,6 +6,9 @@
 //  Copyright (c) 2013 Photobucket. All rights reserved.
 //
 
+@import Foundation;
+@import CoreData;
+
 #import "MagicalMigrationManager.h"
 
 @implementation MagicalMigrationManager

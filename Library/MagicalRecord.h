@@ -3,7 +3,6 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-
 #ifdef __OBJC__
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
@@ -23,6 +22,7 @@
 #import "SQLiteWithSavingContextMagicalRecordStack.h"
 #import "ClassicSQLiteMagicalRecordStack.h"
 #import "ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack.h"
+#import "ModernMagicalRecordStack.h"
 
 #import "InMemoryMagicalRecordStack.h"
 
@@ -57,6 +57,13 @@
 #import "NSRelationshipDescription+MagicalDataImport.h"
 #import "NSEntityDescription+MagicalDataImport.h"
 #import "NSError+MagicalRecordErrorHandling.h"
+
+#import "MagicalMigrationManager.h"
+#import "MagicalRecord+Actions.h"
+#import "MagicalRecordLogging.h"
+#import "MagicalRecordStack+Private.h"
+#import "NSDictionary+MagicalRecordAdditions.h"
+#import "NSPersistentStore+MagicalRecordPrivate.h"
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 #import "NSManagedObject+MagicalFetching.h"
