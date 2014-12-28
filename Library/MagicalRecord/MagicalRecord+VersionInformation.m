@@ -7,9 +7,9 @@
 
 @implementation MagicalRecord (VersionInformation)
 
-+ (MagicalRecordVersionNumber)version
++ (MagicalRecordVersionTag)version
 {
-    return MagicalRecordVersionNumber3_0;
+    return MagicalRecordVersionTag3_0;
 }
 
 @end
