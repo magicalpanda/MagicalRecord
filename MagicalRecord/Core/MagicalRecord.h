@@ -10,16 +10,16 @@
 
  @since Available in v2.3 and later.
  */
-typedef NS_ENUM(NSUInteger, MagicalRecordVersionNumber)
+typedef NS_ENUM(NSUInteger, MagicalRecordVersionTag)
 {
     /** Version 2.2.0 */
-    MagicalRecordVersionNumber2_2 = 220,
+    MagicalRecordVersionTag2_2 = 220,
 
     /** Version 2.3.0 */
-    MagicalRecordVersionNumber2_3 = 230,
+    MagicalRecordVersionTag2_3 = 230,
 
     /** Version 3.0.0 */
-    MagicalRecordVersionNumber3_0 = 300
+    MagicalRecordVersionTag3_0 = 300
 };
 
 // enable to use caches for the fetchedResultsControllers (iOS only)
@@ -42,13 +42,13 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 @interface MagicalRecord : NSObject
 
 /**
- Returns the current version of MagicalRecord. See the MagicalRecordVersionNumber enumeration for valid current and historical values.
+ Returns the current version of MagicalRecord. See the MagicalRecordVersionTag enumeration for valid current and historical values.
 
  @return The current version as a double.
 
  @since Available in v2.3 and later.
  */
-+ (MagicalRecordVersionNumber) version;
++ (MagicalRecordVersionTag) version;
 
 /**
  Provides information about the current stack, including the model, coordinator, persistent store, the default context and any parent contexts of the default context.
