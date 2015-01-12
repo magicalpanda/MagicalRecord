@@ -5,6 +5,14 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
+//! Project version number for MagicalRecord.
+FOUNDATION_EXPORT double MagicalRecordVersionNumber;
+
+//! Project version string for MagicalRecord.
+FOUNDATION_EXPORT const unsigned char MagicalRecordVersionString[];
+
 #ifdef __OBJC__
 
     #import <Foundation/Foundation.h>
