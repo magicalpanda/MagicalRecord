@@ -38,6 +38,8 @@
  @since Available in v2.0 and later.
  */
 + (NSString *) MR_entityName;
++ (void)MR_setProjectPrefix:(NSString *)prefix;
++ (NSString *)MR_projectPrefix;
 
 + (NSEntityDescription *) MR_entityDescription;
 + (NSEntityDescription *) MR_entityDescriptionInContext:(NSManagedObjectContext *)context;

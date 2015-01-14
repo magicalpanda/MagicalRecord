@@ -11,6 +11,16 @@
 
 #pragma mark - Entity Information
 
+static NSString *pprefix;
+
++ (void)MR_setProjectPrefix:(NSString *)prefix {
+    pprefix = prefix;
+}
+
++ (NSString *)MR_projectPrefix {
+    return pprefix;
+}
+
 + (NSString *) MR_entityName;
 {
     NSString *entityName;
@@ -22,7 +32,7 @@
 
     if ([entityName length] == 0)
     {
-        entityName = NSStringFromClass(self);
+        entityName = [NSStringFromClass(self) stringByReplacingOccurrencesOfString:[self MR_projectPrefix] withString:@""];
     }
 
     return entityName;
