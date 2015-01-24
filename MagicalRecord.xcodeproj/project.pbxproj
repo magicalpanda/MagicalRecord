@@ -387,13 +387,7 @@
 		9042537C187103D00066DA41 /* MagicalRecordTests-OSX-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MagicalRecordTests-OSX-Prefix.pch"; sourceTree = "<group>"; };
 		90425475187103EF0066DA41 /* Expecta.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Expecta.xcodeproj; path = Expecta/Expecta.xcodeproj; sourceTree = "<group>"; };
 		905D07181A63DE190076B54E /* MagicalRecord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MagicalRecord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		905D071B1A63DE190076B54E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		905D071C1A63DE190076B54E /* MagicalRecord.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MagicalRecord.h; sourceTree = "<group>"; };
-		905D07281A63DE190076B54E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		905D07291A63DE190076B54E /* MagicalRecordTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MagicalRecordTests.m; sourceTree = "<group>"; };
 		905D073B1A63DE690076B54E /* MagicalRecord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MagicalRecord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		905D074B1A63DE690076B54E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		905D074C1A63DE690076B54E /* MagicalRecord_OS_XTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MagicalRecord_OS_XTests.m; sourceTree = "<group>"; };
 		905D07C91A63DFED0076B54E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		909948F517C2EF9800BC2B5C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
 		9099490917C2F3D400BC2B5C /* TestModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TestModel.xcdatamodel; sourceTree = "<group>"; };
@@ -653,72 +647,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		905D07191A63DE190076B54E /* MagicalRecord */ = {
-			isa = PBXGroup;
-			children = (
-				905D071C1A63DE190076B54E /* MagicalRecord.h */,
-				905D071A1A63DE190076B54E /* Supporting Files */,
-			);
-			path = MagicalRecord;
-			sourceTree = "<group>";
-		};
-		905D071A1A63DE190076B54E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				905D071B1A63DE190076B54E /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		905D07261A63DE190076B54E /* MagicalRecordTests */ = {
-			isa = PBXGroup;
-			children = (
-				905D07291A63DE190076B54E /* MagicalRecordTests.m */,
-				905D07271A63DE190076B54E /* Supporting Files */,
-			);
-			path = MagicalRecordTests;
-			sourceTree = "<group>";
-		};
-		905D07271A63DE190076B54E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				905D07281A63DE190076B54E /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		905D073C1A63DE690076B54E /* MagicalRecord OS X */ = {
-			isa = PBXGroup;
-			children = (
-				905D073D1A63DE690076B54E /* Supporting Files */,
-			);
-			path = "MagicalRecord OS X";
-			sourceTree = "<group>";
-		};
-		905D073D1A63DE690076B54E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		905D07491A63DE690076B54E /* MagicalRecord OS XTests */ = {
-			isa = PBXGroup;
-			children = (
-				905D074C1A63DE690076B54E /* MagicalRecord_OS_XTests.m */,
-				905D074A1A63DE690076B54E /* Supporting Files */,
-			);
-			path = "MagicalRecord OS XTests";
-			sourceTree = "<group>";
-		};
-		905D074A1A63DE690076B54E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				905D074B1A63DE690076B54E /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		9099490C17C2F42100BC2B5C /* TestModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -808,10 +736,6 @@
 				C7DD7299150F832A00216827 /* MagicalRecord */,
 				C77E5FA513D0CBA600298F87 /* Tests */,
 				90425374187102DC0066DA41 /* Support */,
-				905D07191A63DE190076B54E /* MagicalRecord */,
-				905D07261A63DE190076B54E /* MagicalRecordTests */,
-				905D073C1A63DE690076B54E /* MagicalRecord OS X */,
-				905D07491A63DE690076B54E /* MagicalRecord OS XTests */,
 				C721C7B113D0A3AF0097AB6F /* Products */,
 				C721C7B313D0A3AF0097AB6F /* Frameworks */,
 			);
