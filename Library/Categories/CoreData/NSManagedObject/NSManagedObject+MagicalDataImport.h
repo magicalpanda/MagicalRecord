@@ -5,6 +5,7 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
 extern NSString * const kMagicalRecordImportCustomDateFormatKey;
