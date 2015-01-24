@@ -133,6 +133,8 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
 
 - (void) MR_addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey storeIdentifier:(id)storeIdentifier cloudStorePathComponent:(NSString *)subPathComponent completion:(void(^)(void))completionBlock
 {
+    NSAssert([contentNameKey containsString:@"."] == NO, @"NSPersistentStoreUbiquitousContentNameKey cannot contain a period.");
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         NSURL *cloudURL = [NSPersistentStore MR_cloudURLForUbiqutiousContainer:containerID];
@@ -146,9 +148,14 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
         NSDictionary *options = [[self class] MR_autoMigrationOptions];
         if (cloudURL)   //iCloud is available
         {
-            NSDictionary *iCloudOptions = [NSDictionary dictionaryWithObjectsAndKeys:
-                                           contentNameKey, NSPersistentStoreUbiquitousContentNameKey,
-                                           cloudURL, NSPersistentStoreUbiquitousContentURLKey, nil];
+            NSMutableDictionary *iCloudOptions = [[NSMutableDictionary alloc] init];
+            [iCloudOptions setObject:cloudURL forKey:NSPersistentStoreUbiquitousContentURLKey];
+
+            if ([contentNameKey length] > 0)
+            {
+                [iCloudOptions setObject:contentNameKey forKey:NSPersistentStoreUbiquitousContentNameKey];
+            }
+
             options = [options MR_dictionaryByMergingDictionary:iCloudOptions];
         }
         else

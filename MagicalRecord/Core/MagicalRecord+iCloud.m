@@ -31,9 +31,8 @@ static BOOL _iCloudEnabled = NO;
 
 + (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID localStoreNamed:(NSString *)localStore;
 {
-    NSString *contentNameKey = [[[NSBundle mainBundle] infoDictionary] objectForKey:(id)kCFBundleIdentifierKey];
     [self setupCoreDataStackWithiCloudContainer:containerID
-                                 contentNameKey:contentNameKey
+                                 contentNameKey:nil
                                 localStoreNamed:localStore
                         cloudStorePathComponent:nil];
 }
