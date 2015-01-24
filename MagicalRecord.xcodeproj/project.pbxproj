@@ -932,6 +932,7 @@
 			isa = PBXGroup;
 			children = (
 				C7790F4E17E63C3000D20ACF /* Library */,
+				C7790FAB17E63C3100D20ACF /* Support */,
 				909BBDDD18E040E2007BA3F1 /* Tests */,
 				C721C7B113D0A3AF0097AB6F /* Products */,
 			);
@@ -960,7 +961,6 @@
 				C7790F5117E63C3000D20ACF /* Data Import */,
 				C7790F9017E63C3100D20ACF /* MagicalRecord */,
 				C7790F9E17E63C3100D20ACF /* Stacks */,
-				C7790FAB17E63C3100D20ACF /* Support */,
 			);
 			path = Library;
 			sourceTree = "<group>";
