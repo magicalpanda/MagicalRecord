@@ -155,39 +155,44 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     }
 }
 
-- (void) MR_setRelationships:(NSDictionary *)relationships forKeysWithObject:(id)relationshipData withBlock:(void(^)(NSRelationshipDescription *,id))setRelationshipBlock
+- (void)MR_setRelationships:(NSDictionary *)relationships forKeysWithObject:(id)relationshipData withBlock:(void (^)(NSRelationshipDescription *, id))setRelationshipBlock
 {
-    for (NSString *relationshipName in relationships) 
+    for (NSString *relationshipName in relationships)
     {
         SEL shouldImportSelector = NSSelectorFromString([NSString stringWithFormat:@"shouldImport%@:", [relationshipName MR_capitalizedFirstCharacterString]]);
         BOOL implementsShouldImport = (BOOL)[self respondsToSelector:shouldImportSelector];
-        
+
         NSRelationshipDescription *relationshipInfo = [relationships valueForKey:relationshipName];
-        
+
         NSString *lookupKey = [[relationshipInfo userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey] ?: relationshipName;
-        
+
         id relatedObjectData;
-        
-        @try {
+
+        @try
+        {
             relatedObjectData = [relationshipData valueForKeyPath:lookupKey];
         }
-        @catch (NSException *exception) {
+        @catch (NSException *exception)
+        {
             MRLogWarn(@"Looking up a key for relationship failed while importing: %@\n", relationshipInfo);
             MRLogWarn(@"lookupKey: %@", lookupKey);
             MRLogWarn(@"relationshipInfo.destinationEntity %@", [relationshipInfo destinationEntity]);
             MRLogWarn(@"relationshipData: %@", relationshipData);
             MRLogWarn(@"Exception:\n%@: %@", [exception name], [exception reason]);
         }
-        @finally {
+        @finally
+        {
             if (relatedObjectData == nil || [relatedObjectData isEqual:[NSNull null]])
             {
                 continue;
             }
         }
-        
+
 #pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        if (implementsShouldImport && !(BOOL)[self performSelector:shouldImportSelector withObject:relatedObjectData]) {
+#pragma clang diagnostic ignored \
+    "-Warc-performSelector-leaks"
+        if (implementsShouldImport && !(BOOL)[self performSelector:shouldImportSelector withObject:relatedObjectData])
+        {
             continue;
         }
 #pragma clang diagnostic pop
@@ -196,8 +201,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
         {
             continue;
         }
-        
-        
+
         if ([relationshipInfo isToMany] && [relatedObjectData isKindOfClass:[NSArray class]])
         {
             for (id singleRelatedObjectData in relatedObjectData)
