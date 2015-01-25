@@ -131,10 +131,6 @@
 - (void)testSaveToSelfOnlyWhenSaveIsAsynchronousCallsMainThreadOnCompletion
 {
     NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
-
-    __block BOOL completionBlockCalled = NO;
-    __block BOOL completionBlockIsOnMainThread = NO;
-
     NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityInContext:defaultContext];
 
     expect([inserted hasChanges]).to.beTruthy();
