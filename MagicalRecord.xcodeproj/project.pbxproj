@@ -159,8 +159,10 @@
 		905D07C61A63DF130076B54E /* MagicalRecord+Options.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CC150F832A00216827 /* MagicalRecord+Options.m */; };
 		905D07C71A63DF130076B54E /* MagicalRecord+Setup.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CE150F832A00216827 /* MagicalRecord+Setup.m */; };
 		905D07C81A63DF130076B54E /* MagicalRecord+ShorthandSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72D0150F832A00216827 /* MagicalRecord+ShorthandSupport.m */; };
-		909948F717C2EFA100BC2B5C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 909B48C817C2EB5C00CE8C5E /* Cocoa.framework */; };
-		909948F817C2EFA500BC2B5C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C7E213D0C3A00097AB6F /* CoreData.framework */; };
+		908B9C871A74A8D7004610BA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C721C7E213D0C3A00097AB6F /* CoreData.framework */; };
+		908B9C881A74A8E2004610BA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 909B48C817C2EB5C00CE8C5E /* Cocoa.framework */; };
+		908B9C8A1A74A8F5004610BA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908B9C891A74A8F5004610BA /* CoreData.framework */; };
+		908B9C8C1A74A8F9004610BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908B9C8B1A74A8F9004610BA /* UIKit.framework */; };
 		9099490A17C2F3D400BC2B5C /* TestModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9099490817C2F3D400BC2B5C /* TestModel.xcdatamodeld */; };
 		9099490B17C2F3D400BC2B5C /* TestModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9099490817C2F3D400BC2B5C /* TestModel.xcdatamodeld */; };
 		9099493917C2F42100BC2B5C /* _AbstractRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099490E17C2F42100BC2B5C /* _AbstractRelatedEntity.m */; };
@@ -223,8 +225,6 @@
 		90EFB46A1863BE2300B04F5C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 909948F517C2EF9800BC2B5C /* CoreData.framework */; };
 		90EFB46C1863DBD000B04F5C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 909B48CA17C2EC7E00CE8C5E /* UIKit.framework */; };
 		90EFB46E1863DBD400B04F5C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90EFB46D1863DBD400B04F5C /* Foundation.framework */; };
-		90EFB4701863DCD900B04F5C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 909948F517C2EF9800BC2B5C /* CoreData.framework */; };
-		90EFB4711863DCDC00B04F5C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 909B48CA17C2EC7E00CE8C5E /* UIKit.framework */; };
 		90EFB47D1863DE1B00B04F5C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9099497217C3044700BC2B5C /* XCTest.framework */; };
 		90FE37071863BC7100C9E638 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9099497217C3044700BC2B5C /* XCTest.framework */; };
 		90FE37081863BC7800C9E638 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 909B48C817C2EB5C00CE8C5E /* Cocoa.framework */; };
@@ -389,6 +389,8 @@
 		905D07181A63DE190076B54E /* MagicalRecord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MagicalRecord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		905D073B1A63DE690076B54E /* MagicalRecord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MagicalRecord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		905D07C91A63DFED0076B54E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		908B9C891A74A8F5004610BA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
+		908B9C8B1A74A8F9004610BA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		909948F517C2EF9800BC2B5C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
 		9099490917C2F3D400BC2B5C /* TestModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TestModel.xcdatamodel; sourceTree = "<group>"; };
 		9099490D17C2F42100BC2B5C /* _AbstractRelatedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _AbstractRelatedEntity.h; sourceTree = "<group>"; };
@@ -555,8 +557,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90EFB4711863DCDC00B04F5C /* UIKit.framework in Frameworks */,
-				90EFB4701863DCD900B04F5C /* CoreData.framework in Frameworks */,
+				908B9C8C1A74A8F9004610BA /* UIKit.framework in Frameworks */,
+				908B9C8A1A74A8F5004610BA /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,8 +566,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				909948F717C2EFA100BC2B5C /* Cocoa.framework in Frameworks */,
-				909948F817C2EFA500BC2B5C /* CoreData.framework in Frameworks */,
+				908B9C881A74A8E2004610BA /* Cocoa.framework in Frameworks */,
+				908B9C871A74A8D7004610BA /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -757,6 +759,8 @@
 		C721C7B313D0A3AF0097AB6F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				908B9C8B1A74A8F9004610BA /* UIKit.framework */,
+				908B9C891A74A8F5004610BA /* CoreData.framework */,
 				90EFB47E1863E27800B04F5C /* iOS SDK */,
 				90EFB47F1863E28800B04F5C /* OS X SDK */,
 				9099497217C3044700BC2B5C /* XCTest.framework */,
