@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0610"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -20,20 +19,6 @@
                ReferencedContainer = "container:MagicalRecord.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9053F56319E0244C00137362"
-               BuildableName = "MagicalRecord for iOS Tests.xctest"
-               BlueprintName = "MagicalRecord for iOS Tests"
-               ReferencedContainer = "container:MagicalRecord.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -46,9 +31,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9053F56319E0244C00137362"
-               BuildableName = "MagicalRecord for iOS Tests.xctest"
-               BlueprintName = "MagicalRecord for iOS Tests"
+               BlueprintIdentifier = "90C4BD7418E11DFA009FAF9C"
+               BuildableName = "libMagicalRecord for iOS Tests.xctest"
+               BlueprintName = "libMagicalRecord for iOS Tests"
                ReferencedContainer = "container:MagicalRecord.xcodeproj">
             </BuildableReference>
          </TestableReference>
