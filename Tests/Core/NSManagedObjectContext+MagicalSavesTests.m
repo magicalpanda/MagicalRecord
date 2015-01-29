@@ -90,8 +90,7 @@
     expect([parentContextFetchedObject hasChanges]).will.beTruthy();
 
     // The child context should not have changes after the save
-    expect(childContextFetchedObject).willNot.beNil();
-    expect([childContextFetchedObject hasChanges]).will.beFalsy();
+    expect([childContext hasChanges]).will.beFalsy();
 }
 
 - (void)testSaveToSelfOnlyWhenSaveIsAsynchronousCallsCorrectThreadOnCompletion
@@ -198,8 +197,7 @@
     expect([parentContextFetchedObject hasChanges]).will.beFalsy();
 
     // The child context should not have changes after the save
-    expect(childContextFetchedObject).willNot.beNil();
-    expect([childContextFetchedObject hasChanges]).will.beFalsy();
+    expect([childContext hasChanges]).will.beFalsy();
 }
 
 - (void)testThatSavedObjectsHavePermanentIDs
