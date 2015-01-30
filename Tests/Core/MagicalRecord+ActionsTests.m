@@ -132,6 +132,8 @@
 
 - (void)testAsynchronousSaveActionSaves
 {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Save Completed"];
+
     __block BOOL saveSuccessState = NO;
     __block NSError *saveError;
     __block NSManagedObjectID *objectId;
@@ -141,10 +143,11 @@
 
         expect([inserted hasChanges]).to.beTruthy();
 
-        [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
+        expect([localContext obtainPermanentIDsForObjects:@[inserted] error:nil]).to.beTruthy();
         objectId = [inserted objectID];
 
         expect(objectId).toNot.beNil();
+        expect(objectId.isTemporaryID).to.beFalsy();
     } completion:^(BOOL contextDidSave, NSError *error) {
         saveSuccessState = contextDidSave;
         saveError = error;
@@ -154,16 +157,19 @@
 
         NSManagedObjectContext *rootSavingContext = [NSManagedObjectContext MR_rootSavingContext];
 
-        [rootSavingContext performBlock:^{
+        [rootSavingContext performBlockAndWait:^{
             NSError *existingObjectError;
             NSManagedObject *existingObject = [rootSavingContext existingObjectWithID:objectId error:&existingObjectError];
 
             expect(existingObject).toNot.beNil();
             expect([existingObject hasChanges]).to.beFalsy();
             expect(existingObjectError).to.beNil();
+
+            [expectation fulfill];
         }];
     }];
 
+    [self waitForExpectationsWithTimeout:5.0f handler:nil];
 }
 
 - (void)testAsynchronousSaveActionCallsCompletionBlockOnTheMainThread
