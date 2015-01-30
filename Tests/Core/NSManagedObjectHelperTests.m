@@ -92,12 +92,18 @@
 
 - (void)testRetrieveInstanceOfManagedObjectFromAnotherContextHasAPermanentObjectID
 {
-    NSManagedObject *insertedEntity = [SingleRelatedEntity MR_createEntity];
+    NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
+    NSManagedObject *insertedEntity = [SingleRelatedEntity MR_createEntityInContext:defaultContext];
 
-    XCTAssertTrue([[insertedEntity objectID] isTemporaryID], @"Object ID should be temporary until saved");
+    XCTAssertTrue(insertedEntity.objectID.isTemporaryID, @"Object ID should be temporary until saved");
+
+    [defaultContext MR_saveToPersistentStoreAndWait];
+
+    XCTAssertFalse(insertedEntity.objectID.isTemporaryID, @"Object ID should be permanent after save");
 
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
         NSManagedObject *localEntity = [insertedEntity MR_inContext:localContext];
+        XCTAssertNotNil(localEntity, @"Object should not be nil");
         XCTAssertFalse([[localEntity objectID] isTemporaryID], @"Object ID should not be temporary after save");
     }];
 }
