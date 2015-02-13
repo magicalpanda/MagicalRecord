@@ -4,7 +4,7 @@ BEGIN {
 
 /Schemes:/ {
     while (getline && $0 != "") {
-        if ($0 ~ /Expecta/) continue;
+        if ($0 !~ /MagicalRecord/) continue;
         sub(/^ +/, "");
         print "'" $0 "'";
     }
