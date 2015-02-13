@@ -6,7 +6,7 @@ Logging can be enabled by placing the following preprocessor statement before yo
 
 ```objective-c
 #define MR_LOGGING_ENABLED 1
-#import <MagicalRecord/CoreData+MagicalRecord.h>
+#import <MagicalRecord/MagicalRecord.h>
 ```
 
 Logging can also be enabled by passing `-DMR_LOGGING_ENABLED=1` to `OTHER_CFLAGS` (shown as "Other C Flags" in Xcode's Build Settings). If you have trouble with with the first approach, adding this build setting should work.
@@ -33,5 +33,5 @@ If it's available, MagicalRecord will direct its logs to [CocoaLumberjack](https
 ```objective-c
 #import <CocoaLumberjack/DDLog.h>
 #define MR_LOGGING_ENABLED 1
-#import <MagicalRecord/CoreData+MagicalRecord.h>
+#import <MagicalRecord/MagicalRecord.h>
 ```

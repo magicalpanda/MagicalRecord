@@ -1,5 +1,5 @@
 //
-//  CoreData+MagicalRecord.h
+//  MagicalRecord.h
 //
 //  Created by Saul Mora on 28/07/10.
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
@@ -26,7 +26,7 @@ FOUNDATION_EXPORT const unsigned char MagicalRecordVersionString[];
     #import "MagicalRecordShorthand.h"
     #endif
 
-    #import "MagicalRecord.h"
+    #import "MagicalRecordInternal.h"
     #import "MagicalRecordDeprecated.h"
     #import "MagicalRecord+Actions.h"
     #import "MagicalRecord+ErrorHandling.h"

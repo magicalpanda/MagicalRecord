@@ -5,7 +5,7 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import "CoreData+MagicalRecord.h"
+#import "MagicalRecord.h"
 #import "NSObject+MagicalDataImport.h"
 #import "MagicalRecordLogging.h"
 #import <objc/runtime.h>
