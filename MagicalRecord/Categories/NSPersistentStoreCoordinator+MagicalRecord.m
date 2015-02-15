@@ -71,18 +71,23 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
 
 - (NSPersistentStore *) MR_addSqliteStoreNamed:(id)storeFileName withOptions:(__autoreleasing NSDictionary *)options
 {
+    return [self MR_addSqliteStoreNamed:storeFileName configuration:nil withOptions:options];
+}
+
+- (NSPersistentStore *) MR_addSqliteStoreNamed:(id)storeFileName configuration:(NSString *)configuration withOptions:(__autoreleasing NSDictionary *)options
+{
     NSURL *url = [storeFileName isKindOfClass:[NSURL class]] ? storeFileName : [NSPersistentStore MR_urlForStoreName:storeFileName];
     NSError *error = nil;
     
     [self MR_createPathToStoreFileIfNeccessary:url];
     
     NSPersistentStore *store = [self addPersistentStoreWithType:NSSQLiteStoreType
-                                                  configuration:nil
+                                                  configuration:configuration
                                                             URL:url
                                                         options:options
                                                           error:&error];
     
-    if (!store) 
+    if (!store)
     {
         if ([MagicalRecord shouldDeleteStoreOnModelMismatch])
         {
@@ -99,7 +104,7 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
                 [[NSFileManager defaultManager] removeItemAtURL:url error:&deleteStoreError];
                 [[NSFileManager defaultManager] removeItemAtURL:shmSidecar error:nil];
                 [[NSFileManager defaultManager] removeItemAtURL:walSidecar error:nil];
-
+                
                 MRLogWarn(@"Removed incompatible model version: %@", [url lastPathComponent]);
                 if(deleteStoreError) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchCouldNotDeleteStore object:nil userInfo:@{@"Error":deleteStoreError}];
