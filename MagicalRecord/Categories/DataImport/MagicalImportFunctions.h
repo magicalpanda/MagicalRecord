@@ -25,4 +25,3 @@ NSColor * MR_colorFromString(NSString *serializedColor);
 #endif
 
 NSInteger* MR_newColorComponentsFromString(NSString *serializedColor);
-extern id (*colorFromString)(NSString *);

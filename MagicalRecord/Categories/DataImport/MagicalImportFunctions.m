@@ -122,5 +122,3 @@ NSColor * MR_colorFromString(NSString *serializedColor)
 }
 
 #endif
-
-id (*colorFromString)(NSString *) = MR_colorFromString;
