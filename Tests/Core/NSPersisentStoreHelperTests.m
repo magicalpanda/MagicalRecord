@@ -24,10 +24,8 @@
 - (void) testDefaultStoreFolderForiOSDevicesIsTheApplicationSupportFolder
 {
     NSString *applicationLibraryDirectory = [self applicationStorageDirectory];
-    NSString *defaultStoreName = kMagicalRecordDefaultStoreFileName;
-    
-    NSURL *expectedStoreUrl = [NSURL fileURLWithPath:[applicationLibraryDirectory stringByAppendingPathComponent:defaultStoreName]];
-    
+    NSString *expectedStorePath = [applicationLibraryDirectory stringByAppendingPathComponent:kMagicalRecordDefaultStoreFileName];
+    NSURL *expectedStoreUrl = [NSURL fileURLWithPath:expectedStorePath];
     NSURL *defaultStoreUrl = [NSPersistentStore MR_defaultLocalStoreUrl];
     
     XCTAssertEqualObjects(defaultStoreUrl, expectedStoreUrl, @"Store URL should be %@, actually is %@", [expectedStoreUrl absoluteString], [defaultStoreUrl absoluteString]);
@@ -37,70 +35,46 @@
 {
     NSString *storeFileName = @"NotTheDefaultStoreName.storefile";
     NSString *applicationLibraryDirectory = [self applicationStorageDirectory];
-    NSString *testStorePath = [applicationLibraryDirectory stringByAppendingPathComponent:storeFileName];
-    
-    BOOL fileWasCreated = [[NSFileManager defaultManager] createFileAtPath:testStorePath contents:[storeFileName dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
-    
+    NSString *expectedStorePath = [applicationLibraryDirectory stringByAppendingPathComponent:storeFileName];
+
+    BOOL fileWasCreated = [[NSFileManager defaultManager] createFileAtPath:expectedStorePath contents:[storeFileName dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
     XCTAssertTrue(fileWasCreated, @"Expected file to have been created");
 
-    NSURL *expectedFoundStoreUrl = [NSURL fileURLWithPath:testStorePath];
+    NSURL *expectedFoundStoreUrl = [NSURL fileURLWithPath:expectedStorePath];
     NSURL *foundStoreUrl = [NSPersistentStore MR_urlForStoreName:storeFileName];
     
     XCTAssertEqualObjects(foundStoreUrl, expectedFoundStoreUrl, @"Found store URL should be %@, actually is %@", [expectedFoundStoreUrl absoluteString], [foundStoreUrl absoluteString]);
 
-    [[NSFileManager defaultManager] removeItemAtPath:testStorePath error:nil];
-}
-
-- (void) testCanFindAURLInDocumentsFolderForiOSForASpecifiedStoreName
-{
-    NSString *storeFileName = @"NotTheDefaultStoreName.storefile";
-    NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    NSString *testStorePath = [documentDirectory stringByAppendingPathComponent:storeFileName];
-    
-    BOOL fileWasCreated = [[NSFileManager defaultManager] createFileAtPath:testStorePath contents:[storeFileName dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
-    
-    XCTAssertTrue(fileWasCreated, @"Expected file to have been created");
-
-    NSURL *expectedFoundStoreUrl = [NSURL fileURLWithPath:testStorePath];
-    NSURL *foundStoreUrl = [NSPersistentStore MR_urlForStoreName:storeFileName];
-    
-    XCTAssertEqualObjects(foundStoreUrl, expectedFoundStoreUrl, @"Found store URL should be %@, actually is %@", [expectedFoundStoreUrl absoluteString], [foundStoreUrl absoluteString]);
-
-    [[NSFileManager defaultManager] removeItemAtPath:testStorePath error:nil];
+    [[NSFileManager defaultManager] removeItemAtPath:expectedStorePath error:nil];
 }
 
 #else
 
 - (void) testDefaultStoreFolderForMacIsTheApplicationSupportDirectory
 {
-    NSString *applictionSupportDirectory = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *defaultStoreName = kMagicalRecordDefaultStoreFileName;
-    
-    NSURL *expectedStoreUrl = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", applictionSupportDirectory, defaultStoreName]];
-    
+    NSString *applicationSupportDirectory = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *expectedStorePath = [applicationSupportDirectory stringByAppendingPathComponent:kMagicalRecordDefaultStoreFileName];
+    NSURL *expectedStoreUrl = [NSURL fileURLWithPath:expectedStorePath];
     NSURL *defaultStoreUrl = [NSPersistentStore MR_defaultLocalStoreUrl];
 
     XCTAssertEqualObjects(defaultStoreUrl, expectedStoreUrl, @"Store URL should be %@, actually is %@", [expectedStoreUrl absoluteString], [defaultStoreUrl absoluteString]);
 }
 
-
 - (void) testCanFindAURLInTheApplicationSupportLibraryForMacForASpecifiedStoreName
 {
     NSString *storeFileName = @"NotTheDefaultStoreName.storefile";
     NSString *applicationSupportDirectory = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *testStorePath = [applicationSupportDirectory stringByAppendingPathComponent:storeFileName];
-    
-    BOOL fileWasCreated = [[NSFileManager defaultManager] createFileAtPath:testStorePath contents:[storeFileName dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
+    NSString *expectedStorePath = [applicationSupportDirectory stringByAppendingPathComponent:storeFileName];
 
+    BOOL fileWasCreated = [[NSFileManager defaultManager] createFileAtPath:expectedStorePath contents:[storeFileName dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
     XCTAssertTrue(fileWasCreated, @"Expected file to have been created");
 
-    NSURL *expectedStoreUrl = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", applicationSupportDirectory, storeFileName]];
-    
+    NSURL *expectedStoreUrl = [NSURL fileURLWithPath:expectedStorePath];
     NSURL *foundStoreUrl = [NSPersistentStore MR_urlForStoreName:storeFileName];
     
     XCTAssertEqualObjects(foundStoreUrl, expectedStoreUrl, @"Found store URL should be %@, actually is %@", [expectedStoreUrl absoluteString], [foundStoreUrl absoluteString]);
 
-    [[NSFileManager defaultManager] removeItemAtPath:testStorePath error:nil];
+    [[NSFileManager defaultManager] removeItemAtPath:expectedStorePath error:nil];
 }
 
 #endif
