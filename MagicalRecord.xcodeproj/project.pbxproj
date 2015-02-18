@@ -587,8 +587,8 @@
 		C7CF978E174982AD008D9D13 /* MagicalDataImportTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalDataImportTestCase.m; sourceTree = "<group>"; };
 		C7CF97AB17498414008D9D13 /* libMagicalRecord-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMagicalRecord-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CF97BB1749843F008D9D13 /* libMagicalRecord for OSX.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libMagicalRecord for OSX.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7CF97FF174984CA008D9D13 /* libMagicalRecord-iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "libMagicalRecord-iOS Tests.xctest"; path = "libMagicalRecord for iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7CF9816174984E4008D9D13 /* MagicalRecordTests-OSX.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "MagicalRecordTests-OSX.xctest"; path = "libMagicalRecord for OSX Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7CF97FF174984CA008D9D13 /* libMagicalRecord for iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "libMagicalRecord for iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7CF9816174984E4008D9D13 /* libMagicalRecord for OSX Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "libMagicalRecord for OSX Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CF9B4917498985008D9D13 /* SampleJSONDataForImport.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SampleJSONDataForImport.json; path = Fixtures/SampleJSONDataForImport.json; sourceTree = "<group>"; };
 		C7CF9B4A17498985008D9D13 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json; path = Fixtures/SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json; sourceTree = "<group>"; };
 		C7CF9B4B17498985008D9D13 /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json; path = Fixtures/SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json; sourceTree = "<group>"; };
@@ -854,8 +854,8 @@
 			children = (
 				C7CF97AB17498414008D9D13 /* libMagicalRecord-iOS.a */,
 				C7CF97BB1749843F008D9D13 /* libMagicalRecord for OSX.dylib */,
-				C7CF97FF174984CA008D9D13 /* libMagicalRecord-iOS Tests.xctest */,
-				C7CF9816174984E4008D9D13 /* MagicalRecordTests-OSX.xctest */,
+				C7CF97FF174984CA008D9D13 /* libMagicalRecord for iOS Tests.xctest */,
+				C7CF9816174984E4008D9D13 /* libMagicalRecord for OSX Tests.xctest */,
 				905D07181A63DE190076B54E /* MagicalRecord.framework */,
 				905D073B1A63DE690076B54E /* MagicalRecord.framework */,
 				9004F5211A94CBCF00A61312 /* MagicalRecord for iOS Tests.xctest */,
@@ -1264,7 +1264,7 @@
 			);
 			name = "libMagicalRecord for iOS Tests";
 			productName = MagicalRecordTests;
-			productReference = C7CF97FF174984CA008D9D13 /* libMagicalRecord-iOS Tests.xctest */;
+			productReference = C7CF97FF174984CA008D9D13 /* libMagicalRecord for iOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		C7CF9815174984E4008D9D13 /* libMagicalRecord for OSX Tests */ = {
@@ -1281,7 +1281,7 @@
 			);
 			name = "libMagicalRecord for OSX Tests";
 			productName = "MagicalRecordTests-OSX";
-			productReference = C7CF9816174984E4008D9D13 /* MagicalRecordTests-OSX.xctest */;
+			productReference = C7CF9816174984E4008D9D13 /* libMagicalRecord for OSX Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
