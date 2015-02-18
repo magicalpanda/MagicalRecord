@@ -133,6 +133,8 @@
 		9004F5691A94CC0E00A61312 /* Expecta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905C35331A8D613A00D7BC10 /* Expecta.framework */; };
 		9004F57A1A94D7D300A61312 /* MagicalRecord.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 905D07181A63DE190076B54E /* MagicalRecord.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9004F57D1A94D7F100A61312 /* MagicalRecord.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 905D073B1A63DE690076B54E /* MagicalRecord.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9004F5861A94DA0B00A61312 /* Expecta.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 905C35351A8D613A00D7BC10 /* Expecta.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9004F5871A94DA1E00A61312 /* Expecta.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 905C35331A8D613A00D7BC10 /* Expecta.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		90171E1B17C329CC00E7084A /* FixtureHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF9B6C17498B5C008D9D13 /* FixtureHelpers.m */; };
 		90171E1C17C329CD00E7084A /* FixtureHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF9B6C17498B5C008D9D13 /* FixtureHelpers.m */; };
 		90171E1D17C32ACE00E7084A /* TestModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 9099490817C2F3D400BC2B5C /* TestModel.xcdatamodeld */; };
@@ -468,6 +470,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				9004F5861A94DA0B00A61312 /* Expecta.framework in Copy Frameworks */,
 				9004F57A1A94D7D300A61312 /* MagicalRecord.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -479,6 +482,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				9004F5871A94DA1E00A61312 /* Expecta.framework in Copy Frameworks */,
 				9004F57D1A94D7F100A61312 /* MagicalRecord.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -1837,6 +1841,7 @@
 				);
 				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-iOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1868,6 +1873,7 @@
 				);
 				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-iOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1906,6 +1912,7 @@
 					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-OSX-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1936,6 +1943,7 @@
 					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-OSX-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
