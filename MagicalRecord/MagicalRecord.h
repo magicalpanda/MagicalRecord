@@ -22,12 +22,10 @@ FOUNDATION_EXPORT const unsigned char MagicalRecordVersionString[];
     #warning MagicalRecord requires blocks
     #endif
 
-    #ifdef MR_SHORTHAND
-    #import "MagicalRecordShorthand.h"
-    #endif
-
     #import "MagicalRecordInternal.h"
     #import "MagicalRecordDeprecated.h"
+    #import "MagicalRecordShorthand.h"
+
     #import "MagicalRecord+Actions.h"
     #import "MagicalRecord+ErrorHandling.h"
     #import "MagicalRecord+Options.h"

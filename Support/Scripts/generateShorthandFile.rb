@@ -13,19 +13,31 @@ def processHeader(headerFile)
         puts "#{headerFile} not a header"
         return
     end
-        
+
     puts "Reading #{headerFile}"
-    
+
     method_match_expression = /^(?<Start>[\+|\-]\s*\([a-zA-Z\s\*]*\)\s*)(?<MethodName>\w+)(?<End>\:?.*)/
     category_match_expression = /^\s*(?<Interface>@[[:alnum:]]+)\s*(?<ObjectName>[[:alnum:]]+)\s*(\((?<Category>\w+)\))?/
-    
+
     lines = File.readlines(headerFile)
     non_prefixed_methods = []
     processed_methods_count = 0
-    objects_to_process = ["NSManagedObject", "NSManagedObjectContext", "NSManagedObjectModel", "NSPersistentStoreCoordinator", "NSPersistentStore"]
-    
+    objects_to_process = [
+        "NSAttributeDescription",
+        "NSEntityDescription",
+        "NSManagedObject",
+        "NSManagedObjectContext",
+        "NSManagedObjectModel",
+        "NSPersistentStoreCoordinator",
+        "NSPersistentStore",
+        "NSNumber",
+        "NSObject",
+        "NSRelationshipDescription",
+        "NSString"
+    ]
+
     lines.each { |line|
-        
+
         processed_line = nil
         if line.start_with?("@interface")
             matches = category_match_expression.match(line)
@@ -37,7 +49,7 @@ def processHeader(headerFile)
                 return
             end
         end
-        
+
         if processed_line == nil
             matches = method_match_expression.match(line)
 
@@ -54,30 +66,30 @@ def processHeader(headerFile)
                 end
             end
         end
-        
+
         if processed_line == nil
             if line.start_with?("@end")
                 processed_line = "@end"
             end
         end
-        
+
         unless processed_line == nil
             #            puts "#{line} ----->  #{processed_line}"
             non_prefixed_methods << processed_line
         end
     }
-    
-    non_prefixed_methods 
+
+    non_prefixed_methods
 end
 
 def processDirectory(path)
 
     headers = File.join(path, "**", "*+*.h")
     processedHeaders = []
-    
+
     Dir.glob(headers).each { |file|
         puts "Processing #{file}"
-        
+
         processDirectory(file) if File.directory?(file)
         if file.end_with?(".h")
             processedHeaders << processHeader(file)
@@ -92,7 +104,7 @@ def generateHeaders(startingPoint)
     processedHeaders = []
     if startingPoint
         path = File.expand_path(startingPoint)
-        
+
         if path.end_with?(".h")
             processedHeaders << processHeader(path)
         else
@@ -103,7 +115,7 @@ def generateHeaders(startingPoint)
     else
         processedHeaders << processDirectory(startingPoint || Dir.getwd())
     end
-        
+
     processedHeaders
 end
 
@@ -123,11 +135,7 @@ end
 headers = generateHeaders(ARGV[0])
 
 File.open(output_file, "w") { |file|
-    file.write("#ifdef MR_SHORTHAND\n\n")
+    file.write("#ifdef MR_SHORTHAND\n")
     file.write(headers.join("\n"))
     file.write("#endif\n\n")
 }
-
-
-
-
