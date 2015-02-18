@@ -131,6 +131,8 @@
 		9004F5621A94CBF900A61312 /* SingleRelatedEntity.json in Resources */ = {isa = PBXBuildFile; fileRef = C7CF9B5217498985008D9D13 /* SingleRelatedEntity.json */; };
 		9004F5681A94CC0E00A61312 /* MagicalRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905D073B1A63DE690076B54E /* MagicalRecord.framework */; };
 		9004F5691A94CC0E00A61312 /* Expecta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905C35331A8D613A00D7BC10 /* Expecta.framework */; };
+		9004F57A1A94D7D300A61312 /* MagicalRecord.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 905D07181A63DE190076B54E /* MagicalRecord.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9004F57D1A94D7F100A61312 /* MagicalRecord.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 905D073B1A63DE690076B54E /* MagicalRecord.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		90171E1B17C329CC00E7084A /* FixtureHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF9B6C17498B5C008D9D13 /* FixtureHelpers.m */; };
 		90171E1C17C329CD00E7084A /* FixtureHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF9B6C17498B5C008D9D13 /* FixtureHelpers.m */; };
 		90171E1D17C32ACE00E7084A /* TestModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 9099490817C2F3D400BC2B5C /* TestModel.xcdatamodeld */; };
@@ -460,6 +462,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		9004F5791A94D7C500A61312 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9004F57A1A94D7D300A61312 /* MagicalRecord.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9004F57B1A94D7DC00A61312 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9004F57D1A94D7F100A61312 /* MagicalRecord.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C7CF97A917498414008D9D13 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -475,7 +499,7 @@
 		581ECBEB187F63FF00084FEE /* ImportMultipleEntitiesWithNoPrimaryKeyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportMultipleEntitiesWithNoPrimaryKeyTests.m; sourceTree = "<group>"; };
 		581ECBF6187F660B00084FEE /* MultipleEntitiesWithNoPrimaryKey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = MultipleEntitiesWithNoPrimaryKey.json; path = Fixtures/MultipleEntitiesWithNoPrimaryKey.json; sourceTree = "<group>"; };
 		9004F5211A94CBCF00A61312 /* MagicalRecord for iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MagicalRecord for iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9004F5661A94CBF900A61312 /* MagicalRecord-OSX Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MagicalRecord-OSX Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9004F5661A94CBF900A61312 /* MagicalRecord for OSX Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MagicalRecord for OSX Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		902CE11E18F6133E0024F47C /* MagicalRecordDeprecated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordDeprecated.h; sourceTree = "<group>"; };
 		902CE12B18F61A2F0024F47C /* MagicalRecord+ActionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MagicalRecord+ActionsTests.m"; sourceTree = "<group>"; };
 		902CE13818F61E410024F47C /* NSManagedObjectContext+MagicalSavesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+MagicalSavesTests.m"; sourceTree = "<group>"; };
@@ -559,8 +583,8 @@
 		C7CF978E174982AD008D9D13 /* MagicalDataImportTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalDataImportTestCase.m; sourceTree = "<group>"; };
 		C7CF97AB17498414008D9D13 /* libMagicalRecord-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMagicalRecord-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CF97BB1749843F008D9D13 /* libMagicalRecord for OSX.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libMagicalRecord for OSX.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7CF97FF174984CA008D9D13 /* libMagicalRecord-iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "libMagicalRecord-iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7CF9816174984E4008D9D13 /* MagicalRecordTests-OSX.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MagicalRecordTests-OSX.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7CF97FF174984CA008D9D13 /* libMagicalRecord-iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "libMagicalRecord-iOS Tests.xctest"; path = "libMagicalRecord for iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7CF9816174984E4008D9D13 /* MagicalRecordTests-OSX.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "MagicalRecordTests-OSX.xctest"; path = "libMagicalRecord for OSX Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CF9B4917498985008D9D13 /* SampleJSONDataForImport.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SampleJSONDataForImport.json; path = Fixtures/SampleJSONDataForImport.json; sourceTree = "<group>"; };
 		C7CF9B4A17498985008D9D13 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json; path = Fixtures/SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json; sourceTree = "<group>"; };
 		C7CF9B4B17498985008D9D13 /* SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json; path = Fixtures/SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.json; sourceTree = "<group>"; };
@@ -831,7 +855,7 @@
 				905D07181A63DE190076B54E /* MagicalRecord.framework */,
 				905D073B1A63DE690076B54E /* MagicalRecord.framework */,
 				9004F5211A94CBCF00A61312 /* MagicalRecord for iOS Tests.xctest */,
-				9004F5661A94CBF900A61312 /* MagicalRecord-OSX Tests.xctest */,
+				9004F5661A94CBF900A61312 /* MagicalRecord for OSX Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1123,6 +1147,7 @@
 				9004F4E11A94CBCF00A61312 /* Sources */,
 				9004F50E1A94CBCF00A61312 /* Frameworks */,
 				9004F5111A94CBCF00A61312 /* Resources */,
+				9004F5791A94D7C500A61312 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1140,6 +1165,7 @@
 				9004F5261A94CBF900A61312 /* Sources */,
 				9004F5531A94CBF900A61312 /* Frameworks */,
 				9004F5561A94CBF900A61312 /* Resources */,
+				9004F57B1A94D7DC00A61312 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1147,7 +1173,7 @@
 			);
 			name = "MagicalRecord for OSX Tests";
 			productName = "MagicalRecordTests-OSX";
-			productReference = 9004F5661A94CBF900A61312 /* MagicalRecord-OSX Tests.xctest */;
+			productReference = 9004F5661A94CBF900A61312 /* MagicalRecord for OSX Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		905D07171A63DE190076B54E /* MagicalRecord for iOS */ = {
