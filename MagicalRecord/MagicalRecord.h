@@ -14,7 +14,6 @@ FOUNDATION_EXPORT double MagicalRecordVersionNumber;
 FOUNDATION_EXPORT const unsigned char MagicalRecordVersionString[];
 
 #ifdef __OBJC__
-
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
 
@@ -25,6 +24,8 @@ FOUNDATION_EXPORT const unsigned char MagicalRecordVersionString[];
     #import "MagicalRecordInternal.h"
     #import "MagicalRecordDeprecated.h"
     #import "MagicalRecordLogging.h"
+
+    #define MR_SHORTHAND 1
     #import "MagicalRecordShorthand.h"
 
     #import "MagicalRecord+Actions.h"
