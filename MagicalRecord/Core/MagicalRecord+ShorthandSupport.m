@@ -126,7 +126,9 @@ BOOL addMagicalRecordShorthandMethodToPrefixedInstanceMethod(Class klass, SEL or
 BOOL addMagicalRecordShortHandMethodToPrefixedClassMethod(Class klass, SEL originalSelector)
 {
     NSString *originalSelectorString = NSStringFromSelector(originalSelector);
-    if (![originalSelectorString hasPrefix:kMagicalRecordCategoryPrefix]) 
+    if ([originalSelectorString hasSuffix:@"entityName"]) return NO;
+
+    if (![originalSelectorString hasPrefix:kMagicalRecordCategoryPrefix])
     {
         NSString *prefixedSelector = [kMagicalRecordCategoryPrefix stringByAppendingString:originalSelectorString];
         Method existingMethod = class_getClassMethod(klass, NSSelectorFromString(prefixedSelector));
