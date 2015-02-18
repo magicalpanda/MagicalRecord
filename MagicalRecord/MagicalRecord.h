@@ -24,6 +24,7 @@ FOUNDATION_EXPORT const unsigned char MagicalRecordVersionString[];
 
     #import "MagicalRecordInternal.h"
     #import "MagicalRecordDeprecated.h"
+    #import "MagicalRecordLogging.h"
     #import "MagicalRecordShorthand.h"
 
     #import "MagicalRecord+Actions.h"
@@ -38,6 +39,7 @@ FOUNDATION_EXPORT const unsigned char MagicalRecordVersionString[];
     #import "NSManagedObject+MagicalFinders.h"
     #import "NSManagedObject+MagicalAggregation.h"
     #import "NSManagedObjectContext+MagicalRecord.h"
+    #import "NSManagedObjectContext+MagicalChainSave.h"
     #import "NSManagedObjectContext+MagicalObserving.h"
     #import "NSManagedObjectContext+MagicalSaves.h"
     #import "NSManagedObjectContext+MagicalThreading.h"
