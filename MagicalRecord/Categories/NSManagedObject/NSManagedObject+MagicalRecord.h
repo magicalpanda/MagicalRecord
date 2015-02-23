@@ -30,7 +30,7 @@
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
-+ (void) MR_performFetch:(NSFetchedResultsController *)controller;
++ (BOOL) MR_performFetch:(NSFetchedResultsController *)controller;
 
 #endif
 
