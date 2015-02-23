@@ -147,7 +147,7 @@
               sortKey = sortComponents[0];
           }
       
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending selector:@selector(localizedCaseInsensitiveCompare:)];
         [sortDescriptors addObject:sortDescriptor];
     }
     
