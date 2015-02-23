@@ -88,13 +88,15 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 #if TARGET_OS_IPHONE
 
-+ (void) MR_performFetch:(NSFetchedResultsController *)controller
++ (BOOL) MR_performFetch:(NSFetchedResultsController *)controller
 {
 	NSError *error = nil;
-	if (![controller performFetch:&error])
+	BOOL success = [controller performFetch:&error];
+	if (!success)
 	{
 		[MagicalRecord handleErrors:error];
 	}
+	return success;
 }
 
 #endif

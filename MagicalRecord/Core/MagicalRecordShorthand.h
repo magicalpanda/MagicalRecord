@@ -69,7 +69,7 @@
 + (instancetype) executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request;
 + (instancetype) executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
-+ (void) performFetch:(NSFetchedResultsController *)controller;
++ (BOOL) performFetch:(NSFetchedResultsController *)controller;
 #endif
 + (NSEntityDescription *) entityDescription;
 + (NSEntityDescription *) entityDescriptionInContext:(NSManagedObjectContext *)context;
