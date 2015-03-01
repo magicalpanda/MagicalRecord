@@ -13,18 +13,19 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (NSString *) MR_entityName;
 {
-    NSString *entityName;
-
-    if ([self respondsToSelector:@selector(entityName)])
-    {
-        entityName = [self performSelector:@selector(entityName)];
-    }
-
-    if ([entityName length] == 0) {
-        entityName = NSStringFromClass(self);
-    }
-
-    return entityName;
+	NSString *entityName;
+	
+	if ([self respondsToSelector:@selector(entityName)])
+		{
+		entityName = [self performSelector:@selector(entityName)];
+		}
+	
+	if ([entityName length] == 0) {
+		//swift prefixes classes, like ModuleName.MyClass and this causes problems with Core Data and NSSTringFromClass. We must handle that.
+		entityName = [NSStringFromClass(self) componentsSeparatedByString:@"."].lastObject;
+	}
+	
+	return entityName;
 }
 
 + (void) MR_setDefaultBatchSize:(NSUInteger)newBatchSize
