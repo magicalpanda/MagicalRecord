@@ -13,16 +13,16 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (NSString *) MR_entityName;
 {
-	NSString *entityName;
-	
-	if ([self respondsToSelector:@selector(entityName)])
+    NSString *entityName;
+
+    if ([self respondsToSelector:@selector(entityName)])
     {
         entityName = [self performSelector:@selector(entityName)];
     }
 
     if ([entityName length] == 0)
     {
-        //swift prefixes classes, like ModuleName.MyClass and this causes problems with Core Data and NSSTringFromClass. We must handle that.
+        // Remove module prefix from Swift subclasses
         entityName = [NSStringFromClass(self) componentsSeparatedByString:@"."].lastObject;
     }
 
