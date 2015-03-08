@@ -14,7 +14,7 @@
 
 /**
  *  If the NSManagedObject subclass calling this method has implemented the `entityName` method, then the return value of that will be used.
- *  If `entityName` is not implemented, then the name of the class is returned.
+ *  If `entityName` is not implemented, then the name of the class is returned. If the class is written in Swift, the module name will be removed.
  *
  *  @return String based name for the entity
  */
@@ -30,7 +30,7 @@
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
-+ (void) MR_performFetch:(NSFetchedResultsController *)controller;
++ (BOOL) MR_performFetch:(NSFetchedResultsController *)controller;
 
 #endif
 

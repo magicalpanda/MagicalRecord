@@ -1,6 +1,6 @@
 # ![Awesome](https://github.com/magicalpanda/magicalpanda.github.com/blob/master/images/awesome_logo_small.png?raw=true) MagicalRecord
 
-[![Build Status](https://travis-ci.org/magicalpanda/MagicalRecord.svg?branch=develop)](https://travis-ci.org/magicalpanda/MagicalRecord)
+[![Circle CI](https://circleci.com/gh/magicalpanda/MagicalRecord/tree/develop.svg?style=svg)](https://circleci.com/gh/magicalpanda/MagicalRecord/tree/develop)
 
 In software engineering, the active record pattern is a design pattern found in software that stores its data in relational databases. It was named by Martin Fowler in his book Patterns of Enterprise Application Architecture. The interface to such an object would include functions such as Insert, Update, and Delete, plus properties that correspond more-or-less directly to the columns in the underlying database table.
 
@@ -23,7 +23,6 @@ MagicalRecord was inspired by the ease of Ruby on Rails' Active Record fetching.
 - [Deleting Entities](Docs/Deleting-Entities.md)
 - [Fetching Entities](Docs/Fetching-Entities.md)
 - [Saving Entities](Docs/Saving-Entities.md)
-- [Usage Patterns](Docs/Usage-Patterns.md)
 - [Importing Data](Docs/Importing-Data.md)
 - [Logging](Docs/Logging.md)
 * [Other Resources](Docs/Other-Resources.md)

@@ -11,6 +11,11 @@ The easiest way to integrate MagicalRecord in your project is to use [CocoaPods]
     ````ruby
     pod "MagicalRecord"
     ````
+    If you are planing to use **Shorthand Category Methods** (see below) then add this line instead:
+    
+    ````ruby
+    pod "MagicalRecord/Shorthand"
+    ````
 
 2. In your project directory, run `pod update`
 3. You should now be able to add `#import <MagicalRecord/MagicalRecord.h>` to any of your target's source files and begin using MagicalRecord!

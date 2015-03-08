@@ -20,8 +20,10 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
         entityName = [self performSelector:@selector(entityName)];
     }
 
-    if ([entityName length] == 0) {
-        entityName = NSStringFromClass(self);
+    if ([entityName length] == 0)
+    {
+        // Remove module prefix from Swift subclasses
+        entityName = [NSStringFromClass(self) componentsSeparatedByString:@"."].lastObject;
     }
 
     return entityName;
@@ -88,13 +90,15 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 #if TARGET_OS_IPHONE
 
-+ (void) MR_performFetch:(NSFetchedResultsController *)controller
++ (BOOL) MR_performFetch:(NSFetchedResultsController *)controller
 {
 	NSError *error = nil;
-	if (![controller performFetch:&error])
+	BOOL success = [controller performFetch:&error];
+	if (!success)
 	{
 		[MagicalRecord handleErrors:error];
 	}
+	return success;
 }
 
 #endif
