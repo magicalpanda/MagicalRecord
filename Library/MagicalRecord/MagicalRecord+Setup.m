@@ -125,4 +125,13 @@
   [MagicalRecordStack setDefaultStack:stack];
   return stack;
 }
+
++ (MagicalRecordStack *)setupModernStackWithLocalStoreNamed:(NSString *)localStoreName
+                                                   modelURL:(NSURL *)modelURL
+{
+  NSManagedObjectModel *model = [NSManagedObjectModel MR_managedObjectModelAtURL:modelURL];
+  ModernMagicalRecordStack *stack = [[ModernMagicalRecordStack alloc] initWithStoreNamed:localStoreName model:model];
+  [MagicalRecordStack setDefaultStack:stack];
+  return stack;
+}
 @end
