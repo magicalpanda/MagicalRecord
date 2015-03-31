@@ -34,4 +34,6 @@
 - (void) setModelFromClass:(Class)modelClass;
 - (void) setModelNamed:(NSString *)modelName;
 
++ (BOOL)isDefaultStackSetUp;
+
 @end
