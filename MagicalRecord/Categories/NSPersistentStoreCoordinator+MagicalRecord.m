@@ -16,6 +16,7 @@ NSString * const kMagicalRecordPSCMismatchWillRecreateStore = @"kMagicalRecordPS
 NSString * const kMagicalRecordPSCMismatchDidRecreateStore = @"kMagicalRecordPSCMismatchDidRecreateStore";
 NSString * const kMagicalRecordPSCMismatchCouldNotDeleteStore = @"kMagicalRecordPSCMismatchCouldNotDeleteStore";
 NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalRecordPSCMismatchCouldNotRecreateStore";
+NSString * const kMagicalRecordPSCAddSqliteStoreAttemptFailed = @"kMagicalRecordPSCAddSqliteStoreAttemptFailed";
 
 @interface NSDictionary (MagicalRecordMerging)
 
@@ -87,52 +88,74 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
                                                         options:options
                                                           error:&error];
     
+    if (!store && [MagicalRecord shouldDeleteStoreOnModelMismatch])
+    {
+        // if first attempt failed, we try to recreate it (if `shouldDeleteStoreOnModelMismatch` is set to YES)
+        BOOL isMigrationError = (([error code] == NSPersistentStoreIncompatibleVersionHashError) || ([error code] == NSMigrationMissingSourceModelError) || ([error code] == NSMigrationError));
+        BOOL isCocoaErrorDomain = [[error domain] isEqualToString:NSCocoaErrorDomain];
+        
+        // In iOS7, CoreData fails to migrate the model even with simple upgrades on the model,
+        // and on top of that, this API returns store=nil and error=nil, thanks Jonny Ive
+        BOOL isMigrationErrorOniOS7 = (error==nil && NSFoundationVersionNumber<=NSFoundationVersionNumber_iOS_7_1);
+        
+        if ((isCocoaErrorDomain && isMigrationError) || isMigrationErrorOniOS7)
+        {
+            store = [self MR_tryToRecreateStore:url
+                                  configuration:configuration
+                                    withOptions:options
+                                          error:&error];
+        }
+    }
+    
     if (!store)
     {
-        if ([MagicalRecord shouldDeleteStoreOnModelMismatch])
-        {
-            BOOL isMigrationError = (([error code] == NSPersistentStoreIncompatibleVersionHashError) || ([error code] == NSMigrationMissingSourceModelError) || ([error code] == NSMigrationError));
-            if ([[error domain] isEqualToString:NSCocoaErrorDomain] && isMigrationError)
-            {
-                [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchWillDeleteStore object:nil];
-                
-                NSError * deleteStoreError;
-                // Could not open the database, so... kill it! (AND WAL bits)
-                NSString *rawURL = [url absoluteString];
-                NSURL *shmSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-shm"]];
-                NSURL *walSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-wal"]];
-                [[NSFileManager defaultManager] removeItemAtURL:url error:&deleteStoreError];
-                [[NSFileManager defaultManager] removeItemAtURL:shmSidecar error:nil];
-                [[NSFileManager defaultManager] removeItemAtURL:walSidecar error:nil];
-                
-                MRLogWarn(@"Removed incompatible model version: %@", [url lastPathComponent]);
-                if(deleteStoreError) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchCouldNotDeleteStore object:nil userInfo:@{@"Error":deleteStoreError}];
-                }
-                else {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchDidDeleteStore object:nil];
-                }
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchWillRecreateStore object:nil];
-                // Try one more time to create the store
-                store = [self addPersistentStoreWithType:NSSQLiteStoreType
-                                           configuration:nil
-                                                     URL:url
-                                                 options:options
-                                                   error:&error];
-                if (store)
-                {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchDidRecreateStore object:nil];
-                    // If we successfully added a store, remove the error that was initially created
-                    error = nil;
-                }
-                else {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchCouldNotRecreateStore object:nil userInfo:@{@"Error":error}];
-                }
-            }
-        }
+        // post to NotificationCenter if it wasn't possible to add a Persistent Store
+        [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCAddSqliteStoreAttemptFailed object:nil userInfo:@{@"Error": error?:@"Error is nil"}];
+        
         [MagicalRecord handleErrors:error];
     }
+    
+    return store;
+}
+
+- (NSPersistentStore *) MR_tryToRecreateStore:(NSURL *)url configuration:(NSString *)configuration withOptions:(__autoreleasing NSDictionary *)options error:(NSError **)error
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchWillDeleteStore object:nil];
+    
+    NSError *deleteStoreError;
+    // Could not open the database, so... kill it! (AND WAL bits)
+    NSString *rawURL = [url absoluteString];
+    NSURL *shmSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-shm"]];
+    NSURL *walSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-wal"]];
+    [[NSFileManager defaultManager] removeItemAtURL:url error:&deleteStoreError];
+    [[NSFileManager defaultManager] removeItemAtURL:shmSidecar error:nil];
+    [[NSFileManager defaultManager] removeItemAtURL:walSidecar error:nil];
+    
+    MRLogWarn(@"Removed incompatible model version: %@", [url lastPathComponent]);
+    if(deleteStoreError) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchCouldNotDeleteStore object:nil userInfo:@{@"Error":deleteStoreError}];
+    }
+    else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchDidDeleteStore object:nil];
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchWillRecreateStore object:nil];
+    // Try one more time to create the store
+    NSPersistentStore *store = [self addPersistentStoreWithType:NSSQLiteStoreType
+                               configuration:nil
+                                         URL:url
+                                     options:options
+                                       error:error];
+    if (store)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchDidRecreateStore object:nil];
+        // If we successfully added a store, remove the error that was initially created
+        *error = nil;
+    }
+    else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kMagicalRecordPSCMismatchCouldNotRecreateStore object:nil userInfo:@{@"Error": *error}];
+    }
+    
     return store;
 }
 
