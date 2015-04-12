@@ -15,7 +15,6 @@
 #import "NSPersistentStoreCoordinator+MagicalAutoMigrations.h"
 
 @interface ModernMagicalRecordStack ()
-@property (nonatomic, strong, readwrite) NSManagedObjectContext *savingContext;
 @end
 
 @implementation ModernMagicalRecordStack

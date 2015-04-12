@@ -228,4 +228,9 @@ static MagicalRecordStack *defaultStack;
     [[self context] MR_saveToPersistentStoreAndWait];
 }
 
++ (BOOL)isDefaultStackSetUp
+{
+  return defaultStack != nil;
+}
+
 @end

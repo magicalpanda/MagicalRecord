@@ -97,25 +97,39 @@ NSArray *MR_NSSortDescriptorsFromString(NSString *string, BOOL defaultAscendingV
 
 NSArray *MR_NSSortDescriptorsFromString(NSString *sortTerm, BOOL defaultAscendingValue)
 {
-    NSMutableArray* sortDescriptors = [[NSMutableArray alloc] init];
-    NSArray* sortKeys = [sortTerm componentsSeparatedByString:@","];
-
-    for (__strong NSString* sortKey in sortKeys)
+  NSMutableArray* sortDescriptors = [[NSMutableArray alloc] init];
+  NSArray* sortKeys = [sortTerm componentsSeparatedByString:@","];
+  
+  for (__strong NSString* sortKey in sortKeys)
+  {
+    BOOL ascending = defaultAscendingValue;
+    NSArray* sortComponents = [sortKey componentsSeparatedByString:@":"];
+    
+    sortKey = sortComponents[0];
+    if ([sortComponents count] > 1)
     {
-        BOOL ascending = defaultAscendingValue;
-        NSArray* sortComponents = [sortKey componentsSeparatedByString:@":"];
-
-        sortKey = sortComponents[0];
-        if ([sortComponents count] > 1)
-        {
-            NSNumber* customAscending = [sortComponents lastObject];
-            ascending = [customAscending boolValue];
-        }
-
-        MRLogCVerbose(@"- Sorting %@ %@", sortKey, ascending ? @"Ascending": @"Descending");
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
-        [sortDescriptors addObject:sortDescriptor];
+      NSString* customAscending = sortComponents[1];
+      if ([customAscending length] > 0) {
+        ascending = [customAscending boolValue];
+      }
     }
-
-    return [NSArray arrayWithArray:sortDescriptors];
+    
+    SEL customComparatorSelector = nil;
+    if ([sortComponents count] > 2) {
+      customComparatorSelector = NSSelectorFromString([NSString stringWithFormat:@"%@:", sortComponents[2]]);
+    }
+    
+    MRLogCVerbose(@"- Sorting %@ %@", sortKey, ascending ? @"Ascending": @"Descending");
+    NSSortDescriptor *sortDescriptor = nil;
+    if (customComparatorSelector) {
+      sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending selector:customComparatorSelector];
+    }
+    else {
+      sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
+    }
+    
+    [sortDescriptors addObject:sortDescriptor];
+  }
+  
+  return [NSArray arrayWithArray:sortDescriptors];
 }
