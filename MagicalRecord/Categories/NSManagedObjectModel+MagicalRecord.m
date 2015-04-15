@@ -71,4 +71,10 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 	return model;
 }
 
++ (NSManagedObjectModel *) MR_managedObjectModelNamed:(NSString *)modelFileName inBundle:(NSBundle*) bundle
+{
+    NSManagedObjectModel *model = [self MR_newModelNamed:modelFileName inBundle:bundle];
+    return model;
+}
+
 @end

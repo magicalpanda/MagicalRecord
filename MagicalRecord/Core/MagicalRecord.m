@@ -67,6 +67,12 @@ NSString * const kMagicalRecordCleanedUpNotification = @"kMagicalRecordCleanedUp
     [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
 }
 
++ (void) setDefaultModelNamed:(NSString *)modelName inBundle:(NSBundle *)bundle;
+{
+    NSManagedObjectModel *model = [NSManagedObjectModel MR_managedObjectModelNamed:modelName inBundle:bundle];
+    [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
+}
+
 + (void) setDefaultModelFromClass:(Class)modelClass;
 {
     NSBundle *bundle = [NSBundle bundleForClass:modelClass];

@@ -430,9 +430,9 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
 	return [self MR_coordinatorWithSqliteStoreNamed:storeFileName withOptions:nil];
 }
 
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreAtURL:(NSURL *)storeURL
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreAtURL:(NSURL *)storeURL options:(NSDictionary *)options
 {
-    return [self MR_coordinatorWithSqliteStoreAtURL:storeURL withOptions:nil];
+    return [self MR_coordinatorWithSqliteStoreAtURL:storeURL withOptions:options];
 }
 
 @end

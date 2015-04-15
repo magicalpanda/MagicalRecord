@@ -87,6 +87,15 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 + (void) setDefaultModelNamed:(NSString *)modelName;
 
 /**
+ Looks for a momd file with the specified name, and if found sets it as the default model.
+ 
+ @param modelName Model name as a string, including file extension
+ @param bundle Bundle that holds the momd file
+ 
+ */
++ (void) setDefaultModelNamed:(NSString *)modelName inBundle:(NSBundle *)bundle;
+
+/**
  Determines the store file name your app should use. This method is used by the MagicalRecord SQLite stacks when a store file is not specified. The file name returned is in the form "<ApplicationName>.sqlite". `<ApplicationName>` is taken from the application's info dictionary, which is retrieved from the method [[NSBundle mainBundle] infoDictionary]. If no bundle name is available, "CoreDataStore.sqlite" will be used.
 
  @return String of the form <ApplicationName>.sqlite

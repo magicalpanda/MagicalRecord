@@ -46,6 +46,7 @@ static SEL errorHandlerAction = nil;
             MRLogError(@"Error: %@", detailedError);
         }
     }
+    [NSException raise:@"WHYYYY" format:@"error: %@", error];
     MRLogError(@"Error Message: %@", [error localizedDescription]);
     MRLogError(@"Error Domain: %@", [error domain]);
     MRLogError(@"Recovery Suggestion: %@", [error localizedRecoverySuggestion]);

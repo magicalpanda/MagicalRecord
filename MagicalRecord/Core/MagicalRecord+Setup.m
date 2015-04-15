@@ -43,11 +43,15 @@
     [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
 }
 
-+ (void) setupCoreDataStackWithStoreAtURL:(NSURL *)storeURL
++ (void) setupCoreDataStackWithStoreAtURL:(NSURL *)storeURL {
+    [self setupCoreDataStackWithStoreAtURL:storeURL options:nil];
+}
+
++ (void) setupCoreDataStackWithStoreAtURL:(NSURL *)storeURL options:(NSDictionary *)options
 {
     if ([NSPersistentStoreCoordinator MR_defaultStoreCoordinator] != nil) return;
     
-    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreAtURL:storeURL];
+    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreAtURL:storeURL options:options];
     [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
     
     [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
