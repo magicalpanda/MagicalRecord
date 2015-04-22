@@ -11,6 +11,7 @@ Pod::Spec.new do |s|
   s.default_subspec = 'Core'
   s.ios.deployment_target = '6.0'
   s.osx.deployment_target = '10.8'
+  s.framework    = 'CoreData'
 
   s.subspec "Core" do |sp|
     sp.framework    = 'CoreData'
