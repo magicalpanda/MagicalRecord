@@ -1031,8 +1031,6 @@
 		C7DD72C4150F832A00216827 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				C7DD72D1150F832A00216827 /* MagicalRecordInternal.h */,
-				C7DD72D2150F832A00216827 /* MagicalRecordInternal.m */,
 				C7DD72C5150F832A00216827 /* MagicalRecord+Actions.h */,
 				C7DD72C6150F832A00216827 /* MagicalRecord+Actions.m */,
 				C7DD72C7150F832A00216827 /* MagicalRecord+ErrorHandling.h */,
@@ -1045,9 +1043,11 @@
 				C7DD72CE150F832A00216827 /* MagicalRecord+Setup.m */,
 				C7DD72CF150F832A00216827 /* MagicalRecord+ShorthandSupport.h */,
 				C7DD72D0150F832A00216827 /* MagicalRecord+ShorthandSupport.m */,
+				902CE11E18F6133E0024F47C /* MagicalRecordDeprecated.h */,
+				C7DD72D1150F832A00216827 /* MagicalRecordInternal.h */,
+				C7DD72D2150F832A00216827 /* MagicalRecordInternal.m */,
 				90FEC08B18F42DEA002FFC2F /* MagicalRecordLogging.h */,
 				C7DD72D3150F832A00216827 /* MagicalRecordShorthand.h */,
-				902CE11E18F6133E0024F47C /* MagicalRecordDeprecated.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";
