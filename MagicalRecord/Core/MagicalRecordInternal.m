@@ -96,9 +96,6 @@ NSString * const kMagicalRecordCleanedUpNotification = @"kMagicalRecordCleanedUp
 {
     if (self == [MagicalRecord class]) 
     {
-#ifdef MR_SHORTHAND
-        [self swizzleShorthandMethods];
-#endif
         [self setShouldAutoCreateManagedObjectModel:YES];
         [self setShouldAutoCreateDefaultPersistentStoreCoordinator:NO];
 #ifdef DEBUG

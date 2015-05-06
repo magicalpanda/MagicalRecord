@@ -190,9 +190,7 @@
 		905D076C1A63DEF40076B54E /* MagicalRecord+iCloud.h in Headers */ = {isa = PBXBuildFile; fileRef = C7DD72C9150F832A00216827 /* MagicalRecord+iCloud.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		905D076D1A63DEF40076B54E /* MagicalRecord+Options.h in Headers */ = {isa = PBXBuildFile; fileRef = C7DD72CB150F832A00216827 /* MagicalRecord+Options.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		905D076E1A63DEF40076B54E /* MagicalRecord+Setup.h in Headers */ = {isa = PBXBuildFile; fileRef = C7DD72CD150F832A00216827 /* MagicalRecord+Setup.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		905D076F1A63DEF40076B54E /* MagicalRecord+ShorthandSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = C7DD72CF150F832A00216827 /* MagicalRecord+ShorthandSupport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		905D07701A63DEF40076B54E /* MagicalRecordLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 90FEC08B18F42DEA002FFC2F /* MagicalRecordLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		905D07711A63DEF40076B54E /* MagicalRecordShorthand.h in Headers */ = {isa = PBXBuildFile; fileRef = C7DD72D3150F832A00216827 /* MagicalRecordShorthand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		905D07721A63DEF40076B54E /* MagicalRecordDeprecated.h in Headers */ = {isa = PBXBuildFile; fileRef = 902CE11E18F6133E0024F47C /* MagicalRecordDeprecated.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		905D07731A63DEF40076B54E /* MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = C7DD72D4150F832A00216827 /* MagicalRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		905D07741A63DEF40076B54E /* MagicalImportFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = C7DD729C150F832A00216827 /* MagicalImportFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -221,9 +219,7 @@
 		905D078B1A63DEF40076B54E /* MagicalRecord+iCloud.h in Headers */ = {isa = PBXBuildFile; fileRef = C7DD72C9150F832A00216827 /* MagicalRecord+iCloud.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		905D078C1A63DEF40076B54E /* MagicalRecord+Options.h in Headers */ = {isa = PBXBuildFile; fileRef = C7DD72CB150F832A00216827 /* MagicalRecord+Options.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		905D078D1A63DEF40076B54E /* MagicalRecord+Setup.h in Headers */ = {isa = PBXBuildFile; fileRef = C7DD72CD150F832A00216827 /* MagicalRecord+Setup.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		905D078E1A63DEF40076B54E /* MagicalRecord+ShorthandSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = C7DD72CF150F832A00216827 /* MagicalRecord+ShorthandSupport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		905D078F1A63DEF40076B54E /* MagicalRecordLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 90FEC08B18F42DEA002FFC2F /* MagicalRecordLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		905D07901A63DEF40076B54E /* MagicalRecordShorthand.h in Headers */ = {isa = PBXBuildFile; fileRef = C7DD72D3150F832A00216827 /* MagicalRecordShorthand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		905D07911A63DEF40076B54E /* MagicalRecordDeprecated.h in Headers */ = {isa = PBXBuildFile; fileRef = 902CE11E18F6133E0024F47C /* MagicalRecordDeprecated.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		905D07921A63DEF40076B54E /* MagicalRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = C7DD72D4150F832A00216827 /* MagicalRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		905D07931A63DF120076B54E /* MagicalImportFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD729D150F832A00216827 /* MagicalImportFunctions.m */; };
@@ -252,7 +248,6 @@
 		905D07AA1A63DF120076B54E /* MagicalRecord+iCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CA150F832A00216827 /* MagicalRecord+iCloud.m */; };
 		905D07AB1A63DF120076B54E /* MagicalRecord+Options.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CC150F832A00216827 /* MagicalRecord+Options.m */; };
 		905D07AC1A63DF120076B54E /* MagicalRecord+Setup.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CE150F832A00216827 /* MagicalRecord+Setup.m */; };
-		905D07AD1A63DF120076B54E /* MagicalRecord+ShorthandSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72D0150F832A00216827 /* MagicalRecord+ShorthandSupport.m */; };
 		905D07AE1A63DF130076B54E /* MagicalImportFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD729D150F832A00216827 /* MagicalImportFunctions.m */; };
 		905D07AF1A63DF130076B54E /* NSEntityDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72A1150F832A00216827 /* NSEntityDescription+MagicalDataImport.m */; };
 		905D07B01A63DF130076B54E /* NSAttributeDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD729F150F832A00216827 /* NSAttributeDescription+MagicalDataImport.m */; };
@@ -279,7 +274,6 @@
 		905D07C51A63DF130076B54E /* MagicalRecord+iCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CA150F832A00216827 /* MagicalRecord+iCloud.m */; };
 		905D07C61A63DF130076B54E /* MagicalRecord+Options.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CC150F832A00216827 /* MagicalRecord+Options.m */; };
 		905D07C71A63DF130076B54E /* MagicalRecord+Setup.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CE150F832A00216827 /* MagicalRecord+Setup.m */; };
-		905D07C81A63DF130076B54E /* MagicalRecord+ShorthandSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72D0150F832A00216827 /* MagicalRecord+ShorthandSupport.m */; };
 		9099490A17C2F3D400BC2B5C /* TestModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9099490817C2F3D400BC2B5C /* TestModel.xcdatamodeld */; };
 		9099490B17C2F3D400BC2B5C /* TestModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9099490817C2F3D400BC2B5C /* TestModel.xcdatamodeld */; };
 		9099493917C2F42100BC2B5C /* _AbstractRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099490E17C2F42100BC2B5C /* _AbstractRelatedEntity.m */; };
@@ -369,7 +363,6 @@
 		C7CF97DC17498493008D9D13 /* MagicalRecord+iCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CA150F832A00216827 /* MagicalRecord+iCloud.m */; };
 		C7CF97DD17498493008D9D13 /* MagicalRecord+Options.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CC150F832A00216827 /* MagicalRecord+Options.m */; };
 		C7CF97DE17498493008D9D13 /* MagicalRecord+Setup.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CE150F832A00216827 /* MagicalRecord+Setup.m */; };
-		C7CF97DF17498493008D9D13 /* MagicalRecord+ShorthandSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72D0150F832A00216827 /* MagicalRecord+ShorthandSupport.m */; };
 		C7CF97E0174984A5008D9D13 /* MagicalImportFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD729D150F832A00216827 /* MagicalImportFunctions.m */; };
 		C7CF97E1174984A5008D9D13 /* NSEntityDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72A1150F832A00216827 /* NSEntityDescription+MagicalDataImport.m */; };
 		C7CF97E2174984A5008D9D13 /* NSAttributeDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD729F150F832A00216827 /* NSAttributeDescription+MagicalDataImport.m */; };
@@ -395,7 +388,6 @@
 		C7CF97F6174984A5008D9D13 /* MagicalRecord+iCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CA150F832A00216827 /* MagicalRecord+iCloud.m */; };
 		C7CF97F7174984A5008D9D13 /* MagicalRecord+Options.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CC150F832A00216827 /* MagicalRecord+Options.m */; };
 		C7CF97F8174984A5008D9D13 /* MagicalRecord+Setup.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CE150F832A00216827 /* MagicalRecord+Setup.m */; };
-		C7CF97F9174984A5008D9D13 /* MagicalRecord+ShorthandSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72D0150F832A00216827 /* MagicalRecord+ShorthandSupport.m */; };
 		C7CF9B5317498985008D9D13 /* SampleJSONDataForImport.json in Resources */ = {isa = PBXBuildFile; fileRef = C7CF9B4917498985008D9D13 /* SampleJSONDataForImport.json */; };
 		C7CF9B5417498985008D9D13 /* SampleJSONDataForImport.json in Resources */ = {isa = PBXBuildFile; fileRef = C7CF9B4917498985008D9D13 /* SampleJSONDataForImport.json */; };
 		C7CF9B5517498985008D9D13 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json in Resources */ = {isa = PBXBuildFile; fileRef = C7CF9B4A17498985008D9D13 /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json */; };
@@ -649,11 +641,8 @@
 		C7DD72CC150F832A00216827 /* MagicalRecord+Options.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MagicalRecord+Options.m"; sourceTree = "<group>"; };
 		C7DD72CD150F832A00216827 /* MagicalRecord+Setup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MagicalRecord+Setup.h"; sourceTree = "<group>"; };
 		C7DD72CE150F832A00216827 /* MagicalRecord+Setup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MagicalRecord+Setup.m"; sourceTree = "<group>"; };
-		C7DD72CF150F832A00216827 /* MagicalRecord+ShorthandSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MagicalRecord+ShorthandSupport.h"; sourceTree = "<group>"; };
-		C7DD72D0150F832A00216827 /* MagicalRecord+ShorthandSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MagicalRecord+ShorthandSupport.m"; sourceTree = "<group>"; };
 		C7DD72D1150F832A00216827 /* MagicalRecordInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordInternal.h; sourceTree = "<group>"; };
 		C7DD72D2150F832A00216827 /* MagicalRecordInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalRecordInternal.m; sourceTree = "<group>"; };
-		C7DD72D3150F832A00216827 /* MagicalRecordShorthand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordShorthand.h; sourceTree = "<group>"; };
 		C7DD72D4150F832A00216827 /* MagicalRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecord.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1041,13 +1030,10 @@
 				C7DD72CC150F832A00216827 /* MagicalRecord+Options.m */,
 				C7DD72CD150F832A00216827 /* MagicalRecord+Setup.h */,
 				C7DD72CE150F832A00216827 /* MagicalRecord+Setup.m */,
-				C7DD72CF150F832A00216827 /* MagicalRecord+ShorthandSupport.h */,
-				C7DD72D0150F832A00216827 /* MagicalRecord+ShorthandSupport.m */,
 				902CE11E18F6133E0024F47C /* MagicalRecordDeprecated.h */,
 				C7DD72D1150F832A00216827 /* MagicalRecordInternal.h */,
 				C7DD72D2150F832A00216827 /* MagicalRecordInternal.m */,
 				90FEC08B18F42DEA002FFC2F /* MagicalRecordLogging.h */,
-				C7DD72D3150F832A00216827 /* MagicalRecordShorthand.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1059,8 +1045,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				905D07711A63DEF40076B54E /* MagicalRecordShorthand.h in Headers */,
-				905D076F1A63DEF40076B54E /* MagicalRecord+ShorthandSupport.h in Headers */,
 				905D07641A63DEF40076B54E /* NSManagedObjectContext+MagicalSaves.h in Headers */,
 				905D075B1A63DEF40076B54E /* NSString+MagicalDataImport.h in Headers */,
 				905D076B1A63DEF40076B54E /* MagicalRecord+ErrorHandling.h in Headers */,
@@ -1097,8 +1081,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				905D07901A63DEF40076B54E /* MagicalRecordShorthand.h in Headers */,
-				905D078E1A63DEF40076B54E /* MagicalRecord+ShorthandSupport.h in Headers */,
 				905D07831A63DEF40076B54E /* NSManagedObjectContext+MagicalSaves.h in Headers */,
 				905D077A1A63DEF40076B54E /* NSString+MagicalDataImport.h in Headers */,
 				905D078A1A63DEF40076B54E /* MagicalRecord+ErrorHandling.h in Headers */,
@@ -1594,7 +1576,6 @@
 				905D07941A63DF120076B54E /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				905D07931A63DF120076B54E /* MagicalImportFunctions.m in Sources */,
 				905D079D1A63DF120076B54E /* NSManagedObject+MagicalRecord.m in Sources */,
-				905D07AD1A63DF120076B54E /* MagicalRecord+ShorthandSupport.m in Sources */,
 				905D07A31A63DF120076B54E /* NSManagedObjectContext+MagicalThreading.m in Sources */,
 				905D079A1A63DF120076B54E /* NSManagedObject+MagicalAggregation.m in Sources */,
 				905D079B1A63DF120076B54E /* NSManagedObject+MagicalDataImport.m in Sources */,
@@ -1628,7 +1609,6 @@
 				905D07AF1A63DF130076B54E /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				905D07AE1A63DF130076B54E /* MagicalImportFunctions.m in Sources */,
 				905D07B81A63DF130076B54E /* NSManagedObject+MagicalRecord.m in Sources */,
-				905D07C81A63DF130076B54E /* MagicalRecord+ShorthandSupport.m in Sources */,
 				905D07BE1A63DF130076B54E /* NSManagedObjectContext+MagicalThreading.m in Sources */,
 				905D07B51A63DF130076B54E /* NSManagedObject+MagicalAggregation.m in Sources */,
 				905D07B61A63DF130076B54E /* NSManagedObject+MagicalDataImport.m in Sources */,
@@ -1671,7 +1651,6 @@
 				C7CF97DC17498493008D9D13 /* MagicalRecord+iCloud.m in Sources */,
 				C7CF97DD17498493008D9D13 /* MagicalRecord+Options.m in Sources */,
 				C7CF97DE17498493008D9D13 /* MagicalRecord+Setup.m in Sources */,
-				C7CF97DF17498493008D9D13 /* MagicalRecord+ShorthandSupport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1705,7 +1684,6 @@
 				C7CF97F6174984A5008D9D13 /* MagicalRecord+iCloud.m in Sources */,
 				C7CF97F7174984A5008D9D13 /* MagicalRecord+Options.m in Sources */,
 				C7CF97F8174984A5008D9D13 /* MagicalRecord+Setup.m in Sources */,
-				C7CF97F9174984A5008D9D13 /* MagicalRecord+ShorthandSupport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
