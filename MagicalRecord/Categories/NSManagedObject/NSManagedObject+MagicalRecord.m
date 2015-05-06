@@ -6,8 +6,7 @@
 #import "MagicalRecord.h"
 #import "MagicalRecordLogging.h"
 
-static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
-
+static NSUInteger kMagicalRecordDefaultBatchSize = 20;
 
 @implementation NSManagedObject (MagicalRecord)
 
@@ -33,13 +32,13 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 {
 	@synchronized(self)
 	{
-		defaultBatchSize = newBatchSize;
+		kMagicalRecordDefaultBatchSize = newBatchSize;
 	}
 }
 
 + (NSUInteger) MR_defaultBatchSize
 {
-	return defaultBatchSize;
+	return kMagicalRecordDefaultBatchSize;
 }
 
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
