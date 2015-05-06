@@ -5,7 +5,7 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "MagicalRecord.h"
+#import "NSPersistentStore+MagicalRecord.h"
 
 NSString * const kMagicalRecordDefaultStoreFileName = @"CoreDataStore.sqlite";
 

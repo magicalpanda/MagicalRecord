@@ -6,8 +6,7 @@
 //  Copyright (c) 2013 Magical Panda Software LLC. All rights reserved.
 //
 
-#import "MagicalRecord.h"
-#import "MagicalRecord+Options.h"
+#import <MagicalRecord/MagicalRecord+Options.h>
 
 #if !defined(MR_LOGGING_ENABLED) && __has_include("CocoaLumberjack.h")
     #define MR_LOGGING_ENABLED 1

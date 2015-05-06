@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 NSDate * MR_adjustDateForDST(NSDate *date);
 NSDate * MR_dateFromString(NSString *value, NSString *format);
 NSDate * MR_dateFromNumber(NSNumber *value, BOOL milliseconds);

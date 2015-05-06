@@ -1,7 +1,13 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
 // Make changes to SingleEntityWithNoRelationships.h instead.
 
+#import <Foundation/Foundation.h>
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+#import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#else
+#import <Cocoa/Cocoa.h>
+#endif
 
 extern const struct SingleEntityWithNoRelationshipsAttributes {
 	__unsafe_unretained NSString *booleanAsStringTestAttribute;
@@ -41,7 +47,7 @@ extern const struct SingleEntityWithNoRelationshipsAttributes {
 
 //- (BOOL)validateBooleanTestAttribute:(id*)value_ error:(NSError**)error_;
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 @property (nonatomic, strong) UIColor *colorTestAttribute;
 #else
 @property (nonatomic, strong) NSColor *colorTestAttribute;

@@ -6,6 +6,7 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
+#import <CoreData/CoreData.h>
 
 @interface NSEntityDescription (MagicalRecord_DataImport)
 

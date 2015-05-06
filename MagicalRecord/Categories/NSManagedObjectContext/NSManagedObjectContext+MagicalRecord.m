@@ -5,9 +5,13 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "MagicalRecord.h"
+#import "NSManagedObjectContext+MagicalRecord.h"
+#import "NSManagedObjectContext+MagicalObserving.h"
+#import "NSManagedObjectContext+MagicalThreading.h"
+#import "NSPersistentStoreCoordinator+MagicalRecord.h"
+#import "MagicalRecord+ErrorHandling.h"
+#import "MagicalRecord+iCloud.h"
 #import "MagicalRecordLogging.h"
-#import <objc/runtime.h>
 
 static NSString * const MagicalRecordContextWorkingName = @"MagicalRecordContextWorkingName";
 

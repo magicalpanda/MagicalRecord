@@ -5,8 +5,7 @@
 //
 
 #import <CoreData/CoreData.h>
-#import "MagicalRecord.h"
-#import "MagicalRecordDeprecated.h"
+#import <MagicalRecord/MagicalRecordDeprecationMacros.h>
 
 @interface NSManagedObject (MagicalRecord)
 

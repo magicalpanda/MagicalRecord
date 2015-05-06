@@ -3,7 +3,10 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "MagicalRecord.h"
+#import "NSManagedObject+MagicalRecord.h"
+#import "NSManagedObject+MagicalRequests.h"
+#import "NSManagedObjectContext+MagicalThreading.h"
+#import "MagicalRecord+ErrorHandling.h"
 #import "MagicalRecordLogging.h"
 
 static NSUInteger kMagicalRecordDefaultBatchSize = 20;

@@ -8,7 +8,6 @@
 
 #import "NSManagedObjectContext+MagicalObserving.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
-#import "MagicalRecord.h"
 #import "MagicalRecord+iCloud.h"
 #import "MagicalRecordLogging.h"
 
