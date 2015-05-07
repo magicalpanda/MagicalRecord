@@ -267,39 +267,38 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     return [self MR_postImport:objectData];  
 }
 
-- (BOOL) MR_importValuesForKeysWithObject:(id)objectData
+- (BOOL)MR_importValuesForKeysWithObject:(id)objectData
 {
-	__weak typeof(self) weakself = self;
+    __weak typeof(self) weakself = self;
     return [self MR_performDataImportFromObject:objectData
                               relationshipBlock:^(NSRelationshipDescription *relationshipInfo, id localObjectData) {
-        
-        NSManagedObject *relatedObject = [weakself MR_findObjectForRelationship:relationshipInfo withData:localObjectData];
-        
-        if (relatedObject == nil)
-        {
-            NSEntityDescription *entityDescription = [relationshipInfo destinationEntity];
-            relatedObject = [entityDescription MR_createInstanceInContext:[weakself managedObjectContext]];
-        }
-        if ([localObjectData isKindOfClass:[NSDictionary class]]) {
-              [relatedObject MR_importValuesForKeysWithObject:localObjectData];
-        }
-        else if (localObjectData)
-        {
-			NSString * relatedByAttribute = [[relationshipInfo userInfo] objectForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: MR_primaryKeyNameFromString([[relationshipInfo destinationEntity] name]);
-			
-            if (relatedByAttribute)
-            {
-				
-                if (![relatedObject MR_importValue:localObjectData forKey:relatedByAttribute])
-                {
-                    [relatedObject setValue:localObjectData forKey:relatedByAttribute];
-                }
-				
-            }
-        }
-        
-        [weakself MR_addObject:relatedObject forRelationship:relationshipInfo];
-	}];
+
+                                  NSManagedObject *relatedObject = [weakself MR_findObjectForRelationship:relationshipInfo withData:localObjectData];
+
+                                  if (relatedObject == nil)
+                                  {
+                                      NSEntityDescription *entityDescription = [relationshipInfo destinationEntity];
+                                      relatedObject = [entityDescription MR_createInstanceInContext:[weakself managedObjectContext]];
+                                  }
+                                  if ([localObjectData isKindOfClass:[NSDictionary class]])
+                                  {
+                                      [relatedObject MR_importValuesForKeysWithObject:localObjectData];
+                                  }
+                                  else if (localObjectData)
+                                  {
+                                      NSString *relatedByAttribute = [[relationshipInfo userInfo] objectForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: MR_primaryKeyNameFromString([[relationshipInfo destinationEntity] name]);
+
+                                      if (relatedByAttribute)
+                                      {
+                                          if (![relatedObject MR_importValue:localObjectData forKey:relatedByAttribute])
+                                          {
+                                              [relatedObject setValue:localObjectData forKey:relatedByAttribute];
+                                          }
+                                      }
+                                  }
+
+                                  [weakself MR_addObject:relatedObject forRelationship:relationshipInfo];
+                              }];
 }
 
 + (id) MR_importFromObject:(id)objectData inContext:(NSManagedObjectContext *)context;

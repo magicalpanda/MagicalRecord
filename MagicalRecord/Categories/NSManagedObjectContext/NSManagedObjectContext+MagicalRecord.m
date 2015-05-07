@@ -187,7 +187,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
     }
 }
 
-+ (void) rootContextDidSave:(NSNotification *)notification
++ (void)rootContextDidSave:(NSNotification *)notification
 {
     if ([notification object] != [self MR_rootSavingContext])
     {
@@ -202,8 +202,9 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
         return;
     }
-    
-    for (NSManagedObject *object in [[notification userInfo] objectForKey:NSUpdatedObjectsKey]) {
+
+    for (NSManagedObject *object in [[notification userInfo] objectForKey:NSUpdatedObjectsKey])
+    {
         [[[self MR_defaultContext] objectWithID:[object objectID]] willAccessValueForKey:nil];
     }
 
