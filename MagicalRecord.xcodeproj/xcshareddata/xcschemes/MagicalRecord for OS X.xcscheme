@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "905D073A1A63DE690076B54E"
                BuildableName = "MagicalRecord.framework"
-               BlueprintName = "MagicalRecord for OSX"
+               BlueprintName = "MagicalRecord for OS X"
                ReferencedContainer = "container:MagicalRecord.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9004F5251A94CBF900A61312"
-               BuildableName = "MagicalRecord for OSX Tests.xctest"
-               BlueprintName = "MagicalRecord for OSX Tests"
+               BuildableName = "MagicalRecord for OS X Tests.xctest"
+               BlueprintName = "MagicalRecord for OS X Tests"
                ReferencedContainer = "container:MagicalRecord.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -44,7 +44,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "905D073A1A63DE690076B54E"
             BuildableName = "MagicalRecord.framework"
-            BlueprintName = "MagicalRecord for OSX"
+            BlueprintName = "MagicalRecord for OS X"
             ReferencedContainer = "container:MagicalRecord.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,7 +63,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "905D073A1A63DE690076B54E"
             BuildableName = "MagicalRecord.framework"
-            BlueprintName = "MagicalRecord for OSX"
+            BlueprintName = "MagicalRecord for OS X"
             ReferencedContainer = "container:MagicalRecord.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -87,7 +87,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "905D073A1A63DE690076B54E"
             BuildableName = "MagicalRecord.framework"
-            BlueprintName = "MagicalRecord for OSX"
+            BlueprintName = "MagicalRecord for OS X"
             ReferencedContainer = "container:MagicalRecord.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
