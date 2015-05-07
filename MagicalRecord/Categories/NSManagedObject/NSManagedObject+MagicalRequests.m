@@ -142,7 +142,7 @@
         NSArray * sortComponents = [sortKey componentsSeparatedByString:@":"];
         if (sortComponents.count > 1)
           {
-              NSNumber * customAscending = sortComponents.lastObject;
+              NSString * customAscending = sortComponents.lastObject;
               ascending = customAscending.boolValue;
               sortKey = sortComponents[0];
           }
