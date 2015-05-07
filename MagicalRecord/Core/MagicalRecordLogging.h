@@ -44,4 +44,3 @@
 #define MRLogVerbose(frmt, ...) ((void)0)
 
 #endif
-
