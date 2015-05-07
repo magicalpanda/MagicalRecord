@@ -6,8 +6,8 @@ test:
   override:
     - xctool
       -reporter pretty
-      -reporter junit:$CIRCLE_TEST_REPORTS/xcode/results.xml
-      -reporter plain:$CIRCLE_ARTIFACTS/xctool.log
+      -reporter junit:$CIRCLE_TEST_REPORTS/xcode/results-ios-framework.xml
+      -reporter plain:$CIRCLE_ARTIFACTS/xctool-ios-framework.log
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
       PROVISIONING_PROFILE=
@@ -18,8 +18,8 @@ test:
       build build-tests run-tests
     - xctool
       -reporter pretty
-      -reporter junit:$CIRCLE_TEST_REPORTS/xcode/results.xml
-      -reporter plain:$CIRCLE_ARTIFACTS/xctool.log
+      -reporter junit:$CIRCLE_TEST_REPORTS/xcode/results-osx-framework.xml
+      -reporter plain:$CIRCLE_ARTIFACTS/xctool-osx-framework.log
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
       PROVISIONING_PROFILE=
@@ -29,8 +29,8 @@ test:
       build build-tests run-tests
     - xctool
       -reporter pretty
-      -reporter junit:$CIRCLE_TEST_REPORTS/xcode/results.xml
-      -reporter plain:$CIRCLE_ARTIFACTS/xctool.log
+      -reporter junit:$CIRCLE_TEST_REPORTS/xcode/results-ios-static-library.xml
+      -reporter plain:$CIRCLE_ARTIFACTS/xctool-ios-static-library.log
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
       PROVISIONING_PROFILE=
@@ -41,8 +41,8 @@ test:
       build build-tests run-tests
     - xctool
       -reporter pretty
-      -reporter junit:$CIRCLE_TEST_REPORTS/xcode/results.xml
-      -reporter plain:$CIRCLE_ARTIFACTS/xctool.log
+      -reporter junit:$CIRCLE_TEST_REPORTS/xcode/results-osx-static-library.xml
+      -reporter plain:$CIRCLE_ARTIFACTS/xctool-osx-static-library.log
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
       PROVISIONING_PROFILE=
