@@ -30,7 +30,10 @@
 
     id singleEntity = [self dataFromJSONFixture];
 
-    testEntity = [SingleEntityWithNoRelationships MR_importFromObject:singleEntity inContext:[NSManagedObjectContext MR_defaultContext]];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
+    [context performBlockAndWait:^{
+        self.testEntity = [SingleEntityWithNoRelationships MR_importFromObject:singleEntity inContext:context];
+    }];
 }
 
 - (void)tearDown
