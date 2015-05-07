@@ -28,7 +28,7 @@
     NSFetchRequest *testRequest = [SingleRelatedEntity MR_requestFirstWithPredicate:testPredicate];
 
     XCTAssertEqual([testRequest fetchLimit], (NSUInteger)1, @"Fetch limit should be 1, got: %tu", [testRequest fetchLimit]);
-    XCTAssertEqualObjects([testRequest predicate], [NSPredicate predicateWithFormat:@"mappedStringAttribute = 'Test Predicate'"], @"Predicate objects should be equal");
+    XCTAssertEqualObjects([testRequest predicate], testPredicate, @"Predicate objects should be equal");
 }
 
 - (void)testCreateRequestForFirstEntity
