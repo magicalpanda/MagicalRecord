@@ -26,13 +26,6 @@
     BOOL errorHandlerWasCalled_;
 }
 
-- (void) tearDown
-{
-    [super tearDown];
-
-    NSURL *testStoreURL = [NSPersistentStore MR_defaultLocalStoreUrl];
-}
-
 - (void) assertDefaultStack
 {
     XCTAssertNotNil([NSManagedObjectContext MR_defaultContext], @"Default context cannot be nil");
