@@ -11,7 +11,7 @@
 		581ECBF8187F660B00084FEE /* MultipleEntitiesWithNoPrimaryKey.json in Resources */ = {isa = PBXBuildFile; fileRef = 581ECBF6187F660B00084FEE /* MultipleEntitiesWithNoPrimaryKey.json */; };
 		581ECBF9187F663100084FEE /* ImportMultipleEntitiesWithNoPrimaryKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 581ECBEB187F63FF00084FEE /* ImportMultipleEntitiesWithNoPrimaryKeyTests.m */; };
 		581ECBFA187F663200084FEE /* ImportMultipleEntitiesWithNoPrimaryKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 581ECBEB187F63FF00084FEE /* ImportMultipleEntitiesWithNoPrimaryKeyTests.m */; };
-		9004F4DE1A94C76A00A61312 /* libMagicalRecord for OSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C7CF97BB1749843F008D9D13 /* libMagicalRecord for OSX.dylib */; };
+		9004F4DE1A94C76A00A61312 /* libMagicalRecord for OS X.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C7CF97BB1749843F008D9D13 /* libMagicalRecord for OS X.dylib */; };
 		9004F4DF1A94C76E00A61312 /* libMagicalRecord-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7CF97AB17498414008D9D13 /* libMagicalRecord-iOS.a */; };
 		9004F4E21A94CBCF00A61312 /* DifferentClassNameMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099492817C2F42100BC2B5C /* DifferentClassNameMapping.m */; };
 		9004F4E31A94CBCF00A61312 /* _AbstractRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099490E17C2F42100BC2B5C /* _AbstractRelatedEntity.m */; };
@@ -563,7 +563,7 @@
 		C7CF978D174982AD008D9D13 /* MagicalDataImportTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalDataImportTestCase.h; sourceTree = "<group>"; };
 		C7CF978E174982AD008D9D13 /* MagicalDataImportTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalDataImportTestCase.m; sourceTree = "<group>"; };
 		C7CF97AB17498414008D9D13 /* libMagicalRecord-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMagicalRecord-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7CF97BB1749843F008D9D13 /* libMagicalRecord for OSX.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libMagicalRecord for OSX.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7CF97BB1749843F008D9D13 /* libMagicalRecord for OS X.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libMagicalRecord for OS X.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CF97FF174984CA008D9D13 /* libMagicalRecord for iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "libMagicalRecord for iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CF9816174984E4008D9D13 /* libMagicalRecord for OSX Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "libMagicalRecord for OSX Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CF9B4917498985008D9D13 /* SampleJSONDataForImport.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SampleJSONDataForImport.json; path = Fixtures/SampleJSONDataForImport.json; sourceTree = "<group>"; };
@@ -691,7 +691,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9004F4DE1A94C76A00A61312 /* libMagicalRecord for OSX.dylib in Frameworks */,
+				9004F4DE1A94C76A00A61312 /* libMagicalRecord for OS X.dylib in Frameworks */,
 				907DAC071AFB24C3003D7BB4 /* Expecta.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -831,7 +831,7 @@
 			isa = PBXGroup;
 			children = (
 				C7CF97AB17498414008D9D13 /* libMagicalRecord-iOS.a */,
-				C7CF97BB1749843F008D9D13 /* libMagicalRecord for OSX.dylib */,
+				C7CF97BB1749843F008D9D13 /* libMagicalRecord for OS X.dylib */,
 				C7CF97FF174984CA008D9D13 /* libMagicalRecord for iOS Tests.xctest */,
 				C7CF9816174984E4008D9D13 /* libMagicalRecord for OSX Tests.xctest */,
 				905D07181A63DE190076B54E /* MagicalRecord.framework */,
@@ -1219,7 +1219,7 @@
 			);
 			name = "libMagicalRecord for OS X";
 			productName = libMagicalRecord;
-			productReference = C7CF97BB1749843F008D9D13 /* libMagicalRecord for OSX.dylib */;
+			productReference = C7CF97BB1749843F008D9D13 /* libMagicalRecord for OS X.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 		C7CF97FE174984CA008D9D13 /* libMagicalRecord for iOS Tests */ = {
