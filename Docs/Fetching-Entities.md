@@ -1,12 +1,10 @@
 # Fetching Entities
 
-> This document is being revised for MagicalRecord 2.3.0, and may contain information that is out of date. Please refer to the MagicalRecord's headers if anything here doesn't make sense.
-
 #### Basic Finding
 
 Most methods in MagicalRecord return an `NSArray` of results.
 
-As an example, if you have an entity named *Person* related to a *Department* entity (as seen in many examples throughout [Apple's Core Data documentation](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/CoreData/), you can retrieve all of the *Person* entities from your persistent store using the following method:
+As an example, if you have an entity named *Person* related to a *Department* entity (as seen in many of [Apple's Core Data examples](.com/library/mac/documentation/Cocoa/Conceptual/CoreData/Articles/cdBasics.html#//apple_ref/doc/uid/TP40001650-TP1)), you can retrieve all of the *Person* entities from your persistent store using the following method:
 
 ```objective-c
 NSArray *people = [Person MR_findAll];

@@ -1,5 +1,3 @@
-# Getting Started
-
 To get started, import the `MagicalRecord.h` header file in your project's pch file. This will allow a global include of all the required headers.
 
 If you're using CocoaPods or MagicalRecord.framework, your import should look like:
