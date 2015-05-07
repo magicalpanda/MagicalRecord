@@ -202,6 +202,10 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
         return;
     }
+    
+    for (NSManagedObject *object in [[notification userInfo] objectForKey:NSUpdatedObjectsKey]) {
+        [[[self MR_defaultContext] objectWithID:[object objectID]] willAccessValueForKey:nil];
+    }
 
     [[self MR_defaultContext] mergeChangesFromContextDidSaveNotification:notification];
 }

@@ -280,9 +280,10 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
             NSEntityDescription *entityDescription = [relationshipInfo destinationEntity];
             relatedObject = [entityDescription MR_createInstanceInContext:[weakself managedObjectContext]];
         }
-        [relatedObject MR_importValuesForKeysWithObject:localObjectData];
-        
-        if ((localObjectData) && (![localObjectData isKindOfClass:[NSDictionary class]]))
+        if ([localObjectData isKindOfClass:[NSDictionary class]]) {
+              [relatedObject MR_importValuesForKeysWithObject:localObjectData];
+        }
+        else if (localObjectData)
         {
 			NSString * relatedByAttribute = [[relationshipInfo userInfo] objectForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: MR_primaryKeyNameFromString([[relationshipInfo destinationEntity] name]);
 			
