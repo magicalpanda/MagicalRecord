@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import <MagicalRecord/MagicalRecord.h>
+#import "MagicalRecordTestHelpers.h"
 
 @interface NSPersisentStoreHelperTests : XCTestCase
 
@@ -46,7 +47,7 @@
     
     XCTAssertEqualObjects(foundStoreUrl, expectedFoundStoreUrl, @"Found store URL should be %@, actually is %@", [expectedFoundStoreUrl absoluteString], [foundStoreUrl absoluteString]);
 
-    [[NSFileManager defaultManager] removeItemAtPath:expectedStorePath error:nil];
+    [MagicalRecordTestHelpers removeStoreFilesForStoreAtURL:[NSURL fileURLWithPath:expectedStorePath]];
 }
 
 #else
@@ -75,7 +76,7 @@
     
     XCTAssertEqualObjects(foundStoreUrl, expectedStoreUrl, @"Found store URL should be %@, actually is %@", [expectedStoreUrl absoluteString], [foundStoreUrl absoluteString]);
 
-    [[NSFileManager defaultManager] removeItemAtPath:expectedStorePath error:nil];
+    [MagicalRecordTestHelpers removeStoreFilesForStoreAtURL:[NSURL fileURLWithPath:expectedStorePath]];
 }
 
 #endif

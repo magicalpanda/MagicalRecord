@@ -7,7 +7,8 @@
 #import <CoreData/CoreData.h>
 #import <Expecta/Expecta.h>
 
-#import "MagicalRecord.h"
+#import <MagicalRecord/MagicalRecord.h>
+#import "MagicalRecordTestHelpers.h"
 
 @interface MagicalRecordTests : XCTestCase
 
@@ -76,7 +77,10 @@
     NSPersistentStore *defaultStore = [NSPersistentStore MR_defaultPersistentStore];
     XCTAssertEqual([defaultStore type], NSSQLiteStoreType, @"Default store should be of type NSSQLiteStoreType");
     XCTAssertTrue([[[defaultStore URL] absoluteString] hasSuffix:testStoreName], @"Default store URL expects to have a suffix of '%@'", testStoreName);
+
+    [MagicalRecordTestHelpers removeStoreFilesForStoreAtURL:testStoreURL];
     [MagicalRecord cleanUp];
+
 }
 
 - (void) customErrorHandler:(id)error;
