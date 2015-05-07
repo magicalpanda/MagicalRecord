@@ -25,29 +25,29 @@
 
     [defaultContext MR_saveWithBlock:^(NSManagedObjectContext *localContext) {
         SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
-        
+
         expect([insertedObject hasChanges]).to.beTruthy();
-        
+
         NSError *obtainIDsError;
-        BOOL obtainIDsResult = [localContext obtainPermanentIDsForObjects:@[insertedObject] error:&obtainIDsError];
-        
+        BOOL obtainIDsResult = [localContext obtainPermanentIDsForObjects:@[ insertedObject ] error:&obtainIDsError];
+
         expect(obtainIDsResult).to.beTruthy();
         expect(obtainIDsError).to.beNil();
-        
+
         childObjectID = [insertedObject objectID];
-        
+
         expect(childObjectID).toNot.beNil();
         expect([childObjectID isTemporaryID]).to.beFalsy();
 
     } completion:^(BOOL success, NSError *error) {
-        
+
         //test parent and root saving context
         SingleEntityWithNoRelationships *parentObject = (SingleEntityWithNoRelationships *)[defaultContext objectWithID:childObjectID];
-        
+
         expect(parentObject).toNot.beNil();
-        
+
         SingleEntityWithNoRelationships *rootObject = (SingleEntityWithNoRelationships *)[[NSManagedObjectContext MR_rootSavingContext] objectWithID:childObjectID];
-        
+
         expect(rootObject).toNot.beNil();
 
     }];

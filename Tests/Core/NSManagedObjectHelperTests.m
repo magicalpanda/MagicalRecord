@@ -73,21 +73,27 @@
 {
     NSInteger numberOfTestEntitiesToCreate = 20;
 
-    [self p_createSampleData:numberOfTestEntitiesToCreate];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
+    [self p_createSampleData:numberOfTestEntitiesToCreate inContext:context];
 
-    NSNumber *entityCount = [SingleRelatedEntity MR_numberOfEntities];
-    XCTAssertEqualObjects(entityCount, @(numberOfTestEntitiesToCreate), @"Expected numberOfEntities to be %zd, got %@", numberOfTestEntitiesToCreate, entityCount);
+    [context performBlockAndWait:^{
+        NSNumber *entityCount = [SingleRelatedEntity MR_numberOfEntitiesWithContext:context];
+        XCTAssertEqualObjects(entityCount, @(numberOfTestEntitiesToCreate), @"Expected numberOfEntities to be %zd, got %@", numberOfTestEntitiesToCreate, entityCount);
+    }];
 }
 
 - (void)testCanSearchForNumberOfEntitiesWithPredicate
 {
     NSInteger numberOfTestEntitiesToCreate = 20;
 
-    [self p_createSampleData:numberOfTestEntitiesToCreate];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
+    [self p_createSampleData:numberOfTestEntitiesToCreate inContext:context];
 
-    NSPredicate *searchFilter = [NSPredicate predicateWithFormat:@"mappedStringAttribute = '1'"];
-    NSNumber *entityCount = [SingleRelatedEntity MR_numberOfEntitiesWithPredicate:searchFilter];
-    XCTAssertEqualObjects(entityCount, @5, @"Should return a count of 5, got %@", entityCount);
+    [context performBlockAndWait:^{
+        NSPredicate *searchFilter = [NSPredicate predicateWithFormat:@"mappedStringAttribute = '1'"];
+        NSNumber *entityCount = [SingleRelatedEntity MR_numberOfEntitiesWithPredicate:searchFilter inContext:context];
+        XCTAssertEqualObjects(entityCount, @5, @"Should return a count of 5, got %@", entityCount);
+    }];
 }
 
 - (void)testRetrieveInstanceOfManagedObjectFromAnotherContextHasAPermanentObjectID
@@ -138,14 +144,17 @@
 
 #pragma mark - Private Methods
 
-- (void)p_createSampleData:(NSInteger)numberOfTestEntitiesToCreate
+- (void)p_createSampleData:(NSInteger)numberOfTestEntitiesToCreate inContext:(NSManagedObjectContext *)context
 {
-    for (int i = 0; i < numberOfTestEntitiesToCreate; i++) {
-        SingleRelatedEntity *testEntity = [SingleRelatedEntity MR_createEntity];
-        testEntity.mappedStringAttribute = [NSString stringWithFormat:@"%d", i / 5];
-    }
+    [context performBlockAndWait:^{
+        for (int i = 0; i < numberOfTestEntitiesToCreate; i++)
+        {
+            SingleRelatedEntity *testEntity = [SingleRelatedEntity MR_createEntityInContext:context];
+            testEntity.mappedStringAttribute = [NSString stringWithFormat:@"%d", i / 5];
+        }
 
-    [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
+        [context MR_saveOnlySelfAndWait];
+    }];
 }
 
 @end
