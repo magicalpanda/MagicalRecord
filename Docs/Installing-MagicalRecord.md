@@ -63,6 +63,8 @@ If you like, you can include the following headers to use shorter, non-prefixed 
 #import <MagicalRecord/MagicalRecordShorthandMethodAliases.h>
 ```
 
+If you're using Swift, you'll need to add these imports to the Objective-C bridging header.
+
 Once you've included the headers, you just need to call the `+[MagicalRecord enableShorthandMethods]` class method _before_ you setup/use MagicalRecord:
 
 ```
