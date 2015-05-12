@@ -67,7 +67,7 @@ If you're using Swift, you'll need to add these imports to the Objective-C bridg
 
 Once you've included the headers, you just need to call the `+[MagicalRecord enableShorthandMethods]` class method _before_ you setup/use MagicalRecord:
 
-```
+```objective-c
 - (void)theMethodWhereYouSetupMagicalRecord
 {
     [MagicalRecord enableShorthandMethods];
