@@ -50,3 +50,28 @@ If you don't want to use CocoaPods or use an Xcode subproject, you can add Magic
 3. You should now be able to add `#import "MagicalRecord.h"` to any of your target's source files and begin using MagicalRecord!
 
 > **Note** Please be aware that if you've set Xcode's **Link Frameworks Automatically** to **No** then you may need to add the CoreData.framework to your project on iOS, as UIKit does not include Core Data by default. On OS X, Cocoa includes Core Data.
+
+# Shorthand Category Methods
+
+By default, all of the category methods that MagicalRecord provides are prefixed with `MR_`. This is inline with [Apple's recommendation not to create unadorned category methods to avoid naming clashes](https://developer.apple.com/library/mac/documentation/cocoa/conceptual/ProgrammingWithObjectiveC/CustomizingExistingClasses/CustomizingExistingClasses.html#//apple_ref/doc/uid/TP40011210-CH6-SW4).
+
+If you like, you can include the following headers to use shorter, non-prefixed category methods:
+
+```objective-c
+#import <MagicalRecord/MagicalRecord.h>
+#import <MagicalRecord/MagicalRecord+ShorthandMethods.h>
+#import <MagicalRecord/MagicalRecordShorthandMethodAliases.h>
+```
+
+Once you've included the headers, you just need to call the `+[MagicalRecord enableShorthandMethods]` class method _before_ you setup/use MagicalRecord:
+
+```
+- (void)theMethodWhereYouSetupMagicalRecord
+{
+    [MagicalRecord enableShorthandMethods];
+
+    // Setup MagicalRecord as per usual
+}
+```
+
+**Please note that we do not offer support for this feature**. If it doesn't work, [please file an issue](https://github.com/magicalpanda/MagicalRecord/issues/new) and we'll fix it when we can.
