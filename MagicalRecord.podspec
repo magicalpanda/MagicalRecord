@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'MagicalRecord'
-  s.version  = '2.3.0-beta.5'
+  s.version  = '2.3.0-beta.6'
   s.license  = 'MIT'
   s.summary  = 'Super Awesome Easy Fetching for Core Data 1!!!11!!!!1!.'
   s.homepage = 'http://github.com/magicalpanda/MagicalRecord'
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
     sp.source_files = 'MagicalRecord/**/*.{h,m}'
     sp.prefix_header_contents = <<-EOS
 #import <CoreData/CoreData.h>
-#import "CoreData+MagicalRecord.h"
+#import "MagicalRecord.h"
 EOS
   end
 
@@ -29,7 +29,7 @@ EOS
     sp.prefix_header_contents = <<-EOS
 #import <CoreData/CoreData.h>
 #define MR_LOGGING_ENABLED 1
-#import "CoreData+MagicalRecord.h"
+#import "MagicalRecord.h"
 EOS
   end
 
@@ -40,7 +40,7 @@ EOS
     sp.prefix_header_contents = <<-EOS
 #import <CoreData/CoreData.h>
 #define MR_SHORTHAND 1
-#import "CoreData+MagicalRecord.h"
+#import "MagicalRecord.h"
 EOS
   end
 
@@ -52,7 +52,7 @@ EOS
 #import <CoreData/CoreData.h>
 #define MR_LOGGING_ENABLED 1
 #define MR_SHORTHAND 1
-#import "CoreData+MagicalRecord.h"
+#import "MagicalRecord.h"
 EOS
   end
 

@@ -7,8 +7,8 @@
 //
 
 #import "NSManagedObjectContext+MagicalThreading.h"
-#import "NSManagedObject+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
+#import "NSManagedObject+MagicalRecord.h"
 #include <libkern/OSAtomic.h>
 
 static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_NSManagedObjectContextForThreadKey";

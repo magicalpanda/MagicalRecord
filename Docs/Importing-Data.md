@@ -165,3 +165,30 @@ A common scenario is importing JSON data where numeric strings can often be misi
 
 @end
 ```
+
+### Deleting local records on import update
+
+Sometimes you will want to make sure that subsequent import operations not only update but also delete local records that are not included as part of the remote dataset. To do this, fetch all local records not included in this update via their `relatedByAttribute` (`id` in the example below) and remove them immediately before importing the new dataset.
+
+```objective-c
+NSArray *arrayOfPeopleData = /// result from JSON parser
+NSArray *people = [Person MR_importFromArray:arrayOfPeopleData];
+NSArray *idList = [arrayOfPeopleData valueForKey:@"id"];
+NSPredicate *predicate = [NSPredicate predicateWithFormat:@"NOT(id IN %@)", idList];
+[Person MR_deleteAllMatchingPredicate:predicate];
+```
+
+If you also want to make sure that related records are removed during this update, you can use similar logic as above but implement it in the `willImport:` method of `Person`
+
+```objective-c
+
+@implementation Person
+
+-(void)willImport:(id)data {
+    NSArray *idList = [data[@"posts"] valueForKey:@"id"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"NOT(id IN %@) AND person.id == %@", idList, self.id];
+    [Post MR_deleteAllMatchingPredicate:predicate];
+}
+```
+
+Source: http://stackoverflow.com/a/24252825/401092

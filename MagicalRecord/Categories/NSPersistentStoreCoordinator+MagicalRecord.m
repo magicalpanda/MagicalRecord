@@ -5,8 +5,12 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "CoreData+MagicalRecord.h"
+#import "NSPersistentStoreCoordinator+MagicalRecord.h"
+#import "NSPersistentStore+MagicalRecord.h"
+#import "NSManagedObjectModel+MagicalRecord.h"
+#import "MagicalRecord+ErrorHandling.h"
 #import "MagicalRecordLogging.h"
+
 
 static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
 NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification = @"kMagicalRecordPSCDidCompleteiCloudSetupNotification";

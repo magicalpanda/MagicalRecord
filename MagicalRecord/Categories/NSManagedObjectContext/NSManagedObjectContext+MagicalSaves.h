@@ -7,7 +7,7 @@
 //
 
 #import <CoreData/CoreData.h>
-#import "MagicalRecordDeprecated.h"
+#import <MagicalRecord/MagicalRecordDeprecationMacros.h>
 
 typedef NS_OPTIONS(NSUInteger, MRSaveOptions) {
     /** No options — used for cleanliness only */

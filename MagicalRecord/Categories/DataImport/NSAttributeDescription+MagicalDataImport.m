@@ -27,7 +27,7 @@
     {
         if ([desiredAttributeType hasSuffix:@"Color"])
         {
-            value = colorFromString(value);
+            value = MR_colorFromString(value);
         }
     }
     else 

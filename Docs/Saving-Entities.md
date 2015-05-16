@@ -114,46 +114,35 @@ In MagicalRecord 2.2, the APIs for saving were revised to behave more consistent
 The following methods have been added:
 
 #### NSManagedObjectContext+MagicalSaves
-
-```objective-c
-- (void) MR_saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;
-- (void) MR_saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion;
-- (void) MR_saveOnlySelfAndWait;
-- (void) MR_saveToPersistentStoreAndWait;
-- (void) MR_saveWithOptions:(MRSaveContextOptions)mask completion:(MRSaveCompletionHandler)completion;
-```
+- `- (void) MR_saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;`
+- `- (void) MR_saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion;`
+- `- (void) MR_saveOnlySelfAndWait;`
+- `- (void) MR_saveToPersistentStoreAndWait;`
+- `- (void) MR_saveWithOptions:(MRSaveContextOptions)mask completion:(MRSaveCompletionHandler)completion;`
 
 #### __MagicalRecord+Actions__
-
-```objective-c
-+ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
-+ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
-+ (void) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
-+ (void) saveUsingCurrentThreadContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
-+ (void) saveUsingCurrentThreadContextWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block;
-```
+- `+ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;`
+- `+ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;`
+- `+ (void) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;`
+- `+ (void) saveUsingCurrentThreadContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;`
+- `+ (void) saveUsingCurrentThreadContextWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block;`
 
 ### Deprecations
 
 The following methods have been deprecated in favour of newer alternatives, and will be removed in MagicalRecord 3.0:
 
 #### NSManagedObjectContext+MagicalSaves
-
-```objective-c
-- (void) MR_save;
-- (void) MR_saveWithErrorCallback:(void(^)(NSError *error))errorCallback;
-- (void) MR_saveInBackgroundCompletion:(void (^)(void))completion;
-- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback;
-- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion;
-- (void) MR_saveNestedContexts;
-- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback;
-- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion;
-```
+- `- (void) MR_save;`
+- `- (void) MR_saveWithErrorCallback:(void(^)(NSError *error))errorCallback;`
+- `- (void) MR_saveInBackgroundCompletion:(void (^)(void))completion;`
+- `- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback;`
+- `- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion;`
+- `- (void) MR_saveNestedContexts;`
+- `- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback;`
+- `- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion;`
 
 ### MagicalRecord+Actions
-```objective-c
-+ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
-+ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
-+ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))completion;
-+ (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *error))errorHandler;
-```
+- `+ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;`
+- `+ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block;`
+- `+ (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))completion;`
+- `+ (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *error))errorHandler;`

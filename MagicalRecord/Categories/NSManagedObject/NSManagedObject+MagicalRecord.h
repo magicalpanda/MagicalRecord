@@ -5,10 +5,7 @@
 //
 
 #import <CoreData/CoreData.h>
-#import "MagicalRecord.h"
-#import "MagicalRecordDeprecated.h"
-
-#define kMagicalRecordDefaultBatchSize 20
+#import <MagicalRecord/MagicalRecordDeprecationMacros.h>
 
 @interface NSManagedObject (MagicalRecord)
 

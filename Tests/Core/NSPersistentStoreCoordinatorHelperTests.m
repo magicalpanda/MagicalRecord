@@ -7,6 +7,8 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <MagicalRecord/MagicalRecord.h>
+#import "MagicalRecordTestHelpers.h"
 
 @interface NSPersistentStoreCoordinatorHelperTests : XCTestCase
 
@@ -17,13 +19,17 @@
 - (void) setUp
 {
     [super setUp];
-    
+
     NSURL *testStoreURL = [NSPersistentStore MR_urlForStoreName:@"TestStore.sqlite"];
-    [[NSFileManager defaultManager] removeItemAtPath:[testStoreURL path] error:nil];
-    
-    NSString *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    path = [path stringByAppendingPathComponent:@"TestStore.sqlite"];
-    [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+    [MagicalRecordTestHelpers removeStoreFilesForStoreAtURL:testStoreURL];
+}
+
+- (void) tearDown
+{
+    [super tearDown];
+
+    NSURL *testStoreURL = [NSPersistentStore MR_urlForStoreName:@"TestStore.sqlite"];
+    [MagicalRecordTestHelpers removeStoreFilesForStoreAtURL:testStoreURL];
 }
 
 - (void) testCreateCoodinatorWithSqlitePersistentStoreNamed
@@ -84,6 +90,20 @@
     NSPersistentStore *secondStore = [[testCoordinator persistentStores] objectAtIndex:1];
     NSString *secondStoreType = [secondStore type];
     XCTAssertEqualObjects(secondStoreType, NSInMemoryStoreType, @"Second store type should be NSInMemoryStoreType, instead is %@", secondStoreType);
+}
+
+#pragma mark - Private
+
+- (void)removeAllStoreFiles
+{
+    NSURL *testStoreURL = [NSPersistentStore MR_urlForStoreName:@"TestStore.sqlite"];
+    NSString *rawURL = [testStoreURL absoluteString];
+    NSURL *shmSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-shm"]];
+    NSURL *walSidecar = [NSURL URLWithString:[rawURL stringByAppendingString:@"-wal"]];
+
+    [[NSFileManager defaultManager] removeItemAtURL:testStoreURL error:nil];
+    [[NSFileManager defaultManager] removeItemAtURL:shmSidecar error:nil];
+    [[NSFileManager defaultManager] removeItemAtURL:walSidecar error:nil];
 }
 
 @end

@@ -1,0 +1,6 @@
+framework module Expecta {
+  umbrella header "Expecta.h"
+
+  export *
+  module * { export * }
+}

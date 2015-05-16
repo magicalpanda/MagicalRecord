@@ -5,9 +5,9 @@
 //  Copyright 2011 Magical Panda Software. All rights reserved.
 //
 
-#import "CoreData+MagicalRecord.h"
+#import "MagicalRecord+Actions.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
-
+#import "NSManagedObjectContext+MagicalThreading.h"
 
 @implementation MagicalRecord (Actions)
 

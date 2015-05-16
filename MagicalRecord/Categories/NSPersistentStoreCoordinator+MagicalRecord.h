@@ -5,8 +5,7 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "MagicalRecord.h"
-#import "NSPersistentStore+MagicalRecord.h"
+#import <CoreData/CoreData.h>
 
 extern NSString * const kMagicalRecordPSCDidCompleteiCloudSetupNotification;
 extern NSString * const kMagicalRecordPSCMismatchWillDeleteStore;

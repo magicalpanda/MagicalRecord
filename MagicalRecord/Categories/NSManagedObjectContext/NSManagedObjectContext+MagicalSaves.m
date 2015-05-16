@@ -7,9 +7,8 @@
 //
 
 #import "NSManagedObjectContext+MagicalSaves.h"
-#import "MagicalRecord+ErrorHandling.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
-#import "MagicalRecord.h"
+#import "MagicalRecord+ErrorHandling.h"
 #import "MagicalRecordLogging.h"
 
 @implementation NSManagedObjectContext (MagicalSaves)

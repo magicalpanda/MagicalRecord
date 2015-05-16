@@ -6,7 +6,7 @@ Logging can be enabled by placing the following preprocessor statement before yo
 
 ```objective-c
 #define MR_LOGGING_ENABLED 1
-#import <MagicalRecord/CoreData+MagicalRecord.h>
+#import <MagicalRecord/MagicalRecord.h>
 ```
 
 Logging can also be enabled by passing `-DMR_LOGGING_ENABLED=1` to `OTHER_CFLAGS` (shown as "Other C Flags" in Xcode's Build Settings). If you have trouble with with the first approach, adding this build setting should work.
@@ -14,10 +14,10 @@ Logging can also be enabled by passing `-DMR_LOGGING_ENABLED=1` to `OTHER_CFLAGS
 Logging can be configured by calling `[MagicalRecord setLoggingLevel:…];` using one of the predefined logging levels:
 
 - **MagicalRecordLogLevelOff**: Don't log anything
-- **MagicalRecordLoggingLevelFatal**: Log all fatal messages
-- **MagicalRecordLoggingLevelError**: Log all errors and fatal messages
-- **MagicalRecordLoggingLevelWarn**: Log warnings, errors and fatal messages
+- **MagicalRecordLoggingLevelError**: Log all errors
+- **MagicalRecordLoggingLevelWarn**: Log warnings and errors
 - **MagicalRecordLoggingLevelInfo**: Log informative, warning and error messages
+- **MagicalRecordLoggingLevelDebug**: Log all debug, informative, warning and error messages
 - **MagicalRecordLoggingLevelVerbose**: Log verbose diagnostic, informative, warning and error messages
 
 The logging level defaults to `MagicalRecordLoggingLevelWarn`.
@@ -31,7 +31,6 @@ Setting the logging level to **MagicalRecordLogLevelOff** completely disables Ma
 If it's available, MagicalRecord will direct its logs to [CocoaLumberjack](https://github.com/CocoaLumberjack/CocoaLumberjack). All you need to do is make sure you've imported CocoaLumberjack before you import MagicalRecord, like so:
 
 ```objective-c
-#import <CocoaLumberjack/DDLog.h>
-#define MR_LOGGING_ENABLED 1
-#import <MagicalRecord/CoreData+MagicalRecord.h>
+#import <CocoaLumberjack/CocoaLumberjack.h>
+#import <MagicalRecord/MagicalRecord.h>
 ```

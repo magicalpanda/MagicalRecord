@@ -18,8 +18,11 @@
 
 - (void) testCanCreateContextForCurrentThead
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     NSManagedObjectContext *firstContext = [NSManagedObjectContext MR_contextForCurrentThread];
     NSManagedObjectContext *secondContext = [NSManagedObjectContext MR_contextForCurrentThread];
+#pragma clang diagnostic pop
 
     XCTAssertEqualObjects(firstContext, secondContext, @"Contexts should be equal");
 }

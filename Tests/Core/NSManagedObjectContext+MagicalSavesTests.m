@@ -250,13 +250,16 @@
 - (void)testThatSavedObjectsHavePermanentIDs
 {
     NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
-    SingleEntityWithNoRelationships *entity = [SingleEntityWithNoRelationships MR_createEntityInContext:defaultContext];
-    
-    expect([[entity objectID] isTemporaryID]).to.beTruthy();
-    
-    [defaultContext MR_saveOnlySelfAndWait];
-    
-    expect([[entity objectID] isTemporaryID]).to.beFalsy();
+
+    [defaultContext performBlockAndWait:^{
+        SingleEntityWithNoRelationships *entity = [SingleEntityWithNoRelationships MR_createEntityInContext:defaultContext];
+
+        expect([[entity objectID] isTemporaryID]).to.beTruthy();
+
+        [defaultContext MR_saveOnlySelfAndWait];
+
+        expect([[entity objectID] isTemporaryID]).to.beFalsy();
+    }];
 }
 
 @end

@@ -3,11 +3,13 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "CoreData+MagicalRecord.h"
+#import "NSManagedObject+MagicalRecord.h"
+#import "NSManagedObject+MagicalRequests.h"
+#import "NSManagedObjectContext+MagicalThreading.h"
+#import "MagicalRecord+ErrorHandling.h"
 #import "MagicalRecordLogging.h"
 
-static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
-
+static NSUInteger kMagicalRecordDefaultBatchSize = 20;
 
 @implementation NSManagedObject (MagicalRecord)
 
@@ -33,13 +35,13 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 {
 	@synchronized(self)
 	{
-		defaultBatchSize = newBatchSize;
+		kMagicalRecordDefaultBatchSize = newBatchSize;
 	}
 }
 
 + (NSUInteger) MR_defaultBatchSize
 {
-	return defaultBatchSize;
+	return kMagicalRecordDefaultBatchSize;
 }
 
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context

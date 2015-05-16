@@ -6,8 +6,10 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import "CoreData+MagicalRecord.h"
 #import "NSEntityDescription+MagicalDataImport.h"
+#import "NSManagedObject+MagicalDataImport.h"
+#import "NSManagedObject+MagicalRecord.h"
+#import "MagicalImportFunctions.h"
 
 @implementation NSEntityDescription (MagicalRecord_DataImport)
 

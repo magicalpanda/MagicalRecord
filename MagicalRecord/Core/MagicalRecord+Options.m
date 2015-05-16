@@ -9,7 +9,7 @@
 #import "MagicalRecord+Options.h"
 
 #ifdef DEBUG
-static MagicalRecordLoggingLevel kMagicalRecordLoggingLevel = MagicalRecordLoggingLevelInfo;
+static MagicalRecordLoggingLevel kMagicalRecordLoggingLevel = MagicalRecordLoggingLevelDebug;
 #else
 static MagicalRecordLoggingLevel kMagicalRecordLoggingLevel = MagicalRecordLoggingLevelError;
 #endif
