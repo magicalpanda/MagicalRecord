@@ -2,6 +2,11 @@ machine:
   xcode:
     version: "6.3.1"
 
+checkout:
+  post:
+    - git submodule sync
+    - git submodule update --init
+
 test:
   override:
     - xctool
