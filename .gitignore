@@ -18,4 +18,4 @@ profile
 *.moved-aside
 
 DerivedData
-Carthage/Checkouts
+Carthage/Build
