@@ -8,52 +8,15 @@ Pod::Spec.new do |s|
   s.source   = { :git => 'https://github.com/magicalpanda/MagicalRecord.git', :tag => "v#{s.version}" }
   s.description  = 'Handy fetching, threading and data import helpers to make Core Data a little easier to use.'
   s.requires_arc = true
-  s.default_subspec = 'Core'
-  s.ios.deployment_target = '6.0'
+  s.ios.deployment_target = '6.1'
   s.osx.deployment_target = '10.8'
 
-  s.subspec "Core" do |sp|
-    sp.framework    = 'CoreData'
-    sp.header_dir   = 'MagicalRecord'
-    sp.source_files = 'MagicalRecord/**/*.{h,m}'
-    sp.prefix_header_contents = <<-EOS
+  s.framework    = 'CoreData'
+  s.header_dir   = 'MagicalRecord'
+  s.source_files = 'MagicalRecord/**/*.{h,m}'
+  s.prefix_header_contents = <<-EOS
 #import <CoreData/CoreData.h>
-#import "MagicalRecord.h"
+#import <MagicalRecord/MagicalRecord.h>
 EOS
-  end
-
-  s.subspec "Core+Logging" do |sp|
-    sp.framework    = 'CoreData'
-    sp.header_dir   = 'MagicalRecord'
-    sp.source_files = 'MagicalRecord/**/*.{h,m}'
-    sp.prefix_header_contents = <<-EOS
-#import <CoreData/CoreData.h>
-#define MR_LOGGING_ENABLED 1
-#import "MagicalRecord.h"
-EOS
-  end
-
-  s.subspec "Shorthand" do |sp|
-    sp.framework    = 'CoreData'
-    sp.header_dir   = 'MagicalRecord'
-    sp.source_files = 'MagicalRecord/**/*.{h,m}'
-    sp.prefix_header_contents = <<-EOS
-#import <CoreData/CoreData.h>
-#define MR_SHORTHAND 1
-#import "MagicalRecord.h"
-EOS
-  end
-
-  s.subspec "Shorthand+Logging" do |sp|
-    sp.framework    = 'CoreData'
-    sp.header_dir   = 'MagicalRecord'
-    sp.source_files = 'MagicalRecord/**/*.{h,m}'
-    sp.prefix_header_contents = <<-EOS
-#import <CoreData/CoreData.h>
-#define MR_LOGGING_ENABLED 1
-#define MR_SHORTHAND 1
-#import "MagicalRecord.h"
-EOS
-  end
 
 end
