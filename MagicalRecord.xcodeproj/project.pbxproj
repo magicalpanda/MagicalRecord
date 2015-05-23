@@ -276,6 +276,8 @@
 		905D07C51A63DF130076B54E /* MagicalRecord+iCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CA150F832A00216827 /* MagicalRecord+iCloud.m */; };
 		905D07C61A63DF130076B54E /* MagicalRecord+Options.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CC150F832A00216827 /* MagicalRecord+Options.m */; };
 		905D07C71A63DF130076B54E /* MagicalRecord+Setup.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CE150F832A00216827 /* MagicalRecord+Setup.m */; };
+		9088CFC61B1043F500E51758 /* Expecta.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 903125921B103812000E8841 /* Expecta.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9088CFC71B10440800E51758 /* Expecta.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 903125941B103812000E8841 /* Expecta.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9099490A17C2F3D400BC2B5C /* TestModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9099490817C2F3D400BC2B5C /* TestModel.xcdatamodeld */; };
 		9099490B17C2F3D400BC2B5C /* TestModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9099490817C2F3D400BC2B5C /* TestModel.xcdatamodeld */; };
 		9099493917C2F42100BC2B5C /* _AbstractRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099490E17C2F42100BC2B5C /* _AbstractRelatedEntity.m */; };
@@ -489,6 +491,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				9088CFC71B10440800E51758 /* Expecta.framework in Copy Frameworks */,
 				9004F57A1A94D7D300A61312 /* MagicalRecord.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -500,6 +503,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				9088CFC61B1043F500E51758 /* Expecta.framework in Copy Frameworks */,
 				9004F57D1A94D7F100A61312 /* MagicalRecord.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
