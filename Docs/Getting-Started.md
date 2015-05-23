@@ -3,10 +3,16 @@ To get started, import the `MagicalRecord.h` header file in your project's pch f
 If you're using CocoaPods or MagicalRecord.framework, your import should look like:
 
 ```objective-c
+// Objective-C
 #import <MagicalRecord/MagicalRecord.h>
 ```
 
-Otherwise, if you've added MagicalRecord's source files directly to your project, your import should be:
+```swift
+// Swift
+import MagicalRecord
+```
+
+Otherwise, if you've added MagicalRecord's source files directly to your Objective-C project, your import should be:
 
 ```objective-c
 #import "MagicalRecord.h"

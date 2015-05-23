@@ -2,9 +2,21 @@
 
 **Adding MagicalRecord to your project is simple**: Just choose whichever method you're most comfortable with and follow the instructions below.
 
+## Using Carthage
+
+1. Add the following line to your `Cartfile`:
+
+    ```yaml
+    github "MagicalPanda/MagicalRecord"
+    ```
+    
+2. Run `carthage update` in your project directory.
+3. Drag the appropriate `MagicalRecord.framework` for your platform (located in `Carthage/Build/``) into your application’s Xcode project, and add it to the appropriate target(s).
+
+
 ## Using CocoaPods
 
-The easiest way to integrate MagicalRecord in your project is to use [CocoaPods](http://cocoapods.org/):
+One of the easiest ways to integrate MagicalRecord in your project is to use [CocoaPods](http://cocoapods.org/):
 
 1. Add the following line to your `Podfile`:
 
@@ -63,9 +75,9 @@ If you like, you can include the following headers to use shorter, non-prefixed 
 #import <MagicalRecord/MagicalRecordShorthandMethodAliases.h>
 ```
 
-If you're using Swift, you'll need to add these imports to the Objective-C bridging header.
+If you're using Swift, you'll need to add these imports to your target's Objective-C bridging header.
 
-Once you've included the headers, you just need to call the `+[MagicalRecord enableShorthandMethods]` class method _before_ you setup/use MagicalRecord:
+Once you've included the headers, you should call the `+[MagicalRecord enableShorthandMethods]` class method _before_ you setup/use MagicalRecord:
 
 ```objective-c
 - (void)theMethodWhereYouSetupMagicalRecord

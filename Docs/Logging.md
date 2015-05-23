@@ -2,7 +2,7 @@
 
 MagicalRecord has logging built in to most of its interactions with Core Data. When errors occur during fetching or saving data, these errors are captured and (if you've enabled them) logged to the console.
 
-Logging is configured to output debugging messages (**MagicalRecordLoggingLevelDebug**) by default in debug builds, and will output error messages (**MagicalRecordLoggingLevelError**) in release builds. 
+Logging is configured to output debugging messages (**MagicalRecordLoggingLevelDebug**) by default in debug builds, and will output error messages (**MagicalRecordLoggingLevelError**) in release builds.
 
 Logging can be configured by calling `[MagicalRecord setLoggingLevel:];` using one of the predefined logging levels:
 
@@ -20,8 +20,15 @@ The logging level defaults to `MagicalRecordLoggingLevelWarn`.
 If it's available, MagicalRecord will direct its logs to [CocoaLumberjack](https://github.com/CocoaLumberjack/CocoaLumberjack). All you need to do is make sure you've imported CocoaLumberjack before you import MagicalRecord, like so:
 
 ```objective-c
+// Objective-C
 #import <CocoaLumberjack/CocoaLumberjack.h>
 #import <MagicalRecord/MagicalRecord.h>
+```
+
+```swift
+// Swift
+import CocoaLumberjack
+import MagicalRecord
 ```
 
 ## Disabling Logging Completely
