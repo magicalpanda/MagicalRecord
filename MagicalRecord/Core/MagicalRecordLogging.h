@@ -23,6 +23,7 @@
 #endif
 
 #if __has_include("CocoaLumberjack.h")
+#undef LOG_LEVEL_DEF
 #define LOG_LEVEL_DEF (DDLogLevel)[MagicalRecord loggingLevel]
 #define CAST (DDLogFlag)
 #import <CocoaLumberjack/CocoaLumberjack.h>
