@@ -23,10 +23,11 @@
 #endif
 
 #if __has_include("CocoaLumberjack.h")
+    #define MR_LOG_LEVEL_DEF (DDLogLevel)[MagicalRecord loggingLevel]
     #define CAST (DDLogFlag)
     #import <CocoaLumberjack/CocoaLumberjack.h>
 #else
-    #define LOG_LEVEL_DEF [MagicalRecord loggingLevel]
+    #define MR_LOG_LEVEL_DEF [MagicalRecord loggingLevel]
     #define LOG_ASYNC_ENABLED YES
     #define CAST
     #define LOG_MAYBE(async, lvl, flg, ctx, tag, fnct, frmt, ...) \
@@ -39,10 +40,10 @@
         } while (0)
 #endif
 
-#define MRLogError(frmt, ...) LOG_MAYBE(NO, LOG_LEVEL_DEF, CAST MagicalRecordLoggingMaskError, MR_LOGGING_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
-#define MRLogWarn(frmt, ...) LOG_MAYBE(LOG_ASYNC_ENABLED, LOG_LEVEL_DEF, CAST MagicalRecordLoggingMaskWarn, MR_LOGGING_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
-#define MRLogInfo(frmt, ...) LOG_MAYBE(LOG_ASYNC_ENABLED, LOG_LEVEL_DEF, CAST MagicalRecordLoggingMaskInfo, MR_LOGGING_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
-#define MRLogDebug(frmt, ...) LOG_MAYBE(LOG_ASYNC_ENABLED, LOG_LEVEL_DEF, CAST MagicalRecordLoggingMaskDebug, MR_LOGGING_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
-#define MRLogVerbose(frmt, ...) LOG_MAYBE(LOG_ASYNC_ENABLED, LOG_LEVEL_DEF, CAST MagicalRecordLoggingMaskVerbose, MR_LOGGING_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
+#define MRLogError(frmt, ...) LOG_MAYBE(NO, MR_LOG_LEVEL_DEF, CAST MagicalRecordLoggingMaskError, MR_LOGGING_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
+#define MRLogWarn(frmt, ...) LOG_MAYBE(LOG_ASYNC_ENABLED, MR_LOG_LEVEL_DEF, CAST MagicalRecordLoggingMaskWarn, MR_LOGGING_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
+#define MRLogInfo(frmt, ...) LOG_MAYBE(LOG_ASYNC_ENABLED, MR_LOG_LEVEL_DEF, CAST MagicalRecordLoggingMaskInfo, MR_LOGGING_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
+#define MRLogDebug(frmt, ...) LOG_MAYBE(LOG_ASYNC_ENABLED, MR_LOG_LEVEL_DEF, CAST MagicalRecordLoggingMaskDebug, MR_LOGGING_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
+#define MRLogVerbose(frmt, ...) LOG_MAYBE(LOG_ASYNC_ENABLED, MR_LOG_LEVEL_DEF, CAST MagicalRecordLoggingMaskVerbose, MR_LOGGING_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 
 #endif
