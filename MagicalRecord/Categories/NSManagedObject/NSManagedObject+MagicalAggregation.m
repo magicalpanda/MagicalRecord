@@ -57,10 +57,18 @@
 
 + (NSUInteger) MR_countOfEntitiesWithContext:(NSManagedObjectContext *)context;
 {
-	NSError *error = nil;
-	NSUInteger count = [context countForFetchRequest:[self MR_createFetchRequestInContext:context] error:&error];
-	[MagicalRecord handleErrors:error];
-	
+    __block NSUInteger count = 0;
+    [context performBlockAndWait:^{
+        
+        NSError *error = nil;
+        count = [context countForFetchRequest:[self MR_createFetchRequestInContext:context] error:&error];
+        
+        if (error)
+        {
+            [MagicalRecord handleErrors:error];
+        }
+        
+    }];
     return count;
 }
 
@@ -74,13 +82,21 @@
 
 + (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter inContext:(NSManagedObjectContext *)context;
 {
-	NSError *error = nil;
+	
 	NSFetchRequest *request = [self MR_createFetchRequestInContext:context];
 	[request setPredicate:searchFilter];
-	
-	NSUInteger count = [context countForFetchRequest:request error:&error];
-	[MagicalRecord handleErrors:error];
     
+    __block NSUInteger count = 0;
+    [context performBlockAndWait:^{
+        NSError *error = nil;
+        count = [context countForFetchRequest:request error:&error];
+        
+        if (error)
+        {
+            [MagicalRecord handleErrors:error];
+        }
+        
+    }];
     return count;
 }
 
