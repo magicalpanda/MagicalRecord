@@ -215,4 +215,16 @@
     expect([fetchedObject valueForKey:kTestAttributeKey]).will.beFalsy();
 }
 
+- (void)testAsynchronousSaveActionPerformedOnBackgroundQueue
+{
+    MagicalRecordStack *currentStack = self.stack;
+    
+    [currentStack saveWithBlock:^(NSManagedObjectContext *localContext) {
+        expect([NSThread currentThread]).toNot.equal([NSThread mainThread]);
+        
+    } completion:^(BOOL success, NSError *error) {
+        expect([NSThread currentThread]).to.equal([NSThread mainThread]);
+    }];
+}
+
 @end
