@@ -48,13 +48,13 @@ typedef NS_ENUM (NSUInteger, MagicalRecordLoggingLevel)
     MagicalRecordLoggingLevelWarn = (MagicalRecordLoggingLevelError | MagicalRecordLoggingMaskWarn),
 
     /** Log informative, warning and error messages */
-    MagicalRecordLoggingLevelInfo = (MagicalRecordLoggingMaskWarn | MagicalRecordLoggingMaskInfo),
+    MagicalRecordLoggingLevelInfo = (MagicalRecordLoggingLevelWarn | MagicalRecordLoggingMaskInfo),
 
     /** Log all debugging, informative, warning and error messages */
-    MagicalRecordLoggingLevelDebug = (MagicalRecordLoggingMaskInfo | MagicalRecordLoggingMaskDebug),
+    MagicalRecordLoggingLevelDebug = (MagicalRecordLoggingLevelInfo | MagicalRecordLoggingMaskDebug),
 
     /** Log verbose diagnostic, debugging, informative, warning and error messages */
-    MagicalRecordLoggingLevelVerbose = (MagicalRecordLoggingMaskDebug | MagicalRecordLoggingMaskVerbose),
+    MagicalRecordLoggingLevelVerbose = (MagicalRecordLoggingLevelDebug | MagicalRecordLoggingMaskVerbose),
 
     /** Log everything */
     MagicalRecordLoggingLevelAll = NSUIntegerMax
