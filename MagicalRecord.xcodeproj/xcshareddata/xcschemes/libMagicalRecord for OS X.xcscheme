@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C7CF97BA1749843F008D9D13"
-               BuildableName = "libMagicalRecord for OS X.dylib"
+               BuildableName = "libMagicalRecord.dylib"
                BlueprintName = "libMagicalRecord for OS X"
                ReferencedContainer = "container:MagicalRecord.xcodeproj">
             </BuildableReference>
@@ -53,7 +53,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C7CF97BA1749843F008D9D13"
-            BuildableName = "libMagicalRecord for OS X.dylib"
+            BuildableName = "libMagicalRecord.dylib"
             BlueprintName = "libMagicalRecord for OS X"
             ReferencedContainer = "container:MagicalRecord.xcodeproj">
          </BuildableReference>
