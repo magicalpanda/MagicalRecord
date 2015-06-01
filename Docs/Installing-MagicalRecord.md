@@ -9,7 +9,7 @@
     ```yaml
     github "MagicalPanda/MagicalRecord"
     ```
-    
+
 2. Run `carthage update` in your project directory.
 3. Drag the appropriate `MagicalRecord.framework` for your platform (located in `Carthage/Build/``) into your application’s Xcode project, and add it to the appropriate target(s).
 
@@ -44,22 +44,6 @@ Xcode sub-projects allow your project to use and build MagicalRecord as an impli
 4. Navigate to **Build Phases** and expand the **Link Binary With Libraries** section
 5. Click the **+** and find the version of the MagicalRecord framework appropriate to your target's platform
 6. You should now be able to add `#import <MagicalRecord/MagicalRecord.h>` to any of your target's source files and begin using MagicalRecord!
-
-> **Note** Please be aware that if you've set Xcode's **Link Frameworks Automatically** to **No** then you may need to add the CoreData.framework to your project on iOS, as UIKit does not include Core Data by default. On OS X, Cocoa includes Core Data.
-
-## Manually from source
-
-If you don't want to use CocoaPods or use an Xcode subproject, you can add MagicalRecord's source directly to your project.
-
-1. Add MagicalRecord to your project as a Git submodule
-
-    ````
-    $ cd MyXcodeProjectFolder
-    $ git submodule add https://github.com/magicalpanda/MagicalRecord.git Vendor/MagicalRecord
-    $ git commit -m "Add MagicalRecord submodule"
-    ````
-2. Drag `Vendor/MagicalRecord/MagicalRecord` into your Xcode project, and ensure that you add it to the targets that you wish to use it with.
-3. You should now be able to add `#import "MagicalRecord.h"` to any of your target's source files and begin using MagicalRecord!
 
 > **Note** Please be aware that if you've set Xcode's **Link Frameworks Automatically** to **No** then you may need to add the CoreData.framework to your project on iOS, as UIKit does not include Core Data by default. On OS X, Cocoa includes Core Data.
 
