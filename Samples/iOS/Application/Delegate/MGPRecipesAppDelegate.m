@@ -1,6 +1,6 @@
 //
 //  MGPAppDelegate.m
-//  Recipies
+//  Recipes
 //
 //  Created by Saul Mora on 5/19/13.
 //
@@ -15,6 +15,7 @@ static NSString * const kRecipesStoreName = @"Recipes.sqlite";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self copyDefaultStoreIfNecessary];
+    [MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelVerbose];
     [MagicalRecord setupCoreDataStackWithStoreNamed:kRecipesStoreName];
 
     // Override point for customization after application launch.

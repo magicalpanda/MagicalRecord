@@ -5,7 +5,7 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import "MagicalRecord.h"
+#import <CoreData/CoreData.h>
 
 // option to autodelete store if it already exists
 

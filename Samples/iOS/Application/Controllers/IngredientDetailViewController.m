@@ -133,9 +133,9 @@
 	 If there isn't an ingredient object, create and configure one.
 	 */
     if (!_ingredient) {
-        self.ingredient = [Ingredient MR_createInContext:context];
+        self.ingredient = [Ingredient MR_createEntityInContext:context];
         [_recipe addIngredientsObject:_ingredient];
-		_ingredient.displayOrder = [NSNumber numberWithInteger:[_recipe.ingredients count]];
+		_ingredient.displayOrder = @([_recipe.ingredients count]);
     }
 	
 	/*

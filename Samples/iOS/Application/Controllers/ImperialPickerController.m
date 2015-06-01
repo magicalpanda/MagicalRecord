@@ -123,7 +123,7 @@
 	}
 	
 	// The text shown in the component is just the number of the component.
-	NSString *text = [NSString stringWithFormat:@"%d", row];
+	NSString *text = [NSString stringWithFormat:@"%zd", row];
 	
 	// Where to set the text in depends on what sort of view it is.
 	UILabel *theLabel = nil;
@@ -168,7 +168,7 @@
     if (grams > 1000.0) {
         NSInteger kg = grams / 1000;
         grams -= kg *1000;
-        self.label.text = [NSString stringWithFormat:@"%d kg  %1.0f g", kg, grams];
+        self.label.text = [NSString stringWithFormat:@"%zd kg  %1.0f g", kg, grams];
     }
 	else {
         self.label.text = [NSString stringWithFormat:@"%1.0f g", grams];

@@ -9,14 +9,13 @@
 #import "NSRelationshipDescription+MagicalDataImport.h"
 #import "NSManagedObject+MagicalDataImport.h"
 #import "MagicalImportFunctions.h"
-#import "MagicalRecord.h"
 
 @implementation NSRelationshipDescription (MagicalRecord_DataImport)
 
 - (NSString *) MR_primaryKey;
 {
     NSString *primaryKeyName = [[self userInfo] valueForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: 
-    primaryKeyNameFromString([[self destinationEntity] name]);
+    MR_primaryKeyNameFromString([[self destinationEntity] name]);
     
     return primaryKeyName;
 }

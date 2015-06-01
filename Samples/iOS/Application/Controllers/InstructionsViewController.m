@@ -53,6 +53,8 @@
 
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
+
     UINavigationItem *navigationItem = self.navigationItem;
     navigationItem.title = @"Instructions";
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -62,11 +64,14 @@
 - (void)viewDidUnload {
 	self.instructionsText = nil;
 	self.nameLabel = nil;
+    
 	[super viewDidUnload];
 }
 
 
-- (void)viewWillAppear:(BOOL)animated {    
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
     // Update the views appropriately
     self.nameLabel.text = self.recipe.name;
     self.instructionsText.text = self.recipe.instructions;

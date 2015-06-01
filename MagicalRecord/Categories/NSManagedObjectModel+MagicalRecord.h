@@ -5,9 +5,7 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "MagicalRecord.h"
-
+#import <CoreData/CoreData.h>
 
 @interface NSManagedObjectModel (MagicalRecord)
 
@@ -19,5 +17,6 @@
 + (NSManagedObjectModel *) MR_newManagedObjectModelNamed:(NSString *)modelFileName NS_RETURNS_RETAINED;
 + (NSManagedObjectModel *) MR_managedObjectModelNamed:(NSString *)modelFileName;
 + (NSManagedObjectModel *) MR_newModelNamed:(NSString *) modelName inBundleNamed:(NSString *) bundleName NS_RETURNS_RETAINED;
++ (NSManagedObjectModel *) MR_newModelNamed:(NSString *) modelName inBundle:(NSBundle*) bundle NS_RETURNS_RETAINED;
 
 @end

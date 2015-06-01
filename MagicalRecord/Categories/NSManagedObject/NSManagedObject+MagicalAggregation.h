@@ -23,10 +23,46 @@
 + (BOOL) MR_hasAtLeastOneEntity;
 + (BOOL) MR_hasAtLeastOneEntityInContext:(NSManagedObjectContext *)context;
 
-+ (NSNumber *)MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
-+ (NSNumber *)MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate;
+- (id) MR_minValueFor:(NSString *)property;
+- (id) MR_maxValueFor:(NSString *)property;
 
-- (id) MR_objectWithMinValueFor:(NSString *)property;
-- (id) MR_objectWithMinValueFor:(NSString *)property inContext:(NSManagedObjectContext *)context;
++ (id) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
++ (id) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate;
+
+/**
+ *  Supports aggregating values using a key-value collection operator that can be grouped by an attribute.
+ *  See https://developer.apple.com/library/ios/documentation/cocoa/conceptual/KeyValueCoding/Articles/CollectionOperators.html for a list of valid collection operators.
+ *
+ *  @since 2.3.0
+ *
+ *  @param collectionOperator   Collection operator
+ *  @param attributeName        Entity attribute to apply the collection operator to
+ *  @param predicate            Predicate to filter results
+ *  @param groupingKeyPath      Key path to group results by
+ *  @param context              Context to perform the request in
+ *
+ *  @return Results of the collection operator, filtered by the provided predicate and grouped by the provided key path
+ */
++ (NSArray *) MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString*)groupingKeyPath inContext:(NSManagedObjectContext *)context;
+
+/**
+ *  Supports aggregating values using a key-value collection operator that can be grouped by an attribute.
+ *  See https://developer.apple.com/library/ios/documentation/cocoa/conceptual/KeyValueCoding/Articles/CollectionOperators.html for a list of valid collection operators.
+ *
+ *  This method is run against the default MagicalRecordStack's context.
+ *
+ *  @since 2.3.0
+ *
+ *  @param collectionOperator   Collection operator
+ *  @param attributeName        Entity attribute to apply the collection operator to
+ *  @param predicate            Predicate to filter results
+ *  @param groupingKeyPath      Key path to group results by
+ *
+ *  @return Results of the collection operator, filtered by the provided predicate and grouped by the provided key path
+ */
++ (NSArray *) MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString*)groupingKeyPath;
+
+- (instancetype) MR_objectWithMinValueFor:(NSString *)property;
+- (instancetype) MR_objectWithMinValueFor:(NSString *)property inContext:(NSManagedObjectContext *)context;
 
 @end

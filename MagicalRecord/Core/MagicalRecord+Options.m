@@ -8,42 +8,57 @@
 
 #import "MagicalRecord+Options.h"
 
-static BOOL shouldAutoCreateManagedObjectModel_;
-static BOOL shouldAutoCreateDefaultPersistentStoreCoordinator_;
-static BOOL shouldDeleteStoreOnModelMismatch_;
+#ifdef DEBUG
+static MagicalRecordLoggingLevel kMagicalRecordLoggingLevel = MagicalRecordLoggingLevelDebug;
+#else
+static MagicalRecordLoggingLevel kMagicalRecordLoggingLevel = MagicalRecordLoggingLevelError;
+#endif
+static BOOL kMagicalRecordShouldAutoCreateManagedObjectModel = NO;
+static BOOL kMagicalRecordShouldAutoCreateDefaultPersistentStoreCoordinator = NO;
+static BOOL kMagicalRecordShouldDeleteStoreOnModelMismatch = NO;
 
 @implementation MagicalRecord (Options)
 
-#pragma mark - Options
+#pragma mark - Configuration Options
 
 + (BOOL) shouldAutoCreateManagedObjectModel;
 {
-    return shouldAutoCreateManagedObjectModel_;
+    return kMagicalRecordShouldAutoCreateManagedObjectModel;
 }
 
-+ (void) setShouldAutoCreateManagedObjectModel:(BOOL)shouldAutoCreate;
++ (void) setShouldAutoCreateManagedObjectModel:(BOOL)autoCreate;
 {
-    shouldAutoCreateManagedObjectModel_ = shouldAutoCreate;
+    kMagicalRecordShouldAutoCreateManagedObjectModel = autoCreate;
 }
 
 + (BOOL) shouldAutoCreateDefaultPersistentStoreCoordinator;
 {
-    return shouldAutoCreateDefaultPersistentStoreCoordinator_;
+    return kMagicalRecordShouldAutoCreateDefaultPersistentStoreCoordinator;
 }
 
-+ (void) setShouldAutoCreateDefaultPersistentStoreCoordinator:(BOOL)shouldAutoCreate;
++ (void) setShouldAutoCreateDefaultPersistentStoreCoordinator:(BOOL)autoCreate;
 {
-    shouldAutoCreateDefaultPersistentStoreCoordinator_ = shouldAutoCreate;
+    kMagicalRecordShouldAutoCreateDefaultPersistentStoreCoordinator = autoCreate;
 }
 
 + (BOOL) shouldDeleteStoreOnModelMismatch;
 {
-    return shouldDeleteStoreOnModelMismatch_;
+    return kMagicalRecordShouldDeleteStoreOnModelMismatch;
 }
 
-+ (void) setShouldDeleteStoreOnModelMismatch:(BOOL)shouldDeleteStoreOnModelMismatch
++ (void) setShouldDeleteStoreOnModelMismatch:(BOOL)shouldDelete;
 {
-    shouldDeleteStoreOnModelMismatch_ = shouldDeleteStoreOnModelMismatch;
+    kMagicalRecordShouldDeleteStoreOnModelMismatch = shouldDelete;
+}
+
++ (MagicalRecordLoggingLevel) loggingLevel;
+{
+    return kMagicalRecordLoggingLevel;
+}
+
++ (void) setLoggingLevel:(MagicalRecordLoggingLevel)level;
+{
+    kMagicalRecordLoggingLevel = level;
 }
 
 @end

@@ -71,7 +71,7 @@ const struct IngredientFetchedProperties IngredientFetchedProperties = {
 }
 
 - (void)setDisplayOrderValue:(int16_t)value_ {
-	[self setDisplayOrder:[NSNumber numberWithShort:value_]];
+	[self setDisplayOrder:@(value_)];
 }
 
 - (int16_t)primitiveDisplayOrderValue {
@@ -80,7 +80,7 @@ const struct IngredientFetchedProperties IngredientFetchedProperties = {
 }
 
 - (void)setPrimitiveDisplayOrderValue:(int16_t)value_ {
-	[self setPrimitiveDisplayOrder:[NSNumber numberWithShort:value_]];
+	[self setPrimitiveDisplayOrder:@(value_)];
 }
 
 

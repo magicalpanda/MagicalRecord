@@ -79,6 +79,8 @@
 }
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
+
     // Configure the navigation bar
     self.title = @"Recipes";
 
@@ -99,6 +101,8 @@
 // clean up our new observers
 - (void)viewDidUnload {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+    [super viewDidUnload];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -115,7 +119,7 @@
     RecipeAddViewController *addController = [[RecipeAddViewController alloc] initWithNibName:@"RecipeAddView" bundle:nil];
     addController.delegate = self;
 	
-	Recipe *newRecipe = [Recipe MR_createInContext:self.managedObjectContext];
+	Recipe *newRecipe = [Recipe MR_createEntityInContext:self.managedObjectContext];
 	addController.recipe = newRecipe;
 
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addController];
@@ -161,7 +165,7 @@
     NSInteger numberOfRows = 0;
 	
     if ([[self.fetchedResultsController sections] count] > 0) {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+        id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
         numberOfRows = [sectionInfo numberOfObjects];
     }
     
@@ -239,11 +243,11 @@
 	
 	switch(type) {
 		case NSFetchedResultsChangeInsert:
-			[tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+			[tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
 			break;
 			
 		case NSFetchedResultsChangeDelete:
-			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+			[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 			break;
 			
 		case NSFetchedResultsChangeUpdate:
@@ -251,8 +255,8 @@
 			break;
 			
 		case NSFetchedResultsChangeMove:
-			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+			[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
 	}
 }
@@ -267,6 +271,9 @@
 		case NSFetchedResultsChangeDelete:
 			[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
 			break;
+
+        default:
+            break;
 	}
 }
 

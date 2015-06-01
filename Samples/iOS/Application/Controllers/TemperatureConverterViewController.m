@@ -59,7 +59,9 @@
 #pragma mark -
 #pragma mark View lifecycle
 
-- (void)viewDidLoad {    
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
     self.title = @"Temperature";
 	self.tableView.allowsSelection = NO;
 }
@@ -67,6 +69,7 @@
 
 - (void)viewDidUnload {    
 	self.tableView = nil;
+    
 	[super viewDidUnload];
 }
 
@@ -97,7 +100,7 @@
     }
     
     // Configure the temperature cell with the relevant data
-    NSDictionary *temperatureDictionary = [self.temperatureData objectAtIndex:indexPath.row];
+    NSDictionary *temperatureDictionary = (self.temperatureData)[indexPath.row];
     [cell setTemperatureDataFromDictionary:temperatureDictionary];
     return cell;
 }

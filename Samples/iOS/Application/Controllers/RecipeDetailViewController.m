@@ -86,13 +86,13 @@
     NSManagedObjectID* photoID = [self.recipe.image objectID];
     
     if (recipeID) {
-        BOOL shouldReload = ([ui objectForKey:NSInvalidatedAllObjectsKey] != nil);
-        BOOL wasInvalidated = ([ui objectForKey:NSInvalidatedAllObjectsKey] != nil);
+        BOOL shouldReload = (ui[NSInvalidatedAllObjectsKey] != nil);
+        BOOL wasInvalidated = (ui[NSInvalidatedAllObjectsKey] != nil);
         
-        NSArray *interestingKeys = [NSArray arrayWithObjects:NSUpdatedObjectsKey, NSRefreshedObjectsKey, NSInvalidatedObjectsKey, nil];
+        NSArray *interestingKeys = @[NSUpdatedObjectsKey, NSRefreshedObjectsKey, NSInvalidatedObjectsKey];
         
         for (NSString* key in interestingKeys) {
-            NSSet* collection = [ui objectForKey:key];
+            NSSet* collection = ui[key];
             for (NSManagedObjectID* moid in collection) {
                 if ([moid isEqual:recipeID] || [moid isEqual:photoID]) {
                     if ([key isEqual:NSInvalidatedObjectsKey]) {
@@ -124,6 +124,8 @@
 
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
+
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     // Create and set the table header view.
@@ -200,7 +202,7 @@
 	
     NSUInteger ingredientsCount = [self.recipe.ingredients count];
 
-    NSArray *ingredientsInsertIndexPath = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:ingredientsCount inSection:INGREDIENTS_SECTION]];
+    NSArray *ingredientsInsertIndexPath = @[[NSIndexPath indexPathForRow:ingredientsCount inSection:INGREDIENTS_SECTION]];
     
     if (editing) {
         [self.tableView insertRowsAtIndexPaths:ingredientsInsertIndexPath withRowAnimation:UITableViewRowAnimationTop];
@@ -314,7 +316,7 @@
 				cell.accessoryType = UITableViewCellAccessoryNone;
 			}
 			
-            Ingredient *ingredient = [self.ingredients objectAtIndex:row];
+            Ingredient *ingredient = (self.ingredients)[row];
             cell.textLabel.text = ingredient.name;
 			cell.detailTextLabel.text = ingredient.amount;
         } else {
@@ -406,7 +408,7 @@
             ((IngredientDetailViewController *)nextViewController).recipe = self.recipe;
             
             if (indexPath.row < [self.recipe.ingredients count]) {
-                Ingredient *ingredient = [self.ingredients objectAtIndex:indexPath.row];
+                Ingredient *ingredient = (self.ingredients)[indexPath.row];
                 ((IngredientDetailViewController *)nextViewController).ingredient = ingredient;
             }
             break;
@@ -445,13 +447,13 @@
     // Only allow deletion, and only in the ingredients section
     if ((editingStyle == UITableViewCellEditingStyleDelete) && (indexPath.section == INGREDIENTS_SECTION)) {
         // Remove the corresponding ingredient object from the recipe's ingredient list and delete the appropriate table view cell.
-        Ingredient *ingredient = [self.ingredients objectAtIndex:indexPath.row];
+        Ingredient *ingredient = (self.ingredients)[indexPath.row];
         [self.recipe removeIngredientsObject:ingredient];
         [self.ingredients removeObject:ingredient];
 
         [ingredient MR_deleteEntity];
         
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
     }
 }
 
@@ -500,7 +502,7 @@
 	 Update the ingredients array in response to the move.
 	 Update the display order indexes within the range of the move.
 	 */
-    Ingredient *ingredient = [self.ingredients objectAtIndex:fromIndexPath.row];
+    Ingredient *ingredient = (self.ingredients)[fromIndexPath.row];
     [self.ingredients removeObjectAtIndex:fromIndexPath.row];
     [self.ingredients insertObject:ingredient atIndex:toIndexPath.row];
 	
@@ -513,8 +515,8 @@
 		end = fromIndexPath.row;
 	}
 	for (NSInteger i = start; i <= end; i++) {
-		ingredient = [self.ingredients objectAtIndex:i];
-		ingredient.displayOrder = [NSNumber numberWithInteger:i];
+		ingredient = (self.ingredients)[i];
+		ingredient.displayOrder = @(i);
 	}
 }
 
