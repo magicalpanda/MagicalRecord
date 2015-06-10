@@ -25,7 +25,7 @@ One of the easiest ways to integrate MagicalRecord in your project is to use [Co
     ````
 
 2. In your project directory, run `pod update`
-3. You should now be able to add `#import <MagicalRecord/CoreData+MagicalRecord.h>` to any of your target's source files and begin using MagicalRecord!
+3. You should now be able to add `#import <MagicalRecord/MagicalRecord.h>` to any of your target's source files and begin using MagicalRecord!
 
 ## Using an Xcode subproject
 
