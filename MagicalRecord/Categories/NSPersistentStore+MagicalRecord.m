@@ -41,8 +41,8 @@ static NSString *applicationStorageDirectory_ = nil;
 
 + (NSString *)MR_applicationStorageDirectory
 {
-    // by default, MagicalRecord will use a directory in the that contains the bundle name,
-    // so changing the app bundle name will casue your core data store to reset
+    // by default, MagicalRecord uses a directory that contains the app bundle name from your plist,
+    // so changing the app bundle name will cause the core data persistent store to reset
     // to avoid this behaviour, use [NSPersistentStore MR_setApplicationStorageDirectory:] before setting up your stack
     if (applicationStorageDirectory_ == nil) {
         return [self MR_defaultApplicationStorageDirectory];
