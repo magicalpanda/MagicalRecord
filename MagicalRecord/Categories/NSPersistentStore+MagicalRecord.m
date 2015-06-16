@@ -10,6 +10,7 @@
 NSString * const kMagicalRecordDefaultStoreFileName = @"CoreDataStore.sqlite";
 
 static NSPersistentStore *defaultPersistentStore_ = nil;
+static NSString *applicationStorageDirectory_ = nil;
 
 
 @implementation NSPersistentStore (MagicalRecord)
@@ -24,20 +25,30 @@ static NSPersistentStore *defaultPersistentStore_ = nil;
 	defaultPersistentStore_ = store;
 }
 
++ (void) MR_setApplicationStorageDirectory:(NSString *)urlString {
+    applicationStorageDirectory_ = urlString;
+}
+
++ (NSString *) MR_defaultApplicationStorageDirectory {
+    NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
+    return [[self MR_directory:NSApplicationSupportDirectory] stringByAppendingPathComponent:applicationName];
+}
+
 + (NSString *) MR_directory:(NSSearchPathDirectory)type
 {    
     return [NSSearchPathForDirectoriesInDomains(type, NSUserDomainMask, YES) lastObject];
 }
 
-+ (NSString *)MR_applicationDocumentsDirectory 
-{
-	return [self MR_directory:NSDocumentDirectory];
-}
-
 + (NSString *)MR_applicationStorageDirectory
 {
-    NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
-    return [[self MR_directory:NSApplicationSupportDirectory] stringByAppendingPathComponent:applicationName];
+    // by default, MagicalRecord will use a directory in the that contains the bundle name,
+    // so changing the app bundle name will casue your core data store to reset
+    // to avoid this behaviour, use [NSPersistentStore MR_setApplicationStorageDirectory:] before setting up your stack
+    if (applicationStorageDirectory_ == nil) {
+        return [self MR_defaultApplicationStorageDirectory];
+    }
+  
+    return applicationStorageDirectory_;
 }
 
 + (NSURL *) MR_urlForStoreName:(NSString *)storeFileName
