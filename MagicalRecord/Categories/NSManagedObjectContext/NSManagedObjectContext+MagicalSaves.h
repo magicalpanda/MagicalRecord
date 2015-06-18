@@ -81,12 +81,12 @@ typedef void (^MRSaveCompletionHandler)(BOOL contextDidSave, NSError * __MR_null
 @interface NSManagedObjectContext (MagicalSavesDeprecated)
 
 - (void) MR_save MR_DEPRECATED_WILL_BE_REMOVED_IN_PLEASE_USE("3.0", "MR_saveToPersistentStoreAndWait");
-- (void) MR_saveWithErrorCallback:(void __MR_nullable (^)(NSError * __MR_nullable error))errorCallback MR_DEPRECATED_WILL_BE_REMOVED_IN("3.0");
-- (void) MR_saveInBackgroundCompletion:(void __MR_nullable (^)(void))completion MR_DEPRECATED_WILL_BE_REMOVED_IN("3.0");
-- (void) MR_saveInBackgroundErrorHandler:(void __MR_nullable (^)(NSError * __MR_nullable error))errorCallback MR_DEPRECATED_WILL_BE_REMOVED_IN("3.0");
-- (void) MR_saveInBackgroundErrorHandler:(void __MR_nullable (^)(NSError * __MR_nullable error))errorCallback completion:(void __MR_nullable (^)(void))completion MR_DEPRECATED_WILL_BE_REMOVED_IN("3.0");
+- (void) MR_saveWithErrorCallback:(void (^ __MR_nullable)(NSError * __MR_nullable error))errorCallback MR_DEPRECATED_WILL_BE_REMOVED_IN("3.0");
+- (void) MR_saveInBackgroundCompletion:(void (^ __MR_nullable)(void))completion MR_DEPRECATED_WILL_BE_REMOVED_IN("3.0");
+- (void) MR_saveInBackgroundErrorHandler:(void (^ __MR_nullable)(NSError * __MR_nullable error))errorCallback MR_DEPRECATED_WILL_BE_REMOVED_IN("3.0");
+- (void) MR_saveInBackgroundErrorHandler:(void (^ __MR_nullable)(NSError * __MR_nullable error))errorCallback completion:(void (^ __MR_nullable)(void))completion MR_DEPRECATED_WILL_BE_REMOVED_IN("3.0");
 - (void) MR_saveNestedContexts MR_DEPRECATED_WILL_BE_REMOVED_IN_PLEASE_USE("3.0", "MR_saveToPersistentStoreWithCompletion:");
-- (void) MR_saveNestedContextsErrorHandler:(void __MR_nullable (^)(NSError * __MR_nullable error))errorCallback MR_DEPRECATED_WILL_BE_REMOVED_IN_PLEASE_USE("3.0", "MR_saveToPersistentStoreWithCompletion:");
-- (void) MR_saveNestedContextsErrorHandler:(void __MR_nullable (^)(NSError * __MR_nullable error))errorCallback completion:(void __MR_nullable (^)(void))completion MR_DEPRECATED_WILL_BE_REMOVED_IN_PLEASE_USE("3.0", "MR_saveToPersistentStoreWithCompletion:");
+- (void) MR_saveNestedContextsErrorHandler:(void (^ __MR_nullable)(NSError * __MR_nullable error))errorCallback MR_DEPRECATED_WILL_BE_REMOVED_IN_PLEASE_USE("3.0", "MR_saveToPersistentStoreWithCompletion:");
+- (void) MR_saveNestedContextsErrorHandler:(void (^ __MR_nullable)(NSError * __MR_nullable error))errorCallback completion:(void (^ __MR_nullable)(void))completion MR_DEPRECATED_WILL_BE_REMOVED_IN_PLEASE_USE("3.0", "MR_saveToPersistentStoreWithCompletion:");
 
 @end

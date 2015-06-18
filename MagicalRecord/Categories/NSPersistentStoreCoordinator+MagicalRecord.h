@@ -33,8 +33,8 @@ extern NSString * __MR_nonnull const kMagicalRecordPSCMismatchCouldNotRecreateSt
 + (MR_nonnull NSPersistentStoreCoordinator *) MR_coordinatorWithiCloudContainerID:(MR_nonnull NSString *)containerID contentNameKey:(MR_nullable NSString *)contentNameKey localStoreNamed:(MR_nonnull NSString *)localStoreName cloudStorePathComponent:(MR_nullable NSString *)subPathComponent;
 + (MR_nonnull NSPersistentStoreCoordinator *) MR_coordinatorWithiCloudContainerID:(MR_nonnull NSString *)containerID contentNameKey:(MR_nullable NSString *)contentNameKey localStoreAtURL:(MR_nonnull NSURL *)storeURL cloudStorePathComponent:(MR_nullable NSString *)subPathComponent;
 
-+ (MR_nonnull NSPersistentStoreCoordinator *) MR_coordinatorWithiCloudContainerID:(MR_nonnull NSString *)containerID contentNameKey:(MR_nullable NSString *)contentNameKey localStoreNamed:(MR_nonnull NSString *)localStoreName cloudStorePathComponent:(MR_nullable NSString *)subPathComponent completion:(void __MR_nullable (^)(void))completionHandler;
-+ (MR_nonnull NSPersistentStoreCoordinator *) MR_coordinatorWithiCloudContainerID:(MR_nonnull NSString *)containerID contentNameKey:(MR_nullable NSString *)contentNameKey localStoreAtURL:(MR_nonnull NSURL *)storeURL cloudStorePathComponent:(MR_nullable NSString *)subPathComponent completion:(void __MR_nullable (^)(void))completionHandler;
++ (MR_nonnull NSPersistentStoreCoordinator *) MR_coordinatorWithiCloudContainerID:(MR_nonnull NSString *)containerID contentNameKey:(MR_nullable NSString *)contentNameKey localStoreNamed:(MR_nonnull NSString *)localStoreName cloudStorePathComponent:(MR_nullable NSString *)subPathComponent completion:(void (^ __MR_nullable)(void))completionHandler;
++ (MR_nonnull NSPersistentStoreCoordinator *) MR_coordinatorWithiCloudContainerID:(MR_nonnull NSString *)containerID contentNameKey:(MR_nullable NSString *)contentNameKey localStoreAtURL:(MR_nonnull NSURL *)storeURL cloudStorePathComponent:(MR_nullable NSString *)subPathComponent completion:(void (^ __MR_nullable)(void))completionHandler;
 
 - (MR_nullable NSPersistentStore *) MR_addInMemoryStore;
 - (MR_nullable NSPersistentStore *) MR_addAutoMigratingSqliteStoreNamed:(MR_nonnull NSString *) storeFileName;
@@ -45,7 +45,7 @@ extern NSString * __MR_nonnull const kMagicalRecordPSCMismatchCouldNotRecreateSt
 
 - (void) MR_addiCloudContainerID:(MR_nonnull NSString *)containerID contentNameKey:(MR_nullable NSString *)contentNameKey localStoreNamed:(MR_nonnull NSString *)localStoreName cloudStorePathComponent:(MR_nullable NSString *)subPathComponent;
 - (void) MR_addiCloudContainerID:(MR_nonnull NSString *)containerID contentNameKey:(MR_nullable NSString *)contentNameKey localStoreAtURL:(MR_nonnull NSURL *)storeURL cloudStorePathComponent:(MR_nullable NSString *)subPathComponent;
-- (void) MR_addiCloudContainerID:(MR_nonnull NSString *)containerID contentNameKey:(MR_nullable NSString *)contentNameKey localStoreNamed:(MR_nonnull NSString *)localStoreName cloudStorePathComponent:(MR_nullable NSString *)subPathComponent completion:(void __MR_nullable (^)(void))completionBlock;
-- (void) MR_addiCloudContainerID:(MR_nonnull NSString *)containerID contentNameKey:(MR_nullable NSString *)contentNameKey localStoreAtURL:(MR_nonnull NSURL *)storeURL cloudStorePathComponent:(MR_nullable NSString *)subPathComponent completion:(void __MR_nullable (^)(void))completionBlock;
+- (void) MR_addiCloudContainerID:(MR_nonnull NSString *)containerID contentNameKey:(MR_nullable NSString *)contentNameKey localStoreNamed:(MR_nonnull NSString *)localStoreName cloudStorePathComponent:(MR_nullable NSString *)subPathComponent completion:(void (^ __MR_nullable)(void))completionBlock;
+- (void) MR_addiCloudContainerID:(MR_nonnull NSString *)containerID contentNameKey:(MR_nullable NSString *)contentNameKey localStoreAtURL:(MR_nonnull NSURL *)storeURL cloudStorePathComponent:(MR_nullable NSString *)subPathComponent completion:(void (^ __MR_nullable)(void))completionBlock;
 
 @end

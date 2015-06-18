@@ -25,7 +25,7 @@
                                contentNameKey:(MR_nullable NSString *)contentNameKey
                               localStoreNamed:(MR_nonnull NSString *)localStoreName
                       cloudStorePathComponent:(MR_nullable NSString *)pathSubcomponent
-                                   completion:(void __MR_nullable (^)(void))completion;
+                                   completion:(void (^ __MR_nullable)(void))completion;
 
 + (void)setupCoreDataStackWithiCloudContainer:(MR_nonnull NSString *)containerID
                               localStoreAtURL:(MR_nonnull NSURL *)storeURL;
@@ -39,6 +39,6 @@
                                contentNameKey:(MR_nullable NSString *)contentNameKey
                               localStoreAtURL:(MR_nonnull NSURL *)storeURL
                       cloudStorePathComponent:(MR_nullable NSString *)pathSubcomponent
-                                   completion:(void __MR_nullable (^)(void))completion;
+                                   completion:(void (^ __MR_nullable)(void))completion;
 
 @end
