@@ -36,4 +36,6 @@
 #define __MR_kindof(class) id
 #endif
 
+#define MR_NSArrayOfNSManagedObjects MR_GENERIC(NSArray, __MR_kindof(NSManagedObject) *) *
+
 #endif /* MagicalRecordXcode7CompatibilityMacros_h */

@@ -34,7 +34,7 @@ extern NSString * __MR_nonnull const kMagicalRecordImportRelationshipTypeKey;
 + (MR_nonnull instancetype) MR_importFromObject:(MR_nonnull id)data;
 + (MR_nonnull instancetype) MR_importFromObject:(MR_nonnull id)data inContext:(MR_nonnull NSManagedObjectContext *)context;
 
-+ (MR_nonnull NSArray *) MR_importFromArray:(MR_nonnull NSArray *)listOfObjectData;
-+ (MR_nonnull NSArray *) MR_importFromArray:(MR_nonnull NSArray *)listOfObjectData inContext:(MR_nonnull NSManagedObjectContext *)context;
++ (MR_nonnull MR_NSArrayOfNSManagedObjects) MR_importFromArray:(MR_nonnull MR_GENERIC(NSArray, NSDictionary *) *)listOfObjectData;
++ (MR_nonnull MR_NSArrayOfNSManagedObjects) MR_importFromArray:(MR_nonnull MR_GENERIC(NSArray, NSDictionary *) *)listOfObjectData inContext:(MR_nonnull NSManagedObjectContext *)context;
 
 @end

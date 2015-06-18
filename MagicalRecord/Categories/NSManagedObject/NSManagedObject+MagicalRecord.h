@@ -21,8 +21,8 @@
 + (NSUInteger) MR_defaultBatchSize;
 + (void) MR_setDefaultBatchSize:(NSUInteger)newBatchSize;
 
-+ (MR_nullable NSArray *) MR_executeFetchRequest:(MR_nonnull NSFetchRequest *)request;
-+ (MR_nullable NSArray *) MR_executeFetchRequest:(MR_nonnull NSFetchRequest *)request inContext:(MR_nonnull NSManagedObjectContext *)context;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_executeFetchRequest:(MR_nonnull NSFetchRequest *)request;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_executeFetchRequest:(MR_nonnull NSFetchRequest *)request inContext:(MR_nonnull NSManagedObjectContext *)context;
 + (MR_nullable instancetype) MR_executeFetchRequestAndReturnFirstObject:(MR_nonnull NSFetchRequest *)request;
 + (MR_nullable instancetype) MR_executeFetchRequestAndReturnFirstObject:(MR_nonnull NSFetchRequest *)request inContext:(MR_nonnull NSManagedObjectContext *)context;
 
@@ -34,8 +34,8 @@
 
 + (MR_nullable NSEntityDescription *) MR_entityDescription;
 + (MR_nullable NSEntityDescription *) MR_entityDescriptionInContext:(MR_nonnull NSManagedObjectContext *)context;
-+ (MR_nullable NSArray *) MR_propertiesNamed:(MR_nonnull NSArray *)properties;
-+ (MR_nullable NSArray *) MR_propertiesNamed:(MR_nonnull NSArray *)properties inContext:(MR_nonnull NSManagedObjectContext *)context;
++ (MR_nullable MR_GENERIC(NSArray, NSPropertyDescription *) *) MR_propertiesNamed:(MR_nonnull MR_GENERIC(NSArray, NSString *) *)properties;
++ (MR_nullable MR_GENERIC(NSArray, NSPropertyDescription *) *) MR_propertiesNamed:(MR_nonnull MR_GENERIC(NSArray, NSString *) *)properties inContext:(MR_nonnull NSManagedObjectContext *)context;
 
 + (MR_nullable instancetype) MR_createEntity;
 + (MR_nullable instancetype) MR_createEntityInContext:(MR_nonnull NSManagedObjectContext *)context;
@@ -49,8 +49,8 @@
 + (BOOL) MR_truncateAll;
 + (BOOL) MR_truncateAllInContext:(MR_nonnull NSManagedObjectContext *)context;
 
-+ (MR_nonnull NSArray *) MR_ascendingSortDescriptors:(MR_nonnull NSArray *)attributesToSortBy;
-+ (MR_nonnull NSArray *) MR_descendingSortDescriptors:(MR_nonnull NSArray *)attributesToSortBy;
++ (MR_nonnull MR_GENERIC(NSArray, NSSortDescriptor *) *) MR_ascendingSortDescriptors:(MR_nonnull MR_GENERIC(NSArray, NSString *) *)attributesToSortBy;
++ (MR_nonnull MR_GENERIC(NSArray, NSSortDescriptor *) *) MR_descendingSortDescriptors:(MR_nonnull MR_GENERIC(NSArray, NSString *) *)attributesToSortBy;
 
 - (MR_nullable instancetype) MR_inContext:(MR_nonnull NSManagedObjectContext *)otherContext;
 - (MR_nullable instancetype) MR_inThreadContext;

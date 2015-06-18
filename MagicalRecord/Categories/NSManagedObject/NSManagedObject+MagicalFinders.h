@@ -11,15 +11,15 @@
 
 @interface NSManagedObject (MagicalFinders)
 
-+ (MR_nullable NSArray *) MR_findAll;
-+ (MR_nullable NSArray *) MR_findAllInContext:(MR_nonnull NSManagedObjectContext *)context;
-+ (MR_nullable NSArray *) MR_findAllSortedBy:(MR_nonnull NSString *)sortTerm ascending:(BOOL)ascending;
-+ (MR_nullable NSArray *) MR_findAllSortedBy:(MR_nonnull NSString *)sortTerm ascending:(BOOL)ascending inContext:(MR_nonnull NSManagedObjectContext *)context;
-+ (MR_nullable NSArray *) MR_findAllSortedBy:(MR_nonnull NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(MR_nullable NSPredicate *)searchTerm;
-+ (MR_nullable NSArray *) MR_findAllSortedBy:(MR_nonnull NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(MR_nullable NSPredicate *)searchTerm inContext:(MR_nonnull NSManagedObjectContext *)context;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findAll;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findAllInContext:(MR_nonnull NSManagedObjectContext *)context;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findAllSortedBy:(MR_nonnull NSString *)sortTerm ascending:(BOOL)ascending;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findAllSortedBy:(MR_nonnull NSString *)sortTerm ascending:(BOOL)ascending inContext:(MR_nonnull NSManagedObjectContext *)context;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findAllSortedBy:(MR_nonnull NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(MR_nullable NSPredicate *)searchTerm;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findAllSortedBy:(MR_nonnull NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(MR_nullable NSPredicate *)searchTerm inContext:(MR_nonnull NSManagedObjectContext *)context;
 
-+ (MR_nullable NSArray *) MR_findAllWithPredicate:(MR_nullable NSPredicate *)searchTerm;
-+ (MR_nullable NSArray *) MR_findAllWithPredicate:(MR_nullable NSPredicate *)searchTerm inContext:(MR_nonnull NSManagedObjectContext *)context;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findAllWithPredicate:(MR_nullable NSPredicate *)searchTerm;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findAllWithPredicate:(MR_nullable NSPredicate *)searchTerm inContext:(MR_nonnull NSManagedObjectContext *)context;
 
 + (MR_nullable instancetype) MR_findFirst;
 + (MR_nullable instancetype) MR_findFirstInContext:(MR_nonnull NSManagedObjectContext *)context;
@@ -39,10 +39,10 @@
 + (MR_nonnull instancetype) MR_findFirstOrCreateByAttribute:(MR_nonnull NSString *)attribute withValue:(MR_nonnull id)searchValue;
 + (MR_nonnull instancetype) MR_findFirstOrCreateByAttribute:(MR_nonnull NSString *)attribute withValue:(MR_nonnull id)searchValue inContext:(MR_nonnull NSManagedObjectContext *)context;
 
-+ (MR_nullable NSArray *) MR_findByAttribute:(MR_nonnull NSString *)attribute withValue:(MR_nonnull id)searchValue;
-+ (MR_nullable NSArray *) MR_findByAttribute:(MR_nonnull NSString *)attribute withValue:(MR_nonnull id)searchValue inContext:(MR_nonnull NSManagedObjectContext *)context;
-+ (MR_nullable NSArray *) MR_findByAttribute:(MR_nonnull NSString *)attribute withValue:(MR_nonnull id)searchValue andOrderBy:(MR_nullable NSString *)sortTerm ascending:(BOOL)ascending;
-+ (MR_nullable NSArray *) MR_findByAttribute:(MR_nonnull NSString *)attribute withValue:(MR_nonnull id)searchValue andOrderBy:(MR_nullable NSString *)sortTerm ascending:(BOOL)ascending inContext:(MR_nonnull NSManagedObjectContext *)context;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findByAttribute:(MR_nonnull NSString *)attribute withValue:(MR_nonnull id)searchValue;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findByAttribute:(MR_nonnull NSString *)attribute withValue:(MR_nonnull id)searchValue inContext:(MR_nonnull NSManagedObjectContext *)context;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findByAttribute:(MR_nonnull NSString *)attribute withValue:(MR_nonnull id)searchValue andOrderBy:(MR_nullable NSString *)sortTerm ascending:(BOOL)ascending;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findByAttribute:(MR_nonnull NSString *)attribute withValue:(MR_nonnull id)searchValue andOrderBy:(MR_nullable NSString *)sortTerm ascending:(BOOL)ascending inContext:(MR_nonnull NSManagedObjectContext *)context;
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
