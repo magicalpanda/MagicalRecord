@@ -34,5 +34,7 @@
 
 + (MagicalRecordStack *)setupModernStackWithLocalStoreNamed:(NSString *)localStoreName;
 + (MagicalRecordStack *)setupModernStackWithLocalStoreNamed:(NSString *)localStoreName modelURL:(NSURL *)modelURL;
++ (MagicalRecordStack *)setupModernStackWithLocalStoreURL:(NSString *)localStoreURL modelURL:(NSURL *)modelURL;
++ (MagicalRecordStack *)setupModernStackWithLocalStoreURL:(NSString *)localStoreURL;
 
 @end

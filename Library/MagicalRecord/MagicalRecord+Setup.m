@@ -134,4 +134,20 @@
   [MagicalRecordStack setDefaultStack:stack];
   return stack;
 }
+
++ (MagicalRecordStack *)setupModernStackWithLocalStoreURL:(NSString *)localStoreURL modelURL:(NSURL *)modelURL
+{
+  NSManagedObjectModel *model = [NSManagedObjectModel MR_managedObjectModelAtURL:modelURL];
+  ModernMagicalRecordStack *stack = [[ModernMagicalRecordStack alloc] initWithStoreAtURL:[NSURL fileURLWithPath:localStoreURL]
+                                                                                   model:model];
+  [MagicalRecordStack setDefaultStack:stack];
+  return stack;
+}
+
++ (MagicalRecordStack *)setupModernStackWithLocalStoreURL:(NSString *)localStoreURL
+{
+  ModernMagicalRecordStack *stack = [[ModernMagicalRecordStack alloc] initWithStoreAtURL:[NSURL fileURLWithPath:localStoreURL]];
+  [MagicalRecordStack setDefaultStack:stack];
+  return stack;
+}
 @end
