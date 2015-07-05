@@ -26,9 +26,6 @@
 @end
 
 
-@end
-
-
 @interface NSManagedObject (MagicalRecord_DataImportShortHand)
 
 - (BOOL) importValuesForKeysWithObject:(MR_nonnull id)objectData;
@@ -159,9 +156,6 @@
 + (MR_nonnull MR_GENERIC(NSArray, NSSortDescriptor *) *) descendingSortDescriptors:(MR_nonnull MR_GENERIC(NSArray, NSString *) *)attributesToSortBy;
 - (MR_nullable instancetype) inContext:(MR_nonnull NSManagedObjectContext *)otherContext;
 - (MR_nullable instancetype) inThreadContext;
-
-@end
-
 
 @end
 
