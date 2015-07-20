@@ -139,15 +139,17 @@
         entity = [self MR_entityDescriptionInContext:context];
     }
 
-//    [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-    NSManagedObject *managedObject = [[self alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-
+  __block NSManagedObject *managedObject = nil;
+  [context performBlockAndWait:^{
+    managedObject = [[self alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+    
     if ([managedObject respondsToSelector:@selector(MR_awakeFromCreation)])
     {
-        [managedObject MR_awakeFromCreation];
+      [managedObject MR_awakeFromCreation];
     }
+  }];
 
-    return managedObject;
+  return managedObject;
 }
 
 - (BOOL) MR_isTemporaryObject;
@@ -177,16 +179,22 @@
 
 - (BOOL) MR_deleteEntityInContext:(NSManagedObjectContext *)context
 {
+  __block BOOL deleted = NO;
+  [context performBlockAndWait:^{
     NSError *retrieveExistingObjectError;
+    
     NSManagedObject *objectInContext = [context existingObjectWithID:[self objectID] error:&retrieveExistingObjectError];
-
+    
     [[retrieveExistingObjectError MR_coreDataDescription] MR_logToConsole];
-
+    
     if (objectInContext) {
       [context deleteObject:objectInContext];
     }
-
-    return [objectInContext MR_isEntityDeleted];
+    
+    deleted = [objectInContext MR_isEntityDeleted];
+  }];
+  
+  return deleted;
 }
 
 + (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate

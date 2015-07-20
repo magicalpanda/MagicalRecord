@@ -83,14 +83,18 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
 + (NSManagedObjectContext *) MR_mainQueueContext;
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [context MR_setWorkingName:@"Main Queue"];
+  [context performBlockAndWait:^{
+    [context MR_setWorkingName:@"Main Queue"];    
+  }];
     return context;
 }
 
 + (NSManagedObjectContext *) MR_privateQueueContext;
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    [context MR_setWorkingName:@"Private Queue"];
+    [context performBlockAndWait:^{
+      [context MR_setWorkingName:@"Private Queue"];      
+    }];
     return context;
 }
 

@@ -50,11 +50,14 @@
 
 + (NSUInteger) MR_countOfEntitiesWithContext:(NSManagedObjectContext *)context;
 {
-	NSError *error = nil;
-	NSUInteger count = [context countForFetchRequest:[self MR_requestAll] error:&error];
+  __block NSUInteger count = 0;
+  [context performBlockAndWait:^{
+    NSError *error = nil;
+    count = [context countForFetchRequest:[self MR_requestAll] error:&error];
     [[error MR_coreDataDescription] MR_logToConsole];
+  }];
 
-    return count;
+  return count;
 }
 
 + (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter;
@@ -64,14 +67,16 @@
 
 + (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter inContext:(NSManagedObjectContext *)context;
 {
-	NSError *error = nil;
 	NSFetchRequest *request = [self MR_requestAll];
 	[request setPredicate:searchFilter];
-	
-	NSUInteger count = [context countForFetchRequest:request error:&error];
+  __block NSUInteger count = 0;
+	[context performBlockAndWait:^{
+    NSError *error = nil;
+    count = [context countForFetchRequest:request error:&error];
     [[error MR_coreDataDescription] MR_logToConsole];
+  }];
 
-    return count;
+  return count;
 }
 
 + (BOOL) MR_hasAtLeastOneEntity

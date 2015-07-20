@@ -67,8 +67,10 @@ dispatch_queue_t MR_saveQueue()
             MRLogVerbose(@"%@ save starting", contextWorkingName);
             
             NSManagedObjectContext *localContext = [self newConfinementContext];
-            [localContext MR_setWorkingName:contextWorkingName];
-            
+          [localContext performBlockAndWait:^{
+            [localContext MR_setWorkingName:contextWorkingName];            
+          }];
+          
             block(localContext);
 
             [localContext MR_saveWithOptions:MRSaveParentContexts|MRSaveSynchronously completion:completion];
