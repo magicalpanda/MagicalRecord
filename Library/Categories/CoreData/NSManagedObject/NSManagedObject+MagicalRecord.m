@@ -274,13 +274,14 @@
 {
     if ([[self objectID] isTemporaryID])
     {
+      [[self managedObjectContext] performBlockAndWait:^{
         NSError *error = nil;
-
         BOOL success = [[self managedObjectContext] obtainPermanentIDsForObjects:[NSArray arrayWithObject:self] error:&error];
         if (!success)
         {
-            [[error MR_coreDataDescription] MR_logToConsole];
+          [[error MR_coreDataDescription] MR_logToConsole];
         }
+      }];
     }
 }
 
