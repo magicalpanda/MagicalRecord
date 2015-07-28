@@ -51,6 +51,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
 + (NSManagedObjectContext *) MR_rootSavingContext;
 {
+    NSAssert(MagicalRecordRootSavingContext != nil, @"Root saving context is nil! Did you forget to initialize the Core Data Stack?");
     return MagicalRecordRootSavingContext;
 }
 

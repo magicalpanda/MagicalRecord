@@ -17,7 +17,7 @@ def processImplementation(headerFile)
 
     puts "Reading #{headerFile}"
 
-    method_match_expression = /^(?<Start>[\+|\-]\s*\([a-zA-Z\s\*]*\)\s*)(?<MethodName>\w+)(?<End>\:?.*)/
+    method_match_expression = /^(?<Start>[\+|\-]\s*\([a-zA-Z_\(\)\,\s\*]+\)\s*)(?<MethodName>MR_\w+)(?<End>\:?.*)/
     category_match_expression = /^\s*(?<Interface>@[[:alnum:]]+)\s*(?<ObjectName>[[:alnum:]]+)\s*(\((?<Category>\w+)\))?/
 
     lines = File.readlines(headerFile)
@@ -95,7 +95,7 @@ def processHeader(headerFile, include_deprecation_warnings)
 
     puts "Reading #{headerFile}"
 
-    method_match_expression = /^(?<Start>[\+|\-]\s*\([a-zA-Z\s\*]*\)\s*)(?<MethodName>\w+)(?<End>\:?.*)/
+    method_match_expression = /^(?<Start>[\+|\-]\s*\([a-zA-Z_\(\)\,\s\*]+\)\s*)(?<MethodName>MR_\w+)(?<End>\:?.*)/
     category_match_expression = /^\s*(?<Interface>@[[:alnum:]]+)\s*(?<ObjectName>[[:alnum:]]+)\s*(\((?<Category>\w+)\))?/
 
     lines = File.readlines(headerFile)
