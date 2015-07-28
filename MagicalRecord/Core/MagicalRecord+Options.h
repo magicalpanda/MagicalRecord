@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <MagicalRecord/MagicalRecordInternal.h>
+#import "MagicalRecordInternal.h"
 
 /**
  Defines "levels" of logging that will be used as values in a bitmask that filters log messages.

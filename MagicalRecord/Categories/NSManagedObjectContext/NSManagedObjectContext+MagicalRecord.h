@@ -6,8 +6,8 @@
 //
 
 #import <CoreData/CoreData.h>
-#import <MagicalRecord/MagicalRecordDeprecationMacros.h>
-#import <MagicalRecord/MagicalRecordXcode7CompatibilityMacros.h>
+#import "MagicalRecordDeprecationMacros.h"
+#import "MagicalRecordXcode7CompatibilityMacros.h"
 
 @interface NSManagedObjectContext (MagicalRecord)
 

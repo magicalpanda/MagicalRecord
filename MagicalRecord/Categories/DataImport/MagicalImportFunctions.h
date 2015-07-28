@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <MagicalRecord/MagicalRecordXcode7CompatibilityMacros.h>
+#import "MagicalRecordXcode7CompatibilityMacros.h"
 
 NSDate *  __MR_nonnull MR_adjustDateForDST(NSDate *__MR_nonnull date);
 NSDate * __MR_nonnull MR_dateFromString(NSString *__MR_nonnull value, NSString *__MR_nonnull format);

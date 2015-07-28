@@ -7,7 +7,7 @@
 //
 
 #import <CoreData/CoreData.h>
-#import <MagicalRecord/MagicalRecordXcode7CompatibilityMacros.h>
+#import "MagicalRecordXcode7CompatibilityMacros.h"
 
 extern NSString * __MR_nonnull const kMagicalRecordDidMergeChangesFromiCloudNotification;
 

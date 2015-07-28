@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import <MagicalRecord/MagicalRecordXcode7CompatibilityMacros.h>
+#import "MagicalRecordXcode7CompatibilityMacros.h"
 
 @interface NSString (MagicalRecord_DataImport)
 
