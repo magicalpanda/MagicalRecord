@@ -182,7 +182,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
         }
         @finally
         {
-            if (relatedObjectData == nil || [relatedObjectData isEqual:[NSNull null]])
+            if (relatedObjectData == nil)
             {
                 continue;
             }
@@ -200,6 +200,12 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
         if ([self MR_importValue:relationshipData forKey:relationshipName])
         {
             continue;
+        }
+      
+        if ([relatedObjectData isEqual:[NSNull null]])
+        {
+          [self setValue:nil forKey:lookupKey];
+          continue;
         }
 
         if ([relationshipInfo isToMany] && [relatedObjectData isKindOfClass:[NSArray class]])
