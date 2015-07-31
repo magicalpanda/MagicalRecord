@@ -10,7 +10,7 @@
 
 // option to autodelete store if it already exists
 
-extern NSString * __MR_nonnull const kMagicalRecordDefaultStoreFileName;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordDefaultStoreFileName;
 
 
 @interface NSPersistentStore (MagicalRecord)

@@ -9,7 +9,7 @@
 #import <CoreData/CoreData.h>
 #import <MagicalRecord/MagicalRecordXcode7CompatibilityMacros.h>
 
-extern NSString * __MR_nonnull const kMagicalRecordDidMergeChangesFromiCloudNotification;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordDidMergeChangesFromiCloudNotification;
 
 /**
  Category methods to aid in observing changes in other contexts.

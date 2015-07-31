@@ -8,13 +8,13 @@
 #import <CoreData/CoreData.h>
 #import <MagicalRecord/MagicalRecordXcode7CompatibilityMacros.h>
 
-extern NSString * __MR_nonnull const kMagicalRecordPSCDidCompleteiCloudSetupNotification;
-extern NSString * __MR_nonnull const kMagicalRecordPSCMismatchWillDeleteStore;
-extern NSString * __MR_nonnull const kMagicalRecordPSCMismatchDidDeleteStore;
-extern NSString * __MR_nonnull const kMagicalRecordPSCMismatchWillRecreateStore;
-extern NSString * __MR_nonnull const kMagicalRecordPSCMismatchDidRecreateStore;
-extern NSString * __MR_nonnull const kMagicalRecordPSCMismatchCouldNotDeleteStore;
-extern NSString * __MR_nonnull const kMagicalRecordPSCMismatchCouldNotRecreateStore;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordPSCDidCompleteiCloudSetupNotification;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordPSCMismatchWillDeleteStore;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordPSCMismatchDidDeleteStore;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordPSCMismatchWillRecreateStore;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordPSCMismatchDidRecreateStore;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordPSCMismatchCouldNotDeleteStore;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordPSCMismatchCouldNotRecreateStore;
 
 @interface NSPersistentStoreCoordinator (MagicalRecord)
 

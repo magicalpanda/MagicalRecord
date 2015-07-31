@@ -8,15 +8,15 @@
 #import <CoreData/CoreData.h>
 #import <MagicalRecord/MagicalRecordXcode7CompatibilityMacros.h>
 
-extern NSString * __MR_nonnull const kMagicalRecordImportCustomDateFormatKey;
-extern NSString * __MR_nonnull const kMagicalRecordImportDefaultDateFormatString;
-extern NSString * __MR_nonnull const kMagicalRecordImportUnixTimeString;
-extern NSString * __MR_nonnull const kMagicalRecordImportAttributeKeyMapKey;
-extern NSString * __MR_nonnull const kMagicalRecordImportAttributeValueClassNameKey;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordImportCustomDateFormatKey;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordImportDefaultDateFormatString;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordImportUnixTimeString;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordImportAttributeKeyMapKey;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordImportAttributeValueClassNameKey;
 
-extern NSString * __MR_nonnull const kMagicalRecordImportRelationshipMapKey;
-extern NSString * __MR_nonnull const kMagicalRecordImportRelationshipLinkedByKey;
-extern NSString * __MR_nonnull const kMagicalRecordImportRelationshipTypeKey;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordImportRelationshipMapKey;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordImportRelationshipLinkedByKey;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordImportRelationshipTypeKey;
 
 @protocol MagicalRecordDataImportProtocol <NSObject>
 

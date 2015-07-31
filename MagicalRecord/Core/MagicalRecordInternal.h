@@ -30,7 +30,7 @@ typedef NS_ENUM(NSUInteger, MagicalRecordVersionTag)
 
 #ifdef NS_BLOCKS_AVAILABLE
 
-extern NSString * __MR_nonnull const kMagicalRecordCleanedUpNotification;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordCleanedUpNotification;
 
 @class NSManagedObjectContext;
 typedef void (^CoreDataBlock)(NSManagedObjectContext * __MR_nonnull context);
