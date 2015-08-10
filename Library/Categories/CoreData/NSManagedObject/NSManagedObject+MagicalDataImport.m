@@ -23,6 +23,7 @@ NSString * const kMagicalRecordImportRelationshipMapKey             = @"mappedKe
 NSString * const kMagicalRecordImportRelationshipLinkedByKey        = @"relatedByAttribute";
 NSString * const kMagicalRecordImportDistinctAttributeKey           = @"distinctAttribute";
 NSString * const kMagicalRecordImportRelationshipTypeKey            = @"type";  //this needs to be revisited
+NSString * const kMagicalRecordImportExcludeFromImportKey           = @"excludeFromImport";
 
 NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"useDefaultValueWhenNotPresent";
 
@@ -118,11 +119,17 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 }
 - (void) MR_setAttribute:(NSAttributeDescription *)attributeInfo withValueFromObject:(id)objectData
 {
+    BOOL shouldExcludeFromImport = [[[attributeInfo userInfo] valueForKey:kMagicalRecordImportExcludeFromImportKey] isEqualToString:@"YES"];
+    if (shouldExcludeFromImport) {
+        return;
+    }
+    
     NSString *lookupKeyPath = [objectData MR_lookupKeyForProperty:attributeInfo];
 
     if (lookupKeyPath)
     {
         NSString *attributeName = [attributeInfo name];
+        
         id value = [attributeInfo MR_valueForKeyPath:lookupKeyPath fromObjectData:objectData];
         if (value == nil && [attributeInfo MR_shouldUseDefaultValueIfNoValuePresent])
         {

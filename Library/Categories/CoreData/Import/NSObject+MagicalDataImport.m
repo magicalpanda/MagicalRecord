@@ -18,22 +18,24 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
 {
     NSString *attributeName = [propertyDescription name];
     NSDictionary *userInfo = [propertyDescription userInfo];
-    NSString *lookupKey = [userInfo valueForKey:kMagicalRecordImportAttributeKeyMapKey] ?: attributeName;
+    NSString *lookupKey = nil;
+    id value = nil;
     
-    id value = [self valueForKeyPath:lookupKey];
     
     for (NSUInteger i = 1; i < kMagicalRecordImportMaximumAttributeFailoverDepth && value == nil; i++)
     {
         attributeName = [NSString stringWithFormat:@"%@.%tu", kMagicalRecordImportAttributeKeyMapKey, i];
         lookupKey = [userInfo valueForKey:attributeName];
-        if (lookupKey == nil) 
+        if (lookupKey == nil) //stop after first nil key, means there are no more to look for
         {
-            return nil;
+            break;
         }
         value = [self valueForKeyPath:lookupKey];
     }
-    
-    return value != nil ? lookupKey : nil;
+
+    NSString *basicLookupKey = [userInfo valueForKey:kMagicalRecordImportAttributeKeyMapKey] ?: [propertyDescription name];
+
+    return value != nil ? lookupKey : basicLookupKey;
 }
 
 - (id) MR_valueForAttribute:(NSAttributeDescription *)attributeInfo
