@@ -21,7 +21,8 @@ OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordDefaultStoreFileName;
 + (void) MR_setDefaultPersistentStore:(MR_nullable NSPersistentStore *) store;
 
 + (MR_nullable NSURL *) MR_urlForStoreName:(MR_nonnull NSString *)storeFileName;
-+ (MR_nullable NSURL *) MR_cloudURLForUbiqutiousContainer:(MR_nonnull NSString *)bucketName;
++ (MR_nullable NSURL *) MR_cloudURLForUbiquitousContainer:(MR_nonnull NSString *)bucketName;
++ (MR_nullable NSURL *) MR_cloudURLForUbiqutiousContainer:(MR_nonnull NSString *)bucketName __deprecated;
 
 @end
 

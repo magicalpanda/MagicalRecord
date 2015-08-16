@@ -294,7 +294,8 @@
 + (MR_nullable NSPersistentStore *) defaultPersistentStore;
 + (void) setDefaultPersistentStore:(MR_nullable NSPersistentStore *) store;
 + (MR_nullable NSURL *) urlForStoreName:(MR_nonnull NSString *)storeFileName;
-+ (MR_nullable NSURL *) cloudURLForUbiqutiousContainer:(MR_nonnull NSString *)bucketName;
++ (MR_nullable NSURL *) cloudURLForUbiquitousContainer:(MR_nonnull NSString *)bucketName;
++ (MR_nullable NSURL *) cloudURLForUbiqutiousContainer:(MR_nonnull NSString *)bucketName __deprecated;
 
 @end
 
