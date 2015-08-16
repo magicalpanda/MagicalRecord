@@ -20,7 +20,7 @@ typedef NS_OPTIONS(NSUInteger, MRContextSaveOptions) {
     /** When saving, continue saving parent contexts until the changes are present in the persistent store. */
     MRContextSaveOptionsSaveParentContexts = 1 << 0,
 
-    /** Peform saves synchronously, blocking execution on the current thread until the save is complete. */
+    /** Perform saves synchronously, blocking execution on the current thread until the save is complete. */
     MRContextSaveOptionsSaveSynchronously = 1 << 1
 };
 

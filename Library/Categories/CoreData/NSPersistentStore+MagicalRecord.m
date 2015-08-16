@@ -51,7 +51,7 @@
     return nil;
 }
 
-+ (NSURL *) MR_cloudURLForUbiqutiousContainer:(NSString *)bucketName;
++ (NSURL *) MR_cloudURLForUbiquitousContainer:(NSString *)bucketName;
 {
     NSFileManager *fileManager = [[NSFileManager alloc] init];
     NSURL *cloudURL = nil;
@@ -61,6 +61,11 @@
     }
 
     return cloudURL;
+}
+
++ (NSURL *) MR_cloudURLForUbiqutiousContainer:(NSString *)bucketName;
+{
+    return [self MR_cloudURLForUbiquitousContainer:bucketName];
 }
 
 - (BOOL) MR_isSqliteStore;

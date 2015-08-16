@@ -43,7 +43,8 @@
  */
 + (NSURL *) MR_fileURLForStoreNameIfExistsOnDisk:(NSString *)storeFileName;
 
-+ (NSURL *) MR_cloudURLForUbiqutiousContainer:(NSString *)bucketName;
++ (NSURL *) MR_cloudURLForUbiquitousContainer:(NSString *)bucketName;
++ (NSURL *) MR_cloudURLForUbiqutiousContainer:(NSString *)bucketName __deprecated;
 
 - (NSArray *) MR_sqliteURLs;
 
