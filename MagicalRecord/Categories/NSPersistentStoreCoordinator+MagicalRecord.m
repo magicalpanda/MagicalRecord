@@ -146,7 +146,7 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        NSURL *cloudURL = [NSPersistentStore MR_cloudURLForUbiqutiousContainer:containerID];
+        NSURL *cloudURL = [NSPersistentStore MR_cloudURLForUbiquitousContainer:containerID];
         if (subPathComponent)
         {
             cloudURL = [cloudURL URLByAppendingPathComponent:subPathComponent];
