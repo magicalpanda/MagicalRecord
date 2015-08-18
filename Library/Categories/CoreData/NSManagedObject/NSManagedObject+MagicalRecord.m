@@ -14,20 +14,18 @@
 + (NSString *) MR_entityName;
 {
     NSString *entityName;
-
+    
     if ([self respondsToSelector:@selector(entityName)])
     {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wselector"
         entityName = [self performSelector:@selector(entityName)];
-#pragma clang diagnostic pop
     }
-
+    
     if ([entityName length] == 0)
     {
-        entityName = NSStringFromClass(self);
+        //swift prefixes classes, like ModuleName.MyClass and this causes problems with Core Data and NSSTringFromClass. We must handle that.
+        entityName = [NSStringFromClass(self) componentsSeparatedByString:@"."].lastObject;
     }
-
+    
     return entityName;
 }
 
