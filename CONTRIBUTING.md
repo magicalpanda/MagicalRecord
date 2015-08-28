@@ -20,6 +20,6 @@ If you can't make the change yourself, please open an issue after making sure th
 
 Fork this repository, make some great changes (preferably in a branch named for the topic of the changes you're making) and send a pull request!
 
-All code contributions should match our [coding conventions](/magicalpanda/MagicalRecord/wiki/Coding-Conventions).
+All code contributions should match our [coding conventions](https://github.com/magicalpanda/MagicalRecord/wiki/Coding-Conventions).
 
 Thanks for reading the guidelines!
