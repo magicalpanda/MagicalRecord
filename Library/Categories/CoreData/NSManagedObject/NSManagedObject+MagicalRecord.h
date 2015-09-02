@@ -6,7 +6,6 @@
 
 #import <CoreData/CoreData.h>
 #import "MagicalRecord.h"
-#import "MagicalRecordMOGeneratorProtocol.h"
 #import "MagicalRecordDeprecated.h"
 
 @protocol MagicalRecordManagedObjectProtocol <NSObject>
@@ -24,7 +23,7 @@
 
  @since Available in v1.0 and later.
  */
-@interface NSManagedObject (MagicalRecord) <MagicalRecordMOGeneratorProtocol, MagicalRecordManagedObjectProtocol>
+@interface NSManagedObject (MagicalRecord) <MagicalRecordManagedObjectProtocol>
 
 /**
  @name Entity Information

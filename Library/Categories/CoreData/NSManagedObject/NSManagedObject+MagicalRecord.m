@@ -6,6 +6,7 @@
 #import "MagicalRecord.h"
 #import "MagicalRecordStack.h"
 #import "MagicalRecordLogging.h"
+#import "MagicalRecordMOGeneratorProtocol.h"
 
 @implementation NSManagedObject (MagicalRecord)
 
