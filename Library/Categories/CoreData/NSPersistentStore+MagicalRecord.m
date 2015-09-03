@@ -84,7 +84,10 @@
     for (NSURL *storeUrl in storeUrls)
     {
         NSURL *copyToURL = [destinationUrl URLByDeletingPathExtension];
-        copyToURL = [copyToURL URLByAppendingPathExtension:[storeUrl pathExtension]];
+        NSString *storeURLExtension = [storeUrl pathExtension];
+        if (storeURLExtension) {
+          copyToURL = [copyToURL URLByAppendingPathExtension:storeURLExtension];
+        }
         success &= [fileManager copyItemAtURL:storeUrl toURL:copyToURL error:error];
     }
     return success;

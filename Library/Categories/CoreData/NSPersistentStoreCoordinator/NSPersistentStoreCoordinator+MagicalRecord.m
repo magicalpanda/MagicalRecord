@@ -15,16 +15,23 @@ NSString * const MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey = @"
 
 + (void) MR_createPathToStoreFileIfNeccessary:(NSURL *)urlForStore
 {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSURL *pathToStore = [urlForStore URLByDeletingLastPathComponent];
-    
-    NSError *error = nil;
-    BOOL pathWasCreated = [fileManager createDirectoryAtPath:[pathToStore path] withIntermediateDirectories:YES attributes:nil error:&error];
-
-    if (!pathWasCreated) 
-    {
-        [[error MR_coreDataDescription] MR_logToConsole];
-    }
+  NSFileManager *fileManager = [NSFileManager defaultManager];
+  NSURL *pathToStore = [urlForStore URLByDeletingLastPathComponent];
+  
+  NSError *error = nil;
+  BOOL pathWasCreated = NO;
+  NSString *const path = pathToStore.path;
+  if (path) {
+    pathWasCreated = [fileManager createDirectoryAtPath:path
+                            withIntermediateDirectories:YES
+                                             attributes:nil
+                                                  error:&error];
+  }
+  
+  if (!pathWasCreated)
+  {
+    [[error MR_coreDataDescription] MR_logToConsole];
+  }
 }
 
 - (NSPersistentStore *) MR_addSqliteStoreNamed:(id)storeFileName withOptions:(__autoreleasing NSDictionary *)options;
