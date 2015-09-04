@@ -13,6 +13,7 @@
 #endif
 
 #import "MagicalRecordInternal.h"
+#import "MagicalRecord+Actions.h"
 #import "MagicalRecord+Options.h"
 #import "MagicalRecord+Setup.h"
 #import "MagicalRecord+VersionInformation.h"
@@ -40,6 +41,9 @@
 #import "NSManagedObjectContext+MagicalObserving.h"
 #import "NSManagedObjectContext+MagicalSaves.h"
 
+#import "MagicalRecordLogging.h"
+#import "MagicalRecordMOGeneratorProtocol.h"
+
 #import "NSPersistentStoreCoordinator+MagicalRecord.h"
 #import "NSPersistentStoreCoordinator+MagicalAutoMigrations.h"
 #import "NSPersistentStoreCoordinator+MagicalManualMigrations.h"
@@ -53,11 +57,13 @@
 #import "NSNumber+MagicalDataImport.h"
 #import "NSObject+MagicalDataImport.h"
 #import "NSString+MagicalDataImport.h"
+#import "NSDictionary+MagicalRecordAdditions.h"
 #import "NSAttributeDescription+MagicalDataImport.h"
 #import "NSRelationshipDescription+MagicalDataImport.h"
 #import "NSEntityDescription+MagicalDataImport.h"
 #import "NSError+MagicalRecordErrorHandling.h"
 
+#import "MagicalMigrationManager.h"
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 #import "NSManagedObject+MagicalFetching.h"
 #import "NSFetchedResultsController+MagicalFetching.h"
