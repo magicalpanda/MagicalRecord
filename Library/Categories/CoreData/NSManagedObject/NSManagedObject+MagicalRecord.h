@@ -23,6 +23,7 @@
 
  @since Available in v1.0 and later.
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface NSManagedObject (MagicalRecord) <MagicalRecordManagedObjectProtocol>
 
 /**
@@ -263,6 +264,7 @@
 
 @end
 
+
 @interface NSManagedObject (MagicalRecordDeprecated)
 
 + (instancetype) MR_createInContext:(NSManagedObjectContext *)context MR_DEPRECATED_IN_3_0_PLEASE_USE("MR_createEntityInContext:");
@@ -270,3 +272,4 @@
 - (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context MR_DEPRECATED_IN_3_0_PLEASE_USE("MR_deleteEntityInContext:");
 
 @end
+NS_ASSUME_NONNULL_END

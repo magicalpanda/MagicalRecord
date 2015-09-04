@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 /**
  Category method to make logging to the console easier.
 
@@ -96,3 +97,5 @@ BOOL MR_errorCodeIsObjectGraphErrorCode(NSInteger errorCode);
  @since Available in v3.0 and later.
  */
 NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode);
+
+NS_ASSUME_NONNULL_END

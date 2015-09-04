@@ -24,13 +24,14 @@ typedef NS_OPTIONS(NSUInteger, MRContextSaveOptions) {
     MRContextSaveOptionsSaveSynchronously = 1 << 1
 };
 
-typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
+typedef void (^MRSaveCompletionHandler)(BOOL success, NSError * _Nullable error);
 
 /**
  Category methods to simplify saving managed object contexts.
 
  @since Available in 2.0 and later.
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface NSManagedObjectContext (MagicalSaves)
 
 /**
@@ -106,3 +107,4 @@ typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
  - (void) MR_saveWithOptions:(MRContextSaveOptions)saveOptions completion:(MRSaveCompletionHandler)completion;
 
 @end
+NS_ASSUME_NONNULL_END

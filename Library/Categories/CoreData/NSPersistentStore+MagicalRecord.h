@@ -8,6 +8,7 @@
 #import "MagicalRecord.h"
 #import "MagicalRecordDeprecated.h"
 
+NS_ASSUME_NONNULL_BEGIN
 @interface NSPersistentStore (MagicalRecord)
 
 /**
@@ -80,3 +81,4 @@
 + (NSURL *) MR_urlForStoreName:(NSString *)storeFileName MR_DEPRECATED_IN_3_0_PLEASE_USE("MR_fileURLForStoreNameIfExistsOnDisk:");
 
 @end
+NS_ASSUME_NONNULL_END

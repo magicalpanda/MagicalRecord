@@ -13,6 +13,7 @@
 
  @since Available in v2.0 and later.
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface NSManagedObject (MagicalAggregation)
 
 + (NSNumber *) MR_numberOfEntities;
@@ -127,3 +128,4 @@
 - (id) MR_objectWithMinValueFor:(NSString *)property inContext:(NSManagedObjectContext *)context;
 
 @end
+NS_ASSUME_NONNULL_END

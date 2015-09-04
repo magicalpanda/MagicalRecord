@@ -8,6 +8,7 @@
 
 #import <CoreData/CoreData.h>
 
+NS_ASSUME_NONNULL_BEGIN
 @interface NSPersistentStoreCoordinator (MagicalManualMigrations)
 
 - (NSPersistentStore *) MR_addManuallyMigratingSqliteStoreAtURL:(NSURL *)url;
@@ -17,3 +18,4 @@
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithManuallyMigratingSqliteStoreAtURL:(NSURL *)url;
 
 @end
+NS_ASSUME_NONNULL_END

@@ -6,6 +6,7 @@
 //
 
 #import <CoreData/CoreData.h>
+NS_ASSUME_NONNULL_BEGIN
 
 extern NSString * const MagicalRecordDidMergeChangesFromiCloudNotification;
 
@@ -29,3 +30,4 @@ extern NSString * const MagicalRecordDidMergeChangesFromiCloudNotification;
 - (NSString *) MR_workingName;
 
 @end
+NS_ASSUME_NONNULL_END

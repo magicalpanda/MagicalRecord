@@ -13,30 +13,32 @@
 
  @since Available in v3.0 and later.
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface NSManagedObject (MagicalFetching)
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
-+ (NSFetchedResultsController *) MR_fetchController:(NSFetchRequest *)request delegate:(id<NSFetchedResultsControllerDelegate>)delegate useFileCache:(BOOL)useFileCache groupedBy:(NSString *)groupKeyPath inContext:(NSManagedObjectContext *)context;
++ (NSFetchedResultsController *) MR_fetchController:(NSFetchRequest *)request delegate:(id<NSFetchedResultsControllerDelegate> _Nullable)delegate useFileCache:(BOOL)useFileCache groupedBy:(NSString *)groupKeyPath inContext:(NSManagedObjectContext *)context;
 
 + (NSFetchedResultsController *) MR_fetchAllSortedBy:(NSString *)sortTerm
                                            ascending:(BOOL)ascending
-                                       withPredicate:(NSPredicate *)searchTerm
+                                       withPredicate:(NSPredicate *_Nullable)searchTerm
                                              groupBy:(NSString *)groupingKeyPath
-                                            delegate:(id<NSFetchedResultsControllerDelegate>)delegate;
+                                            delegate:(id<NSFetchedResultsControllerDelegate> _Nullable)delegate;
 + (NSFetchedResultsController *) MR_fetchAllSortedBy:(NSString *)sortTerm
                                            ascending:(BOOL)ascending
-                                       withPredicate:(NSPredicate *)searchTerm
+                                       withPredicate:(NSPredicate *_Nullable)searchTerm
                                              groupBy:(NSString *)groupingKeyPath
-                                            delegate:(id<NSFetchedResultsControllerDelegate>)delegate
+                                            delegate:(id<NSFetchedResultsControllerDelegate> _Nullable)delegate
                                            inContext:(NSManagedObjectContext *)context;
 
-+ (NSFetchedResultsController *) MR_fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending;
-+ (NSFetchedResultsController *) MR_fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
++ (NSFetchedResultsController *) MR_fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate * _Nullable)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending;
++ (NSFetchedResultsController *) MR_fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate * _Nullable)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
 
-+ (NSFetchedResultsController *) MR_fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending delegate:(id<NSFetchedResultsControllerDelegate>)delegate;
-+ (NSFetchedResultsController *) MR_fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending delegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context;
++ (NSFetchedResultsController *) MR_fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate * _Nullable)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending delegate:(id<NSFetchedResultsControllerDelegate> _Nullable)delegate;
++ (NSFetchedResultsController *) MR_fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate * _Nullable)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending delegate:(id<NSFetchedResultsControllerDelegate> _Nullable)delegate inContext:(NSManagedObjectContext *)context;
 
 #endif
 
 @end
+NS_ASSUME_NONNULL_END

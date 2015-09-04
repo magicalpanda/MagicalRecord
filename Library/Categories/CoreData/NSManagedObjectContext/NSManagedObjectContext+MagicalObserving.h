@@ -9,7 +9,8 @@
 #import <CoreData/CoreData.h>
 #import "MagicalRecordDeprecated.h"
 
-extern NSString * const MagicalRecordDidMergeChangesFromiCloudNotification;
+NS_ASSUME_NONNULL_BEGIN
+extern NSString * _Nonnull const MagicalRecordDidMergeChangesFromiCloudNotification;
 
 /**
  Category methods to aid in observing changes in other contexts.
@@ -86,4 +87,4 @@ extern NSString * const MagicalRecordDidMergeChangesFromiCloudNotification;
 - (void) MR_stopObservingContext:(NSManagedObjectContext *)otherContext MR_DEPRECATED_IN_3_0_PLEASE_USE("MR_stopObservingContextDidSave");
 
 @end
-
+NS_ASSUME_NONNULL_END

@@ -7,6 +7,7 @@
 
 #import <CoreData/CoreData.h>
 
+NS_ASSUME_NONNULL_BEGIN
 @interface NSManagedObjectModel (MagicalRecord)
 
 + (NSManagedObjectModel *)MR_managedObjectModelAtURL:(NSURL *)url;
@@ -15,3 +16,4 @@
 + (NSManagedObjectModel *)MR_newModelNamed:(NSString *)modelName inBundleNamed:(NSString *)bundleName NS_RETURNS_RETAINED;
 
 @end
+NS_ASSUME_NONNULL_END

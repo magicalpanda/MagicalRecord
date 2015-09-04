@@ -13,6 +13,7 @@
 
  @since Available in v3.0 and later.
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface NSDictionary (MagicalRecordAdditions)
 
 /**
@@ -53,3 +54,4 @@
 - (BOOL) MR_shouldDeletePersistentStoreOnModelMismatch;
 
 @end
+NS_ASSUME_NONNULL_END

@@ -10,6 +10,7 @@
  
  @since Available in v2.3 and later.
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface NSArray (MagicalRecord)
 
 ///------------------------
@@ -47,3 +48,4 @@
 - (void) MR_deleteEntitiesInContext:(NSManagedObjectContext *)context;
 
 @end
+NS_ASSUME_NONNULL_END

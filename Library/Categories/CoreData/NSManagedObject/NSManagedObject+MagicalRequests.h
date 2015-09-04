@@ -13,6 +13,7 @@
 
  @since Available in v1.8 and later.
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface NSManagedObject (MagicalRequests)
 
 /**
@@ -121,6 +122,7 @@
 
  @since Available in v1.8 and later.
  */
-+ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)predicate;
++ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate * _Nullable)predicate;
 
 @end
+NS_ASSUME_NONNULL_END
