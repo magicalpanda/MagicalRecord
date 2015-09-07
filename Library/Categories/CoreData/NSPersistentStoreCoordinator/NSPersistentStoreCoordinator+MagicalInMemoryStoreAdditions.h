@@ -13,10 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithInMemoryStore;
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithInMemoryStoreWithModel:(NSManagedObjectModel *)model;
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithInMemoryStoreWithModel:(NSManagedObjectModel *)model withOptions:(NSDictionary * _Nullable)options;
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithInMemoryStoreWithModel:(NSManagedObjectModel *)model withOptions:(NSDictionary * __nullable)options;
 
 - (NSPersistentStore *) MR_addInMemoryStore;
-- (NSPersistentStore *) MR_addInMemoryStoreWithOptions:(NSDictionary * _Nullable)options;
+- (NSPersistentStore *) MR_addInMemoryStoreWithOptions:(NSDictionary * __nullable)options;
 
 @end
 NS_ASSUME_NONNULL_END

@@ -122,7 +122,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v1.8 and later.
  */
-+ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate * _Nullable)predicate;
++ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate * __nullable)predicate;
 
 @end
 NS_ASSUME_NONNULL_END

@@ -10,7 +10,7 @@
 #import "MagicalRecordDeprecated.h"
 
 NS_ASSUME_NONNULL_BEGIN
-extern NSString * _Nonnull const MagicalRecordDidMergeChangesFromiCloudNotification;
+extern NSString * __nonnull const MagicalRecordDidMergeChangesFromiCloudNotification;
 
 /**
  Category methods to aid in observing changes in other contexts.
