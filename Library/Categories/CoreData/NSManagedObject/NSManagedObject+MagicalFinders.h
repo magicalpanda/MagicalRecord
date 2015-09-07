@@ -28,11 +28,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSArray *) MR_findAllInContext:(NSManagedObjectContext *)context;
 + (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending;
 + (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
-+ (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate * _Nullable)searchTerm;
-+ (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate * _Nullable)searchTerm inContext:(NSManagedObjectContext *)context;
++ (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate * __nullable)searchTerm;
++ (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate * __nullable)searchTerm inContext:(NSManagedObjectContext *)context;
 
-+ (NSArray *) MR_findAllWithPredicate:(NSPredicate * _Nullable)searchTerm;
-+ (NSArray *) MR_findAllWithPredicate:(NSPredicate * _Nullable)searchTerm inContext:(NSManagedObjectContext *)context;
++ (NSArray *) MR_findAllWithPredicate:(NSPredicate * __nullable)searchTerm;
++ (NSArray *) MR_findAllWithPredicate:(NSPredicate * __nullable)searchTerm inContext:(NSManagedObjectContext *)context;
 
 + (instancetype) MR_findFirst;
 + (instancetype) MR_findFirstInContext:(NSManagedObjectContext *)context;
@@ -56,8 +56,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (id) MR_findLargestValueForAttribute:(NSString *)attribute;
 + (id) MR_findLargestValueForAttribute:(NSString *)attribute inContext:(NSManagedObjectContext *)context;
-+ (id) MR_findLargestValueForAttribute:(NSString *)attribute withPredicate:(NSPredicate * _Nullable)predicate;
-+ (id) MR_findLargestValueForAttribute:(NSString *)attribute withPredicate:(NSPredicate * _Nullable)predicate inContext:(NSManagedObjectContext *)context;
++ (id) MR_findLargestValueForAttribute:(NSString *)attribute withPredicate:(NSPredicate * __nullable)predicate;
++ (id) MR_findLargestValueForAttribute:(NSString *)attribute withPredicate:(NSPredicate * __nullable)predicate inContext:(NSManagedObjectContext *)context;
 + (id) MR_findSmallestValueForAttribute:(NSString *)attribute;
 + (id) MR_findSmallestValueForAttribute:(NSString *)attribute inContext:(NSManagedObjectContext *)context;
 
