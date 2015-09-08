@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Magical Panda Software LLC. All rights reserved.
 //
 
+NS_ASSUME_NONNULL_BEGIN
 @interface MagicalRecordStack : NSObject
 
 @property (nonatomic, copy) NSString *stackName;
@@ -19,8 +20,8 @@
 @property (nonatomic, assign) BOOL saveOnApplicationWillTerminate;
 @property (nonatomic, assign) BOOL saveOnApplicationWillResignActive;
 
-+ (instancetype) defaultStack;
-+ (void) setDefaultStack:(MagicalRecordStack *)stack;
++ (__nullable instancetype) defaultStack;
++ (void) setDefaultStack:(MagicalRecordStack * __nullable)stack;
 
 + (instancetype) stack;
 
@@ -32,3 +33,4 @@
 - (void) setModelNamed:(NSString *)modelName;
 
 @end
+NS_ASSUME_NONNULL_END

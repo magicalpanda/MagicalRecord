@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return a new instance of the current NSManagedObject subclass
  */
-+ (instancetype) MR_createEntityWithDescription:(NSEntityDescription *)entityDescription inContext:(NSManagedObjectContext *)context;
++ (instancetype) MR_createEntityWithDescription:(NSEntityDescription * __nullable)entityDescription inContext:(NSManagedObjectContext *)context;
 
 /**
  Check if an object has been saved to at least one persistent store

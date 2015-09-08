@@ -92,10 +92,10 @@ static MagicalRecordStack *defaultStack;
 
 - (void) reset;
 {
-    self.context = nil;
-    self.model = nil;
-    self.coordinator = nil;
-    self.store = nil;
+    _context = nil;
+    _model = nil;
+    _coordinator = nil;
+    _store = nil;
 }
 
 - (NSManagedObjectContext *) context;
