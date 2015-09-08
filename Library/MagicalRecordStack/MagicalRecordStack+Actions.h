@@ -9,8 +9,8 @@
 #import "NSManagedObjectContext+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalSaves.h"
 
+NS_ASSUME_NONNULL_BEGIN
 dispatch_queue_t MR_saveQueue(void);
-
 
 @interface MagicalRecordStack (Actions)
 
@@ -42,6 +42,7 @@ dispatch_queue_t MR_saveQueue(void);
  *
  *  @return Whether the save was successful
  */
-- (BOOL) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block error:(NSError **)error;
+- (BOOL) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block error:(NSError ** __nullable)error;
 
 @end
+NS_ASSUME_NONNULL_END
