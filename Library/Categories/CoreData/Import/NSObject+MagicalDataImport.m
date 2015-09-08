@@ -16,7 +16,7 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
 
 - (NSString *) MR_lookupKeyForProperty:(NSPropertyDescription *)propertyDescription;
 {
-    NSString *attributeName = [propertyDescription name];
+    NSString *attributeName = nil;
     NSDictionary *userInfo = [propertyDescription userInfo];
     NSString *lookupKey = nil;
     id value = nil;
