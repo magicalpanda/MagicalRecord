@@ -40,7 +40,7 @@
                 dateFormatKey = [dateFormatKey stringByAppendingFormat:@".%tu", index];
             }
             index++;
-            dateFormat = [[self userInfo] valueForKey:dateFormatKey];
+            dateFormat = [[self userInfo] objectForKey:dateFormatKey];
 
             convertedValue = [value MR_dateWithFormat:dateFormat];
 
@@ -105,7 +105,7 @@
 - (BOOL) MR_isColorAttributeType;
 {
     BOOL isColorAttributeType = NO;
-    NSString *desiredAttributeType = [[self userInfo] valueForKey:kMagicalRecordImportAttributeValueClassNameKey];
+    NSString *desiredAttributeType = [[self userInfo] objectForKey:kMagicalRecordImportAttributeValueClassNameKey];
     if (desiredAttributeType)
     {
         isColorAttributeType = [desiredAttributeType hasSuffix:@"Color"];

@@ -46,7 +46,7 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
 
 - (NSArray *) MR_errorCollection;
 {
-    return [self code] == NSValidationMultipleErrorsError ? [[self userInfo] valueForKey:NSDetailedErrorsKey] : @[self];
+    return [self code] == NSValidationMultipleErrorsError ? [[self userInfo] objectForKey:NSDetailedErrorsKey] : @[self];
 }
 
 - (NSDictionary *) MR_errorCollectionGroupedByObject;
@@ -80,9 +80,9 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
     }
     else if (errorCode == NSManagedObjectMergeError)
     {
-        return [[self userInfo] valueForKey:@"conflictList"];
+        return [[self userInfo] objectForKey:@"conflictList"];
     }
-    return [NSString stringWithFormat:@"(%zd) %@ [%@]", errorCode, MR_errorSummaryFromErrorCode(errorCode), [self MR_validationErrorObject] ?: [[self userInfo] valueForKey:@"reason"]];
+    return [NSString stringWithFormat:@"(%zd) %@ [%@]", errorCode, MR_errorSummaryFromErrorCode(errorCode), [self MR_validationErrorObject] ?: [[self userInfo] objectForKey:@"reason"]];
 }
 
 - (NSString *) MR_coreDataDescription;
@@ -116,7 +116,7 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
 
 - (id) MR_validationError;
 {
-    return [[self userInfo] valueForKey:NSValidationKeyErrorKey];
+    return [[self userInfo] objectForKey:NSValidationKeyErrorKey];
 }
 
 - (NSManagedObject *) MR_validationErrorObject;
