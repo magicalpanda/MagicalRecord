@@ -172,7 +172,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 
         NSRelationshipDescription *relationshipInfo = [relationships valueForKey:relationshipName];
 
-        NSString *lookupKey = [[relationshipInfo userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey] ?: relationshipName;
+        NSString *lookupKey = [[relationshipInfo userInfo] objectForKey:kMagicalRecordImportRelationshipMapKey] ?: relationshipName;
 
         id relatedObjectData;
 
@@ -286,7 +286,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
                                   }
                                   else if (localObjectData)
                                   {
-                                      NSString *relatedByAttribute = [[relationshipInfo userInfo] objectForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: MR_primaryKeyNameFromString([[relationshipInfo destinationEntity] name]);
+                                      NSString *relatedByAttribute = [relationshipInfo MR_primaryKey];
 
                                       if (relatedByAttribute)
                                       {

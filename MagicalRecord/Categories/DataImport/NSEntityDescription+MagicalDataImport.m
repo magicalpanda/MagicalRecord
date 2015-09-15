@@ -15,7 +15,7 @@
 
 - (NSAttributeDescription *) MR_primaryAttributeToRelateBy;
 {
-    NSString *lookupKey = [[self userInfo] valueForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: MR_primaryKeyNameFromString([self name]);
+    NSString *lookupKey = [[self userInfo] objectForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: MR_primaryKeyNameFromString([self name]);
 
     return [self MR_attributeDescriptionForName:lookupKey];
 }

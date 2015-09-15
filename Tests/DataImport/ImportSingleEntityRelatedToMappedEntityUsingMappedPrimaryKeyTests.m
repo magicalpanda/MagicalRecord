@@ -44,7 +44,7 @@
     //verify mapping in relationship description userinfo
     NSEntityDescription *mappedEntity = [entity entity];
     NSRelationshipDescription *testRelationship = [[mappedEntity propertiesByName] valueForKey:@"mappedEntity"];
-    XCTAssertEqualObjects([[testRelationship userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey], @"someRandomAttributeName", @"Expected 'someRandomAttributeName' got '%@'", [[testRelationship userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey]);
+    XCTAssertEqualObjects([[testRelationship userInfo] objectForKey:kMagicalRecordImportRelationshipMapKey], @"someRandomAttributeName", @"Expected 'someRandomAttributeName' got '%@'", [[testRelationship userInfo] objectForKey:kMagicalRecordImportRelationshipMapKey]);
 
     NSNumber *numberOfEntities = [SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_numberOfEntities];
     XCTAssertEqualObjects(numberOfEntities, @1, @"Expected count of 1 entity, got %@", numberOfEntities);
@@ -70,7 +70,7 @@
     //verify mapping in relationship description userinfo
     NSEntityDescription *mappedEntity = [entity entity];
     NSRelationshipDescription *testRelationship = [[mappedEntity propertiesByName] valueForKey:@"mappedEntity"];
-    NSString *mapKey = [[testRelationship userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey];
+    NSString *mapKey = [[testRelationship userInfo] objectForKey:kMagicalRecordImportRelationshipMapKey];
     XCTAssertEqualObjects(mapKey, @"someRandomAttributeName", @"Expected 'someRandomAttributeName' got '%@'", mapKey);
 
     NSNumber *entityCount = [SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_numberOfEntities];
