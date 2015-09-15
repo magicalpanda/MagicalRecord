@@ -114,7 +114,9 @@
 + (MagicalRecordStack *) setupiCloudStackWithLocalStoreNamed:(NSString *)localStore;
 {
     ClassicSQLiteMagicalRecordStack *stack = [[ClassicSQLiteMagicalRecordStack alloc] initWithStoreNamed:localStore];
+#if TARGET_OS_IOS
     stack.storeOptions = @{ NSPersistentStoreUbiquitousContentNameKey: localStore};
+#endif
     [MagicalRecordStack setDefaultStack:stack];
     return stack;
 }
