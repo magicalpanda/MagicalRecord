@@ -7,8 +7,8 @@ Pod::Spec.new do |s|
   s.author   = { 'Saul Mora' => 'saul@magicalpanda.com' }
   s.source   = { :git => 'https://github.com/magicalpanda/MagicalRecord.git',:branch=>'develop', :tag => '2.2' }
   s.description  = 'Handy fetching, threading and data import helpers to make Core Data a little easier to use.'
-  s.platform = :ios
-  s.platform = :osx
+  s.ios.deployment_target = ""
+  s.osx.deployment_target = ""
   s.source_files = 'MagicalRecord/**/*.{h,m}'
   s.framework    = 'CoreData'
   s.requires_arc = true
