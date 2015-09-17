@@ -19,3 +19,6 @@ profile
 
 DerivedData
 Carthage/Build
+
+*.gcno
+*.gcda
