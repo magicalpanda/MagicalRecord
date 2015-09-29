@@ -32,7 +32,12 @@ static NSString *pprefix;
 
     if ([entityName length] == 0)
     {
-        entityName = [NSStringFromClass(self) stringByReplacingOccurrencesOfString:[self MR_projectPrefix] withString:@""];
+        NSString *prefix = [self MR_projectPrefix];
+        if (prefix) {
+            entityName = [NSStringFromClass(self) stringByReplacingOccurrencesOfString:prefix withString:@""];
+        } else {
+            entityName = NSStringFromClass(self);
+        }
     }
 
     return entityName;
