@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.ios.deployment_target = '6.1'
   s.osx.deployment_target = '10.8'
-
+  s.weak_framework = 'CocoaLumberJack'
   s.framework    = 'CoreData'
   s.header_dir   = 'MagicalRecord'
   s.source_files = 'MagicalRecord/**/*.{h,m}'
