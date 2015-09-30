@@ -20,8 +20,15 @@ One of the easiest ways to integrate MagicalRecord in your project is to use [Co
 
 1. Add the following line to your `Podfile`:
 
+    a. Plain
+
     ````ruby
     pod "MagicalRecord"
+    ````
+    b. With CocoaLumberjack as Logger
+
+    ````ruby
+    pod "MagicalRecord/CocoaLumberjack"
     ````
 
 2. In your project directory, run `pod update`

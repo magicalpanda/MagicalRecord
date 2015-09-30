@@ -1,4 +1,5 @@
 Pod::Spec.new do |s|
+  s.default_subspec = 'Core'
   s.name     = 'MagicalRecord'
   s.version  = '2.3.0'
   s.license  = 'MIT'
@@ -10,13 +11,20 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.ios.deployment_target = '6.1'
   s.osx.deployment_target = '10.8'
-  s.weak_framework = 'CocoaLumberJack'
-  s.framework    = 'CoreData'
-  s.header_dir   = 'MagicalRecord'
-  s.source_files = 'MagicalRecord/**/*.{h,m}'
-  s.prefix_header_contents = <<-EOS
-#import <CoreData/CoreData.h>
-#import <MagicalRecord/MagicalRecord.h>
-EOS
+
+  s.subspec 'Core' do |sp|
+    sp.framework    = 'CoreData'
+    sp.header_dir   = 'MagicalRecord'
+    sp.source_files = 'MagicalRecord/**/*.{h,m}'
+    sp.prefix_header_contents = <<-EOS
+    #import <CoreData/CoreData.h>
+    #import <MagicalRecord/MagicalRecord.h>
+    EOS
+  end
+
+  s.subspec 'CocoaLumberjack' do |sp|
+    sp.dependency 'MagicalRecord/Core'
+    sp.dependency 'CocoaLumberjack', '~> 2.0'
+  end
 
 end
