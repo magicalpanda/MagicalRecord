@@ -8,6 +8,7 @@
 
 #import "SQLiteMagicalRecordStack.h"
 
+NS_ASSUME_NONNULL_BEGIN
 @interface AutoMigratingWithSourceAndTargetModelMagicalRecordStack : SQLiteMagicalRecordStack
 
 - (instancetype) initWithSourceModel:(NSManagedObjectModel *)sourceModel targetModel:(NSManagedObjectModel *)targetModel storeAtURL:(NSURL *)storeURL;
@@ -15,3 +16,4 @@
 - (instancetype) initWithSourceModel:(NSManagedObjectModel *)sourceModel targetModel:(NSManagedObjectModel *)targetModel storeNamed:(NSString *)storeName;
 
 @end
+NS_ASSUME_NONNULL_END

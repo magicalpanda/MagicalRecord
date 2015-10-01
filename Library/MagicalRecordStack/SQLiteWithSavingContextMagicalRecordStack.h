@@ -8,8 +8,10 @@
 
 #import "SQLiteMagicalRecordStack.h"
 
+NS_ASSUME_NONNULL_BEGIN
 @interface SQLiteWithSavingContextMagicalRecordStack : SQLiteMagicalRecordStack
 
 @property (nonatomic, strong, readonly) NSManagedObjectContext *savingContext;
 
 @end
+NS_ASSUME_NONNULL_END
