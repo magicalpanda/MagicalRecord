@@ -103,14 +103,22 @@
 
 + (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
 {
-	[request setFetchLimit:1];
+  return [self MR_executeFetchRequestAndReturnNthObject:request N:0 inContext:context];
+}
 
-	NSArray *results = [self MR_executeFetchRequest:request inContext:context];
-	if ([results count] == 0)
-	{
-		return nil;
-	}
-	return [results objectAtIndex:0];
++ (id) MR_executeFetchRequestAndReturnNthObject:(NSFetchRequest *)request
+                                              N:(NSUInteger)N
+                                      inContext:(NSManagedObjectContext *)context
+{
+  [request setFetchLimit:1];
+  [request setFetchOffset:N];
+  
+  NSArray *results = [self MR_executeFetchRequest:request inContext:context];
+  if ([results count] == 0)
+  {
+    return nil;
+  }
+  return [results objectAtIndex:0];
 }
 
 + (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request

@@ -244,6 +244,16 @@
 	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
 }
 
++ (instancetype) MR_findFirstWithPredicate:(NSPredicate *)searchTerm
+                                  sortedBy:(NSString *)property
+                                 ascending:(BOOL)ascending
+                                    offset:(NSUInteger)offset
+                                 inContext:(NSManagedObjectContext *)context
+{
+  NSFetchRequest *request = [self MR_requestAllSortedBy:property ascending:ascending withPredicate:searchTerm];
+  return [self MR_executeFetchRequestAndReturnNthObject:request N:offset inContext:context];
+}
+
 + (instancetype) MR_findFirstWithPredicate:(NSPredicate *)searchterm sortedBy:(NSString *)property ascending:(BOOL)ascending;
 {
 	return [self MR_findFirstWithPredicate:searchterm

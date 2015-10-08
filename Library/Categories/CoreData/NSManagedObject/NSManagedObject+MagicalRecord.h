@@ -53,6 +53,9 @@
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
 + (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request;
 + (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
++ (id) MR_executeFetchRequestAndReturnNthObject:(NSFetchRequest *)request
+                                              N:(NSUInteger)N
+                                      inContext:(NSManagedObjectContext *)context;
 
 /** 
  @name Creating Entities
