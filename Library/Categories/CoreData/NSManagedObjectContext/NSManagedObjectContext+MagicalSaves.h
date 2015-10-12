@@ -48,7 +48,7 @@ typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *error);
  
  @since Available in 2.1 and later.
  */
-- (void) MR_saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion;
+- (void) MR_saveToPersistentStoreAndWaitWithCompletion:(MRSaveCompletionHandler)completion;
 
 /**
  Synchronously save changes in the current context and it's parent.
