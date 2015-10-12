@@ -13,6 +13,17 @@
 #import "NSManagedObjectContext+MagicalRecord.h"
 #import "NSDictionary+MagicalRecordAdditions.h"
 #import "NSPersistentStoreCoordinator+MagicalAutoMigrations.h"
+#import "MagicalRecordLogging.h"
+
+
+@implementation DSManagedObjectContext
+#ifdef DEBUG
+- (void)dealloc
+{
+  MRLogVerbose(@"DSManagedObjectContext dealloc with name: %@", self.MR_workingName);
+}
+#endif
+@end
 
 @interface ModernMagicalRecordStack ()
 @end
@@ -24,13 +35,13 @@
 {
   if (_savingContext == nil)
   {
-    _savingContext = [NSManagedObjectContext MR_privateQueueContext];
+    _savingContext = [DSManagedObjectContext MR_privateQueueContext];
     [_savingContext setPersistentStoreCoordinator:[self coordinator]];
   }
   
   if (_context == nil)
   {
-    _context = [NSManagedObjectContext MR_mainQueueContext];
+    _context = [DSManagedObjectContext MR_mainQueueContext];
     [_context setParentContext:_savingContext];
   }
   
@@ -39,7 +50,7 @@
 
 - (NSManagedObjectContext *)newConfinementContext;
 {
-  NSManagedObjectContext *context = [NSManagedObjectContext MR_privateQueueContext];
+  NSManagedObjectContext *context = [DSManagedObjectContext MR_privateQueueContext];
   [context setParentContext:[self context]];
   return context;
 }

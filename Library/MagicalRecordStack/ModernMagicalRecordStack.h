@@ -8,6 +8,10 @@
 
 #import "SQLiteMagicalRecordStack.h"
 
+@interface DSManagedObjectContext : NSManagedObjectContext
+
+@end
+
 @interface ModernMagicalRecordStack : SQLiteMagicalRecordStack
 @property (nonatomic, strong, readwrite) NSManagedObjectContext *savingContext;
 @end
