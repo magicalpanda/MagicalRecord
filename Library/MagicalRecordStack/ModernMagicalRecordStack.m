@@ -16,13 +16,21 @@
 #import "MagicalRecordLogging.h"
 
 
-@implementation DSManagedObjectContext
+@implementation DSManagedObjectContext {
+  NSString *ds_name;
+}
 #ifdef DEBUG
 - (void)dealloc
 {
-  MRLogVerbose(@"DSManagedObjectContext dealloc with name: %@", self.MR_workingName);
+  MRLogVerbose(@"DSManagedObjectContext dealloc with name: %@", ds_name);
 }
 #endif
+
+- (void)setName:(NSString *)name
+{
+  ds_name = name.copy;
+  [super setName:name];
+}
 @end
 
 @interface ModernMagicalRecordStack ()
