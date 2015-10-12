@@ -116,7 +116,9 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
 
 - (void) MR_setWorkingName:(NSString *)workingName;
 {
+  [self performBlockAndWait:^{
     [[self userInfo] setObject:workingName forKey:kMagicalRecordNSManagedObjectContextWorkingName];
+  }];
 }
 
 - (NSString *) MR_workingName;
