@@ -137,5 +137,10 @@ static NSString * const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSM
   return name;
 }
 
-
+- (void)MR_reset
+{
+  [self performBlockAndWait:^{
+    [self reset];
+  }];
+}
 @end

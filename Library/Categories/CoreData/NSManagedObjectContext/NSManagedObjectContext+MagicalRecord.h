@@ -28,4 +28,5 @@ extern NSString * const MagicalRecordDidMergeChangesFromiCloudNotification;
 - (void) MR_setWorkingName:(NSString *)workingName;
 - (NSString *) MR_workingName;
 
+- (void)MR_reset;
 @end
