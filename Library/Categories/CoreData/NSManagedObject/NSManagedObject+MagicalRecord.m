@@ -22,7 +22,7 @@
 
     if ([entityName length] == 0)
     {
-        entityName = NSStringFromClass(self);
+        entityName = [NSStringFromClass(self) componentsSeparatedByString:@"."].lastObject;
     }
 
     return entityName;
