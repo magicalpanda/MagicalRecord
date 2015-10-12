@@ -36,4 +36,8 @@
 
 + (BOOL)isDefaultStackSetUp;
 
+- (NSPersistentStoreCoordinator *) createCoordinator;
+- (NSPersistentStoreCoordinator *) createCoordinatorWithOptions:(NSDictionary *)options;
+
+
 @end

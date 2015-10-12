@@ -10,9 +10,6 @@
 
 @interface MagicalRecordStack ()
 
-- (NSPersistentStoreCoordinator *) createCoordinator;
-- (NSPersistentStoreCoordinator *) createCoordinatorWithOptions:(NSDictionary *)options;
-
 - (NSManagedObjectContext *) createConfinementContext;
 - (void) loadStack;
 
