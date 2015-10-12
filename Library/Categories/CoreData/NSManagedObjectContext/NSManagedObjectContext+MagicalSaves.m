@@ -49,7 +49,7 @@
 
 - (void) MR_saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion;
 {
-    [self MR_saveWithOptions:MRSaveParentContexts completion:completion];
+    [self MR_saveWithOptions:MRSaveParentContexts | MRSaveSynchronously completion:completion];
 }
 
 - (BOOL) MR_saveToPersistentStoreAndWait;
