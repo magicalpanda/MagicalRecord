@@ -7,57 +7,58 @@
 //
 
 #import <CoreData/CoreData.h>
+#import <MagicalRecord/MagicalRecordXcode7CompatibilityMacros.h>
 
 @interface NSManagedObject (MagicalFinders)
 
-+ (NSArray *) MR_findAll;
-+ (NSArray *) MR_findAllInContext:(NSManagedObjectContext *)context;
-+ (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending;
-+ (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
-+ (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm;
-+ (NSArray *) MR_findAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findAll;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findAllInContext:(MR_nonnull NSManagedObjectContext *)context;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findAllSortedBy:(MR_nonnull NSString *)sortTerm ascending:(BOOL)ascending;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findAllSortedBy:(MR_nonnull NSString *)sortTerm ascending:(BOOL)ascending inContext:(MR_nonnull NSManagedObjectContext *)context;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findAllSortedBy:(MR_nonnull NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(MR_nullable NSPredicate *)searchTerm;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findAllSortedBy:(MR_nonnull NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(MR_nullable NSPredicate *)searchTerm inContext:(MR_nonnull NSManagedObjectContext *)context;
 
-+ (NSArray *) MR_findAllWithPredicate:(NSPredicate *)searchTerm;
-+ (NSArray *) MR_findAllWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findAllWithPredicate:(MR_nullable NSPredicate *)searchTerm;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findAllWithPredicate:(MR_nullable NSPredicate *)searchTerm inContext:(MR_nonnull NSManagedObjectContext *)context;
 
-+ (instancetype) MR_findFirst;
-+ (instancetype) MR_findFirstInContext:(NSManagedObjectContext *)context;
-+ (instancetype) MR_findFirstWithPredicate:(NSPredicate *)searchTerm;
-+ (instancetype) MR_findFirstWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
-+ (instancetype) MR_findFirstWithPredicate:(NSPredicate *)searchterm sortedBy:(NSString *)property ascending:(BOOL)ascending;
-+ (instancetype) MR_findFirstWithPredicate:(NSPredicate *)searchterm sortedBy:(NSString *)property ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
-+ (instancetype) MR_findFirstWithPredicate:(NSPredicate *)searchTerm andRetrieveAttributes:(NSArray *)attributes;
-+ (instancetype) MR_findFirstWithPredicate:(NSPredicate *)searchTerm andRetrieveAttributes:(NSArray *)attributes inContext:(NSManagedObjectContext *)context;
-+ (instancetype) MR_findFirstWithPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortBy ascending:(BOOL)ascending andRetrieveAttributes:(id)attributes, ...;
-+ (instancetype) MR_findFirstWithPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortBy ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context andRetrieveAttributes:(id)attributes, ...;
-+ (instancetype) MR_findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue;
-+ (instancetype) MR_findFirstByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context;
-+ (instancetype) MR_findFirstOrderedByAttribute:(NSString *)attribute ascending:(BOOL)ascending;
-+ (instancetype) MR_findFirstOrderedByAttribute:(NSString *)attribute ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
++ (MR_nullable instancetype) MR_findFirst;
++ (MR_nullable instancetype) MR_findFirstInContext:(MR_nonnull NSManagedObjectContext *)context;
++ (MR_nullable instancetype) MR_findFirstWithPredicate:(MR_nullable NSPredicate *)searchTerm;
++ (MR_nullable instancetype) MR_findFirstWithPredicate:(MR_nullable NSPredicate *)searchTerm inContext:(MR_nonnull NSManagedObjectContext *)context;
++ (MR_nullable instancetype) MR_findFirstWithPredicate:(MR_nullable NSPredicate *)searchterm sortedBy:(MR_nullable NSString *)property ascending:(BOOL)ascending;
++ (MR_nullable instancetype) MR_findFirstWithPredicate:(MR_nullable NSPredicate *)searchterm sortedBy:(MR_nullable NSString *)property ascending:(BOOL)ascending inContext:(MR_nonnull NSManagedObjectContext *)context;
++ (MR_nullable instancetype) MR_findFirstWithPredicate:(MR_nullable NSPredicate *)searchTerm andRetrieveAttributes:(MR_nullable NSArray *)attributes;
++ (MR_nullable instancetype) MR_findFirstWithPredicate:(MR_nullable NSPredicate *)searchTerm andRetrieveAttributes:(MR_nullable NSArray *)attributes inContext:(MR_nonnull NSManagedObjectContext *)context;
++ (MR_nullable instancetype) MR_findFirstWithPredicate:(MR_nullable NSPredicate *)searchTerm sortedBy:(MR_nullable NSString *)sortBy ascending:(BOOL)ascending andRetrieveAttributes:(MR_nullable id)attributes, ...;
++ (MR_nullable instancetype) MR_findFirstWithPredicate:(MR_nullable NSPredicate *)searchTerm sortedBy:(MR_nullable NSString *)sortBy ascending:(BOOL)ascending inContext:(MR_nonnull NSManagedObjectContext *)context andRetrieveAttributes:(MR_nullable id)attributes, ...;
++ (MR_nullable instancetype) MR_findFirstByAttribute:(MR_nonnull NSString *)attribute withValue:(MR_nonnull id)searchValue;
++ (MR_nullable instancetype) MR_findFirstByAttribute:(MR_nonnull NSString *)attribute withValue:(MR_nonnull id)searchValue inContext:(MR_nonnull NSManagedObjectContext *)context;
++ (MR_nullable instancetype) MR_findFirstOrderedByAttribute:(MR_nonnull NSString *)attribute ascending:(BOOL)ascending;
++ (MR_nullable instancetype) MR_findFirstOrderedByAttribute:(MR_nonnull NSString *)attribute ascending:(BOOL)ascending inContext:(MR_nonnull NSManagedObjectContext *)context;
 
-+ (instancetype) MR_findFirstOrCreateByAttribute:(NSString *)attribute withValue:(id)searchValue;
-+ (instancetype) MR_findFirstOrCreateByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context;
++ (MR_nonnull instancetype) MR_findFirstOrCreateByAttribute:(MR_nonnull NSString *)attribute withValue:(MR_nonnull id)searchValue;
++ (MR_nonnull instancetype) MR_findFirstOrCreateByAttribute:(MR_nonnull NSString *)attribute withValue:(MR_nonnull id)searchValue inContext:(MR_nonnull NSManagedObjectContext *)context;
 
-+ (NSArray *) MR_findByAttribute:(NSString *)attribute withValue:(id)searchValue;
-+ (NSArray *) MR_findByAttribute:(NSString *)attribute withValue:(id)searchValue inContext:(NSManagedObjectContext *)context;
-+ (NSArray *) MR_findByAttribute:(NSString *)attribute withValue:(id)searchValue andOrderBy:(NSString *)sortTerm ascending:(BOOL)ascending;
-+ (NSArray *) MR_findByAttribute:(NSString *)attribute withValue:(id)searchValue andOrderBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findByAttribute:(MR_nonnull NSString *)attribute withValue:(MR_nonnull id)searchValue;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findByAttribute:(MR_nonnull NSString *)attribute withValue:(MR_nonnull id)searchValue inContext:(MR_nonnull NSManagedObjectContext *)context;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findByAttribute:(MR_nonnull NSString *)attribute withValue:(MR_nonnull id)searchValue andOrderBy:(MR_nullable NSString *)sortTerm ascending:(BOOL)ascending;
++ (MR_nullable MR_NSArrayOfNSManagedObjects) MR_findByAttribute:(MR_nonnull NSString *)attribute withValue:(MR_nonnull id)searchValue andOrderBy:(MR_nullable NSString *)sortTerm ascending:(BOOL)ascending inContext:(MR_nonnull NSManagedObjectContext *)context;
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
-+ (NSFetchedResultsController *) MR_fetchController:(NSFetchRequest *)request delegate:(id<NSFetchedResultsControllerDelegate>)delegate useFileCache:(BOOL)useFileCache groupedBy:(NSString *)groupKeyPath inContext:(NSManagedObjectContext *)context;
++ (MR_nonnull NSFetchedResultsController *) MR_fetchController:(MR_nonnull NSFetchRequest *)request delegate:(MR_nullable id<NSFetchedResultsControllerDelegate>)delegate useFileCache:(BOOL)useFileCache groupedBy:(MR_nullable NSString *)groupKeyPath inContext:(MR_nonnull NSManagedObjectContext *)context;
 
-+ (NSFetchedResultsController *) MR_fetchAllWithDelegate:(id<NSFetchedResultsControllerDelegate>)delegate;
-+ (NSFetchedResultsController *) MR_fetchAllWithDelegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context;
++ (MR_nonnull NSFetchedResultsController *) MR_fetchAllWithDelegate:(MR_nullable id<NSFetchedResultsControllerDelegate>)delegate;
++ (MR_nonnull NSFetchedResultsController *) MR_fetchAllWithDelegate:(MR_nullable id<NSFetchedResultsControllerDelegate>)delegate inContext:(MR_nonnull NSManagedObjectContext *)context;
 
-+ (NSFetchedResultsController *) MR_fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate;
-+ (NSFetchedResultsController *) MR_fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context;
++ (MR_nonnull NSFetchedResultsController *) MR_fetchAllSortedBy:(MR_nullable NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(MR_nullable NSPredicate *)searchTerm groupBy:(MR_nullable NSString *)groupingKeyPath delegate:(MR_nullable id<NSFetchedResultsControllerDelegate>)delegate;
++ (MR_nonnull NSFetchedResultsController *) MR_fetchAllSortedBy:(MR_nullable NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(MR_nullable NSPredicate *)searchTerm groupBy:(MR_nullable NSString *)groupingKeyPath delegate:(MR_nullable id<NSFetchedResultsControllerDelegate>)delegate inContext:(MR_nonnull NSManagedObjectContext *)context;
 
-+ (NSFetchedResultsController *) MR_fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending;
-+ (NSFetchedResultsController *) MR_fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
++ (MR_nonnull NSFetchedResultsController *) MR_fetchAllGroupedBy:(MR_nullable NSString *)group withPredicate:(MR_nullable NSPredicate *)searchTerm sortedBy:(MR_nullable NSString *)sortTerm ascending:(BOOL)ascending;
++ (MR_nonnull NSFetchedResultsController *) MR_fetchAllGroupedBy:(MR_nullable NSString *)group withPredicate:(MR_nullable NSPredicate *)searchTerm sortedBy:(MR_nullable NSString *)sortTerm ascending:(BOOL)ascending inContext:(MR_nonnull NSManagedObjectContext *)context;
 
-+ (NSFetchedResultsController *) MR_fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending delegate:(id<NSFetchedResultsControllerDelegate>)delegate;
-+ (NSFetchedResultsController *) MR_fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending delegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context;
++ (MR_nonnull NSFetchedResultsController *) MR_fetchAllGroupedBy:(MR_nullable NSString *)group withPredicate:(MR_nullable NSPredicate *)searchTerm sortedBy:(MR_nullable NSString *)sortTerm ascending:(BOOL)ascending delegate:(MR_nullable id<NSFetchedResultsControllerDelegate>)delegate;
++ (MR_nonnull NSFetchedResultsController *) MR_fetchAllGroupedBy:(MR_nullable NSString *)group withPredicate:(MR_nullable NSPredicate *)searchTerm sortedBy:(MR_nullable NSString *)sortTerm ascending:(BOOL)ascending delegate:(MR_nullable id<NSFetchedResultsControllerDelegate>)delegate inContext:(MR_nonnull NSManagedObjectContext *)context;
 
 #endif
 

@@ -6,34 +6,35 @@
 //
 
 #import <CoreData/CoreData.h>
+#import <MagicalRecord/MagicalRecordXcode7CompatibilityMacros.h>
 
-extern NSString * const kMagicalRecordImportCustomDateFormatKey;
-extern NSString * const kMagicalRecordImportDefaultDateFormatString;
-extern NSString * const kMagicalRecordImportUnixTimeString;
-extern NSString * const kMagicalRecordImportAttributeKeyMapKey;
-extern NSString * const kMagicalRecordImportAttributeValueClassNameKey;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordImportCustomDateFormatKey;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordImportDefaultDateFormatString;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordImportUnixTimeString;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordImportAttributeKeyMapKey;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordImportAttributeValueClassNameKey;
 
-extern NSString * const kMagicalRecordImportRelationshipMapKey;
-extern NSString * const kMagicalRecordImportRelationshipLinkedByKey;
-extern NSString * const kMagicalRecordImportRelationshipTypeKey;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordImportRelationshipMapKey;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordImportRelationshipLinkedByKey;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordImportRelationshipTypeKey;
 
 @protocol MagicalRecordDataImportProtocol <NSObject>
 
 @optional
-- (BOOL) shouldImport:(id)data;
-- (void) willImport:(id)data;
-- (void) didImport:(id)data;
+- (BOOL) shouldImport:(MR_nonnull id)data;
+- (void) willImport:(MR_nonnull id)data;
+- (void) didImport:(MR_nonnull id)data;
 
 @end
 
 @interface NSManagedObject (MagicalRecord_DataImport) <MagicalRecordDataImportProtocol>
 
-- (BOOL) MR_importValuesForKeysWithObject:(id)objectData;
+- (BOOL) MR_importValuesForKeysWithObject:(MR_nonnull id)objectData;
 
-+ (instancetype) MR_importFromObject:(id)data;
-+ (instancetype) MR_importFromObject:(id)data inContext:(NSManagedObjectContext *)context;
++ (MR_nonnull instancetype) MR_importFromObject:(MR_nonnull id)data;
++ (MR_nonnull instancetype) MR_importFromObject:(MR_nonnull id)data inContext:(MR_nonnull NSManagedObjectContext *)context;
 
-+ (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData;
-+ (NSArray *) MR_importFromArray:(NSArray *)listOfObjectData inContext:(NSManagedObjectContext *)context;
++ (MR_nonnull MR_NSArrayOfNSManagedObjects) MR_importFromArray:(MR_nonnull MR_GENERIC(NSArray, NSDictionary *) *)listOfObjectData;
++ (MR_nonnull MR_NSArrayOfNSManagedObjects) MR_importFromArray:(MR_nonnull MR_GENERIC(NSArray, NSDictionary *) *)listOfObjectData inContext:(MR_nonnull NSManagedObjectContext *)context;
 
 @end

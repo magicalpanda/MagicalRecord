@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MagicalRecord/MagicalRecordXcode7CompatibilityMacros.h>
 
 /**
  Defines current and historical version numbers for MagicalRecord.
@@ -29,10 +30,10 @@ typedef NS_ENUM(NSUInteger, MagicalRecordVersionTag)
 
 #ifdef NS_BLOCKS_AVAILABLE
 
-extern NSString * const kMagicalRecordCleanedUpNotification;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordCleanedUpNotification;
 
 @class NSManagedObjectContext;
-typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
+typedef void (^CoreDataBlock)(NSManagedObjectContext * __MR_nonnull context);
 
 #endif
 
@@ -59,7 +60,7 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
  @since Available in v2.3 and later.
  */
-+ (NSString *) currentStack;
++ (MR_nonnull NSString *) currentStack;
 
 /**
  Cleans up the entire MagicalRecord stack. Sets the default model, store and context to nil before posting a kMagicalRecordCleanedUpNotification notification.
@@ -75,7 +76,7 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
  @since Available in v2.0 and later.
  */
-+ (void) setDefaultModelFromClass:(Class)modelClass;
++ (void) setDefaultModelFromClass:(MR_nonnull Class)modelClass;
 
 /**
  Looks for a momd file with the specified name, and if found sets it as the default model.
@@ -84,7 +85,7 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
  @since Available in v1.0 and later.
  */
-+ (void) setDefaultModelNamed:(NSString *)modelName;
++ (void) setDefaultModelNamed:(MR_nonnull NSString *)modelName;
 
 /**
  Determines the store file name your app should use. This method is used by the MagicalRecord SQLite stacks when a store file is not specified. The file name returned is in the form "<ApplicationName>.sqlite". `<ApplicationName>` is taken from the application's info dictionary, which is retrieved from the method [[NSBundle mainBundle] infoDictionary]. If no bundle name is available, "CoreDataStore.sqlite" will be used.
@@ -93,6 +94,6 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 
  @since Available in v2.0 and later.
  */
-+ (NSString *) defaultStoreName;
++ (MR_nonnull NSString *) defaultStoreName;
 
 @end

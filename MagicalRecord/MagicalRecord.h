@@ -14,6 +14,7 @@ FOUNDATION_EXPORT double MagicalRecordVersionNumber;
 //! Project version string for MagicalRecord.
 FOUNDATION_EXPORT const unsigned char MagicalRecordVersionString[];
 
+#import <MagicalRecord/MagicalRecordXcode7CompatibilityMacros.h>
 #import <MagicalRecord/MagicalRecordInternal.h>
 #import <MagicalRecord/MagicalRecordLogging.h>
 

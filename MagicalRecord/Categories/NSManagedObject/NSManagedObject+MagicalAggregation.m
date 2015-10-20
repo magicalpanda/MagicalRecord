@@ -173,12 +173,12 @@
 
     NSAttributeDescription *attributeDescription = [[[self MR_entityDescriptionInContext:context] attributesByName] objectForKey:attributeName];
     [expressionDescription setExpressionResultType:[attributeDescription attributeType]];
-    NSArray *properties = [NSArray arrayWithObjects:groupingKeyPath, expressionDescription, nil];
+    NSArray *properties = @[groupingKeyPath, expressionDescription];
 
     NSFetchRequest *fetchRequest = [self MR_requestAllWithPredicate:predicate inContext:context];
     [fetchRequest setPropertiesToFetch:properties];
     [fetchRequest setResultType:NSDictionaryResultType];
-    [fetchRequest setPropertiesToGroupBy:[NSArray arrayWithObject:groupingKeyPath]];
+    [fetchRequest setPropertiesToGroupBy:@[groupingKeyPath]];
 
     NSArray *results = [self MR_executeFetchRequest:fetchRequest inContext:context];
 

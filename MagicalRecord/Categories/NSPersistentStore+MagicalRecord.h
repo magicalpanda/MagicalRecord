@@ -6,21 +6,24 @@
 //
 
 #import <CoreData/CoreData.h>
+#import <MagicalRecord/MagicalRecordXcode7CompatibilityMacros.h>
+#import "MagicalRecordDeprecationMacros.h"
 
 // option to autodelete store if it already exists
 
-extern NSString * const kMagicalRecordDefaultStoreFileName;
+OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordDefaultStoreFileName;
 
 
 @interface NSPersistentStore (MagicalRecord)
 
-+ (NSURL *) MR_defaultLocalStoreUrl;
++ (MR_nonnull NSURL *) MR_defaultLocalStoreUrl;
 
-+ (NSPersistentStore *) MR_defaultPersistentStore;
-+ (void) MR_setDefaultPersistentStore:(NSPersistentStore *) store;
++ (MR_nullable NSPersistentStore *) MR_defaultPersistentStore;
++ (void) MR_setDefaultPersistentStore:(MR_nullable NSPersistentStore *) store;
 
-+ (NSURL *) MR_urlForStoreName:(NSString *)storeFileName;
-+ (NSURL *) MR_cloudURLForUbiqutiousContainer:(NSString *)bucketName;
++ (MR_nullable NSURL *) MR_urlForStoreName:(MR_nonnull NSString *)storeFileName;
++ (MR_nullable NSURL *) MR_cloudURLForUbiquitousContainer:(MR_nonnull NSString *)bucketName;
++ (MR_nullable NSURL *) MR_cloudURLForUbiqutiousContainer:(MR_nonnull NSString *)bucketName MR_DEPRECATED_WILL_BE_REMOVED_IN_PLEASE_USE("4.0", "MR_cloudURLForUbiquitousContainer:");
 
 @end
 

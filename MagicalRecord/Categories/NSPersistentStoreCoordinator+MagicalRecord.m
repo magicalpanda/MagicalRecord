@@ -142,11 +142,11 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
 
 - (void) MR_addiCloudContainerID:(NSString *)containerID contentNameKey:(NSString *)contentNameKey storeIdentifier:(id)storeIdentifier cloudStorePathComponent:(NSString *)subPathComponent completion:(void(^)(void))completionBlock
 {
-    NSAssert([contentNameKey containsString:@"."] == NO, @"NSPersistentStoreUbiquitousContentNameKey cannot contain a period.");
+    NSAssert([contentNameKey rangeOfString:@"."].length > 0, @"NSPersistentStoreUbiquitousContentNameKey cannot contain a period.");
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        NSURL *cloudURL = [NSPersistentStore MR_cloudURLForUbiqutiousContainer:containerID];
+        NSURL *cloudURL = [NSPersistentStore MR_cloudURLForUbiquitousContainer:containerID];
         if (subPathComponent)
         {
             cloudURL = [cloudURL URLByAppendingPathComponent:subPathComponent];

@@ -6,17 +6,18 @@
 //
 
 #import <CoreData/CoreData.h>
+#import <MagicalRecord/MagicalRecordXcode7CompatibilityMacros.h>
 
 @interface NSManagedObjectModel (MagicalRecord)
 
-+ (NSManagedObjectModel *) MR_defaultManagedObjectModel;
++ (MR_nullable NSManagedObjectModel *) MR_defaultManagedObjectModel;
 
-+ (void) MR_setDefaultManagedObjectModel:(NSManagedObjectModel *)newDefaultModel;
++ (void) MR_setDefaultManagedObjectModel:(MR_nullable NSManagedObjectModel *)newDefaultModel;
 
-+ (NSManagedObjectModel *) MR_mergedObjectModelFromMainBundle;
-+ (NSManagedObjectModel *) MR_newManagedObjectModelNamed:(NSString *)modelFileName NS_RETURNS_RETAINED;
-+ (NSManagedObjectModel *) MR_managedObjectModelNamed:(NSString *)modelFileName;
-+ (NSManagedObjectModel *) MR_newModelNamed:(NSString *) modelName inBundleNamed:(NSString *) bundleName NS_RETURNS_RETAINED;
-+ (NSManagedObjectModel *) MR_newModelNamed:(NSString *) modelName inBundle:(NSBundle*) bundle NS_RETURNS_RETAINED;
++ (MR_nullable NSManagedObjectModel *) MR_mergedObjectModelFromMainBundle;
++ (MR_nullable NSManagedObjectModel *) MR_newManagedObjectModelNamed:(MR_nonnull NSString *)modelFileName NS_RETURNS_RETAINED;
++ (MR_nullable NSManagedObjectModel *) MR_managedObjectModelNamed:(MR_nonnull NSString *)modelFileName;
++ (MR_nullable NSManagedObjectModel *) MR_newModelNamed:(MR_nonnull NSString *) modelName inBundleNamed:(MR_nonnull NSString *) bundleName NS_RETURNS_RETAINED;
++ (MR_nullable NSManagedObjectModel *) MR_newModelNamed:(MR_nonnull NSString *) modelName inBundle:(MR_nonnull NSBundle*) bundle NS_RETURNS_RETAINED;
 
 @end

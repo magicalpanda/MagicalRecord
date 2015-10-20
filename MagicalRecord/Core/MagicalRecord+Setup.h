@@ -7,6 +7,7 @@
 //
 
 #import <MagicalRecord/MagicalRecordInternal.h>
+#import <MagicalRecord/MagicalRecordXcode7CompatibilityMacros.h>
 
 @interface MagicalRecord (Setup)
 
@@ -14,11 +15,11 @@
 + (void) setupCoreDataStackWithInMemoryStore;
 + (void) setupAutoMigratingCoreDataStack;
 
-+ (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName;
-+ (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName;
++ (void) setupCoreDataStackWithStoreNamed:(MR_nonnull NSString *)storeName;
++ (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(MR_nonnull NSString *)storeName;
 
-+ (void) setupCoreDataStackWithStoreAtURL:(NSURL *)storeURL;
-+ (void) setupCoreDataStackWithAutoMigratingSqliteStoreAtURL:(NSURL *)storeURL;
++ (void) setupCoreDataStackWithStoreAtURL:(MR_nonnull NSURL *)storeURL;
++ (void) setupCoreDataStackWithAutoMigratingSqliteStoreAtURL:(MR_nonnull NSURL *)storeURL;
 
 
 @end
