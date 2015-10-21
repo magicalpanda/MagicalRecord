@@ -27,7 +27,7 @@
     // Verify mapping in relationship description userinfo
     NSEntityDescription *mappedEntity = [entity entity];
     NSRelationshipDescription *testRelationship = [[mappedEntity propertiesByName] valueForKey:@"mappedEntity"];
-    expect([[testRelationship userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey]).to.equal(@"someRandomAttributeName");
+    expect([[testRelationship userInfo] objectForKey:kMagicalRecordImportRelationshipMapKey]).to.equal(@"someRandomAttributeName");
 }
 
 - (void)testImportMappedEntityUsingPrimaryRelationshipKey
@@ -45,7 +45,7 @@
     // Verify mapping in relationship description userinfo
     NSEntityDescription *mappedEntity = [entity entity];
     NSRelationshipDescription *testRelationship = [[mappedEntity propertiesByName] valueForKey:@"mappedEntity"];
-    expect([[testRelationship userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey]).to.equal(@"someRandomAttributeName");
+    expect([[testRelationship userInfo] objectForKey:kMagicalRecordImportRelationshipMapKey]).to.equal(@"someRandomAttributeName");
 }
 
 @end

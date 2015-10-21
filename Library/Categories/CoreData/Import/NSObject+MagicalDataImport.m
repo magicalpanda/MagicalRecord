@@ -25,7 +25,7 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
     for (NSUInteger i = 1; i < kMagicalRecordImportMaximumAttributeFailoverDepth && value == nil; i++)
     {
         attributeName = [NSString stringWithFormat:@"%@.%tu", kMagicalRecordImportAttributeKeyMapKey, i];
-        lookupKey = [userInfo valueForKey:attributeName];
+        lookupKey = [userInfo objectForKey:attributeName];
         if (lookupKey == nil) //stop after first nil key, means there are no more to look for
         {
             break;
@@ -33,7 +33,7 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
         value = [self valueForKeyPath:lookupKey];
     }
 
-    NSString *basicLookupKey = [userInfo valueForKey:kMagicalRecordImportAttributeKeyMapKey] ?: [propertyDescription name];
+    NSString *basicLookupKey = [userInfo objectForKey:kMagicalRecordImportAttributeKeyMapKey] ?: [propertyDescription name];
 
     return value != nil ? lookupKey : basicLookupKey;
 }

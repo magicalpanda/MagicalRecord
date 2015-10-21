@@ -39,14 +39,14 @@
 
 - (NSAttributeDescription *) MR_primaryAttributeToRelateBy;
 {
-    NSString *lookupKey = [[self userInfo] valueForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: MRPrimaryKeyNameFromString([self name]);
+    NSString *lookupKey = [[self userInfo] objectForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: MRPrimaryKeyNameFromString([self name]);
 
     return [self MR_attributeDescriptionForName:lookupKey];
 }
 
 - (NSAttributeDescription *) MR_primaryAttribute;
 {
-    NSString *lookupKey = [[self userInfo] valueForKey:kMagicalRecordImportDistinctAttributeKey];
+    NSString *lookupKey = [[self userInfo] objectForKey:kMagicalRecordImportDistinctAttributeKey];
     return [self MR_attributeDescriptionForName:lookupKey];
 }
 
