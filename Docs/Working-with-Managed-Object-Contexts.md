@@ -5,7 +5,7 @@
 A variety of simple class methods are provided to help you create new contexts:
 
 - `+ [NSManagedObjectContext MR_newContext]`: Sets the default context as it's parent context. Has a concurrency type of **NSPrivateQueueConcurrencyType**.
-- `+ [NSManagedObjectContext MR_newMainQueueContext]`: Has a concurrency type of ** NSMainQueueConcurrencyType**.
+- `+ [NSManagedObjectContext MR_newMainQueueContext]`: Has a concurrency type of **NSMainQueueConcurrencyType**.
 - `+ [NSManagedObjectContext MR_newPrivateQueueContext]`: Has a concurrency type of **NSPrivateQueueConcurrencyType**.
 - `+ [NSManagedObjectContext MR_newContextWithParent:…]`: Allows you to specify the parent context that will be set. Has a concurrency type of **NSPrivateQueueConcurrencyType**.
 - `+ [NSManagedObjectContext MR_newContextWithStoreCoordinator:…]`: Allows you to specify the persistent store coordinator for the new context. Has a concurrency type of **NSPrivateQueueConcurrencyType**.

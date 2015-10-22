@@ -1461,7 +1461,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MR;
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Magical Panda Software LLC";
 				TargetAttributes = {
 					905D07171A63DE190076B54E = {
@@ -2303,6 +2303,7 @@
 				CURRENT_PROJECT_VERSION = 2.2.99;
 				DYLIB_COMPATIBILITY_VERSION = 2.0;
 				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				ENABLE_TESTABILITY = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
@@ -2322,6 +2323,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DDEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.magicalpanda.ios.${PRODUCT_NAME:rfc1034identifier}";
 			};
 			name = Debug;
 		};
@@ -2355,6 +2357,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_CFLAGS = "-DNEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.magicalpanda.ios.${PRODUCT_NAME:rfc1034identifier}";
 			};
 			name = Release;
 		};
