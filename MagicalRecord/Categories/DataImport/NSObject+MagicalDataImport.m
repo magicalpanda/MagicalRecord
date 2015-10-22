@@ -21,14 +21,14 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
 - (NSString *) MR_lookupKeyForAttribute:(NSAttributeDescription *)attributeInfo;
 {
     NSString *attributeName = [attributeInfo name];
-    NSString *lookupKey = [[attributeInfo userInfo] valueForKey:kMagicalRecordImportAttributeKeyMapKey] ?: attributeName;
+    NSString *lookupKey = [[attributeInfo userInfo] objectForKey:kMagicalRecordImportAttributeKeyMapKey] ?: attributeName;
     
     id value = [self valueForKeyPath:lookupKey];
     
     for (NSUInteger i = 1; i < kMagicalRecordImportMaximumAttributeFailoverDepth && value == nil; i++)
     {
         attributeName = [NSString stringWithFormat:@"%@.%lu", kMagicalRecordImportAttributeKeyMapKey, (unsigned long)i];
-        lookupKey = [[attributeInfo userInfo] valueForKey:attributeName];
+        lookupKey = [[attributeInfo userInfo] objectForKey:attributeName];
         if (lookupKey == nil) 
         {
             return nil;
