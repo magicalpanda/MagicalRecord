@@ -7,7 +7,7 @@
 #import "SingleEntityWithNoRelationships.h"
 
 #define EXP_SHORTHAND
-#import "Expecta.h"
+#import <Expecta/Expecta.h>
 
 #import "MagicalImportFunctions.h"
 

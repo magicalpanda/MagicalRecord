@@ -5,7 +5,7 @@
 
 #import <XCTest/XCTest.h>
 #define EXP_SHORTHAND
-#import "Expecta.h"
+#import <Expecta/Expecta.h>
 
 #import "NSPersistentStore+MagicalRecord.h"
 #import "NSPersistentStore+MagicalRecordPrivate.h"
