@@ -17,4 +17,8 @@ xcuserdata
 profile
 *.moved-aside
 
-Carthage
+DerivedData
+Carthage/Build
+
+*.gcno
+*.gcda
