@@ -102,18 +102,30 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
 - (void) MR_setWorkingName:(NSString *)workingName
 {
-    [[self userInfo] setObject:workingName forKey:MagicalRecordContextWorkingName];
+    if([self respondsToSelector:@selector(setName:)]) {
+        [self performSelector:@selector(setName:) withObject:workingName];
+    }
+    else {
+        [[self userInfo] setObject:workingName forKey:MagicalRecordContextWorkingName];
+    }
 }
 
 - (NSString *) MR_workingName
 {
-    NSString *workingName = [[self userInfo] objectForKey:MagicalRecordContextWorkingName];
-
+    NSString *workingName;
+    
+    if([self respondsToSelector:@selector(name)]) {
+        workingName = [self performSelector:@selector(name)];
+    }
+    else {
+        workingName = [[self userInfo] objectForKey:MagicalRecordContextWorkingName];
+    }
+    
     if ([workingName length] == 0)
     {
         workingName = @"Untitled Context";
     }
-
+    
     return workingName;
 }
 
