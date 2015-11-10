@@ -39,18 +39,20 @@
 
     XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for managed object context"];
 
-    [entity.managedObjectContext performBlock:^{
+    NSManagedObjectContext *entityContext = entity.managedObjectContext;
+
+    [entityContext performBlock:^{
         MappedEntity *testRelatedEntity = entity.mappedEntity;
 
-        //verify mapping in relationship description userinfo
+        // Verify mapping in relationship description userinfo
         NSEntityDescription *mappedEntity = [entity entity];
         NSRelationshipDescription *testRelationship = [[mappedEntity propertiesByName] valueForKey:@"mappedEntity"];
         XCTAssertEqualObjects([[testRelationship userInfo] objectForKey:kMagicalRecordImportRelationshipMapKey], @"someRandomAttributeName", @"Expected 'someRandomAttributeName' got '%@'", [[testRelationship userInfo] objectForKey:kMagicalRecordImportRelationshipMapKey]);
 
-        NSNumber *numberOfEntities = [SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_numberOfEntities];
+        NSNumber *numberOfEntities = [SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_numberOfEntitiesWithContext:entityContext];
         XCTAssertEqualObjects(numberOfEntities, @1, @"Expected count of 1 entity, got %@", numberOfEntities);
 
-        NSNumber *numberOfMappedEntities = [MappedEntity MR_numberOfEntities];
+        NSNumber *numberOfMappedEntities = [MappedEntity MR_numberOfEntitiesWithContext:entityContext];
         XCTAssertEqualObjects(numberOfMappedEntities, @1, @"Expected count of 1 entity, got %@", numberOfMappedEntities);
 
         XCTAssertNotNil(testRelatedEntity, @"testRelatedEntity should not be nil");
@@ -73,7 +75,9 @@
 
     XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for managed object context"];
 
-    [entity.managedObjectContext performBlock:^{
+    NSManagedObjectContext *entityContext = entity.managedObjectContext;
+
+    [entityContext performBlock:^{
         MappedEntity *testRelatedEntity = entity.mappedEntity;
 
         //verify mapping in relationship description userinfo
@@ -82,10 +86,10 @@
         NSString *mapKey = [[testRelationship userInfo] objectForKey:kMagicalRecordImportRelationshipMapKey];
         XCTAssertEqualObjects(mapKey, @"someRandomAttributeName", @"Expected 'someRandomAttributeName' got '%@'", mapKey);
 
-        NSNumber *entityCount = [SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_numberOfEntities];
+        NSNumber *entityCount = [SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_numberOfEntitiesWithContext:entityContext];
         XCTAssertEqualObjects(entityCount, @1, @"Expected count of 1 entity, got %@", entityCount);
 
-        NSNumber *mappedEntityCount = [MappedEntity MR_numberOfEntities];
+        NSNumber *mappedEntityCount = [MappedEntity MR_numberOfEntitiesWithContext:entityContext];
         XCTAssertEqualObjects(mappedEntityCount, @1, @"Expected count of 1 entity, got %@", mappedEntityCount);
 
         NSNumber *mappedEntityID = [testRelatedEntity testMappedEntityID];
