@@ -13,7 +13,7 @@
     [super setUp];
 
     // Don't pollute the tests with logging
-    [MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelError];
+    [MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelOff];
 
     // Setup the default model from the current class' bundle
     [MagicalRecord setDefaultModelFromClass:[self class]];
