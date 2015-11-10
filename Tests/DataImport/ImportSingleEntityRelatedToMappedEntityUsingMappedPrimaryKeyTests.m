@@ -37,55 +37,71 @@
 {
     SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
 
-    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for managed object context"];
 
-    id testRelatedEntity = entity.mappedEntity;
+    [entity.managedObjectContext performBlock:^{
+        MappedEntity *testRelatedEntity = entity.mappedEntity;
 
-    //verify mapping in relationship description userinfo
-    NSEntityDescription *mappedEntity = [entity entity];
-    NSRelationshipDescription *testRelationship = [[mappedEntity propertiesByName] valueForKey:@"mappedEntity"];
-    XCTAssertEqualObjects([[testRelationship userInfo] objectForKey:kMagicalRecordImportRelationshipMapKey], @"someRandomAttributeName", @"Expected 'someRandomAttributeName' got '%@'", [[testRelationship userInfo] objectForKey:kMagicalRecordImportRelationshipMapKey]);
+        //verify mapping in relationship description userinfo
+        NSEntityDescription *mappedEntity = [entity entity];
+        NSRelationshipDescription *testRelationship = [[mappedEntity propertiesByName] valueForKey:@"mappedEntity"];
+        XCTAssertEqualObjects([[testRelationship userInfo] objectForKey:kMagicalRecordImportRelationshipMapKey], @"someRandomAttributeName", @"Expected 'someRandomAttributeName' got '%@'", [[testRelationship userInfo] objectForKey:kMagicalRecordImportRelationshipMapKey]);
 
-    NSNumber *numberOfEntities = [SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_numberOfEntities];
-    XCTAssertEqualObjects(numberOfEntities, @1, @"Expected count of 1 entity, got %@", numberOfEntities);
+        NSNumber *numberOfEntities = [SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_numberOfEntities];
+        XCTAssertEqualObjects(numberOfEntities, @1, @"Expected count of 1 entity, got %@", numberOfEntities);
 
-    NSNumber *numberOfMappedEntities = [MappedEntity MR_numberOfEntities];
-    XCTAssertEqualObjects(numberOfMappedEntities, @1, @"Expected count of 1 entity, got %@", numberOfMappedEntities);
+        NSNumber *numberOfMappedEntities = [MappedEntity MR_numberOfEntities];
+        XCTAssertEqualObjects(numberOfMappedEntities, @1, @"Expected count of 1 entity, got %@", numberOfMappedEntities);
 
-    XCTAssertNotNil(testRelatedEntity, @"testRelatedEntity should not be nil");
+        XCTAssertNotNil(testRelatedEntity, @"testRelatedEntity should not be nil");
 
-    NSRange stringRange = [[testRelatedEntity sampleAttribute] rangeOfString:@"sample json file"];
+        NSRange stringRange = [[testRelatedEntity sampleAttribute] rangeOfString:@"sample json file"];
 
-    XCTAssertTrue(stringRange.length > 0, @"Did not find 'sample json file' in %@", [testRelatedEntity sampleAttribute]);
+        XCTAssertTrue(stringRange.length > 0, @"Did not find 'sample json file' in %@", [testRelatedEntity sampleAttribute]);
+
+        [expectation fulfill];
+    }];
+
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
+        MRLogError(@"Managed Object Context performBlock: timed out due to error: %@", [error localizedDescription]);
+    }];
 }
 
 - (void)testImportMappedEntityUsingPrimaryRelationshipKey
 {
     SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
 
-    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for managed object context"];
 
-    id testRelatedEntity = entity.mappedEntity;
+    [entity.managedObjectContext performBlock:^{
+        MappedEntity *testRelatedEntity = entity.mappedEntity;
 
-    //verify mapping in relationship description userinfo
-    NSEntityDescription *mappedEntity = [entity entity];
-    NSRelationshipDescription *testRelationship = [[mappedEntity propertiesByName] valueForKey:@"mappedEntity"];
-    NSString *mapKey = [[testRelationship userInfo] objectForKey:kMagicalRecordImportRelationshipMapKey];
-    XCTAssertEqualObjects(mapKey, @"someRandomAttributeName", @"Expected 'someRandomAttributeName' got '%@'", mapKey);
+        //verify mapping in relationship description userinfo
+        NSEntityDescription *mappedEntity = [entity entity];
+        NSRelationshipDescription *testRelationship = [[mappedEntity propertiesByName] valueForKey:@"mappedEntity"];
+        NSString *mapKey = [[testRelationship userInfo] objectForKey:kMagicalRecordImportRelationshipMapKey];
+        XCTAssertEqualObjects(mapKey, @"someRandomAttributeName", @"Expected 'someRandomAttributeName' got '%@'", mapKey);
 
-    NSNumber *entityCount = [SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_numberOfEntities];
-    XCTAssertEqualObjects(entityCount, @1, @"Expected count of 1 entity, got %@", entityCount);
+        NSNumber *entityCount = [SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_numberOfEntities];
+        XCTAssertEqualObjects(entityCount, @1, @"Expected count of 1 entity, got %@", entityCount);
 
-    NSNumber *mappedEntityCount = [MappedEntity MR_numberOfEntities];
-    XCTAssertEqualObjects(mappedEntityCount, @1, @"Expected count of 1 entity, got %@", mappedEntityCount);
+        NSNumber *mappedEntityCount = [MappedEntity MR_numberOfEntities];
+        XCTAssertEqualObjects(mappedEntityCount, @1, @"Expected count of 1 entity, got %@", mappedEntityCount);
 
-    NSNumber *mappedEntityID = [testRelatedEntity testMappedEntityID];
-    XCTAssertEqualObjects(mappedEntityID, @42, @"Expected testMappedEntityID to be '42', got '%@'", mappedEntityID);
+        NSNumber *mappedEntityID = [testRelatedEntity testMappedEntityID];
+        XCTAssertEqualObjects(mappedEntityID, @42, @"Expected testMappedEntityID to be '42', got '%@'", mappedEntityID);
 
-    XCTAssertNotNil(testRelatedEntity, @"testRelatedEntity should not be nil");
+        XCTAssertNotNil(testRelatedEntity, @"testRelatedEntity should not be nil");
 
-    NSRange stringRange = [[testRelatedEntity sampleAttribute] rangeOfString:@"sample json file"];
-    XCTAssertTrue(stringRange.length > 0, @"Did not find 'sample json file' in %@", [testRelatedEntity sampleAttribute]);
+        NSRange stringRange = [[testRelatedEntity sampleAttribute] rangeOfString:@"sample json file"];
+        XCTAssertTrue(stringRange.length > 0, @"Did not find 'sample json file' in %@", [testRelatedEntity sampleAttribute]);
+
+        [expectation fulfill];
+    }];
+
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
+        MRLogError(@"Managed Object Context performBlock: timed out due to error: %@", [error localizedDescription]);
+    }];
 }
 
 @end

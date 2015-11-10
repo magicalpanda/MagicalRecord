@@ -26,7 +26,7 @@
     NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
 
     MappedEntity *testMappedEntity = [MappedEntity MR_createEntityInContext:context];
-
+    
     testMappedEntity.mappedEntityID = @42;
     testMappedEntity.sampleAttribute = @"This attribute created as part of the test case setup";
 
@@ -40,19 +40,27 @@
 {
     SingleEntityRelatedToMappedEntityUsingDefaults *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
 
-    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for managed object context"];
 
-    id testRelatedEntity = entity.mappedEntity;
+    [entity.managedObjectContext performBlock:^{
+        MappedEntity *testRelatedEntity = entity.mappedEntity;
 
-    XCTAssertNotNil(testRelatedEntity, @"Entity should not be nil");
+        XCTAssertNotNil(testRelatedEntity, @"Entity should not be nil");
 
-    NSString *string = [testRelatedEntity sampleAttribute];
-    NSRange stringRange = [string rangeOfString:@"sample json file"];
+        NSString *string = testRelatedEntity.sampleAttribute;
+        NSRange stringRange = [string rangeOfString:@"sample json file"];
 
-    XCTAssert(stringRange.length > 0, @"Could not find 'sample json file' in '%@'", string);
+        XCTAssert(stringRange.length > 0, @"Could not find 'sample json file' in '%@'", string);
 
-    NSNumber *numberOfEntities = [MappedEntity MR_numberOfEntities];
-    XCTAssertEqualObjects(numberOfEntities, @1, @"Expected 1 entity, got %@", numberOfEntities);
+        NSNumber *numberOfEntities = [MappedEntity MR_numberOfEntities];
+        XCTAssertEqualObjects(numberOfEntities, @1, @"Expected 1 entity, got %@", numberOfEntities);
+
+        [expectation fulfill];
+    }];
+
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
+        MRLogError(@"Managed Object Context performBlock: timed out due to error: %@", [error localizedDescription]);
+    }];
 }
 
 @end

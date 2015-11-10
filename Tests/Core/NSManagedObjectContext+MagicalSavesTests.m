@@ -148,10 +148,9 @@
     NSManagedObjectContext *parentContext = [NSManagedObjectContext MR_defaultContext];
     NSManagedObjectContext *childContext = [NSManagedObjectContext MR_contextWithParent:parentContext];
 
-    XCTestExpectation *childContextExpectation = [self expectationWithDescription:@"Child Context Completed Work"];
-    XCTestExpectation *parentContextExpectation = [self expectationWithDescription:@"Parent Context Completed Work"];
+    __block NSManagedObjectID *insertedObjectID;
 
-    [childContext performBlock:^{
+    [childContext performBlockAndWait:^{
         SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
 
         expect([insertedObject hasChanges]).to.beTruthy();
@@ -162,36 +161,32 @@
         expect(obtainIDsResult).to.beTruthy();
         expect(obtainIDsError).to.beNil();
 
-        NSManagedObjectID *insertedObjectID = [insertedObject objectID];
+        insertedObjectID = [insertedObject objectID];
 
         expect(insertedObjectID).toNot.beNil();
         expect([insertedObjectID isTemporaryID]).to.beFalsy();
+    }];
 
-        [childContext MR_saveToPersistentStoreAndWait];
+    [childContext MR_saveToPersistentStoreAndWait];
 
-        [parentContext performBlock:^{
-            NSError *fetchExistingObjectFromParentContextError;
-            NSManagedObject *parentContextFetchedObject = [parentContext existingObjectWithID:insertedObjectID error:&fetchExistingObjectFromParentContextError];
+    [parentContext performBlockAndWait:^{
+        NSError *fetchExistingObjectFromParentContextError;
+        NSManagedObject *parentContextFetchedObject = [parentContext existingObjectWithID:insertedObjectID error:&fetchExistingObjectFromParentContextError];
 
-            // Saving to the persistent store should save to all parent contexts,
-            //  leaving no changes
-            expect(fetchExistingObjectFromParentContextError).to.beNil();
-            expect(parentContextFetchedObject).toNot.beNil();
-            expect([parentContextFetchedObject hasChanges]).to.beFalsy();
+        // Saving to the persistent store should save to all parent contexts,
+        //  leaving no changes
+        expect(fetchExistingObjectFromParentContextError).to.beNil();
+        expect(parentContextFetchedObject).toNot.beNil();
+        expect([parentContextFetchedObject hasChanges]).to.beFalsy();
+    }];
 
-            [parentContextExpectation fulfill];
-        }];
-
+    [childContext performBlockAndWait:^{
         NSManagedObject *childContextFetchedObject = [childContext objectRegisteredForID:insertedObjectID];
 
         // The child context should not have changes after the save
         expect(childContextFetchedObject).toNot.beNil();
         expect([childContextFetchedObject hasChanges]).to.beFalsy();
-
-        [childContextExpectation fulfill];
     }];
-
-    [self waitForExpectationsWithTimeout:5.0f handler:nil];
 }
 
 - (void)testSaveToPersistentStoreWhenSaveIsAsynchronous

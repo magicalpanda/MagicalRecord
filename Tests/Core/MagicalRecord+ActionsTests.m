@@ -242,17 +242,26 @@
         expect([fetchedObject valueForKey:kTestAttributeKey]).to.beTruthy();
     }];
 
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for managed object context"];
+
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
         NSManagedObject *changed = [localContext objectWithID:objectId];
         
         [changed setValue:@NO forKey:kTestAttributeKey];
     } completion:^(BOOL contextDidSave, NSError *error) {
-        [rootSavingContext performBlockAndWait:^{
+        [rootSavingContext performBlock:^{
             fetchedObject = [rootSavingContext objectWithID:objectId];
             expect(fetchedObject).toNot.beNil();
             expect([fetchedObject valueForKey:kTestAttributeKey]).to.beFalsy();
+
+            [expectation fulfill];
         }];
     }];
+
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
+        MRLogError(@"Managed Object Context performBlock: timed out due to error: %@", [error localizedDescription]);
+    }];
+
 }
 
 @end
