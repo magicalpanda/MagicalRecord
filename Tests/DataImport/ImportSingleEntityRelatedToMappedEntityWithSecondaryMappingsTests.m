@@ -24,12 +24,12 @@
 {
     SingleEntityRelatedToMappedEntityWithSecondaryMappings *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData];
 
-    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+    [entity.managedObjectContext performBlockAndWait:^{
+        XCTAssertNotNil(entity, @"Entity should not be nil");
 
-    XCTAssertNotNil(entity, @"Entity should not be nil");
-
-    NSRange stringRange = [[entity secondaryMappedAttribute] rangeOfString:@"sample json file"];
-    XCTAssertTrue(stringRange.length > 0, @"Expected string not contained withing secondary mapped attribute. Got %@", [entity secondaryMappedAttribute]);
+        NSRange stringRange = [[entity secondaryMappedAttribute] rangeOfString:@"sample json file"];
+        XCTAssertTrue(stringRange.length > 0, @"Expected string not contained withing secondary mapped attribute. Got %@", [entity secondaryMappedAttribute]);
+    }];
 }
 
 @end
