@@ -287,10 +287,15 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
     {
         NSManagedObjectContext *context = [self managedObjectContext];
         Class managedObjectClass = NSClassFromString([destinationEntity managedObjectClassName]);
-        NSString *primaryKey = [[destinationEntity MR_primaryAttribute] name];
-        if ([primaryKey length])
+				NSString *relatedByAtribute = [relationshipInfo.userInfo objectForKey:kMagicalRecordImportRelationshipLinkedByKey];
+
+				if (relatedByAtribute == nil || [relatedByAtribute length] == 0) {
+            relatedByAtribute = [[destinationEntity MR_primaryAttribute] name];
+        }       
+				
+        if ([relatedByAtribute length])
         {
-            objectForRelationship = [managedObjectClass MR_findFirstByAttribute:primaryKey
+            objectForRelationship = [managedObjectClass MR_findFirstByAttribute:relatedByAtribute
                                                                       withValue:relatedValue
                                                                       inContext:context];
         }
