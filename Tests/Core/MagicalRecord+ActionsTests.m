@@ -172,7 +172,7 @@
         [localContext obtainPermanentIDsForObjects:@[ inserted ] error:nil];
         objectId = [inserted objectID];
     }
-        completion:^(BOOL success, NSError *error) {
+        completion:^(BOOL success, __unused NSError *error) {
             saveSuccessState = success;
             fetchedObject = [currentContext objectWithID:objectId];
         }];
@@ -211,7 +211,7 @@
 
         [changed setValue:@NO forKey:kTestAttributeKey];
     }
-        completion:^(BOOL success, NSError *error) {
+        completion:^(__unused BOOL success, __unused NSError *error) {
             fetchedObject = [currentContext objectWithID:objectId];
         }];
 
@@ -222,11 +222,11 @@
 {
     MagicalRecordStack *currentStack = self.stack;
 
-    [currentStack saveWithBlock:^(NSManagedObjectContext *localContext) {
+    [currentStack saveWithBlock:^(__unused NSManagedObjectContext *localContext) {
         expect([NSThread currentThread]).toNot.equal([NSThread mainThread]);
 
     }
-        completion:^(BOOL success, NSError *error) {
+        completion:^(__unused BOOL success, __unused NSError *error) {
             expect([NSThread currentThread]).to.equal([NSThread mainThread]);
         }];
 }

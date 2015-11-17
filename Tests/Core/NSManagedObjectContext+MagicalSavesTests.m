@@ -106,7 +106,7 @@
 
     NSThread *callingThread = [NSThread currentThread];
 
-    [stackContext MR_saveOnlySelfWithCompletion:^(BOOL success, NSError *error) {
+    [stackContext MR_saveOnlySelfWithCompletion:^(__unused BOOL success, __unused NSError *error) {
         completionBlockCalled = YES;
         completionBlockIsOnCallingThread = [[NSThread currentThread] isEqual:callingThread];
     }];
