@@ -446,7 +446,6 @@
 		90610E5418F4222800E2C328 /* MagicalRecordInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordInternal.h; sourceTree = "<group>"; };
 		90610E5518F4222800E2C328 /* MagicalRecordInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalRecordInternal.m; sourceTree = "<group>"; };
 		90723126190401B40012D0D0 /* MagicalRecordMOGeneratorProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordMOGeneratorProtocol.h; sourceTree = "<group>"; };
-		907E48581BFBF3B7005903DF /* libMagicalRecord for iOS Tests copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "libMagicalRecord for iOS Tests copy-Info.plist"; path = "/Users/tonyarnold/Documents/MagicalRecord/MagicalRecord3/libMagicalRecord for iOS Tests copy-Info.plist"; sourceTree = "<absolute>"; };
 		90808E9618E068B300A4AFB0 /* MagicalRecord+ActionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MagicalRecord+ActionsTests.m"; sourceTree = "<group>"; };
 		90808E9818E06CFC00A4AFB0 /* NSManagedObjectContext+MagicalSavesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+MagicalSavesTests.m"; sourceTree = "<group>"; };
 		909BBC7E18E03FCB007BA3F1 /* MagicalRecord for OS X Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MagicalRecord for OS X Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -761,7 +760,6 @@
 				C7790FAB17E63C3100D20ACF /* Support */,
 				909BBDDD18E040E2007BA3F1 /* Tests */,
 				C721C7B113D0A3AF0097AB6F /* Products */,
-				907E48581BFBF3B7005903DF /* libMagicalRecord for iOS Tests copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
