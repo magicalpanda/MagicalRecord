@@ -108,7 +108,7 @@
                                                              delegate:nil
                                                          useFileCache:NO
                                                             groupedBy:groupingKeyPath
-                                                            inContext:[[MagicalRecordStack defaultStack] context]];
+                                                            inContext:context];
 
     [controller MR_performFetch];
     return controller;
