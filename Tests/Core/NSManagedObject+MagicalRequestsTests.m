@@ -30,12 +30,12 @@
 
 - (void)testCreateRequestForFirstEntity
 {
-    NSFetchRequest *testRequest = [SingleRelatedEntity MR_requestFirstByAttribute:@"mappedStringAttribute" withValue:nil];
+    NSFetchRequest *testRequest = [SingleRelatedEntity MR_requestFirstByAttribute:@"mappedStringAttribute" withValue:@"Autumnal"];
 
     expect([testRequest entityName]).to.equal(NSStringFromClass([SingleRelatedEntity class]));
     expect([testRequest fetchLimit]).to.equal(1);
     expect([testRequest fetchOffset]).to.equal(0);
-    expect([testRequest predicate]).to.equal([NSPredicate predicateWithFormat:@"mappedStringAttribute = nil"]);
+    expect([testRequest predicate]).to.equal([NSPredicate predicateWithFormat:@"mappedStringAttribute = \"Autumnal\""]);
 }
 
 @end

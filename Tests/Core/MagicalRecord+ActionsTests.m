@@ -110,7 +110,7 @@
 
     [currentStack saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
         NSEntityDescription *entityDescription = [NSEntityDescription entityForName:[SingleEntityWithNoRelationships MR_entityName] inManagedObjectContext:localContext];
-        NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityWithDescription:entityDescription inContext:nil];
+        NSManagedObject *inserted = [[SingleEntityWithNoRelationships alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:nil];
 
         expect([inserted hasChanges]).to.beFalsy();
         expect([inserted managedObjectContext]).to.beNil;
