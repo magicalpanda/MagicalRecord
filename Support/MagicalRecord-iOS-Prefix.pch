@@ -3,9 +3,9 @@
 //
 
 #ifdef __OBJC__
-    #import <Foundation/Foundation.h>
-    #import <CoreData/CoreData.h>
-    #import <UIKit/UIKit.h>
+    @import Foundation;
+    @import CoreData;
+    @import UIKit;
 
 #if DEBUG == 1 || BETA == 1
     #define MR_LOGGING_ENABLED 1
