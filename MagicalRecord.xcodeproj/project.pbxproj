@@ -1920,6 +1920,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.magicalpanda.ios.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				WARNING_CFLAGS = (
+					"$(inherited)",
+					"-Wno-documentation-unknown-command",
+				);
 			};
 			name = Debug;
 		};
@@ -1942,6 +1946,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.magicalpanda.ios.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				WARNING_CFLAGS = (
+					"$(inherited)",
+					"-Wno-documentation-unknown-command",
+				);
 			};
 			name = Release;
 		};
@@ -1962,6 +1970,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.magicalpanda.ios.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				WARNING_CFLAGS = (
+					"$(inherited)",
+					"-Wno-documentation-unknown-command",
+				);
 			};
 			name = Debug;
 		};
@@ -1982,6 +1994,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.magicalpanda.ios.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				WARNING_CFLAGS = (
+					"$(inherited)",
+					"-Wno-documentation-unknown-command",
+				);
 			};
 			name = Release;
 		};
@@ -2003,6 +2019,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.magicalpanda.ios.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				WARNING_CFLAGS = (
+					"$(inherited)",
+					"-Wno-documentation-unknown-command",
+				);
 			};
 			name = Debug;
 		};
@@ -2024,6 +2044,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.magicalpanda.ios.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				WARNING_CFLAGS = (
+					"$(inherited)",
+					"-Wno-documentation-unknown-command",
+				);
 			};
 			name = Release;
 		};
@@ -2041,11 +2065,14 @@
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_DUPLICATE_METHOD_MATCH = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_MISSING_PARENTHESES = YES;
 				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
@@ -2063,6 +2090,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
@@ -2091,6 +2119,15 @@
 				);
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Weverything",
+					"-Wno-objc-missing-property-synthesis",
+					"-Wno-gnu",
+					"-Wno-pedantic",
+					"-Wno-direct-ivar-access",
+					"-Wno-cast-qual",
+					"-Wno-nullable-to-nonnull-conversion",
+				);
 			};
 			name = Debug;
 		};
@@ -2109,11 +2146,14 @@
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_DUPLICATE_METHOD_MATCH = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_MISSING_PARENTHESES = YES;
 				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
@@ -2128,6 +2168,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
@@ -2157,6 +2198,15 @@
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				WARNING_CFLAGS = (
+					"-Weverything",
+					"-Wno-objc-missing-property-synthesis",
+					"-Wno-gnu",
+					"-Wno-pedantic",
+					"-Wno-direct-ivar-access",
+					"-Wno-cast-qual",
+					"-Wno-nullable-to-nonnull-conversion",
+				);
 			};
 			name = Release;
 		};

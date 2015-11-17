@@ -11,27 +11,27 @@
 
 @implementation MagicalRecord (Actions)
 
-+ (void)saveWithBlock:(void (^)(NSManagedObjectContext *localContext))block;
++ (void)saveWithBlock:(void (^)(NSManagedObjectContext *localContext))block
 {
     [[MagicalRecordStack defaultStack] saveWithBlock:block];
 }
 
-+ (void)saveWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
++ (void)saveWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion
 {
     [[MagicalRecordStack defaultStack] saveWithBlock:block completion:completion];
 }
 
-+ (void)saveWithBlock:(void (^)(NSManagedObjectContext *))block identifier:(NSString *)contextWorkingName completion:(MRSaveCompletionHandler)completion;
++ (void)saveWithBlock:(void (^)(NSManagedObjectContext *))block identifier:(NSString *)contextWorkingName completion:(MRSaveCompletionHandler)completion
 {
     [[MagicalRecordStack defaultStack] saveWithBlock:block identifier:contextWorkingName completion:completion];
 }
 
-+ (void)saveWithIdentifier:(NSString *)identifier block:(void (^)(NSManagedObjectContext *))block;
++ (void)saveWithIdentifier:(NSString *)identifier block:(void (^)(NSManagedObjectContext *))block
 {
     [[MagicalRecordStack defaultStack] saveWithIdentifier:identifier block:block];
 }
 
-+ (BOOL)saveWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block;
++ (BOOL)saveWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block
 {
     return [self saveWithBlockAndWait:block error:nil];
 }

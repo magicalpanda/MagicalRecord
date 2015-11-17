@@ -3,11 +3,11 @@
 //  Copyright (c) 2013 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
-#import <CoreData/CoreData.h>
+@import XCTest;
+@import CoreData;
 
 #define EXP_SHORTHAND
-#import <Expecta/Expecta.h>
+@import Expecta;
 
 #import "MagicalRecord.h"
 

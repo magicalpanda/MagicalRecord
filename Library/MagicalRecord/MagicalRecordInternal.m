@@ -13,9 +13,9 @@
     [MagicalRecordStack setDefaultStack:nil];
 }
 
-+ (NSString *)defaultStoreName;
++ (NSString *)defaultStoreName
 {
-    NSString *defaultName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(id)kCFBundleNameKey];
+    NSString *defaultName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
 
     if (defaultName == nil)
     {

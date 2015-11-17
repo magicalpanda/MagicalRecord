@@ -9,17 +9,17 @@
 
 @implementation NSManagedObjectModel (MagicalRecord)
 
-+ (NSManagedObjectModel *)MR_managedObjectModelAtURL:(NSURL *)url;
++ (NSManagedObjectModel *)MR_managedObjectModelAtURL:(NSURL *)url
 {
     return [[NSManagedObjectModel alloc] initWithContentsOfURL:url];
 }
 
-+ (NSManagedObjectModel *)MR_mergedObjectModelFromMainBundle;
++ (NSManagedObjectModel *)MR_mergedObjectModelFromMainBundle
 {
     return [self mergedModelFromBundles:nil];
 }
 
-+ (NSManagedObjectModel *)MR_newModelNamed:(NSString *)modelName inBundleNamed:(NSString *)bundleName;
++ (NSManagedObjectModel *)MR_newModelNamed:(NSString *)modelName inBundleNamed:(NSString *)bundleName
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:[modelName stringByDeletingPathExtension]
                                                      ofType:[modelName pathExtension]
@@ -31,7 +31,7 @@
     return mom;
 }
 
-+ (NSManagedObjectModel *)MR_managedObjectModelNamed:(NSString *)modelFileName;
++ (NSManagedObjectModel *)MR_managedObjectModelNamed:(NSString *)modelFileName
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:[modelFileName stringByDeletingPathExtension]
                                                      ofType:[modelFileName pathExtension]];

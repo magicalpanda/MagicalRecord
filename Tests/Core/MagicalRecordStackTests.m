@@ -5,8 +5,7 @@
 
 #import "MagicalRecordTestBase.h"
 
-#define EXP_SHORTHAND
-#import <Expecta/Expecta.h>
+@import Expecta;
 
 #import "MagicalRecord.h"
 

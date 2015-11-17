@@ -3,8 +3,8 @@
 //  Copyright (c) 2014 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+@import Foundation;
+@import CoreData;
 
 @protocol MagicalRecordMOGeneratorProtocol <NSObject>
 

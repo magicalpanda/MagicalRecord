@@ -12,7 +12,7 @@
 
 @implementation ManuallyMigratingMagicalRecordStack
 
-- (NSPersistentStoreCoordinator *)createCoordinator;
+- (NSPersistentStoreCoordinator *)createCoordinator
 {
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self model]];
     [coordinator MR_addManuallyMigratingSqliteStoreAtURL:self.storeURL];

@@ -40,7 +40,7 @@ NSArray *MR_NSSortDescriptorsFromString(NSString *string, BOOL defaultAscendingV
     return request;
 }
 
-+ (NSFetchRequest *)MR_requestAllWithPredicate:(NSPredicate *)predicate;
++ (NSFetchRequest *)MR_requestAllWithPredicate:(NSPredicate *)predicate
 {
     NSFetchRequest *request = [self MR_requestAll];
     [request setPredicate:predicate];
@@ -48,7 +48,7 @@ NSArray *MR_NSSortDescriptorsFromString(NSString *string, BOOL defaultAscendingV
     return request;
 }
 
-+ (NSFetchRequest *)MR_requestAllWhere:(NSString *)attributeName isEqualTo:(id)value;
++ (NSFetchRequest *)MR_requestAllWhere:(NSString *)attributeName isEqualTo:(id)value
 {
     NSFetchRequest *request = [self MR_requestAll];
     [request setPredicate:[NSPredicate predicateWithFormat:@"%K = %@", attributeName, value]];
@@ -56,7 +56,7 @@ NSArray *MR_NSSortDescriptorsFromString(NSString *string, BOOL defaultAscendingV
     return request;
 }
 
-+ (NSFetchRequest *)MR_requestFirstWithPredicate:(NSPredicate *)predicate;
++ (NSFetchRequest *)MR_requestFirstWithPredicate:(NSPredicate *)predicate
 {
     NSFetchRequest *request = [self MR_requestAll];
     [request setPredicate:predicate];
@@ -65,7 +65,7 @@ NSArray *MR_NSSortDescriptorsFromString(NSString *string, BOOL defaultAscendingV
     return request;
 }
 
-+ (NSFetchRequest *)MR_requestFirstByAttribute:(NSString *)attributeName withValue:(id)value;
++ (NSFetchRequest *)MR_requestFirstByAttribute:(NSString *)attributeName withValue:(id)value
 {
     NSFetchRequest *request = [self MR_requestAllWhere:attributeName isEqualTo:value];
     [request setFetchLimit:1];
@@ -73,14 +73,14 @@ NSArray *MR_NSSortDescriptorsFromString(NSString *string, BOOL defaultAscendingV
     return request;
 }
 
-+ (NSFetchRequest *)MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending;
++ (NSFetchRequest *)MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending
 {
     return [self MR_requestAllSortedBy:sortTerm
                              ascending:ascending
                          withPredicate:nil];
 }
 
-+ (NSFetchRequest *)MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)predicate;
++ (NSFetchRequest *)MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)predicate
 {
     NSFetchRequest *request = [self MR_requestAll];
     if (predicate)

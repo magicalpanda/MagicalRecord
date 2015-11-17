@@ -14,10 +14,10 @@ NSString *MRAttributeNameFromString(NSString *value);
 NSString *MRPrimaryKeyNameFromString(NSString *value);
 
 #if TARGET_OS_IPHONE
-#import <UIKit/UIKit.h>
+@import UIKit;
 UIColor *MRColorFromString(NSString *serializedColor);
 #else
-#import <AppKit/AppKit.h>
+@import Cocoa;
 NSColor *MRColorFromString(NSString *serializedColor);
 #endif
 

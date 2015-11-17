@@ -1,7 +1,7 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
 // Make changes to ConcreteRelatedEntity.h instead.
 
-#import <CoreData/CoreData.h>
+@import CoreData;
 #import "AbstractRelatedEntity.h"
 
 extern const struct ConcreteRelatedEntityAttributes

@@ -22,7 +22,7 @@
     return nil;
 }
 
-- (NSDate *)MR_dateWithFormat:(NSString *)dateFormat;
+- (NSDate *)MR_dateWithFormat:(NSString *)dateFormat
 {
     return MRDateFromNumber(self, [dateFormat isEqualToString:kMagicalRecordImportUnixTimeString]);
 }

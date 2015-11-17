@@ -12,7 +12,7 @@
 
 #pragma mark - Entity Information
 
-+ (NSString *)MR_entityName;
++ (NSString *)MR_entityName
 {
     NSString *entityName;
 
@@ -152,7 +152,7 @@
     return managedObject;
 }
 
-- (BOOL)MR_isTemporaryObject;
+- (BOOL)MR_isTemporaryObject
 {
     return [[self objectID] isTemporaryID];
 }
@@ -249,12 +249,12 @@
 
 #pragma mark - Working Across Contexts
 
-- (void)MR_refresh;
+- (void)MR_refresh
 {
     [[self managedObjectContext] refreshObject:self mergeChanges:YES];
 }
 
-- (void)MR_obtainPermanentObjectID;
+- (void)MR_obtainPermanentObjectID
 {
     if ([[self objectID] isTemporaryID])
     {
@@ -268,7 +268,7 @@
     }
 }
 
-- (instancetype)MR_inContext:(NSManagedObjectContext *)otherContext;
+- (instancetype)MR_inContext:(NSManagedObjectContext *)otherContext
 {
     NSManagedObject *inContext = nil;
     NSManagedObjectID *objectID = [self objectID];
@@ -313,7 +313,7 @@
 
 #pragma mark - Validation
 
-- (BOOL)MR_isValidForInsert;
+- (BOOL)MR_isValidForInsert
 {
     NSError *error = nil;
     BOOL isValid = [self validateForInsert:&error];
@@ -325,7 +325,7 @@
     return isValid;
 }
 
-- (BOOL)MR_isValidForUpdate;
+- (BOOL)MR_isValidForUpdate
 {
     NSError *error = nil;
     BOOL isValid = [self validateForUpdate:&error];
@@ -352,7 +352,7 @@
     return [self MR_deleteEntityInContext:context];
 }
 
-- (instancetype)MR_inContextIfTempObject:(NSManagedObjectContext *)otherContext;
+- (instancetype)MR_inContextIfTempObject:(NSManagedObjectContext *)otherContext
 {
     return [self MR_inContextIfTemporaryObject:otherContext];
 }

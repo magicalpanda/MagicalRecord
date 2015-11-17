@@ -19,71 +19,71 @@
 
 @implementation SQLiteMagicalRecordStack
 
-+ (instancetype)stackWithStoreNamed:(NSString *)name;
++ (instancetype)stackWithStoreNamed:(NSString *)name
 {
     return [[self alloc] initWithStoreNamed:name];
 }
 
-+ (instancetype)stackWithStoreAtURL:(NSURL *)url;
++ (instancetype)stackWithStoreAtURL:(NSURL *)url
 {
     return [[self alloc] initWithStoreAtURL:url];
 }
 
-+ (instancetype)stackWithStoreAtPath:(NSString *)path;
++ (instancetype)stackWithStoreAtPath:(NSString *)path
 {
     return [[self alloc] initWithStoreAtPath:path];
 }
 
-+ (instancetype)stackWithStoreNamed:(NSString *)name model:(NSManagedObjectModel *)model;
++ (instancetype)stackWithStoreNamed:(NSString *)name model:(NSManagedObjectModel *)model
 {
     return [[self alloc] initWithStoreNamed:name model:model];
 }
 
-+ (instancetype)stackWithStoreAtURL:(NSURL *)url model:(NSManagedObjectModel *)model;
++ (instancetype)stackWithStoreAtURL:(NSURL *)url model:(NSManagedObjectModel *)model
 {
     return [[self alloc] initWithStoreAtURL:url model:model];
 }
 
-+ (instancetype)stackWithStoreAtPath:(NSString *)path model:(NSManagedObjectModel *)model;
++ (instancetype)stackWithStoreAtPath:(NSString *)path model:(NSManagedObjectModel *)model
 {
     return [[self alloc] initWithStoreAtPath:path model:model];
 }
 
-- (instancetype)init;
+- (instancetype)init
 {
     return [self initWithStoreNamed:[MagicalRecord defaultStoreName]];
 }
 
-- (instancetype)initWithStoreNamed:(NSString *)name;
+- (instancetype)initWithStoreNamed:(NSString *)name
 {
     NSURL *storeURL = [NSPersistentStore MR_fileURLForStoreName:name];
     return [self initWithStoreAtURL:storeURL];
 }
 
-- (instancetype)initWithStoreAtPath:(NSString *)path;
+- (instancetype)initWithStoreAtPath:(NSString *)path
 {
     NSURL *storeURL = [NSURL fileURLWithPath:path];
     return [self initWithStoreAtURL:storeURL];
 }
 
-- (instancetype)initWithStoreAtURL:(NSURL *)url;
+- (instancetype)initWithStoreAtURL:(NSURL *)url
 {
     return [self initWithStoreAtURL:url model:nil];
 }
 
-- (instancetype)initWithStoreAtPath:(NSString *)path model:(NSManagedObjectModel *)model;
+- (instancetype)initWithStoreAtPath:(NSString *)path model:(NSManagedObjectModel *)model
 {
     NSURL *storeURL = [NSURL fileURLWithPath:path];
     return [self initWithStoreAtURL:storeURL model:model];
 }
 
-- (instancetype)initWithStoreNamed:(NSString *)name model:(NSManagedObjectModel *)model;
+- (instancetype)initWithStoreNamed:(NSString *)name model:(NSManagedObjectModel *)model
 {
     NSURL *storeURL = [NSPersistentStore MR_fileURLForStoreName:name];
     return [self initWithStoreAtURL:storeURL model:model];
 }
 
-- (instancetype)initWithStoreAtURL:(NSURL *)url model:(NSManagedObjectModel *)model;
+- (instancetype)initWithStoreAtURL:(NSURL *)url model:(NSManagedObjectModel *)model
 {
     NSParameterAssert(url);
 
@@ -96,7 +96,7 @@
     return self;
 }
 
-- (NSDictionary *)defaultStoreOptions;
+- (NSDictionary *)defaultStoreOptions
 {
     NSDictionary *options = @{MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey :
                                   @(self.shouldDeletePersistentStoreOnModelMismatch)};
@@ -108,14 +108,14 @@
     return [self createCoordinatorWithOptions:[self defaultStoreOptions]];
 }
 
-- (NSManagedObjectContext *)newConfinementContext;
+- (NSManagedObjectContext *)newConfinementContext
 {
     NSManagedObjectContext *context = [super newConfinementContext];
     [context setParentContext:[self context]];
     return context;
 }
 
-- (NSPersistentStoreCoordinator *)createCoordinatorWithOptions:(NSDictionary *)options;
+- (NSPersistentStoreCoordinator *)createCoordinatorWithOptions:(NSDictionary *)options
 {
     MRLogVerbose(@"Loading Store at URL: %@", self.storeURL);
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self model]];

@@ -12,7 +12,7 @@
 
 @implementation NSString (MagicalRecordDataImport)
 
-- (NSString *)MR_capitalizedFirstCharacterString;
+- (NSString *)MR_capitalizedFirstCharacterString
 {
     if ([self length] > 0)
     {
@@ -32,7 +32,7 @@
     return nil;
 }
 
-- (NSDate *)MR_dateWithFormat:(NSString *)dateFormat;
+- (NSDate *)MR_dateWithFormat:(NSString *)dateFormat
 {
     return MRDateFromString(self, dateFormat ?: kMagicalRecordImportDefaultDateFormatString);
 }

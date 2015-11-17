@@ -24,12 +24,12 @@ static MagicalRecordStack *defaultStack;
 
 @implementation MagicalRecordStack
 
-- (void)dealloc;
+- (void)dealloc
 {
     [self reset];
 }
 
-- (NSString *)description;
+- (NSString *)description
 {
     NSMutableString *status = [NSMutableString stringWithString:@"\n"];
 
@@ -42,29 +42,28 @@ static MagicalRecordStack *defaultStack;
     return status;
 }
 
-+ (instancetype)defaultStack;
++ (instancetype)defaultStack
 {
     NSAssert(defaultStack, @"No Default Stack Found. Did you forget to setup MagicalRecord?");
     return defaultStack;
 }
 
-+ (void)setDefaultStack:(MagicalRecordStack *)stack;
++ (void)setDefaultStack:(MagicalRecordStack *)stack
 {
     defaultStack = stack;
     [stack loadStack];
     MRLogVerbose(@"Default Core Data Stack Initialized: %@", stack);
 }
 
-+ (instancetype)stack;
++ (instancetype)stack
 {
     return [[self alloc] init];
 }
 
-- (void)loadStack;
+- (void)loadStack
 {
     NSManagedObjectContext *context = [self context];
     NSString *stackType = NSStringFromClass([self class]);
-#pragma unused(stackType)
     NSAssert(context, @"No NSManagedObjectContext for stack [%@]", stackType);
     NSAssert([self model], @"No NSManagedObjectModel loaded for stack [%@]", stackType);
     NSAssert([self store], @"No NSPersistentStore initialized for stack [%@]", stackType);
@@ -77,20 +76,20 @@ static MagicalRecordStack *defaultStack;
 #endif
 }
 
-- (void)setModelFromClass:(Class)modelClass;
+- (void)setModelFromClass:(Class)modelClass
 {
     NSBundle *bundle = [NSBundle bundleForClass:modelClass];
     NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:[NSArray arrayWithObject:bundle]];
     [self setModel:model];
 }
 
-- (void)setModelNamed:(NSString *)modelName;
+- (void)setModelNamed:(NSString *)modelName
 {
     NSManagedObjectModel *model = [NSManagedObjectModel MR_managedObjectModelNamed:modelName];
     [self setModel:model];
 }
 
-- (void)reset;
+- (void)reset
 {
     _context = nil;
     _model = nil;
@@ -98,7 +97,7 @@ static MagicalRecordStack *defaultStack;
     _store = nil;
 }
 
-- (NSManagedObjectContext *)context;
+- (NSManagedObjectContext *)context
 {
     if (_context == nil)
     {
@@ -110,7 +109,7 @@ static MagicalRecordStack *defaultStack;
     return _context;
 }
 
-- (NSString *)stackName;
+- (NSString *)stackName
 {
     if (_stackName == nil)
     {
@@ -119,7 +118,7 @@ static MagicalRecordStack *defaultStack;
     return _stackName;
 }
 
-- (NSManagedObjectContext *)createConfinementContext;
+- (NSManagedObjectContext *)createConfinementContext
 {
     NSManagedObjectContext *context = [NSManagedObjectContext MR_confinementContext];
     NSString *workingName = [[context MR_workingName] stringByAppendingFormat:@" (%@)", [self stackName]];
@@ -128,14 +127,14 @@ static MagicalRecordStack *defaultStack;
     return context;
 }
 
-- (NSManagedObjectContext *)newConfinementContext;
+- (NSManagedObjectContext *)newConfinementContext
 {
     NSManagedObjectContext *context = [self createConfinementContext];
 
     return context;
 }
 
-- (NSManagedObjectModel *)model;
+- (NSManagedObjectModel *)model
 {
     if (_model == nil)
     {
@@ -144,7 +143,7 @@ static MagicalRecordStack *defaultStack;
     return _model;
 }
 
-- (NSPersistentStoreCoordinator *)coordinator;
+- (NSPersistentStoreCoordinator *)coordinator
 {
     if (_coordinator == nil)
     {
@@ -154,12 +153,12 @@ static MagicalRecordStack *defaultStack;
     return _coordinator;
 }
 
-- (NSPersistentStoreCoordinator *)createCoordinator;
+- (NSPersistentStoreCoordinator *)createCoordinator
 {
     return [self createCoordinatorWithOptions:nil];
 }
 
-- (NSPersistentStoreCoordinator *)createCoordinatorWithOptions:(__unused NSDictionary *)options;
+- (NSPersistentStoreCoordinator *)createCoordinatorWithOptions:(__unused NSDictionary *)options
 {
     MRLogError(@"%@ must be overridden in %@", NSStringFromSelector(_cmd), NSStringFromClass([self class]));
     return nil;
@@ -167,17 +166,17 @@ static MagicalRecordStack *defaultStack;
 
 #pragma mark - Handle System Notifications
 
-- (BOOL)saveOnApplicationWillResignActive;
+- (BOOL)saveOnApplicationWillResignActive
 {
     return self.applicationWillResignActive != nil;
 }
 
-- (void)setSaveOnApplicationWillResignActive:(BOOL)save;
+- (void)setSaveOnApplicationWillResignActive:(BOOL)save
 {
     [self setApplicationWillTerminate:save ? [NSNotificationCenter defaultCenter] : nil];
 }
 
-- (void)setApplicationWillResignActive:(NSNotificationCenter *)applicationWillResignActive;
+- (void)setApplicationWillResignActive:(NSNotificationCenter *)applicationWillResignActive
 {
     NSString *notificationName = nil;
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
@@ -195,17 +194,17 @@ static MagicalRecordStack *defaultStack;
                                        object:nil];
 }
 
-- (BOOL)saveOnApplicationWillTerminate;
+- (BOOL)saveOnApplicationWillTerminate
 {
     return self.applicationWillTerminate != nil;
 }
 
-- (void)setSaveOnApplicationWillTerminate:(BOOL)save;
+- (void)setSaveOnApplicationWillTerminate:(BOOL)save
 {
     [self setApplicationWillTerminate:save ? [NSNotificationCenter defaultCenter] : nil];
 }
 
-- (void)setApplicationWillTerminate:(NSNotificationCenter *)willTerminate;
+- (void)setApplicationWillTerminate:(NSNotificationCenter *)willTerminate
 {
     NSString *notificationName = nil;
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
@@ -223,7 +222,7 @@ static MagicalRecordStack *defaultStack;
                                     object:nil];
 }
 
-- (void)autoSaveHandle:(__unused NSNotification *)notification;
+- (void)autoSaveHandle:(__unused NSNotification *)notification
 {
     [[self context] MR_saveToPersistentStoreAndWait];
 }

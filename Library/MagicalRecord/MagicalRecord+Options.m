@@ -12,12 +12,12 @@ static MagicalRecordLoggingLevel magicalRecordLoggingLevel = MagicalRecordLoggin
 
 @implementation MagicalRecord (Options)
 
-+ (MagicalRecordLoggingLevel)loggingLevel;
++ (MagicalRecordLoggingLevel)loggingLevel
 {
     return magicalRecordLoggingLevel;
 }
 
-+ (void)setLoggingLevel:(MagicalRecordLoggingLevel)level;
++ (void)setLoggingLevel:(MagicalRecordLoggingLevel)level
 {
     magicalRecordLoggingLevel = level;
 }

@@ -52,7 +52,7 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
     return NO;
 }
 
-- (BOOL)MR_shouldImportData:(id)relatedObjectData forRelationshipNamed:(NSString *)relationshipName;
+- (BOOL)MR_shouldImportData:(id)relatedObjectData forRelationshipNamed:(NSString *)relationshipName
 {
     BOOL shouldImport = YES; // By default, we always import
     SEL shouldImportSelector = NSSelectorFromString([NSString stringWithFormat:@"shouldImport%@:", [relationshipName MR_capitalizedFirstCharacterString]]);
@@ -97,7 +97,10 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
         }
     }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wformat-nonliteral"
     NSString *addRelatedObjectToSetMessage = [NSString stringWithFormat:addRelationMessageFormat, MRAttributeNameFromString([relationshipInfo name])];
+#pragma clang diagnostic pop
 
     SEL selector = NSSelectorFromString(addRelatedObjectToSetMessage);
 
@@ -224,7 +227,7 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
 
 #pragma mark - Pre/Post Import Events
 
-- (BOOL)MR_preImport:(id)objectData;
+- (BOOL)MR_preImport:(id)objectData
 {
     if ([self respondsToSelector:@selector(shouldImport:)])
     {
@@ -243,7 +246,7 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
     return YES;
 }
 
-- (BOOL)MR_postImport:(id)objectData;
+- (BOOL)MR_postImport:(id)objectData
 {
     if ([self respondsToSelector:@selector(didImport:)])
     {
@@ -295,7 +298,7 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
 
 #pragma mark - Kicking off importing
 
-- (BOOL)MR_importValuesForKeysWithObject:(id)objectData establishRelationshipBlock:(void (^)(NSRelationshipDescription *, id))relationshipBlock;
+- (BOOL)MR_importValuesForKeysWithObject:(id)objectData establishRelationshipBlock:(void (^)(NSRelationshipDescription *, id))relationshipBlock
 {
     BOOL didStartimporting = [self MR_preImport:objectData];
     if (!didStartimporting)
@@ -337,7 +340,7 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
 
 #pragma mark - Class level importing
 
-+ (id)MR_importFromObject:(id)objectData inContext:(NSManagedObjectContext *)context;
++ (id)MR_importFromObject:(id)objectData inContext:(NSManagedObjectContext *)context
 {
     NSAttributeDescription *primaryAttribute = [[self MR_entityDescriptionInContext:context] MR_primaryAttribute];
 

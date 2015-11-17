@@ -3,7 +3,7 @@
 //  Copyright (c) 2014 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <CoreData/CoreData.h>
+@import CoreData;
 
 /**
  Category methods for working with NSManagedObjects within NSArray instances.

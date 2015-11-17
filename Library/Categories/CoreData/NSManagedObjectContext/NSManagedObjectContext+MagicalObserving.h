@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <CoreData/CoreData.h>
+@import CoreData;
 #import "MagicalRecordDeprecated.h"
 
 NS_ASSUME_NONNULL_BEGIN
