@@ -12,24 +12,24 @@
 
 @interface MagicalRecord (Setup)
 
-+ (MagicalRecordStack *) setupSQLiteStack;
-+ (MagicalRecordStack *) setupSQLiteStackWithStoreAtURL:(NSURL *)url;
-+ (MagicalRecordStack *) setupSQLiteStackWithStoreNamed:(NSString *)storeName;
++ (MagicalRecordStack *)setupSQLiteStack;
++ (MagicalRecordStack *)setupSQLiteStackWithStoreAtURL:(NSURL *)url;
++ (MagicalRecordStack *)setupSQLiteStackWithStoreNamed:(NSString *)storeName;
 
-+ (MagicalRecordStack *) setupAutoMigratingStack;
-+ (MagicalRecordStack *) setupAutoMigratingStackWithSQLiteStoreNamed:(NSString *)storeName;
-+ (MagicalRecordStack *) setupAutoMigratingStackWithSQLiteStoreAtURL:(NSURL *)url;
++ (MagicalRecordStack *)setupAutoMigratingStack;
++ (MagicalRecordStack *)setupAutoMigratingStackWithSQLiteStoreNamed:(NSString *)storeName;
++ (MagicalRecordStack *)setupAutoMigratingStackWithSQLiteStoreAtURL:(NSURL *)url;
 
-+ (MagicalRecordStack *) setupManuallyMigratingStack;
-+ (MagicalRecordStack *) setupManuallyMigratingStackWithSQLiteStoreNamed:(NSString *)storeName;
-+ (MagicalRecordStack *) setupManuallyMigratingStackWithSQLiteStoreAtURL:(NSURL *)url;
++ (MagicalRecordStack *)setupManuallyMigratingStack;
++ (MagicalRecordStack *)setupManuallyMigratingStackWithSQLiteStoreNamed:(NSString *)storeName;
++ (MagicalRecordStack *)setupManuallyMigratingStackWithSQLiteStoreAtURL:(NSURL *)url;
 
-+ (MagicalRecordStack *) setupClassicStack;
-+ (MagicalRecordStack *) setupClassicStackWithSQLiteStoreNamed:(NSString *)storeName;
-+ (MagicalRecordStack *) setupClassicStackWithSQLiteStoreAtURL:(NSURL *)storeURL;
++ (MagicalRecordStack *)setupClassicStack;
++ (MagicalRecordStack *)setupClassicStackWithSQLiteStoreNamed:(NSString *)storeName;
++ (MagicalRecordStack *)setupClassicStackWithSQLiteStoreAtURL:(NSURL *)storeURL;
 
-+ (MagicalRecordStack *) setupiCloudStackWithLocalStoreNamed:(NSString *)localStore;
++ (MagicalRecordStack *)setupiCloudStackWithLocalStoreNamed:(NSString *)localStore;
 
-+ (MagicalRecordStack *) setupStackWithInMemoryStore;
++ (MagicalRecordStack *)setupStackWithInMemoryStore;
 
 @end

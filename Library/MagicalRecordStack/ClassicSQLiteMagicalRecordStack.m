@@ -11,7 +11,6 @@
 #import "NSManagedObjectContext+MagicalObserving.h"
 #import "MagicalRecordLogging.h"
 
-
 @implementation ClassicSQLiteMagicalRecordStack
 
 - (NSManagedObjectContext *)newConfinementContext;
@@ -22,11 +21,11 @@
 
     //TODO: This observation needs to be torn down by the user at this time :(
     [self.context MR_observeContextDidSave:context];
-    
+
     return context;
 }
 
-- (void) saveWithBlock:(void (^)(NSManagedObjectContext *))block identifier:(NSString *)contextWorkingName completion:(MRSaveCompletionHandler)completion;
+- (void)saveWithBlock:(void (^)(NSManagedObjectContext *))block identifier:(NSString *)contextWorkingName completion:(MRSaveCompletionHandler)completion;
 {
     NSParameterAssert(block);
 

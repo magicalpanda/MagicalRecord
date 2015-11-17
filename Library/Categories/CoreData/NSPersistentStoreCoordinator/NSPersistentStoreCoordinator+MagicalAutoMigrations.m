@@ -13,29 +13,29 @@
 
 @implementation NSPersistentStoreCoordinator (MagicalAutoMigrations)
 
-- (NSPersistentStore *) MR_addAutoMigratingSqliteStoreNamed:(NSString *)storeFileName;
+- (NSPersistentStore *)MR_addAutoMigratingSqliteStoreNamed:(NSString *)storeFileName;
 {
     NSDictionary *options = [NSDictionary MR_autoMigrationOptions];
     return [self MR_addAutoMigratingSqliteStoreNamed:storeFileName withOptions:options];
 }
 
-- (NSPersistentStore *) MR_addAutoMigratingSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *)options;
+- (NSPersistentStore *)MR_addAutoMigratingSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *)options;
 {
     return [self MR_addSqliteStoreNamed:storeFileName withOptions:options];
 }
 
-- (NSPersistentStore *) MR_addAutoMigratingSqliteStoreAtURL:(NSURL *)url;
+- (NSPersistentStore *)MR_addAutoMigratingSqliteStoreAtURL:(NSURL *)url;
 {
     NSDictionary *options = [NSDictionary MR_autoMigrationOptions];
     return [self MR_addAutoMigratingSqliteStoreAtURL:url withOptions:options];
 }
 
-- (NSPersistentStore *) MR_addAutoMigratingSqliteStoreAtURL:(NSURL *)url withOptions:(NSDictionary *)options;
+- (NSPersistentStore *)MR_addAutoMigratingSqliteStoreAtURL:(NSURL *)url withOptions:(NSDictionary *)options;
 {
     return [self MR_addSqliteStoreAtURL:url withOptions:options];
 }
 
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *)storeFileName;
++ (NSPersistentStoreCoordinator *)MR_coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *)storeFileName;
 {
     NSManagedObjectModel *model = [[MagicalRecordStack defaultStack] model];
     NSPersistentStoreCoordinator *coordinator = [[self alloc] initWithManagedObjectModel:model];
@@ -51,7 +51,7 @@
     return coordinator;
 }
 
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreAtURL:(NSURL *)url;
++ (NSPersistentStoreCoordinator *)MR_coordinatorWithAutoMigratingSqliteStoreAtURL:(NSURL *)url;
 {
     NSManagedObjectModel *model = [[MagicalRecordStack defaultStack] model];
     NSPersistentStoreCoordinator *coordinator = [[self alloc] initWithManagedObjectModel:model];

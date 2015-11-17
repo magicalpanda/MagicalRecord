@@ -15,7 +15,7 @@
 
  @since Available in v1.8.3 and later.
  */
-- (NSString *) MR_capitalizedFirstCharacterString;
+- (NSString *)MR_capitalizedFirstCharacterString;
 
 /**
  If possible, converts the current string into a data using the specified format string. 
@@ -27,6 +27,6 @@
 
  @since Available in v3.0 and later.
  */
-- (NSDate *) MR_dateWithFormat:(NSString *)dateFormat;
+- (NSDate *)MR_dateWithFormat:(NSString *)dateFormat;
 
 @end

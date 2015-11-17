@@ -26,7 +26,7 @@
 
         expect([inserted hasChanges]).to.beTruthy();
 
-        [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
+        [localContext obtainPermanentIDsForObjects:@[ inserted ] error:nil];
         objectId = [inserted objectID];
     }];
 
@@ -52,7 +52,7 @@
 
         expect([inserted hasChanges]).to.beTruthy();
 
-        [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
+        [localContext obtainPermanentIDsForObjects:@[ inserted ] error:nil];
         objectId = [inserted objectID];
     }];
 
@@ -83,7 +83,7 @@
 
         expect([inserted hasChanges]).to.beTruthy();
 
-        [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
+        [localContext obtainPermanentIDsForObjects:@[ inserted ] error:nil];
         objectId = [inserted objectID];
     }];
 
@@ -114,7 +114,7 @@
 
         expect([inserted hasChanges]).to.beFalsy();
         expect([inserted managedObjectContext]).to.beNil;
-        
+
         objectId = [inserted objectID];
     }];
 
@@ -139,13 +139,14 @@
 
         expect([inserted hasChanges]).to.beTruthy();
 
-        [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
+        [localContext obtainPermanentIDsForObjects:@[ inserted ] error:nil];
         objectId = [inserted objectID];
-    } completion:^(BOOL success, NSError *error) {
-        saveSuccessState = success;
-        saveError = error;
-        existingObject = [currentContext existingObjectWithID:objectId error:&existingObjectError];
-    }];
+    }
+        completion:^(BOOL success, NSError *error) {
+            saveSuccessState = success;
+            saveError = error;
+            existingObject = [currentContext existingObjectWithID:objectId error:&existingObjectError];
+        }];
 
     expect(saveSuccessState).will.beTruthy();
     expect(saveError).will.beNil();
@@ -168,12 +169,13 @@
 
         expect([inserted hasChanges]).to.beTruthy();
 
-        [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
+        [localContext obtainPermanentIDsForObjects:@[ inserted ] error:nil];
         objectId = [inserted objectID];
-    } completion:^(BOOL success, NSError *error) {
-        saveSuccessState = success;
-        fetchedObject = [currentContext objectWithID:objectId];
-    }];
+    }
+        completion:^(BOOL success, NSError *error) {
+            saveSuccessState = success;
+            fetchedObject = [currentContext objectWithID:objectId];
+        }];
 
     expect(saveSuccessState).will.beTruthy();
     expect(fetchedObject).willNot.beNil();
@@ -197,7 +199,7 @@
 
         expect([inserted hasChanges]).to.beTruthy();
 
-        [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
+        [localContext obtainPermanentIDsForObjects:@[ inserted ] error:nil];
         objectId = [inserted objectID];
     }];
 
@@ -208,9 +210,10 @@
         NSManagedObject *changed = [localContext objectWithID:objectId];
 
         [changed setValue:@NO forKey:kTestAttributeKey];
-    } completion:^(BOOL success, NSError *error) {
-        fetchedObject = [currentContext objectWithID:objectId];
-    }];
+    }
+        completion:^(BOOL success, NSError *error) {
+            fetchedObject = [currentContext objectWithID:objectId];
+        }];
 
     expect([fetchedObject valueForKey:kTestAttributeKey]).will.beFalsy();
 }
@@ -218,13 +221,14 @@
 - (void)testAsynchronousSaveActionPerformedOnBackgroundQueue
 {
     MagicalRecordStack *currentStack = self.stack;
-    
+
     [currentStack saveWithBlock:^(NSManagedObjectContext *localContext) {
         expect([NSThread currentThread]).toNot.equal([NSThread mainThread]);
-        
-    } completion:^(BOOL success, NSError *error) {
-        expect([NSThread currentThread]).to.equal([NSThread mainThread]);
-    }];
+
+    }
+        completion:^(BOOL success, NSError *error) {
+            expect([NSThread currentThread]).to.equal([NSThread mainThread]);
+        }];
 }
 
 @end

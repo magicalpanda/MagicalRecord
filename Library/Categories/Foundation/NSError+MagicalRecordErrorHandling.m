@@ -34,22 +34,21 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
 
 @implementation NSString (MagicalRecordLogging)
 
-- (void) MR_logToConsole;
+- (void)MR_logToConsole;
 {
     MRLogVerbose(@"*** %@ ***", self);
 }
 
 @end
 
-
 @implementation NSError (MagicalRecordErrorHandling)
 
-- (NSArray *) MR_errorCollection;
+- (NSArray *)MR_errorCollection;
 {
-    return [self code] == NSValidationMultipleErrorsError ? [[self userInfo] objectForKey:NSDetailedErrorsKey] : @[self];
+    return [self code] == NSValidationMultipleErrorsError ? [[self userInfo] objectForKey:NSDetailedErrorsKey] : @[ self ];
 }
 
-- (NSDictionary *) MR_errorCollectionGroupedByObject;
+- (NSDictionary *)MR_errorCollectionGroupedByObject;
 {
     NSMutableDictionary *collatedObjects = [NSMutableDictionary dictionary];
     [[self MR_errorCollection] enumerateObjectsUsingBlock:^(NSError *error, NSUInteger idx, BOOL *stop) {
@@ -63,20 +62,20 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
         }
 
         [errorList addObject:error];
-        
+
     }];
     return [NSDictionary dictionaryWithDictionary:collatedObjects];
 }
 
-- (NSString *) MR_summaryDescription;
+- (NSString *)MR_summaryDescription;
 {
     NSInteger errorCode = [self code];
     if (MR_errorCodeIsValidationErrorCode(errorCode))
     {
         return [NSString stringWithFormat:@"- [Validation] %@, Invalid Property: [%@], ManagedObject: [%@]",
-                MR_errorSummaryFromErrorCode(errorCode),
-                [self MR_validationError],
-                [self MR_validationErrorObject]];
+                                          MR_errorSummaryFromErrorCode(errorCode),
+                                          [self MR_validationError],
+                                          [self MR_validationErrorObject]];
     }
     else if (errorCode == NSManagedObjectMergeError)
     {
@@ -85,20 +84,20 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
     return [NSString stringWithFormat:@"(%zd) %@ [%@]", errorCode, MR_errorSummaryFromErrorCode(errorCode), [self MR_validationErrorObject] ?: [[self userInfo] objectForKey:@"reason"]];
 }
 
-- (NSString *) MR_coreDataDescription;
+- (NSString *)MR_coreDataDescription;
 {
     NSMutableString *descriptionBuffer = [NSMutableString string];
-    
+
     if ([self code] == NSValidationMultipleErrorsError)
     {
         [descriptionBuffer appendString:@"Multiple Validation Errors --\n"];
         NSDictionary *groupedErrors = [self MR_errorCollectionGroupedByObject];
         [[groupedErrors allKeys] enumerateObjectsUsingBlock:^(NSManagedObject *managedObject, NSUInteger idx, BOOL *stop) {
-            
+
             [descriptionBuffer appendFormat:@" Object: %@ -", managedObject];
             NSArray *errors = [groupedErrors objectForKey:managedObject];
             [errors enumerateObjectsUsingBlock:^(NSError *error, NSUInteger inneridx, BOOL *innerstop) {
-                [descriptionBuffer appendFormat:@" %@ [%@],",[error MR_validationError], MR_errorSummaryFromErrorCode([error code])];
+                [descriptionBuffer appendFormat:@" %@ [%@],", [error MR_validationError], MR_errorSummaryFromErrorCode([error code])];
             }];
             [descriptionBuffer deleteCharactersInRange:NSMakeRange([descriptionBuffer length] - 1, 1)];
             [descriptionBuffer appendString:@"\n"];
@@ -110,22 +109,21 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
             [descriptionBuffer appendFormat:@" %@\n", [obj MR_summaryDescription]];
         }];
     }
-    
+
     return [NSString stringWithString:descriptionBuffer];
 }
 
-- (id) MR_validationError;
+- (id)MR_validationError;
 {
     return [[self userInfo] objectForKey:NSValidationKeyErrorKey];
 }
 
-- (NSManagedObject *) MR_validationErrorObject;
+- (NSManagedObject *)MR_validationErrorObject;
 {
     return [[self userInfo] objectForKey:NSValidationObjectErrorKey];
 }
 
 @end
-
 
 /*********************
  Returns a lookup table of error codes to human readable strings as specified in the Core Data Constants Reference:
@@ -139,20 +137,20 @@ NSDictionary *MR_validationErrorCodeLookup(void)
 
         validationErrorMap =
             @{
-              @(NSValidationMultipleErrorsError): @"General Validation Error",
-              @(NSValidationMissingMandatoryPropertyError): @"Missing Mandiatory Property",
-              @(NSValidationRelationshipLacksMinimumCountError): @"Relationship Lacks Minimum Count",
-              @(NSValidationRelationshipExceedsMaximumCountError): @"Relationship Exceeds Maximum Count",
-              @(NSValidationRelationshipDeniedDeleteError): @"Relationship Denied Delete",
-              @(NSValidationNumberTooLargeError): @"Number too Large",
-              @(NSValidationNumberTooSmallError): @"Number too Small",
-              @(NSValidationDateTooLateError): @"Date too Late",
-              @(NSValidationDateTooSoonError): @"Date too Soon",
-              @(NSValidationInvalidDateError): @"Invalid Date",
-              @(NSValidationStringTooLongError): @"String too Long",
-              @(NSValidationStringTooShortError): @"String too Short",
-              @(NSValidationStringPatternMatchingError): @"String Pattering Matching Error"
-          };
+                @(NSValidationMultipleErrorsError) : @"General Validation Error",
+                @(NSValidationMissingMandatoryPropertyError) : @"Missing Mandiatory Property",
+                @(NSValidationRelationshipLacksMinimumCountError) : @"Relationship Lacks Minimum Count",
+                @(NSValidationRelationshipExceedsMaximumCountError) : @"Relationship Exceeds Maximum Count",
+                @(NSValidationRelationshipDeniedDeleteError) : @"Relationship Denied Delete",
+                @(NSValidationNumberTooLargeError) : @"Number too Large",
+                @(NSValidationNumberTooSmallError) : @"Number too Small",
+                @(NSValidationDateTooLateError) : @"Date too Late",
+                @(NSValidationDateTooSoonError) : @"Date too Soon",
+                @(NSValidationInvalidDateError) : @"Invalid Date",
+                @(NSValidationStringTooLongError) : @"String too Long",
+                @(NSValidationStringTooShortError) : @"String too Short",
+                @(NSValidationStringPatternMatchingError) : @"String Pattering Matching Error"
+            };
     });
     return validationErrorMap;
 }
@@ -170,18 +168,18 @@ NSDictionary *MR_migrationErrorCodeLookup(void)
 
         migrationErrorDictionary =
 
-    @{
-      @(NSMigrationError): @"General Migration Error",
-      @(NSMigrationCancelledError): @"Migration Cancelled",
-      @(NSMigrationMissingSourceModelError): @"Migration Missing Source Model",
-      @(NSMigrationMissingMappingModelError): @"Migration Missing Mapping Model",
-      @(NSMigrationManagerSourceStoreError): @"Migration Manager Source Store Problem",
-      @(NSMigrationManagerDestinationStoreError): @"Migration Manager Destination Store Problem",
-      @(NSEntityMigrationPolicyError): @"Entity Migration Policy Failure",
-      @(NSInferredMappingModelError): @"Error Inferring Mapping Model",
-      @(NSExternalRecordImportError): @"Error Importing External Records"
-      };
-            });
+            @{
+                @(NSMigrationError) : @"General Migration Error",
+                @(NSMigrationCancelledError) : @"Migration Cancelled",
+                @(NSMigrationMissingSourceModelError) : @"Migration Missing Source Model",
+                @(NSMigrationMissingMappingModelError) : @"Migration Missing Mapping Model",
+                @(NSMigrationManagerSourceStoreError) : @"Migration Manager Source Store Problem",
+                @(NSMigrationManagerDestinationStoreError) : @"Migration Manager Destination Store Problem",
+                @(NSEntityMigrationPolicyError) : @"Entity Migration Policy Failure",
+                @(NSInferredMappingModelError) : @"Error Inferring Mapping Model",
+                @(NSExternalRecordImportError) : @"Error Importing External Records"
+            };
+    });
     return migrationErrorDictionary;
 }
 BOOL MR_errorCodeIsMigrationErrorCode(NSInteger errorCode)
@@ -197,19 +195,19 @@ NSDictionary *MR_persistentStoreErrorCodeLookup(void)
     dispatch_once(&onceToken, ^{
 
         persistentStoreErrorDictionary =
-    @{
-      @(NSPersistentStoreInvalidTypeError): @"Invalid type specified for persistent store",
-      @(NSPersistentStoreTypeMismatchError): @"Store does not match specified type",
-      @(NSPersistentStoreIncompatibleSchemaError): @"Unable to save. Error in persistent store (missing table?).",
-      @(NSPersistentStoreSaveError): @"Unable to save. Error in persistent store (permission error?).",
-      @(NSPersistentStoreIncompleteSaveError): @"One or more stores failed to save",
-      @(NSPersistentStoreSaveConflictsError): @"Unable to resolve merge conflicts during save",
-      @(NSPersistentStoreOperationError): @"Error in persistent store. Store level operation failed",
-      @(NSPersistentStoreOpenError): @"Unable to open persistent store",
-      @(NSPersistentStoreTimeoutError): @"Timeout expired connecting to persistent store",
-      @(NSPersistentStoreUnsupportedRequestTypeError): @"Did not understand request type",
-      @(NSPersistentStoreIncompatibleVersionHashError): @"Store version info does not match managed object model version info"
-      };
+            @{
+                @(NSPersistentStoreInvalidTypeError) : @"Invalid type specified for persistent store",
+                @(NSPersistentStoreTypeMismatchError) : @"Store does not match specified type",
+                @(NSPersistentStoreIncompatibleSchemaError) : @"Unable to save. Error in persistent store (missing table?).",
+                @(NSPersistentStoreSaveError) : @"Unable to save. Error in persistent store (permission error?).",
+                @(NSPersistentStoreIncompleteSaveError) : @"One or more stores failed to save",
+                @(NSPersistentStoreSaveConflictsError) : @"Unable to resolve merge conflicts during save",
+                @(NSPersistentStoreOperationError) : @"Error in persistent store. Store level operation failed",
+                @(NSPersistentStoreOpenError) : @"Unable to open persistent store",
+                @(NSPersistentStoreTimeoutError) : @"Timeout expired connecting to persistent store",
+                @(NSPersistentStoreUnsupportedRequestTypeError) : @"Did not understand request type",
+                @(NSPersistentStoreIncompatibleVersionHashError) : @"Store version info does not match managed object model version info"
+            };
     });
     return persistentStoreErrorDictionary;
 }
@@ -226,13 +224,13 @@ NSDictionary *MR_objectGraphErrorCodeLooup(void)
     dispatch_once(&onceToken, ^{
 
         objectGraphErrorCodeMap =
-    @{
-      @(NSManagedObjectContextLockingError): @"Unable to aquire lock in NSManagedObjectContext instance",
-      @(NSPersistentStoreCoordinatorLockingError): @"Unable to aquire lock in NSPersistentStoreCoordinator instance",
-      @(NSManagedObjectReferentialIntegrityError): @"Attempted to fire fault pointing to non-existant object in store",
-      @(NSManagedObjectExternalRelationshipError): @"Object being saved has relationship containing object from a different store",
-      @(NSManagedObjectMergeError): @"Merge policy failed"
-      };
+            @{
+                @(NSManagedObjectContextLockingError) : @"Unable to aquire lock in NSManagedObjectContext instance",
+                @(NSPersistentStoreCoordinatorLockingError) : @"Unable to aquire lock in NSPersistentStoreCoordinator instance",
+                @(NSManagedObjectReferentialIntegrityError) : @"Attempted to fire fault pointing to non-existant object in store",
+                @(NSManagedObjectExternalRelationshipError) : @"Object being saved has relationship containing object from a different store",
+                @(NSManagedObjectMergeError) : @"Merge policy failed"
+            };
     });
     return objectGraphErrorCodeMap;
 }

@@ -7,7 +7,7 @@
 
 @interface NSPersistentStoreCoordinatorMagicalRecordTests : MagicalRecordTestBase
 
-@property(readwrite, nonatomic, strong) NSManagedObjectModel *model;
+@property (readwrite, nonatomic, strong) NSManagedObjectModel *model;
 
 @end
 
@@ -19,7 +19,8 @@
 
     NSURL *testStoreURL = [NSPersistentStore MR_fileURLForStoreNameIfExistsOnDisk:@"TestStore.sqlite"];
 
-    if (testStoreURL) {
+    if (testStoreURL)
+    {
         [[NSFileManager defaultManager] removeItemAtPath:[testStoreURL path] error:nil];
     }
 
@@ -84,7 +85,7 @@
 
     NSPersistentStore *secondStore = [[testCoordinator persistentStores] objectAtIndex:1];
     NSString *secondStoreType = [secondStore type];
-    
+
     expect(secondStoreType).to.equal(NSInMemoryStoreType);
 
     expect([firstStore MR_removePersistentStoreFiles]).to.beTruthy();

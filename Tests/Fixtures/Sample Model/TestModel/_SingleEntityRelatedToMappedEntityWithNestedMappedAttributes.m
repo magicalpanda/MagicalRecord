@@ -4,7 +4,7 @@
 #import "_SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.h"
 
 const struct SingleEntityRelatedToMappedEntityWithNestedMappedAttributesRelationships SingleEntityRelatedToMappedEntityWithNestedMappedAttributesRelationships = {
-	.mappedEntity = @"mappedEntity",
+    .mappedEntity = @"mappedEntity",
 };
 
 @implementation SingleEntityRelatedToMappedEntityWithNestedMappedAttributesID
@@ -12,25 +12,28 @@ const struct SingleEntityRelatedToMappedEntityWithNestedMappedAttributesRelation
 
 @implementation _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes
 
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-	NSParameterAssert(moc_);
-	return [NSEntityDescription insertNewObjectForEntityForName:@"SingleEntityRelatedToMappedEntityWithNestedMappedAttributes" inManagedObjectContext:moc_];
++ (id)insertInManagedObjectContext:(NSManagedObjectContext *)moc_
+{
+    NSParameterAssert(moc_);
+    return [NSEntityDescription insertNewObjectForEntityForName:@"SingleEntityRelatedToMappedEntityWithNestedMappedAttributes" inManagedObjectContext:moc_];
 }
 
-+ (NSString*)entityName {
-	return @"SingleEntityRelatedToMappedEntityWithNestedMappedAttributes";
++ (NSString *)entityName
+{
+    return @"SingleEntityRelatedToMappedEntityWithNestedMappedAttributes";
 }
 
-+ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-	NSParameterAssert(moc_);
-	return [NSEntityDescription entityForName:@"SingleEntityRelatedToMappedEntityWithNestedMappedAttributes" inManagedObjectContext:moc_];
++ (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)moc_
+{
+    NSParameterAssert(moc_);
+    return [NSEntityDescription entityForName:@"SingleEntityRelatedToMappedEntityWithNestedMappedAttributes" inManagedObjectContext:moc_];
 }
 
-- (SingleEntityRelatedToMappedEntityWithNestedMappedAttributesID*)objectID {
-	return (SingleEntityRelatedToMappedEntityWithNestedMappedAttributesID*)[super objectID];
+- (SingleEntityRelatedToMappedEntityWithNestedMappedAttributesID *)objectID
+{
+    return (SingleEntityRelatedToMappedEntityWithNestedMappedAttributesID *)[super objectID];
 }
 
 @dynamic mappedEntity;
 
 @end
-

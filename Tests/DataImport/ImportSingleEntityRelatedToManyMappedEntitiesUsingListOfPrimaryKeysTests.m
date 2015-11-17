@@ -21,7 +21,8 @@
 
     MappedEntity *related = nil;
 
-    for (NSInteger mappedEntityIndex = 0; mappedEntityIndex < 10; mappedEntityIndex++) {
+    for (NSInteger mappedEntityIndex = 0; mappedEntityIndex < 10; mappedEntityIndex++)
+    {
         MappedEntity *testMappedEntity = [MappedEntity MR_createEntityInContext:currentStackContext];
         testMappedEntity.testMappedEntityID = @(mappedEntityIndex);
         testMappedEntity.sampleAttribute = [NSString stringWithFormat:@"test attribute %zd", mappedEntityIndex];
@@ -49,7 +50,8 @@
 
     expect(testEntity.mappedEntities).to.haveCountOf(5);
 
-    for (MappedEntity *relatedEntity in testEntity.mappedEntities) {
+    for (MappedEntity *relatedEntity in testEntity.mappedEntities)
+    {
         expect(relatedEntity.sampleAttribute).to.beginWith(@"test attribute");
     }
 }

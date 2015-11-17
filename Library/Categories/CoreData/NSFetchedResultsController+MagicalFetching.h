@@ -21,7 +21,7 @@
 
  @since Available in v3.0 and later.
  */
-- (void) MR_performFetch;
+- (void)MR_performFetch;
 
 @end
 #endif

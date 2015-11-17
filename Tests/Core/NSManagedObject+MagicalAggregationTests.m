@@ -40,7 +40,8 @@
 
 - (void)p_createSampleData:(NSInteger)numberOfTestEntitiesToCreate inContext:(NSManagedObjectContext *)context
 {
-    for (NSInteger i = 0; i < numberOfTestEntitiesToCreate; i++) {
+    for (NSInteger i = 0; i < numberOfTestEntitiesToCreate; i++)
+    {
         SingleRelatedEntity *testEntity = [SingleRelatedEntity MR_createEntityInContext:context];
         testEntity.mappedStringAttribute = [NSString stringWithFormat:@"%zd", i / 5];
     }

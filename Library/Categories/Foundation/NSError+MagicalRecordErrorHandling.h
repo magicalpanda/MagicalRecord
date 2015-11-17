@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v3.0 and later.
  */
-- (void) MR_logToConsole;
+- (void)MR_logToConsole;
 
 @end
 
@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v3.0 and later.
  */
-- (NSString *) MR_coreDataDescription;
+- (NSString *)MR_coreDataDescription;
 
 @end
 

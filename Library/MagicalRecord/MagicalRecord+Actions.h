@@ -25,7 +25,7 @@
  
  @since Available in v2.1 and later.
  */
-+ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
++ (void)saveWithBlock:(void (^)(NSManagedObjectContext *localContext))block;
 
 /**
  @param block Make changes to your NSManagedObject instances in this block using the provided `localContext`. The block will be executed on a background queue, and once complete the context will be saved.
@@ -33,7 +33,7 @@
  
  @since Available in v2.1 and later.
  */
-+ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
++ (void)saveWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
 
 /**
  @param block Make changes to your NSManagedObject instances in this block using the provided `localContext`. The block will be executed on a background queue, and once complete the context will be saved.
@@ -42,7 +42,7 @@
  
  @since Available in v2.1 and later.
  */
-+ (void) saveWithBlock:(void (^)(NSManagedObjectContext *))block identifier:(NSString *)identifier completion:(MRSaveCompletionHandler)completion;
++ (void)saveWithBlock:(void (^)(NSManagedObjectContext *))block identifier:(NSString *)identifier completion:(MRSaveCompletionHandler)completion;
 
 /**
  @discussion The identifier is printed out when logging is enabled, and the context is being saved.
@@ -52,7 +52,7 @@
  
  @since Available in v2.1 and later.
  */
-+ (void) saveWithIdentifier:(NSString *)identifier block:(void(^)(NSManagedObjectContext *))block;
++ (void)saveWithIdentifier:(NSString *)identifier block:(void (^)(NSManagedObjectContext *))block;
 
 /**
  Synchronously saves the default managed object context (if there is one) and any parent contexts.
@@ -63,7 +63,7 @@
  
  @since Available in v2.1 and later.
  */
-+ (BOOL) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
++ (BOOL)saveWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block;
 
 /**
  Synchronously saves the default managed object context (if there is one) and any parent contexts.
@@ -75,6 +75,6 @@
  
  @since Available in v2.1 and later.
  */
-+ (BOOL) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block error:(NSError **)error;
++ (BOOL)saveWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block error:(NSError **)error;
 
 @end

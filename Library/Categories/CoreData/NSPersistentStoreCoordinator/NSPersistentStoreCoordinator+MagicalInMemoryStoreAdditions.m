@@ -16,21 +16,21 @@
 
 #pragma mark - Public Class Methods
 
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithInMemoryStore
++ (NSPersistentStoreCoordinator *)MR_coordinatorWithInMemoryStore
 {
-	NSManagedObjectModel *defaultStackModel = [[MagicalRecordStack defaultStack] model];
+    NSManagedObjectModel *defaultStackModel = [[MagicalRecordStack defaultStack] model];
 
     return [self MR_coordinatorWithInMemoryStoreWithModel:defaultStackModel];
 }
 
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithInMemoryStoreWithModel:(NSManagedObjectModel *)model
++ (NSPersistentStoreCoordinator *)MR_coordinatorWithInMemoryStoreWithModel:(NSManagedObjectModel *)model
 {
     return [self MR_coordinatorWithInMemoryStoreWithModel:model withOptions:nil];
 }
 
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithInMemoryStoreWithModel:(NSManagedObjectModel *)model withOptions:(NSDictionary *)options
++ (NSPersistentStoreCoordinator *)MR_coordinatorWithInMemoryStoreWithModel:(NSManagedObjectModel *)model withOptions:(NSDictionary *)options
 {
-	NSPersistentStoreCoordinator *coordinator = [[self alloc] initWithManagedObjectModel:model];
+    NSPersistentStoreCoordinator *coordinator = [[self alloc] initWithManagedObjectModel:model];
 
     [coordinator MR_addInMemoryStoreWithOptions:options];
 
@@ -39,12 +39,12 @@
 
 #pragma mark - Public Instance Methods
 
-- (NSPersistentStore *) MR_addInMemoryStore
+- (NSPersistentStore *)MR_addInMemoryStore
 {
     return [self MR_addInMemoryStoreWithOptions:nil];
 }
 
-- (NSPersistentStore *) MR_addInMemoryStoreWithOptions:(NSDictionary *)options
+- (NSPersistentStore *)MR_addInMemoryStoreWithOptions:(NSDictionary *)options
 {
     NSError *error;
     NSPersistentStore *store = [self addPersistentStoreWithType:NSInMemoryStoreType

@@ -4,14 +4,14 @@
 #import "_MappedEntity.h"
 
 const struct MappedEntityAttributes MappedEntityAttributes = {
-	.mappedEntityID = @"mappedEntityID",
-	.nestedAttribute = @"nestedAttribute",
-	.sampleAttribute = @"sampleAttribute",
-	.testMappedEntityID = @"testMappedEntityID",
+    .mappedEntityID = @"mappedEntityID",
+    .nestedAttribute = @"nestedAttribute",
+    .sampleAttribute = @"sampleAttribute",
+    .testMappedEntityID = @"testMappedEntityID",
 };
 
 const struct MappedEntityUserInfo MappedEntityUserInfo = {
-	.relatedByAttribute = @"mapped",
+    .relatedByAttribute = @"mapped",
 };
 
 @implementation MappedEntityID
@@ -19,22 +19,26 @@ const struct MappedEntityUserInfo MappedEntityUserInfo = {
 
 @implementation _MappedEntity
 
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-	NSParameterAssert(moc_);
-	return [NSEntityDescription insertNewObjectForEntityForName:@"MappedEntity" inManagedObjectContext:moc_];
++ (id)insertInManagedObjectContext:(NSManagedObjectContext *)moc_
+{
+    NSParameterAssert(moc_);
+    return [NSEntityDescription insertNewObjectForEntityForName:@"MappedEntity" inManagedObjectContext:moc_];
 }
 
-+ (NSString*)entityName {
-	return @"MappedEntity";
++ (NSString *)entityName
+{
+    return @"MappedEntity";
 }
 
-+ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-	NSParameterAssert(moc_);
-	return [NSEntityDescription entityForName:@"MappedEntity" inManagedObjectContext:moc_];
++ (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)moc_
+{
+    NSParameterAssert(moc_);
+    return [NSEntityDescription entityForName:@"MappedEntity" inManagedObjectContext:moc_];
 }
 
-- (MappedEntityID*)objectID {
-	return (MappedEntityID*)[super objectID];
+- (MappedEntityID *)objectID
+{
+    return (MappedEntityID *)[super objectID];
 }
 
 @dynamic mappedEntityID;
@@ -46,4 +50,3 @@ const struct MappedEntityUserInfo MappedEntityUserInfo = {
 @dynamic testMappedEntityID;
 
 @end
-

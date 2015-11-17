@@ -9,7 +9,7 @@
 
 @implementation NSArray (MagicalRecord)
 
-- (NSArray *) MR_entitiesInContext:(NSManagedObjectContext *)context
+- (NSArray *)MR_entitiesInContext:(NSManagedObjectContext *)context
 {
     NSMutableArray *objectsInContext = [NSMutableArray new];
 
@@ -19,7 +19,8 @@
 
         NSManagedObject *managedObjectInContext = [object MR_inContext:context];
 
-        if ([managedObjectInContext isKindOfClass:[NSManagedObject class]]) {
+        if ([managedObjectInContext isKindOfClass:[NSManagedObject class]])
+        {
             [objectsInContext addObject:managedObjectInContext];
         }
     }
@@ -27,12 +28,12 @@
     return objectsInContext;
 }
 
-- (void) MR_deleteEntities
+- (void)MR_deleteEntities
 {
     [self MR_deleteEntitiesInContext:[[MagicalRecordStack defaultStack] context]];
 }
 
-- (void) MR_deleteEntitiesInContext:(NSManagedObjectContext *)otherContext
+- (void)MR_deleteEntitiesInContext:(NSManagedObjectContext *)otherContext
 {
     for (id object in self)
     {

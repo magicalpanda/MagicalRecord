@@ -10,8 +10,7 @@
 
  @since Available in v2.3 and later.
  */
-typedef NS_ENUM(NSUInteger, MagicalRecordVersionTag)
-{
+typedef NS_ENUM(NSUInteger, MagicalRecordVersionTag) {
     /** Version 2.2.0 */
     MagicalRecordVersionTag2_2 = 220,
 

@@ -9,8 +9,8 @@
 @protocol MagicalRecordMOGeneratorProtocol <NSObject>
 
 @optional
-+ (NSString *) entityName;
-- (instancetype) entityInManagedObjectContext:(NSManagedObjectContext *)object;
-- (instancetype) insertInManagedObjectContext:(NSManagedObjectContext *)object;
++ (NSString *)entityName;
+- (instancetype)entityInManagedObjectContext:(NSManagedObjectContext *)object;
+- (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)object;
 
 @end

@@ -12,17 +12,17 @@
 
 @implementation NSNumber (MagicalRecordDataImport)
 
-- (id) MR_relatedValueForRelationship:(NSRelationshipDescription *)relationshipInfo
+- (id)MR_relatedValueForRelationship:(NSRelationshipDescription *)relationshipInfo
 {
     return self;
 }
 
-- (NSString *) MR_lookupKeyForProperty:(NSPropertyDescription *)propertyDescription
+- (NSString *)MR_lookupKeyForProperty:(NSPropertyDescription *)propertyDescription
 {
     return nil;
 }
 
-- (NSDate *) MR_dateWithFormat:(NSString *)dateFormat;
+- (NSDate *)MR_dateWithFormat:(NSString *)dateFormat;
 {
     return MRDateFromNumber(self, [dateFormat isEqualToString:kMagicalRecordImportUnixTimeString]);
 }

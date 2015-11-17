@@ -20,17 +20,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL saveOnApplicationWillTerminate;
 @property (nonatomic, assign) BOOL saveOnApplicationWillResignActive;
 
-+ (__nullable instancetype) defaultStack;
-+ (void) setDefaultStack:(MagicalRecordStack * __nullable)stack;
++ (__nullable instancetype)defaultStack;
++ (void)setDefaultStack:(MagicalRecordStack *__nullable)stack;
 
-+ (instancetype) stack;
++ (instancetype)stack;
 
-- (void) reset;
+- (void)reset;
 
-- (NSManagedObjectContext *) newConfinementContext;
+- (NSManagedObjectContext *)newConfinementContext;
 
-- (void) setModelFromClass:(Class)modelClass;
-- (void) setModelNamed:(NSString *)modelName;
+- (void)setModelFromClass:(Class)modelClass;
+- (void)setModelNamed:(NSString *)modelName;
 
 @end
 NS_ASSUME_NONNULL_END

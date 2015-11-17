@@ -11,14 +11,14 @@
 NS_ASSUME_NONNULL_BEGIN
 @interface NSPersistentStoreCoordinator (MagicalAutoMigrations)
 
-- (NSPersistentStore *) MR_addAutoMigratingSqliteStoreNamed:(NSString *)storeFileName;
-- (NSPersistentStore *) MR_addAutoMigratingSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *)options;
+- (NSPersistentStore *)MR_addAutoMigratingSqliteStoreNamed:(NSString *)storeFileName;
+- (NSPersistentStore *)MR_addAutoMigratingSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *)options;
 
-- (NSPersistentStore *) MR_addAutoMigratingSqliteStoreAtURL:(NSURL *)url;
-- (NSPersistentStore *) MR_addAutoMigratingSqliteStoreAtURL:(NSURL *)url withOptions:(NSDictionary *)options;
+- (NSPersistentStore *)MR_addAutoMigratingSqliteStoreAtURL:(NSURL *)url;
+- (NSPersistentStore *)MR_addAutoMigratingSqliteStoreAtURL:(NSURL *)url withOptions:(NSDictionary *)options;
 
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *)storeFileName;
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreAtURL:(NSURL *)url;
++ (NSPersistentStoreCoordinator *)MR_coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *)storeFileName;
++ (NSPersistentStoreCoordinator *)MR_coordinatorWithAutoMigratingSqliteStoreAtURL:(NSURL *)url;
 
 @end
 NS_ASSUME_NONNULL_END

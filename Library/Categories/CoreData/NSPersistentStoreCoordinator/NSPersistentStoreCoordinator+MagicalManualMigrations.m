@@ -11,22 +11,21 @@
 #import "NSPersistentStoreCoordinator+MagicalRecord.h"
 #import "MagicalRecordStack.h"
 
-
 @implementation NSPersistentStoreCoordinator (MagicalManualMigrations)
 
-- (NSPersistentStore *) MR_addManuallyMigratingSqliteStoreNamed:(NSString *)storeFileName;
+- (NSPersistentStore *)MR_addManuallyMigratingSqliteStoreNamed:(NSString *)storeFileName;
 {
     NSDictionary *options = [NSDictionary MR_manualMigrationOptions];
     return [self MR_addSqliteStoreNamed:storeFileName withOptions:options];
 }
 
-- (NSPersistentStore *) MR_addManuallyMigratingSqliteStoreAtURL:(NSURL *)url;
+- (NSPersistentStore *)MR_addManuallyMigratingSqliteStoreAtURL:(NSURL *)url;
 {
     NSDictionary *options = [NSDictionary MR_manualMigrationOptions];
     return [self MR_addSqliteStoreAtURL:url withOptions:options];
 }
 
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithManuallyMigratingSqliteStoreNamed:(NSString *)storeFileName;
++ (NSPersistentStoreCoordinator *)MR_coordinatorWithManuallyMigratingSqliteStoreNamed:(NSString *)storeFileName;
 {
     NSManagedObjectModel *model = [[MagicalRecordStack defaultStack] model];
     NSPersistentStoreCoordinator *coordinator = [[self alloc] initWithManagedObjectModel:model];
@@ -36,7 +35,7 @@
     return coordinator;
 }
 
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithManuallyMigratingSqliteStoreAtURL:(NSURL *)url;
++ (NSPersistentStoreCoordinator *)MR_coordinatorWithManuallyMigratingSqliteStoreAtURL:(NSURL *)url;
 {
     NSManagedObjectModel *model = [[MagicalRecordStack defaultStack] model];
     NSPersistentStoreCoordinator *coordinator = [[self alloc] initWithManagedObjectModel:model];

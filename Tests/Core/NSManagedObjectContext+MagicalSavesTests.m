@@ -23,7 +23,7 @@
     expect([insertedObject hasChanges]).to.beTruthy();
 
     NSError *obtainIDsError;
-    BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[insertedObject] error:&obtainIDsError];
+    BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[ insertedObject ] error:&obtainIDsError];
 
     expect(obtainIDsResult).to.beTruthy();
     expect(obtainIDsError).to.beNil();
@@ -63,7 +63,7 @@
     expect([insertedObject hasChanges]).to.beTruthy();
 
     NSError *obtainIDsError;
-    BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[insertedObject] error:&obtainIDsError];
+    BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[ insertedObject ] error:&obtainIDsError];
 
     expect(obtainIDsResult).to.beTruthy();
     expect(obtainIDsError).to.beNil();
@@ -126,7 +126,7 @@
     expect([insertedObject hasChanges]).to.beTruthy();
 
     NSError *obtainIDsError;
-    BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[insertedObject] error:&obtainIDsError];
+    BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[ insertedObject ] error:&obtainIDsError];
 
     expect(obtainIDsResult).to.beTruthy();
     expect(obtainIDsError).to.beNil();
@@ -168,7 +168,7 @@
     expect([insertedObject hasChanges]).to.beTruthy();
 
     NSError *obtainIDsError;
-    BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[insertedObject] error:&obtainIDsError];
+    BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[ insertedObject ] error:&obtainIDsError];
 
     expect(obtainIDsResult).to.beTruthy();
     expect(obtainIDsError).to.beNil();
@@ -206,7 +206,7 @@
     SingleEntityWithNoRelationships *entity = [SingleEntityWithNoRelationships MR_createEntityInContext:stackContext];
 
     expect([[entity objectID] isTemporaryID]).to.beTruthy();
-    
+
     NSError *saveError;
     BOOL saveResult = [stackContext MR_saveOnlySelfAndWaitWithError:&saveError];
     expect(saveResult).to.beTruthy();

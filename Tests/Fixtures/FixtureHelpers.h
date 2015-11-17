@@ -10,13 +10,13 @@
 
 @interface FixtureHelpers : NSObject
 
-+ (id) dataFromPListFixtureNamed:(NSString *)fixtureName;
-+ (id) dataFromJSONFixtureNamed:(NSString *)fixtureName;
++ (id)dataFromPListFixtureNamed:(NSString *)fixtureName;
++ (id)dataFromJSONFixtureNamed:(NSString *)fixtureName;
 
 @end
 
 @interface XCTestCase (FixtureHelpers)
 
-- (id) dataFromJSONFixture;
+- (id)dataFromJSONFixture;
 
 @end

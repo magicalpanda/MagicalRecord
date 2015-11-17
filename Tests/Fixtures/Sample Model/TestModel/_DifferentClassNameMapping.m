@@ -8,23 +8,26 @@
 
 @implementation _DifferentClassNameMapping
 
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-	NSParameterAssert(moc_);
-	return [NSEntityDescription insertNewObjectForEntityForName:@"EntityWithDifferentClassName" inManagedObjectContext:moc_];
++ (id)insertInManagedObjectContext:(NSManagedObjectContext *)moc_
+{
+    NSParameterAssert(moc_);
+    return [NSEntityDescription insertNewObjectForEntityForName:@"EntityWithDifferentClassName" inManagedObjectContext:moc_];
 }
 
-+ (NSString*)entityName {
-	return @"EntityWithDifferentClassName";
++ (NSString *)entityName
+{
+    return @"EntityWithDifferentClassName";
 }
 
-+ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-	NSParameterAssert(moc_);
-	return [NSEntityDescription entityForName:@"EntityWithDifferentClassName" inManagedObjectContext:moc_];
++ (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)moc_
+{
+    NSParameterAssert(moc_);
+    return [NSEntityDescription entityForName:@"EntityWithDifferentClassName" inManagedObjectContext:moc_];
 }
 
-- (DifferentClassNameMappingID*)objectID {
-	return (DifferentClassNameMappingID*)[super objectID];
+- (DifferentClassNameMappingID *)objectID
+{
+    return (DifferentClassNameMappingID *)[super objectID];
 }
 
 @end
-

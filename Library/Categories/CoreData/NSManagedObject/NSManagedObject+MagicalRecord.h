@@ -14,7 +14,7 @@
 /**
  Work around for situation with inserting the same object into many nested contexts. This will be called once, while awakeFromInsert has the potential to be called mutliple times for the same insert.
  */
-- (void) MR_awakeFromCreation;
+- (void)MR_awakeFromCreation;
 
 @end
 
@@ -37,29 +37,29 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v2.0 and later.
  */
-+ (NSString *) MR_entityName;
++ (NSString *)MR_entityName;
 
-+ (NSEntityDescription *) MR_entityDescription;
-+ (NSEntityDescription *) MR_entityDescriptionInContext:(NSManagedObjectContext *)context;
++ (NSEntityDescription *)MR_entityDescription;
++ (NSEntityDescription *)MR_entityDescriptionInContext:(NSManagedObjectContext *)context;
 
-+ (NSArray *) MR_propertiesNamed:(NSArray *)properties;
-+ (NSArray *) MR_propertiesNamed:(NSArray *)properties inContext:(NSManagedObjectContext *)context;
++ (NSArray *)MR_propertiesNamed:(NSArray *)properties;
++ (NSArray *)MR_propertiesNamed:(NSArray *)properties inContext:(NSManagedObjectContext *)context;
 
 /**
  @name Fetch Requests
  */
 
-+ (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request;
-+ (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
-+ (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request;
-+ (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
++ (NSArray *)MR_executeFetchRequest:(NSFetchRequest *)request;
++ (NSArray *)MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
++ (id)MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request;
++ (id)MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
 
 /** 
  @name Creating Entities
  */
 
-+ (instancetype) MR_createEntity;
-+ (instancetype) MR_createEntityInContext:(NSManagedObjectContext *)context;
++ (instancetype)MR_createEntity;
++ (instancetype)MR_createEntityInContext:(NSManagedObjectContext *)context;
 
 /** 
  Create a new entity using the provided entity description.
@@ -71,14 +71,14 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return a new instance of the current NSManagedObject subclass
  */
-+ (instancetype) MR_createEntityWithDescription:(NSEntityDescription * __nullable)entityDescription inContext:(NSManagedObjectContext *)context;
++ (instancetype)MR_createEntityWithDescription:(NSEntityDescription *__nullable)entityDescription inContext:(NSManagedObjectContext *)context;
 
 /**
  Check if an object has been saved to at least one persistent store
  
  @return YES if object has a permanent ID
  */
-- (BOOL) MR_isTemporaryObject;
+- (BOOL)MR_isTemporaryObject;
 
 /**
  @name Deleting Entities
@@ -91,7 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v2.3 and later.
  */
-- (BOOL) MR_isEntityDeleted;
+- (BOOL)MR_isEntityDeleted;
 
 /** 
  Deletes the entity from the default context of the default stack.
@@ -102,7 +102,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v1.8 and later.
  */
-- (BOOL) MR_deleteEntity;
+- (BOOL)MR_deleteEntity;
 
 /**
  Deletes the entity from the supplied context.
@@ -113,7 +113,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v2.3 and later.
  */
-- (BOOL) MR_deleteEntityInContext:(NSManagedObjectContext *)context;
+- (BOOL)MR_deleteEntityInContext:(NSManagedObjectContext *)context;
 
 /**
  Deletes any entities matching the passed predicate from the default context of the default stack.
@@ -124,7 +124,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v1.8 and later.
  */
-+ (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate;
++ (BOOL)MR_deleteAllMatchingPredicate:(NSPredicate *)predicate;
 
 /**
  Deletes all entities matching the passed predicate from the supplied context.
@@ -136,7 +136,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v1.8 and later.
  */
-+ (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
++ (BOOL)MR_deleteAllMatchingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
 
 /**
  Deletes all entities with a class that matches this subclass from the default context of the default stack.
@@ -145,7 +145,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v1.8 and later.
  */
-+ (BOOL) MR_truncateAll;
++ (BOOL)MR_truncateAll;
 
 /**
  Deletes all entities with a class that matches this subclass from the supplied context.
@@ -156,7 +156,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v1.8 and later.
  */
-+ (BOOL) MR_truncateAllInContext:(NSManagedObjectContext *)context;
++ (BOOL)MR_truncateAllInContext:(NSManagedObjectContext *)context;
 
 /**
  @name Sorting Entities
@@ -171,7 +171,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v1.8 and later.
  */
-+ (NSArray *) MR_ascendingSortDescriptors:(NSArray *)attributesToSortBy;
++ (NSArray *)MR_ascendingSortDescriptors:(NSArray *)attributesToSortBy;
 
 /**
  Initializes an array of descending sort descriptors for the supplied attributes.
@@ -182,7 +182,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v1.8 and later.
  */
-+ (NSArray *) MR_descendingSortDescriptors:(NSArray *)attributesToSortBy;
++ (NSArray *)MR_descendingSortDescriptors:(NSArray *)attributesToSortBy;
 
 /**
  Initializes an array of sort descriptors for the supplied attributes, sorted according to the supplied `ascending` value.
@@ -194,7 +194,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v2.3 and later.
  */
-+ (NSArray *) MR_sortAscending:(BOOL)ascending attributes:(NSArray *)attributesToSortBy;
++ (NSArray *)MR_sortAscending:(BOOL)ascending attributes:(NSArray *)attributesToSortBy;
 
 /**
  @name Working Across Contexts
@@ -205,14 +205,14 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v2.1 and later.
  */
-- (void) MR_obtainPermanentObjectID;
+- (void)MR_obtainPermanentObjectID;
 
 /**
  Updates the persistent properties of a managed object to use the latest values from the persistent store.
 
  @since Available in v3.0 and later.
  */
-- (void) MR_refresh;
+- (void)MR_refresh;
 
 /** 
  Retrieves an instance of the current managed object from another context.
@@ -227,7 +227,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v1.8 and later.
  */
-- (instancetype) MR_inContext:(NSManagedObjectContext *)otherContext;
+- (instancetype)MR_inContext:(NSManagedObjectContext *)otherContext;
 
 /** 
  If the current managed object has a temporary ID, returns self immediately otherwise calls `- MR_inContext:` on self with the supplied managed object context.
@@ -238,7 +238,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v3.0 and later.
  */
-- (instancetype) MR_inContextIfTemporaryObject:(NSManagedObjectContext *)otherContext;
+- (instancetype)MR_inContextIfTemporaryObject:(NSManagedObjectContext *)otherContext;
 
 /**
  @name Validation
@@ -251,7 +251,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v3.0 and later.
  */
-- (BOOL) MR_isValidForInsert;
+- (BOOL)MR_isValidForInsert;
 
 /**
  Wrapper around `-validateForUpdate:` that automatically logs any errors.
@@ -260,16 +260,15 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v3.0 and later.
  */
-- (BOOL) MR_isValidForUpdate;
+- (BOOL)MR_isValidForUpdate;
 
 @end
 
-
 @interface NSManagedObject (MagicalRecordDeprecated)
 
-+ (instancetype) MR_createInContext:(NSManagedObjectContext *)context MR_DEPRECATED_IN_3_0_PLEASE_USE("MR_createEntityInContext:");
-- (instancetype) MR_inContextIfTempObject:(NSManagedObjectContext *)otherContext MR_DEPRECATED_IN_3_0_PLEASE_USE("MR_inContextIfTemporaryObject:");
-- (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context MR_DEPRECATED_IN_3_0_PLEASE_USE("MR_deleteEntityInContext:");
++ (instancetype)MR_createInContext:(NSManagedObjectContext *)context MR_DEPRECATED_IN_3_0_PLEASE_USE("MR_createEntityInContext:");
+- (instancetype)MR_inContextIfTempObject:(NSManagedObjectContext *)otherContext MR_DEPRECATED_IN_3_0_PLEASE_USE("MR_inContextIfTemporaryObject:");
+- (BOOL)MR_deleteInContext:(NSManagedObjectContext *)context MR_DEPRECATED_IN_3_0_PLEASE_USE("MR_deleteEntityInContext:");
 
 @end
 NS_ASSUME_NONNULL_END

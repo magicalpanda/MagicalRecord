@@ -11,11 +11,11 @@
 NS_ASSUME_NONNULL_BEGIN
 @interface NSPersistentStoreCoordinator (MagicalManualMigrations)
 
-- (NSPersistentStore *) MR_addManuallyMigratingSqliteStoreAtURL:(NSURL *)url;
-- (NSPersistentStore *) MR_addManuallyMigratingSqliteStoreNamed:(NSString *)storeFileName;
+- (NSPersistentStore *)MR_addManuallyMigratingSqliteStoreAtURL:(NSURL *)url;
+- (NSPersistentStore *)MR_addManuallyMigratingSqliteStoreNamed:(NSString *)storeFileName;
 
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithManuallyMigratingSqliteStoreNamed:(NSString *)storeFileName;
-+ (NSPersistentStoreCoordinator *) MR_coordinatorWithManuallyMigratingSqliteStoreAtURL:(NSURL *)url;
++ (NSPersistentStoreCoordinator *)MR_coordinatorWithManuallyMigratingSqliteStoreNamed:(NSString *)storeFileName;
++ (NSPersistentStoreCoordinator *)MR_coordinatorWithManuallyMigratingSqliteStoreAtURL:(NSURL *)url;
 
 @end
 NS_ASSUME_NONNULL_END

@@ -3,7 +3,6 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-
 #ifdef __OBJC__
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>

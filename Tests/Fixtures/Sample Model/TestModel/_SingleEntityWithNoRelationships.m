@@ -4,24 +4,24 @@
 #import "_SingleEntityWithNoRelationships.h"
 
 const struct SingleEntityWithNoRelationshipsAttributes SingleEntityWithNoRelationshipsAttributes = {
-	.booleanAsStringTestAttribute = @"booleanAsStringTestAttribute",
-	.booleanTestAttribute = @"booleanTestAttribute",
-	.colorTestAttribute = @"colorTestAttribute",
-	.dateTestAttribute = @"dateTestAttribute",
-	.dateWithCustomFormat = @"dateWithCustomFormat",
-	.decimalTestAttribute = @"decimalTestAttribute",
-	.doubleTestAttribute = @"doubleTestAttribute",
-	.floatTestAttribute = @"floatTestAttribute",
-	.int16TestAttribute = @"int16TestAttribute",
-	.int32TestAttribute = @"int32TestAttribute",
-	.int64TestAttribute = @"int64TestAttribute",
-	.mappedStringAttribute = @"mappedStringAttribute",
-	.notInJsonAttribute = @"notInJsonAttribute",
-	.nullTestAttribute = @"nullTestAttribute",
-	.numberAsStringTestAttribute = @"numberAsStringTestAttribute",
-	.stringTestAttribute = @"stringTestAttribute",
-	.unixTime13TestAttribute = @"unixTime13TestAttribute",
-	.unixTimeTestAttribute = @"unixTimeTestAttribute",
+    .booleanAsStringTestAttribute = @"booleanAsStringTestAttribute",
+    .booleanTestAttribute = @"booleanTestAttribute",
+    .colorTestAttribute = @"colorTestAttribute",
+    .dateTestAttribute = @"dateTestAttribute",
+    .dateWithCustomFormat = @"dateWithCustomFormat",
+    .decimalTestAttribute = @"decimalTestAttribute",
+    .doubleTestAttribute = @"doubleTestAttribute",
+    .floatTestAttribute = @"floatTestAttribute",
+    .int16TestAttribute = @"int16TestAttribute",
+    .int32TestAttribute = @"int32TestAttribute",
+    .int64TestAttribute = @"int64TestAttribute",
+    .mappedStringAttribute = @"mappedStringAttribute",
+    .notInJsonAttribute = @"notInJsonAttribute",
+    .nullTestAttribute = @"nullTestAttribute",
+    .numberAsStringTestAttribute = @"numberAsStringTestAttribute",
+    .stringTestAttribute = @"stringTestAttribute",
+    .unixTime13TestAttribute = @"unixTime13TestAttribute",
+    .unixTimeTestAttribute = @"unixTimeTestAttribute",
 };
 
 @implementation SingleEntityWithNoRelationshipsID
@@ -29,22 +29,26 @@ const struct SingleEntityWithNoRelationshipsAttributes SingleEntityWithNoRelatio
 
 @implementation _SingleEntityWithNoRelationships
 
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-	NSParameterAssert(moc_);
-	return [NSEntityDescription insertNewObjectForEntityForName:@"SingleEntityWithNoRelationships" inManagedObjectContext:moc_];
++ (id)insertInManagedObjectContext:(NSManagedObjectContext *)moc_
+{
+    NSParameterAssert(moc_);
+    return [NSEntityDescription insertNewObjectForEntityForName:@"SingleEntityWithNoRelationships" inManagedObjectContext:moc_];
 }
 
-+ (NSString*)entityName {
-	return @"SingleEntityWithNoRelationships";
++ (NSString *)entityName
+{
+    return @"SingleEntityWithNoRelationships";
 }
 
-+ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-	NSParameterAssert(moc_);
-	return [NSEntityDescription entityForName:@"SingleEntityWithNoRelationships" inManagedObjectContext:moc_];
++ (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)moc_
+{
+    NSParameterAssert(moc_);
+    return [NSEntityDescription entityForName:@"SingleEntityWithNoRelationships" inManagedObjectContext:moc_];
 }
 
-- (SingleEntityWithNoRelationshipsID*)objectID {
-	return (SingleEntityWithNoRelationshipsID*)[super objectID];
+- (SingleEntityWithNoRelationshipsID *)objectID
+{
+    return (SingleEntityWithNoRelationshipsID *)[super objectID];
 }
 
 @dynamic booleanAsStringTestAttribute;
@@ -84,4 +88,3 @@ const struct SingleEntityWithNoRelationshipsAttributes SingleEntityWithNoRelatio
 @dynamic unixTimeTestAttribute;
 
 @end
-

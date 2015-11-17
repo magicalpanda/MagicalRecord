@@ -4,15 +4,15 @@
 #import "_SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey.h"
 
 const struct SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyAttributes SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyAttributes = {
-	.testPrimaryKey = @"testPrimaryKey",
+    .testPrimaryKey = @"testPrimaryKey",
 };
 
 const struct SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyRelationships SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyRelationships = {
-	.mappedEntities = @"mappedEntities",
+    .mappedEntities = @"mappedEntities",
 };
 
 const struct SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyUserInfo SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyUserInfo = {
-	.relatedByAttribute = @"testPrimaryKey",
+    .relatedByAttribute = @"testPrimaryKey",
 };
 
 @implementation SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyID
@@ -20,36 +20,40 @@ const struct SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyUserInf
 
 @implementation _SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey
 
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-	NSParameterAssert(moc_);
-	return [NSEntityDescription insertNewObjectForEntityForName:@"SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey" inManagedObjectContext:moc_];
++ (id)insertInManagedObjectContext:(NSManagedObjectContext *)moc_
+{
+    NSParameterAssert(moc_);
+    return [NSEntityDescription insertNewObjectForEntityForName:@"SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey" inManagedObjectContext:moc_];
 }
 
-+ (NSString*)entityName {
-	return @"SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey";
++ (NSString *)entityName
+{
+    return @"SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey";
 }
 
-+ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-	NSParameterAssert(moc_);
-	return [NSEntityDescription entityForName:@"SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey" inManagedObjectContext:moc_];
++ (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)moc_
+{
+    NSParameterAssert(moc_);
+    return [NSEntityDescription entityForName:@"SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey" inManagedObjectContext:moc_];
 }
 
-- (SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyID*)objectID {
-	return (SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyID*)[super objectID];
+- (SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyID *)objectID
+{
+    return (SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKeyID *)[super objectID];
 }
 
 @dynamic testPrimaryKey;
 
 @dynamic mappedEntities;
 
-- (NSMutableSet*)mappedEntitiesSet {
-	[self willAccessValueForKey:@"mappedEntities"];
+- (NSMutableSet *)mappedEntitiesSet
+{
+    [self willAccessValueForKey:@"mappedEntities"];
 
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"mappedEntities"];
+    NSMutableSet *result = (NSMutableSet *)[self mutableSetValueForKey:@"mappedEntities"];
 
-	[self didAccessValueForKey:@"mappedEntities"];
-	return result;
+    [self didAccessValueForKey:@"mappedEntities"];
+    return result;
 }
 
 @end
-

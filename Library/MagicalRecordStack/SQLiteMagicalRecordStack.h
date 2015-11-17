@@ -22,23 +22,23 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readwrite) NSDictionary *storeOptions;
 @property (nonatomic, copy, readonly) NSURL *storeURL;
 
-+ (instancetype) stackWithStoreNamed:(NSString *)name model:(NSManagedObjectModel * __nullable)model;
-+ (instancetype) stackWithStoreAtURL:(NSURL *)url model:(NSManagedObjectModel * __nullable)model;
-+ (instancetype) stackWithStoreAtPath:(NSString *)path model:(NSManagedObjectModel * __nullable)model;
++ (instancetype)stackWithStoreNamed:(NSString *)name model:(NSManagedObjectModel *__nullable)model;
++ (instancetype)stackWithStoreAtURL:(NSURL *)url model:(NSManagedObjectModel *__nullable)model;
++ (instancetype)stackWithStoreAtPath:(NSString *)path model:(NSManagedObjectModel *__nullable)model;
 
-+ (instancetype) stackWithStoreNamed:(NSString *)name;
-+ (instancetype) stackWithStoreAtURL:(NSURL *)url;
-+ (instancetype) stackWithStoreAtPath:(NSString *)path;
++ (instancetype)stackWithStoreNamed:(NSString *)name;
++ (instancetype)stackWithStoreAtURL:(NSURL *)url;
++ (instancetype)stackWithStoreAtPath:(NSString *)path;
 
-- (instancetype) initWithStoreNamed:(NSString *)name model:(NSManagedObjectModel * __nullable)model;
-- (instancetype) initWithStoreAtURL:(NSURL *)url model:(NSManagedObjectModel * __nullable)model;
-- (instancetype) initWithStoreAtPath:(NSString *)path model:(NSManagedObjectModel *  __nullable)model;
+- (instancetype)initWithStoreNamed:(NSString *)name model:(NSManagedObjectModel *__nullable)model;
+- (instancetype)initWithStoreAtURL:(NSURL *)url model:(NSManagedObjectModel *__nullable)model;
+- (instancetype)initWithStoreAtPath:(NSString *)path model:(NSManagedObjectModel *__nullable)model;
 
-- (instancetype) initWithStoreNamed:(NSString *)name;
-- (instancetype) initWithStoreAtURL:(NSURL *)url;
-- (instancetype) initWithStoreAtPath:(NSString *)path;
+- (instancetype)initWithStoreNamed:(NSString *)name;
+- (instancetype)initWithStoreAtURL:(NSURL *)url;
+- (instancetype)initWithStoreAtPath:(NSString *)path;
 
-- (NSDictionary *) defaultStoreOptions;
+- (NSDictionary *)defaultStoreOptions;
 
 @end
 NS_ASSUME_NONNULL_END

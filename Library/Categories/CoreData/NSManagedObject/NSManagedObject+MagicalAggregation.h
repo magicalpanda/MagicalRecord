@@ -16,10 +16,10 @@
 NS_ASSUME_NONNULL_BEGIN
 @interface NSManagedObject (MagicalAggregation)
 
-+ (NSNumber *) MR_numberOfEntities;
-+ (NSNumber *) MR_numberOfEntitiesWithContext:(NSManagedObjectContext *)context;
-+ (NSNumber *) MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm;
-+ (NSNumber *) MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
++ (NSNumber *)MR_numberOfEntities;
++ (NSNumber *)MR_numberOfEntitiesWithContext:(NSManagedObjectContext *)context;
++ (NSNumber *)MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm;
++ (NSNumber *)MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
 
 /**
  Count of entities for the current class in the default stack's context.
@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v2.0 and later.
  */
-+ (NSUInteger) MR_countOfEntities;
++ (NSUInteger)MR_countOfEntities;
 
 /**
  Count of entities for the current class in the supplied context.
@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v2.0 and later.
  */
-+ (NSUInteger) MR_countOfEntitiesWithContext:(NSManagedObjectContext *)context;
++ (NSUInteger)MR_countOfEntitiesWithContext:(NSManagedObjectContext *)context;
 
 /**
  Count of entities for the current class matching the supplied predicate in the default stack's context.
@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v2.0 and later.
  */
-+ (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)predicate;
++ (NSUInteger)MR_countOfEntitiesWithPredicate:(NSPredicate *)predicate;
 
 /**
  Count of entities for the current class matching the supplied predicate in the supplied context.
@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v2.0 and later.
  */
-+ (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
++ (NSUInteger)MR_countOfEntitiesWithPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
 
 /**
  Check that there is at least one entity matching the current class in the default stack's context.
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v2.0 and later.
  */
-+ (BOOL) MR_hasAtLeastOneEntity;
++ (BOOL)MR_hasAtLeastOneEntity;
 
 /**
  Check that there is at least one entity matching the current class in the supplied context.
@@ -82,13 +82,13 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v2.0 and later.
  */
-+ (BOOL) MR_hasAtLeastOneEntityInContext:(NSManagedObjectContext *)context;
++ (BOOL)MR_hasAtLeastOneEntityInContext:(NSManagedObjectContext *)context;
 
-- (id) MR_minValueFor:(NSString *)property;
-- (id) MR_maxValueFor:(NSString *)property;
+- (id)MR_minValueFor:(NSString *)property;
+- (id)MR_maxValueFor:(NSString *)property;
 
-+ (id) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
-+ (id) MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate;
++ (id)MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
++ (id)MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate;
 
 /**
  Supports aggregating values using a key-value collection operator that can be grouped by an attribute.
@@ -104,7 +104,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @since Available in v2.3 and later.
  */
-+ (NSArray *) MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString*)groupingKeyPath inContext:(NSManagedObjectContext *)context;
++ (NSArray *)MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString *)groupingKeyPath inContext:(NSManagedObjectContext *)context;
 
 /**
  Supports aggregating values using a key-value collection operator that can be grouped by an attribute.
@@ -122,10 +122,10 @@ NS_ASSUME_NONNULL_BEGIN
  
  @since Available in v2.3 and later.
  */
-+ (NSArray *) MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString*)groupingKeyPath;
++ (NSArray *)MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString *)groupingKeyPath;
 
-- (id) MR_objectWithMinValueFor:(NSString *)property;
-- (id) MR_objectWithMinValueFor:(NSString *)property inContext:(NSManagedObjectContext *)context;
+- (id)MR_objectWithMinValueFor:(NSString *)property;
+- (id)MR_objectWithMinValueFor:(NSString *)property inContext:(NSManagedObjectContext *)context;
 
 @end
 NS_ASSUME_NONNULL_END

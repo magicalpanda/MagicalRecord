@@ -19,7 +19,7 @@
 
 @interface ImportSingleEntityWithNoRelationshipsTests : MagicalRecordDataImportTestCase
 
-@property(readwrite, nonatomic, strong) SingleEntityWithNoRelationships *testEntity;
+@property (readwrite, nonatomic, strong) SingleEntityWithNoRelationships *testEntity;
 
 @end
 
@@ -112,7 +112,8 @@
 {
     UIColor *actualColor = self.testEntity.colorTestAttribute;
 
-    if ([actualColor respondsToSelector:@selector(getRed:green:blue:alpha:)]) {
+    if ([actualColor respondsToSelector:@selector(getRed:green:blue:alpha:)])
+    {
         CGFloat red, blue, green, alpha;
         [actualColor getRed:&red green:&green blue:&blue alpha:&alpha];
 
@@ -175,5 +176,3 @@
 }
 
 @end
-
-

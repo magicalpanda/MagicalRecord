@@ -13,8 +13,7 @@
 
  @since Available in v2.3 and later.
  */
-typedef NS_ENUM (NSInteger, MagicalRecordLoggingMask)
-{
+typedef NS_ENUM(NSInteger, MagicalRecordLoggingMask) {
     /** Disable all logging */
     MagicalRecordLoggingMaskOff = 0,
 
@@ -39,8 +38,7 @@ typedef NS_ENUM (NSInteger, MagicalRecordLoggingMask)
 
  @since Available in v2.3 and later.
  */
-typedef NS_ENUM (NSInteger, MagicalRecordLoggingLevel)
-{
+typedef NS_ENUM(NSInteger, MagicalRecordLoggingLevel) {
     /** Don't log anything */
     MagicalRecordLoggingLevelOff = 0,
 
@@ -76,7 +74,7 @@ typedef NS_ENUM (NSInteger, MagicalRecordLoggingLevel)
  
  @since Available in v2.3 and later.
  */
-+ (MagicalRecordLoggingLevel) loggingLevel;
++ (MagicalRecordLoggingLevel)loggingLevel;
 
 /**
  Sets the logging level for MagicalRecord in the current application.
@@ -85,6 +83,6 @@ typedef NS_ENUM (NSInteger, MagicalRecordLoggingLevel)
 
  @since Available in v2.3 and later.
  */
-+ (void) setLoggingLevel:(MagicalRecordLoggingLevel)level;
++ (void)setLoggingLevel:(MagicalRecordLoggingLevel)level;
 
 @end

@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @since Available in v2.3 and later.
  */
-- (NSArray *) MR_entitiesInContext:(NSManagedObjectContext *)context;
+- (NSArray *)MR_entitiesInContext:(NSManagedObjectContext *)context;
 
 ///-----------------------
 /// @name Entity Deletion
@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @since Available in v2.3 and later.
  */
-- (void) MR_deleteEntities;
+- (void)MR_deleteEntities;
 
 /**
  Deletes any managed objects in the array instance from the specified context.
@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @since Available in v2.3 and later.
  */
-- (void) MR_deleteEntitiesInContext:(NSManagedObjectContext *)context;
+- (void)MR_deleteEntitiesInContext:(NSManagedObjectContext *)context;
 
 @end
 NS_ASSUME_NONNULL_END

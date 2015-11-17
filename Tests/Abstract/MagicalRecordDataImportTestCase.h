@@ -7,6 +7,6 @@
 
 @interface MagicalRecordDataImportTestCase : MagicalRecordTestBase
 
-@property(readwrite, nonatomic, strong) id testEntityData;
+@property (readwrite, nonatomic, strong) id testEntityData;
 
 @end

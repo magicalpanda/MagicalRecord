@@ -13,11 +13,10 @@
 
 @implementation NSRelationshipDescription (MagicalRecordDataImport)
 
-- (NSString *) MR_primaryKey;
+- (NSString *)MR_primaryKey;
 {
-    NSString *primaryKeyName = [[self userInfo] objectForKey:kMagicalRecordImportDistinctAttributeKey] ?: 
-    MRPrimaryKeyNameFromString([[self destinationEntity] name]);
-    
+    NSString *primaryKeyName = [[self userInfo] objectForKey:kMagicalRecordImportDistinctAttributeKey] ?: MRPrimaryKeyNameFromString([[self destinationEntity] name]);
+
     return primaryKeyName;
 }
 

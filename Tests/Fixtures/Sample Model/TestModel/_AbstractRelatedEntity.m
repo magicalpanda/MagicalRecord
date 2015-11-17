@@ -4,7 +4,7 @@
 #import "_AbstractRelatedEntity.h"
 
 const struct AbstractRelatedEntityAttributes AbstractRelatedEntityAttributes = {
-	.sampleBaseAttribute = @"sampleBaseAttribute",
+    .sampleBaseAttribute = @"sampleBaseAttribute",
 };
 
 @implementation AbstractRelatedEntityID
@@ -12,25 +12,28 @@ const struct AbstractRelatedEntityAttributes AbstractRelatedEntityAttributes = {
 
 @implementation _AbstractRelatedEntity
 
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-	NSParameterAssert(moc_);
-	return [NSEntityDescription insertNewObjectForEntityForName:@"AbstractRelatedEntity" inManagedObjectContext:moc_];
++ (id)insertInManagedObjectContext:(NSManagedObjectContext *)moc_
+{
+    NSParameterAssert(moc_);
+    return [NSEntityDescription insertNewObjectForEntityForName:@"AbstractRelatedEntity" inManagedObjectContext:moc_];
 }
 
-+ (NSString*)entityName {
-	return @"AbstractRelatedEntity";
++ (NSString *)entityName
+{
+    return @"AbstractRelatedEntity";
 }
 
-+ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-	NSParameterAssert(moc_);
-	return [NSEntityDescription entityForName:@"AbstractRelatedEntity" inManagedObjectContext:moc_];
++ (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)moc_
+{
+    NSParameterAssert(moc_);
+    return [NSEntityDescription entityForName:@"AbstractRelatedEntity" inManagedObjectContext:moc_];
 }
 
-- (AbstractRelatedEntityID*)objectID {
-	return (AbstractRelatedEntityID*)[super objectID];
+- (AbstractRelatedEntityID *)objectID
+{
+    return (AbstractRelatedEntityID *)[super objectID];
 }
 
 @dynamic sampleBaseAttribute;
 
 @end
-

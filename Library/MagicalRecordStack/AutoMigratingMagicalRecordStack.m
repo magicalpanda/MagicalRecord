@@ -13,18 +13,18 @@
 
 @implementation AutoMigratingMagicalRecordStack
 
-- (NSPersistentStoreCoordinator *) createCoordinatorWithOptions:(NSDictionary *)options
+- (NSPersistentStoreCoordinator *)createCoordinatorWithOptions:(NSDictionary *)options
 {
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self model]];
     NSMutableDictionary *storeOptions = [options mutableCopy];
     [storeOptions addEntriesFromDictionary:self.storeOptions];
-    
+
     [coordinator MR_addAutoMigratingSqliteStoreAtURL:self.storeURL withOptions:storeOptions];
-    
+
     return coordinator;
 }
 
-- (NSDictionary *) defaultStoreOptions;
+- (NSDictionary *)defaultStoreOptions;
 {
     NSMutableDictionary *options = [super defaultStoreOptions].mutableCopy;
     [options addEntriesFromDictionary:[NSDictionary MR_autoMigrationOptions]];

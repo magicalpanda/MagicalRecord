@@ -14,14 +14,13 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
 
 @implementation NSObject (MagicalRecordDataImport)
 
-- (NSString *) MR_lookupKeyForProperty:(NSPropertyDescription *)propertyDescription;
+- (NSString *)MR_lookupKeyForProperty:(NSPropertyDescription *)propertyDescription;
 {
     NSString *attributeName = nil;
     NSDictionary *userInfo = [propertyDescription userInfo];
     NSString *lookupKey = nil;
     id value = nil;
-    
-    
+
     for (NSUInteger i = 1; i < kMagicalRecordImportMaximumAttributeFailoverDepth && value == nil; i++)
     {
         attributeName = [NSString stringWithFormat:@"%@.%tu", kMagicalRecordImportAttributeKeyMapKey, i];
@@ -38,28 +37,28 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
     return value != nil ? lookupKey : basicLookupKey;
 }
 
-- (id) MR_valueForAttribute:(NSAttributeDescription *)attributeInfo
+- (id)MR_valueForAttribute:(NSAttributeDescription *)attributeInfo
 {
     NSString *lookupKey = [self MR_lookupKeyForProperty:attributeInfo];
     return lookupKey ? [self valueForKeyPath:lookupKey] : nil;
 }
 
-- (NSString *) MR_lookupKeyForRelationship:(NSRelationshipDescription *)relationshipInfo
+- (NSString *)MR_lookupKeyForRelationship:(NSRelationshipDescription *)relationshipInfo
 {
     NSEntityDescription *destinationEntity = [relationshipInfo destinationEntity];
-    if (destinationEntity == nil) 
+    if (destinationEntity == nil)
     {
         MRLogWarn(@"Unable to find entity for type '%@'", [self valueForKey:kMagicalRecordImportRelationshipTypeKey]);
         return nil;
     }
-    
+
     NSAttributeDescription *primaryKeyAttribute = [destinationEntity MR_primaryAttribute];
     NSString *lookupKey = [self MR_lookupKeyForProperty:primaryKeyAttribute] ?: [primaryKeyAttribute name];
 
     return lookupKey;
 }
 
-- (id) MR_relatedValueForRelationship:(NSRelationshipDescription *)relationshipInfo
+- (id)MR_relatedValueForRelationship:(NSRelationshipDescription *)relationshipInfo
 {
     NSString *lookupKey = [self MR_lookupKeyForRelationship:relationshipInfo];
     return lookupKey ? [self valueForKeyPath:lookupKey] : nil;

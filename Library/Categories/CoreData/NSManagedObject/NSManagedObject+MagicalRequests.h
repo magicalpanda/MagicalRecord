@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v2.3 and later.
  */
-+ (NSUInteger) MR_defaultBatchSize;
++ (NSUInteger)MR_defaultBatchSize;
 
 /**
  Sets the number of items to fetch by default.
@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v2.3 and later.
  */
-+ (void) MR_setDefaultBatchSize:(NSUInteger)newBatchSize;
++ (void)MR_setDefaultBatchSize:(NSUInteger)newBatchSize;
 
 /**
  @name Fetch Request Creation
@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v1.8 and later.
  */
-+ (NSFetchRequest *) MR_requestAll;
++ (NSFetchRequest *)MR_requestAll;
 
 /**
  Initializes a fetch request that queries a context for all entities of the current type that match the supplied predicate.
@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v1.8 and later.
  */
-+ (NSFetchRequest *) MR_requestAllWithPredicate:(NSPredicate *)predicate;
++ (NSFetchRequest *)MR_requestAllWithPredicate:(NSPredicate *)predicate;
 
 /**
  Initializes a fetch request that queries a context for all entities of the current type where the supplied property has the supplied value.
@@ -74,7 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v1.8 and later.
  */
-+ (NSFetchRequest *) MR_requestAllWhere:(NSString *)attributeName isEqualTo:(id)value;
++ (NSFetchRequest *)MR_requestAllWhere:(NSString *)attributeName isEqualTo:(id)value;
 
 /**
  Initializes a fetch request that queries a context for the first entity of the current type that matches the supplied predicate.
@@ -85,7 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v1.8 and later.
  */
-+ (NSFetchRequest *) MR_requestFirstWithPredicate:(NSPredicate *)predicate;
++ (NSFetchRequest *)MR_requestFirstWithPredicate:(NSPredicate *)predicate;
 
 /**
  Initializes a fetch request that queries a context for the first entity of the current type where the supplied property has the supplied value.
@@ -97,7 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v1.8 and later.
  */
-+ (NSFetchRequest *) MR_requestFirstByAttribute:(NSString *)attributeName withValue:(id)value;
++ (NSFetchRequest *)MR_requestFirstByAttribute:(NSString *)attributeName withValue:(id)value;
 
 /**
  Initializes a fetch request that queries a context for all entities of the current type, sorted by the supplied sort term in the supplied order.
@@ -109,7 +109,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v1.8 and later.
  */
-+ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending;
++ (NSFetchRequest *)MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending;
 
 /**
  Initializes a fetch request that queries a context for all entities of the current type, sorted by the supplied sort term in the supplied order that match the supplied predicate.
@@ -122,7 +122,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @since Available in v1.8 and later.
  */
-+ (NSFetchRequest *) MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate * __nullable)predicate;
++ (NSFetchRequest *)MR_requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *__nullable)predicate;
 
 @end
 NS_ASSUME_NONNULL_END

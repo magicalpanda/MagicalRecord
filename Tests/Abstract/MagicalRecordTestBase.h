@@ -15,7 +15,7 @@
 
 @interface MagicalRecordTestBase : XCTestCase
 
-@property(readwrite, nonatomic, strong) MagicalRecordStack *stack;
+@property (readwrite, nonatomic, strong) MagicalRecordStack *stack;
 
 /**
  *  Setup and return a new Magical Record stack. Returns an in-memory stack by

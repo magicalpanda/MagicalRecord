@@ -10,7 +10,7 @@
 #import "MagicalRecordDeprecated.h"
 
 NS_ASSUME_NONNULL_BEGIN
-extern NSString * __nonnull const MagicalRecordDidMergeChangesFromiCloudNotification;
+extern NSString *__nonnull const MagicalRecordDidMergeChangesFromiCloudNotification;
 
 /**
  Category methods to aid in observing changes in other contexts.
@@ -26,7 +26,7 @@ extern NSString * __nonnull const MagicalRecordDidMergeChangesFromiCloudNotifica
 
  @since Available in v3.0 and later.
  */
-- (void) MR_observeContextDidSave:(NSManagedObjectContext *)otherContext;
+- (void)MR_observeContextDidSave:(NSManagedObjectContext *)otherContext;
 
 /**
  Stops merging changes from the supplied context into self.
@@ -35,7 +35,7 @@ extern NSString * __nonnull const MagicalRecordDidMergeChangesFromiCloudNotifica
 
  @since Available in v3.0 and later.
  */
-- (void) MR_stopObservingContextDidSave:(NSManagedObjectContext *)otherContext;
+- (void)MR_stopObservingContextDidSave:(NSManagedObjectContext *)otherContext;
 
 /**
  Merges changes from another context into self on the main thread.
@@ -44,7 +44,7 @@ extern NSString * __nonnull const MagicalRecordDidMergeChangesFromiCloudNotifica
 
  @since Available in v2.0 and later.
  */
-- (void) MR_observeContextOnMainThread:(NSManagedObjectContext *)otherContext;
+- (void)MR_observeContextOnMainThread:(NSManagedObjectContext *)otherContext;
 
 /**
  Merges changes from another context into self, saving after each change.
@@ -55,7 +55,7 @@ extern NSString * __nonnull const MagicalRecordDidMergeChangesFromiCloudNotifica
  
  @since Available in v3.0 and later.
  */
-- (void) MR_observeContextDidSaveAndSaveChangesToSelf:(NSManagedObjectContext *)otherContext;
+- (void)MR_observeContextDidSaveAndSaveChangesToSelf:(NSManagedObjectContext *)otherContext;
 
 /**
  Merges changes from the supplied persistent store coordinator into self in response to changes from iCloud.
@@ -66,7 +66,7 @@ extern NSString * __nonnull const MagicalRecordDidMergeChangesFromiCloudNotifica
 
  @since Available in v2.0 and later.
  */
-- (void) MR_observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
+- (void)MR_observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 
 /**
  Stops observation and merging of changes from the supplied persistent store coordinator in response to changes from iCloud.
@@ -77,14 +77,14 @@ extern NSString * __nonnull const MagicalRecordDidMergeChangesFromiCloudNotifica
 
  @since Available in v2.0 and later.
  */
-- (void) MR_stopObservingiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
+- (void)MR_stopObservingiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 
 @end
 
 @interface NSManagedObjectContext (MagicalObservingDeprecated)
 
-- (void) MR_observeContext:(NSManagedObjectContext *)otherContext MR_DEPRECATED_IN_3_0_PLEASE_USE("MR_observeContextDidSave:");
-- (void) MR_stopObservingContext:(NSManagedObjectContext *)otherContext MR_DEPRECATED_IN_3_0_PLEASE_USE("MR_stopObservingContextDidSave");
+- (void)MR_observeContext:(NSManagedObjectContext *)otherContext MR_DEPRECATED_IN_3_0_PLEASE_USE("MR_observeContextDidSave:");
+- (void)MR_stopObservingContext:(NSManagedObjectContext *)otherContext MR_DEPRECATED_IN_3_0_PLEASE_USE("MR_stopObservingContextDidSave");
 
 @end
 NS_ASSUME_NONNULL_END

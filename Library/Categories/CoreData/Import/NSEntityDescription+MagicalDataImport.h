@@ -50,6 +50,6 @@
  */
 - (NSAttributeDescription *)MR_primaryAttributeToRelateBy;
 
-- (NSAttributeDescription *) MR_primaryAttribute;
+- (NSAttributeDescription *)MR_primaryAttribute;
 
 @end

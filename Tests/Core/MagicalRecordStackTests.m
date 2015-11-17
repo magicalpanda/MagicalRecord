@@ -21,7 +21,8 @@
     // Clean up any store files we created during the test
     MagicalRecordStack *defaultStack = [MagicalRecordStack defaultStack];
 
-    if ((NO == [defaultStack.store.type isEqualToString:NSInMemoryStoreType]) && (nil != defaultStack.store)) {
+    if ((NO == [defaultStack.store.type isEqualToString:NSInMemoryStoreType]) && (nil != defaultStack.store))
+    {
         expect([defaultStack.store MR_removePersistentStoreFiles]).to.beTruthy();
     }
 

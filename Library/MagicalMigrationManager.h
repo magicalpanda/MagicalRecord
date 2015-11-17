@@ -14,12 +14,10 @@
 @property (nonatomic, copy) NSString *targetModelName;
 @property (nonatomic, copy) NSString *versionedModelName;
 
-- (instancetype) initWithSourceModelName:(NSString *)sourceName targetModelName:(NSString *)targetName;
+- (instancetype)initWithSourceModelName:(NSString *)sourceName targetModelName:(NSString *)targetName;
 
-- (BOOL) migrateStoreAtURL:(NSURL *)sourceStoreURL toStoreAtURL:(NSURL *)targetStoreURL;
-- (BOOL) migrateStoreAtURL:(NSURL *)sourceStoreURL toStoreAtURL:(NSURL *)targetStoreURL mappingModelURL:(NSURL *)mappingModelURL;
-- (BOOL) migrateStoreAtURL:(NSURL *)sourceStoreURL toStoreAtURL:(NSURL *)targetStoreURL mappingModelURL:(NSURL *)mappingModelURL progressiveMigration:(BOOL)progressiveMigration;
+- (BOOL)migrateStoreAtURL:(NSURL *)sourceStoreURL toStoreAtURL:(NSURL *)targetStoreURL;
+- (BOOL)migrateStoreAtURL:(NSURL *)sourceStoreURL toStoreAtURL:(NSURL *)targetStoreURL mappingModelURL:(NSURL *)mappingModelURL;
+- (BOOL)migrateStoreAtURL:(NSURL *)sourceStoreURL toStoreAtURL:(NSURL *)targetStoreURL mappingModelURL:(NSURL *)mappingModelURL progressiveMigration:(BOOL)progressiveMigration;
 
 @end
-
-

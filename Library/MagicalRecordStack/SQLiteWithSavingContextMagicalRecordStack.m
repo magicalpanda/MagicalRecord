@@ -17,7 +17,6 @@
 
 @end
 
-
 @implementation SQLiteWithSavingContextMagicalRecordStack
 
 @synthesize context = _context;
@@ -27,7 +26,7 @@
     [_context MR_stopObservingContextDidSave:_savingContext];
 }
 
-- (NSManagedObjectContext *) context;
+- (NSManagedObjectContext *)context;
 {
     if (_savingContext == nil)
     {
@@ -46,7 +45,7 @@
     return _context;
 }
 
-- (NSManagedObjectContext *) newConfinementContext;
+- (NSManagedObjectContext *)newConfinementContext;
 {
     NSManagedObjectContext *context = [super createConfinementContext];
     [context setParentContext:[self savingContext]];

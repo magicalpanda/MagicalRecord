@@ -12,68 +12,68 @@
 
 #pragma mark - Entity Information
 
-+ (NSString *) MR_entityName;
++ (NSString *)MR_entityName;
 {
     NSString *entityName;
-    
+
     if ([self respondsToSelector:@selector(entityName)])
     {
         entityName = [self performSelector:@selector(entityName)];
     }
-    
+
     if ([entityName length] == 0)
     {
         //swift prefixes classes, like ModuleName.MyClass and this causes problems with Core Data and NSSTringFromClass. We must handle that.
         entityName = [NSStringFromClass(self) componentsSeparatedByString:@"."].lastObject;
     }
-    
+
     return entityName;
 }
 
-+ (NSEntityDescription *) MR_entityDescription
++ (NSEntityDescription *)MR_entityDescription
 {
-	return [self MR_entityDescriptionInContext:[[MagicalRecordStack defaultStack] context]];
+    return [self MR_entityDescriptionInContext:[[MagicalRecordStack defaultStack] context]];
 }
 
-+ (NSEntityDescription *) MR_entityDescriptionInContext:(NSManagedObjectContext *)context
++ (NSEntityDescription *)MR_entityDescriptionInContext:(NSManagedObjectContext *)context
 {
     NSString *entityName = [self MR_entityName];
     return [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
 }
 
-+ (NSArray *) MR_propertiesNamed:(NSArray *)properties
++ (NSArray *)MR_propertiesNamed:(NSArray *)properties
 {
     return [self MR_propertiesNamed:properties inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
-+ (NSArray *) MR_propertiesNamed:(NSArray *)properties inContext:(NSManagedObjectContext *)context
++ (NSArray *)MR_propertiesNamed:(NSArray *)properties inContext:(NSManagedObjectContext *)context
 {
-	NSEntityDescription *description = [self MR_entityDescriptionInContext:context];
-	NSMutableArray *propertiesWanted = [NSMutableArray array];
+    NSEntityDescription *description = [self MR_entityDescriptionInContext:context];
+    NSMutableArray *propertiesWanted = [NSMutableArray array];
 
-	if (properties)
-	{
-		NSDictionary *propDict = [description propertiesByName];
+    if (properties)
+    {
+        NSDictionary *propDict = [description propertiesByName];
 
-		for (NSString *propertyName in properties)
-		{
-			NSPropertyDescription *property = [propDict objectForKey:propertyName];
-			if (property)
-			{
-				[propertiesWanted addObject:property];
-			}
-			else
-			{
-				MRLogWarn(@"Property '%@' not found in %tu properties for %@", propertyName, [propDict count], NSStringFromClass(self));
-			}
-		}
-	}
-	return propertiesWanted;
+        for (NSString *propertyName in properties)
+        {
+            NSPropertyDescription *property = [propDict objectForKey:propertyName];
+            if (property)
+            {
+                [propertiesWanted addObject:property];
+            }
+            else
+            {
+                MRLogWarn(@"Property '%@' not found in %tu properties for %@", propertyName, [propDict count], NSStringFromClass(self));
+            }
+        }
+    }
+    return propertiesWanted;
 }
 
 #pragma mark - Fetch Requests
 
-+ (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
++ (NSArray *)MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
 {
     __block NSArray *results = nil;
     void (^requestBlock)(void) = ^{
@@ -95,44 +95,44 @@
     {
         [context performBlockAndWait:requestBlock];
     }
-	return results;
+    return results;
 }
 
-+ (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request
++ (NSArray *)MR_executeFetchRequest:(NSFetchRequest *)request
 {
-	return [self MR_executeFetchRequest:request inContext:[[MagicalRecordStack defaultStack] context]];
+    return [self MR_executeFetchRequest:request inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
-+ (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
++ (id)MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
 {
-	[request setFetchLimit:1];
+    [request setFetchLimit:1];
 
-	NSArray *results = [self MR_executeFetchRequest:request inContext:context];
-	if ([results count] == 0)
-	{
-		return nil;
-	}
-	return [results objectAtIndex:0];
+    NSArray *results = [self MR_executeFetchRequest:request inContext:context];
+    if ([results count] == 0)
+    {
+        return nil;
+    }
+    return [results objectAtIndex:0];
 }
 
-+ (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request
++ (id)MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request
 {
-	return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:[[MagicalRecordStack defaultStack] context]];
+    return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
 #pragma mark - Creating Entities
 
-+ (instancetype) MR_createEntity
++ (instancetype)MR_createEntity
 {
-	return [self MR_createEntityInContext:[[MagicalRecordStack defaultStack] context]];
+    return [self MR_createEntityInContext:[[MagicalRecordStack defaultStack] context]];
 }
 
-+ (instancetype) MR_createEntityInContext:(NSManagedObjectContext *)context
++ (instancetype)MR_createEntityInContext:(NSManagedObjectContext *)context
 {
     return [self MR_createEntityWithDescription:nil inContext:context];
 }
 
-+ (instancetype) MR_createEntityWithDescription:(NSEntityDescription *)entityDescription inContext:(NSManagedObjectContext *)context
++ (instancetype)MR_createEntityWithDescription:(NSEntityDescription *)entityDescription inContext:(NSManagedObjectContext *)context
 {
     NSEntityDescription *entity = entityDescription;
 
@@ -141,7 +141,7 @@
         entity = [self MR_entityDescriptionInContext:context];
     }
 
-//    [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
+    //    [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
     NSManagedObject *managedObject = [[self alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
 
     if ([managedObject respondsToSelector:@selector(MR_awakeFromCreation)])
@@ -152,24 +152,24 @@
     return managedObject;
 }
 
-- (BOOL) MR_isTemporaryObject;
+- (BOOL)MR_isTemporaryObject;
 {
     return [[self objectID] isTemporaryID];
 }
 
 #pragma mark - Deleting Entities
 
-- (BOOL) MR_isEntityDeleted
+- (BOOL)MR_isEntityDeleted
 {
     return [self isDeleted] || [self managedObjectContext] == nil;
 }
 
-- (BOOL) MR_deleteEntity
+- (BOOL)MR_deleteEntity
 {
-	return [self MR_deleteEntityInContext:[self managedObjectContext]];
+    return [self MR_deleteEntityInContext:[self managedObjectContext]];
 }
 
-- (BOOL) MR_deleteEntityInContext:(NSManagedObjectContext *)context
+- (BOOL)MR_deleteEntityInContext:(NSManagedObjectContext *)context
 {
     NSError *retrieveExistingObjectError;
     NSManagedObject *objectInContext = [context existingObjectWithID:[self objectID] error:&retrieveExistingObjectError];
@@ -181,34 +181,34 @@
     return [objectInContext MR_isEntityDeleted];
 }
 
-+ (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate
++ (BOOL)MR_deleteAllMatchingPredicate:(NSPredicate *)predicate
 {
     return [self MR_deleteAllMatchingPredicate:predicate inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
-+ (BOOL) MR_deleteAllMatchingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context
++ (BOOL)MR_deleteAllMatchingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *request = [self MR_requestAllWithPredicate:predicate];
     [request setReturnsObjectsAsFaults:YES];
-	[request setIncludesPropertyValues:NO];
+    [request setIncludesPropertyValues:NO];
 
-	NSArray *objectsToTruncate = [self MR_executeFetchRequest:request inContext:context];
+    NSArray *objectsToTruncate = [self MR_executeFetchRequest:request inContext:context];
 
-	for (NSManagedObject *objectToTruncate in objectsToTruncate)
+    for (NSManagedObject *objectToTruncate in objectsToTruncate)
     {
-		[objectToTruncate MR_deleteEntityInContext:context];
-	}
+        [objectToTruncate MR_deleteEntityInContext:context];
+    }
 
-	return YES;
+    return YES;
 }
 
-+ (BOOL) MR_truncateAll
++ (BOOL)MR_truncateAll
 {
     [self MR_truncateAllInContext:[[MagicalRecordStack defaultStack] context]];
     return YES;
 }
 
-+ (BOOL) MR_truncateAllInContext:(NSManagedObjectContext *)context
++ (BOOL)MR_truncateAllInContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *request = [self MR_requestAll];
     [request setReturnsObjectsAsFaults:YES];
@@ -224,19 +224,19 @@
 
 #pragma mark - Sorting Entities
 
-+ (NSArray *) MR_ascendingSortDescriptors:(NSArray *)attributesToSortBy
++ (NSArray *)MR_ascendingSortDescriptors:(NSArray *)attributesToSortBy
 {
-	return [self MR_sortAscending:YES attributes:attributesToSortBy];
+    return [self MR_sortAscending:YES attributes:attributesToSortBy];
 }
 
-+ (NSArray *) MR_descendingSortDescriptors:(NSArray *)attributesToSortBy
++ (NSArray *)MR_descendingSortDescriptors:(NSArray *)attributesToSortBy
 {
-	return [self MR_sortAscending:NO attributes:attributesToSortBy];
+    return [self MR_sortAscending:NO attributes:attributesToSortBy];
 }
 
-+ (NSArray *) MR_sortAscending:(BOOL)ascending attributes:(NSArray *)attributesToSortBy
++ (NSArray *)MR_sortAscending:(BOOL)ascending attributes:(NSArray *)attributesToSortBy
 {
-	NSMutableArray *attributes = [NSMutableArray array];
+    NSMutableArray *attributes = [NSMutableArray array];
 
     for (NSString *attributeName in attributesToSortBy)
     {
@@ -244,17 +244,17 @@
         [attributes addObject:sortDescriptor];
     }
 
-	return attributes;
+    return attributes;
 }
 
 #pragma mark - Working Across Contexts
 
-- (void) MR_refresh;
+- (void)MR_refresh;
 {
     [[self managedObjectContext] refreshObject:self mergeChanges:YES];
 }
 
-- (void) MR_obtainPermanentObjectID;
+- (void)MR_obtainPermanentObjectID;
 {
     if ([[self objectID] isTemporaryID])
     {
@@ -268,7 +268,7 @@
     }
 }
 
-- (instancetype) MR_inContext:(NSManagedObjectContext *)otherContext;
+- (instancetype)MR_inContext:(NSManagedObjectContext *)otherContext;
 {
     NSManagedObject *inContext = nil;
     NSManagedObjectID *objectID = [self objectID];
@@ -283,7 +283,7 @@
     }
     else
     {
-        inContext = [otherContext objectRegisteredForID:objectID];  //see if its already there
+        inContext = [otherContext objectRegisteredForID:objectID]; //see if its already there
         if (inContext == nil)
         {
             NSError *error = nil;
@@ -298,7 +298,7 @@
     return inContext;
 }
 
-- (instancetype) MR_inContextIfTemporaryObject:(NSManagedObjectContext *)otherContext
+- (instancetype)MR_inContextIfTemporaryObject:(NSManagedObjectContext *)otherContext
 {
     NSManagedObjectID *objectID = [self objectID];
     if ([objectID isTemporaryID])
@@ -313,7 +313,7 @@
 
 #pragma mark - Validation
 
-- (BOOL) MR_isValidForInsert;
+- (BOOL)MR_isValidForInsert;
 {
     NSError *error = nil;
     BOOL isValid = [self validateForInsert:&error];
@@ -321,11 +321,11 @@
     {
         [[error MR_coreDataDescription] MR_logToConsole];
     }
-    
+
     return isValid;
 }
 
-- (BOOL) MR_isValidForUpdate;
+- (BOOL)MR_isValidForUpdate;
 {
     NSError *error = nil;
     BOOL isValid = [self validateForUpdate:&error];
@@ -342,20 +342,19 @@
 #pragma mark - Deprecated Methods
 @implementation NSManagedObject (MagicalRecordDeprecated)
 
-+ (instancetype) MR_createInContext:(NSManagedObjectContext *)context
++ (instancetype)MR_createInContext:(NSManagedObjectContext *)context
 {
     return [self MR_createEntityInContext:context];
 }
 
-- (BOOL) MR_deleteInContext:(NSManagedObjectContext *)context
+- (BOOL)MR_deleteInContext:(NSManagedObjectContext *)context
 {
     return [self MR_deleteEntityInContext:context];
 }
 
-- (instancetype) MR_inContextIfTempObject:(NSManagedObjectContext *)otherContext;
+- (instancetype)MR_inContextIfTempObject:(NSManagedObjectContext *)otherContext;
 {
     return [self MR_inContextIfTemporaryObject:otherContext];
 }
 
 @end
-

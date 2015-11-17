@@ -24,7 +24,7 @@ typedef NS_OPTIONS(NSUInteger, MRContextSaveOptions) {
     MRContextSaveOptionsSaveSynchronously = 1 << 1
 };
 
-typedef void (^MRSaveCompletionHandler)(BOOL success, NSError * __nullable error);
+typedef void (^MRSaveCompletionHandler)(BOOL success, NSError *__nullable error);
 
 /**
  Category methods to simplify saving managed object contexts.
@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @since Available in 2.1 and later.
  */
-- (void) MR_saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;
+- (void)MR_saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;
 
 /**
  Asynchronously save changes in the current context all the way back to the persistent store.
@@ -52,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @since Available in 2.1 and later.
  */
-- (void) MR_saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion;
+- (void)MR_saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion;
 
 /**
  Synchronously save changes in the current context and it's parent.
@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @since Available in 2.1 and later.
  */
-- (BOOL) MR_saveOnlySelfAndWait;
+- (BOOL)MR_saveOnlySelfAndWait;
 
 /**
  Synchronously save changes in the current context and merge changes to it's parent.
@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @since Available in 2.1 and later.
  */
-- (BOOL) MR_saveOnlySelfAndWaitWithError:(NSError **)error;
+- (BOOL)MR_saveOnlySelfAndWaitWithError:(NSError **)error;
 
 /**
  Synchronously save changes in the current context all the way back to the persistent store.
@@ -83,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @since Available in 2.1 and later.
  */
-- (BOOL) MR_saveToPersistentStoreAndWait;
+- (BOOL)MR_saveToPersistentStoreAndWait;
 
 /**
  Synchronously save changes in the current context all the way back to the persistent store.
@@ -94,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @since Available in 2.1 and later.
  */
-- (BOOL) MR_saveToPersistentStoreAndWaitWithError:(NSError **)error;
+- (BOOL)MR_saveToPersistentStoreAndWaitWithError:(NSError **)error;
 
 /**
  Save the current context with options. All other save methods are convenience wrappers around this method.
@@ -104,7 +104,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @since Available in 2.1 and later.
  */
- - (void) MR_saveWithOptions:(MRContextSaveOptions)saveOptions completion:(MRSaveCompletionHandler)completion;
+- (void)MR_saveWithOptions:(MRContextSaveOptions)saveOptions completion:(MRSaveCompletionHandler)completion;
 
 @end
 NS_ASSUME_NONNULL_END

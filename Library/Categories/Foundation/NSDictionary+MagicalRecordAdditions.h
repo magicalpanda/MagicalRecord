@@ -23,35 +23,35 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return Dictionary containing entries from both dictionaries.
  */
-- (NSMutableDictionary *) MR_dictionaryByMergingDictionary:(NSDictionary *)dictionary;
+- (NSMutableDictionary *)MR_dictionaryByMergingDictionary:(NSDictionary *)dictionary;
 
 /**
  Default SQLite store options for setting up a persistent store.
 
  @return Dictionary containing default options for a SQLite-based store.
  */
-+ (NSDictionary *) MR_defaultSqliteStoreOptions;
++ (NSDictionary *)MR_defaultSqliteStoreOptions;
 
 /**
  Setup options for a persistent store that specify that the store should be automatically migrated if possible.
 
  @return Dictionary containing options for a persistent store.
  */
-+ (NSDictionary *) MR_autoMigrationOptions;
++ (NSDictionary *)MR_autoMigrationOptions;
 
 /**
  Setup options for a persistent store that specify that the store should not be automatically migrated.
 
  @return Dictionary containing options for a persistent store.
  */
-+ (NSDictionary *) MR_manualMigrationOptions;
++ (NSDictionary *)MR_manualMigrationOptions;
 
 /**
  Convenience method to read the value for the `MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey` key from self and return the value as a BOOL.
 
  @return BOOL value for key.
  */
-- (BOOL) MR_shouldDeletePersistentStoreOnModelMismatch;
+- (BOOL)MR_shouldDeletePersistentStoreOnModelMismatch;
 
 @end
 NS_ASSUME_NONNULL_END
