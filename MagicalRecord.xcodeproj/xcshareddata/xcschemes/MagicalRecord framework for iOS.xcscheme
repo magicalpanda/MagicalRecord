@@ -26,15 +26,16 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "90C4BD7418E11DFA009FAF9C"
-               BuildableName = "libMagicalRecord for iOS Tests.xctest"
-               BlueprintName = "libMagicalRecord for iOS Tests"
+               BlueprintIdentifier = "9053F56319E0244C00137362"
+               BuildableName = "MagicalRecord for iOS Tests.xctest"
+               BlueprintName = "MagicalRecord for iOS Tests"
                ReferencedContainer = "container:MagicalRecord.xcodeproj">
             </BuildableReference>
          </TestableReference>
