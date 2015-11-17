@@ -6,10 +6,6 @@
 #import "MagicalRecordDataImportTestCase.h"
 #import "SingleEntityWithNoRelationships.h"
 
-@import Expecta;
-
-#import "MagicalImportFunctions.h"
-
 @interface NSString (MagicalRecordDateFormatter)
 
 - (NSDate *)MRTests_dateFromString;
@@ -35,12 +31,12 @@
 
 - (void)testImportASingleEntity
 {
-    expect(self.testEntity).toNot.beNil();
+    XCTAssertNotNil(self.testEntity);
 }
 
 - (void)testImportStringAttributeToEntity
 {
-    expect(self.testEntity.stringTestAttribute).to.equal(@"This is a test value");
+    XCTAssertEqualObjects(self.testEntity.stringTestAttribute, @"This is a test value");
 }
 
 - (void)testImportInt16AttributeToEntity
@@ -139,22 +135,22 @@
 
 - (void)testImportDateAttributeToEntity
 {
-    expect(self.testEntity.dateTestAttribute).to.equal([@"2011-07-23 22:30:40 +0000" MRTests_dateFromString]);
+    XCTAssertEqualObjects(self.testEntity.dateTestAttribute, [@"2011-07-23 22:30:40 +0000" MRTests_dateFromString]);
 }
 
 - (void)testImportDateAttributeWithCustomFormat
 {
-    expect(self.testEntity.dateWithCustomFormat).to.equal([@"2011-08-05 01:56:04 +0000" MRTests_dateFromString]);
+    XCTAssertEqualObjects(self.testEntity.dateWithCustomFormat, [@"2011-08-05 01:56:04 +0000" MRTests_dateFromString]);
 }
 
 - (void)testImportEpochDate
 {
-    expect(self.testEntity.unixTimeTestAttribute).to.equal([NSDate dateWithTimeIntervalSince1970:1388349428]);
+    XCTAssertEqualObjects(self.testEntity.unixTimeTestAttribute, [NSDate dateWithTimeIntervalSince1970:1388349428]);
 }
 
 - (void)testImportEpochDate13
 {
-    expect(self.testEntity.unixTime13TestAttribute).to.equal([NSDate dateWithTimeIntervalSince1970:1388349427.543]);
+    XCTAssertEqualObjects(self.testEntity.unixTime13TestAttribute, [NSDate dateWithTimeIntervalSince1970:1388349427.543]);
 }
 
 @end

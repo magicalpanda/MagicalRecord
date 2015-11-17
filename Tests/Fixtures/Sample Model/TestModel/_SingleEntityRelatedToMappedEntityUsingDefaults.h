@@ -3,32 +3,30 @@
 
 @import CoreData;
 
-extern const struct SingleEntityRelatedToMappedEntityUsingDefaultsAttributes
-{
-    __unsafe_unretained NSString *singleEntityRelatedToMappedEntityUsingDefaultsID;
+extern const struct SingleEntityRelatedToMappedEntityUsingDefaultsAttributes {
+	__unsafe_unretained NSString *singleEntityRelatedToMappedEntityUsingDefaultsID;
 } SingleEntityRelatedToMappedEntityUsingDefaultsAttributes;
 
-extern const struct SingleEntityRelatedToMappedEntityUsingDefaultsRelationships
-{
-    __unsafe_unretained NSString *mappedEntity;
+extern const struct SingleEntityRelatedToMappedEntityUsingDefaultsRelationships {
+	__unsafe_unretained NSString *mappedEntity;
 } SingleEntityRelatedToMappedEntityUsingDefaultsRelationships;
 
 @class MappedEntity;
 
-@interface SingleEntityRelatedToMappedEntityUsingDefaultsID : NSManagedObjectID
-{
-}
+@interface SingleEntityRelatedToMappedEntityUsingDefaultsID : NSManagedObjectID {}
 @end
 
-@interface _SingleEntityRelatedToMappedEntityUsingDefaults : NSManagedObject
-{
-}
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext *)moc_;
-+ (NSString *)entityName;
-+ (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)moc_;
-- (SingleEntityRelatedToMappedEntityUsingDefaultsID *)objectID;
+@interface _SingleEntityRelatedToMappedEntityUsingDefaults : NSManagedObject {}
++ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
++ (NSString*)entityName;
++ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
+@property (nonatomic, readonly, strong) SingleEntityRelatedToMappedEntityUsingDefaultsID* objectID;
 
-@property (nonatomic, strong) NSNumber *singleEntityRelatedToMappedEntityUsingDefaultsID;
+@property (nonatomic, strong) NSNumber* singleEntityRelatedToMappedEntityUsingDefaultsID;
+
+@property (atomic) int16_t singleEntityRelatedToMappedEntityUsingDefaultsIDValue;
+- (int16_t)singleEntityRelatedToMappedEntityUsingDefaultsIDValue;
+- (void)setSingleEntityRelatedToMappedEntityUsingDefaultsIDValue:(int16_t)value_;
 
 //- (BOOL)validateSingleEntityRelatedToMappedEntityUsingDefaultsID:(id*)value_ error:(NSError**)error_;
 
@@ -40,10 +38,13 @@ extern const struct SingleEntityRelatedToMappedEntityUsingDefaultsRelationships
 
 @interface _SingleEntityRelatedToMappedEntityUsingDefaults (CoreDataGeneratedPrimitiveAccessors)
 
-- (NSNumber *)primitiveSingleEntityRelatedToMappedEntityUsingDefaultsID;
-- (void)setPrimitiveSingleEntityRelatedToMappedEntityUsingDefaultsID:(NSNumber *)value;
+- (NSNumber*)primitiveSingleEntityRelatedToMappedEntityUsingDefaultsID;
+- (void)setPrimitiveSingleEntityRelatedToMappedEntityUsingDefaultsID:(NSNumber*)value;
 
-- (MappedEntity *)primitiveMappedEntity;
-- (void)setPrimitiveMappedEntity:(MappedEntity *)value;
+- (int16_t)primitiveSingleEntityRelatedToMappedEntityUsingDefaultsIDValue;
+- (void)setPrimitiveSingleEntityRelatedToMappedEntityUsingDefaultsIDValue:(int16_t)value_;
+
+- (MappedEntity*)primitiveMappedEntity;
+- (void)setPrimitiveMappedEntity:(MappedEntity*)value;
 
 @end

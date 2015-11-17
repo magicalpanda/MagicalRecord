@@ -29,18 +29,16 @@
     NSManagedObjectContext *stackContext = self.stack.context;
 
     self.singleTestEntity = [SingleRelatedEntity MR_importFromObject:self.testEntityData inContext:stackContext];
-
-    expect(self.singleTestEntity).toNot.beNil();
+    XCTAssertNotNil(self.singleTestEntity);
 }
 
 - (void)testImportAnEntityRelatedToAbstractEntityViaToOneRelationshop
 {
     AbstractRelatedEntity *relatedEntity = self.singleTestEntity.testAbstractToOneRelationship;
-
-    expect(relatedEntity).toNot.beNil();
-    expect(relatedEntity).to.beKindOf([AbstractRelatedEntity class]);
-    expect(relatedEntity).to.respondTo(@selector(sampleBaseAttribute));
-    expect(relatedEntity.sampleBaseAttribute).to.contain(@"BASE");
+    XCTAssertNotNil(relatedEntity);
+    XCTAssertTrue([relatedEntity isKindOfClass:[AbstractRelatedEntity class]]);
+    XCTAssertTrue([relatedEntity respondsToSelector:@selector(sampleBaseAttribute)]);
+    XCTAssertTrue([relatedEntity.sampleBaseAttribute containsString:@"BASE"]);
 }
 
 - (void)testImportAnEntityRelatedToAbstractEntityViaToManyRelationship

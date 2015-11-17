@@ -16,18 +16,16 @@
 - (void)testImportMappedEntityRelatedViaToOneRelationship
 {
     NSManagedObjectContext *stackContext = self.stack.context;
-
     SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey *entity = [SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_importFromObject:self.testEntityData inContext:stackContext];
-
-    expect(entity.mappedEntity).toNot.beNil();
-    expect([SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_numberOfEntitiesWithContext:self.stack.context]).to.equal(1);
-    expect([MappedEntity MR_numberOfEntitiesWithContext:self.stack.context]).to.equal(1);
-    expect(entity.mappedEntity.sampleAttribute).to.contain(@"sample json file");
+    XCTAssertNotNil(entity.mappedEntity);
+    XCTAssertEqualObjects([SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_numberOfEntitiesWithContext:stackContext], @1);
+    XCTAssertEqualObjects([MappedEntity MR_numberOfEntitiesWithContext:stackContext], @1);
+    XCTAssertTrue([entity.mappedEntity.sampleAttribute containsString:@"sample json file"]);
 
     // Verify mapping in relationship description userinfo
     NSEntityDescription *mappedEntity = [entity entity];
     NSRelationshipDescription *testRelationship = [[mappedEntity propertiesByName] valueForKey:@"mappedEntity"];
-    expect([[testRelationship userInfo] objectForKey:kMagicalRecordImportRelationshipMapKey]).to.equal(@"someRandomAttributeName");
+    XCTAssertEqualObjects(testRelationship.userInfo[kMagicalRecordImportAttributeKeyMapKey], @"someRandomAttributeName");
 }
 
 - (void)testImportMappedEntityUsingPrimaryRelationshipKey
@@ -35,17 +33,17 @@
     NSManagedObjectContext *stackContext = self.stack.context;
 
     SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey *entity = [SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_importFromObject:self.testEntityData inContext:stackContext];
-
-    expect(entity.mappedEntity).toNot.beNil();
-    expect([SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_numberOfEntitiesWithContext:self.stack.context]).to.equal(1);
-    expect([MappedEntity MR_numberOfEntitiesWithContext:self.stack.context]).to.equal(1);
-    expect(entity.mappedEntity.sampleAttribute).to.contain(@"sample json file");
-    expect(entity.mappedEntity.testMappedEntityID).to.equal(@42);
+    XCTAssertNotNil(entity.mappedEntity);
+    XCTAssertEqualObjects([SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey MR_numberOfEntitiesWithContext:stackContext], @1);
+    XCTAssertEqualObjects([MappedEntity MR_numberOfEntitiesWithContext:stackContext], @1);
+    XCTAssertTrue([entity.mappedEntity.sampleAttribute containsString:@"sample json file"]);
+    XCTAssertEqualObjects(entity.mappedEntity.testMappedEntityID, @42);
 
     // Verify mapping in relationship description userinfo
     NSEntityDescription *mappedEntity = [entity entity];
     NSRelationshipDescription *testRelationship = [[mappedEntity propertiesByName] valueForKey:@"mappedEntity"];
-    expect([[testRelationship userInfo] objectForKey:kMagicalRecordImportRelationshipMapKey]).to.equal(@"someRandomAttributeName");
+    XCTAssertEqualObjects(testRelationship.userInfo[kMagicalRecordImportRelationshipMapKey], @"someRandomAttributeName");
+
 }
 
 @end

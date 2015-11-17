@@ -3,18 +3,14 @@
 
 @import CoreData;
 
-@interface DifferentClassNameMappingID : NSManagedObjectID
-{
-}
+@interface DifferentClassNameMappingID : NSManagedObjectID {}
 @end
 
-@interface _DifferentClassNameMapping : NSManagedObject
-{
-}
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext *)moc_;
-+ (NSString *)entityName;
-+ (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)moc_;
-- (DifferentClassNameMappingID *)objectID;
+@interface _DifferentClassNameMapping : NSManagedObject {}
++ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
++ (NSString*)entityName;
++ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
+@property (nonatomic, readonly, strong) DifferentClassNameMappingID* objectID;
 
 @end
 

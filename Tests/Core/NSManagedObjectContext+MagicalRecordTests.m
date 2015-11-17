@@ -15,8 +15,7 @@
 {
     NSManagedObjectContext *stackContext = self.stack.context;
     NSManagedObjectContext *testContext = [NSManagedObjectContext MR_confinementContextWithParent:stackContext];
-
-    expect([testContext parentContext]).to.equal(stackContext);
+    XCTAssertEqualObjects(testContext.parentContext, stackContext);
 }
 
 @end

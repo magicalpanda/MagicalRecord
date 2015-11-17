@@ -7,6 +7,7 @@
 //
 
 #import "MagicalMigrationManager.h"
+@import CoreData;
 
 @implementation MagicalMigrationManager
 

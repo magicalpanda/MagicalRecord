@@ -15,8 +15,7 @@
 - (void)testCreateFetchRequestForEntity
 {
     NSFetchRequest *testRequest = [SingleRelatedEntity MR_requestAll];
-
-    expect([testRequest entityName]).to.equal(NSStringFromClass([SingleRelatedEntity class]));
+    XCTAssertEqualObjects(testRequest.entityName, NSStringFromClass([SingleRelatedEntity class]));
 }
 
 - (void)testCanRequestFirstEntityWithPredicate
@@ -24,18 +23,17 @@
     NSPredicate *testPredicate = [NSPredicate predicateWithFormat:@"mappedStringAttribute = 'Test Predicate'"];
     NSFetchRequest *testRequest = [SingleRelatedEntity MR_requestFirstWithPredicate:testPredicate];
 
-    expect([testRequest fetchLimit]).to.equal(1);
-    expect([testRequest predicate]).to.equal([NSPredicate predicateWithFormat:@"mappedStringAttribute = 'Test Predicate'"]);
+    XCTAssertEqual(testRequest.fetchLimit, (NSUInteger)1);
+    XCTAssertEqualObjects(testRequest.predicate, [NSPredicate predicateWithFormat:@"mappedStringAttribute = 'Test Predicate'"]);
 }
 
 - (void)testCreateRequestForFirstEntity
 {
     NSFetchRequest *testRequest = [SingleRelatedEntity MR_requestFirstByAttribute:@"mappedStringAttribute" withValue:@"Autumnal"];
-
-    expect([testRequest entityName]).to.equal(NSStringFromClass([SingleRelatedEntity class]));
-    expect([testRequest fetchLimit]).to.equal(1);
-    expect([testRequest fetchOffset]).to.equal(0);
-    expect([testRequest predicate]).to.equal([NSPredicate predicateWithFormat:@"mappedStringAttribute = \"Autumnal\""]);
+    XCTAssertEqualObjects(testRequest.entityName, NSStringFromClass([SingleRelatedEntity class]));
+    XCTAssertEqual(testRequest.fetchLimit, (NSUInteger)1);
+    XCTAssertEqual(testRequest.fetchOffset, (NSUInteger)0);
+    XCTAssertEqualObjects(testRequest.predicate, [NSPredicate predicateWithFormat:@"mappedStringAttribute = 'Autumnal'"]);
 }
 
 @end

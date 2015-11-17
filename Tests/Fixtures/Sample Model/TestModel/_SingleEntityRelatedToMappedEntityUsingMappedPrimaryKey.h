@@ -3,25 +3,20 @@
 
 @import CoreData;
 
-extern const struct SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyRelationships
-{
-    __unsafe_unretained NSString *mappedEntity;
+extern const struct SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyRelationships {
+	__unsafe_unretained NSString *mappedEntity;
 } SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyRelationships;
 
 @class MappedEntity;
 
-@interface SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyID : NSManagedObjectID
-{
-}
+@interface SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyID : NSManagedObjectID {}
 @end
 
-@interface _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey : NSManagedObject
-{
-}
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext *)moc_;
-+ (NSString *)entityName;
-+ (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)moc_;
-- (SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyID *)objectID;
+@interface _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey : NSManagedObject {}
++ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
++ (NSString*)entityName;
++ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
+@property (nonatomic, readonly, strong) SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyID* objectID;
 
 @property (nonatomic, strong) MappedEntity *mappedEntity;
 
@@ -31,7 +26,7 @@ extern const struct SingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyRelati
 
 @interface _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey (CoreDataGeneratedPrimitiveAccessors)
 
-- (MappedEntity *)primitiveMappedEntity;
-- (void)setPrimitiveMappedEntity:(MappedEntity *)value;
+- (MappedEntity*)primitiveMappedEntity;
+- (void)setPrimitiveMappedEntity:(MappedEntity*)value;
 
 @end

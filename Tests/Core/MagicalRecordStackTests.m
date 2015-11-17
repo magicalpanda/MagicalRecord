@@ -5,10 +5,6 @@
 
 #import "MagicalRecordTestBase.h"
 
-@import Expecta;
-
-#import "MagicalRecord.h"
-
 @interface MagicalRecordTests : MagicalRecordTestBase
 
 @end
@@ -22,7 +18,7 @@
 
     if ((NO == [defaultStack.store.type isEqualToString:NSInMemoryStoreType]) && (nil != defaultStack.store))
     {
-        expect([defaultStack.store MR_removePersistentStoreFiles]).to.beTruthy();
+        XCTAssertTrue([defaultStack.store MR_removePersistentStoreFiles]);
     }
 
     [super tearDown];
@@ -32,17 +28,16 @@
 {
     MagicalRecordStack *defaultStack = [MagicalRecordStack defaultStack];
 
-    expect(defaultStack.context).toNot.beNil();
-    expect(defaultStack.model).toNot.beNil();
-    expect(defaultStack.coordinator).toNot.beNil();
-    expect(defaultStack.store).toNot.beNil();
+    XCTAssertNotNil(defaultStack.context);
+    XCTAssertNotNil(defaultStack.model);
+    XCTAssertNotNil(defaultStack.coordinator);
+    XCTAssertNotNil(defaultStack.store);
 }
 
 - (void)testCreateDefaultCoreDataStack
 {
     NSURL *testStoreURL = [NSPersistentStore MR_fileURLForStoreName:[MagicalRecord defaultStoreName]];
-
-    expect(testStoreURL).toNot.beNil();
+    XCTAssertNotNil(testStoreURL);
 
     [[NSFileManager defaultManager] removeItemAtPath:[testStoreURL path] error:nil];
 
@@ -53,9 +48,8 @@
     [self assertDefaultStack];
 
     NSPersistentStore *defaultStore = defaultStack.store;
-
-    expect([defaultStore type]).to.equal(NSSQLiteStoreType);
-    expect([[defaultStore URL] absoluteString]).to.endWith(@".sqlite");
+    XCTAssertEqual(defaultStore.type, NSSQLiteStoreType);
+    XCTAssertTrue([defaultStore.URL.absoluteString hasSuffix:@".sqlite"]);
 }
 
 - (void)testCreateInMemoryCoreDataStack
@@ -67,7 +61,7 @@
     [self assertDefaultStack];
 
     NSPersistentStore *defaultStore = defaultStack.store;
-    expect([defaultStore type]).to.equal(NSInMemoryStoreType);
+    XCTAssertEqual(defaultStore.type, NSInMemoryStoreType);
 }
 
 - (void)testCreateSqliteStackWithCustomName
@@ -84,8 +78,8 @@
     [self assertDefaultStack];
 
     NSPersistentStore *defaultStore = defaultStack.store;
-    expect([defaultStore type]).to.equal(NSSQLiteStoreType);
-    expect([[defaultStore URL] absoluteString]).to.endWith(testStoreName);
+    XCTAssertEqual(defaultStore.type, NSSQLiteStoreType);
+    XCTAssertTrue([defaultStore.URL.absoluteString hasSuffix:testStoreName]);
 }
 
 @end
