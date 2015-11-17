@@ -11,7 +11,7 @@
 
 @implementation NSEntityDescription (MagicalRecordDataImport)
 
-- (NSManagedObject *)MR_createInstanceInContext:(NSManagedObjectContext *)context;
+- (NSManagedObject *)MR_createInstanceInContext:(NSManagedObjectContext *)context
 {
     Class relatedClass = NSClassFromString([self managedObjectClassName]);
     NSManagedObject *newInstance = [relatedClass MR_createInContext:context];
@@ -19,7 +19,7 @@
     return newInstance;
 }
 
-- (NSAttributeDescription *)MR_attributeDescriptionForName:(NSString *)name;
+- (NSAttributeDescription *)MR_attributeDescriptionForName:(NSString *)name
 {
     __block NSAttributeDescription *description = nil;
 
@@ -37,14 +37,14 @@
     return description;
 }
 
-- (NSAttributeDescription *)MR_primaryAttributeToRelateBy;
+- (NSAttributeDescription *)MR_primaryAttributeToRelateBy
 {
     NSString *lookupKey = [[self userInfo] objectForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: MRPrimaryKeyNameFromString([self name]);
 
     return [self MR_attributeDescriptionForName:lookupKey];
 }
 
-- (NSAttributeDescription *)MR_primaryAttribute;
+- (NSAttributeDescription *)MR_primaryAttribute
 {
     NSString *lookupKey = [[self userInfo] objectForKey:kMagicalRecordImportDistinctAttributeKey];
     return [self MR_attributeDescriptionForName:lookupKey];

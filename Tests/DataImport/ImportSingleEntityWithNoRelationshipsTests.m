@@ -6,8 +6,7 @@
 #import "MagicalRecordDataImportTestCase.h"
 #import "SingleEntityWithNoRelationships.h"
 
-#define EXP_SHORTHAND
-#import <Expecta/Expecta.h>
+@import Expecta;
 
 #import "MagicalImportFunctions.h"
 
@@ -117,10 +116,10 @@
         CGFloat red, blue, green, alpha;
         [actualColor getRed:&red green:&green blue:&blue alpha:&alpha];
 
-        XCTAssertEqual(alpha, (CGFloat)1.0, @"Unexpected value returned: %f", alpha);
-        XCTAssertEqual(red, (CGFloat)(64.0f / 255.0f), @"Unexpected value returned: %f", red);
-        XCTAssertEqual(green, (CGFloat)(128.0f / 255.0f), @"Unexpected value returned: %f", green);
-        XCTAssertEqual(blue, (CGFloat)(225.0f / 255.0f), @"Unexpected value returned: %f", blue);
+        XCTAssertEqualWithAccuracy(alpha, (CGFloat)1.0, FLT_EPSILON, @"Unexpected value returned: %f", alpha);
+        XCTAssertEqualWithAccuracy(red, (CGFloat)(64.0f / 255.0f), FLT_EPSILON, @"Unexpected value returned: %f", red);
+        XCTAssertEqualWithAccuracy(green, (CGFloat)(128.0f / 255.0f), FLT_EPSILON, @"Unexpected value returned: %f", green);
+        XCTAssertEqualWithAccuracy(blue, (CGFloat)(225.0f / 255.0f), FLT_EPSILON, @"Unexpected value returned: %f", blue);
     }
 }
 
@@ -130,10 +129,10 @@
 {
     NSColor *actualColor = self.testEntity.colorTestAttribute;
 
-    XCTAssertEqual([actualColor alphaComponent], (CGFloat)(255.0 / 255.0), @"Unexpected value returned");
-    XCTAssertEqual([actualColor redComponent], (CGFloat)(64.0f / 255.0f), @"Unexpected value returned");
-    XCTAssertEqual([actualColor greenComponent], (CGFloat)(128.0f / 255.0f), @"Unexpected value returned");
-    XCTAssertEqual([actualColor blueComponent], (CGFloat)(225.0f / 255.0f), @"Unexpected value returned");
+    XCTAssertEqualWithAccuracy([actualColor alphaComponent], (CGFloat)(255.0 / 255.0), FLT_EPSILON, @"Unexpected value returned");
+    XCTAssertEqualWithAccuracy([actualColor redComponent], (CGFloat)(64.0f / 255.0f), FLT_EPSILON, @"Unexpected value returned");
+    XCTAssertEqualWithAccuracy([actualColor greenComponent], (CGFloat)(128.0f / 255.0f), FLT_EPSILON, @"Unexpected value returned");
+    XCTAssertEqualWithAccuracy([actualColor blueComponent], (CGFloat)(225.0f / 255.0f), FLT_EPSILON, @"Unexpected value returned");
 }
 
 #endif /* if TARGET_OS_IPHONE */

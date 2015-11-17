@@ -3,9 +3,8 @@
 //  Copyright (c) 2014 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
-#define EXP_SHORTHAND
-#import <Expecta/Expecta.h>
+@import XCTest;
+@import Expecta;
 
 #import "NSPersistentStore+MagicalRecord.h"
 #import "NSPersistentStore+MagicalRecordPrivate.h"

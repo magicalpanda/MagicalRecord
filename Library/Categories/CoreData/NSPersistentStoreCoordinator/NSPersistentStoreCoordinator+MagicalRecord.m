@@ -27,13 +27,13 @@ NSString *const MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey = @"M
     }
 }
 
-- (NSPersistentStore *)MR_addSqliteStoreNamed:(id)storeFileName withOptions:(__autoreleasing NSDictionary *)options;
+- (NSPersistentStore *)MR_addSqliteStoreNamed:(id)storeFileName withOptions:(__autoreleasing NSDictionary *)options
 {
     NSURL *url = [storeFileName isKindOfClass:[NSURL class]] ? storeFileName : [NSPersistentStore MR_fileURLForStoreName:storeFileName];
     return [self MR_addSqliteStoreAtURL:url withOptions:options];
 }
 
-- (NSPersistentStore *)MR_reinitializeStoreAtURL:(NSURL *)url fromError:(NSError *)error withOptions:(NSDictionary *__autoreleasing)options;
+- (NSPersistentStore *)MR_reinitializeStoreAtURL:(NSURL *)url fromError:(NSError *)error withOptions:(NSDictionary *__autoreleasing)options
 {
     NSPersistentStore *store = nil;
     BOOL isMigrationError = [error code] == NSMigrationError ||
@@ -64,7 +64,7 @@ NSString *const MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey = @"M
     return store;
 }
 
-- (NSPersistentStore *)MR_addSqliteStoreAtURL:(NSURL *)url withOptions:(NSDictionary *__autoreleasing)options;
+- (NSPersistentStore *)MR_addSqliteStoreAtURL:(NSURL *)url withOptions:(NSDictionary *__autoreleasing)options
 {
     [[self class] MR_createPathToStoreFileIfNeccessary:url];
 
@@ -105,7 +105,7 @@ NSString *const MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey = @"M
 
 #pragma mark - Persistent Store Initializers
 
-+ (NSPersistentStoreCoordinator *)MR_coordinatorWithPersistentStore:(NSPersistentStore *)persistentStore;
++ (NSPersistentStoreCoordinator *)MR_coordinatorWithPersistentStore:(NSPersistentStore *)persistentStore
 {
     NSManagedObjectModel *defaultStackModel = [[MagicalRecordStack defaultStack] model];
 
@@ -113,12 +113,12 @@ NSString *const MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey = @"M
     ;
 }
 
-+ (NSPersistentStoreCoordinator *)MR_coordinatorWithPersistentStore:(NSPersistentStore *)persistentStore andModel:(NSManagedObjectModel *)model;
++ (NSPersistentStoreCoordinator *)MR_coordinatorWithPersistentStore:(NSPersistentStore *)persistentStore andModel:(NSManagedObjectModel *)model
 {
     return [self MR_coordinatorWithPersistentStore:persistentStore andModel:model withOptions:nil];
 }
 
-+ (NSPersistentStoreCoordinator *)MR_coordinatorWithPersistentStore:(NSPersistentStore *)persistentStore andModel:(NSManagedObjectModel *)model withOptions:(NSDictionary *)options;
++ (NSPersistentStoreCoordinator *)MR_coordinatorWithPersistentStore:(NSPersistentStore *)persistentStore andModel:(NSManagedObjectModel *)model withOptions:(NSDictionary *)options
 {
     NSPersistentStoreCoordinator *psc = [[self alloc] initWithManagedObjectModel:model];
 
@@ -129,19 +129,19 @@ NSString *const MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey = @"M
 
 #pragma mark - Store Name Initializers
 
-+ (NSPersistentStoreCoordinator *)MR_coordinatorWithSqliteStoreNamed:(NSString *)storeFileName;
++ (NSPersistentStoreCoordinator *)MR_coordinatorWithSqliteStoreNamed:(NSString *)storeFileName
 {
     return [self MR_coordinatorWithSqliteStoreNamed:storeFileName withOptions:nil];
 }
 
-+ (NSPersistentStoreCoordinator *)MR_coordinatorWithSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *)options;
++ (NSPersistentStoreCoordinator *)MR_coordinatorWithSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *)options
 {
     NSManagedObjectModel *defaultStackModel = [[MagicalRecordStack defaultStack] model];
 
     return [self MR_coordinatorWithSqliteStoreNamed:storeFileName andModel:defaultStackModel withOptions:options];
 }
 
-+ (NSPersistentStoreCoordinator *)MR_coordinatorWithSqliteStoreNamed:(NSString *)storeFileName andModel:(NSManagedObjectModel *)model withOptions:(NSDictionary *)options;
++ (NSPersistentStoreCoordinator *)MR_coordinatorWithSqliteStoreNamed:(NSString *)storeFileName andModel:(NSManagedObjectModel *)model withOptions:(NSDictionary *)options
 {
     NSPersistentStoreCoordinator *psc = [[self alloc] initWithManagedObjectModel:model];
 
@@ -152,19 +152,19 @@ NSString *const MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey = @"M
 
 #pragma mark - URL Initializers
 
-+ (NSPersistentStoreCoordinator *)MR_coordinatorWithSqliteStoreAtURL:(NSURL *)url;
++ (NSPersistentStoreCoordinator *)MR_coordinatorWithSqliteStoreAtURL:(NSURL *)url
 {
     NSManagedObjectModel *defaultStackModel = [[MagicalRecordStack defaultStack] model];
 
     return [self MR_coordinatorWithSqliteStoreAtURL:url andModel:defaultStackModel];
 }
 
-+ (NSPersistentStoreCoordinator *)MR_coordinatorWithSqliteStoreAtURL:(NSURL *)url andModel:(NSManagedObjectModel *)model;
++ (NSPersistentStoreCoordinator *)MR_coordinatorWithSqliteStoreAtURL:(NSURL *)url andModel:(NSManagedObjectModel *)model
 {
     return [self MR_coordinatorWithSqliteStoreAtURL:url andModel:model withOptions:nil];
 }
 
-+ (NSPersistentStoreCoordinator *)MR_coordinatorWithSqliteStoreAtURL:(NSURL *)url andModel:(NSManagedObjectModel *)model withOptions:(NSDictionary *)options;
++ (NSPersistentStoreCoordinator *)MR_coordinatorWithSqliteStoreAtURL:(NSURL *)url andModel:(NSManagedObjectModel *)model withOptions:(NSDictionary *)options
 {
     NSPersistentStoreCoordinator *psc = [[self alloc] initWithManagedObjectModel:model];
 

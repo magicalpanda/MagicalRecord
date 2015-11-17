@@ -5,8 +5,8 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+@import Foundation;
+@import CoreData;
 
 extern NSString *const kMagicalRecordImportCustomDateFormatKey;
 extern NSString *const kMagicalRecordImportDefaultDateFormatString;
@@ -18,6 +18,7 @@ extern NSString *const kMagicalRecordImportAttributeValueClassNameKey;
 extern NSString *const kMagicalRecordImportRelationshipMapKey;
 extern NSString *const kMagicalRecordImportRelationshipLinkedByKey;
 extern NSString *const kMagicalRecordImportRelationshipTypeKey;
+extern NSString *const kMagicalRecordImportExcludeFromImportKey;
 
 extern NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent;
 

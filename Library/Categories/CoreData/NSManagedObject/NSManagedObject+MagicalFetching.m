@@ -23,7 +23,7 @@
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
-+ (NSString *)MR_fileCacheNameForObject:(id)object;
++ (NSString *)MR_fileCacheNameForObject:(id)object
 {
     SEL selector = @selector(fetchedResultsControllerCacheName);
     if ([object respondsToSelector:selector])
@@ -69,7 +69,7 @@
     return controller;
 }
 
-+ (NSFetchedResultsController *)MR_fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending delegate:(id)delegate
++ (NSFetchedResultsController *)MR_fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending delegate:(id<NSFetchedResultsControllerDelegate>)delegate
 {
     return [self MR_fetchAllGroupedBy:group
                         withPredicate:searchTerm
@@ -79,7 +79,7 @@
                             inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
-+ (NSFetchedResultsController *)MR_fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
++ (NSFetchedResultsController *)MR_fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
 {
     return [self MR_fetchAllGroupedBy:group
                         withPredicate:searchTerm
@@ -114,7 +114,7 @@
     return controller;
 }
 
-+ (NSFetchedResultsController *)MR_fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath;
++ (NSFetchedResultsController *)MR_fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath
 {
     return [self MR_fetchAllSortedBy:sortTerm
                            ascending:ascending
@@ -123,7 +123,7 @@
                            inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
-+ (NSFetchedResultsController *)MR_fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context;
++ (NSFetchedResultsController *)MR_fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context
 {
     return [self MR_fetchAllGroupedBy:groupingKeyPath
                         withPredicate:searchTerm
@@ -133,7 +133,7 @@
                             inContext:context];
 }
 
-+ (NSFetchedResultsController *)MR_fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate;
++ (NSFetchedResultsController *)MR_fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate
 {
     return [self MR_fetchAllSortedBy:sortTerm
                            ascending:ascending

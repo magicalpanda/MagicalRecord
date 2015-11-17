@@ -22,7 +22,7 @@
 
 @implementation ClassicWithBackgroundCoordinatorSQLiteMagicalRecordStack
 
-- (NSString *)description;
+- (NSString *)description
 {
     NSMutableString *description = [[super description] mutableCopy];
 
@@ -31,13 +31,13 @@
     return [NSString stringWithString:description];
 }
 
-- (void)reset;
+- (void)reset
 {
     self.backgroundCoordinator = nil;
     [super reset];
 }
 
-- (NSManagedObjectContext *)newConfinementContext;
+- (NSManagedObjectContext *)newConfinementContext
 {
     //TODO: need to setup backgroundContext -> context merges via NSNC, and unsubscribe automatically
     NSManagedObjectContext *backgroundContext = [NSManagedObjectContext MR_confinementContext];
@@ -45,7 +45,7 @@
     return backgroundContext;
 }
 
-- (NSPersistentStoreCoordinator *)backgroundCoordinator;
+- (NSPersistentStoreCoordinator *)backgroundCoordinator
 {
     if (_backgroundCoordinator == nil)
     {

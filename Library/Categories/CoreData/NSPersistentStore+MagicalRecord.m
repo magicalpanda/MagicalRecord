@@ -13,12 +13,12 @@
 
 @implementation NSPersistentStore (MagicalRecord)
 
-+ (NSURL *)MR_defaultLocalStoreUrl;
++ (NSURL *)MR_defaultLocalStoreUrl
 {
     return [self MR_fileURLForStoreName:[MagicalRecord defaultStoreName]];
 }
 
-+ (NSURL *)MR_fileURLForStoreName:(NSString *)storeFileName;
++ (NSURL *)MR_fileURLForStoreName:(NSString *)storeFileName
 {
     NSURL *storeURL = [self MR_fileURLForStoreNameIfExistsOnDisk:storeFileName];
 
@@ -31,7 +31,7 @@
     return storeURL;
 }
 
-+ (NSURL *)MR_fileURLForStoreNameIfExistsOnDisk:(NSString *)storeFileName;
++ (NSURL *)MR_fileURLForStoreNameIfExistsOnDisk:(NSString *)storeFileName
 {
     NSArray *paths = [NSArray arrayWithObjects:
                                   MR_defaultApplicationStorePath(),
@@ -51,7 +51,7 @@
     return nil;
 }
 
-+ (NSURL *)MR_cloudURLForUbiquitousContainer:(NSString *)bucketName;
++ (NSURL *)MR_cloudURLForUbiquitousContainer:(NSString *)bucketName
 {
     NSFileManager *fileManager = [[NSFileManager alloc] init];
     NSURL *cloudURL = nil;
@@ -63,17 +63,17 @@
     return cloudURL;
 }
 
-+ (NSURL *)MR_cloudURLForUbiqutiousContainer:(NSString *)bucketName;
++ (NSURL *)MR_cloudURLForUbiqutiousContainer:(NSString *)bucketName
 {
     return [self MR_cloudURLForUbiquitousContainer:bucketName];
 }
 
-- (BOOL)MR_isSqliteStore;
+- (BOOL)MR_isSqliteStore
 {
     return [[self type] isEqualToString:NSSQLiteStoreType];
 }
 
-- (BOOL)MR_copyToURL:(NSURL *)destinationUrl error:(NSError *__autoreleasing *)error;
+- (BOOL)MR_copyToURL:(NSURL *)destinationUrl error:(NSError *__autoreleasing *)error
 {
     if (![self MR_isSqliteStore])
     {
@@ -95,7 +95,7 @@
     return success;
 }
 
-- (NSArray *)MR_sqliteURLs;
+- (NSArray *)MR_sqliteURLs
 {
     if (![self MR_isSqliteStore])
     {
@@ -127,12 +127,12 @@
 
 #pragma mark - Remove Store File(s)
 
-- (BOOL)MR_removePersistentStoreFiles;
+- (BOOL)MR_removePersistentStoreFiles
 {
     return [[self class] MR_removePersistentStoreFilesAtURL:self.URL];
 }
 
-+ (BOOL)MR_removePersistentStoreFilesAtURL:(NSURL *)url;
++ (BOOL)MR_removePersistentStoreFilesAtURL:(NSURL *)url
 {
     NSCAssert([url isFileURL], @"URL must be a file URL");
 
@@ -166,12 +166,12 @@
 #pragma mark - Deprecated Methods
 @implementation NSPersistentStore (MagicalRecordDeprecated)
 
-+ (NSURL *)MR_defaultURLForStoreName:(NSString *)storeFileName;
++ (NSURL *)MR_defaultURLForStoreName:(NSString *)storeFileName
 {
     return [self MR_fileURLForStoreName:storeFileName];
 }
 
-+ (NSURL *)MR_urlForStoreName:(NSString *)storeFileName;
++ (NSURL *)MR_urlForStoreName:(NSString *)storeFileName
 {
     return [self MR_fileURLForStoreNameIfExistsOnDisk:storeFileName];
 }
@@ -181,7 +181,7 @@
 NSString *MR_defaultApplicationStorePath(void)
 {
     NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) firstObject];
-    NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(id)kCFBundleNameKey];
+    NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
     NSString *applicationStorePath = [documentPath stringByAppendingPathComponent:applicationName];
 
     return applicationStorePath;

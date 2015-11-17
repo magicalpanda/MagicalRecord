@@ -12,7 +12,7 @@
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 @implementation NSFetchedResultsController (MagicalFetching)
 
-- (void)MR_performFetch;
+- (void)MR_performFetch
 {
     NSError *error = nil;
     BOOL success = [self performFetch:&error];

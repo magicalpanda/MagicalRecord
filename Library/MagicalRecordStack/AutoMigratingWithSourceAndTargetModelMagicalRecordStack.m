@@ -20,7 +20,7 @@
 
 @implementation AutoMigratingWithSourceAndTargetModelMagicalRecordStack
 
-- (instancetype)initWithSourceModel:(NSManagedObjectModel *)sourceModel targetModel:(NSManagedObjectModel *)targetModel storeAtURL:(NSURL *)storeURL;
+- (instancetype)initWithSourceModel:(NSManagedObjectModel *)sourceModel targetModel:(NSManagedObjectModel *)targetModel storeAtURL:(NSURL *)storeURL
 {
     self = [super initWithStoreAtURL:storeURL model:targetModel];
     if (self)
@@ -30,7 +30,7 @@
     return self;
 }
 
-- (instancetype)initWithSourceModel:(NSManagedObjectModel *)sourceModel targetModel:(NSManagedObjectModel *)targetModel storeAtPath:(NSString *)path;
+- (instancetype)initWithSourceModel:(NSManagedObjectModel *)sourceModel targetModel:(NSManagedObjectModel *)targetModel storeAtPath:(NSString *)path
 {
     self = [super initWithStoreAtPath:path model:targetModel];
     if (self)
@@ -40,7 +40,7 @@
     return self;
 }
 
-- (instancetype)initWithSourceModel:(NSManagedObjectModel *)sourceModel targetModel:(NSManagedObjectModel *)targetModel storeNamed:(NSString *)storeName;
+- (instancetype)initWithSourceModel:(NSManagedObjectModel *)sourceModel targetModel:(NSManagedObjectModel *)targetModel storeNamed:(NSString *)storeName
 {
     self = [super initWithStoreNamed:storeName model:targetModel];
     if (self)
@@ -50,7 +50,7 @@
     return self;
 }
 
-- (NSManagedObjectModel *)targetModel;
+- (NSManagedObjectModel *)targetModel
 {
     return self.model;
 }
@@ -60,7 +60,7 @@
     return [self createCoordinatorWithOptions:[self defaultStoreOptions]];
 }
 
-- (NSPersistentStoreCoordinator *)createCoordinatorWithOptions:(NSDictionary *)options;
+- (NSPersistentStoreCoordinator *)createCoordinatorWithOptions:(NSDictionary *)options
 {
     NSMigrationManager *migrationManager = [[NSMigrationManager alloc] initWithSourceModel:self.sourceModel destinationModel:self.targetModel];
     NSError *error = nil;
