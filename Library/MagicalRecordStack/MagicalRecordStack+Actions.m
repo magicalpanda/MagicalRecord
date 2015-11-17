@@ -84,7 +84,7 @@ dispatch_queue_t MR_saveQueue()
     return [self saveWithBlockAndWait:block error:nil];
 }
 
-- (BOOL)saveWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block error:(NSError **)error;
+- (BOOL)saveWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block error:(NSError *__autoreleasing *)error;
 {
     NSParameterAssert(block);
     NSManagedObjectContext *localContext = [self newConfinementContext];

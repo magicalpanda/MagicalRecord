@@ -25,7 +25,7 @@
     return saveResult;
 }
 
-- (BOOL)MR_saveOnlySelfAndWaitWithError:(NSError **)error;
+- (BOOL)MR_saveOnlySelfAndWaitWithError:(NSError *__autoreleasing *)error;
 {
     __block BOOL saveResult = NO;
     __block NSError *saveError;
@@ -65,7 +65,7 @@
     return saveResult;
 }
 
-- (BOOL)MR_saveToPersistentStoreAndWaitWithError:(NSError **)error;
+- (BOOL)MR_saveToPersistentStoreAndWaitWithError:(NSError *__autoreleasing *)error;
 {
     __block BOOL saveResult = NO;
     __block NSError *saveError;

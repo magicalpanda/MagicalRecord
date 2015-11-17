@@ -36,7 +36,7 @@
     return [self saveWithBlockAndWait:block error:nil];
 }
 
-+ (BOOL)saveWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block error:(NSError **)error
++ (BOOL)saveWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block error:(NSError *__autoreleasing *)error
 {
     return [[MagicalRecordStack defaultStack] saveWithBlockAndWait:block error:error];
 }

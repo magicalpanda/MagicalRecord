@@ -108,7 +108,7 @@
     return mappingModel;
 }
 
-- (BOOL)MagicalMigrationManager_progressivelyMigrateStoreAtURL:(NSURL *)sourceStoreURL toStoreAtURL:(NSURL *)targetStoreURL ofType:(NSString *)type error:(NSError **)error;
+- (BOOL)MagicalMigrationManager_progressivelyMigrateStoreAtURL:(NSURL *)sourceStoreURL toStoreAtURL:(NSURL *)targetStoreURL ofType:(NSString *)type error:(NSError *__autoreleasing *)error;
 {
     NSManagedObjectModel *targetModel = [self targetModel];
     NSDictionary *sourceMetadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:type
@@ -196,7 +196,7 @@
     return modelPaths;
 }
 
-- (BOOL)MagicalMigrationManager_getDestinationModel:(NSManagedObjectModel **)destinationModel mappingModel:(NSMappingModel **)mappingModel modelName:(NSString **)modelName forSourceModel:(NSManagedObjectModel *)sourceModel;
+- (BOOL)MagicalMigrationManager_getDestinationModel:(NSManagedObjectModel *__autoreleasing *)destinationModel mappingModel:(NSMappingModel *__autoreleasing *)mappingModel modelName:(NSString *__autoreleasing *)modelName forSourceModel:(NSManagedObjectModel *)sourceModel;
 {
     NSArray *modelPaths = [self MagicalMigrationManager_modelPaths];
     if ([modelPaths count] == 0)
@@ -238,7 +238,7 @@
     return YES;
 }
 
-- (BOOL)MagicalMigrationManager_backupSourceStoreAtURL:(NSURL *)sourceStoreURL movingDestinationStoreAtURL:(NSURL *)destinationStoreURL error:(NSError **)error;
+- (BOOL)MagicalMigrationManager_backupSourceStoreAtURL:(NSURL *)sourceStoreURL movingDestinationStoreAtURL:(NSURL *)destinationStoreURL error:(NSError *__autoreleasing *)error;
 {
     NSString *guid = [[NSProcessInfo processInfo] globallyUniqueString];
     NSString *backupPath = [NSTemporaryDirectory() stringByAppendingPathComponent:guid];

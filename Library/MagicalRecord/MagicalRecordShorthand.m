@@ -450,7 +450,7 @@
     return [self MR_saveOnlySelfAndWait];
 }
 
-- (BOOL)saveOnlySelfAndWaitWithError:(NSError **)error;
+- (BOOL)saveOnlySelfAndWaitWithError:(NSError *__autoreleasing *)error;
 {
     return [self MR_saveOnlySelfAndWaitWithError:error];
 }
@@ -460,7 +460,7 @@
     return [self MR_saveToPersistentStoreAndWait];
 }
 
-- (BOOL)saveToPersistentStoreAndWaitWithError:(NSError **)error;
+- (BOOL)saveToPersistentStoreAndWaitWithError:(NSError *__autoreleasing *)error;
 {
     return [self MR_saveToPersistentStoreAndWaitWithError:error];
 }

@@ -73,7 +73,7 @@
     return [[self type] isEqualToString:NSSQLiteStoreType];
 }
 
-- (BOOL)MR_copyToURL:(NSURL *)destinationUrl error:(NSError **)error;
+- (BOOL)MR_copyToURL:(NSURL *)destinationUrl error:(NSError *__autoreleasing *)error;
 {
     if (![self MR_isSqliteStore])
     {
