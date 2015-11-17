@@ -26,7 +26,7 @@
     NSInputStream *inputStream = [NSInputStream inputStreamWithFileAtPath:resource];
     [inputStream open];
     
-    return [NSJSONSerialization JSONObjectWithStream:inputStream options:0 error:nil];
+    return [NSJSONSerialization JSONObjectWithStream:inputStream options:(NSJSONReadingOptions)0 error:nil];
 }
 
 @end
