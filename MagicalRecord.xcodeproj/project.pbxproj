@@ -687,7 +687,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		9053F55619E0244C00137362 /* Frameworks */ = {
+		900760BE1BFB5BC8008C2B50 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1281,9 +1281,8 @@
 			buildConfigurationList = 9053F56D19E0244C00137362 /* Build configuration list for PBXNativeTarget "MagicalRecord for iOS" */;
 			buildPhases = (
 				9053F55519E0244C00137362 /* Sources */,
-				9053F55619E0244C00137362 /* Frameworks */,
+				900760BE1BFB5BC8008C2B50 /* Frameworks */,
 				9053F55719E0244C00137362 /* Headers */,
-				9053F55819E0244C00137362 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -1494,13 +1493,6 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
-		9053F55819E0244C00137362 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9053F56219E0244C00137362 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1880,11 +1872,10 @@
 		9053F56E19E0244C00137362 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Support/MagicalRecord-iOS-Prefix.pch";
-				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
 				INFOPLIST_FILE = "Support/MagicalRecord-Info.plist";
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "@rpath";
@@ -1897,11 +1888,10 @@
 		9053F57019E0244C00137362 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEFINES_MODULE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Support/MagicalRecord-iOS-Prefix.pch";
-				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
 				INFOPLIST_FILE = "Support/MagicalRecord-Info.plist";
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "@rpath";
@@ -1914,12 +1904,7 @@
 		9053F57219E0244C00137362 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tests/Support/MagicalRecordTests-iOS-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1941,12 +1926,7 @@
 		9053F57419E0244C00137362 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tests/Support/MagicalRecordTests-iOS-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1968,11 +1948,6 @@
 		909BBC8C18E03FCB007BA3F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tests/Support/MagicalRecordTests-OSX-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1993,11 +1968,6 @@
 		909BBC8E18E03FCB007BA3F1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tests/Support/MagicalRecordTests-OSX-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -2018,11 +1988,7 @@
 		90C4BD8618E11DFA009FAF9C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tests/Support/MagicalRecordTests-iOS-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -2043,11 +2009,7 @@
 		90C4BD8818E11DFA009FAF9C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tests/Support/MagicalRecordTests-iOS-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -2088,8 +2050,11 @@
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = "/tmp/$(PROJECT_NAME)$(EFFECTIVE_PLATFORM_NAME).dst";
+				DYLIB_COMPATIBILITY_VERSION = 3.0;
+				DYLIB_CURRENT_VERSION = 3.0.0;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
@@ -2150,7 +2115,10 @@
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				DSTROOT = "/tmp/$(PROJECT_NAME)$(EFFECTIVE_PLATFORM_NAME).dst";
+				DYLIB_COMPATIBILITY_VERSION = 3.0;
+				DYLIB_CURRENT_VERSION = 3.0.0;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
@@ -2219,30 +2187,22 @@
 		C7CF97B517498414008D9D13 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DSTROOT = "/tmp/lib$(PROJECT_NAME)$(EFFECTIVE_PLATFORM_NAME).dst";
-				DYLIB_COMPATIBILITY_VERSION = 3.0;
-				DYLIB_CURRENT_VERSION = 3.0.0;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Support/MagicalRecord-iOS-Prefix.pch";
 				PRODUCT_NAME = MagicalRecord;
 				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 			};
 			name = Debug;
 		};
 		C7CF97B617498414008D9D13 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				DSTROOT = "/tmp/lib$(PROJECT_NAME)$(EFFECTIVE_PLATFORM_NAME).dst";
-				DYLIB_COMPATIBILITY_VERSION = 3.0;
-				DYLIB_CURRENT_VERSION = 3.0.0;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Support/MagicalRecord-iOS-Prefix.pch";
 				PRODUCT_NAME = MagicalRecord;
 				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 			};
 			name = Release;
 		};
