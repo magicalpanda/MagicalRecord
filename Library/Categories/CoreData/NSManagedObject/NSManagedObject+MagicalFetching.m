@@ -7,6 +7,7 @@
 //
 
 #import "NSManagedObject+MagicalFetching.h"
+#import "NSManagedObject+MagicalFinders.h"
 #import "NSManagedObject+MagicalRequests.h"
 #import "NSFetchedResultsController+MagicalFetching.h"
 
