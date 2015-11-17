@@ -52,11 +52,6 @@
 
 - (BOOL)migrateStoreAtURL:(NSURL *)sourceStoreURL toStoreAtURL:(NSURL *)targetStoreURL mappingModelURL:(NSURL *)mappingModelURL;
 {
-    return [self migrateStoreAtURL:sourceStoreURL toStoreAtURL:targetStoreURL mappingModelURL:mappingModelURL progressiveMigration:YES];
-}
-
-- (BOOL)migrateStoreAtURL:(NSURL *)sourceStoreURL toStoreAtURL:(NSURL *)targetStoreURL mappingModelURL:(NSURL *)mappingModelURL progressiveMigration:(BOOL)progressiveMigration;
-{
     NSManagedObjectModel *sourceModel = [self sourceModel];
     NSManagedObjectModel *targetModel = [self targetModel];
 
