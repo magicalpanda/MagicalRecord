@@ -159,7 +159,7 @@ static MagicalRecordStack *defaultStack;
     return [self createCoordinatorWithOptions:nil];
 }
 
-- (NSPersistentStoreCoordinator *)createCoordinatorWithOptions:(NSDictionary *)options;
+- (NSPersistentStoreCoordinator *)createCoordinatorWithOptions:(__unused NSDictionary *)options;
 {
     MRLogError(@"%@ must be overridden in %@", NSStringFromSelector(_cmd), NSStringFromClass([self class]));
     return nil;
@@ -223,7 +223,7 @@ static MagicalRecordStack *defaultStack;
                                     object:nil];
 }
 
-- (void)autoSaveHandle:(NSNotification *)notification;
+- (void)autoSaveHandle:(__unused NSNotification *)notification;
 {
     [[self context] MR_saveToPersistentStoreAndWait];
 }

@@ -215,8 +215,7 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
 
 - (void)MR_setRelationships:(NSDictionary *)relationshipDescriptions forKeysWithObject:(id)relationshipData withBlock:(void (^)(NSRelationshipDescription *, id))setRelationshipBlock
 {
-    [relationshipDescriptions enumerateKeysAndObjectsUsingBlock:^(id relationshipName, id relationshipDescription, BOOL *stop) {
-
+    [relationshipDescriptions enumerateKeysAndObjectsUsingBlock:^(__unused id relationshipName, id relationshipDescription, __unused  BOOL *stop) {
         [self MR_setRelationship:relationshipDescription
                      relatedData:relationshipData
             setRelationshipBlock:setRelationshipBlock];

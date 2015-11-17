@@ -18,7 +18,7 @@
 {
     __block BOOL saveResult = NO;
 
-    [self MR_saveWithOptions:MRContextSaveOptionsSaveSynchronously completion:^(BOOL success, NSError *error) {
+    [self MR_saveWithOptions:MRContextSaveOptionsSaveSynchronously completion:^(BOOL success, __unused NSError *error) {
         saveResult = success;
     }];
 
@@ -58,7 +58,7 @@
     __block BOOL saveResult = NO;
 
     MRContextSaveOptions saveOptions = (MRContextSaveOptions)(MRContextSaveOptionsSaveParentContexts | MRContextSaveOptionsSaveSynchronously);
-    [self MR_saveWithOptions:saveOptions completion:^(BOOL success, NSError *error) {
+    [self MR_saveWithOptions:saveOptions completion:^(BOOL success, __unused NSError *error) {
         saveResult = success;
     }];
 
