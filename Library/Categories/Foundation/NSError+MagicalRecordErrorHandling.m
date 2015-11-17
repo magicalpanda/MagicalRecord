@@ -51,7 +51,9 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
 - (NSDictionary *)MR_errorCollectionGroupedByObject;
 {
     NSMutableDictionary *collatedObjects = [NSMutableDictionary dictionary];
-    [[self MR_errorCollection] enumerateObjectsUsingBlock:^(NSError *error, NSUInteger idx, BOOL *stop) {
+
+    for (NSError *error in [self MR_errorCollection])
+    {
         NSManagedObject *errorObject = [error MR_validationErrorObject];
 
         NSMutableArray *errorList = [collatedObjects objectForKey:[errorObject objectID]];
@@ -62,8 +64,8 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
         }
 
         [errorList addObject:error];
+    }
 
-    }];
     return [NSDictionary dictionaryWithDictionary:collatedObjects];
 }
 
@@ -92,22 +94,26 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
     {
         [descriptionBuffer appendString:@"Multiple Validation Errors --\n"];
         NSDictionary *groupedErrors = [self MR_errorCollectionGroupedByObject];
-        [[groupedErrors allKeys] enumerateObjectsUsingBlock:^(NSManagedObject *managedObject, NSUInteger idx, BOOL *stop) {
-
+        for (NSManagedObject *managedObject in groupedErrors.allKeys)
+        {
             [descriptionBuffer appendFormat:@" Object: %@ -", managedObject];
             NSArray *errors = [groupedErrors objectForKey:managedObject];
-            [errors enumerateObjectsUsingBlock:^(NSError *error, NSUInteger inneridx, BOOL *innerstop) {
+
+            for (NSError *error in errors)
+            {
                 [descriptionBuffer appendFormat:@" %@ [%@],", [error MR_validationError], MR_errorSummaryFromErrorCode([error code])];
-            }];
+            }
+
             [descriptionBuffer deleteCharactersInRange:NSMakeRange([descriptionBuffer length] - 1, 1)];
             [descriptionBuffer appendString:@"\n"];
-        }];
+        }
     }
     else
     {
-        [[self MR_errorCollection] enumerateObjectsUsingBlock:^(NSError *obj, NSUInteger idx, BOOL *stop) {
-            [descriptionBuffer appendFormat:@" %@\n", [obj MR_summaryDescription]];
-        }];
+        for (NSError *error in [self MR_errorCollection])
+        {
+            [descriptionBuffer appendFormat:@" %@\n", [error MR_summaryDescription]];
+        }
     }
 
     return [NSString stringWithString:descriptionBuffer];
