@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <CoreFoundation/CoreFoundation.h>
-#import <CoreData/CoreData.h>
+@import CoreFoundation;
+@import CoreData;
 
 NS_ASSUME_NONNULL_BEGIN
 @protocol MagicalFinderExtensions <NSObject>

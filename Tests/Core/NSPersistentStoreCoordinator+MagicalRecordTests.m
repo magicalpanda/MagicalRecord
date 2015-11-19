@@ -31,64 +31,40 @@
 - (void)testCreateCoodinatorWithSqlitePersistentStore
 {
     NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreNamed:@"TestStore.sqlite" andModel:self.model withOptions:nil];
-
-    expect(testCoordinator).toNot.beNil();
-
-    NSUInteger persistentStoreCount = [[testCoordinator persistentStores] count];
-
-    expect(persistentStoreCount).to.equal(1);
+    XCTAssertNotNil(testCoordinator);
+    XCTAssertEqual(testCoordinator.persistentStores.count, (NSUInteger)1);
 
     NSPersistentStore *store = [[testCoordinator persistentStores] firstObject];
-    NSString *storeType = [store type];
-
-    expect(storeType).to.equal(NSSQLiteStoreType);
-
-    expect([store MR_removePersistentStoreFiles]).to.beTruthy();
+    XCTAssertEqualObjects(store.type, NSSQLiteStoreType);
+    XCTAssertTrue([store MR_removePersistentStoreFiles]);
 }
 
 - (void)testCreateCoordinatorWithInMemoryStore
 {
     NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator MR_coordinatorWithInMemoryStoreWithModel:self.model];
-
-    expect(testCoordinator).toNot.beNil();
-
-    NSUInteger persistentStoreCount = [[testCoordinator persistentStores] count];
-
-    expect(persistentStoreCount).to.equal(1);
+    XCTAssertNotNil(testCoordinator);
+    XCTAssertEqual(testCoordinator.persistentStores.count, (NSUInteger)1);
 
     NSPersistentStore *store = [[testCoordinator persistentStores] firstObject];
-    NSString *storeType = [store type];
-
-    expect(storeType).to.equal(NSInMemoryStoreType);
+    XCTAssertEqualObjects(store.type, NSInMemoryStoreType);
 }
 
 - (void)testCanAddAnInMemoryStoreToAnExistingCoordinator
 {
     NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreNamed:@"TestStore.sqlite" andModel:self.model withOptions:nil];
+    XCTAssertNotNil(testCoordinator);
+    XCTAssertEqual(testCoordinator.persistentStores.count, (NSUInteger)1);
 
-    expect(testCoordinator).toNot.beNil();
-
-    NSUInteger persistentStoreCount = [[testCoordinator persistentStores] count];
-
-    expect(persistentStoreCount).to.equal(1);
-
-    NSPersistentStore *firstStore = [[testCoordinator persistentStores] firstObject];
-    NSString *firstStoreType = [firstStore type];
-
-    expect(firstStoreType).to.equal(NSSQLiteStoreType);
+    NSPersistentStore *firstStore = [testCoordinator persistentStores][ 0 ];
+    XCTAssertEqualObjects(firstStore.type, NSSQLiteStoreType);
 
     [testCoordinator MR_addInMemoryStoreWithOptions:nil];
+    XCTAssertEqual(testCoordinator.persistentStores.count, (NSUInteger)2);
 
-    persistentStoreCount = [[testCoordinator persistentStores] count];
+    NSPersistentStore *secondStore = [testCoordinator persistentStores][ 1 ];
+    XCTAssertEqualObjects(secondStore.type, NSInMemoryStoreType);
 
-    expect(persistentStoreCount).to.equal(2);
-
-    NSPersistentStore *secondStore = [[testCoordinator persistentStores] objectAtIndex:1];
-    NSString *secondStoreType = [secondStore type];
-
-    expect(secondStoreType).to.equal(NSInMemoryStoreType);
-
-    expect([firstStore MR_removePersistentStoreFiles]).to.beTruthy();
+    XCTAssertTrue([firstStore MR_removePersistentStoreFiles]);
 }
 
 @end

@@ -17,123 +17,104 @@
 
 - (void)testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented
 {
-    expect([EntityWithoutEntityNameMethod MR_entityName]).toNot.beNil();
-    expect([EntityWithoutEntityNameMethod MR_entityName]).to.equal(NSStringFromClass([EntityWithoutEntityNameMethod class]));
+    NSString *entityName = [EntityWithoutEntityNameMethod MR_entityName];
+    XCTAssertNotNil(entityName);
+    XCTAssertEqualObjects(entityName, NSStringFromClass([EntityWithoutEntityNameMethod class]));
 }
 
 - (void)testThatInternalEntityNameReturnsProvidedNameWhenEntityNameMethodIsImplemented
 {
-    expect([EntityWithoutEntityNameMethod MR_entityName]).toNot.beNil();
-    expect([DifferentClassNameMapping MR_entityName]).toNot.equal(NSStringFromClass([DifferentClassNameMapping class]));
-    expect([DifferentClassNameMapping MR_entityName]).to.equal([DifferentClassNameMapping entityName]);
+    NSString *entityName = [DifferentClassNameMapping MR_entityName];
+    XCTAssertNotNil(entityName);
+    XCTAssertNotEqualObjects(entityName, NSStringFromClass([DifferentClassNameMapping class]));
+    XCTAssertEqualObjects(entityName, [DifferentClassNameMapping entityName]);
 }
 
 - (void)testCanGetEntityDescriptionFromEntityClass
 {
     NSManagedObjectContext *stackContext = self.stack.context;
-
     NSEntityDescription *testDescription = [SingleRelatedEntity MR_entityDescriptionInContext:stackContext];
-
-    expect(testDescription).toNot.beNil();
+    XCTAssertNotNil(testDescription);
 }
 
 - (void)testCanCreateEntityInstance
 {
     NSManagedObjectContext *stackContext = self.stack.context;
-
     SingleRelatedEntity *testEntity = [SingleRelatedEntity MR_createEntityInContext:stackContext];
-
-    expect(testEntity).toNot.beNil();
+    XCTAssertNotNil(testEntity);
 }
 
 - (void)testCanDeleteEntityInstanceInCurrentContext
 {
     MagicalRecordStack *currentStack = self.stack;
     NSManagedObjectContext *currentStackContext = currentStack.context;
-
     NSManagedObject *insertedEntity = [SingleRelatedEntity MR_createEntityInContext:currentStackContext];
 
     [currentStackContext MR_saveToPersistentStoreAndWait];
-
-    expect([insertedEntity MR_isEntityDeleted]).to.beFalsy();
+    XCTAssertFalse([insertedEntity MR_isEntityDeleted]);
 
     [currentStack saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
         NSManagedObject *localEntity = [insertedEntity MR_inContext:localContext];
-
-        expect([localEntity MR_deleteEntityInContext:localContext]).to.beTruthy();
+        XCTAssertTrue([localEntity MR_deleteEntityInContext:localContext]);
     }];
 
-    // The default context entity should now be deleted
-    expect(insertedEntity).willNot.beNil();
-    expect([insertedEntity MR_isEntityDeleted]).will.beTruthy();
+    XCTAssertNotNil(insertedEntity);
+    XCTAssertTrue([insertedEntity MR_isEntityDeleted]);
 }
 
 - (void)testCanDeleteEntityInstanceInOtherContext
 {
     MagicalRecordStack *currentStack = self.stack;
     NSManagedObjectContext *currentStackContext = currentStack.context;
-
     NSManagedObject *testEntity = [SingleRelatedEntity MR_createEntityInContext:currentStackContext];
 
     [currentStackContext MR_saveToPersistentStoreAndWait];
-
-    expect([testEntity MR_isEntityDeleted]).to.beFalsy();
+    XCTAssertFalse([testEntity MR_isEntityDeleted]);
 
     [currentStack saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
         NSManagedObject *otherEntity = [testEntity MR_inContext:localContext];
-
-        expect(otherEntity).toNot.beNil();
-        expect([otherEntity MR_isEntityDeleted]).to.beFalsy();
+        XCTAssertNotNil(otherEntity);
+        XCTAssertFalse([otherEntity MR_isEntityDeleted]);
 
         // Delete the object in the other context
-        expect([testEntity MR_deleteEntityInContext:localContext]).to.beTruthy();
+        XCTAssertTrue([testEntity MR_deleteEntityInContext:localContext]);
 
         // The nested context entity should now be deleted
-        expect([otherEntity MR_isEntityDeleted]).to.beTruthy();
+        XCTAssertTrue([otherEntity MR_isEntityDeleted]);
     }];
 
     // The default context entity should now be deleted
-    expect(testEntity).willNot.beNil();
-    expect([testEntity MR_isEntityDeleted]).will.beTruthy();
+    XCTAssertNotNil(testEntity);
+    XCTAssertTrue([testEntity MR_isEntityDeleted]);
 }
 
 - (void)testRetrievingManagedObjectFromAnotherContextWithAPermanentObjectID
 {
     MagicalRecordStack *currentStack = self.stack;
     NSManagedObjectContext *currentStackContext = currentStack.context;
-
     NSManagedObject *insertedEntity = [SingleRelatedEntity MR_createEntityInContext:currentStackContext];
-
-    expect([[insertedEntity objectID] isTemporaryID]).to.beTruthy();
+    XCTAssertTrue(insertedEntity.objectID.isTemporaryID);
 
     [insertedEntity MR_obtainPermanentObjectID];
-
-    expect([[insertedEntity objectID] isTemporaryID]).to.beFalsy();
+    XCTAssertFalse(insertedEntity.objectID.isTemporaryID);
 
     [currentStack saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
         NSManagedObject *localEntity = [insertedEntity MR_inContext:localContext];
-
-        expect([[localEntity objectID] isTemporaryID]).to.beFalsy();
+        XCTAssertFalse(localEntity.objectID.isTemporaryID);
     }];
 
-    expect([[insertedEntity objectID] isTemporaryID]).to.beFalsy();
+    XCTAssertFalse(insertedEntity.objectID.isTemporaryID);
 }
 
 - (void)testRetrievingManagedObjectFromAnotherContextWithATemporaryObjectID
 {
     MagicalRecordStack *currentStack = self.stack;
     NSManagedObjectContext *currentStackContext = currentStack.context;
-
     NSManagedObject *insertedEntity = [SingleRelatedEntity MR_createEntityInContext:currentStackContext];
-
-    expect([[insertedEntity objectID] isTemporaryID]).to.beTruthy();
+    XCTAssertTrue(insertedEntity.objectID.isTemporaryID);
 
     [currentStack saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-        NSString *reason = [NSString stringWithFormat:@"Cannot load a temporary object '%@' [%@] across managed object contexts. Please obtain a permanent ID for this object first.", insertedEntity, [insertedEntity objectID]];
-
-        expect(^{
-            [insertedEntity MR_inContext:localContext];
-        }).to.raiseWithReason(NSObjectInaccessibleException, reason);
+        XCTAssertThrowsSpecificNamed([insertedEntity MR_inContext:localContext], NSException, NSObjectInaccessibleException);
     }];
 }
 

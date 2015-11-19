@@ -3,15 +3,10 @@
 //  Copyright (c) 2013 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
-#import <CoreData/CoreData.h>
-
-#define EXP_SHORTHAND
-#import <Expecta/Expecta.h>
-
-#import "MagicalRecord.h"
-
-@class MagicalRecordStack;
+@import Foundation;
+@import XCTest;
+@import CoreData;
+@import MagicalRecord;
 
 @interface MagicalRecordTestBase : XCTestCase
 

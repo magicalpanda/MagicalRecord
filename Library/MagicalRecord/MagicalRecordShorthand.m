@@ -5,72 +5,72 @@
 
 @implementation NSManagedObject (MagicalAggregationShortHand)
 
-+ (NSNumber *)numberOfEntities;
++ (NSNumber *)numberOfEntities
 {
     return [self MR_numberOfEntities];
 }
 
-+ (NSNumber *)numberOfEntitiesWithContext:(NSManagedObjectContext *)context;
++ (NSNumber *)numberOfEntitiesWithContext:(NSManagedObjectContext *)context
 {
     return [self MR_numberOfEntitiesWithContext:context];
 }
 
-+ (NSNumber *)numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm;
++ (NSNumber *)numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm
 {
     return [self MR_numberOfEntitiesWithPredicate:searchTerm];
 }
 
-+ (NSNumber *)numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;
++ (NSNumber *)numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context
 {
     return [self MR_numberOfEntitiesWithPredicate:searchTerm inContext:context];
 }
 
-+ (NSUInteger)countOfEntities;
++ (NSUInteger)countOfEntities
 {
     return [self MR_countOfEntities];
 }
 
-+ (NSUInteger)countOfEntitiesWithContext:(NSManagedObjectContext *)context;
++ (NSUInteger)countOfEntitiesWithContext:(NSManagedObjectContext *)context
 {
     return [self MR_countOfEntitiesWithContext:context];
 }
 
-+ (NSUInteger)countOfEntitiesWithPredicate:(NSPredicate *)searchFilter;
++ (NSUInteger)countOfEntitiesWithPredicate:(NSPredicate *)searchFilter
 {
     return [self MR_countOfEntitiesWithPredicate:searchFilter];
 }
 
-+ (NSUInteger)countOfEntitiesWithPredicate:(NSPredicate *)searchFilter inContext:(NSManagedObjectContext *)context;
++ (NSUInteger)countOfEntitiesWithPredicate:(NSPredicate *)searchFilter inContext:(NSManagedObjectContext *)context
 {
     return [self MR_countOfEntitiesWithPredicate:searchFilter inContext:context];
 }
 
-+ (BOOL)hasAtLeastOneEntity;
++ (BOOL)hasAtLeastOneEntity
 {
     return [self MR_hasAtLeastOneEntity];
 }
 
-+ (BOOL)hasAtLeastOneEntityInContext:(NSManagedObjectContext *)context;
++ (BOOL)hasAtLeastOneEntityInContext:(NSManagedObjectContext *)context
 {
     return [self MR_hasAtLeastOneEntityInContext:context];
 }
 
-+ (NSNumber *)aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
++ (NSNumber *)aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context
 {
     return [self MR_aggregateOperation:function onAttribute:attributeName withPredicate:predicate inContext:context];
 }
 
-+ (NSNumber *)aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate;
++ (NSNumber *)aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate
 {
     return [self MR_aggregateOperation:function onAttribute:attributeName withPredicate:predicate];
 }
 
-- (id)objectWithMinValueFor:(NSString *)property;
+- (id)objectWithMinValueFor:(NSString *)property
 {
     return [self MR_objectWithMinValueFor:property];
 }
 
-- (id)objectWithMinValueFor:(NSString *)property inContext:(NSManagedObjectContext *)context;
+- (id)objectWithMinValueFor:(NSString *)property inContext:(NSManagedObjectContext *)context
 {
     return [self MR_objectWithMinValueFor:property inContext:context];
 }
@@ -81,7 +81,7 @@
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
-+ (NSFetchedResultsController *)fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate;
++ (NSFetchedResultsController *)fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate
 {
     return [self MR_fetchAllSortedBy:sortTerm ascending:ascending withPredicate:searchTerm groupBy:groupingKeyPath delegate:delegate];
 }
@@ -90,7 +90,7 @@
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
-+ (NSFetchedResultsController *)fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context;
++ (NSFetchedResultsController *)fetchAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm groupBy:(NSString *)groupingKeyPath delegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context
 {
     return [self MR_fetchAllSortedBy:sortTerm ascending:ascending withPredicate:searchTerm groupBy:groupingKeyPath delegate:delegate inContext:context];
 }
@@ -99,7 +99,7 @@
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
-+ (NSFetchedResultsController *)fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending;
++ (NSFetchedResultsController *)fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending
 {
     return [self MR_fetchAllGroupedBy:group withPredicate:searchTerm sortedBy:sortTerm ascending:ascending];
 }
@@ -108,7 +108,7 @@
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
-+ (NSFetchedResultsController *)fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context;
++ (NSFetchedResultsController *)fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending inContext:(NSManagedObjectContext *)context
 {
     return [self MR_fetchAllGroupedBy:group withPredicate:searchTerm sortedBy:sortTerm ascending:ascending inContext:context];
 }
@@ -117,7 +117,7 @@
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
-+ (NSFetchedResultsController *)fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending delegate:(id<NSFetchedResultsControllerDelegate>)delegate;
++ (NSFetchedResultsController *)fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending delegate:(id<NSFetchedResultsControllerDelegate>)delegate
 {
     return [self MR_fetchAllGroupedBy:group withPredicate:searchTerm sortedBy:sortTerm ascending:ascending delegate:delegate];
 }
@@ -126,7 +126,7 @@
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
-+ (NSFetchedResultsController *)fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending delegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context;
++ (NSFetchedResultsController *)fetchAllGroupedBy:(NSString *)group withPredicate:(NSPredicate *)searchTerm sortedBy:(NSString *)sortTerm ascending:(BOOL)ascending delegate:(id<NSFetchedResultsControllerDelegate>)delegate inContext:(NSManagedObjectContext *)context
 {
     return [self MR_fetchAllGroupedBy:group withPredicate:searchTerm sortedBy:sortTerm ascending:ascending delegate:delegate inContext:context];
 }
@@ -137,127 +137,127 @@
 
 @implementation NSManagedObject (MagicalRecordShortHand)
 
-+ (NSArray *)executeFetchRequest:(NSFetchRequest *)request;
++ (NSArray *)executeFetchRequest:(NSFetchRequest *)request
 {
     return [self MR_executeFetchRequest:request];
 }
 
-+ (NSArray *)executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
++ (NSArray *)executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
 {
     return [self MR_executeFetchRequest:request inContext:context];
 }
 
-+ (id)executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request;
++ (id)executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request
 {
     return [self MR_executeFetchRequestAndReturnFirstObject:request];
 }
 
-+ (id)executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context;
++ (id)executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
 {
     return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
 }
 
-+ (NSEntityDescription *)entityDescription;
++ (NSEntityDescription *)entityDescription
 {
     return [self MR_entityDescription];
 }
 
-+ (NSEntityDescription *)entityDescriptionInContext:(NSManagedObjectContext *)context;
++ (NSEntityDescription *)entityDescriptionInContext:(NSManagedObjectContext *)context
 {
     return [self MR_entityDescriptionInContext:context];
 }
 
-+ (NSArray *)propertiesNamed:(NSArray *)properties;
++ (NSArray *)propertiesNamed:(NSArray *)properties
 {
     return [self MR_propertiesNamed:properties];
 }
 
-+ (instancetype)createEntity;
++ (instancetype)createEntity
 {
     return [self MR_createEntity];
 }
 
-+ (instancetype)createEntityInContext:(NSManagedObjectContext *)context;
++ (instancetype)createEntityInContext:(NSManagedObjectContext *)context
 {
     return [self MR_createEntityInContext:context];
 }
 
-+ (instancetype)createEntityWithDescription:(NSEntityDescription *)entityDescription inContext:(NSManagedObjectContext *)context;
++ (instancetype)createEntityWithDescription:(NSEntityDescription *)entityDescription inContext:(NSManagedObjectContext *)context
 {
     return [self MR_createEntityWithDescription:entityDescription inContext:context];
 }
 
-- (BOOL)isEntityDeleted;
+- (BOOL)isEntityDeleted
 {
     return [self MR_isEntityDeleted];
 }
 
-- (BOOL)deleteEntity;
+- (BOOL)deleteEntity
 {
     return [self MR_deleteEntity];
 }
 
-- (BOOL)deleteEntityInContext:(NSManagedObjectContext *)context;
+- (BOOL)deleteEntityInContext:(NSManagedObjectContext *)context
 {
     return [self MR_deleteEntityInContext:context];
 }
 
-+ (BOOL)deleteAllMatchingPredicate:(NSPredicate *)predicate;
++ (BOOL)deleteAllMatchingPredicate:(NSPredicate *)predicate
 {
     return [self MR_deleteAllMatchingPredicate:predicate];
 }
 
-+ (BOOL)deleteAllMatchingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
++ (BOOL)deleteAllMatchingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context
 {
     return [self MR_deleteAllMatchingPredicate:predicate inContext:context];
 }
 
-+ (BOOL)truncateAll;
++ (BOOL)truncateAll
 {
     return [self MR_truncateAll];
 }
 
-+ (BOOL)truncateAllInContext:(NSManagedObjectContext *)context;
++ (BOOL)truncateAllInContext:(NSManagedObjectContext *)context
 {
     return [self MR_truncateAllInContext:context];
 }
 
-+ (NSArray *)ascendingSortDescriptors:(NSArray *)attributesToSortBy;
++ (NSArray *)ascendingSortDescriptors:(NSArray *)attributesToSortBy
 {
     return [self MR_ascendingSortDescriptors:attributesToSortBy];
 }
 
-+ (NSArray *)descendingSortDescriptors:(NSArray *)attributesToSortBy;
++ (NSArray *)descendingSortDescriptors:(NSArray *)attributesToSortBy
 {
     return [self MR_descendingSortDescriptors:attributesToSortBy];
 }
 
-- (void)obtainPermanentObjectID;
+- (void)obtainPermanentObjectID
 {
     return [self MR_obtainPermanentObjectID];
 }
 
-- (void)refresh;
+- (void)refresh
 {
     return [self MR_refresh];
 }
 
-- (instancetype)inContext:(NSManagedObjectContext *)otherContext;
+- (instancetype)inContext:(NSManagedObjectContext *)otherContext
 {
     return [self MR_inContext:otherContext];
 }
 
-- (instancetype)inContextIfTemporaryObject:(NSManagedObjectContext *)otherContext;
+- (instancetype)inContextIfTemporaryObject:(NSManagedObjectContext *)otherContext
 {
     return [self MR_inContextIfTemporaryObject:otherContext];
 }
 
-- (BOOL)isValidForInsert;
+- (BOOL)isValidForInsert
 {
     return [self MR_isValidForInsert];
 }
 
-- (BOOL)isValidForUpdate;
+- (BOOL)isValidForUpdate
 {
     return [self MR_isValidForUpdate];
 }
@@ -266,7 +266,7 @@
 
 @implementation NSManagedObject (MagicalRecordOptionalShortHand)
 
-- (void)awakeFromCreation;
+- (void)awakeFromCreation
 {
     return [self MR_awakeFromCreation];
 }
@@ -303,47 +303,47 @@
 
 @implementation NSManagedObject (MagicalRequestsShortHand)
 
-+ (NSUInteger)defaultBatchSize;
++ (NSUInteger)defaultBatchSize
 {
     return [self MR_defaultBatchSize];
 }
 
-+ (void)setDefaultBatchSize:(NSUInteger)newBatchSize;
++ (void)setDefaultBatchSize:(NSUInteger)newBatchSize
 {
     return [self MR_setDefaultBatchSize:newBatchSize];
 }
 
-+ (NSFetchRequest *)requestAll;
++ (NSFetchRequest *)requestAll
 {
     return [self MR_requestAll];
 }
 
-+ (NSFetchRequest *)requestAllWithPredicate:(NSPredicate *)searchTerm;
++ (NSFetchRequest *)requestAllWithPredicate:(NSPredicate *)searchTerm
 {
     return [self MR_requestAllWithPredicate:searchTerm];
 }
 
-+ (NSFetchRequest *)requestAllWhere:(NSString *)property isEqualTo:(id)value;
++ (NSFetchRequest *)requestAllWhere:(NSString *)property isEqualTo:(id)value
 {
     return [self MR_requestAllWhere:property isEqualTo:value];
 }
 
-+ (NSFetchRequest *)requestFirstWithPredicate:(NSPredicate *)searchTerm;
++ (NSFetchRequest *)requestFirstWithPredicate:(NSPredicate *)searchTerm
 {
     return [self MR_requestFirstWithPredicate:searchTerm];
 }
 
-+ (NSFetchRequest *)requestFirstByAttribute:(NSString *)attribute withValue:(id)searchValue;
++ (NSFetchRequest *)requestFirstByAttribute:(NSString *)attribute withValue:(id)searchValue
 {
     return [self MR_requestFirstByAttribute:attribute withValue:searchValue];
 }
 
-+ (NSFetchRequest *)requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending;
++ (NSFetchRequest *)requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending
 {
     return [self MR_requestAllSortedBy:sortTerm ascending:ascending];
 }
 
-+ (NSFetchRequest *)requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm;
++ (NSFetchRequest *)requestAllSortedBy:(NSString *)sortTerm ascending:(BOOL)ascending withPredicate:(NSPredicate *)searchTerm
 {
     return [self MR_requestAllSortedBy:sortTerm ascending:ascending withPredicate:searchTerm];
 }
@@ -352,27 +352,27 @@
 
 @implementation NSManagedObjectContext (MagicalObservingShortHand)
 
-- (void)observeContext:(NSManagedObjectContext *)otherContext;
+- (void)observeContext:(NSManagedObjectContext *)otherContext
 {
     return [self MR_observeContextDidSave:otherContext];
 }
 
-- (void)stopObservingContext:(NSManagedObjectContext *)otherContext;
+- (void)stopObservingContext:(NSManagedObjectContext *)otherContext
 {
     return [self MR_stopObservingContextDidSave:otherContext];
 }
 
-- (void)observeContextOnMainThread:(NSManagedObjectContext *)otherContext;
+- (void)observeContextOnMainThread:(NSManagedObjectContext *)otherContext
 {
     return [self MR_observeContextOnMainThread:otherContext];
 }
 
-- (void)observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
+- (void)observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
     return [self MR_observeiCloudChangesInCoordinator:coordinator];
 }
 
-- (void)stopObservingiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
+- (void)stopObservingiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
     return [self MR_stopObservingiCloudChangesInCoordinator:coordinator];
 }
@@ -381,7 +381,7 @@
 
 @implementation NSManagedObjectContext (MagicalRecordShortHand)
 
-- (void)obtainPermanentIDsForObjects:(NSArray *)objects;
+- (void)obtainPermanentIDsForObjects:(NSArray *)objects
 {
     return [self MR_obtainPermanentIDsForObjects:objects];
 }
@@ -391,22 +391,22 @@
     return [self MR_context];
 }
 
-+ (NSManagedObjectContext *)mainQueueContext;
++ (NSManagedObjectContext *)mainQueueContext
 {
     return [self MR_mainQueueContext];
 }
 
-+ (NSManagedObjectContext *)privateQueueContext;
++ (NSManagedObjectContext *)privateQueueContext
 {
     return [self MR_privateQueueContext];
 }
 
-+ (NSManagedObjectContext *)confinementContext;
++ (NSManagedObjectContext *)confinementContext
 {
     return [self MR_confinementContext];
 }
 
-+ (NSManagedObjectContext *)confinementContextWithParent:(NSManagedObjectContext *)parentContext;
++ (NSManagedObjectContext *)confinementContextWithParent:(NSManagedObjectContext *)parentContext
 {
     return [self MR_confinementContextWithParent:parentContext];
 }
@@ -416,17 +416,17 @@
     return [self MR_privateQueueContextWithStoreCoordinator:coordinator];
 }
 
-- (NSString *)parentChain;
+- (NSString *)parentChain
 {
     return [self MR_parentChain];
 }
 
-- (void)setWorkingName:(NSString *)workingName;
+- (void)setWorkingName:(NSString *)workingName
 {
     return [self MR_setWorkingName:workingName];
 }
 
-- (NSString *)workingName;
+- (NSString *)workingName
 {
     return [self MR_workingName];
 }
@@ -435,32 +435,32 @@
 
 @implementation NSManagedObjectContext (MagicalSavesShortHand)
 
-- (void)saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;
+- (void)saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion
 {
     return [self MR_saveOnlySelfWithCompletion:completion];
 }
 
-- (void)saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion;
+- (void)saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion
 {
     return [self MR_saveToPersistentStoreWithCompletion:completion];
 }
 
-- (BOOL)saveOnlySelfAndWait;
+- (BOOL)saveOnlySelfAndWait
 {
     return [self MR_saveOnlySelfAndWait];
 }
 
-- (BOOL)saveOnlySelfAndWaitWithError:(NSError *__autoreleasing *)error;
+- (BOOL)saveOnlySelfAndWaitWithError:(NSError *__autoreleasing *)error
 {
     return [self MR_saveOnlySelfAndWaitWithError:error];
 }
 
-- (BOOL)saveToPersistentStoreAndWait;
+- (BOOL)saveToPersistentStoreAndWait
 {
     return [self MR_saveToPersistentStoreAndWait];
 }
 
-- (BOOL)saveToPersistentStoreAndWaitWithError:(NSError *__autoreleasing *)error;
+- (BOOL)saveToPersistentStoreAndWaitWithError:(NSError *__autoreleasing *)error
 {
     return [self MR_saveToPersistentStoreAndWaitWithError:error];
 }
@@ -469,17 +469,17 @@
 
 @implementation NSManagedObjectModel (MagicalRecordShortHand)
 
-+ (NSManagedObjectModel *)managedObjectModelAtURL:(NSURL *)url;
++ (NSManagedObjectModel *)managedObjectModelAtURL:(NSURL *)url
 {
     return [self MR_managedObjectModelAtURL:url];
 }
 
-+ (NSManagedObjectModel *)mergedObjectModelFromMainBundle;
++ (NSManagedObjectModel *)mergedObjectModelFromMainBundle
 {
     return [self MR_mergedObjectModelFromMainBundle];
 }
 
-+ (NSManagedObjectModel *)managedObjectModelNamed:(NSString *)modelFileName;
++ (NSManagedObjectModel *)managedObjectModelNamed:(NSString *)modelFileName
 {
     return [self MR_managedObjectModelNamed:modelFileName];
 }
@@ -493,32 +493,32 @@
 
 @implementation NSPersistentStoreCoordinator (MagicalAutoMigrationsShortHand)
 
-- (NSPersistentStore *)addAutoMigratingSqliteStoreNamed:(NSString *)storeFileName;
+- (NSPersistentStore *)addAutoMigratingSqliteStoreNamed:(NSString *)storeFileName
 {
     return [self MR_addAutoMigratingSqliteStoreNamed:storeFileName];
 }
 
-- (NSPersistentStore *)addAutoMigratingSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *)options;
+- (NSPersistentStore *)addAutoMigratingSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *)options
 {
     return [self MR_addAutoMigratingSqliteStoreNamed:storeFileName withOptions:options];
 }
 
-- (NSPersistentStore *)addAutoMigratingSqliteStoreAtURL:(NSURL *)url;
+- (NSPersistentStore *)addAutoMigratingSqliteStoreAtURL:(NSURL *)url
 {
     return [self MR_addAutoMigratingSqliteStoreAtURL:url];
 }
 
-- (NSPersistentStore *)addAutoMigratingSqliteStoreAtURL:(NSURL *)url withOptions:(NSDictionary *)options;
+- (NSPersistentStore *)addAutoMigratingSqliteStoreAtURL:(NSURL *)url withOptions:(NSDictionary *)options
 {
     return [self MR_addAutoMigratingSqliteStoreAtURL:url withOptions:options];
 }
 
-+ (NSPersistentStoreCoordinator *)coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *)storeFileName;
++ (NSPersistentStoreCoordinator *)coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *)storeFileName
 {
     return [self MR_coordinatorWithAutoMigratingSqliteStoreNamed:storeFileName];
 }
 
-+ (NSPersistentStoreCoordinator *)coordinatorWithAutoMigratingSqliteStoreAtURL:(NSURL *)url;
++ (NSPersistentStoreCoordinator *)coordinatorWithAutoMigratingSqliteStoreAtURL:(NSURL *)url
 {
     return [self MR_coordinatorWithAutoMigratingSqliteStoreAtURL:url];
 }
@@ -527,27 +527,27 @@
 
 @implementation NSPersistentStoreCoordinator (MagicalInMemoryStoreAdditionsShortHand)
 
-+ (NSPersistentStoreCoordinator *)coordinatorWithInMemoryStore;
++ (NSPersistentStoreCoordinator *)coordinatorWithInMemoryStore
 {
     return [self MR_coordinatorWithInMemoryStore];
 }
 
-+ (NSPersistentStoreCoordinator *)coordinatorWithInMemoryStoreWithModel:(NSManagedObjectModel *)model;
++ (NSPersistentStoreCoordinator *)coordinatorWithInMemoryStoreWithModel:(NSManagedObjectModel *)model
 {
     return [self MR_coordinatorWithInMemoryStoreWithModel:model];
 }
 
-+ (NSPersistentStoreCoordinator *)coordinatorWithInMemoryStoreWithModel:(NSManagedObjectModel *)model withOptions:(NSDictionary *)options;
++ (NSPersistentStoreCoordinator *)coordinatorWithInMemoryStoreWithModel:(NSManagedObjectModel *)model withOptions:(NSDictionary *)options
 {
     return [self MR_coordinatorWithInMemoryStoreWithModel:model withOptions:options];
 }
 
-- (NSPersistentStore *)addInMemoryStore;
+- (NSPersistentStore *)addInMemoryStore
 {
     return [self MR_addInMemoryStore];
 }
 
-- (NSPersistentStore *)addInMemoryStoreWithOptions:(NSDictionary *)options;
+- (NSPersistentStore *)addInMemoryStoreWithOptions:(NSDictionary *)options
 {
     return [self MR_addInMemoryStoreWithOptions:options];
 }
@@ -556,22 +556,22 @@
 
 @implementation NSPersistentStoreCoordinator (MagicalManualMigrationsShortHand)
 
-- (NSPersistentStore *)addManuallyMigratingSqliteStoreAtURL:(NSURL *)url;
+- (NSPersistentStore *)addManuallyMigratingSqliteStoreAtURL:(NSURL *)url
 {
     return [self MR_addManuallyMigratingSqliteStoreAtURL:url];
 }
 
-- (NSPersistentStore *)addManuallyMigratingSqliteStoreNamed:(NSString *)storeFileName;
+- (NSPersistentStore *)addManuallyMigratingSqliteStoreNamed:(NSString *)storeFileName
 {
     return [self MR_addManuallyMigratingSqliteStoreNamed:storeFileName];
 }
 
-+ (NSPersistentStoreCoordinator *)coordinatorWithManuallyMigratingSqliteStoreNamed:(NSString *)storeFileName;
++ (NSPersistentStoreCoordinator *)coordinatorWithManuallyMigratingSqliteStoreNamed:(NSString *)storeFileName
 {
     return [self MR_coordinatorWithManuallyMigratingSqliteStoreNamed:storeFileName];
 }
 
-+ (NSPersistentStoreCoordinator *)coordinatorWithManuallyMigratingSqliteStoreAtURL:(NSURL *)url;
++ (NSPersistentStoreCoordinator *)coordinatorWithManuallyMigratingSqliteStoreAtURL:(NSURL *)url
 {
     return [self MR_coordinatorWithManuallyMigratingSqliteStoreAtURL:url];
 }
@@ -585,57 +585,57 @@
     return [self MR_newPersistentStoreCoordinator];
 }
 
-+ (NSPersistentStoreCoordinator *)coordinatorWithPersistentStore:(NSPersistentStore *)persistentStore;
++ (NSPersistentStoreCoordinator *)coordinatorWithPersistentStore:(NSPersistentStore *)persistentStore
 {
     return [self MR_coordinatorWithPersistentStore:persistentStore];
 }
 
-+ (NSPersistentStoreCoordinator *)coordinatorWithPersistentStore:(NSPersistentStore *)persistentStore andModel:(NSManagedObjectModel *)model;
++ (NSPersistentStoreCoordinator *)coordinatorWithPersistentStore:(NSPersistentStore *)persistentStore andModel:(NSManagedObjectModel *)model
 {
     return [self MR_coordinatorWithPersistentStore:persistentStore andModel:model];
 }
 
-+ (NSPersistentStoreCoordinator *)coordinatorWithPersistentStore:(NSPersistentStore *)persistentStore andModel:(NSManagedObjectModel *)model withOptions:(NSDictionary *)options;
++ (NSPersistentStoreCoordinator *)coordinatorWithPersistentStore:(NSPersistentStore *)persistentStore andModel:(NSManagedObjectModel *)model withOptions:(NSDictionary *)options
 {
     return [self MR_coordinatorWithPersistentStore:persistentStore andModel:model withOptions:options];
 }
 
-+ (NSPersistentStoreCoordinator *)coordinatorWithSqliteStoreNamed:(NSString *)storeFileName;
++ (NSPersistentStoreCoordinator *)coordinatorWithSqliteStoreNamed:(NSString *)storeFileName
 {
     return [self MR_coordinatorWithSqliteStoreNamed:storeFileName];
 }
 
-+ (NSPersistentStoreCoordinator *)coordinatorWithSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *)options;
++ (NSPersistentStoreCoordinator *)coordinatorWithSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *)options
 {
     return [self MR_coordinatorWithSqliteStoreNamed:storeFileName withOptions:options];
 }
 
-+ (NSPersistentStoreCoordinator *)coordinatorWithSqliteStoreNamed:(NSString *)storeFileName andModel:(NSManagedObjectModel *)model withOptions:(NSDictionary *)options;
++ (NSPersistentStoreCoordinator *)coordinatorWithSqliteStoreNamed:(NSString *)storeFileName andModel:(NSManagedObjectModel *)model withOptions:(NSDictionary *)options
 {
     return [self MR_coordinatorWithSqliteStoreNamed:storeFileName andModel:model withOptions:options];
 }
 
-+ (NSPersistentStoreCoordinator *)coordinatorWithSqliteStoreAtURL:(NSURL *)url;
++ (NSPersistentStoreCoordinator *)coordinatorWithSqliteStoreAtURL:(NSURL *)url
 {
     return [self MR_coordinatorWithSqliteStoreAtURL:url];
 }
 
-+ (NSPersistentStoreCoordinator *)coordinatorWithSqliteStoreAtURL:(NSURL *)url andModel:(NSManagedObjectModel *)model;
++ (NSPersistentStoreCoordinator *)coordinatorWithSqliteStoreAtURL:(NSURL *)url andModel:(NSManagedObjectModel *)model
 {
     return [self MR_coordinatorWithSqliteStoreAtURL:url andModel:model];
 }
 
-+ (NSPersistentStoreCoordinator *)coordinatorWithSqliteStoreAtURL:(NSURL *)url andModel:(NSManagedObjectModel *)model withOptions:(NSDictionary *)options;
++ (NSPersistentStoreCoordinator *)coordinatorWithSqliteStoreAtURL:(NSURL *)url andModel:(NSManagedObjectModel *)model withOptions:(NSDictionary *)options
 {
     return [self MR_coordinatorWithSqliteStoreAtURL:url andModel:model withOptions:options];
 }
 
-- (NSPersistentStore *)addSqliteStoreAtURL:(NSURL *)url withOptions:(NSDictionary *__autoreleasing)options;
+- (NSPersistentStore *)addSqliteStoreAtURL:(NSURL *)url withOptions:(NSDictionary *__autoreleasing)options
 {
     return [self MR_addSqliteStoreAtURL:url withOptions:options];
 }
 
-- (NSPersistentStore *)addSqliteStoreNamed:(id)storeFileName withOptions:(__autoreleasing NSDictionary *)options;
+- (NSPersistentStore *)addSqliteStoreNamed:(id)storeFileName withOptions:(__autoreleasing NSDictionary *)options
 {
     return [self MR_addSqliteStoreNamed:storeFileName withOptions:options];
 }

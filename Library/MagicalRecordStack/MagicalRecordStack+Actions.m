@@ -42,22 +42,22 @@ dispatch_queue_t MR_saveQueue()
 
 #pragma mark - Asynchronous saving
 
-- (void)saveWithBlock:(void (^)(NSManagedObjectContext *localContext))block;
+- (void)saveWithBlock:(void (^)(NSManagedObjectContext *localContext))block
 {
     [self saveWithBlock:block identifier:NSStringFromSelector(_cmd) completion:nil];
 }
 
-- (void)saveWithIdentifier:(NSString *)identifier block:(void (^)(NSManagedObjectContext *))block;
+- (void)saveWithIdentifier:(NSString *)identifier block:(void (^)(NSManagedObjectContext *))block
 {
     [self saveWithBlock:block identifier:identifier completion:nil];
 }
 
-- (void)saveWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
+- (void)saveWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion
 {
     [self saveWithBlock:block identifier:NSStringFromSelector(_cmd) completion:completion];
 }
 
-- (void)saveWithBlock:(void (^)(NSManagedObjectContext *))block identifier:(NSString *)contextWorkingName completion:(MRSaveCompletionHandler)completion;
+- (void)saveWithBlock:(void (^)(NSManagedObjectContext *))block identifier:(NSString *)contextWorkingName completion:(MRSaveCompletionHandler)completion
 {
     NSParameterAssert(block);
     MRLogVerbose(@"Dispatching save request: %@", contextWorkingName);
@@ -79,12 +79,12 @@ dispatch_queue_t MR_saveQueue()
 
 #pragma mark - Synchronous saving
 
-- (BOOL)saveWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block;
+- (BOOL)saveWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block
 {
     return [self saveWithBlockAndWait:block error:nil];
 }
 
-- (BOOL)saveWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block error:(NSError *__autoreleasing *)error;
+- (BOOL)saveWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block error:(NSError *__autoreleasing *)error
 {
     NSParameterAssert(block);
     NSManagedObjectContext *localContext = [self newConfinementContext];

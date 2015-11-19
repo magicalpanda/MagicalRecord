@@ -35,18 +35,18 @@
     return [NSNumber numberWithUnsignedInteger:[self MR_countOfEntitiesWithPredicate:searchTerm inContext:context]];
 }
 
-+ (NSNumber *)MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm;
++ (NSNumber *)MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm
 {
     return [self MR_numberOfEntitiesWithPredicate:searchTerm
                                         inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
-+ (NSUInteger)MR_countOfEntities;
++ (NSUInteger)MR_countOfEntities
 {
     return [self MR_countOfEntitiesWithContext:[[MagicalRecordStack defaultStack] context]];
 }
 
-+ (NSUInteger)MR_countOfEntitiesWithContext:(NSManagedObjectContext *)context;
++ (NSUInteger)MR_countOfEntitiesWithContext:(NSManagedObjectContext *)context
 {
     NSError *error = nil;
     NSUInteger count = [context countForFetchRequest:[self MR_requestAll] error:&error];
@@ -55,12 +55,12 @@
     return count;
 }
 
-+ (NSUInteger)MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter;
++ (NSUInteger)MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter
 {
     return [self MR_countOfEntitiesWithPredicate:searchFilter inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
-+ (NSUInteger)MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter inContext:(NSManagedObjectContext *)context;
++ (NSUInteger)MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter inContext:(NSManagedObjectContext *)context
 {
     NSError *error = nil;
     NSFetchRequest *request = [self MR_requestAll];
@@ -144,7 +144,7 @@
                              inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
-+ (NSArray *)MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString *)groupingKeyPath inContext:(NSManagedObjectContext *)context;
++ (NSArray *)MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString *)groupingKeyPath inContext:(NSManagedObjectContext *)context
 {
     NSExpression *expression = [NSExpression expressionForFunction:collectionOperator arguments:[NSArray arrayWithObject:[NSExpression expressionForKeyPath:attributeName]]];
 
@@ -167,7 +167,7 @@
     return results;
 }
 
-+ (NSArray *)MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString *)groupingKeyPath;
++ (NSArray *)MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString *)groupingKeyPath
 {
     return [self MR_aggregateOperation:collectionOperator
                            onAttribute:attributeName

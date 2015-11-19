@@ -1,34 +1,28 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
 // Make changes to SingleEntityRelatedToMappedEntityWithSecondaryMappings.h instead.
 
-#import <CoreData/CoreData.h>
+@import CoreData;
 
-extern const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsAttributes
-{
-    __unsafe_unretained NSString *secondaryMappedAttribute;
+extern const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsAttributes {
+	__unsafe_unretained NSString *secondaryMappedAttribute;
 } SingleEntityRelatedToMappedEntityWithSecondaryMappingsAttributes;
 
-extern const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsRelationships
-{
-    __unsafe_unretained NSString *mappedRelationship;
+extern const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsRelationships {
+	__unsafe_unretained NSString *mappedRelationship;
 } SingleEntityRelatedToMappedEntityWithSecondaryMappingsRelationships;
 
 @class MappedEntity;
 
-@interface SingleEntityRelatedToMappedEntityWithSecondaryMappingsID : NSManagedObjectID
-{
-}
+@interface SingleEntityRelatedToMappedEntityWithSecondaryMappingsID : NSManagedObjectID {}
 @end
 
-@interface _SingleEntityRelatedToMappedEntityWithSecondaryMappings : NSManagedObject
-{
-}
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext *)moc_;
-+ (NSString *)entityName;
-+ (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)moc_;
-- (SingleEntityRelatedToMappedEntityWithSecondaryMappingsID *)objectID;
+@interface _SingleEntityRelatedToMappedEntityWithSecondaryMappings : NSManagedObject {}
++ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
++ (NSString*)entityName;
++ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
+@property (nonatomic, readonly, strong) SingleEntityRelatedToMappedEntityWithSecondaryMappingsID* objectID;
 
-@property (nonatomic, strong) NSString *secondaryMappedAttribute;
+@property (nonatomic, strong) NSString* secondaryMappedAttribute;
 
 //- (BOOL)validateSecondaryMappedAttribute:(id*)value_ error:(NSError**)error_;
 
@@ -40,10 +34,10 @@ extern const struct SingleEntityRelatedToMappedEntityWithSecondaryMappingsRelati
 
 @interface _SingleEntityRelatedToMappedEntityWithSecondaryMappings (CoreDataGeneratedPrimitiveAccessors)
 
-- (NSString *)primitiveSecondaryMappedAttribute;
-- (void)setPrimitiveSecondaryMappedAttribute:(NSString *)value;
+- (NSString*)primitiveSecondaryMappedAttribute;
+- (void)setPrimitiveSecondaryMappedAttribute:(NSString*)value;
 
-- (MappedEntity *)primitiveMappedRelationship;
-- (void)setPrimitiveMappedRelationship:(MappedEntity *)value;
+- (MappedEntity*)primitiveMappedRelationship;
+- (void)setPrimitiveMappedRelationship:(MappedEntity*)value;
 
 @end

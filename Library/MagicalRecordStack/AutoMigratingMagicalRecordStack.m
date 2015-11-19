@@ -24,7 +24,7 @@
     return coordinator;
 }
 
-- (NSDictionary *)defaultStoreOptions;
+- (NSDictionary *)defaultStoreOptions
 {
     NSMutableDictionary *options = [super defaultStoreOptions].mutableCopy;
     [options addEntriesFromDictionary:[NSDictionary MR_autoMigrationOptions]];

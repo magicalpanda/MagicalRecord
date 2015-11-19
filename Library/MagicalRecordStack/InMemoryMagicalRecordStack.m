@@ -12,7 +12,7 @@
 
 @implementation InMemoryMagicalRecordStack
 
-- (NSManagedObjectContext *)newConfinementContext;
+- (NSManagedObjectContext *)newConfinementContext
 {
     NSManagedObjectContext *context = [super createConfinementContext];
     [context setParentContext:[self context]];

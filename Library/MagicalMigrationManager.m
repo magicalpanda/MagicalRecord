@@ -7,10 +7,11 @@
 //
 
 #import "MagicalMigrationManager.h"
+@import CoreData;
 
 @implementation MagicalMigrationManager
 
-- (instancetype)initWithSourceModelName:(NSString *)sourceName targetModelName:(NSString *)targetName;
+- (instancetype)initWithSourceModelName:(NSString *)sourceName targetModelName:(NSString *)targetName
 {
     self = [super init];
     if (self)
@@ -21,7 +22,7 @@
     return self;
 }
 
-- (NSManagedObjectModel *)managedObjectModelNamed:(NSString *)modelName;
+- (NSManagedObjectModel *)managedObjectModelNamed:(NSString *)modelName
 {
     NSString *bundleModelName = modelName;
     if (self.versionedModelName)
@@ -35,12 +36,12 @@
     return model;
 }
 
-- (NSManagedObjectModel *)sourceModel;
+- (NSManagedObjectModel *)sourceModel
 {
     return [self managedObjectModelNamed:self.sourceModelName];
 }
 
-- (NSManagedObjectModel *)targetModel;
+- (NSManagedObjectModel *)targetModel
 {
     return [self managedObjectModelNamed:self.targetModelName];
 }
@@ -50,7 +51,7 @@
     return [self migrateStoreAtURL:sourceStoreURL toStoreAtURL:targetStoreURL mappingModelURL:nil];
 }
 
-- (BOOL)migrateStoreAtURL:(NSURL *)sourceStoreURL toStoreAtURL:(NSURL *)targetStoreURL mappingModelURL:(NSURL *)mappingModelURL;
+- (BOOL)migrateStoreAtURL:(NSURL *)sourceStoreURL toStoreAtURL:(NSURL *)targetStoreURL mappingModelURL:(NSURL *)mappingModelURL
 {
     NSManagedObjectModel *sourceModel = [self sourceModel];
     NSManagedObjectModel *targetModel = [self targetModel];
@@ -82,7 +83,7 @@
     return success;
 }
 
-- (NSMappingModel *)mappingModelAtURL:(NSURL *)mappingModelURL forSourceModel:(NSManagedObjectModel *)sourceModel targetModel:(NSManagedObjectModel *)targetModel;
+- (NSMappingModel *)mappingModelAtURL:(NSURL *)mappingModelURL forSourceModel:(NSManagedObjectModel *)sourceModel targetModel:(NSManagedObjectModel *)targetModel
 {
     NSMappingModel *mappingModel = nil;
     if (mappingModelURL)
@@ -108,7 +109,7 @@
     return mappingModel;
 }
 
-- (BOOL)MagicalMigrationManager_progressivelyMigrateStoreAtURL:(NSURL *)sourceStoreURL toStoreAtURL:(NSURL *)targetStoreURL ofType:(NSString *)type error:(NSError *__autoreleasing *)error;
+- (BOOL)MagicalMigrationManager_progressivelyMigrateStoreAtURL:(NSURL *)sourceStoreURL toStoreAtURL:(NSURL *)targetStoreURL ofType:(NSString *)type error:(NSError *__autoreleasing *)error
 {
     NSManagedObjectModel *targetModel = [self targetModel];
     NSDictionary *sourceMetadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:type
@@ -177,7 +178,7 @@
                                                                   error:error];
 }
 
-- (NSArray *)MagicalMigrationManager_modelPaths;
+- (NSArray *)MagicalMigrationManager_modelPaths
 {
     //Find all of the mom and momd files in the Resources directory
     NSMutableArray *modelPaths = [NSMutableArray array];
@@ -196,7 +197,7 @@
     return modelPaths;
 }
 
-- (BOOL)MagicalMigrationManager_getDestinationModel:(NSManagedObjectModel *__autoreleasing *)destinationModel mappingModel:(NSMappingModel *__autoreleasing *)mappingModel modelName:(NSString *__autoreleasing *)modelName forSourceModel:(NSManagedObjectModel *)sourceModel;
+- (BOOL)MagicalMigrationManager_getDestinationModel:(NSManagedObjectModel *__autoreleasing *)destinationModel mappingModel:(NSMappingModel *__autoreleasing *)mappingModel modelName:(NSString *__autoreleasing *)modelName forSourceModel:(NSManagedObjectModel *)sourceModel
 {
     NSArray *modelPaths = [self MagicalMigrationManager_modelPaths];
     if ([modelPaths count] == 0)
@@ -238,7 +239,7 @@
     return YES;
 }
 
-- (BOOL)MagicalMigrationManager_backupSourceStoreAtURL:(NSURL *)sourceStoreURL movingDestinationStoreAtURL:(NSURL *)destinationStoreURL error:(NSError *__autoreleasing *)error;
+- (BOOL)MagicalMigrationManager_backupSourceStoreAtURL:(NSURL *)sourceStoreURL movingDestinationStoreAtURL:(NSURL *)destinationStoreURL error:(NSError *__autoreleasing *)error
 {
     NSString *guid = [[NSProcessInfo processInfo] globallyUniqueString];
     NSString *backupPath = [NSTemporaryDirectory() stringByAppendingPathComponent:guid];

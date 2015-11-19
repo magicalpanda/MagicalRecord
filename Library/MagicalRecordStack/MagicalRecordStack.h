@@ -6,6 +6,9 @@
 //  Copyright (c) 2013 Magical Panda Software LLC. All rights reserved.
 //
 
+@import Foundation;
+@import CoreData;
+
 NS_ASSUME_NONNULL_BEGIN
 @interface MagicalRecordStack : NSObject
 

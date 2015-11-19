@@ -6,8 +6,8 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+@import Foundation;
+@import CoreData;
 
 @interface NSAttributeDescription (MagicalRecordDataImport)
 

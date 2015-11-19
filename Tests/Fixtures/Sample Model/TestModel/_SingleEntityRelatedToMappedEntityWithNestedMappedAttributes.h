@@ -1,27 +1,22 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
 // Make changes to SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.h instead.
 
-#import <CoreData/CoreData.h>
+@import CoreData;
 
-extern const struct SingleEntityRelatedToMappedEntityWithNestedMappedAttributesRelationships
-{
-    __unsafe_unretained NSString *mappedEntity;
+extern const struct SingleEntityRelatedToMappedEntityWithNestedMappedAttributesRelationships {
+	__unsafe_unretained NSString *mappedEntity;
 } SingleEntityRelatedToMappedEntityWithNestedMappedAttributesRelationships;
 
 @class MappedEntity;
 
-@interface SingleEntityRelatedToMappedEntityWithNestedMappedAttributesID : NSManagedObjectID
-{
-}
+@interface SingleEntityRelatedToMappedEntityWithNestedMappedAttributesID : NSManagedObjectID {}
 @end
 
-@interface _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes : NSManagedObject
-{
-}
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext *)moc_;
-+ (NSString *)entityName;
-+ (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)moc_;
-- (SingleEntityRelatedToMappedEntityWithNestedMappedAttributesID *)objectID;
+@interface _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes : NSManagedObject {}
++ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
++ (NSString*)entityName;
++ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
+@property (nonatomic, readonly, strong) SingleEntityRelatedToMappedEntityWithNestedMappedAttributesID* objectID;
 
 @property (nonatomic, strong) MappedEntity *mappedEntity;
 
@@ -31,7 +26,7 @@ extern const struct SingleEntityRelatedToMappedEntityWithNestedMappedAttributesR
 
 @interface _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes (CoreDataGeneratedPrimitiveAccessors)
 
-- (MappedEntity *)primitiveMappedEntity;
-- (void)setPrimitiveMappedEntity:(MappedEntity *)value;
+- (MappedEntity*)primitiveMappedEntity;
+- (void)setPrimitiveMappedEntity:(MappedEntity*)value;
 
 @end

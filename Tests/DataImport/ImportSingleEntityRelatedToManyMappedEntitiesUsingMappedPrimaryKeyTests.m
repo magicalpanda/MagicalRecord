@@ -15,11 +15,9 @@
 - (void)testImportData
 {
     NSManagedObjectContext *stackContext = self.stack.context;
-
     SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey *entity = [SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey MR_importFromObject:self.testEntityData inContext:stackContext];
-
-    expect(entity).toNot.beNil();
-    expect(entity.mappedEntities).to.haveCountOf(4);
+    XCTAssertNotNil(entity);
+    XCTAssertEqual(entity.mappedEntities.count, (NSUInteger)4);
 }
 
 @end

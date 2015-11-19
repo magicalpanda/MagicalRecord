@@ -20,7 +20,7 @@
 
     [self p_createSampleData:numberOfTestEntitiesToCreate inContext:stackContext];
 
-    expect([SingleRelatedEntity MR_numberOfEntitiesWithContext:stackContext]).to.equal(numberOfTestEntitiesToCreate);
+    XCTAssertEqualObjects([SingleRelatedEntity MR_numberOfEntitiesWithContext:stackContext], @(numberOfTestEntitiesToCreate));
 }
 
 - (void)testCanSearchForNumberOfEntitiesWithPredicate
@@ -32,8 +32,7 @@
     [self p_createSampleData:numberOfTestEntitiesToCreate inContext:stackContext];
 
     NSPredicate *searchFilter = [NSPredicate predicateWithFormat:@"mappedStringAttribute = '1'"];
-
-    expect([SingleRelatedEntity MR_numberOfEntitiesWithPredicate:searchFilter inContext:stackContext]).to.equal(5);
+    XCTAssertEqualObjects([SingleRelatedEntity MR_numberOfEntitiesWithPredicate:searchFilter inContext:stackContext], @(5));
 }
 
 #pragma mark - Private Methods

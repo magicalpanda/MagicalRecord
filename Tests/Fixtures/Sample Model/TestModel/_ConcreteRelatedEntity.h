@@ -1,28 +1,23 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
 // Make changes to ConcreteRelatedEntity.h instead.
 
-#import <CoreData/CoreData.h>
+@import CoreData;
 #import "AbstractRelatedEntity.h"
 
-extern const struct ConcreteRelatedEntityAttributes
-{
-    __unsafe_unretained NSString *sampleConcreteAttribute;
+extern const struct ConcreteRelatedEntityAttributes {
+	__unsafe_unretained NSString *sampleConcreteAttribute;
 } ConcreteRelatedEntityAttributes;
 
-@interface ConcreteRelatedEntityID : AbstractRelatedEntityID
-{
-}
+@interface ConcreteRelatedEntityID : AbstractRelatedEntityID {}
 @end
 
-@interface _ConcreteRelatedEntity : AbstractRelatedEntity
-{
-}
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext *)moc_;
-+ (NSString *)entityName;
-+ (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)moc_;
-- (ConcreteRelatedEntityID *)objectID;
+@interface _ConcreteRelatedEntity : AbstractRelatedEntity {}
++ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
++ (NSString*)entityName;
++ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
+@property (nonatomic, readonly, strong) ConcreteRelatedEntityID* objectID;
 
-@property (nonatomic, strong) NSString *sampleConcreteAttribute;
+@property (nonatomic, strong) NSString* sampleConcreteAttribute;
 
 //- (BOOL)validateSampleConcreteAttribute:(id*)value_ error:(NSError**)error_;
 
@@ -30,7 +25,7 @@ extern const struct ConcreteRelatedEntityAttributes
 
 @interface _ConcreteRelatedEntity (CoreDataGeneratedPrimitiveAccessors)
 
-- (NSString *)primitiveSampleConcreteAttribute;
-- (void)setPrimitiveSampleConcreteAttribute:(NSString *)value;
+- (NSString*)primitiveSampleConcreteAttribute;
+- (void)setPrimitiveSampleConcreteAttribute:(NSString*)value;
 
 @end

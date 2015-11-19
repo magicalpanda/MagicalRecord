@@ -6,7 +6,8 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+@import Foundation;
+@import XCTest;
 
 @interface FixtureHelpers : NSObject
 

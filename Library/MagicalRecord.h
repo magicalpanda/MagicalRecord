@@ -4,8 +4,8 @@
 //
 
 #ifdef __OBJC__
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+@import Foundation;
+@import CoreData;
 
 #ifndef NS_BLOCKS_AVAILABLE
 #warning MagicalRecord requires blocks

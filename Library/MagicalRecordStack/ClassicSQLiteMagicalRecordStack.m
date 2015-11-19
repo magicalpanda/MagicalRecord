@@ -13,7 +13,7 @@
 
 @implementation ClassicSQLiteMagicalRecordStack
 
-- (NSManagedObjectContext *)newConfinementContext;
+- (NSManagedObjectContext *)newConfinementContext
 {
     NSManagedObjectContext *context = [NSManagedObjectContext MR_confinementContext];
     [context setPersistentStoreCoordinator:self.coordinator];
@@ -25,7 +25,7 @@
     return context;
 }
 
-- (void)saveWithBlock:(void (^)(NSManagedObjectContext *))block identifier:(NSString *)contextWorkingName completion:(MRSaveCompletionHandler)completion;
+- (void)saveWithBlock:(void (^)(NSManagedObjectContext *))block identifier:(NSString *)contextWorkingName completion:(MRSaveCompletionHandler)completion
 {
     NSParameterAssert(block);
 

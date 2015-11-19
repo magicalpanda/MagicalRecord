@@ -34,7 +34,7 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
 
 @implementation NSString (MagicalRecordLogging)
 
-- (void)MR_logToConsole;
+- (void)MR_logToConsole
 {
     MRLogVerbose(@"*** %@ ***", self);
 }
@@ -43,12 +43,12 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
 
 @implementation NSError (MagicalRecordErrorHandling)
 
-- (NSArray *)MR_errorCollection;
+- (NSArray *)MR_errorCollection
 {
     return [self code] == NSValidationMultipleErrorsError ? [[self userInfo] objectForKey:NSDetailedErrorsKey] : @[ self ];
 }
 
-- (NSDictionary *)MR_errorCollectionGroupedByObject;
+- (NSDictionary *)MR_errorCollectionGroupedByObject
 {
     NSMutableDictionary *collatedObjects = [NSMutableDictionary dictionary];
 
@@ -69,7 +69,7 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
     return [NSDictionary dictionaryWithDictionary:collatedObjects];
 }
 
-- (NSString *)MR_summaryDescription;
+- (NSString *)MR_summaryDescription
 {
     NSInteger errorCode = [self code];
     if (MR_errorCodeIsValidationErrorCode(errorCode))
@@ -86,7 +86,7 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
     return [NSString stringWithFormat:@"(%zd) %@ [%@]", errorCode, MR_errorSummaryFromErrorCode(errorCode), [self MR_validationErrorObject] ?: [[self userInfo] objectForKey:@"reason"]];
 }
 
-- (NSString *)MR_coreDataDescription;
+- (NSString *)MR_coreDataDescription
 {
     NSMutableString *descriptionBuffer = [NSMutableString string];
 
@@ -119,12 +119,12 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
     return [NSString stringWithString:descriptionBuffer];
 }
 
-- (id)MR_validationError;
+- (id)MR_validationError
 {
     return [[self userInfo] objectForKey:NSValidationKeyErrorKey];
 }
 
-- (NSManagedObject *)MR_validationErrorObject;
+- (NSManagedObject *)MR_validationErrorObject
 {
     return [[self userInfo] objectForKey:NSValidationObjectErrorKey];
 }
