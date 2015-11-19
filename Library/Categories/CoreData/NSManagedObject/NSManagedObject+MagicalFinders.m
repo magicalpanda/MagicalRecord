@@ -81,7 +81,7 @@
     [request setPropertiesToFetch:[NSArray arrayWithObject:attribute]];
     NSArray *results = [self MR_executeFetchRequest:request inContext:context];
 
-    return [results valueForKeyPath:[NSString stringWithFormat:@"@unionOfObjects.%@", attribute]];
+    return (results != nil) ? [results valueForKeyPath:[NSString stringWithFormat:@"@unionOfObjects.%@", attribute]] : nil;
 }
 
 + (id)MR_selectAttribute:(NSString *)attribute ascending:(BOOL)ascending withPredicate:(NSPredicate *)predicate
@@ -96,7 +96,7 @@
     [request setPropertiesToFetch:[NSArray arrayWithObject:attribute]];
     NSArray *results = [self MR_executeFetchRequest:request inContext:context];
 
-    return [results valueForKeyPath:[NSString stringWithFormat:@"@unionOfObjects.%@", attribute]];
+    return (results != nil) ? [results valueForKeyPath:[NSString stringWithFormat:@"@unionOfObjects.%@", attribute]] : nil;
 }
 
 + (instancetype)MR_findFirst

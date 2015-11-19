@@ -166,7 +166,8 @@
 
 - (BOOL)MR_deleteEntity
 {
-    return [self MR_deleteEntityInContext:[self managedObjectContext]];
+    NSManagedObjectContext *context = self.managedObjectContext;
+    return (context != nil) ? [self MR_deleteEntityInContext:context] : NO;
 }
 
 - (BOOL)MR_deleteEntityInContext:(NSManagedObjectContext *)context

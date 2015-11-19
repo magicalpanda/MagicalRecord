@@ -39,7 +39,10 @@
     NSURL *testStoreURL = [NSPersistentStore MR_fileURLForStoreName:[MagicalRecord defaultStoreName]];
     XCTAssertNotNil(testStoreURL);
 
-    [[NSFileManager defaultManager] removeItemAtPath:[testStoreURL path] error:nil];
+    NSString *testStorePath = testStoreURL.path;
+    XCTAssertNotNil(testStorePath);
+
+    [[NSFileManager defaultManager] removeItemAtPath:testStorePath error:nil];
 
     MagicalRecordStack *defaultStack = [SQLiteMagicalRecordStack stackWithStoreAtURL:testStoreURL];
     [defaultStack setModelFromClass:[self class]];
@@ -69,8 +72,10 @@
     NSString *testStoreName = @"MyTestDataStore.sqlite";
 
     NSURL *testStoreURL = [NSPersistentStore MR_fileURLForStoreName:testStoreName];
+    NSString *testStorePath = testStoreURL.path;
+    XCTAssertNotNil(testStorePath);
 
-    [[NSFileManager defaultManager] removeItemAtPath:[testStoreURL path] error:nil];
+    [[NSFileManager defaultManager] removeItemAtPath:testStorePath error:nil];
 
     MagicalRecordStack *defaultStack = [SQLiteMagicalRecordStack stackWithStoreNamed:testStoreName];
     [MagicalRecordStack setDefaultStack:defaultStack];

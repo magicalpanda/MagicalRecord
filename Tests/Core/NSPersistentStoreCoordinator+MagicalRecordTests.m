@@ -1,7 +1,5 @@
 //
-//  Created by Tony Arnold on 25/03/2014.
 //  Copyright (c) 2014 Magical Panda Software LLC. All rights reserved.
-//
 
 #import "MagicalRecordTestBase.h"
 
@@ -18,10 +16,11 @@
     [super setUp];
 
     NSURL *testStoreURL = [NSPersistentStore MR_fileURLForStoreNameIfExistsOnDisk:@"TestStore.sqlite"];
+    NSString *testStorePath = testStoreURL.path;
 
-    if (testStoreURL)
+    if (testStoreURL != nil && testStorePath != nil)
     {
-        [[NSFileManager defaultManager] removeItemAtPath:[testStoreURL path] error:nil];
+        [[NSFileManager defaultManager] removeItemAtPath:testStorePath error:nil];
     }
 
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];

@@ -1,39 +1,32 @@
 //
-//  MagicalRecordStack.h
-//  MagicalRecord
-//
-//  Created by Saul Mora on 9/14/13.
-//  Copyright (c) 2013 Magical Panda Software LLC. All rights reserved.
-//
+//  Copyright © 2013 Magical Panda Software LLC. All rights reserved.
 
 @import Foundation;
 @import CoreData;
 
-NS_ASSUME_NONNULL_BEGIN
 @interface MagicalRecordStack : NSObject
 
-@property (nonatomic, copy) NSString *stackName;
+@property (readwrite, nonnull, nonatomic, copy) NSString *stackName;
 
-@property (nonatomic, strong) NSManagedObjectContext *context;
-@property (nonatomic, strong) NSManagedObjectModel *model;
-@property (nonatomic, strong) NSPersistentStoreCoordinator *coordinator;
-@property (nonatomic, strong) NSPersistentStore *store;
+@property (readwrite, nonnull, nonatomic, strong) NSManagedObjectContext *context;
+@property (readwrite, nonnull, nonatomic, strong) NSManagedObjectModel *model;
+@property (readwrite, nonnull, nonatomic, strong) NSPersistentStoreCoordinator *coordinator;
+@property (readwrite, nullable, nonatomic, strong) NSPersistentStore *store;
 
-@property (nonatomic, assign) BOOL loggingEnabled;
-@property (nonatomic, assign) BOOL saveOnApplicationWillTerminate;
-@property (nonatomic, assign) BOOL saveOnApplicationWillResignActive;
+@property (readwrite, nonatomic, assign) BOOL loggingEnabled;
+@property (readwrite, nonatomic, assign) BOOL saveOnApplicationWillTerminate;
+@property (readwrite, nonatomic, assign) BOOL saveOnApplicationWillResignActive;
 
-+ (__nullable instancetype)defaultStack;
-+ (void)setDefaultStack:(MagicalRecordStack *__nullable)stack;
++ (nonnull instancetype)defaultStack;
++ (void)setDefaultStack:(nullable MagicalRecordStack *)stack;
 
-+ (instancetype)stack;
++ (nonnull instancetype)stack;
 
 - (void)reset;
 
-- (NSManagedObjectContext *)newConfinementContext;
+- (nonnull NSManagedObjectContext *)newConfinementContext;
 
-- (void)setModelFromClass:(Class)modelClass;
-- (void)setModelNamed:(NSString *)modelName;
+- (void)setModelFromClass:(nonnull Class)modelClass;
+- (void)setModelNamed:(nonnull NSString *)modelName;
 
 @end
-NS_ASSUME_NONNULL_END

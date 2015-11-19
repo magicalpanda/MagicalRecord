@@ -1,10 +1,5 @@
 //
-//  MagicalRecordStack.m
-//  MagicalRecord
-//
-//  Created by Saul Mora on 9/14/13.
-//  Copyright (c) 2013 Magical Panda Software LLC. All rights reserved.
-//
+//  Copyright © 2013 Magical Panda Software LLC. All rights reserved.
 
 #import "MagicalRecordStack.h"
 
@@ -97,7 +92,7 @@ static MagicalRecordStack *defaultStack;
     _store = nil;
 }
 
-- (NSManagedObjectContext *)context
+- (nonnull NSManagedObjectContext *)context
 {
     if (_context == nil)
     {
@@ -109,7 +104,7 @@ static MagicalRecordStack *defaultStack;
     return _context;
 }
 
-- (NSString *)stackName
+- (nonnull NSString *)stackName
 {
     if (_stackName == nil)
     {
@@ -134,11 +129,13 @@ static MagicalRecordStack *defaultStack;
     return context;
 }
 
-- (NSManagedObjectModel *)model
+- (nonnull NSManagedObjectModel *)model
 {
     if (_model == nil)
     {
-        _model = [NSManagedObjectModel MR_mergedObjectModelFromMainBundle];
+        NSManagedObjectModel *model = [NSManagedObjectModel MR_mergedObjectModelFromMainBundle];
+        NSParameterAssert(model != nil);
+        _model = model;
     }
     return _model;
 }
@@ -148,7 +145,7 @@ static MagicalRecordStack *defaultStack;
     if (_coordinator == nil)
     {
         _coordinator = [self createCoordinator];
-        _store = [[_coordinator persistentStores] lastObject];
+        _store = _coordinator.persistentStores.firstObject;
     }
     return _coordinator;
 }

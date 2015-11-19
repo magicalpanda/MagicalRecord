@@ -89,7 +89,8 @@
     for (NSURL *storeUrl in storeUrls)
     {
         NSURL *copyToURL = [destinationUrl URLByDeletingPathExtension];
-        copyToURL = [copyToURL URLByAppendingPathExtension:[storeUrl pathExtension]];
+        NSString *pathExtension = storeUrl.pathExtension;
+        copyToURL = [copyToURL URLByAppendingPathExtension:pathExtension];
         success &= [fileManager copyItemAtURL:storeUrl toURL:copyToURL error:error];
     }
     return success;
@@ -129,7 +130,8 @@
 
 - (BOOL)MR_removePersistentStoreFiles
 {
-    return [[self class] MR_removePersistentStoreFilesAtURL:self.URL];
+    NSURL *storeURL = self.URL;
+    return (storeURL != nil) ? [[self class] MR_removePersistentStoreFilesAtURL:storeURL] : NO;
 }
 
 + (BOOL)MR_removePersistentStoreFilesAtURL:(NSURL *)url

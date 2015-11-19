@@ -84,11 +84,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (BOOL)MR_hasAtLeastOneEntityInContext:(NSManagedObjectContext *)context;
 
-- (id)MR_minValueFor:(NSString *)property;
-- (id)MR_maxValueFor:(NSString *)property;
+- (nullable id)MR_minValueFor:(nonnull NSString *)property;
+- (nullable id)MR_maxValueFor:(nonnull NSString *)property;
 
-+ (id)MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
-+ (id)MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate;
++ (nullable id)MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate;
++ (nullable id)MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;
 
 /**
  Supports aggregating values using a key-value collection operator that can be grouped by an attribute.
@@ -124,7 +124,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (NSArray *)MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString *)groupingKeyPath;
 
-- (id)MR_objectWithMinValueFor:(NSString *)property;
+- (nullable id)MR_objectWithMinValueFor:(nonnull NSString *)property;
 - (id)MR_objectWithMinValueFor:(NSString *)property inContext:(NSManagedObjectContext *)context;
 
 @end

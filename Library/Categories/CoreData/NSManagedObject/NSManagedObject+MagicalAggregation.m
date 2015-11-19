@@ -84,18 +84,14 @@
 
 - (id)MR_minValueFor:(NSString *)property
 {
-    NSManagedObject *obj = [[self class] MR_findFirstByAttribute:property
-                                                       withValue:[NSString stringWithFormat:@"min(%@)", property]];
-
-    return [obj valueForKey:property];
+    NSManagedObject *obj = [[self class] MR_findFirstByAttribute:property withValue:[NSString stringWithFormat:@"min(%@)", property]];
+    return (obj != nil) ? [obj valueForKey:property] : nil;
 }
 
 - (id)MR_maxValueFor:(NSString *)property
 {
-    NSManagedObject *obj = [[self class] MR_findFirstByAttribute:property
-                                                       withValue:[NSString stringWithFormat:@"max(%@)", property]];
-
-    return [obj valueForKey:property];
+    NSManagedObject *obj = [[self class] MR_findFirstByAttribute:property withValue:[NSString stringWithFormat:@"max(%@)", property]];
+    return (obj != nil) ? [obj valueForKey:property] : nil;
 }
 
 - (id)MR_objectWithMinValueFor:(NSString *)property inContext:(NSManagedObjectContext *)context
@@ -110,7 +106,8 @@
 
 - (id)MR_objectWithMinValueFor:(NSString *)property
 {
-    return [self MR_objectWithMinValueFor:property inContext:[self managedObjectContext]];
+    NSManagedObjectContext *context = self.managedObjectContext;
+    return (context != nil) ? [self MR_objectWithMinValueFor:property inContext:context] : nil;
 }
 
 + (id)MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context
@@ -132,8 +129,7 @@
     [request setResultType:NSDictionaryResultType];
 
     NSDictionary *resultsDictionary = [self MR_executeFetchRequestAndReturnFirstObject:request inContext:context];
-
-    return [resultsDictionary objectForKey:@"result"];
+    return (resultsDictionary != nil) ? [resultsDictionary objectForKey:@"result"] : nil;
 }
 
 + (id)MR_aggregateOperation:(NSString *)function onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate
