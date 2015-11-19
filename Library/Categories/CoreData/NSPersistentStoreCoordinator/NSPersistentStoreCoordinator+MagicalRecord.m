@@ -16,10 +16,10 @@ NSString *const MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey = @"M
 + (void)MR_createPathToStoreFileIfNeccessary:(NSURL *)urlForStore
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSURL *pathToStore = [urlForStore URLByDeletingLastPathComponent];
+    NSString *pathToStore = urlForStore.URLByDeletingLastPathComponent.path;
 
     NSError *error = nil;
-    BOOL pathWasCreated = [fileManager createDirectoryAtPath:[pathToStore path] withIntermediateDirectories:YES attributes:nil error:&error];
+    BOOL pathWasCreated = (pathToStore != nil) ? [fileManager createDirectoryAtPath:pathToStore withIntermediateDirectories:YES attributes:nil error:&error] : NO;
 
     if (!pathWasCreated)
     {
@@ -122,7 +122,11 @@ NSString *const MagicalRecordShouldDeletePersistentStoreOnModelMismatchKey = @"M
 {
     NSPersistentStoreCoordinator *psc = [[self alloc] initWithManagedObjectModel:model];
 
-    [psc MR_addSqliteStoreNamed:[persistentStore URL] withOptions:options];
+    NSURL *pscURL = persistentStore.URL;
+    if (pscURL != nil)
+    {
+        [psc MR_addSqliteStoreNamed:pscURL withOptions:options];
+    }
 
     return psc;
 }

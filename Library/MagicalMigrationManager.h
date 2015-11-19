@@ -1,22 +1,17 @@
 //
-//  MagicalMigrationManager.h
-//  Photobucket Next
-//
-//  Created by Saul Mora on 8/6/13.
-//  Copyright (c) 2013 Photobucket. All rights reserved.
-//
+//  Copyright © 2013 Magical Panda Software, LLC. All rights reserved.
 
 @import Foundation;
 
 @interface MagicalMigrationManager : NSObject
 
-@property (nonatomic, copy) NSString *sourceModelName;
-@property (nonatomic, copy) NSString *targetModelName;
-@property (nonatomic, copy) NSString *versionedModelName;
+@property (readwrite, nonnull, nonatomic, copy) NSString *sourceModelName;
+@property (readwrite, nonnull, nonatomic, copy) NSString *targetModelName;
+@property (readwrite, nonnull, nonatomic, copy) NSString *versionedModelName;
 
-- (instancetype)initWithSourceModelName:(NSString *)sourceName targetModelName:(NSString *)targetName;
+- (nonnull instancetype)initWithSourceModelName:(nonnull NSString *)sourceName targetModelName:(nonnull NSString *)targetName;
 
-- (BOOL)migrateStoreAtURL:(NSURL *)sourceStoreURL toStoreAtURL:(NSURL *)targetStoreURL;
-- (BOOL)migrateStoreAtURL:(NSURL *)sourceStoreURL toStoreAtURL:(NSURL *)targetStoreURL mappingModelURL:(NSURL *)mappingModelURL;
+- (BOOL)migrateStoreAtURL:(nonnull NSURL *)sourceStoreURL toStoreAtURL:(nonnull NSURL *)targetStoreURL;
+- (BOOL)migrateStoreAtURL:(nonnull NSURL *)sourceStoreURL toStoreAtURL:(nonnull NSURL *)targetStoreURL mappingModelURL:(nullable NSURL *)mappingModelURL;
 
 @end

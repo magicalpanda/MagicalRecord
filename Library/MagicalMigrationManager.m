@@ -1,10 +1,5 @@
 //
-//  MagicalMigrationManager.m
-//  Photobucket Next
-//
-//  Created by Saul Mora on 8/6/13.
-//  Copyright (c) 2013 Photobucket. All rights reserved.
-//
+//  Copyright © 2013 Magical Panda Software, LLC. All rights reserved.
 
 #import "MagicalMigrationManager.h"
 @import CoreData;
@@ -243,26 +238,29 @@
 {
     NSString *guid = [[NSProcessInfo processInfo] globallyUniqueString];
     NSString *backupPath = [NSTemporaryDirectory() stringByAppendingPathComponent:guid];
-
+    
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager moveItemAtPath:sourceStoreURL.path
-                              toPath:backupPath
-                               error:error])
+    NSString *sourceStorePath = sourceStoreURL.path;
+
+    if (sourceStorePath == nil ||
+        NO == [fileManager moveItemAtPath:sourceStorePath toPath:backupPath error:error])
     {
         // Failed to copy the file
         return NO;
     }
+
+    NSString *destinationStorePath = destinationStoreURL.path;
+
     // Move the destination to the source path
-    if (![fileManager moveItemAtPath:destinationStoreURL.path
-                              toPath:sourceStoreURL.path
-                               error:error])
+    if (destinationStorePath == nil ||
+        NO == [fileManager moveItemAtPath:destinationStorePath toPath:sourceStorePath error:error])
     {
         // Try to back out the source move first, no point in checking it for errors
-        [fileManager moveItemAtPath:backupPath
-                             toPath:sourceStoreURL.path
-                              error:nil];
+        [fileManager moveItemAtPath:backupPath toPath:sourceStorePath error:nil];
+
         return NO;
     }
+
     return YES;
 }
 

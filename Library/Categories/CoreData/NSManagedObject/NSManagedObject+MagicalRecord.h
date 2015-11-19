@@ -39,8 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (NSString *)MR_entityName;
 
-+ (NSEntityDescription *)MR_entityDescription;
-+ (NSEntityDescription *)MR_entityDescriptionInContext:(NSManagedObjectContext *)context;
++ (nullable NSEntityDescription *)MR_entityDescription;
++ (nullable NSEntityDescription *)MR_entityDescriptionInContext:(NSManagedObjectContext *)context;
 
 + (NSArray *)MR_propertiesNamed:(NSArray *)properties;
 + (NSArray *)MR_propertiesNamed:(NSArray *)properties inContext:(NSManagedObjectContext *)context;

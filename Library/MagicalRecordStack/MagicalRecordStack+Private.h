@@ -1,19 +1,14 @@
 //
-//  MagicalRecordStack_Private.h
-//  MagicalRecord
-//
-//  Created by Saul Mora on 9/15/13.
-//  Copyright (c) 2013 Magical Panda Software LLC. All rights reserved.
-//
+//  Copyright © 2013 Magical Panda Software LLC. All rights reserved.
 
 #import "MagicalRecordStack.h"
 
 @interface MagicalRecordStack ()
 
-- (NSPersistentStoreCoordinator *)createCoordinator;
-- (NSPersistentStoreCoordinator *)createCoordinatorWithOptions:(NSDictionary *)options;
+- (nonnull NSPersistentStoreCoordinator *)createCoordinator;
+- (nonnull NSPersistentStoreCoordinator *)createCoordinatorWithOptions:(nullable NSDictionary *)options;
 
-- (NSManagedObjectContext *)createConfinementContext;
+- (nonnull NSManagedObjectContext *)createConfinementContext;
 - (void)loadStack;
 
 @end
