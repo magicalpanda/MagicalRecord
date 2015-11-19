@@ -1730,7 +1730,6 @@
 					"-Wno-pedantic",
 					"-Wno-direct-ivar-access",
 					"-Wno-cast-qual",
-					"-Wno-nullable-to-nonnull-conversion",
 					"-Wno-reserved-id-macro",
 					"-Wno-auto-import",
 				);
@@ -1812,7 +1811,6 @@
 					"-Wno-pedantic",
 					"-Wno-direct-ivar-access",
 					"-Wno-cast-qual",
-					"-Wno-nullable-to-nonnull-conversion",
 					"-Wno-reserved-id-macro",
 					"-Wno-auto-import",
 				);
