@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Magical Panda Software LLC. All rights reserved.
 //
 
-@import CoreData;
+#import <CoreData/CoreData.h>
 
 /**
  Category methods on NSManagedObject to make working with NSFetchedResultsControllers easier.

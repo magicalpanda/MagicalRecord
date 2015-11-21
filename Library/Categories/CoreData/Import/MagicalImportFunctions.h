@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Magical Panda Software LLC. All rights reserved.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 NSDate *MRAdjustDateForDST(NSDate *date);
 NSDate *MRDateFromString(NSString *value, NSString *format);
@@ -16,10 +16,10 @@ NSString *MRAttributeNameFromString(NSString *value);
 NSString *MRPrimaryKeyNameFromString(NSString *value);
 
 #if TARGET_OS_IPHONE
-@import UIKit;
+#import <UIKit/UIKit.h>
 UIColor *MRColorFromString(NSString *serializedColor);
 #else
-@import Cocoa;
+#import <Cocoa/Cocoa.h>
 NSColor *MRColorFromString(NSString *serializedColor);
 #endif
 

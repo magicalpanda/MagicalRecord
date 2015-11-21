@@ -1,12 +1,12 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
 // Make changes to SingleEntityWithNoRelationships.h instead.
 
-@import CoreData;
+#import <CoreData/CoreData.h>
 
 #if TARGET_OS_IPHONE
-@import UIKit;
+#import <UIKit/UIKit.h>
 #else
-@import Cocoa;
+#import <Cocoa/Cocoa.h>
 #endif
 
 extern const struct SingleEntityWithNoRelationshipsAttributes {

@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Magical Panda Software. All rights reserved.
 //
 
-@import CoreData;
+#import <CoreData/CoreData.h>
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 /**

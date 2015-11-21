@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Magical Panda Software LLC. All rights reserved.
 //
 
-@import CoreData;
+#import <CoreData/CoreData.h>
 
 NS_ASSUME_NONNULL_BEGIN
 @interface NSPersistentStoreCoordinator (MagicalAutoMigrations)

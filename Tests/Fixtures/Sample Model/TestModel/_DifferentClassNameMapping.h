@@ -1,7 +1,7 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
 // Make changes to DifferentClassNameMapping.h instead.
 
-@import CoreData;
+#import <CoreData/CoreData.h>
 
 @interface DifferentClassNameMappingID : NSManagedObjectID {}
 @end

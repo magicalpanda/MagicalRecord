@@ -3,7 +3,7 @@
 //  Copyright (c) 2014 Magical Panda Software LLC. All rights reserved.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 NSString *MR_defaultApplicationStorePath(void);
 NSString *MR_userDocumentsPath(void);

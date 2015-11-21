@@ -5,7 +5,7 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-@import CoreData;
+#import <CoreData/CoreData.h>
 NS_ASSUME_NONNULL_BEGIN
 
 extern NSString *const MagicalRecordDidMergeChangesFromiCloudNotification;

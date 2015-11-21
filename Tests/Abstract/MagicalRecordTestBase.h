@@ -3,10 +3,9 @@
 //  Copyright (c) 2013 Magical Panda Software LLC. All rights reserved.
 //
 
-@import Foundation;
-@import XCTest;
-@import CoreData;
-@import MagicalRecord;
+#import <XCTest/XCTest.h>
+#import <CoreData/CoreData.h>
+#import <MagicalRecord/MagicalRecord.h>
 
 @interface MagicalRecordTestBase : XCTestCase
 

@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Magical Panda Software LLC. All rights reserved.
 //
 
-@import CoreData;
+#import <CoreData/CoreData.h>
 
 /** 
  Options that can be passed when saving a context

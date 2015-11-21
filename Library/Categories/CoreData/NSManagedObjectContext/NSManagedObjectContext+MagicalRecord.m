@@ -8,7 +8,7 @@
 #import "MagicalRecord.h"
 #import "MagicalRecordStack.h"
 #import "MagicalRecordLogging.h"
-@import ObjectiveC.runtime;
+#import <objc/runtime.h>
 
 NSString *MR_concurrencyStringFromType(NSManagedObjectContextConcurrencyType type);
 NSString *MR_concurrencyStringFromType(NSManagedObjectContextConcurrencyType type)

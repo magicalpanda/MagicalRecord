@@ -6,8 +6,8 @@
 //  Copyright 2011 Magical Panda Software LLC. All rights reserved.
 //
 
-@import Foundation;
-@import CoreData;
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
 /**
  Category methods on NSEntityDescription used in MagicalRecord's data import process.

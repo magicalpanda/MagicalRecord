@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Medallion Media. All rights reserved.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 /**

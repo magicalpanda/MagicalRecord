@@ -4,7 +4,7 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-@import CoreData;
+#import <CoreData/CoreData.h>
 #import "MagicalRecord.h"
 #import "MagicalRecordDeprecated.h"
 

@@ -3,7 +3,7 @@
 //  Copyright (c) 2014 Magical Panda Software LLC. All rights reserved.
 //
 
-@import CoreData;
+#import <CoreData/CoreData.h>
 
 @interface EntityWithoutEntityNameMethod : NSManagedObject
 

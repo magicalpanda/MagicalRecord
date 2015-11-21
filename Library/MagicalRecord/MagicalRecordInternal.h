@@ -3,7 +3,7 @@
 //  Copyright 2010 Magical Panda Software, LLC All rights reserved.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 /**
  @since Available in v2.0 and later.

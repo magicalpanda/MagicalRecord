@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Magical Panda Software LLC. All rights reserved.
 //
 
-@import CoreData;
+#import <CoreData/CoreData.h>
 
 /**
  Category methods to make creating fetch requests easier.

@@ -1,8 +1,8 @@
 //
 //  Copyright © 2013 Magical Panda Software LLC. All rights reserved.
 
-@import Foundation;
-@import CoreData;
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
 @interface MagicalRecordStack : NSObject
 

@@ -2,7 +2,7 @@
 //  Copyright © 2013 Magical Panda Software, LLC. All rights reserved.
 
 #import "MagicalMigrationManager.h"
-@import CoreData;
+#import <CoreData/CoreData.h>
 
 @implementation MagicalMigrationManager
 

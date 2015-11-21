@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Magical Panda Software LLC. All rights reserved.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 /**
  NSDictionary category methods to support various aspects of MagicalRecord.

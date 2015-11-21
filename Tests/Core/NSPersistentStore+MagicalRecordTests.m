@@ -3,9 +3,8 @@
 //  Copyright (c) 2014 Magical Panda Software LLC. All rights reserved.
 //
 
-@import Foundation;
-@import XCTest;
-@import MagicalRecord;
+#import <XCTest/XCTest.h>
+#import <MagicalRecord/MagicalRecord.h>
 
 #import "NSPersistentStore+MagicalRecordPrivate.h"
 
