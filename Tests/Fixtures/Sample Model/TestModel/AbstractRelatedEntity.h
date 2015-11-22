@@ -1,7 +1,17 @@
-#import "_AbstractRelatedEntity.h"
+//
+//  Copyright © 2015 Magical Panda Software LLC. All rights reserved.
 
-@interface AbstractRelatedEntity : _AbstractRelatedEntity
-{
-}
-// Custom logic goes here.
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface AbstractRelatedEntity : NSManagedObject
+
+// Insert code here to declare functionality of your managed object subclass
+
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "AbstractRelatedEntity+CoreDataProperties.h"

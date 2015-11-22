@@ -1,13 +1,10 @@
+//
+//  Copyright © 2015 Magical Panda Software LLC. All rights reserved.
+
 #import "MappedEntity.h"
-
-@interface MappedEntity ()
-
-// Private interface goes here.
-
-@end
 
 @implementation MappedEntity
 
-// Custom logic goes here.
+// Insert code here to add functionality to your managed object subclass
 
 @end

@@ -1,13 +1,10 @@
+//
+//  Copyright © 2015 Magical Panda Software LLC. All rights reserved.
+
 #import "AbstractRelatedEntity.h"
-
-@interface AbstractRelatedEntity ()
-
-// Private interface goes here.
-
-@end
 
 @implementation AbstractRelatedEntity
 
-// Custom logic goes here.
+// Insert code here to add functionality to your managed object subclass
 
 @end

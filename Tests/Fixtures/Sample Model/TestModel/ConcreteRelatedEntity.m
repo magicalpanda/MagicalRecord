@@ -1,13 +1,10 @@
+//
+//  Copyright © 2015 Magical Panda Software LLC. All rights reserved.
+
 #import "ConcreteRelatedEntity.h"
-
-@interface ConcreteRelatedEntity ()
-
-// Private interface goes here.
-
-@end
 
 @implementation ConcreteRelatedEntity
 
-// Custom logic goes here.
+// Insert code here to add functionality to your managed object subclass
 
 @end

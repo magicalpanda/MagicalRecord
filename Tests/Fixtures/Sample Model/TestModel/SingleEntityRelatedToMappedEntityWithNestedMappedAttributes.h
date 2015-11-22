@@ -1,7 +1,19 @@
-#import "_SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.h"
+//
+//  Copyright © 2015 Magical Panda Software LLC. All rights reserved.
 
-@interface SingleEntityRelatedToMappedEntityWithNestedMappedAttributes : _SingleEntityRelatedToMappedEntityWithNestedMappedAttributes
-{
-}
-// Custom logic goes here.
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
+@class MappedEntity;
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface SingleEntityRelatedToMappedEntityWithNestedMappedAttributes : NSManagedObject
+
+// Insert code here to declare functionality of your managed object subclass
+
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "SingleEntityRelatedToMappedEntityWithNestedMappedAttributes+CoreDataProperties.h"

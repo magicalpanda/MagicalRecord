@@ -1,13 +1,11 @@
+//
+//  Copyright © 2015 Magical Panda Software LLC. All rights reserved.
+
 #import "SingleEntityRelatedToMappedEntityWithSecondaryMappings.h"
-
-@interface SingleEntityRelatedToMappedEntityWithSecondaryMappings ()
-
-// Private interface goes here.
-
-@end
+#import "MappedEntity.h"
 
 @implementation SingleEntityRelatedToMappedEntityWithSecondaryMappings
 
-// Custom logic goes here.
+// Insert code here to add functionality to your managed object subclass
 
 @end

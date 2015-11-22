@@ -1,7 +1,17 @@
-#import "_ConcreteRelatedEntity.h"
+//
+//  Copyright © 2015 Magical Panda Software LLC. All rights reserved.
 
-@interface ConcreteRelatedEntity : _ConcreteRelatedEntity
-{
-}
-// Custom logic goes here.
+#import <Foundation/Foundation.h>
+#import "AbstractRelatedEntity.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface ConcreteRelatedEntity : AbstractRelatedEntity
+
+// Insert code here to declare functionality of your managed object subclass
+
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "ConcreteRelatedEntity+CoreDataProperties.h"

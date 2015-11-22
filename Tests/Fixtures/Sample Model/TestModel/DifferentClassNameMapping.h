@@ -1,7 +1,17 @@
-#import "_DifferentClassNameMapping.h"
+//
+//  Copyright © 2015 Magical Panda Software LLC. All rights reserved.
 
-@interface DifferentClassNameMapping : _DifferentClassNameMapping
-{
-}
-// Custom logic goes here.
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface DifferentClassNameMapping : NSManagedObject
+
++ (NSString *)entityName;
+
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "DifferentClassNameMapping+CoreDataProperties.h"

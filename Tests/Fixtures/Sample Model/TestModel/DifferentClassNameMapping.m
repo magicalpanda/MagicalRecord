@@ -1,13 +1,13 @@
+//
+//  Copyright © 2015 Magical Panda Software LLC. All rights reserved.
+
 #import "DifferentClassNameMapping.h"
-
-@interface DifferentClassNameMapping ()
-
-// Private interface goes here.
-
-@end
 
 @implementation DifferentClassNameMapping
 
-// Custom logic goes here.
++ (NSString *)entityName
+{
+    return @"EntityWithDifferentClassName";
+}
 
 @end

@@ -1,13 +1,11 @@
+//
+//  Copyright © 2015 Magical Panda Software LLC. All rights reserved.
+
 #import "SingleEntityRelatedToMappedEntityWithNestedMappedAttributes.h"
-
-@interface SingleEntityRelatedToMappedEntityWithNestedMappedAttributes ()
-
-// Private interface goes here.
-
-@end
+#import "MappedEntity.h"
 
 @implementation SingleEntityRelatedToMappedEntityWithNestedMappedAttributes
 
-// Custom logic goes here.
+// Insert code here to add functionality to your managed object subclass
 
 @end
