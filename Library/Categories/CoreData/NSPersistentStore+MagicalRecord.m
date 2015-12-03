@@ -183,7 +183,7 @@
 NSString *MR_defaultApplicationStorePath(void)
 {
     NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) firstObject];
-    NSString *applicationName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
+    NSString *applicationName = [[NSBundle mainBundle] bundleIdentifier];
     NSString *applicationStorePath = [documentPath stringByAppendingPathComponent:applicationName];
 
     return applicationStorePath;
