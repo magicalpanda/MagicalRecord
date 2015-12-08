@@ -10,6 +10,7 @@
 #import "NSManagedObject+MagicalDataImport.h"
 #import "NSManagedObject+MagicalRecord.h"
 #import "MagicalImportFunctions.h"
+#import "MagicalRecordLogging.h"
 
 @implementation NSEntityDescription (MagicalRecord_DataImport)
 
