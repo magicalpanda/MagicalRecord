@@ -16,8 +16,18 @@
 - (NSAttributeDescription *) MR_primaryAttributeToRelateBy;
 {
     NSString *lookupKey = [[self userInfo] objectForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: MR_primaryKeyNameFromString([self name]);
-
-    return [self MR_attributeDescriptionForName:lookupKey];
+    NSAttributeDescription *attributeDescription = [self MR_attributeDescriptionForName:lookupKey];
+    
+    if(attributeDescription == nil) {
+        MRLogError(
+                   @"Invalid value for key '%@' in '%@' entity. Remove this key or add attribute '%@'\n",
+                   kMagicalRecordImportRelationshipLinkedByKey,
+                   self.name,
+                   lookupKey
+                   );
+    }
+    
+    return attributeDescription;
 }
 
 - (NSManagedObject *) MR_createInstanceInContext:(NSManagedObjectContext *)context;
