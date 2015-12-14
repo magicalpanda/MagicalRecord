@@ -22,3 +22,5 @@ Carthage/Build
 
 *.gcno
 *.gcda
+Carthage
+Vendor
