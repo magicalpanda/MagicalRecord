@@ -11,13 +11,4 @@
 
 @property (readwrite, nonatomic, strong) MagicalRecordStack *stack;
 
-/**
- *  Setup and return a new Magical Record stack. Returns an in-memory stack by
- *  default. Subclasses can override this and return a suitable stack for
- *  the tests they are performing.
- *
- *  @return New instance of one of the MagicalRecordStack subclasses.
- */
-+ (MagicalRecordStack *)newMagicalRecordStack;
-
 @end

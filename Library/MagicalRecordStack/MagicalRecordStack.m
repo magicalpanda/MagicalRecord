@@ -74,7 +74,7 @@ static MagicalRecordStack *defaultStack;
 - (void)setModelFromClass:(Class)modelClass
 {
     NSBundle *bundle = [NSBundle bundleForClass:modelClass];
-    NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:[NSArray arrayWithObject:bundle]];
+    NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:@[bundle]];
     [self setModel:model];
 }
 
@@ -92,14 +92,22 @@ static MagicalRecordStack *defaultStack;
     _store = nil;
 }
 
+- (NSManagedObjectContext *)newPrivateQueueContext
+{
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_privateQueueContext];
+    context.name = [context.name stringByAppendingFormat:@" (%@)", self.stackName];
+    context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
+    return context;
+}
+
 - (nonnull NSManagedObjectContext *)context
 {
     if (_context == nil)
     {
         _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-        [_context setPersistentStoreCoordinator:[self coordinator]];
-        [_context setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
-        [_context MR_setWorkingName:[NSString stringWithFormat:@"Main Queue Context (%@)", [self stackName]]];
+        _context.persistentStoreCoordinator = self.coordinator;
+        _context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
+        _context.name = [NSString stringWithFormat:@"Main Queue Context (%@)", [self stackName]];
     }
     return _context;
 }
@@ -111,22 +119,6 @@ static MagicalRecordStack *defaultStack;
         _stackName = [NSString stringWithFormat:@"%@ [%p]", NSStringFromClass([self class]), self];
     }
     return _stackName;
-}
-
-- (NSManagedObjectContext *)createConfinementContext
-{
-    NSManagedObjectContext *context = [NSManagedObjectContext MR_confinementContext];
-    NSString *workingName = [[context MR_workingName] stringByAppendingFormat:@" (%@)", [self stackName]];
-    [context MR_setWorkingName:workingName];
-    [context setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
-    return context;
-}
-
-- (NSManagedObjectContext *)newConfinementContext
-{
-    NSManagedObjectContext *context = [self createConfinementContext];
-
-    return context;
 }
 
 - (nonnull NSManagedObjectModel *)model
@@ -222,6 +214,18 @@ static MagicalRecordStack *defaultStack;
 - (void)autoSaveHandle:(__unused NSNotification *)notification
 {
     [[self context] MR_saveToPersistentStoreAndWait];
+}
+
+@end
+
+@implementation MagicalRecordStack (MagicalRecordDeprecated)
+
+- (NSManagedObjectContext *)newConfinementContext
+{
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_confinementContext];
+    context.name = [context.name stringByAppendingFormat:@" (%@)", self.stackName];
+    context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
+    return context;
 }
 
 @end

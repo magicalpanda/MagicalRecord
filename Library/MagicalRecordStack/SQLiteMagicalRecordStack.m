@@ -108,10 +108,10 @@
     return [self createCoordinatorWithOptions:[self defaultStoreOptions]];
 }
 
-- (NSManagedObjectContext *)newConfinementContext
+- (NSManagedObjectContext *)newPrivateQueueContext
 {
-    NSManagedObjectContext *context = [super newConfinementContext];
-    [context setParentContext:[self context]];
+    NSManagedObjectContext *context = [super newPrivateQueueContext];
+    context.parentContext = self.context;
     return context;
 }
 

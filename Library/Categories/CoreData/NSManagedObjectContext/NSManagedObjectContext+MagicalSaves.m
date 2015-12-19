@@ -105,7 +105,7 @@
 
     if (!hasChanges)
     {
-        MRLogInfo(@"NO CHANGES IN ** %@ ** CONTEXT - NOT SAVING", [self MR_workingName]);
+        MRLogInfo(@"NO CHANGES IN ** %@ ** CONTEXT - NOT SAVING", self.name);
 
         if (saveParentContexts && [self parentContext])
         {

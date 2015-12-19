@@ -101,7 +101,7 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
     void (^mergeBlock)(void) = ^{
 
         MRLogInfo(@"Merging changes From iCloud to %@ %@",
-                  [self MR_workingName],
+                  self.name,
                   ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
 
         [self mergeChangesFromContextDidSaveNotification:notification];
@@ -124,7 +124,7 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
 
     void (^mergeBlock)(void) = ^{
         MRLogVerbose(@"Merging changes from %@ to %@ %@",
-                     [fromContext MR_workingName], [self MR_workingName],
+                     fromContext.name, self.name,
                      ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
         [self mergeChangesFromContextDidSaveNotification:notification];
     };

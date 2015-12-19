@@ -12,11 +12,12 @@
     [super setUp];
 
     // Don't pollute the tests with logging
-    [MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelOff];
+    [MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelVerbose];
 
     // Setup a usable stack
-    self.stack = [[self class] newMagicalRecordStack];
-    [self.stack setModelFromClass:[self class]];
+    MagicalRecordStack *testStack = [InMemoryMagicalRecordStack stack];
+    [testStack setModelFromClass:[self class]];
+    self.stack = testStack;
 }
 
 - (void)tearDown
@@ -24,11 +25,6 @@
     [super tearDown];
 
     [self.stack reset];
-}
-
-+ (MagicalRecordStack *)newMagicalRecordStack
-{
-    return [InMemoryMagicalRecordStack stack];
 }
 
 @end

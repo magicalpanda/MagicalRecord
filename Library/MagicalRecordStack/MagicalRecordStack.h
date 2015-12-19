@@ -3,6 +3,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "MagicalRecordDeprecated.h"
 
 @interface MagicalRecordStack : NSObject
 
@@ -24,9 +25,15 @@
 
 - (void)reset;
 
-- (nonnull NSManagedObjectContext *)newConfinementContext;
+- (nonnull NSManagedObjectContext *)newPrivateQueueContext;
 
 - (void)setModelFromClass:(nonnull Class)modelClass;
 - (void)setModelNamed:(nonnull NSString *)modelName;
+
+@end
+
+@interface MagicalRecordStack (MagicalRecordDeprecated)
+
+- (nonnull NSManagedObjectContext *)newConfinementContext MR_DEPRECATED_WILL_BE_REMOVED_IN_PLEASE_USE("4.0", "a context with a type of `NSPrivateQueueConcurrencyType` or `NSMainQueueConcurrencyType`");
 
 @end

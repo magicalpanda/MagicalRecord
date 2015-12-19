@@ -37,12 +37,12 @@
     [super reset];
 }
 
-- (NSManagedObjectContext *)newConfinementContext
+- (NSManagedObjectContext *)newPrivateQueueContext
 {
     //TODO: need to setup backgroundContext -> context merges via NSNC, and unsubscribe automatically
-    NSManagedObjectContext *backgroundContext = [NSManagedObjectContext MR_confinementContext];
-    [backgroundContext setPersistentStoreCoordinator:self.backgroundCoordinator];
-    return backgroundContext;
+    NSManagedObjectContext *context = [super newPrivateQueueContext];
+    context.persistentStoreCoordinator = self.backgroundCoordinator;
+    return context;
 }
 
 - (NSPersistentStoreCoordinator *)backgroundCoordinator

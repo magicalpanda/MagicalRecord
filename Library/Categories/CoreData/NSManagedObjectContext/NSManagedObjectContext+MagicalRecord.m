@@ -38,8 +38,7 @@ static NSString *const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSMa
 - (NSString *)MR_description
 {
     NSString *onMainThread = [NSThread isMainThread] ? @"*** MAIN THREAD ***" : @"*** BACKGROUND THREAD ***";
-
-    return [NSString stringWithFormat:@"%@ on %@", [self MR_workingName], onMainThread];
+    return [NSString stringWithFormat:@"%@ on %@", self.name, onMainThread];
 }
 
 - (NSString *)MR_debugDescription
@@ -53,7 +52,7 @@ static NSString *const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSMa
     NSManagedObjectContext *currentContext = self;
     do
     {
-        [familyTree appendFormat:@"- %@ (%p) %@\n", [currentContext MR_workingName], currentContext, (currentContext == self ? @"(*)" : @"")];
+        [familyTree appendFormat:@"- %@ (%p) %@\n", currentContext.name, currentContext, (currentContext == self ? @"(*)" : @"")];
     } while ((currentContext = [currentContext parentContext]));
 
     return [NSString stringWithString:familyTree];
@@ -74,31 +73,17 @@ static NSString *const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSMa
     return [self MR_privateQueueContext];
 }
 
-+ (NSManagedObjectContext *)MR_confinementContext
-{
-    NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSConfinementConcurrencyType];
-    [context MR_setWorkingName:@"Confinement"];
-    return context;
-}
-
-+ (NSManagedObjectContext *)MR_confinementContextWithParent:(NSManagedObjectContext *)parentContext
-{
-    NSManagedObjectContext *context = [self MR_confinementContext];
-    [context setParentContext:parentContext];
-    return context;
-}
-
 + (NSManagedObjectContext *)MR_mainQueueContext
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [context MR_setWorkingName:@"Main Queue"];
+    context.name = @"Main Queue";
     return context;
 }
 
 + (NSManagedObjectContext *)MR_privateQueueContext
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    [context MR_setWorkingName:@"Private Queue"];
+    context.name = @"Private Queue";
     return context;
 }
 
@@ -113,24 +98,9 @@ static NSString *const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSMa
             [context setPersistentStoreCoordinator:coordinator];
         }];
 
-        MRLogInfo(@"-> Created Context %@", [context MR_workingName]);
+        MRLogInfo(@"-> Created Context %@", context.name);
     }
     return context;
-}
-
-- (void)MR_setWorkingName:(NSString *)workingName
-{
-    [[self userInfo] setObject:workingName forKey:kMagicalRecordNSManagedObjectContextWorkingName];
-}
-
-- (NSString *)MR_workingName
-{
-    NSString *workingName = [[self userInfo] objectForKey:kMagicalRecordNSManagedObjectContextWorkingName];
-    if ([workingName length] == 0)
-    {
-        workingName = @"UNNAMED";
-    }
-    return workingName;
 }
 
 @end

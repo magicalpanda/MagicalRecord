@@ -8,7 +8,6 @@
 - (nonnull NSPersistentStoreCoordinator *)createCoordinator;
 - (nonnull NSPersistentStoreCoordinator *)createCoordinatorWithOptions:(nullable NSDictionary *)options;
 
-- (nonnull NSManagedObjectContext *)createConfinementContext;
 - (void)loadStack;
 
 @end
