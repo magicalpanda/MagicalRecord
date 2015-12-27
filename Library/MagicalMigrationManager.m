@@ -107,9 +107,7 @@
 - (BOOL)MagicalMigrationManager_progressivelyMigrateStoreAtURL:(NSURL *)sourceStoreURL toStoreAtURL:(NSURL *)targetStoreURL ofType:(NSString *)type error:(NSError *__autoreleasing *)error
 {
     NSManagedObjectModel *targetModel = [self targetModel];
-    NSDictionary *sourceMetadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:type
-                                                                                              URL:sourceStoreURL
-                                                                                            error:error];
+    NSDictionary *sourceMetadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:type URL:sourceStoreURL options:nil error:error];
 
     if (nil == sourceMetadata)
     {
