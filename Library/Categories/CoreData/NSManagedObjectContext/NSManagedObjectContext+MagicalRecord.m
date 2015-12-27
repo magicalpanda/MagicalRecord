@@ -68,11 +68,6 @@ static NSString *const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSMa
     }
 }
 
-+ (NSManagedObjectContext *)MR_context
-{
-    return [self MR_privateQueueContext];
-}
-
 + (NSManagedObjectContext *)MR_mainQueueContext
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
@@ -107,6 +102,11 @@ static NSString *const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSMa
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-implementations"
+
++ (NSManagedObjectContext *)MR_context
+{
+    return [self MR_privateQueueContext];
+}
 
 + (NSManagedObjectContext *)MR_confinementContext
 {
