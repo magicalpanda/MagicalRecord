@@ -92,6 +92,14 @@ static MagicalRecordStack *defaultStack;
     _store = nil;
 }
 
+- (NSManagedObjectContext *)newMainQueueContext
+{
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_mainQueueContext];
+    context.name = [context.name stringByAppendingFormat:@" (%@)", self.stackName];
+    context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
+    return context;
+}
+
 - (NSManagedObjectContext *)newPrivateQueueContext
 {
     NSManagedObjectContext *context = [NSManagedObjectContext MR_privateQueueContext];

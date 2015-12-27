@@ -25,6 +25,7 @@
 
 - (void)reset;
 
+- (nonnull NSManagedObjectContext *)newMainQueueContext;
 - (nonnull NSManagedObjectContext *)newPrivateQueueContext;
 
 - (void)setModelFromClass:(nonnull Class)modelClass;
