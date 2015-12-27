@@ -103,4 +103,26 @@ static NSString *const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSMa
     return context;
 }
 
+#pragma mark - Deprecated Methods
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
+
++ (NSManagedObjectContext *)MR_confinementContext
+{
+    NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSConfinementConcurrencyType];
+    context.name = @"Confinement";
+    return context;
+}
+
++ (NSManagedObjectContext *)MR_confinementContextWithParent:(NSManagedObjectContext *)parentContext
+{
+    NSManagedObjectContext *context = [self MR_confinementContext];
+    context.parentContext = parentContext;
+    return context;
+}
+
+#pragma clang diagnostic pop
+
 @end
+
