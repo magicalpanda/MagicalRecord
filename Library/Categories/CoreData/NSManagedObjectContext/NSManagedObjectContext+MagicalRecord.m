@@ -21,11 +21,15 @@ NSString *MR_concurrencyStringFromType(NSManagedObjectContextConcurrencyType typ
     {
         return @"Main Queue";
     }
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if (type == NSConfinementConcurrencyType)
     {
         return @"Confinement";
     }
-
+#pragma clang diagnostic pop
+    
     return @"Unknown Concurrency";
 }
 

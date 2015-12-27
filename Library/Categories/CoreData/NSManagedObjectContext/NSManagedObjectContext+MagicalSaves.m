@@ -92,6 +92,8 @@
 
     __block BOOL hasChanges = NO;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if ([self concurrencyType] == NSConfinementConcurrencyType)
     {
         hasChanges = [self hasChanges];
@@ -102,6 +104,7 @@
             hasChanges = [self hasChanges];
         }];
     }
+#pragma clang diagnostic pop
 
     if (!hasChanges)
     {
@@ -182,6 +185,8 @@
         }
     };
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if ([self concurrencyType] == NSConfinementConcurrencyType)
     {
         saveBlock();
@@ -194,6 +199,7 @@
     {
         [self performBlock:saveBlock];
     }
+#pragma clang diagnostic pop
 }
 
 @end

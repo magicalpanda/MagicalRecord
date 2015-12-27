@@ -17,6 +17,8 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
 
 - (void)MR_performBlock:(void (^)(void))block
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if ([self concurrencyType] == NSConfinementConcurrencyType)
     {
         block();
@@ -25,10 +27,13 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
     {
         [self performBlock:block];
     }
+#pragma clang diagnostic pop
 }
 
 - (void)MR_performBlockAndWait:(void (^)(void))block
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if ([self concurrencyType] == NSConfinementConcurrencyType)
     {
         block();
@@ -37,6 +42,7 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
     {
         [self performBlockAndWait:block];
     }
+#pragma clang diagnostic pop
 }
 
 #pragma mark - Context Observation Helpers
