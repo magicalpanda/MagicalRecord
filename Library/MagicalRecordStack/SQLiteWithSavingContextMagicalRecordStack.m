@@ -45,4 +45,10 @@
     return _context;
 }
 
+- (NSManagedObjectContext *)newPrivateQueueContext {
+    NSManagedObjectContext *context = [super newPrivateQueueContext];
+    context.parentContext = self.savingContext;
+    return context;
+}
+
 @end
