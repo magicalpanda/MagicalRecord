@@ -46,8 +46,11 @@
 }
 
 - (NSManagedObjectContext *)newPrivateQueueContext {
-    NSManagedObjectContext *context = [super newPrivateQueueContext];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_privateQueueContext];
     context.parentContext = self.savingContext;
+    context.name = [context.name stringByAppendingFormat:@" (%@)", self.stackName];
+    context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
+    
     return context;
 }
 
