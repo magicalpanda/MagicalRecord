@@ -75,8 +75,10 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
 - (void)MR_setObject:(NSManagedObject *)relatedObject forRelationship:(NSRelationshipDescription *)relationshipInfo
 {
     NSAssert2(relatedObject != nil, @"Cannot add nil to %@ for attribute %@", NSStringFromClass([self class]), [relationshipInfo name]);
-    NSAssert2([relatedObject entity] == [relationshipInfo destinationEntity], @"related object entity %@ not same as destination entity %@", [relatedObject entity], [relationshipInfo destinationEntity]);
-
+    NSEntityDescription *destinationEntity = [relationshipInfo destinationEntity] ?: [[NSEntityDescription alloc] init];
+    NSAssert1([[destinationEntity name] length], @"entity on relationship %@ is not valid", [relationshipInfo name]);
+    NSAssert2([[relatedObject entity] isKindOfEntity:destinationEntity], @"related object entity %@ not similar to destination entity %@", [relatedObject entity], [relationshipInfo destinationEntity]);
+    
     //add related object to set
     NSString *addRelationMessageFormat = @"set%@:";
     id relationshipSource = self;
@@ -141,7 +143,7 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
         }
 
         //        id value = [attributeInfo MR_valueForKeyPath:lookupKeyPath fromObjectData:objectData];
-        if (![self MR_importValue:value forKey:attributeName])
+        if (value && ![self MR_importValue:value forKey:attributeName])
         {
             [self setValue:value forKey:attributeName];
         }
