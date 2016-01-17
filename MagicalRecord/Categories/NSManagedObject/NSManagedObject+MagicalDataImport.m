@@ -172,7 +172,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 
         NSRelationshipDescription *relationshipInfo = [relationships valueForKey:relationshipName];
 
-        NSString *lookupKey = [relationshipData MR_lookupKeyForRelationship:relationshipInfo]?: relationshipName;
+        NSString *lookupKey = [relationshipData MR_lookupKeyForAttribute:relationshipInfo]?: relationshipName;
 
         id relatedObjectData;
 
