@@ -172,9 +172,11 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 
         NSRelationshipDescription *relationshipInfo = [relationships valueForKey:relationshipName];
 
-        NSString * lookupKey = [[relationshipInfo userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey] ?: relationshipName;
+      NSString *lookupKey = [relationshipData MR_lookupKeyForAttribute:relationshipInfo];
         
-        NSLog(@"%@", lookupKey);
+        if ( ! lookupKey) {
+            lookupKey = [[relationshipInfo userInfo] valueForKey:kMagicalRecordImportRelationshipMapKey] ?: relationshipName;
+        }
 
         id relatedObjectData;
 
@@ -212,6 +214,66 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
             continue;
         }
 
+/* 往relationship中导入数据时,要适当适时删除原来的数据:
+         如果目标实体没有设置模拟主键"relatedByAttribute",就删除此relationship下所有的目标实体对象,以避免引入不必要的冗余数据. */
+        if (relationshipInfo && relatedObjectData) {
+            NSAttributeDescription *primaryAttribute = [[relationshipInfo destinationEntity] MR_primaryAttributeToRelateBy];
+            if ( ! primaryAttribute) {
+                
+                @try
+                {
+                    NSString * selectorName = [relationshipInfo name];
+                    
+                    if ([relationshipInfo respondsToSelector:@selector(isOrdered)] && [relationshipInfo isOrdered])
+                    {
+                        //Need to get the ordered set
+                        selectorName = [[relationshipInfo name] stringByAppendingString:@"Set"];
+                    }
+                    
+                    SEL selector = NSSelectorFromString([relationshipInfo name]);
+                    
+                    id relatedEntitys = [self performSelector:NSSelectorFromString(selectorName)];
+                    
+                    if ([relatedEntitys isKindOfClass:[NSMutableOrderedSet class]]) { /* one to many orderd 一对多 有序 */
+                        NSArray * entitys = [(NSMutableOrderedSet *)relatedEntitys array];
+                        
+                        for (NSManagedObject * entity in entitys) {
+                            [entity MR_deleteEntityInContext:[entity managedObjectContext]];
+                        }
+                        
+                        [(NSMutableOrderedSet *)relatedEntitys removeAllObjects];
+                    }
+                    
+                    if ([relatedEntitys isKindOfClass:[NSMutableSet class]]) { /* one to many disorder 一对多 无序. */
+                        NSArray * entitys = [(NSSet *)relatedEntitys allObjects];
+                        
+                        for (NSManagedObject * entity in entitys) {
+                            [entity MR_deleteEntityInContext:[entity managedObjectContext]];
+                        }
+                        
+                        [(NSMutableSet *)relatedEntitys removeAllObjects];
+                    }
+                    
+                    if ([relatedEntitys isKindOfClass:[NSManagedObject class]]) { /* one to one 一对一. */
+                        [(NSManagedObject *)relatedEntitys MR_deleteEntityInContext:[(NSManagedObject *)relatedEntitys managedObjectContext]];
+                        SEL selector = NSSelectorFromString([NSString stringWithFormat:@"set%@:", [[relationshipInfo name] MR_capitalizedFirstCharacterString]]);
+                        
+                        [self performSelector:selector withObject:nil];
+                        
+                    }
+                }
+                @catch (NSException *exception)
+                {
+                    MRLogError(@"deleting object for relationship failed: %@\n", relationshipInfo);
+                    MRLogError(@"relatedObject.entity %@", self);
+                    MRLogError(@"relationshipInfo.destinationEntity %@", [relationshipInfo destinationEntity]);
+                    MRLogError(@"deleting Relationship Selector: %@", [relationshipInfo name]);
+                    MRLogError(@"perform selector error: %@", exception);
+                }
+            }
+        }
+        
+        // ===============================================
         if ([relationshipInfo isToMany] && [relatedObjectData isKindOfClass:[NSArray class]])
         {
             for (id singleRelatedObjectData in relatedObjectData)
