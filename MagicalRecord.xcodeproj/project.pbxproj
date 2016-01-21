@@ -218,6 +218,9 @@
 		909BBF0018E0415F007BA3F1 /* ImportSingleRelatedEntityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 909BBDED18E040E2007BA3F1 /* ImportSingleRelatedEntityTests.m */; };
 		909BBF0218E04164007BA3F1 /* MagicalRecordStackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 909BBDDF18E040E2007BA3F1 /* MagicalRecordStackTests.m */; };
 		909BBF0818E04185007BA3F1 /* MagicalRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C779107F17E63C8900D20ACF /* MagicalRecord.framework */; };
+		90A0DE1E1C50DA3000CF5A5A /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 90A0DE0E1C50D9C500CF5A5A /* LICENSE */; };
+		90A0DE201C50DA3900CF5A5A /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 90A0DE0E1C50D9C500CF5A5A /* LICENSE */; };
+		90A0DE211C50DA4900CF5A5A /* LICENSE in CopyFiles */ = {isa = PBXBuildFile; fileRef = 90A0DE0E1C50D9C500CF5A5A /* LICENSE */; };
 		90C4BDCF18E139CA009FAF9C /* NSManagedObject+MagicalRequestsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C4BDCD18E139CA009FAF9C /* NSManagedObject+MagicalRequestsTests.m */; };
 		90C4BDD318E13A6D009FAF9C /* NSManagedObject+MagicalRecordTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C4BDD118E13A6D009FAF9C /* NSManagedObject+MagicalRecordTests.m */; };
 		90C4BDD618E13AFF009FAF9C /* NSManagedObject+MagicalAggregationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C4BDD418E13AFF009FAF9C /* NSManagedObject+MagicalAggregationTests.m */; };
@@ -363,9 +366,10 @@
 		C7CF97A917498414008D9D13 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "include/${PRODUCT_NAME}";
+			dstPath = "share/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				90A0DE211C50DA4900CF5A5A /* LICENSE in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +471,7 @@
 		909BBDF218E040E2007BA3F1 /* FixtureHelpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FixtureHelpers.m; sourceTree = "<group>"; };
 		909BBE3018E040E2007BA3F1 /* MagicalRecordTests-iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagicalRecordTests-iOS-Info.plist"; sourceTree = "<group>"; };
 		909BBE3218E040E2007BA3F1 /* MagicalRecordTests-OSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagicalRecordTests-OSX-Info.plist"; sourceTree = "<group>"; };
+		90A0DE0E1C50D9C500CF5A5A /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		90C4BDCD18E139CA009FAF9C /* NSManagedObject+MagicalRequestsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+MagicalRequestsTests.m"; sourceTree = "<group>"; };
 		90C4BDD118E13A6D009FAF9C /* NSManagedObject+MagicalRecordTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+MagicalRecordTests.m"; sourceTree = "<group>"; };
 		90C4BDD418E13AFF009FAF9C /* NSManagedObject+MagicalAggregationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+MagicalAggregationTests.m"; sourceTree = "<group>"; };
@@ -561,13 +566,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		900760BE1BFB5BC8008C2B50 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9053F56119E0244C00137362 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -581,20 +579,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				909BBF0818E04185007BA3F1 /* MagicalRecord.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C779107B17E63C8900D20ACF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C7CF97A817498414008D9D13 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -770,9 +754,10 @@
 		C721C7A013D0A3750097AB6F = {
 			isa = PBXGroup;
 			children = (
+				90A0DE0E1C50D9C500CF5A5A /* LICENSE */,
 				C7790F4E17E63C3000D20ACF /* Library */,
-				C7790FAB17E63C3100D20ACF /* Support */,
 				909BBDDD18E040E2007BA3F1 /* Tests */,
+				C7790FAB17E63C3100D20ACF /* Support */,
 				C721C7B113D0A3AF0097AB6F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -1117,8 +1102,8 @@
 			buildConfigurationList = 9053F56D19E0244C00137362 /* Build configuration list for PBXNativeTarget "MagicalRecord for iOS" */;
 			buildPhases = (
 				9053F55519E0244C00137362 /* Sources */,
-				900760BE1BFB5BC8008C2B50 /* Frameworks */,
 				9053F55719E0244C00137362 /* Headers */,
+				90A0DE1D1C50DA1E00CF5A5A /* Resources */,
 			);
 			buildRules = (
 			);
@@ -1170,8 +1155,8 @@
 			buildConfigurationList = C77910A117E63C8A00D20ACF /* Build configuration list for PBXNativeTarget "MagicalRecord for OS X" */;
 			buildPhases = (
 				C779107A17E63C8900D20ACF /* Sources */,
-				C779107B17E63C8900D20ACF /* Frameworks */,
 				C779107C17E63C8900D20ACF /* Headers */,
+				90A0DE1F1C50DA3300CF5A5A /* Resources */,
 			);
 			buildRules = (
 			);
@@ -1187,7 +1172,6 @@
 			buildConfigurationList = C7CF97B417498414008D9D13 /* Build configuration list for PBXNativeTarget "libMagicalRecord for iOS" */;
 			buildPhases = (
 				C7CF97A717498414008D9D13 /* Sources */,
-				C7CF97A817498414008D9D13 /* Frameworks */,
 				C7CF97A917498414008D9D13 /* CopyFiles */,
 			);
 			buildRules = (
@@ -1275,6 +1259,22 @@
 				90470E3C18E102A200CCE9DD /* SingleEntityRelatedToManyMappedEntitiesUsingListOfPrimaryKeys.json in Resources */,
 				90470E3F18E102A200CCE9DD /* SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.json in Resources */,
 				90470E4118E102A200CCE9DD /* SingleEntityRelatedToMappedEntityWithSecondaryMappings.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90A0DE1D1C50DA1E00CF5A5A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90A0DE1E1C50DA3000CF5A5A /* LICENSE in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90A0DE1F1C50DA3300CF5A5A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90A0DE201C50DA3900CF5A5A /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
