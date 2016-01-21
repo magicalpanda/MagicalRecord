@@ -100,14 +100,38 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
 #pragma mark - Debugging
 
-- (void) MR_setWorkingName:(NSString *)workingName
+- (void)MR_setWorkingName:(NSString *)workingName
 {
-    [[self userInfo] setObject:workingName forKey:MagicalRecordContextWorkingName];
+    void (^setWorkingName)() = ^{
+        [[self userInfo] setObject:workingName forKey:MagicalRecordContextWorkingName];
+    };
+
+    if (self.concurrencyType == NSMainQueueConcurrencyType && [NSThread isMainThread])
+    {
+        setWorkingName();
+    }
+    else
+    {
+        [self performBlockAndWait:setWorkingName];
+    }
 }
 
-- (NSString *) MR_workingName
+- (NSString *)MR_workingName
 {
-    NSString *workingName = [[self userInfo] objectForKey:MagicalRecordContextWorkingName];
+    __block NSString *workingName;
+
+    void (^getWorkingName)() = ^{
+        workingName = [[self userInfo] objectForKey:MagicalRecordContextWorkingName];
+    };
+
+    if (self.concurrencyType == NSMainQueueConcurrencyType && [NSThread isMainThread])
+    {
+        getWorkingName();
+    }
+    else
+    {
+        [self performBlockAndWait:getWorkingName];
+    }
 
     if ([workingName length] == 0)
     {
