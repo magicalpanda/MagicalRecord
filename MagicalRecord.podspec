@@ -28,8 +28,8 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'CocoaLumberjack' do |sp|
-    sp.dependency 'MagicalRecord/Core'
     sp.dependency 'CocoaLumberjack', '~> 2.0'
+    sp.dependency 'MagicalRecord/Core'
   end
 
 end
