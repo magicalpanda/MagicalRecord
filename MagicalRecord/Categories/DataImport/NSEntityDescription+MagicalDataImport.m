@@ -18,16 +18,16 @@
 {
     NSString *lookupKey = [[self userInfo] objectForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: MR_primaryKeyNameFromString([self name]);
     NSAttributeDescription *attributeDescription = [self MR_attributeDescriptionForName:lookupKey];
-    
-    if(attributeDescription == nil) {
+
+    if (attributeDescription == nil)
+    {
         MRLogError(
-                   @"Invalid value for key '%@' in '%@' entity. Remove this key or add attribute '%@'\n",
-                   kMagicalRecordImportRelationshipLinkedByKey,
-                   self.name,
-                   lookupKey
-                   );
+            @"Invalid value for key '%@' in '%@' entity. Remove this key or add attribute '%@'\n",
+            kMagicalRecordImportRelationshipLinkedByKey,
+            self.name,
+            lookupKey);
     }
-    
+
     return attributeDescription;
 }
 
