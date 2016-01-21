@@ -695,6 +695,8 @@
 		9099493617C2F42100BC2B5C /* SingleEntityWithNoRelationships.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntityWithNoRelationships.m; sourceTree = "<group>"; };
 		9099493717C2F42100BC2B5C /* SingleRelatedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleRelatedEntity.h; sourceTree = "<group>"; };
 		9099493817C2F42100BC2B5C /* SingleRelatedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleRelatedEntity.m; sourceTree = "<group>"; };
+		90A0DE031C50D59300CF5A5A /* Cartfile.private */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.private; sourceTree = SOURCE_ROOT; };
+		90A0DE051C50D59300CF5A5A /* MagicalRecord.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = MagicalRecord.podspec; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		90AA771718F79A3300D49377 /* NSManagedObject+MagicalRecordTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+MagicalRecordTests.m"; sourceTree = "<group>"; };
 		90AA772318F79CCC00D49377 /* EntityWithoutEntityNameMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityWithoutEntityNameMethod.h; sourceTree = "<group>"; };
 		90AA772418F79CCC00D49377 /* EntityWithoutEntityNameMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityWithoutEntityNameMethod.m; sourceTree = "<group>"; };
@@ -886,6 +888,8 @@
 		90425374187102DC0066DA41 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				90A0DE031C50D59300CF5A5A /* Cartfile.private */,
+				90A0DE051C50D59300CF5A5A /* MagicalRecord.podspec */,
 				905D07C91A63DFED0076B54E /* Info.plist */,
 			);
 			path = Support;
@@ -2275,8 +2279,8 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CURRENT_PROJECT_VERSION = 2.2.99;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 2.2.99;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DYLIB_COMPATIBILITY_VERSION = 2.0;
 				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
