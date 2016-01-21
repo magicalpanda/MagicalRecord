@@ -124,10 +124,7 @@
         return YES;
     }
 
-    NSManagedObjectModel *sourceModel = [NSManagedObjectModel mergedModelFromBundles:@[
-        [NSBundle mainBundle]
-    ]
-                                                                    forStoreMetadata:sourceMetadata];
+    NSManagedObjectModel *sourceModel = [NSManagedObjectModel mergedModelFromBundles:@[ [NSBundle mainBundle] ] forStoreMetadata:sourceMetadata];
 
     NSManagedObjectModel *destinationModel = nil;
     NSMappingModel *mappingModel = nil;
