@@ -93,7 +93,10 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
             NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:selector]];
             [invocation setSelector:selector];
             [invocation invokeWithTarget:self];
-            [invocation getReturnValue:&relationshipSource];
+            
+            __unsafe_unretained id orderedSet;
+            [invocation getReturnValue:&orderedSet];
+            relationshipSource = orderedSet;
 
             addRelationMessageFormat = @"addObject:";
         }
@@ -108,7 +111,7 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
 
     @try
     {
-        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:selector]];
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[relationshipSource methodSignatureForSelector:selector]];
         [invocation setSelector:selector];
         [invocation setArgument:&relatedObject atIndex:2];
         [invocation invokeWithTarget:relationshipSource];
