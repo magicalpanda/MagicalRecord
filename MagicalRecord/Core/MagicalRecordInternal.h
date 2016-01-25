@@ -6,7 +6,12 @@
 //
 
 #import <Foundation/Foundation.h>
+
+#if __has_include(<MagicalRecord/MagicalRecord.h>)
 #import <MagicalRecord/MagicalRecordXcode7CompatibilityMacros.h>
+#else
+#import "MagicalRecordXcode7CompatibilityMacros.h"
+#endif
 
 /**
  Defines current and historical version numbers for MagicalRecord.

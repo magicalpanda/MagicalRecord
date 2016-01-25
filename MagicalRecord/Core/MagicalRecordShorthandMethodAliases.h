@@ -1,6 +1,14 @@
+
+
+#if __has_include(<MagicalRecord/MagicalRecord.h>)
 #import <MagicalRecord/MagicalRecord.h>
 #import <MagicalRecord/MagicalRecordDeprecationMacros.h>
 #import <MagicalRecord/MagicalRecordXcode7CompatibilityMacros.h>
+#else
+#import "MagicalRecord.h"
+#import "MagicalRecordDeprecationMacros.h"
+#import "MagicalRecordXcode7CompatibilityMacros.h"
+#endif
 
 @interface NSManagedObject (MagicalAggregationShortHand)
 

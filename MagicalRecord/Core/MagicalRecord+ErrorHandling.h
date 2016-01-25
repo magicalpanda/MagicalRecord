@@ -6,8 +6,13 @@
 //  Copyright (c) 2012 Magical Panda Software LLC. All rights reserved.
 //
 
+#if __has_include(<MagicalRecord/MagicalRecord.h>)
 #import <MagicalRecord/MagicalRecordInternal.h>
 #import <MagicalRecord/MagicalRecordXcode7CompatibilityMacros.h>
+#else
+#import "MagicalRecordInternal.h"
+#import "MagicalRecordXcode7CompatibilityMacros.h"
+#endif
 
 @interface MagicalRecord (ErrorHandling)
 
