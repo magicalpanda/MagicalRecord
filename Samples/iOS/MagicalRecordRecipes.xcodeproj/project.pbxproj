@@ -55,7 +55,6 @@
 		C7CF96BC17497053008D9D13 /* DetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7CF96B417497053008D9D13 /* DetailHeaderView.xib */; };
 		C7CF96BD17497053008D9D13 /* EditingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7CF96B517497053008D9D13 /* EditingTableViewCell.xib */; };
 		C7CF96BE17497053008D9D13 /* InstructionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7CF96B617497053008D9D13 /* InstructionsView.xib */; };
-		C7CF96BF17497053008D9D13 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7CF96B717497053008D9D13 /* MainWindow.xib */; };
 		C7CF96C017497053008D9D13 /* RecipeAddView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7CF96B817497053008D9D13 /* RecipeAddView.xib */; };
 		C7CF96C117497053008D9D13 /* TemperatureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7CF96B917497053008D9D13 /* TemperatureCell.xib */; };
 		C7CF96C217497053008D9D13 /* TemperatureConverter.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7CF96BA17497053008D9D13 /* TemperatureConverter.xib */; };
@@ -172,7 +171,6 @@
 		C7CF96B417497053008D9D13 /* DetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailHeaderView.xib; sourceTree = "<group>"; };
 		C7CF96B517497053008D9D13 /* EditingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditingTableViewCell.xib; sourceTree = "<group>"; };
 		C7CF96B617497053008D9D13 /* InstructionsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstructionsView.xib; sourceTree = "<group>"; };
-		C7CF96B717497053008D9D13 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		C7CF96B817497053008D9D13 /* RecipeAddView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecipeAddView.xib; sourceTree = "<group>"; };
 		C7CF96B917497053008D9D13 /* TemperatureCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TemperatureCell.xib; sourceTree = "<group>"; };
 		C7CF96BA17497053008D9D13 /* TemperatureConverter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TemperatureConverter.xib; sourceTree = "<group>"; };
@@ -465,7 +463,6 @@
 				C7CF96B417497053008D9D13 /* DetailHeaderView.xib */,
 				C7CF96B517497053008D9D13 /* EditingTableViewCell.xib */,
 				C7CF96B617497053008D9D13 /* InstructionsView.xib */,
-				C7CF96B717497053008D9D13 /* MainWindow.xib */,
 				C7CF96B817497053008D9D13 /* RecipeAddView.xib */,
 				C7CF96B917497053008D9D13 /* TemperatureCell.xib */,
 				C7CF96BA17497053008D9D13 /* TemperatureConverter.xib */,
@@ -603,7 +600,6 @@
 				C7CF96BC17497053008D9D13 /* DetailHeaderView.xib in Resources */,
 				C7CF96BD17497053008D9D13 /* EditingTableViewCell.xib in Resources */,
 				C7CF96BE17497053008D9D13 /* InstructionsView.xib in Resources */,
-				C7CF96BF17497053008D9D13 /* MainWindow.xib in Resources */,
 				C7CF96C017497053008D9D13 /* RecipeAddView.xib in Resources */,
 				C7CF96C117497053008D9D13 /* TemperatureCell.xib in Resources */,
 				C7CF96C217497053008D9D13 /* TemperatureConverter.xib in Resources */,
