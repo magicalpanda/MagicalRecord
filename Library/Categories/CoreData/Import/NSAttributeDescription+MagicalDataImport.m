@@ -116,7 +116,7 @@
 - (id)MR_valueForKeyPath:(NSString *)keyPath fromObjectData:(id)objectData
 {
     id value = [objectData valueForKeyPath:keyPath];
-    if ([value isEqual:[NSNull null]])
+    if (value == [NSNull null])
     {
         value = nil;
     }
