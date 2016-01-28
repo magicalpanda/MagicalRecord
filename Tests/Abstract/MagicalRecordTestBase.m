@@ -23,8 +23,8 @@
 - (void)tearDown
 {
     [super tearDown];
-
-    [self.stack reset];
+    
+    self.stack = nil;
 }
 
 @end

@@ -9,7 +9,7 @@
 
 @property (readwrite, nonnull, nonatomic, copy) NSString *stackName;
 
-@property (readwrite, nonnull, nonatomic, strong) NSManagedObjectContext *context;
+@property (readwrite, null_resettable, nonatomic, strong) NSManagedObjectContext *context;
 @property (readwrite, nonnull, nonatomic, strong) NSManagedObjectModel *model;
 @property (readwrite, nonnull, nonatomic, strong) NSPersistentStoreCoordinator *coordinator;
 @property (readwrite, nullable, nonatomic, strong) NSPersistentStore *store;
@@ -23,8 +23,6 @@
 
 + (nonnull instancetype)stack;
 
-- (void)reset;
-
 - (nonnull NSManagedObjectContext *)newMainQueueContext;
 - (nonnull NSManagedObjectContext *)newPrivateQueueContext;
 
@@ -35,6 +33,12 @@
 
 @interface MagicalRecordStack (MagicalRecordDeprecated)
 
+/**
+ Does nothing in MagicalRecord 3.
+ 
+ @note Please deallocate the stack and create a new one rather than trying to reuse the existing instance.
+ */
+- (void)reset MR_DEPRECATED_WILL_BE_REMOVED_IN("4.0");
 - (nonnull NSManagedObjectContext *)newConfinementContext MR_DEPRECATED_WILL_BE_REMOVED_IN_PLEASE_USE("4.0", "a context with a type of `NSPrivateQueueConcurrencyType` or `NSMainQueueConcurrencyType`");
 
 @end

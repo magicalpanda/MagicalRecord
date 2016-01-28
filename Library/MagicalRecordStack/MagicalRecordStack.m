@@ -19,11 +19,6 @@ static MagicalRecordStack *defaultStack;
 
 @implementation MagicalRecordStack
 
-- (void)dealloc
-{
-    [self reset];
-}
-
 - (NSString *)description
 {
     NSMutableString *status = [NSMutableString stringWithString:@"\n"];
@@ -82,14 +77,6 @@ static MagicalRecordStack *defaultStack;
 {
     NSManagedObjectModel *model = [NSManagedObjectModel MR_managedObjectModelNamed:modelName];
     [self setModel:model];
-}
-
-- (void)reset
-{
-    _context = nil;
-    _model = nil;
-    _coordinator = nil;
-    _store = nil;
 }
 
 - (NSManagedObjectContext *)newMainQueueContext
@@ -227,6 +214,8 @@ static MagicalRecordStack *defaultStack;
 @end
 
 @implementation MagicalRecordStack (MagicalRecordDeprecated)
+
+- (void)reset {}
 
 - (NSManagedObjectContext *)newConfinementContext
 {

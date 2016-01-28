@@ -31,12 +31,6 @@
     return [NSString stringWithString:description];
 }
 
-- (void)reset
-{
-    self.backgroundCoordinator = nil;
-    [super reset];
-}
-
 - (NSManagedObjectContext *)newPrivateQueueContext
 {
     //TODO: need to setup backgroundContext -> context merges via NSNC, and unsubscribe automatically
