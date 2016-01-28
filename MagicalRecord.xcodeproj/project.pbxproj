@@ -1749,6 +1749,7 @@
 					"-Wno-cast-qual",
 					"-Wno-reserved-id-macro",
 					"-Wno-auto-import",
+					"-Wunknown-warning-option",
 				);
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -1832,6 +1833,7 @@
 					"-Wno-cast-qual",
 					"-Wno-reserved-id-macro",
 					"-Wno-auto-import",
+					"-Wunknown-warning-option",
 				);
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
