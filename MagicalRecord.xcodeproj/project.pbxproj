@@ -555,7 +555,7 @@
 		C7790FA917E63C3100D20ACF /* SQLiteMagicalRecordStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteMagicalRecordStack.h; sourceTree = "<group>"; };
 		C7790FAA17E63C3100D20ACF /* SQLiteMagicalRecordStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteMagicalRecordStack.m; sourceTree = "<group>"; };
 		C779107F17E63C8900D20ACF /* MagicalRecord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MagicalRecord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C781810017E6462500ADD31C /* MagicalRecord.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = MagicalRecord.podspec; sourceTree = SOURCE_ROOT; };
+		C781810017E6462500ADD31C /* MagicalRecord.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = MagicalRecord.podspec; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C781813117E6555300ADD31C /* NSManagedObject+MagicalFetching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+MagicalFetching.h"; sourceTree = "<group>"; };
 		C781813217E6555300ADD31C /* NSManagedObject+MagicalFetching.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+MagicalFetching.m"; sourceTree = "<group>"; };
 		C79D63E0180880A9006C29E3 /* AutoMigratingWithSourceAndTargetModelMagicalRecordStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoMigratingWithSourceAndTargetModelMagicalRecordStack.h; sourceTree = "<group>"; };
