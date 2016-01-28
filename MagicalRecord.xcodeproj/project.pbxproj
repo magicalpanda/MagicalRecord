@@ -1629,6 +1629,7 @@
 					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-OSX-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-all_load",
@@ -1652,6 +1653,7 @@
 					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-OSX-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-all_load",
@@ -1735,6 +1737,7 @@
 				);
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				WARNING_CFLAGS = (
 					"-Weverything",
 					"-Wno-objc-missing-property-synthesis",
@@ -1745,6 +1748,7 @@
 					"-Wno-reserved-id-macro",
 					"-Wno-auto-import",
 				);
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -1815,6 +1819,7 @@
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VALIDATE_PRODUCT = YES;
 				WARNING_CFLAGS = (
 					"-Weverything",
@@ -1826,6 +1831,7 @@
 					"-Wno-reserved-id-macro",
 					"-Wno-auto-import",
 				);
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
