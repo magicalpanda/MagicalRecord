@@ -86,9 +86,9 @@ NSColor *MRColorFromString(NSString *serializedColor)
         return nil;
     }
 
-    NSColor *color = [NSColor colorWithDeviceRed:(componentValues[ 0 ] / 255.0f)
-                                           green:(componentValues[ 1 ] / 255.0f)
-                                            blue:(componentValues[ 2 ] / 255.0f)
+    NSColor *color = [NSColor colorWithDeviceRed:(componentValues[ 0 ] / 255.0)
+                                           green:(componentValues[ 1 ] / 255.0)
+                                            blue:(componentValues[ 2 ] / 255.0)
                                            alpha:componentValues[ 3 ]];
     free(componentValues);
     return color;
