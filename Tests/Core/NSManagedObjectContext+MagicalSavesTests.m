@@ -43,15 +43,19 @@
     XCTestExpectation *parentContextSavedExpectation = [self expectationWithDescription:@"Parent Context Did Save"];
     childContextSavedExpectation = [self expectationWithDescription:@"Child Context Did Save"];
 
-    [parentContext performBlockAndWait:^{
-        NSManagedObject *parentContextFetchedObject = [parentContext objectRegisteredForID:insertedObjectID];
+    [parentContext performBlock:^{
+        NSError *fetchExistingObjectFromParentContextError;
+        NSManagedObject *parentContextFetchedObject = [parentContext existingObjectWithID:insertedObjectID error:&fetchExistingObjectFromParentContextError];
 
+        XCTAssertNil(fetchExistingObjectFromParentContextError);
         XCTAssertNotNil(parentContextFetchedObject);
         XCTAssertTrue(parentContextFetchedObject.hasChanges, @"Saving a child context moves the saved changes up to the parent, but does not save them, leaving the parent context with changes");
 
-        [childContext performBlockAndWait:^{
-            NSManagedObject *childContextFetchedObject = [childContext objectRegisteredForID:insertedObjectID];
+        [childContext performBlock:^{
+            NSError *fetchExistingObjectFromChildContextError;
+            NSManagedObject *childContextFetchedObject = [childContext existingObjectWithID:insertedObjectID error:&fetchExistingObjectFromChildContextError];
 
+            XCTAssertNil(fetchExistingObjectFromChildContextError);
             XCTAssertNotNil(childContextFetchedObject);
             XCTAssertFalse(childContextFetchedObject.hasChanges, @"The child context should not have changes after the save");
 
@@ -102,7 +106,10 @@
             }];
 
             [parentContext performBlock:^{
-                NSManagedObject *parentContextFetchedObject = [parentContext objectRegisteredForID:insertedObjectID];
+                NSError *fetchExistingObjectFromParentContextError;
+                NSManagedObject *parentContextFetchedObject = [parentContext existingObjectWithID:insertedObjectID error:&fetchExistingObjectFromParentContextError];
+
+                XCTAssertNil(fetchExistingObjectFromParentContextError);
                 XCTAssertNotNil(parentContextFetchedObject);
                 XCTAssertTrue(parentContextFetchedObject.hasChanges, @"Saves from child contexts should leave changes in the parent");
                 [parentContextExpectation fulfill];
