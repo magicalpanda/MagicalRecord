@@ -1,5 +1,23 @@
 # Changelog
 
+## Version 2.3.2
+
+This release fixes an issue where the OS X framework was being built with instrumentation data, and included in the binary builds posted to GitHub. It contains no other fixes over MagicalRecord v2.3.1.
+
+
+## Version 2.3.1
+
+- CocoaPods users who want to use:
+    - Shorthand method aliases should add `pod 'MagicalRecord/ShorthandMethodAliases'` to their Podfile, and run `pod update`
+    - CocoaLumberjack should add `pod 'MagicalRecord/CocoaLumberjack'` to their Podfile, and run `pod update`
+- Fixed a Core Data multithreading violation when setting a context's working name
+- Fixed the check for whether `NSPersistentStoreUbiquitousContentNameKey` is valid when using iCloud containers
+- Attempting to delete a `nil` managed object, or a managed object not present in the context will do nothing (previously it crashed)
+- Add a fix for CocoaLumberjack reporting duplicate definitions of LOG_MAYBE
+- Added error logging when the passed value for `relatedByAttribute` is invalid during a relationship import
+- Added more lightweight generics and nullability annotations
+
+
 ## Version 2.3
 * Dynamic framework targets are provided for both OS X 10.8+ and iOS 8.0+
 * Logging is enabled by default, change the logging level using `+[MagicalRecord setLoggingLevel: MagicalRecordLogLevelOff];` — [see the documentation in the wiki](https://github.com/magicalpanda/MagicalRecord/wiki/Logging)
