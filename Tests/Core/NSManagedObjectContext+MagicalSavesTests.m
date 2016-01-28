@@ -191,8 +191,10 @@
     }];
 
     [childContext performBlockAndWait:^{
-        NSManagedObject *childContextFetchedObject = [childContext objectRegisteredForID:insertedObjectID];
+        NSError *fetchExistingObjectFromChildContextError;
+        NSManagedObject *childContextFetchedObject = [childContext existingObjectWithID:insertedObjectID error:&fetchExistingObjectFromChildContextError];
 
+        XCTAssertNil(fetchExistingObjectFromChildContextError);
         XCTAssertNotNil(childContextFetchedObject);
         XCTAssertFalse(childContextFetchedObject.hasChanges, @"The child context should not have changes after the save");
     }];
