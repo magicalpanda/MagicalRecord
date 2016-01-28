@@ -1591,6 +1591,7 @@
 				WARNING_CFLAGS = (
 					"$(inherited)",
 					"-Wno-documentation-unknown-command",
+					"-Wno-partial-availability",
 				);
 			};
 			name = Debug;
@@ -1616,6 +1617,7 @@
 				WARNING_CFLAGS = (
 					"$(inherited)",
 					"-Wno-documentation-unknown-command",
+					"-Wno-partial-availability",
 				);
 			};
 			name = Release;
@@ -1640,6 +1642,7 @@
 				WARNING_CFLAGS = (
 					"$(inherited)",
 					"-Wno-documentation-unknown-command",
+					"-Wno-partial-availability",
 				);
 			};
 			name = Debug;
@@ -1664,6 +1667,7 @@
 				WARNING_CFLAGS = (
 					"$(inherited)",
 					"-Wno-documentation-unknown-command",
+					"-Wno-partial-availability",
 				);
 			};
 			name = Release;
