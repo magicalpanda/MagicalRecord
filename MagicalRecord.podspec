@@ -18,48 +18,13 @@ Pod::Spec.new do |s|
     sp.source_files = 'Library/**/*.{h,m}'
     sp.prefix_header_contents = <<-EOS
 #import <CoreData/CoreData.h>
-#import "MagicalRecord.h"
+#import <MagicalRecord/MagicalRecord.h>
 EOS
   end
 
-  s.subspec "Core+Logging" do |sp|
-    sp.framework    = 'CoreData'
-    sp.header_dir   = 'MagicalRecord'
-    sp.source_files = 'Library/**/*.{h,m}'
-    sp.prefix_header_contents = <<-EOS
-#import <CoreData/CoreData.h>
-#if defined(COCOAPODS_POD_AVAILABLE_CocoaLumberjack)
-  #import "DDLog.h"
-#endif
-#define MR_LOGGING_ENABLED 1
-#import "MagicalRecord.h"
-EOS
-  end
-
-  s.subspec "Shorthand" do |sp|
-    sp.framework    = 'CoreData'
-    sp.header_dir   = 'MagicalRecord'
-    sp.source_files = 'Library/**/*.{h,m}'
-    sp.prefix_header_contents = <<-EOS
-#import <CoreData/CoreData.h>
-#define MR_SHORTHAND 1
-#import "MagicalRecord.h"
-EOS
-  end
-
-  s.subspec "Shorthand+Logging" do |sp|
-    sp.framework    = 'CoreData'
-    sp.header_dir   = 'MagicalRecord'
-    sp.source_files = 'Library/**/*.{h,m}'
-    sp.prefix_header_contents = <<-EOS
-#import <CoreData/CoreData.h>
-#if defined(COCOAPODS_POD_AVAILABLE_CocoaLumberjack)
-  #import "DDLog.h"
-#endif
-#define MR_LOGGING_ENABLED 1
-#define MR_SHORTHAND 1
-#import "MagicalRecord.h"
-EOS
+  s.subspec 'CocoaLumberjack' do |sp|
+    sp.dependency 'CocoaLumberjack', '~> 2.0'
+    sp.dependency 'MagicalRecord/Core'
   end
 
 end
