@@ -1631,7 +1631,6 @@
 					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-OSX-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-all_load",
@@ -1656,7 +1655,6 @@
 					"\"$(SRCROOT)/Tests/Vendor/Expecta/src\"/**",
 				);
 				INFOPLIST_FILE = "Tests/Support/MagicalRecordTests-OSX-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-all_load",
