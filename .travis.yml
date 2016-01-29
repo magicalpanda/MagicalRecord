@@ -5,11 +5,8 @@ env:
   global:
   - FRAMEWORK_NAME=MagicalRecord
   - secure: WIm8vwQHOrBPCkWGmV0YMV+k92Dva6ORd0hfi96UzGRC/FTghzrelvLmTzr5kJXCeStv5ZxCNCUvJZm8q4J4y+6UdMQu5FPnx4+EKoogC4quJV8H1pXlXmoetITQdK7t2ldRH1EOuELdmpx2g5hydinu5Z5KMHb0vgLqtn9PvAc=
-before_install:
-- brew update
-- brew install carthage
-before_script:
-- carthage bootstrap
+# before_script:
+# - carthage bootstrap
 before_deploy:
 - carthage build --no-skip-current
 - carthage archive $FRAMEWORK_NAME
