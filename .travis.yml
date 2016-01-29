@@ -19,9 +19,9 @@ deploy:
   on:
     repo: magicalpanda/MagicalRecord
     tags: true
-deploy:
-  provider: script
-  script: ./Support/Scripts/push_podspec.sh
-  on:
-    repo: magicalpanda/MagicalRecord
-    tags: true
+# deploy:
+#   provider: script
+#   script: ./Support/Scripts/push_podspec.sh
+#   on:
+#     repo: magicalpanda/MagicalRecord
+#     tags: true
