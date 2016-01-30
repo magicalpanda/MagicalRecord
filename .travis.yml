@@ -11,6 +11,12 @@ before_deploy:
 - carthage build --no-skip-current
 - carthage archive $FRAMEWORK_NAME
 deploy:
+  provider: script
+  script: ./Support/Scripts/push_podspec.sh
+  on:
+    repo: magicalpanda/MagicalRecord
+    tags: true
+deploy:
   provider: releases
   api_key:
     secure: 1exCONwRvGbV+hi1N4n1VSbqJYpOaJW9zloj17Lxx14dQCyv7p2cSwB79A3RVOifJQg9pgC7eeyn4njKaIB9SZiDznhAiUlvFhNcuOdVrwmjqyxiYFByXNr4f0GVa7opIn9s/WDqGW8qQUQSOdoql5U9B/n5Mt86Jt5cws1BoYE=
@@ -19,9 +25,3 @@ deploy:
   on:
     repo: magicalpanda/MagicalRecord
     tags: true
-# deploy:
-#   provider: script
-#   script: ./Support/Scripts/push_podspec.sh
-#   on:
-#     repo: magicalpanda/MagicalRecord
-#     tags: true
