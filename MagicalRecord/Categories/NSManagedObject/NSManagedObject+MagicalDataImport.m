@@ -308,10 +308,9 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     [context performBlockAndWait:^{
         NSAttributeDescription *primaryAttribute = [[self MR_entityDescriptionInContext:context] MR_primaryAttributeToRelateBy];
 
-        id value = [objectData MR_valueForAttribute:primaryAttribute];
-
         if (primaryAttribute != nil)
         {
+            id value = [objectData MR_valueForAttribute:primaryAttribute];
             managedObject = [self MR_findFirstByAttribute:[primaryAttribute name] withValue:value inContext:context];
         }
         if (managedObject == nil)

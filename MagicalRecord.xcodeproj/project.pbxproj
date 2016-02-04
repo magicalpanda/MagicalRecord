@@ -191,6 +191,10 @@
 		9004F5681A94CC0E00A61312 /* MagicalRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905D073B1A63DE690076B54E /* MagicalRecord.framework */; };
 		9004F57A1A94D7D300A61312 /* MagicalRecord.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 905D07181A63DE190076B54E /* MagicalRecord.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9004F57D1A94D7F100A61312 /* MagicalRecord.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 905D073B1A63DE690076B54E /* MagicalRecord.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9007B14A1C5A416500C64F94 /* MagicalRecord+ShorthandTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9007B1491C5A416500C64F94 /* MagicalRecord+ShorthandTests.m */; };
+		9007B14B1C5A416500C64F94 /* MagicalRecord+ShorthandTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9007B1491C5A416500C64F94 /* MagicalRecord+ShorthandTests.m */; };
+		9007B14C1C5A416500C64F94 /* MagicalRecord+ShorthandTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9007B1491C5A416500C64F94 /* MagicalRecord+ShorthandTests.m */; };
+		9007B14D1C5A416500C64F94 /* MagicalRecord+ShorthandTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9007B1491C5A416500C64F94 /* MagicalRecord+ShorthandTests.m */; };
 		90171E1B17C329CC00E7084A /* FixtureHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF9B6C17498B5C008D9D13 /* FixtureHelpers.m */; };
 		90171E1C17C329CD00E7084A /* FixtureHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF9B6C17498B5C008D9D13 /* FixtureHelpers.m */; };
 		90171E1D17C32ACE00E7084A /* TestModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 9099490817C2F3D400BC2B5C /* TestModel.xcdatamodeld */; };
@@ -637,6 +641,7 @@
 		581ECBF6187F660B00084FEE /* MultipleEntitiesWithNoPrimaryKey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = MultipleEntitiesWithNoPrimaryKey.json; path = Fixtures/MultipleEntitiesWithNoPrimaryKey.json; sourceTree = "<group>"; };
 		9004F5211A94CBCF00A61312 /* MagicalRecord for iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MagicalRecord for iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9004F5661A94CBF900A61312 /* MagicalRecord for OS X Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MagicalRecord for OS X Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9007B1491C5A416500C64F94 /* MagicalRecord+ShorthandTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MagicalRecord+ShorthandTests.m"; sourceTree = "<group>"; };
 		9021D9E11AFB34D6001C80BA /* MagicalRecordTestHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MagicalRecordTestHelpers.h; path = Tests/Support/MagicalRecordTestHelpers.h; sourceTree = SOURCE_ROOT; };
 		9021D9E21AFB34D6001C80BA /* MagicalRecordTestHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MagicalRecordTestHelpers.m; path = Tests/Support/MagicalRecordTestHelpers.m; sourceTree = SOURCE_ROOT; };
 		902CE11E18F6133E0024F47C /* MagicalRecordDeprecationMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordDeprecationMacros.h; sourceTree = "<group>"; };
@@ -695,6 +700,8 @@
 		9099493617C2F42100BC2B5C /* SingleEntityWithNoRelationships.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntityWithNoRelationships.m; sourceTree = "<group>"; };
 		9099493717C2F42100BC2B5C /* SingleRelatedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleRelatedEntity.h; sourceTree = "<group>"; };
 		9099493817C2F42100BC2B5C /* SingleRelatedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleRelatedEntity.m; sourceTree = "<group>"; };
+		90A0DE031C50D59300CF5A5A /* Cartfile.private */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.private; sourceTree = SOURCE_ROOT; };
+		90A0DE051C50D59300CF5A5A /* MagicalRecord.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = MagicalRecord.podspec; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		90AA771718F79A3300D49377 /* NSManagedObject+MagicalRecordTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+MagicalRecordTests.m"; sourceTree = "<group>"; };
 		90AA772318F79CCC00D49377 /* EntityWithoutEntityNameMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityWithoutEntityNameMethod.h; sourceTree = "<group>"; };
 		90AA772418F79CCC00D49377 /* EntityWithoutEntityNameMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityWithoutEntityNameMethod.m; sourceTree = "<group>"; };
@@ -886,6 +893,8 @@
 		90425374187102DC0066DA41 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				90A0DE031C50D59300CF5A5A /* Cartfile.private */,
+				90A0DE051C50D59300CF5A5A /* MagicalRecord.podspec */,
 				905D07C91A63DFED0076B54E /* Info.plist */,
 			);
 			path = Support;
@@ -1055,6 +1064,7 @@
 			children = (
 				902CE13718F61E170024F47C /* Abstract */,
 				902CE12B18F61A2F0024F47C /* MagicalRecord+ActionsTests.m */,
+				9007B1491C5A416500C64F94 /* MagicalRecord+ShorthandTests.m */,
 				C7CF976817498275008D9D13 /* MagicalRecord+StackTests.m */,
 				90AA771718F79A3300D49377 /* NSManagedObject+MagicalRecordTests.m */,
 				9BB566931A2C47B3004174B3 /* NSManagedObjectContext+ChainSaveTests.m */,
@@ -1356,6 +1366,7 @@
 				905D07141A63DE190076B54E /* Frameworks */,
 				905D07151A63DE190076B54E /* Headers */,
 				905D07161A63DE190076B54E /* Resources */,
+				90A0DE281C50E2FD00CF5A5A /* Set Version Information */,
 			);
 			buildRules = (
 			);
@@ -1374,6 +1385,7 @@
 				905D07371A63DE690076B54E /* Frameworks */,
 				905D07381A63DE690076B54E /* Headers */,
 				905D07391A63DE690076B54E /* Resources */,
+				90A0DE291C50E32200CF5A5A /* Set Version Information */,
 			);
 			buildRules = (
 			);
@@ -1654,6 +1666,37 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		90A0DE281C50E2FD00CF5A5A /* Set Version Information */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Set Version Information";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = $SRCROOT/Support/Scripts/set_version_information.sh;
+		};
+		90A0DE291C50E32200CF5A5A /* Set Version Information */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Set Version Information";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = $SRCROOT/Support/Scripts/set_version_information.sh;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9004F4E11A94CBCF00A61312 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1684,6 +1727,7 @@
 				9004F4F71A94CBCF00A61312 /* ImportMultipleEntitiesWithNoPrimaryKeyTests.m in Sources */,
 				9004F4F81A94CBCF00A61312 /* ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m in Sources */,
 				9004F4F91A94CBCF00A61312 /* NSPersistentStoreCoordinatorHelperTests.m in Sources */,
+				9007B14A1C5A416500C64F94 /* MagicalRecord+ShorthandTests.m in Sources */,
 				9004F4FA1A94CBCF00A61312 /* NSManagedObjectContextHelperTests.m in Sources */,
 				9004F4FB1A94CBCF00A61312 /* ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests.m in Sources */,
 				9004F4FC1A94CBCF00A61312 /* _SingleEntityWithNoRelationships.m in Sources */,
@@ -1736,6 +1780,7 @@
 				9004F53C1A94CBF900A61312 /* ImportMultipleEntitiesWithNoPrimaryKeyTests.m in Sources */,
 				9004F53D1A94CBF900A61312 /* ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m in Sources */,
 				9004F53E1A94CBF900A61312 /* NSPersistentStoreCoordinatorHelperTests.m in Sources */,
+				9007B14B1C5A416500C64F94 /* MagicalRecord+ShorthandTests.m in Sources */,
 				9004F53F1A94CBF900A61312 /* NSManagedObjectContextHelperTests.m in Sources */,
 				9004F5401A94CBF900A61312 /* ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests.m in Sources */,
 				9004F5411A94CBF900A61312 /* _SingleEntityWithNoRelationships.m in Sources */,
@@ -1924,6 +1969,7 @@
 				581ECBF9187F663100084FEE /* ImportMultipleEntitiesWithNoPrimaryKeyTests.m in Sources */,
 				90542E1A1864688100916224 /* ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m in Sources */,
 				90542E2618648AAF00916224 /* NSPersistentStoreCoordinatorHelperTests.m in Sources */,
+				9007B14C1C5A416500C64F94 /* MagicalRecord+ShorthandTests.m in Sources */,
 				90542E201864855500916224 /* NSManagedObjectContextHelperTests.m in Sources */,
 				90542E1C1864691E00916224 /* ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests.m in Sources */,
 				9099494B17C2F42100BC2B5C /* _SingleEntityWithNoRelationships.m in Sources */,
@@ -1976,6 +2022,7 @@
 				581ECBFA187F663200084FEE /* ImportMultipleEntitiesWithNoPrimaryKeyTests.m in Sources */,
 				90542E1B1864688100916224 /* ImportSingleEntityRelatedToMappedEntityWithNestedMappedAttributesTests.m in Sources */,
 				90542E2718648AB000916224 /* NSPersistentStoreCoordinatorHelperTests.m in Sources */,
+				9007B14D1C5A416500C64F94 /* MagicalRecord+ShorthandTests.m in Sources */,
 				90542E211864855500916224 /* NSManagedObjectContextHelperTests.m in Sources */,
 				90542E1D1864691E00916224 /* ImportSingleEntityRelatedToMappedEntityUsingMappedPrimaryKeyTests.m in Sources */,
 				9099494C17C2F42100BC2B5C /* _SingleEntityWithNoRelationships.m in Sources */,
@@ -2207,7 +2254,6 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
-				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -2251,7 +2297,6 @@
 				FRAMEWORK_VERSION = A;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
-				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = Support/Info.plist;
@@ -2275,8 +2320,8 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CURRENT_PROJECT_VERSION = 2.2.99;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 2.3.3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DYLIB_COMPATIBILITY_VERSION = 2.0;
 				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
@@ -2300,7 +2345,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DDEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.magicalpanda.ios.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.magicalpanda.${PRODUCT_NAME:rfc1034identifier}";
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
@@ -2315,7 +2360,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CURRENT_PROJECT_VERSION = 2.2.99;
+				CURRENT_PROJECT_VERSION = 2.3.3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 2.0;
 				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
@@ -2337,7 +2382,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_CFLAGS = "-DNEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.magicalpanda.ios.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.magicalpanda.${PRODUCT_NAME:rfc1034identifier}";
 			};
 			name = Release;
 		};
