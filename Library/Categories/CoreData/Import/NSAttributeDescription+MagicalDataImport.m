@@ -46,7 +46,9 @@
             convertedValue = [value MR_dateWithFormat:dateFormat];
 
         } while (!convertedValue && dateFormat);
-        value = convertedValue;
+        if(convertedValue!=nil){
+            value = convertedValue;
+        }
     }
     return value;
 }
