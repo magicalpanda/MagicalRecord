@@ -55,7 +55,8 @@ static MagicalRecordStack *defaultStack;
     return [[self alloc] init];
 }
 
-- (void)loadStack{
+- (void)loadStack
+{
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunused-variable"
     NSManagedObjectContext *context = [self context];
@@ -64,8 +65,7 @@ static MagicalRecordStack *defaultStack;
     NSAssert(context, @"No NSManagedObjectContext for stack [%@]", stackType);
     NSAssert([self model], @"No NSManagedObjectModel loaded for stack [%@]", stackType);
     NSAssert([self store], @"No NSPersistentStore initialized for stack [%@]", stackType);
-    NSAssert([self coordinator], @"No NSPersistentStoreCoodinator initialized for stack [%@]", stackType);
-    
+    NSAssert([self coordinator], @"No NSPersistentStoreCoodinator initialized for stack [%@]", stackType);    
 #ifndef DEBUG
     if (context == nil)
     {

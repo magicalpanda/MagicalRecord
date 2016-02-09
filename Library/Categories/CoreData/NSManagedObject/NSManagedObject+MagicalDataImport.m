@@ -72,7 +72,8 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
 
 #pragma mark - Setting Attributes and Relationships
 
-- (void)MR_setObject:(NSManagedObject *)relatedObject forRelationship:(NSRelationshipDescription *)relationshipInfo{
+- (void)MR_setObject:(NSManagedObject *)relatedObject forRelationship:(NSRelationshipDescription *)relationshipInfo
+{
     NSAssert2(relatedObject != nil, @"Cannot add nil to %@ for attribute %@", NSStringFromClass([self class]), [relationshipInfo name]);
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunused-variable"
@@ -80,7 +81,6 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
 #pragma clang diagnostic pop
     NSAssert1([[destinationEntity name] length], @"entity on relationship %@ is not valid", [relationshipInfo name]);
     NSAssert2([[relatedObject entity] isKindOfEntity:destinationEntity], @"related object entity %@ not similar to destination entity %@", [relatedObject entity], [relationshipInfo destinationEntity]);
-
     
     //add related object to set
     NSString *addRelationMessageFormat = @"set%@:";
