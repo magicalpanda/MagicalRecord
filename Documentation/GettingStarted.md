@@ -19,11 +19,3 @@ When using the default sqlite data store with the DEBUG flag set, if you change 
 And finally, before your app exits, you can use the clean up method:
 
 	[MagicalRecord cleanUp];
-	
-
-## Nested Contexts
-
-New in Core Data is support for related contexts. This is a super neat, and super fast feature. However, writing a wrapper that supports both is, frankly, more work that it's worth. However, the 1.8.3 version will be the last version that has dual support, and going forward, MagicalRecord will only work with the version of Core Data that supports nested managed object contexts.
-
-MagicalRecord provides a background saving queue so that saving all data is performed off the main thread, in the background. This means that it may be necessary to use *MR_saveNestedContexts* rather than the typical *MR_save* method in order to persist your changes all the way to your persistent store;
-

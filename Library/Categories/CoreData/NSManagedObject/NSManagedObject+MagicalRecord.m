@@ -87,7 +87,9 @@
         }
     };
 
-    if ([context concurrencyType] == NSConfinementConcurrencyType)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    if (context.concurrencyType == NSConfinementConcurrencyType)
     {
         requestBlock();
     }
@@ -95,6 +97,8 @@
     {
         [context performBlockAndWait:requestBlock];
     }
+#pragma clang diagnostic pop
+
     return results;
 }
 
@@ -134,20 +138,18 @@
 
 + (instancetype)MR_createEntityWithDescription:(NSEntityDescription *)entityDescription inContext:(NSManagedObjectContext *)context
 {
-    NSEntityDescription *entity = entityDescription;
+    NSEntityDescription *entity = entityDescription ?: [self MR_entityDescriptionInContext:context];
 
-    if (!entity)
-    {
-        entity = [self MR_entityDescriptionInContext:context];
-    }
+    __block NSManagedObject *managedObject;
 
-    //    [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-    NSManagedObject *managedObject = [[self alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+    [context performBlockAndWait:^{
+        managedObject = [[self alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
 
-    if ([managedObject respondsToSelector:@selector(MR_awakeFromCreation)])
-    {
-        [managedObject MR_awakeFromCreation];
-    }
+        if ([managedObject respondsToSelector:@selector(MR_awakeFromCreation)])
+        {
+            [managedObject MR_awakeFromCreation];
+        }
+    }];
 
     return managedObject;
 }

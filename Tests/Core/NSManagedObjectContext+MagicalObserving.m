@@ -19,15 +19,26 @@
 
     NSManagedObject *testEntity = [SingleEntityWithNoRelationships MR_createEntityInContext:otherContext];
     XCTAssertNotNil(testEntity);
-    XCTAssertTrue(otherContext.hasChanges);
-    XCTAssertFalse(stackContext.hasChanges);
+
+    [otherContext performBlockAndWait:^{
+        XCTAssertTrue(otherContext.hasChanges);
+    }];
+
+    [stackContext performBlockAndWait:^{
+        XCTAssertFalse(stackContext.hasChanges);
+    }];
 
     [stackContext MR_observeContextDidSaveAndSaveChangesToSelf:otherContext];
 
     [otherContext MR_saveOnlySelfAndWait];
 
-    XCTAssertFalse(otherContext.hasChanges);
-    XCTAssertFalse(stackContext.hasChanges);
+    [otherContext performBlockAndWait:^{
+        XCTAssertFalse(otherContext.hasChanges);
+    }];
+
+    [stackContext performBlockAndWait:^{
+        XCTAssertFalse(stackContext.hasChanges);
+    }];
 }
 
 @end

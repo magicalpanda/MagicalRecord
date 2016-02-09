@@ -101,6 +101,12 @@
     XCTAssertNotEqual(@(rangeOfString.length), @0, @"notInJsonAttribute did not contain expected string, instead received: %@", self.testEntity.notInJsonAttribute);
 }
 
+#if CGFLOAT_IS_DOUBLE
+#define MR_CGFLOAT_EPSILON DBL_EPSILON
+#else
+#define MR_CGFLOAT_EPSILON FLT_EPSILON
+#endif
+
 #if TARGET_OS_IPHONE
 
 - (void)testImportUIColorAttributeToEntity
@@ -112,10 +118,10 @@
         CGFloat red, blue, green, alpha;
         [actualColor getRed:&red green:&green blue:&blue alpha:&alpha];
 
-        XCTAssertEqualWithAccuracy(alpha, (CGFloat)1.0, FLT_EPSILON, @"Unexpected value returned: %f", alpha);
-        XCTAssertEqualWithAccuracy(red, (CGFloat)(64.0f / 255.0f), FLT_EPSILON, @"Unexpected value returned: %f", red);
-        XCTAssertEqualWithAccuracy(green, (CGFloat)(128.0f / 255.0f), FLT_EPSILON, @"Unexpected value returned: %f", green);
-        XCTAssertEqualWithAccuracy(blue, (CGFloat)(225.0f / 255.0f), FLT_EPSILON, @"Unexpected value returned: %f", blue);
+        XCTAssertEqualWithAccuracy(alpha, 1.0, MR_CGFLOAT_EPSILON);
+        XCTAssertEqualWithAccuracy(red, (64.0 / 255.0), MR_CGFLOAT_EPSILON);
+        XCTAssertEqualWithAccuracy(green, (128.0 / 255.0), MR_CGFLOAT_EPSILON);
+        XCTAssertEqualWithAccuracy(blue, (225.0 / 255.0), MR_CGFLOAT_EPSILON);
     }
 }
 
@@ -125,10 +131,10 @@
 {
     NSColor *actualColor = self.testEntity.colorTestAttribute;
 
-    XCTAssertEqualWithAccuracy([actualColor alphaComponent], (CGFloat)(255.0 / 255.0), FLT_EPSILON, @"Unexpected value returned");
-    XCTAssertEqualWithAccuracy([actualColor redComponent], (CGFloat)(64.0f / 255.0f), FLT_EPSILON, @"Unexpected value returned");
-    XCTAssertEqualWithAccuracy([actualColor greenComponent], (CGFloat)(128.0f / 255.0f), FLT_EPSILON, @"Unexpected value returned");
-    XCTAssertEqualWithAccuracy([actualColor blueComponent], (CGFloat)(225.0f / 255.0f), FLT_EPSILON, @"Unexpected value returned");
+    XCTAssertEqualWithAccuracy(actualColor.alphaComponent, (255.0 / 255.0), MR_CGFLOAT_EPSILON);
+    XCTAssertEqualWithAccuracy(actualColor.redComponent, (64.0 / 255.0), MR_CGFLOAT_EPSILON);
+    XCTAssertEqualWithAccuracy(actualColor.greenComponent, (128.0 / 255.0), MR_CGFLOAT_EPSILON);
+    XCTAssertEqualWithAccuracy(actualColor.blueComponent, (225.0 / 255.0), MR_CGFLOAT_EPSILON);
 }
 
 #endif /* if TARGET_OS_IPHONE */

@@ -92,7 +92,9 @@
 
     __block BOOL hasChanges = NO;
 
-    if ([self concurrencyType] == NSConfinementConcurrencyType)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    if (self.concurrencyType == NSConfinementConcurrencyType)
     {
         hasChanges = [self hasChanges];
     }
@@ -102,10 +104,11 @@
             hasChanges = [self hasChanges];
         }];
     }
+#pragma clang diagnostic pop
 
     if (!hasChanges)
     {
-        MRLogInfo(@"NO CHANGES IN ** %@ ** CONTEXT - NOT SAVING", [self MR_workingName]);
+        MRLogInfo(@"NO CHANGES IN ** %@ ** CONTEXT - NOT SAVING", self.name);
 
         if (saveParentContexts && [self parentContext])
         {
@@ -182,7 +185,9 @@
         }
     };
 
-    if ([self concurrencyType] == NSConfinementConcurrencyType)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    if (self.concurrencyType == NSConfinementConcurrencyType)
     {
         saveBlock();
     }
@@ -194,6 +199,7 @@
     {
         [self performBlock:saveBlock];
     }
+#pragma clang diagnostic pop
 }
 
 @end

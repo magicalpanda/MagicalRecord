@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15B42" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10137.1" systemVersion="15D21" minimumToolsVersion="Automatic">
     <entity name="AbstractRelatedEntity" representedClassName="AbstractRelatedEntity" isAbstract="YES" syncable="YES">
         <attribute name="sampleBaseAttribute" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -93,7 +93,7 @@
             </userInfo>
         </attribute>
         <attribute name="notInJsonAttribute" optional="YES" attributeType="String" defaultValueString="Set From Core Data Model Editor" syncable="YES"/>
-        <attribute name="nullTestAttribute" optional="YES" attributeType="Integer 64" defaultValueString="100" syncable="YES"/>
+        <attribute name="nullTestAttribute" optional="YES" attributeType="Integer 64" syncable="YES"/>
         <attribute name="numberAsStringTestAttribute" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stringTestAttribute" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="unixTime13TestAttribute" optional="YES" attributeType="Date" syncable="YES">

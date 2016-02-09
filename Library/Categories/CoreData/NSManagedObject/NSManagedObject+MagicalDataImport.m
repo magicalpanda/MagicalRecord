@@ -189,7 +189,7 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
             MRLogWarn(@"Exception:\n%@: %@", exception.name, exception.reason);
         }
     }
-    if (relatedObjectData == nil || [relatedObjectData isEqual:[NSNull null]])
+    if (relatedObjectData == nil || relatedObjectData == [NSNull null])
         return;
 
     void (^establishRelationship)(NSRelationshipDescription *, id) = ^(NSRelationshipDescription *blockInfo, id blockData) {

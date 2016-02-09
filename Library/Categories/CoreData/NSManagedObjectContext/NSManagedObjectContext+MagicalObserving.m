@@ -17,7 +17,9 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
 
 - (void)MR_performBlock:(void (^)(void))block
 {
-    if ([self concurrencyType] == NSConfinementConcurrencyType)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    if (self.concurrencyType == NSConfinementConcurrencyType)
     {
         block();
     }
@@ -25,11 +27,14 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
     {
         [self performBlock:block];
     }
+#pragma clang diagnostic pop
 }
 
 - (void)MR_performBlockAndWait:(void (^)(void))block
 {
-    if ([self concurrencyType] == NSConfinementConcurrencyType)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    if (self.concurrencyType == NSConfinementConcurrencyType)
     {
         block();
     }
@@ -37,6 +42,7 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
     {
         [self performBlockAndWait:block];
     }
+#pragma clang diagnostic pop
 }
 
 #pragma mark - Context Observation Helpers
@@ -101,7 +107,7 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
     void (^mergeBlock)(void) = ^{
 
         MRLogInfo(@"Merging changes From iCloud to %@ %@",
-                  [self MR_workingName],
+                  self.name,
                   ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
 
         [self mergeChangesFromContextDidSaveNotification:notification];
@@ -124,7 +130,7 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
 
     void (^mergeBlock)(void) = ^{
         MRLogVerbose(@"Merging changes from %@ to %@ %@",
-                     [fromContext MR_workingName], [self MR_workingName],
+                     fromContext.name, self.name,
                      ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
         [self mergeChangesFromContextDidSaveNotification:notification];
     };

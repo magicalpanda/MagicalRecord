@@ -16,32 +16,61 @@
     NSManagedObjectContext *childContext = [NSManagedObjectContext MR_privateQueueContext];
     childContext.parentContext = parentContext;
 
-    SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
-    XCTAssertTrue(insertedObject.hasChanges);
+    XCTestExpectation *childContextSavedExpectation = [self expectationWithDescription:@"Child Context Did Save"];
 
-    NSError *obtainIDsError;
-    BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[ insertedObject ] error:&obtainIDsError];
-    XCTAssertTrue(obtainIDsResult);
-    XCTAssertNil(obtainIDsError);
+    __block NSManagedObjectID *insertedObjectID;
 
-    NSManagedObjectID *insertedObjectID = [insertedObject objectID];
-    XCTAssertNotNil(insertedObjectID);
-    XCTAssertFalse(insertedObjectID.isTemporaryID);
+    [childContext performBlockAndWait:^{
+        SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
+        XCTAssertTrue(insertedObject.hasChanges);
 
-    NSError *saveError;
-    BOOL saveResult = [childContext MR_saveOnlySelfAndWaitWithError:&saveError];
-    XCTAssertTrue(saveResult);
-    XCTAssertNil(saveError);
+        NSError *obtainIDsError;
+        BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[ insertedObject ] error:&obtainIDsError];
+        XCTAssertTrue(obtainIDsResult);
+        XCTAssertNil(obtainIDsError);
 
-    NSManagedObject *parentContextFetchedObject = [parentContext objectRegisteredForID:insertedObjectID];
+        insertedObjectID = [insertedObject objectID];
+        XCTAssertNotNil(insertedObjectID);
+        XCTAssertFalse(insertedObjectID.isTemporaryID);
 
-    XCTAssertNotNil(parentContextFetchedObject);
-    XCTAssertTrue(parentContextFetchedObject.hasChanges, @"Saving a child context moves the saved changes up to the parent, but does not save them, leaving the parent context with changes");
+        NSError *saveError;
+        BOOL saveResult = [childContext MR_saveOnlySelfAndWaitWithError:&saveError];
+        XCTAssertTrue(saveResult);
+        XCTAssertNil(saveError);
+        [childContextSavedExpectation fulfill];
+    }];
 
-    NSManagedObject *childContextFetchedObject = [childContext objectRegisteredForID:insertedObjectID];
+    XCTestExpectation *parentContextSavedExpectation = [self expectationWithDescription:@"Parent Context Did Save"];
+    childContextSavedExpectation = [self expectationWithDescription:@"Child Context Did Save"];
 
-    XCTAssertNotNil(childContextFetchedObject);
-    XCTAssertFalse(childContextFetchedObject.hasChanges, @"The child context should not have changes after the save");
+    [parentContext performBlock:^{
+        NSError *fetchExistingObjectFromParentContextError;
+        NSManagedObject *parentContextFetchedObject = [parentContext existingObjectWithID:insertedObjectID error:&fetchExistingObjectFromParentContextError];
+
+        XCTAssertNil(fetchExistingObjectFromParentContextError);
+        XCTAssertNotNil(parentContextFetchedObject);
+        XCTAssertTrue(parentContextFetchedObject.hasChanges, @"Saving a child context moves the saved changes up to the parent, but does not save them, leaving the parent context with changes");
+
+        [childContext performBlock:^{
+            NSError *fetchExistingObjectFromChildContextError;
+            NSManagedObject *childContextFetchedObject = [childContext existingObjectWithID:insertedObjectID error:&fetchExistingObjectFromChildContextError];
+
+            XCTAssertNil(fetchExistingObjectFromChildContextError);
+            XCTAssertNotNil(childContextFetchedObject);
+            XCTAssertFalse(childContextFetchedObject.hasChanges, @"The child context should not have changes after the save");
+
+            [childContextSavedExpectation fulfill];
+        }];
+
+        [parentContextSavedExpectation fulfill];
+    }];
+
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *_Nullable error) {
+        if (error)
+        {
+            NSLog(@"Timeout Error: %@", error);
+        }
+    }];
 }
 
 - (void)testSaveToSelfOnlyWhenSaveIsAsynchronous
@@ -50,42 +79,53 @@
     NSManagedObjectContext *childContext = [NSManagedObjectContext MR_privateQueueContext];
     childContext.parentContext = parentContext;
 
-    SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
-    XCTAssertTrue(insertedObject.hasChanges);
+    XCTestExpectation *childContextExpectation = [self expectationWithDescription:@"Child Context Completed Work"];
+    XCTestExpectation *childContextSaveExpectation = [self expectationWithDescription:@"Child Context Saved"];
+    XCTestExpectation *parentContextExpectation = [self expectationWithDescription:@"Parent Context Completed Work"];
 
-    NSError *obtainIDsError;
-    BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[ insertedObject ] error:&obtainIDsError];
-    XCTAssertTrue(obtainIDsResult);
-    XCTAssertNil(obtainIDsError);
+    [childContext performBlock:^{
+        SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
+        XCTAssertTrue(insertedObject.hasChanges);
 
-    NSManagedObjectID *insertedObjectID = [insertedObject objectID];
-    XCTAssertNotNil(insertedObjectID);
-    XCTAssertFalse(insertedObjectID.isTemporaryID);
+        NSError *obtainIDsError;
+        BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[ insertedObject ] error:&obtainIDsError];
+        XCTAssertTrue(obtainIDsResult);
+        XCTAssertNil(obtainIDsError);
 
-    __block NSManagedObject *parentContextFetchedObject;
-    __block NSManagedObject *childContextFetchedObject;
+        NSManagedObjectID *insertedObjectID = [insertedObject objectID];
+        XCTAssertNotNil(insertedObjectID);
+        XCTAssertFalse(insertedObjectID.isTemporaryID);
 
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for asynchronous context to save"];
+        [childContext MR_saveOnlySelfWithCompletion:^(BOOL success, NSError *error) {
+            XCTAssertTrue(success);
+            XCTAssertNil(error);
 
-    [childContext MR_saveOnlySelfWithCompletion:^(BOOL success, NSError *error) {
-        XCTAssertTrue(success);
-        XCTAssertNil(error);
+            [childContext performBlock:^{
+                XCTAssertFalse(childContext.hasChanges, @"Child context should not have changes after the save has completed");
+                [childContextSaveExpectation fulfill];
+            }];
 
-        parentContextFetchedObject = [parentContext objectRegisteredForID:insertedObjectID];
-        childContextFetchedObject = [childContext objectRegisteredForID:insertedObjectID];
+            [parentContext performBlock:^{
+                NSError *fetchExistingObjectFromParentContextError;
+                NSManagedObject *parentContextFetchedObject = [parentContext existingObjectWithID:insertedObjectID error:&fetchExistingObjectFromParentContextError];
 
-        [expectation fulfill];
+                XCTAssertNil(fetchExistingObjectFromParentContextError);
+                XCTAssertNotNil(parentContextFetchedObject);
+                XCTAssertTrue(parentContextFetchedObject.hasChanges, @"Saves from child contexts should leave changes in the parent");
+                [parentContextExpectation fulfill];
+            }];
+
+        }];
+
+        [childContextExpectation fulfill];
     }];
 
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
-        if (error) {
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *_Nullable error) {
+        if (error)
+        {
             NSLog(@"Timeout Error: %@", error);
         }
     }];
-
-    XCTAssertNotNil(parentContextFetchedObject);
-    XCTAssertTrue(parentContextFetchedObject.hasChanges, @"Saves from child contexts should leave changes in the parent");
-    XCTAssertFalse(childContext.hasChanges, @"Child context should not have changes after the save has completed");
 }
 
 - (void)testSaveToSelfOnlyWhenSaveIsAsynchronousCallsCorrectThreadOnCompletion
@@ -124,32 +164,47 @@
     NSManagedObjectContext *childContext = [NSManagedObjectContext MR_privateQueueContext];
     childContext.parentContext = parentContext;
 
-    SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
-    XCTAssertTrue(insertedObject.hasChanges);
+    __block NSManagedObjectID *insertedObjectID;
 
-    NSError *obtainIDsError;
-    BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[ insertedObject ] error:&obtainIDsError];
-    XCTAssertTrue(obtainIDsResult);
-    XCTAssertNil(obtainIDsError);
+    [childContext performBlockAndWait:^{
+        SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
 
-    NSManagedObjectID *insertedObjectID = [insertedObject objectID];
-    XCTAssertNotNil(insertedObjectID);
-    XCTAssertFalse(insertedObjectID.isTemporaryID);
+        XCTAssertTrue(insertedObject.hasChanges);
+
+        NSError *obtainIDsError;
+        BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[ insertedObject ] error:&obtainIDsError];
+
+        XCTAssertTrue(obtainIDsResult);
+        XCTAssertNil(obtainIDsError);
+
+        insertedObjectID = [insertedObject objectID];
+
+        XCTAssertNotNil(insertedObjectID);
+        XCTAssertFalse(insertedObjectID.isTemporaryID);
+    }];
 
     NSError *saveError;
     BOOL saveResult = [childContext MR_saveToPersistentStoreAndWaitWithError:&saveError];
     XCTAssertTrue(saveResult);
     XCTAssertNil(saveError);
 
-    NSError *fetchExistingObjectFromParentContextError;
-    NSManagedObject *parentContextFetchedObject = [parentContext existingObjectWithID:insertedObjectID error:&fetchExistingObjectFromParentContextError];
-    XCTAssertNil(fetchExistingObjectFromParentContextError);
-    XCTAssertNotNil(parentContextFetchedObject);
-    XCTAssertFalse(parentContextFetchedObject.hasChanges, @"Saving to the persistent store should save to all parent contexts, leaving no changes");
+    [parentContext performBlockAndWait:^{
+        NSError *fetchExistingObjectFromParentContextError;
+        NSManagedObject *parentContextFetchedObject = [parentContext existingObjectWithID:insertedObjectID error:&fetchExistingObjectFromParentContextError];
 
-    NSManagedObject *childContextFetchedObject = [childContext objectRegisteredForID:insertedObjectID];
-    XCTAssertNotNil(childContextFetchedObject);
-    XCTAssertFalse(childContextFetchedObject.hasChanges, @"The child context should not have changes after the save");
+        XCTAssertNil(fetchExistingObjectFromParentContextError);
+        XCTAssertNotNil(parentContextFetchedObject);
+        XCTAssertFalse(parentContextFetchedObject.hasChanges, @"Saving to the persistent store should save to all parent contexts, leaving no changes");
+    }];
+
+    [childContext performBlockAndWait:^{
+        NSError *fetchExistingObjectFromChildContextError;
+        NSManagedObject *childContextFetchedObject = [childContext existingObjectWithID:insertedObjectID error:&fetchExistingObjectFromChildContextError];
+
+        XCTAssertNil(fetchExistingObjectFromChildContextError);
+        XCTAssertNotNil(childContextFetchedObject);
+        XCTAssertFalse(childContextFetchedObject.hasChanges, @"The child context should not have changes after the save");
+    }];
 }
 
 - (void)testSaveToPersistentStoreWhenSaveIsAsynchronous
@@ -158,44 +213,51 @@
     NSManagedObjectContext *childContext = [NSManagedObjectContext MR_privateQueueContext];
     childContext.parentContext = parentContext;
 
-    SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
-    XCTAssertTrue(insertedObject.hasChanges);
+    XCTestExpectation *childContextExpectation = [self expectationWithDescription:@"Child Context Completed Work"];
+    XCTestExpectation *childContextSavedExpectation = [self expectationWithDescription:@"Child Context Saved"];
 
-    NSError *obtainIDsError;
-    BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[ insertedObject ] error:&obtainIDsError];
-    XCTAssertTrue(obtainIDsResult);
-    XCTAssertNil(obtainIDsError);
+    [childContext performBlock:^{
+        SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
+        XCTAssertTrue(insertedObject.hasChanges);
 
-    NSManagedObjectID *insertedObjectID = [insertedObject objectID];
-    XCTAssertNotNil(insertedObjectID);
-    XCTAssertFalse(insertedObjectID.isTemporaryID);
+        NSError *obtainIDsError;
+        BOOL obtainIDsResult = [childContext obtainPermanentIDsForObjects:@[ insertedObject ] error:&obtainIDsError];
+        XCTAssertTrue(obtainIDsResult);
+        XCTAssertNil(obtainIDsError);
 
-    __block NSManagedObject *parentContextFetchedObject;
-    __block NSManagedObject *childContextFetchedObject;
-    __block NSError *fetchExistingObjectFromParentContextError;
+        NSManagedObjectID *insertedObjectID = [insertedObject objectID];
+        XCTAssertNotNil(insertedObjectID);
+        XCTAssertFalse(insertedObjectID.isTemporaryID);
 
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for asynchronous context to save"];
+        [childContext MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+            XCTAssertTrue(success);
+            XCTAssertNil(error);
 
-    [childContext MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        XCTAssertTrue(success);
-        XCTAssertNil(error);
+            [parentContext performBlockAndWait:^{
+                NSError *fetchExistingObjectFromParentContextError;
+                NSManagedObject *parentContextFetchedObject = [parentContext existingObjectWithID:insertedObjectID error:&fetchExistingObjectFromParentContextError];
 
-        parentContextFetchedObject = [parentContext existingObjectWithID:insertedObjectID error:&fetchExistingObjectFromParentContextError];
-        childContextFetchedObject = [childContext objectRegisteredForID:insertedObjectID];
+                XCTAssertNil(fetchExistingObjectFromParentContextError);
+                XCTAssertNotNil(parentContextFetchedObject);
+                XCTAssertFalse(parentContextFetchedObject.hasChanges, @"Saving to the persistent store should save to all parent contexts, leaving no changes");
+            }];
 
-        [expectation fulfill];
+            [childContext performBlockAndWait:^{
+                XCTAssertFalse(childContext.hasChanges, @"The child context should not have changes after the save");
+            }];
+
+            [childContextSavedExpectation fulfill];
+        }];
+
+        [childContextExpectation fulfill];
     }];
 
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
-        if (error) {
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *_Nullable error) {
+        if (error)
+        {
             NSLog(@"Timeout Error: %@", error);
         }
     }];
-
-    XCTAssertNil(fetchExistingObjectFromParentContextError);
-    XCTAssertNotNil(parentContextFetchedObject);
-    XCTAssertFalse(parentContextFetchedObject.hasChanges, @"Saving to the persistent store should save to all parent contexts, leaving no changes");
-    XCTAssertFalse(childContext.hasChanges, @"The child context should not have changes after the save");
 }
 
 - (void)testThatSavedObjectsHavePermanentIDs
