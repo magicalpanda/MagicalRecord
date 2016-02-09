@@ -421,16 +421,6 @@
     return [self MR_parentChain];
 }
 
-- (void)setWorkingName:(NSString *)workingName
-{
-    return [self MR_setWorkingName:workingName];
-}
-
-- (NSString *)workingName
-{
-    return [self MR_workingName];
-}
-
 @end
 
 @implementation NSManagedObjectContext (MagicalSavesShortHand)

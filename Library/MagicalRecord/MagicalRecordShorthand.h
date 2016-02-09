@@ -140,8 +140,6 @@
 + (NSManagedObjectContext *)confinementContextWithParent:(NSManagedObjectContext *)parentContext;
 + (NSManagedObjectContext *)privateQueueContextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator NS_RETURNS_RETAINED;
 - (NSString *)parentChain;
-- (void)setWorkingName:(NSString *)workingName;
-- (NSString *)workingName;
 
 @end
 
