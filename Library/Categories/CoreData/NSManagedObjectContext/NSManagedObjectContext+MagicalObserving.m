@@ -19,7 +19,7 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    if ([self concurrencyType] == NSConfinementConcurrencyType)
+    if (self.concurrencyType == NSConfinementConcurrencyType)
     {
         block();
     }
@@ -34,7 +34,7 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    if ([self concurrencyType] == NSConfinementConcurrencyType)
+    if (self.concurrencyType == NSConfinementConcurrencyType)
     {
         block();
     }

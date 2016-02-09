@@ -94,7 +94,7 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    if ([self concurrencyType] == NSConfinementConcurrencyType)
+    if (self.concurrencyType == NSConfinementConcurrencyType)
     {
         hasChanges = [self hasChanges];
     }
@@ -187,7 +187,7 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    if ([self concurrencyType] == NSConfinementConcurrencyType)
+    if (self.concurrencyType == NSConfinementConcurrencyType)
     {
         saveBlock();
     }

@@ -89,7 +89,7 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    if ([context concurrencyType] == NSConfinementConcurrencyType)
+    if (context.concurrencyType == NSConfinementConcurrencyType)
     {
         requestBlock();
     }
