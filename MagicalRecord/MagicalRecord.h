@@ -20,7 +20,6 @@ FOUNDATION_EXPORT const unsigned char MagicalRecordVersionString[];
 
 #import <MagicalRecord/MagicalRecord+Actions.h>
 #import <MagicalRecord/MagicalRecord+ErrorHandling.h>
-#import <MagicalRecord/MagicalRecord+Options.h>
 #import <MagicalRecord/MagicalRecord+Setup.h>
 #import <MagicalRecord/MagicalRecord+iCloud.h>
 

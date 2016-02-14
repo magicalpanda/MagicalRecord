@@ -10,6 +10,7 @@
 #import "NSManagedObjectModel+MagicalRecord.h"
 #import "MagicalRecord+ErrorHandling.h"
 #import "MagicalRecordLogging.h"
+#import "NSManagedObjectContext+MagicalRecord.h"
 
 
 static NSPersistentStoreCoordinator *defaultCoordinator_ = nil;
@@ -55,6 +56,10 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
         if ([persistentStores count] && [NSPersistentStore MR_defaultPersistentStore] == nil)
         {
             [NSPersistentStore MR_setDefaultPersistentStore:[persistentStores firstObject]];
+        }
+        if ([MagicalRecord shouldAutoCreateDefaultContext])
+        {
+            [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
         }
     }
 }

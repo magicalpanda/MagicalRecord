@@ -10,6 +10,7 @@
 #import "NSManagedObject+MagicalRecord.h"
 #import "NSPersistentStoreCoordinator+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
+#import "MagicalRecord+Options.h"
 
 @implementation MagicalRecord (Setup)
 
@@ -29,8 +30,11 @@
     
 	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreNamed:storeName];
     [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
-	
-    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
+    
+    if (![MagicalRecord shouldAutoCreateDefaultContext])
+    {
+        [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
+    }
 }
 
 + (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName
@@ -40,7 +44,10 @@
     NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithAutoMigratingSqliteStoreNamed:storeName];
     [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
     
-    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
+    if (![MagicalRecord shouldAutoCreateDefaultContext])
+    {
+        [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
+    }
 }
 
 + (void) setupCoreDataStackWithStoreAtURL:(NSURL *)storeURL
@@ -50,7 +57,10 @@
     NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreAtURL:storeURL];
     [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
     
-    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
+    if (![MagicalRecord shouldAutoCreateDefaultContext])
+    {
+        [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
+    }
 }
 
 + (void) setupCoreDataStackWithAutoMigratingSqliteStoreAtURL:(NSURL *)storeURL
@@ -60,7 +70,10 @@
     NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithAutoMigratingSqliteStoreAtURL:storeURL];
     [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
     
-    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
+    if (![MagicalRecord shouldAutoCreateDefaultContext])
+    {
+        [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
+    }
 }
 
 + (void) setupCoreDataStackWithInMemoryStore;
@@ -70,7 +83,10 @@
 	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithInMemoryStore];
 	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
 	
-    [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
+    if (![MagicalRecord shouldAutoCreateDefaultContext])
+    {
+        [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
+    }
 }
 
 @end

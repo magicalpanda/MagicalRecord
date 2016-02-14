@@ -98,6 +98,7 @@ NSString * const kMagicalRecordCleanedUpNotification = @"kMagicalRecordCleanedUp
     {
         [self setShouldAutoCreateManagedObjectModel:YES];
         [self setShouldAutoCreateDefaultPersistentStoreCoordinator:NO];
+        [self setShouldAutoCreateDefaultContext:NO];
 #ifdef DEBUG
         [self setShouldDeleteStoreOnModelMismatch:YES];
 #else
