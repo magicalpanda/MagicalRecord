@@ -11,6 +11,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.ios.deployment_target = '6.1'
   s.osx.deployment_target = '10.8'
+  s.watchos.deployment_target = '2.0'
 
   s.subspec 'Core' do |sp|
     sp.framework    = 'CoreData'
@@ -28,7 +29,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'CocoaLumberjack' do |sp|
-    sp.dependency 'CocoaLumberjack', '~> 2.0'
+    sp.dependency 'CocoaLumberjack', '~> 2.2'
     sp.dependency 'MagicalRecord/Core'
   end
 
