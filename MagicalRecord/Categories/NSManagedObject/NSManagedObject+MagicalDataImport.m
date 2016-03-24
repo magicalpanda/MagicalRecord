@@ -310,7 +310,10 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 
         if (primaryAttribute != nil)
         {
-            id value = [objectData MR_valueForAttribute:primaryAttribute];
+//            id value = [objectData MR_valueForAttribute:primaryAttribute];
+            NSString *lookupKeyPath = [objectData MR_lookupKeyForAttribute:primaryAttribute];
+            id value = [primaryAttribute MR_valueForKeyPath:lookupKeyPath fromObjectData:objectData];
+
             managedObject = [self MR_findFirstByAttribute:[primaryAttribute name] withValue:value inContext:context];
         }
         if (managedObject == nil)
