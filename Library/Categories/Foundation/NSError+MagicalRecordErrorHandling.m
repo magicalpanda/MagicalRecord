@@ -55,6 +55,12 @@ NSString *MR_errorSummaryFromErrorCode(NSInteger errorCode)
     for (NSError *error in [self MR_errorCollection])
     {
         NSManagedObject *errorObject = [error MR_validationErrorObject];
+        
+        // custom validation errors may not contain NSValidationObjectErrorKey
+        if(!errorObject) 
+        {
+            continue;
+        }
 
         NSMutableArray *errorList = [collatedObjects objectForKey:[errorObject objectID]];
         if (errorList == nil)
