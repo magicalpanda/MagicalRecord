@@ -79,9 +79,14 @@
     }
 	
 	NSUInteger count = [context countForFetchRequest:request error:&error];
-	[MagicalRecord handleErrors:error];
+
+  if (error) {
+    [MagicalRecord handleErrors:error];
+    return 0;
+  }
+
     
-    return count;
+  return count;
 }
 
 + (BOOL) MR_hasAtLeastOneEntity
