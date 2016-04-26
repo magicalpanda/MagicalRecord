@@ -7,8 +7,16 @@
 //
 
 #import "MGPRecipesAppDelegate.h"
+#import "RecipeListTableViewController.h"
+#import "UnitConverterTableViewController.h"
 
 static NSString * const kRecipesStoreName = @"Recipes.sqlite";
+
+@interface MGPRecipesAppDelegate ()
+
+@property (nonatomic, strong) UITabBarController *tabBarController;
+
+@end
 
 @implementation MGPRecipesAppDelegate
 
@@ -17,10 +25,24 @@ static NSString * const kRecipesStoreName = @"Recipes.sqlite";
     [self copyDefaultStoreIfNecessary];
     [MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelVerbose];
     [MagicalRecord setupCoreDataStackWithStoreNamed:kRecipesStoreName];
+    
+    //init window
+    UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window = window;
+    
+    //init viewControllers
+    RecipeListTableViewController *recipeListController = [[RecipeListTableViewController alloc] init];
+    UnitConverterTableViewController *unitController = [[UnitConverterTableViewController alloc] init];
+    
+    UINavigationController *recipesNavigationController = [[UINavigationController alloc] initWithRootViewController:recipeListController];
+    UINavigationController *unitNavigationController = [[UINavigationController alloc] initWithRootViewController:unitController];
+    self.tabBarController = [[UITabBarController alloc] init];
+    _tabBarController.viewControllers = @[recipesNavigationController,unitNavigationController];
+    self.window.rootViewController = _tabBarController;
 
     // Override point for customization after application launch.
 //    self.window.backgroundColor = [UIColor whiteColor];
-    self.recipeListController.managedObjectContext = [NSManagedObjectContext MR_defaultContext];
+    recipeListController.managedObjectContext = [NSManagedObjectContext MR_defaultContext];
     [self.window addSubview:self.tabBarController.view];
     [self.window makeKeyAndVisible];
     return YES;

@@ -6,7 +6,11 @@
 //  Copyright (c) 2013 Magical Panda Software LLC. All rights reserved.
 //
 
+#if __has_include(<MagicalRecord/MagicalRecord.h>)
 #import <MagicalRecord/MagicalRecord+Options.h>
+#else
+#import "MagicalRecord+Options.h"
+#endif
 
 #if MR_LOGGING_DISABLED
 

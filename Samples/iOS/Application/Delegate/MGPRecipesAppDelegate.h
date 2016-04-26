@@ -7,12 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RecipeListTableViewController.h"
+
 
 @interface MGPRecipesAppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (nonatomic, strong) IBOutlet UIWindow *window;
-@property (nonatomic, strong) IBOutlet UITabBarController *tabBarController;
-@property (nonatomic, strong) IBOutlet RecipeListTableViewController *recipeListController;
+@property (nonatomic, strong) UIWindow *window;
 
 @end

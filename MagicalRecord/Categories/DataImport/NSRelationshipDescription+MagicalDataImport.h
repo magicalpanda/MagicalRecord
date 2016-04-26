@@ -7,7 +7,12 @@
 //
 
 #import <CoreData/CoreData.h>
+
+#if __has_include(<MagicalRecord/MagicalRecord.h>)
 #import <MagicalRecord/MagicalRecordXcode7CompatibilityMacros.h>
+#else
+#import "MagicalRecordXcode7CompatibilityMacros.h"
+#endif
 
 @interface NSRelationshipDescription (MagicalRecord_DataImport)
 
