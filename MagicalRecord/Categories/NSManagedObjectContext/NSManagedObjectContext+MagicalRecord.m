@@ -20,6 +20,9 @@ static NSManagedObjectContext *MagicalRecordDefaultContext;
 
 static id MagicalRecordUbiquitySetupNotificationObserver;
 
+static NSMutableArray *pendingNotifications;
+static dispatch_queue_t readWritePendingNotificationsQueue;
+
 @implementation NSManagedObjectContext (MagicalRecord)
 
 #pragma mark - Setup
@@ -221,8 +224,23 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
     if ([NSThread isMainThread] == NO)
     {
+        dispatch_sync(readWritePendingNotificationsQueue, ^{
+            [pendingNotifications addObject:notification];
+        });
+
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self rootContextDidSave:notification];
+            __block NSNotification *pendingNotification = nil;
+            dispatch_sync(readWritePendingNotificationsQueue, ^{
+                pendingNotification = [pendingNotifications firstObject];
+                if (pendingNotification)
+                {
+                    [pendingNotifications removeObjectAtIndex:0];
+                }
+            });
+            if (pendingNotification)
+            {
+                [self rootContextDidSave:pendingNotification];
+            }
         });
 
         return;
@@ -275,10 +293,25 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
         [MagicalRecordDefaultContext MR_stopObservingiCloudChangesInCoordinator:coordinator];
     }
 
+    if (readWritePendingNotificationsQueue)
+    {
+        dispatch_sync(readWritePendingNotificationsQueue, ^{
+            [pendingNotifications removeAllObjects];
+            pendingNotifications = nil;
+        });
+        readWritePendingNotificationsQueue = nil;
+    }
+
     MagicalRecordDefaultContext = moc;
     [MagicalRecordDefaultContext MR_setWorkingName:@"MagicalRecord Default Context"];
 
     if ((MagicalRecordDefaultContext != nil) && ([self MR_rootSavingContext] != nil)) {
+        NSString *queueName = @"com.magicalpanda.MagicalRecord:NSManagedObjectContext+MagicalRecord.readWritePendingNotificationsQueue";
+        readWritePendingNotificationsQueue = dispatch_queue_create([queueName UTF8String], DISPATCH_QUEUE_SERIAL);
+        dispatch_sync(readWritePendingNotificationsQueue, ^{
+            pendingNotifications = [[NSMutableArray alloc] init];
+        });
+
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(rootContextDidSave:)
                                                      name:NSManagedObjectContextDidSaveNotification
