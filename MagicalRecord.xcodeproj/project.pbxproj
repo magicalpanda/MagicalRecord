@@ -417,6 +417,10 @@
 		9BB5668D1A2C44C4004174B3 /* NSManagedObjectContext+MagicalChainSave.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB5668A1A2C44C4004174B3 /* NSManagedObjectContext+MagicalChainSave.m */; };
 		9BB566981A2EA8F8004174B3 /* NSManagedObjectContext+ChainSaveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB566931A2C47B3004174B3 /* NSManagedObjectContext+ChainSaveTests.m */; };
 		9BB566991A2EA8FF004174B3 /* NSManagedObjectContext+ChainSaveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB566931A2C47B3004174B3 /* NSManagedObjectContext+ChainSaveTests.m */; };
+		A07DF19B1D4CE66400A07B33 /* NSManagedObject+MagicalRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A07DF19A1D4CE66400A07B33 /* NSManagedObject+MagicalRequestTests.m */; };
+		A07DF19C1D4CE66400A07B33 /* NSManagedObject+MagicalRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A07DF19A1D4CE66400A07B33 /* NSManagedObject+MagicalRequestTests.m */; };
+		A07DF19D1D4CE66400A07B33 /* NSManagedObject+MagicalRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A07DF19A1D4CE66400A07B33 /* NSManagedObject+MagicalRequestTests.m */; };
+		A07DF19E1D4CE66400A07B33 /* NSManagedObject+MagicalRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A07DF19A1D4CE66400A07B33 /* NSManagedObject+MagicalRequestTests.m */; };
 		C7CF97C617498493008D9D13 /* MagicalImportFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD729D150F832A00216827 /* MagicalImportFunctions.m */; };
 		C7CF97C717498493008D9D13 /* NSEntityDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72A1150F832A00216827 /* NSEntityDescription+MagicalDataImport.m */; };
 		C7CF97C817498493008D9D13 /* NSAttributeDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD729F150F832A00216827 /* NSAttributeDescription+MagicalDataImport.m */; };
@@ -716,6 +720,7 @@
 		9BB566891A2C44C4004174B3 /* NSManagedObjectContext+MagicalChainSave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+MagicalChainSave.h"; sourceTree = "<group>"; };
 		9BB5668A1A2C44C4004174B3 /* NSManagedObjectContext+MagicalChainSave.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+MagicalChainSave.m"; sourceTree = "<group>"; };
 		9BB566931A2C47B3004174B3 /* NSManagedObjectContext+ChainSaveTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+ChainSaveTests.m"; sourceTree = "<group>"; };
+		A07DF19A1D4CE66400A07B33 /* NSManagedObject+MagicalRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+MagicalRequestTests.m"; sourceTree = "<group>"; };
 		C7CF976817498275008D9D13 /* MagicalRecord+StackTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MagicalRecord+StackTests.m"; sourceTree = "<group>"; };
 		C7CF976A17498275008D9D13 /* NSManagedObjectContextHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSManagedObjectContextHelperTests.m; sourceTree = "<group>"; };
 		C7CF976C17498275008D9D13 /* NSManagedObjectHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSManagedObjectHelperTests.m; sourceTree = "<group>"; };
@@ -1067,6 +1072,7 @@
 				9007B1491C5A416500C64F94 /* MagicalRecord+ShorthandTests.m */,
 				C7CF976817498275008D9D13 /* MagicalRecord+StackTests.m */,
 				90AA771718F79A3300D49377 /* NSManagedObject+MagicalRecordTests.m */,
+				A07DF19A1D4CE66400A07B33 /* NSManagedObject+MagicalRequestTests.m */,
 				9BB566931A2C47B3004174B3 /* NSManagedObjectContext+ChainSaveTests.m */,
 				902CE13818F61E410024F47C /* NSManagedObjectContext+MagicalSavesTests.m */,
 				C7CF976A17498275008D9D13 /* NSManagedObjectContextHelperTests.m */,
@@ -1736,6 +1742,7 @@
 				9004F4FF1A94CBCF00A61312 /* TestModel.xcdatamodeld in Sources */,
 				9004F5001A94CBCF00A61312 /* NSManagedObjectContext+MagicalSavesTests.m in Sources */,
 				9004F5011A94CBCF00A61312 /* SingleEntityRelatedToMappedEntityUsingDefaults.m in Sources */,
+				A07DF19B1D4CE66400A07B33 /* NSManagedObject+MagicalRequestTests.m in Sources */,
 				9004F5021A94CBCF00A61312 /* _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m in Sources */,
 				9004F5031A94CBCF00A61312 /* ImportSingleRelatedEntityTests.m in Sources */,
 				9004F5041A94CBCF00A61312 /* MagicalRecord+ActionsTests.m in Sources */,
@@ -1789,6 +1796,7 @@
 				9004F5441A94CBF900A61312 /* TestModel.xcdatamodeld in Sources */,
 				9004F5451A94CBF900A61312 /* NSManagedObjectContext+MagicalSavesTests.m in Sources */,
 				9004F5461A94CBF900A61312 /* SingleEntityRelatedToMappedEntityUsingDefaults.m in Sources */,
+				A07DF19C1D4CE66400A07B33 /* NSManagedObject+MagicalRequestTests.m in Sources */,
 				9004F5471A94CBF900A61312 /* _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m in Sources */,
 				9004F5481A94CBF900A61312 /* ImportSingleRelatedEntityTests.m in Sources */,
 				9004F5491A94CBF900A61312 /* MagicalRecord+ActionsTests.m in Sources */,
@@ -1978,6 +1986,7 @@
 				9099490A17C2F3D400BC2B5C /* TestModel.xcdatamodeld in Sources */,
 				902CE13918F61E410024F47C /* NSManagedObjectContext+MagicalSavesTests.m in Sources */,
 				9099495917C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityUsingDefaults.m in Sources */,
+				A07DF19D1D4CE66400A07B33 /* NSManagedObject+MagicalRequestTests.m in Sources */,
 				9099494517C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m in Sources */,
 				90BB1C3F1864F662001BBFBB /* ImportSingleRelatedEntityTests.m in Sources */,
 				902CE12C18F61A2F0024F47C /* MagicalRecord+ActionsTests.m in Sources */,
@@ -2031,6 +2040,7 @@
 				9099490B17C2F3D400BC2B5C /* TestModel.xcdatamodeld in Sources */,
 				902CE13A18F61E410024F47C /* NSManagedObjectContext+MagicalSavesTests.m in Sources */,
 				9099495A17C2F42100BC2B5C /* SingleEntityRelatedToMappedEntityUsingDefaults.m in Sources */,
+				A07DF19E1D4CE66400A07B33 /* NSManagedObject+MagicalRequestTests.m in Sources */,
 				9099494617C2F42100BC2B5C /* _SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey.m in Sources */,
 				90BB1C401864F662001BBFBB /* ImportSingleRelatedEntityTests.m in Sources */,
 				902CE12D18F61A2F0024F47C /* MagicalRecord+ActionsTests.m in Sources */,
