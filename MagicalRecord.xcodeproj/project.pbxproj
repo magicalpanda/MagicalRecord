@@ -1679,7 +1679,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = $SRCROOT/Support/Scripts/set_version_information.sh;
+			shellScript = "\"$SRCROOT/Support/Scripts/set_version_information.sh\"";
 		};
 		90A0DE291C50E32200CF5A5A /* Set Version Information */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1693,7 +1693,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = $SRCROOT/Support/Scripts/set_version_information.sh;
+			shellScript = "\"$SRCROOT/Support/Scripts/set_version_information.sh\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
