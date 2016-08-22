@@ -283,20 +283,25 @@ static NSUInteger kMagicalRecordDefaultBatchSize = 20;
 
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext
 {
-    NSError *error = nil;
-    
+    __block NSError *error = nil;
+
     if ([[self objectID] isTemporaryID])
     {
-        BOOL success = [[self managedObjectContext] obtainPermanentIDsForObjects:@[self] error:&error];
+        __block BOOL success = NO;
+        [self.managedObjectContext performBlockAndWait:^{
+
+            success = [[self managedObjectContext] obtainPermanentIDsForObjects:@[self] error:&error];
+
+        }];
         if (!success)
         {
             [MagicalRecord handleErrors:error];
             return nil;
         }
     }
-    
+
     error = nil;
-    
+
     NSManagedObject *inContext = [otherContext existingObjectWithID:[self objectID] error:&error];
     [MagicalRecord handleErrors:error];
     
