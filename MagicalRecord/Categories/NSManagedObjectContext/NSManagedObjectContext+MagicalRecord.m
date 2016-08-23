@@ -203,8 +203,11 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
     if ([insertedObjects count])
     {
         MRLogVerbose(@"Context '%@' is about to save: obtaining permanent IDs for %lu new inserted object(s).", [context MR_workingName], (unsigned long)[insertedObjects count]);
-        NSError *error = nil;
-        BOOL success = [context obtainPermanentIDsForObjects:[insertedObjects allObjects] error:&error];
+        __block NSError *error = nil;
+        __block BOOL success = NO;
+        [context performBlockAndWait:^{
+            BOOL success = [context obtainPermanentIDsForObjects:[insertedObjects allObjects] error:&error];
+        }];
         if (!success)
         {
             [MagicalRecord handleErrors:error];
@@ -311,7 +314,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
     }
 
     MagicalRecordRootSavingContext = context;
-    
+
     [MagicalRecordRootSavingContext performBlock:^{
         [MagicalRecordRootSavingContext MR_obtainPermanentIDsBeforeSaving];
         [MagicalRecordRootSavingContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
