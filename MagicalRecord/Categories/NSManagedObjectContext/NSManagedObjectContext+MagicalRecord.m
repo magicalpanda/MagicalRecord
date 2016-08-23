@@ -206,7 +206,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
         __block NSError *error = nil;
         __block BOOL success = NO;
         [context performBlockAndWait:^{
-            BOOL success = [context obtainPermanentIDsForObjects:[insertedObjects allObjects] error:&error];
+            success = [context obtainPermanentIDsForObjects:[insertedObjects allObjects] error:&error];
         }];
         if (!success)
         {
