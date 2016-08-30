@@ -260,7 +260,7 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
 
 + (NSDictionary *) MR_autoMigrationDeleteJournalModeOptions;
 {
-  // Adding the journalling mode recommended by apple
+  // Adding the DELETE journalling mode
   NSMutableDictionary *sqliteOptions = [NSMutableDictionary dictionary];
   [sqliteOptions setObject:@"DELETE" forKey:@"journal_mode"];
 
