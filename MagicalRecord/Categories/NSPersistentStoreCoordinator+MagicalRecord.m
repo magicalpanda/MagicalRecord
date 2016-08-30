@@ -82,15 +82,30 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
 {
     NSURL *url = [storeFileName isKindOfClass:[NSURL class]] ? storeFileName : [NSPersistentStore MR_urlForStoreName:storeFileName];
     NSError *error = nil;
-    
+
     [self MR_createPathToStoreFileIfNeccessary:url];
-    
+
+    // Check if we need a migration
+    NSDictionary *sourceMetadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:NSSQLiteStoreType URL:url error:&error];
+    NSManagedObjectModel *destinationModel = [self managedObjectModel];
+    BOOL isModelCompatible = (sourceMetadata == nil) || [destinationModel isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
+    if (! isModelCompatible) {
+        // We need a migration, so we set the journal_mode to DELETE
+        NSPersistentStore *_store = [self addPersistentStoreWithType:NSSQLiteStoreType
+                                                       configuration:configuration
+                                                                 URL:url
+                                                             options:[[self class] MR_autoMigrationDeleteJournalModeOptions]
+                                                               error:&error];
+        // Then remove the DELETE journal_mode store so that we can reinstate the WAL store next
+        [self removePersistentStore:_store error:NULL];
+    }
+
     NSPersistentStore *store = [self addPersistentStoreWithType:NSSQLiteStoreType
                                                   configuration:configuration
                                                             URL:url
                                                         options:options
                                                           error:&error];
-    
+
     if (!store)
     {
         if ([MagicalRecord shouldDeleteStoreOnModelMismatch])
@@ -241,6 +256,20 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
                              sqliteOptions, NSSQLitePragmasOption,
                              nil];
     return options;
+}
+
++ (NSDictionary *) MR_autoMigrationDeleteJournalModeOptions;
+{
+  // Adding the journalling mode recommended by apple
+  NSMutableDictionary *sqliteOptions = [NSMutableDictionary dictionary];
+  [sqliteOptions setObject:@"DELETE" forKey:@"journal_mode"];
+
+  NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                           [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                           [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
+                           sqliteOptions, NSSQLitePragmasOption,
+                           nil];
+  return options;
 }
 
 - (NSPersistentStore *) MR_addAutoMigratingSqliteStoreNamed:(NSString *) storeFileName;
