@@ -8,6 +8,7 @@ If you find that saving is taking a long time, there are a couple of things you 
 
 1. **Save in a background thread**: MagicalRecord provides a simple, clean API for making changes to your entities and subsequently saving them in a background thread — for example:
 	````objective-c
+	// Objective-C
 	[MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
 
 		// Do your work to be saved here, against the `localContext` instance
@@ -17,6 +18,19 @@ If you find that saving is taking a long time, there are a couple of things you 
 		[application endBackgroundTask:bgTask];
 		bgTask = UIBackgroundTaskInvalid;
 	}];
+	````
+
+	````swift
+	// Swift
+	MagicalRecord.save({ (localContext) in
+
+		// Do your work to be saved here, against the `localContext` instance
+		// Everything you do in this block will occur on a background thread
+
+	}) { (success, error) in
+		application.endBackgroundTask(bgTask)
+		bgTask = UIBackgroundTaskInvalid
+	}
 	````
 
 2. **Break the task down into smaller saves**: tasks like importing large amounts of data should always be broken down into smaller chunks. There's no one-size-fits all rule for how much data you should be saving in one go, so you'll need to measure your application's performance using a tool like Apple's Instruments and tune appropriately.
@@ -29,6 +43,7 @@ If you find that saving is taking a long time, there are a couple of things you 
 When an application terminates on iOS, it is given a small window of opportunity to tidy up and save any data to disk. If you know that a save operation is likely to take a while, the best approach is to request an extension to your application's expiration, like so:
 
 ````objective-c
+// Objective-C
 UIApplication *application = [UIApplication sharedApplication];
 
 __block UIBackgroundTaskIdentifier bgTask = [application beginBackgroundTaskWithExpirationHandler:^{
@@ -46,6 +61,25 @@ __block UIBackgroundTaskIdentifier bgTask = [application beginBackgroundTaskWith
 }];
 ````
 
+````swift
+// Swift
+let application = UIApplication.shared
+
+var bgTask = application.beginBackgroundTask {
+    application.endBackgroundTask(bgTask)
+    bgTask = UIBackgroundTaskInvalid
+}
+
+MagicalRecord.save({ (localContext) in
+
+	// Do your work to be saved here
+
+}) { (success, error) in
+	application.endBackgroundTask(bgTask)
+	bgTask = UIBackgroundTaskInvalid
+}
+````
+
 Be sure to carefully [read the documentation for `beginBackgroundTaskWithExpirationHandler`](https://developer.apple.com/documentation/uikit/uiapplication/1623031-beginbackgroundtaskwithexpiratio), as inappropriately or unnecessarily extending your application's lifetime may earn your app a rejection from the App Store.
 
 ### On OS X
@@ -53,6 +87,7 @@ Be sure to carefully [read the documentation for `beginBackgroundTaskWithExpirat
 On OS X Mavericks (10.9) and later, App Nap can cause your application to act as though it is effectively terminated when it is in the background. If you know that a save operation is likely to take a while, the best approach is to disable automatic and sudden termination temporarily (assuming that your app supports these features):
 
 ````objective-c
+// Objective-C
 NSProcessInfo *processInfo = [NSProcessInfo processInfo];
 
 [processInfo disableSuddenTermination];
@@ -66,6 +101,23 @@ NSProcessInfo *processInfo = [NSProcessInfo processInfo];
 	[processInfo enableSuddenTermination];
 	[processInfo enableAutomaticTermination:@"Application has finished saving to the persistent store"];
 }];
+````
+
+````swift
+// Swift
+let processInfo = NSProcessInfo.processInfo()
+
+processInfo.disableSuddenTermination()
+processInfo.disableAutomaticTermination("Application is currently saving to persistent store")
+
+MagicalRecord.save({ (localContext) in
+
+	// Do your work to be saved here
+
+}) { (success, error) in
+	processInfo.enableSuddenTermination()
+	processInfo.enableAutomaticTermination("Application has finished saving to the persistent store")
+}
 ````
 
 As with the iOS approach, be sure to [read the documentation on NSProcessInfo](https://developer.apple.com/documentation/foundation/nsprocessinfo) before implementing this approach in your app.
@@ -85,19 +137,37 @@ In particular, **do not use `+MR_contextForCurrentThread` from within any of the
 If you'd like to begin preparing for the change now, please use the method variants that accept a "context" parameter, and use the context that's passed to you in the `+[MagicalRecord saveWithBlock:…]` method block. Instead of:
 
 ```objective-c
+// Objective-C
 [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
 	NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntity];
 	// …
 }];
 ```
 
+```swift
+// Swift
+MagicalRecord.save(blockAndWait: { (localContext) in
+	let inserted = SingleEntityWithNoRelationships.mr_createEntity()
+	// …
+})
+```
+
 You should now use:
 
 ```objective-c
+// Objective-C
 [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
 	NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
 	// …
 }];
+```
+
+```swift
+// Swift
+MagicalRecord.save(blockAndWait: { (localContext) in
+	let inserted = SingleEntityWithNoRelationships.mr_createEntity(in: localContext)
+	// …
+})
 ```
 
 **When MagicalRecord 3.0 is released, the context for current thread methods will be removed entirely**. The methods that do not accept a "context" parameter will move to using the default context of the default stack — please see the MagicalRecord 3.0 release notes for more details.
