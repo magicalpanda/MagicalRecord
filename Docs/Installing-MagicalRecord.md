@@ -61,9 +61,15 @@ By default, all of the category methods that MagicalRecord provides are prefixed
 If you like, you can include the following headers to use shorter, non-prefixed category methods:
 
 ```objective-c
+// Objective-C
 #import <MagicalRecord/MagicalRecord.h>
 #import <MagicalRecord/MagicalRecord+ShorthandMethods.h>
 #import <MagicalRecord/MagicalRecordShorthandMethodAliases.h>
+```
+
+```swift
+// Swift
+import MagicalRecord
 ```
 
 If you're using Swift, you'll need to add these imports to your target's Objective-C bridging header.
@@ -71,9 +77,19 @@ If you're using Swift, you'll need to add these imports to your target's Objecti
 Once you've included the headers, you should call the `+[MagicalRecord enableShorthandMethods]` class method _before_ you setup/use MagicalRecord:
 
 ```objective-c
+// Objective-C
 - (void)theMethodWhereYouSetupMagicalRecord
 {
     [MagicalRecord enableShorthandMethods];
+
+    // Setup MagicalRecord as per usual
+}
+```
+
+```swift
+// Swift
+func theMethodWhereYouSetupMagicalRecord() {
+    MagicalRecord.enableShorthandMethods()
 
     // Setup MagicalRecord as per usual
 }
