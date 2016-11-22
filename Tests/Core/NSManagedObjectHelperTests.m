@@ -124,6 +124,44 @@
     }];
 }
 
+- (void)testRetreiveInstanceOfManagedObjectContextWhichAlreadyHasPermamentObjectIDInOtherContext {
+    
+    NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
+
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_newMainQueueContext];
+    context.parentContext = [NSManagedObjectContext MR_defaultContext];
+
+//    This is -> MR_obtainPermanentIDsBeforeSaving, if I uncomment it, object is getting permament id and works
+//    [[NSNotificationCenter defaultCenter] addObserver:context
+//                                             selector:@selector(MR_contextWillSave:)
+//                                                 name:NSManagedObjectContextWillSaveNotification
+//                                               object:context];
+    
+    __block NSManagedObject *insertedEntity;
+    [context performBlockAndWait:^{
+        SingleRelatedEntity *entity = [SingleRelatedEntity MR_createEntityInContext:context];
+        entity.mappedStringAttribute = @"123";
+        insertedEntity = entity;
+        [context MR_saveOnlySelfAndWait];
+    }];
+    
+//    XCTAssertTrue(insertedEntity.objectID.isTemporaryID, @"Object ID should be temporary");
+    
+    NSManagedObjectContext *anotherSavingContext = [NSManagedObjectContext MR_contextWithParent:defaultContext];
+    
+    __block NSManagedObject *insertedEntityInAnotherContext;
+    [anotherSavingContext performBlockAndWait:^{
+        insertedEntityInAnotherContext = [[SingleRelatedEntity MR_findByAttribute:@"mappedStringAttribute" withValue:@"123" inContext:anotherSavingContext] firstObject];
+        
+        [anotherSavingContext MR_saveOnlySelfAndWait];
+    }];
+    
+    NSManagedObject *insertedEntityInDefaultContext = [insertedEntityInAnotherContext MR_inContext:defaultContext];
+    
+    XCTAssertTrue(insertedEntityInDefaultContext, @"Object should not be nil");    
+    
+}
+
 - (void)testCanDeleteEntityInstanceInOtherContext
 {
     NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
