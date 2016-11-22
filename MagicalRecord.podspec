@@ -1,5 +1,9 @@
 Pod::Spec.new do |s|
+#if defined(COCOAPODS_POD_AVAILABLE_CocoaLumberjack)
   s.default_subspec = 'Core'
+#else
+  s.default_subspec = 'CocoaLumberjack'
+#endif
   s.name     = 'MagicalRecord'
   s.version  = '2.3.3'
   s.license  = 'MIT'
