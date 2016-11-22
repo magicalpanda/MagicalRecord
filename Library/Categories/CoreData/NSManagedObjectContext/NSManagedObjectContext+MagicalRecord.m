@@ -98,7 +98,9 @@ static NSString *const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSMa
 + (NSManagedObjectContext *)MR_privateQueueContext
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    [context MR_setWorkingName:@"Private Queue"];
+    [context performBlockAndWait:^{
+        [context MR_setWorkingName:@"Private Queue"];
+    }];
     return context;
 }
 
