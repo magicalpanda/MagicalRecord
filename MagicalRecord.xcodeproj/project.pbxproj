@@ -73,6 +73,14 @@
 		581ECBF8187F660B00084FEE /* MultipleEntitiesWithNoPrimaryKey.json in Resources */ = {isa = PBXBuildFile; fileRef = 581ECBF6187F660B00084FEE /* MultipleEntitiesWithNoPrimaryKey.json */; };
 		581ECBF9187F663100084FEE /* ImportMultipleEntitiesWithNoPrimaryKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 581ECBEB187F63FF00084FEE /* ImportMultipleEntitiesWithNoPrimaryKeyTests.m */; };
 		581ECBFA187F663200084FEE /* ImportMultipleEntitiesWithNoPrimaryKeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 581ECBEB187F63FF00084FEE /* ImportMultipleEntitiesWithNoPrimaryKeyTests.m */; };
+		585088EC1BC9159D00051DAA /* NSManagedObject+MagicalBatchRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 585088EA1BC9159D00051DAA /* NSManagedObject+MagicalBatchRequests.m */; settings = {ASSET_TAGS = (); }; };
+		585088ED1BC9159D00051DAA /* NSManagedObject+MagicalBatchRequests.h in Headers */ = {isa = PBXBuildFile; fileRef = 585088EB1BC9159D00051DAA /* NSManagedObject+MagicalBatchRequests.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		585088F61BC9175200051DAA /* NSManagedObject+MagicalBatchRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 585088EA1BC9159D00051DAA /* NSManagedObject+MagicalBatchRequests.m */; settings = {ASSET_TAGS = (); }; };
+		585088F71BC9175300051DAA /* NSManagedObject+MagicalBatchRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 585088EA1BC9159D00051DAA /* NSManagedObject+MagicalBatchRequests.m */; settings = {ASSET_TAGS = (); }; };
+		585088F81BC9175300051DAA /* NSManagedObject+MagicalBatchRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 585088EA1BC9159D00051DAA /* NSManagedObject+MagicalBatchRequests.m */; settings = {ASSET_TAGS = (); }; };
+		58B6E8881BC91AE300A5E459 /* NSManagedObject+MagicalBatchRequests.h in Headers */ = {isa = PBXBuildFile; fileRef = 585088EB1BC9159D00051DAA /* NSManagedObject+MagicalBatchRequests.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		58B6E8891BC91AEF00A5E459 /* NSManagedObject+MagicalBatchRequests.h in Headers */ = {isa = PBXBuildFile; fileRef = 585088EB1BC9159D00051DAA /* NSManagedObject+MagicalBatchRequests.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		58B6E88A1BC91BDD00A5E459 /* NSManagedObject+MagicalBatchRequests.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 585088EB1BC9159D00051DAA /* NSManagedObject+MagicalBatchRequests.h */; };
 		9004F4DE1A94C76A00A61312 /* libMagicalRecord.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C7CF97BB1749843F008D9D13 /* libMagicalRecord.dylib */; };
 		9004F4DF1A94C76E00A61312 /* libMagicalRecord.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7CF97AB17498414008D9D13 /* libMagicalRecord.a */; };
 		9004F4E21A94CBCF00A61312 /* DifferentClassNameMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099492817C2F42100BC2B5C /* DifferentClassNameMapping.m */; };
@@ -599,6 +607,7 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				58B6E88A1BC91BDD00A5E459 /* NSManagedObject+MagicalBatchRequests.h in CopyFiles */,
 				1352E5841B175E6200182E53 /* MagicalRecord.h in CopyFiles */,
 				1352E5851B175E6200182E53 /* MagicalImportFunctions.h in CopyFiles */,
 				1352E5861B175E6200182E53 /* NSAttributeDescription+MagicalDataImport.h in CopyFiles */,
@@ -639,6 +648,8 @@
 /* Begin PBXFileReference section */
 		581ECBEB187F63FF00084FEE /* ImportMultipleEntitiesWithNoPrimaryKeyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportMultipleEntitiesWithNoPrimaryKeyTests.m; sourceTree = "<group>"; };
 		581ECBF6187F660B00084FEE /* MultipleEntitiesWithNoPrimaryKey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = MultipleEntitiesWithNoPrimaryKey.json; path = Fixtures/MultipleEntitiesWithNoPrimaryKey.json; sourceTree = "<group>"; };
+		585088EA1BC9159D00051DAA /* NSManagedObject+MagicalBatchRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+MagicalBatchRequests.m"; sourceTree = "<group>"; };
+		585088EB1BC9159D00051DAA /* NSManagedObject+MagicalBatchRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+MagicalBatchRequests.h"; sourceTree = "<group>"; };
 		9004F5211A94CBCF00A61312 /* MagicalRecord for iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MagicalRecord for iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9004F5661A94CBF900A61312 /* MagicalRecord for OS X Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MagicalRecord for OS X Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9007B1491C5A416500C64F94 /* MagicalRecord+ShorthandTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MagicalRecord+ShorthandTests.m"; sourceTree = "<group>"; };
@@ -1153,6 +1164,8 @@
 				C7DD72B2150F832A00216827 /* NSManagedObject+MagicalRecord.m */,
 				C7DD72B3150F832A00216827 /* NSManagedObject+MagicalRequests.h */,
 				C7DD72B4150F832A00216827 /* NSManagedObject+MagicalRequests.m */,
+				585088EB1BC9159D00051DAA /* NSManagedObject+MagicalBatchRequests.h */,
+				585088EA1BC9159D00051DAA /* NSManagedObject+MagicalBatchRequests.m */,
 			);
 			path = NSManagedObject;
 			sourceTree = "<group>";
@@ -1231,6 +1244,7 @@
 				905D07571A63DEF40076B54E /* NSAttributeDescription+MagicalDataImport.h in Headers */,
 				905D07621A63DEF40076B54E /* NSManagedObjectContext+MagicalObserving.h in Headers */,
 				905D075E1A63DEF40076B54E /* NSManagedObject+MagicalFinders.h in Headers */,
+				585088ED1BC9159D00051DAA /* NSManagedObject+MagicalBatchRequests.h in Headers */,
 				905D07661A63DEF40076B54E /* NSManagedObjectModel+MagicalRecord.h in Headers */,
 				905D075D1A63DEF40076B54E /* NSManagedObject+MagicalDataImport.h in Headers */,
 				905D076E1A63DEF40076B54E /* MagicalRecord+Setup.h in Headers */,
@@ -1270,6 +1284,7 @@
 				905D07881A63DEF40076B54E /* MagicalRecordInternal.h in Headers */,
 				905D07761A63DEF40076B54E /* NSAttributeDescription+MagicalDataImport.h in Headers */,
 				905D07811A63DEF40076B54E /* NSManagedObjectContext+MagicalObserving.h in Headers */,
+				58B6E8881BC91AE300A5E459 /* NSManagedObject+MagicalBatchRequests.h in Headers */,
 				905D077D1A63DEF40076B54E /* NSManagedObject+MagicalFinders.h in Headers */,
 				905D07851A63DEF40076B54E /* NSManagedObjectModel+MagicalRecord.h in Headers */,
 				905D077C1A63DEF40076B54E /* NSManagedObject+MagicalDataImport.h in Headers */,
@@ -1308,6 +1323,7 @@
 				1352E6071B176AF600182E53 /* MagicalRecord+Actions.h in Headers */,
 				1352E6081B176AF600182E53 /* MagicalRecord+ErrorHandling.h in Headers */,
 				1352E6091B176AF600182E53 /* MagicalRecord+iCloud.h in Headers */,
+				58B6E8891BC91AEF00A5E459 /* NSManagedObject+MagicalBatchRequests.h in Headers */,
 				1352E60A1B176AF600182E53 /* MagicalRecord+Options.h in Headers */,
 				1352E60B1B176AF600182E53 /* MagicalRecord+Setup.h in Headers */,
 				1352E60C1B176AF600182E53 /* MagicalRecord+ShorthandMethods.h in Headers */,
@@ -1825,6 +1841,7 @@
 				905D07A51A63DF120076B54E /* NSPersistentStore+MagicalRecord.m in Sources */,
 				905D07941A63DF120076B54E /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				905D07931A63DF120076B54E /* MagicalImportFunctions.m in Sources */,
+				585088EC1BC9159D00051DAA /* NSManagedObject+MagicalBatchRequests.m in Sources */,
 				905D079D1A63DF120076B54E /* NSManagedObject+MagicalRecord.m in Sources */,
 				905D07A31A63DF120076B54E /* NSManagedObjectContext+MagicalThreading.m in Sources */,
 				905D079A1A63DF120076B54E /* NSManagedObject+MagicalAggregation.m in Sources */,
@@ -1859,6 +1876,7 @@
 				905D07C01A63DF130076B54E /* NSPersistentStore+MagicalRecord.m in Sources */,
 				905D07AF1A63DF130076B54E /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				905D07AE1A63DF130076B54E /* MagicalImportFunctions.m in Sources */,
+				585088F61BC9175200051DAA /* NSManagedObject+MagicalBatchRequests.m in Sources */,
 				905D07B81A63DF130076B54E /* NSManagedObject+MagicalRecord.m in Sources */,
 				905D07BE1A63DF130076B54E /* NSManagedObjectContext+MagicalThreading.m in Sources */,
 				905D07B51A63DF130076B54E /* NSManagedObject+MagicalAggregation.m in Sources */,
@@ -1893,6 +1911,7 @@
 				C7CF97D317498493008D9D13 /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				C7CF97D417498493008D9D13 /* NSManagedObjectContext+MagicalSaves.m in Sources */,
 				C7CF97D517498493008D9D13 /* NSManagedObjectContext+MagicalThreading.m in Sources */,
+				585088F71BC9175300051DAA /* NSManagedObject+MagicalBatchRequests.m in Sources */,
 				C7CF97D617498493008D9D13 /* NSManagedObjectModel+MagicalRecord.m in Sources */,
 				9BB5668C1A2C44C4004174B3 /* NSManagedObjectContext+MagicalChainSave.m in Sources */,
 				C7CF97D717498493008D9D13 /* NSPersistentStore+MagicalRecord.m in Sources */,
@@ -1927,6 +1946,7 @@
 				C7CF97ED174984A5008D9D13 /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				C7CF97EE174984A5008D9D13 /* NSManagedObjectContext+MagicalSaves.m in Sources */,
 				C7CF97EF174984A5008D9D13 /* NSManagedObjectContext+MagicalThreading.m in Sources */,
+				585088F81BC9175300051DAA /* NSManagedObject+MagicalBatchRequests.m in Sources */,
 				C7CF97F0174984A5008D9D13 /* NSManagedObjectModel+MagicalRecord.m in Sources */,
 				9BB5668D1A2C44C4004174B3 /* NSManagedObjectContext+MagicalChainSave.m in Sources */,
 				C7CF97F1174984A5008D9D13 /* NSPersistentStore+MagicalRecord.m in Sources */,
