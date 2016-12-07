@@ -66,7 +66,12 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
             id value = [attributeInfo MR_valueForKeyPath:lookupKeyPath fromObjectData:objectData];
             if (![self MR_importValue:value forKey:attributeName])
             {
-                [self setValue:value forKey:attributeName];
+				@try {
+					[self setValue:value forKey:attributeName];
+				}
+				@catch (NSException *exception) {
+					NSLog(@"Couldn't import value: %@", exception.reason);
+				}
             }
         } 
         else 
