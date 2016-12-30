@@ -66,8 +66,8 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 
 - (void) MR_mergeChangesFromNotification:(NSNotification *)notification;
 {
-	MRLogVerbose(@"Merging changes to %@context%@",
-          self == [NSManagedObjectContext MR_defaultContext] ? @"*** DEFAULT *** " : @"",
+	MRLogVerbose(@"Merging changes to %@ context%@",
+          self == [NSManagedObjectContext MR_defaultContext] ? @"*** DEFAULT ***" : [self MR_workingName],
           ([NSThread isMainThread] ? @" *** on Main Thread ***" : @""));
     
 	[self mergeChangesFromContextDidSaveNotification:notification];
