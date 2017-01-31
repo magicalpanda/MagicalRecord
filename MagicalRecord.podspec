@@ -12,7 +12,8 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '6.1'
   s.osx.deployment_target = '10.8'
   s.watchos.deployment_target = '2.0'
-
+  s.tvos.deployment_target = '10.0'
+  
   s.subspec 'Core' do |sp|
     sp.framework    = 'CoreData'
     sp.header_dir   = 'MagicalRecord'
