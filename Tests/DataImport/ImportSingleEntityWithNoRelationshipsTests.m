@@ -125,10 +125,10 @@
 {
     NSColor *actualColor = self.testEntity.colorTestAttribute;
 
-    XCTAssertEqualWithAccuracy([actualColor alphaComponent], (CGFloat)(255.0 / 255.0), FLT_EPSILON, @"Unexpected value returned");
-    XCTAssertEqualWithAccuracy([actualColor redComponent], (CGFloat)(64.0f / 255.0f), FLT_EPSILON, @"Unexpected value returned");
-    XCTAssertEqualWithAccuracy([actualColor greenComponent], (CGFloat)(128.0f / 255.0f), FLT_EPSILON, @"Unexpected value returned");
-    XCTAssertEqualWithAccuracy([actualColor blueComponent], (CGFloat)(225.0f / 255.0f), FLT_EPSILON, @"Unexpected value returned");
+    XCTAssertEqualWithAccuracy([actualColor alphaComponent], (CGFloat)(255.0f / 255.0f), 0.001, @"Unexpected value returned");
+    XCTAssertEqualWithAccuracy([actualColor redComponent], (CGFloat)(64.0f / 255.0f), 0.001, @"Unexpected value returned");
+    XCTAssertEqualWithAccuracy([actualColor greenComponent], (CGFloat)(128.0f / 255.0f), 0.001, @"Unexpected value returned");
+    XCTAssertEqualWithAccuracy([actualColor blueComponent], (CGFloat)(225.0f / 255.0f), 0.001, @"Unexpected value returned");
 }
 
 #endif /* if TARGET_OS_IPHONE */
