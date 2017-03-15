@@ -92,16 +92,9 @@
 
     __block BOOL hasChanges = NO;
 
-    if ([self concurrencyType] == NSConfinementConcurrencyType)
-    {
+    [self performBlockAndWait:^{
         hasChanges = [self hasChanges];
-    }
-    else
-    {
-        [self performBlockAndWait:^{
-            hasChanges = [self hasChanges];
-        }];
-    }
+    }];
 
     if (!hasChanges)
     {
@@ -182,11 +175,7 @@
         }
     };
 
-    if ([self concurrencyType] == NSConfinementConcurrencyType)
-    {
-        saveBlock();
-    }
-    else if (YES == saveSynchronously)
+    if (YES == saveSynchronously)
     {
         [self performBlockAndWait:saveBlock];
     }

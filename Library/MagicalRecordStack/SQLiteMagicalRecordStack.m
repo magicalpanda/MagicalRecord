@@ -108,13 +108,6 @@
     return [self createCoordinatorWithOptions:[self defaultStoreOptions]];
 }
 
-- (NSManagedObjectContext *)newConfinementContext
-{
-    NSManagedObjectContext *context = [super newConfinementContext];
-    [context setParentContext:[self context]];
-    return context;
-}
-
 - (NSPersistentStoreCoordinator *)createCoordinatorWithOptions:(NSDictionary *)options
 {
     MRLogVerbose(@"Loading Store at URL: %@", self.storeURL);

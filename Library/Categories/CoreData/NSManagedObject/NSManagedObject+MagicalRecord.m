@@ -128,20 +128,24 @@
 
 + (instancetype)MR_createEntityWithDescription:(NSEntityDescription *)entityDescription inContext:(NSManagedObjectContext *)context
 {
-    NSEntityDescription *entity = entityDescription;
+    __block NSManagedObject *managedObject;
 
-    if (!entity)
-    {
-        entity = [self MR_entityDescriptionInContext:context];
-    }
+    [context performBlockAndWait:^{
+        NSEntityDescription *entity = entityDescription;
 
-    //    [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-    NSManagedObject *managedObject = [[self alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+        if (!entity)
+        {
+            entity = [self MR_entityDescriptionInContext:context];
+        }
 
-    if ([managedObject respondsToSelector:@selector(MR_awakeFromCreation)])
-    {
-        [managedObject MR_awakeFromCreation];
-    }
+        //    [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
+        managedObject = [[self alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+
+        if ([managedObject respondsToSelector:@selector(MR_awakeFromCreation)])
+        {
+            [managedObject MR_awakeFromCreation];
+        }
+    }];
 
     return managedObject;
 }
