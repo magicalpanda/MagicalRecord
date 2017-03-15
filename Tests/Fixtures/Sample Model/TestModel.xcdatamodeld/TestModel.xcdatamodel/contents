@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15B42" minimumToolsVersion="Automatic">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12140" systemVersion="16E189a" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="AbstractRelatedEntity" representedClassName="AbstractRelatedEntity" isAbstract="YES" syncable="YES">
         <attribute name="sampleBaseAttribute" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -9,14 +9,14 @@
     <entity name="EntityWithDifferentClassName" representedClassName="DifferentClassNameMapping" syncable="YES"/>
     <entity name="EntityWithoutEntityNameMethodWithASuffix" representedClassName="EntityWithoutEntityNameMethod" syncable="YES"/>
     <entity name="MappedEntity" representedClassName="MappedEntity" syncable="YES">
-        <attribute name="mappedEntityID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="mappedEntityID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="nestedAttribute" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="attributeValue.nestedValue"/>
             </userInfo>
         </attribute>
         <attribute name="sampleAttribute" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="testMappedEntityID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES">
+        <attribute name="testMappedEntityID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="id"/>
             </userInfo>
@@ -26,7 +26,7 @@
         </userInfo>
     </entity>
     <entity name="SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey" representedClassName="SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey" syncable="YES">
-        <attribute name="testPrimaryKey" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="testPrimaryKey" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="mappedEntities" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MappedEntity" syncable="YES">
             <userInfo>
                 <entry key="relatedByAttribute" value="testMappedEntityID"/>
@@ -37,7 +37,7 @@
         </userInfo>
     </entity>
     <entity name="SingleEntityRelatedToMappedEntityUsingDefaults" representedClassName="SingleEntityRelatedToMappedEntityUsingDefaults" syncable="YES">
-        <attribute name="singleEntityRelatedToMappedEntityUsingDefaultsID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="singleEntityRelatedToMappedEntityUsingDefaultsID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="mappedEntity" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="MappedEntity" syncable="YES"/>
     </entity>
     <entity name="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" representedClassName="SingleEntityRelatedToMappedEntityUsingMappedPrimaryKey" syncable="YES">
@@ -68,40 +68,40 @@
         </relationship>
     </entity>
     <entity name="SingleEntityWithNoRelationships" representedClassName="SingleEntityWithNoRelationships" syncable="YES">
-        <attribute name="booleanAsStringTestAttribute" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="booleanTestAttribute" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="booleanAsStringTestAttribute" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="booleanTestAttribute" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="colorTestAttribute" optional="YES" attributeType="Transformable" syncable="YES">
             <userInfo>
                 <entry key="attributeValueClassName" value="*Color"/>
             </userInfo>
         </attribute>
-        <attribute name="dateTestAttribute" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="dateWithCustomFormat" optional="YES" attributeType="Date" syncable="YES">
+        <attribute name="dateTestAttribute" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="dateWithCustomFormat" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
             <userInfo>
                 <entry key="dateFormat" value="M/d/yyyy H-mm-ss"/>
             </userInfo>
         </attribute>
         <attribute name="decimalTestAttribute" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="doubleTestAttribute" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="floatTestAttribute" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
-        <attribute name="int16TestAttribute" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="int32TestAttribute" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="int64TestAttribute" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="doubleTestAttribute" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="floatTestAttribute" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="int16TestAttribute" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="int32TestAttribute" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="int64TestAttribute" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="mappedStringAttribute" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="mappedAttributeWithStringValue"/>
             </userInfo>
         </attribute>
         <attribute name="notInJsonAttribute" optional="YES" attributeType="String" defaultValueString="Set From Core Data Model Editor" syncable="YES"/>
-        <attribute name="nullTestAttribute" optional="YES" attributeType="Integer 64" defaultValueString="100" syncable="YES"/>
+        <attribute name="nullTestAttribute" optional="YES" attributeType="Integer 64" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="numberAsStringTestAttribute" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stringTestAttribute" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="unixTime13TestAttribute" optional="YES" attributeType="Date" syncable="YES">
+        <attribute name="unixTime13TestAttribute" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
             <userInfo>
                 <entry key="dateFormat" value="UnixTime"/>
             </userInfo>
         </attribute>
-        <attribute name="unixTimeTestAttribute" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="unixTimeTestAttribute" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <entity name="SingleRelatedEntity" representedClassName="SingleRelatedEntity" syncable="YES">
         <attribute name="mappedStringAttribute" optional="YES" attributeType="String" syncable="YES"/>
