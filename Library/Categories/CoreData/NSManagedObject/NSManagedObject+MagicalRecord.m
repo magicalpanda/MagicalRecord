@@ -87,14 +87,8 @@
         }
     };
 
-    if ([context concurrencyType] == NSConfinementConcurrencyType)
-    {
-        requestBlock();
-    }
-    else
-    {
-        [context performBlockAndWait:requestBlock];
-    }
+    [context performBlockAndWait:requestBlock];
+    
     return results;
 }
 
