@@ -1,0 +1,20 @@
+# This is a generated version of the vendorspec. Please change the
+# values to suit your library.
+
+Vendor::Spec.new do |s|
+
+  s.name         "MagicalRecord"
+  s.version      "0.2.2"
+
+  s.authors      "magicalpanda"
+  s.email        "ray@wirestorm.net"
+  s.description  "Super Awesome Easy Fetching for Core Data 1!!!11!!!!1!"
+
+  s.homepage     "https://github.com/rayh/MagicalRecord"
+  s.source       "https://github.com/rayh/MagicalRecord"
+
+  s.files        Dir['Source/**/*.{h,m}']
+
+  s.framework    "CoreData.framework"
+  s.dependency   "JSONKit", "1.4"
+end
