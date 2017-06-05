@@ -50,16 +50,16 @@ static NSUInteger kMagicalRecordDefaultBatchSize = 20;
     [context performBlockAndWait:^{
 
         NSError *error = nil;
-        
+
         results = [context executeFetchRequest:request error:&error];
-        
-        if (results == nil) 
+
+        if (results == nil)
         {
             [MagicalRecord handleErrors:error];
         }
 
     }];
-	return results;	
+	return results;
 }
 
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request
@@ -73,7 +73,7 @@ static NSUInteger kMagicalRecordDefaultBatchSize = 20;
 + (id) MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
 {
 	[request setFetchLimit:1];
-	
+
 	NSArray *results = [self MR_executeFetchRequest:request inContext:context];
 	if ([results count] == 0)
 	{
@@ -155,13 +155,13 @@ static NSUInteger kMagicalRecordDefaultBatchSize = 20;
 + (NSArray *) MR_sortAscending:(BOOL)ascending attributes:(NSArray *)attributesToSortBy
 {
 	NSMutableArray *attributes = [NSMutableArray array];
-    
-    for (NSString *attributeName in attributesToSortBy) 
+
+    for (NSString *attributeName in attributesToSortBy)
     {
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:attributeName ascending:ascending];
         [attributes addObject:sortDescriptor];
     }
-    
+
 	return attributes;
 }
 
@@ -195,12 +195,12 @@ static NSUInteger kMagicalRecordDefaultBatchSize = 20;
         {
             entity  = [self MR_entityDescriptionInContext:context];
         }
-        
+
         if (entity == nil)
         {
             return nil;
         }
-        
+
         return [[self alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
     }
 }
@@ -238,14 +238,14 @@ static NSUInteger kMagicalRecordDefaultBatchSize = 20;
     NSFetchRequest *request = [self MR_requestAllWithPredicate:predicate inContext:context];
     [request setReturnsObjectsAsFaults:YES];
 	[request setIncludesPropertyValues:NO];
-    
+
 	NSArray *objectsToTruncate = [self MR_executeFetchRequest:request inContext:context];
-    
-	for (id objectToTruncate in objectsToTruncate) 
+
+	for (id objectToTruncate in objectsToTruncate)
     {
 		[objectToTruncate MR_deleteEntityInContext:context];
 	}
-    
+
 	return YES;
 }
 
@@ -284,7 +284,7 @@ static NSUInteger kMagicalRecordDefaultBatchSize = 20;
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext
 {
     NSError *error = nil;
-    
+
     if ([[self objectID] isTemporaryID])
     {
         BOOL success = [[self managedObjectContext] obtainPermanentIDsForObjects:@[self] error:&error];
@@ -294,9 +294,9 @@ static NSUInteger kMagicalRecordDefaultBatchSize = 20;
             return nil;
         }
     }
-    
+
     error = nil;
-    
+
     NSManagedObject *inContext = [otherContext existingObjectWithID:[self objectID] error:&error];
     [MagicalRecord handleErrors:error];
     
