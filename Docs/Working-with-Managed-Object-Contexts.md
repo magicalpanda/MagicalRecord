@@ -22,7 +22,7 @@ To access the default context, call:
 NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
 ```
 
-This context will be used throughout MagicalRecord in any method that uses a context, but does not provde a specific managed object context parameter.
+This context will be used throughout MagicalRecord in any method that uses a context, but does not provide a specific managed object context parameter.
 
 If you need to create a new managed object context for use in non-main threads, use the following method:
 
