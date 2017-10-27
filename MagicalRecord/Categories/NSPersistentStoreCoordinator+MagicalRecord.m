@@ -158,14 +158,15 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
         [MagicalRecord setICloudEnabled:cloudURL != nil];
         
         NSDictionary *options = [[self class] MR_autoMigrationOptions];
+#if !TARGET_OS_WATCH
         if (cloudURL)   //iCloud is available
         {
             NSMutableDictionary *iCloudOptions = [[NSMutableDictionary alloc] init];
-            [iCloudOptions setObject:cloudURL forKey:NSPersistentStoreUbiquitousContentURLKey];
+//            [iCloudOptions setObject:cloudURL forKey:NSPersistentStoreUbiquitousContentURLKey];
 
             if ([contentNameKey length] > 0)
             {
-                [iCloudOptions setObject:contentNameKey forKey:NSPersistentStoreUbiquitousContentNameKey];
+//                [iCloudOptions setObject:contentNameKey forKey:NSPersistentStoreUbiquitousContentNameKey];
             }
 
             options = [options MR_dictionaryByMergingDictionary:iCloudOptions];
@@ -174,7 +175,7 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
         {
             MRLogWarn(@"iCloud is not enabled");
         }
-
+#endif
 
         if ([self respondsToSelector:@selector(performBlockAndWait:)])
         {
@@ -184,15 +185,22 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
         }
         else
         {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-            [self lock];
-#pragma clang diagnostic pop
-            [self MR_addSqliteStoreNamed:storeIdentifier withOptions:options];
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-            [self unlock];
-#pragma clang diagnostic pop
+#if TARGET_OS_WATCH
+			[self performBlockAndWait:^{
+				[self MR_addSqliteStoreNamed:storeIdentifier withOptions:options];
+			}];
+#else
+			#pragma clang diagnostic push
+			#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+			            [self lock];
+			#pragma clang diagnostic pop
+			            [self MR_addSqliteStoreNamed:storeIdentifier withOptions:options];
+			#pragma clang diagnostic push
+			#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+			            [self unlock];
+			#pragma clang diagnostic pop
+#endif
+
         }
 
         dispatch_async(dispatch_get_main_queue(), ^{

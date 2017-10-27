@@ -45,26 +45,30 @@ OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordDidMergeChangesFromiClou
  */
 - (void) MR_observeContextOnMainThread:(MR_nonnull NSManagedObjectContext *)otherContext;
 
+#if !TARGET_OS_WATCH
+
 /**
  Merges changes from the supplied persistent store coordinator into self in response to changes from iCloud.
-
+ 
  @param coordinator Persistent store coordinator
-
+ 
  @see -MR_stopObservingiCloudChangesInCoordinator:
-
+ 
  @since Available in v2.0 and later.
  */
 - (void) MR_observeiCloudChangesInCoordinator:(MR_nonnull NSPersistentStoreCoordinator *)coordinator;
 
 /**
  Stops observation and merging of changes from the supplied persistent store coordinator in response to changes from iCloud.
-
+ 
  @param coordinator Persistent store coordinator
-
+ 
  @see -MR_observeiCloudChangesInCoordinator:
-
+ 
  @since Available in v2.0 and later.
  */
 - (void) MR_stopObservingiCloudChangesInCoordinator:(MR_nonnull NSPersistentStoreCoordinator *)coordinator;
+
+#endif
 
 @end
