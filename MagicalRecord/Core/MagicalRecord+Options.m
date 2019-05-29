@@ -13,9 +13,13 @@ static MagicalRecordLoggingLevel kMagicalRecordLoggingLevel = MagicalRecordLoggi
 #else
 static MagicalRecordLoggingLevel kMagicalRecordLoggingLevel = MagicalRecordLoggingLevelError;
 #endif
-static BOOL kMagicalRecordShouldAutoCreateManagedObjectModel = NO;
+static BOOL kMagicalRecordShouldAutoCreateManagedObjectModel = YES;
 static BOOL kMagicalRecordShouldAutoCreateDefaultPersistentStoreCoordinator = NO;
+#ifdef DEBUG
+static BOOL kMagicalRecordShouldDeleteStoreOnModelMismatch = YES;
+#else
 static BOOL kMagicalRecordShouldDeleteStoreOnModelMismatch = NO;
+#endif
 
 @implementation MagicalRecord (Options)
 
