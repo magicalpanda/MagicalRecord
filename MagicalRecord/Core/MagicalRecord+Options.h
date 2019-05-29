@@ -104,6 +104,24 @@ typedef NS_ENUM (NSUInteger, MagicalRecordLoggingLevel)
 + (void) setShouldAutoCreateDefaultPersistentStoreCoordinator:(BOOL)autoCreate;
 
 /**
+ If this is true, the default context will be automatically created if it doesn't exist by calling `[NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:[NSPersistentCoordinator MR_defaultStoreCoordinator]]`.
+ 
+ @return current value of shouldAutoCreateDefaultContext.
+ 
+ @since Available in v2.3.4 and later.
+ */
++ (BOOL) shouldAutoCreateDefaultContext;
+
+/**
+ Setting this to true will make MagicalRecord create the default context(s) automatically if it doesn't exist when called.
+ 
+ @param autoCreate BOOL value that flags whether the default context should be automatically created.
+ 
+ @since Available in v2.3.4 and later.
+ */
++ (void) setShouldAutoCreateDefaultContext:(BOOL)autoCreate;
+
+/**
  If this is true and MagicalRecord encounters a store with a version that does not match that of the model, the store will be removed from the disk.
  This is extremely useful during development where frequent model changes can potentially require a delete and reinstall of the app.
 

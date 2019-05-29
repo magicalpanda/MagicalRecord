@@ -44,6 +44,10 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 + (NSManagedObjectContext *) MR_defaultContext
 {
     @synchronized(self) {
+        if ([MagicalRecord shouldAutoCreateDefaultContext]&&!MagicalRecordDefaultContext)
+        {
+            [NSPersistentStoreCoordinator MR_defaultStoreCoordinator];
+        }
         NSAssert(MagicalRecordDefaultContext != nil, @"Default context is nil! Did you forget to initialize the Core Data Stack?");
         return MagicalRecordDefaultContext;
     }
@@ -51,6 +55,10 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
 + (NSManagedObjectContext *) MR_rootSavingContext;
 {
+    if ([MagicalRecord shouldAutoCreateDefaultContext]&&!MagicalRecordRootSavingContext)
+    {
+        [NSPersistentStoreCoordinator MR_defaultStoreCoordinator];
+    }
     NSAssert(MagicalRecordRootSavingContext != nil, @"Root saving context is nil! Did you forget to initialize the Core Data Stack?");
     return MagicalRecordRootSavingContext;
 }

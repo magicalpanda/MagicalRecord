@@ -22,11 +22,6 @@
 #define MR_LOGGING_CONTEXT 0
 #endif
 
-#if __has_include("CocoaLumberjack.h") || __has_include("CocoaLumberjack/CocoaLumberjack.h")
-    #define MR_LOG_LEVEL_DEF (DDLogLevel)[MagicalRecord loggingLevel]
-    #define CAST (DDLogFlag)
-    #import <CocoaLumberjack/CocoaLumberjack.h>
-#else
     #define MR_LOG_LEVEL_DEF [MagicalRecord loggingLevel]
     #define LOG_ASYNC_ENABLED YES
     #define CAST
@@ -38,7 +33,6 @@
                 NSLog(frmt, ##__VA_ARGS__);                       \
             }                                                     \
         } while (0)
-#endif
 
 #define MRLogError(frmt, ...) LOG_MAYBE(NO, MR_LOG_LEVEL_DEF, CAST MagicalRecordLoggingMaskError, MR_LOGGING_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 #define MRLogWarn(frmt, ...) LOG_MAYBE(LOG_ASYNC_ENABLED, MR_LOG_LEVEL_DEF, CAST MagicalRecordLoggingMaskWarn, MR_LOGGING_CONTEXT, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)

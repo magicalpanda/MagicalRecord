@@ -15,6 +15,7 @@ static MagicalRecordLoggingLevel kMagicalRecordLoggingLevel = MagicalRecordLoggi
 #endif
 static BOOL kMagicalRecordShouldAutoCreateManagedObjectModel = NO;
 static BOOL kMagicalRecordShouldAutoCreateDefaultPersistentStoreCoordinator = NO;
+static BOOL kMagicalRecordShouldAutoCreateDefaultContext = NO;
 static BOOL kMagicalRecordShouldDeleteStoreOnModelMismatch = NO;
 
 @implementation MagicalRecord (Options)
@@ -39,6 +40,15 @@ static BOOL kMagicalRecordShouldDeleteStoreOnModelMismatch = NO;
 + (void) setShouldAutoCreateDefaultPersistentStoreCoordinator:(BOOL)autoCreate;
 {
     kMagicalRecordShouldAutoCreateDefaultPersistentStoreCoordinator = autoCreate;
+}
+
++ (BOOL) shouldAutoCreateDefaultContext {
+    return kMagicalRecordShouldAutoCreateDefaultContext;
+}
+
++ (void) setShouldAutoCreateDefaultContext:(BOOL)autoCreate
+{
+    kMagicalRecordShouldAutoCreateDefaultContext = autoCreate;
 }
 
 + (BOOL) shouldDeleteStoreOnModelMismatch;
