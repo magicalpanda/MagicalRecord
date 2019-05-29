@@ -89,7 +89,7 @@
 
 + (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block
 {
-    [[self class] saveWithBlock:block completion:nil];
+    [self saveWithBlock:block completion:nil];
 }
 
 + (void) saveInBackgroundWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(void(^)(void))completion

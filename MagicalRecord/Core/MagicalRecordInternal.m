@@ -89,23 +89,4 @@ NSString * const kMagicalRecordCleanedUpNotification = @"kMagicalRecordCleanedUp
     return defaultName;
 }
 
-
-#pragma mark - initialize
-
-+ (void) initialize;
-{
-    if (self == [MagicalRecord class]) 
-    {
-        [self setShouldAutoCreateManagedObjectModel:YES];
-        [self setShouldAutoCreateDefaultPersistentStoreCoordinator:NO];
-#ifdef DEBUG
-        [self setShouldDeleteStoreOnModelMismatch:YES];
-#else
-        [self setShouldDeleteStoreOnModelMismatch:NO];
-#endif
-    }
-}
-
 @end
-
-
