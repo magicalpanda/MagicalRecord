@@ -157,10 +157,10 @@
             CGFloat red, blue, green, alpha;
             [actualColor getRed:&red green:&green blue:&blue alpha:&alpha];
 
-            XCTAssertEqual(alpha, (CGFloat)1.0, @"Unexpected value returned: %f", alpha);
-            XCTAssertEqual(red, (CGFloat)(64.0f / 255.0f), @"Unexpected value returned: %f", red);
-            XCTAssertEqual(green, (CGFloat)(128.0f / 255.0f), @"Unexpected value returned: %f", green);
-            XCTAssertEqual(blue, (CGFloat)(225.0f / 255.0f), @"Unexpected value returned: %f", blue);
+            XCTAssertEqual(alpha, (CGFloat)1., @"Unexpected value returned: %f", alpha);
+            XCTAssertEqual(red, (CGFloat)64. / (CGFloat)255., @"Unexpected value returned: %f", red);
+            XCTAssertEqual(green, (CGFloat)128. / (CGFloat)255., @"Unexpected value returned: %f", green);
+            XCTAssertEqual(blue, (CGFloat)225. / (CGFloat)255., @"Unexpected value returned: %f", blue);
         }
     }];
 }
@@ -186,10 +186,10 @@
     [testEntity.managedObjectContext performBlockAndWait:^{
         NSColor *actualColor = self->testEntity.colorTestAttribute;
 
-        XCTAssertEqual([actualColor alphaComponent], (CGFloat)(255.0 / 255.0), @"Unexpected value returned");
-        XCTAssertEqual([actualColor redComponent], (CGFloat)(64.0f / 255.0f), @"Unexpected value returned");
-        XCTAssertEqual([actualColor greenComponent], (CGFloat)(128.0f / 255.0f), @"Unexpected value returned");
-        XCTAssertEqual([actualColor blueComponent], (CGFloat)(225.0f / 255.0f), @"Unexpected value returned");
+        XCTAssertEqual([actualColor alphaComponent], (CGFloat)255. / (CGFloat)255., @"Unexpected value returned");
+        XCTAssertEqual([actualColor redComponent], (CGFloat)64. / (CGFloat)255., @"Unexpected value returned");
+        XCTAssertEqual([actualColor greenComponent], (CGFloat)128. / (CGFloat)255., @"Unexpected value returned");
+        XCTAssertEqual([actualColor blueComponent], (CGFloat)225. / (CGFloat)255., @"Unexpected value returned");
     }];
 }
 
