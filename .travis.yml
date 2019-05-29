@@ -1,6 +1,122 @@
 language: objective-c
-osx_image: xcode7.2
-script: Support/Scripts/objc-build-scripts/cibuild
+xcode_project: MagicalRecord.xcodeproj
+matrix:
+  include:
+    #BROKEN like below
+    #- osx_image: xcode10.2
+    #  xcode_scheme: MagicalRecord for iOS
+    #  xcode_destination: platform=iOS Simulator,OS=12.2,name=iPhone Xʀ
+    #  env: DEVICE="iPhone Xʀ (12.2)"
+    #BROKEN like below
+    #- osx_image: xcode10.2
+    #  xcode_scheme: libMagicalRecord for iOS
+    #  xcode_destination: platform=iOS Simulator,OS=12.2,name=iPhone Xʀ
+    #  env: DEVICE="iPhone Xʀ (12.2)"
+    #BROKEN like below
+    #- osx_image: xcode10.2
+    #  xcode_scheme: MagicalRecord for iOS
+    #  xcode_destination: platform=iOS Simulator,OS=11.4,name=iPhone X
+    #  env: DEVICE="iPhone X (11.4)"
+    #BROKEN like below
+    #- osx_image: xcode10.2
+    #  xcode_scheme: libMagicalRecord for iOS
+    #  xcode_destination: platform=iOS Simulator,OS=11.4,name=iPhone X
+    #  env: DEVICE="iPhone X (11.4)"
+    #BROKEN like below and by testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented & testSaveToPersistentStoreWhenSaveIsSynchronous (since iOS 10.0)
+    #- osx_image: xcode10.2
+    #  xcode_scheme: MagicalRecord for iOS
+    #  xcode_destination: platform=iOS Simulator,OS=10.3.1,name=iPhone 7 Plus
+    #  env: DEVICE="iPhone 7 Plus (10.3.1)"
+    #BROKEN like below and by testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented & testSaveToPersistentStoreWhenSaveIsSynchronous (since iOS 10.0)
+    #- osx_image: xcode10.2
+    #  xcode_scheme: libMagicalRecord for iOS
+    #  xcode_destination: platform=iOS Simulator,OS=10.3.1,name=iPhone 7 Plus
+    #  env: DEVICE="iPhone 7 Plus (10.3.1)"
+    #BROKEN like below
+    #- osx_image: xcode10.2
+    #  xcode_scheme: MagicalRecord for iOS
+    #  xcode_destination: platform=iOS Simulator,OS=9.3,name=iPhone 6s Plus
+    #  env: DEVICE="iPhone 6s Plus (9.3)"
+    #BROKEN like below
+    #- osx_image: xcode10.2
+    #  xcode_scheme: libMagicalRecord for iOS
+    #  xcode_destination: platform=iOS Simulator,OS=9.3,name=iPhone 6s Plus
+    #  env: DEVICE="iPhone 6s Plus (9.3)"
+    #BROKEN by testDefaultStoreFolderForiOSDevicesIsTheApplicationSupportFolder (since Xcode 10.2)
+    #- osx_image: xcode10.2
+    #  xcode_scheme: MagicalRecord for iOS
+    #  xcode_destination: platform=iOS Simulator,OS=8.1,name=iPhone 4s
+    #  env: DEVICE="iPhone 4s (8.1)"
+    #BROKEN by testDefaultStoreFolderForiOSDevicesIsTheApplicationSupportFolder (since Xcode 10.2)
+    #- osx_image: xcode10.2
+    #  xcode_scheme: libMagicalRecord for iOS
+    #  xcode_destination: platform=iOS Simulator,OS=8.1,name=iPhone 4s
+    #  env: DEVICE="iPhone 4s (8.1)"
+    #BROKEN by testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented & testSaveToPersistentStoreWhenSaveIsSynchronous (since iOS 10.0)
+    #- osx_image: xcode10.1
+    #  xcode_scheme: MagicalRecord for iOS
+    #  xcode_destination: platform=iOS Simulator,OS=10.3.1,name=iPhone 7 Plus
+    #  env: DEVICE="iPhone 7 Plus (10.3.1)"
+    #BROKEN by testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented & testSaveToPersistentStoreWhenSaveIsSynchronous (since iOS 10.0)
+    #- osx_image: xcode10.1
+    #  xcode_scheme: libMagicalRecord for iOS
+    #  xcode_destination: platform=iOS Simulator,OS=10.3.1,name=iPhone 7 Plus
+    #  env: DEVICE="iPhone 7 Plus (10.3.1)"
+    - osx_image: xcode10.1
+      xcode_scheme: MagicalRecord for iOS
+      xcode_destination: platform=iOS Simulator,OS=9.3,name=iPhone 6s Plus
+      env: DEVICE="iPhone 6s Plus (9.3)"
+    - osx_image: xcode10.1
+      xcode_scheme: libMagicalRecord for iOS
+      xcode_destination: platform=iOS Simulator,OS=9.3,name=iPhone 6s Plus
+      env: DEVICE="iPhone 6s Plus (9.3)"
+    - osx_image: xcode10.1
+      xcode_scheme: MagicalRecord for iOS
+      xcode_destination: platform=iOS Simulator,OS=8.1,name=iPhone 4s
+      env: DEVICE="iPhone 4s (8.1)"
+    - osx_image: xcode10.1
+      xcode_scheme: libMagicalRecord for iOS
+      xcode_destination: platform=iOS Simulator,OS=8.1,name=iPhone 4s
+      env: DEVICE="iPhone 4s (8.1)"
+    #BROKEN like below and by testDefaultStoreFolderForMacIsTheApplicationSupportDirectory (since Xcode 10.2)
+    #- osx_image: xcode10.2
+    #  xcode_scheme: MagicalRecord for OS X
+    #  xcode_destination: platform=macOS
+    #  env: DEVICE="OS X 10.14"
+    #BROKEN like below and by testDefaultStoreFolderForMacIsTheApplicationSupportDirectory (since Xcode 10.2)
+    #- osx_image: xcode10.2
+    #  xcode_scheme: libMagicalRecord for OS X
+    #  xcode_destination: platform=macOS
+    #  env: DEVICE="OS X 10.14"
+    #BROKEN like below
+    #- osx_image: xcode9.4
+    #  xcode_scheme: MagicalRecord for OS X
+    #  xcode_destination: platform=macOS
+    #  env: DEVICE="OS X 10.13"
+    #BROKEN like below
+    #- osx_image: xcode9.4
+    #  xcode_scheme: libMagicalRecord for OS X
+    #  xcode_destination: platform=macOS
+    #  env: DEVICE="OS X 10.13"
+    #BROKEN by testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented & testSaveToPersistentStoreWhenSaveIsSynchronous (since OS X 10.12)
+    #- osx_image: xcode8.3
+    #  xcode_scheme: MagicalRecord for OS X
+    #  xcode_destination: platform=macOS
+    #  env: DEVICE="OS X 10.12"
+    #BROKEN by testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented & testSaveToPersistentStoreWhenSaveIsSynchronous (since OS X 10.12)
+    #- osx_image: xcode8.3
+    #  xcode_scheme: libMagicalRecord for OS X
+    #  xcode_destination: platform=macOS
+    #  env: DEVICE="OS X 10.12"
+    - osx_image: xcode7.3
+      xcode_scheme: MagicalRecord for OS X
+      xcode_destination: platform=OS X
+      env: DEVICE="OS X 10.11"
+    - osx_image: xcode7.3
+      xcode_scheme: libMagicalRecord for OS X
+      xcode_destination: platform=OS X
+      env: DEVICE="OS X 10.11"
+
 env:
   global:
   - FRAMEWORK_NAME=MagicalRecord
