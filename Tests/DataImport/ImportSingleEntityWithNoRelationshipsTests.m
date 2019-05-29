@@ -46,100 +46,100 @@
 - (void)testImportASingleEntity
 {
     [testEntity.managedObjectContext performBlockAndWait:^{
-        XCTAssertNotNil(testEntity, @"testEntity should not be nil");
+        XCTAssertNotNil(self->testEntity, @"testEntity should not be nil");
     }];
 }
 
 - (void)testImportStringAttributeToEntity
 {
     [testEntity.managedObjectContext performBlockAndWait:^{
-        XCTAssertEqualObjects(testEntity.stringTestAttribute, @"This is a test value", @"stringTestAttribute did not contain expected value, instead found '%@'", testEntity.stringTestAttribute);
+        XCTAssertEqualObjects(self->testEntity.stringTestAttribute, @"This is a test value", @"stringTestAttribute did not contain expected value, instead found '%@'", self->testEntity.stringTestAttribute);
     }];
 }
 
 - (void)testImportInt16AttributeToEntity
 {
     [testEntity.managedObjectContext performBlockAndWait:^{
-        XCTAssertEqualObjects(testEntity.int16TestAttribute, @256, @"int16TestAttribute did not contain expected value, instead found: %@", testEntity.int16TestAttribute);
+        XCTAssertEqualObjects(self->testEntity.int16TestAttribute, @256, @"int16TestAttribute did not contain expected value, instead found: %@", self->testEntity.int16TestAttribute);
     }];
 }
 
 - (void)testImportInt32AttributeToEntity
 {
     [testEntity.managedObjectContext performBlockAndWait:^{
-        XCTAssertEqualObjects(testEntity.int32TestAttribute, @32, @"int32TestAttribute did not contain expected value, instead found: %@", testEntity.int32TestAttribute);
+        XCTAssertEqualObjects(self->testEntity.int32TestAttribute, @32, @"int32TestAttribute did not contain expected value, instead found: %@", self->testEntity.int32TestAttribute);
     }];
 }
 
 - (void)testImportInt64AttributeToEntity
 {
     [testEntity.managedObjectContext performBlockAndWait:^{
-        XCTAssertEqualObjects(testEntity.int64TestAttribute, @42, @"int64TestAttribute did not contain expected value, instead found: %@", testEntity.int64TestAttribute);
+        XCTAssertEqualObjects(self->testEntity.int64TestAttribute, @42, @"int64TestAttribute did not contain expected value, instead found: %@", self->testEntity.int64TestAttribute);
     }];
 }
 
 - (void)testImportDecimalAttributeToEntity
 {
     [testEntity.managedObjectContext performBlockAndWait:^{
-        XCTAssertEqualObjects(testEntity.decimalTestAttribute, @1.2, @"decimalTestAttribute did not contain expected value, instead found: %@", testEntity.decimalTestAttribute);
+        XCTAssertEqualObjects(self->testEntity.decimalTestAttribute, @1.2, @"decimalTestAttribute did not contain expected value, instead found: %@", self->testEntity.decimalTestAttribute);
     }];
 }
 
 - (void)testImportDoubleAttributeToEntity
 {
     [testEntity.managedObjectContext performBlockAndWait:^{
-        XCTAssertEqualObjects(testEntity.doubleTestAttribute, @124.3, @"doubleTestAttribute did not contain expected value, instead found: %@", testEntity.doubleTestAttribute);
+        XCTAssertEqualObjects(self->testEntity.doubleTestAttribute, @124.3, @"doubleTestAttribute did not contain expected value, instead found: %@", self->testEntity.doubleTestAttribute);
     }];
 }
 
 - (void)testImportFloatAttributeToEntity
 {
     [testEntity.managedObjectContext performBlockAndWait:^{
-        XCTAssertEqualObjects(testEntity.floatTestAttribute, @10000000000, @"floatTestAttribute did not contain expected value, instead found: %@", testEntity.floatTestAttribute);
+        XCTAssertEqualObjects(self->testEntity.floatTestAttribute, @10000000000, @"floatTestAttribute did not contain expected value, instead found: %@", self->testEntity.floatTestAttribute);
     }];
 }
 
 - (void)testImportBooleanAttributeToEntity
 {
     [testEntity.managedObjectContext performBlockAndWait:^{
-        XCTAssertFalse([testEntity.booleanTestAttribute boolValue], @"booleanTestAttribute did not contain expected value, instead found: %@", testEntity.booleanTestAttribute);
+        XCTAssertFalse([self->testEntity.booleanTestAttribute boolValue], @"booleanTestAttribute did not contain expected value, instead found: %@", self->testEntity.booleanTestAttribute);
     }];
 }
 
 - (void)testImportMappedStringAttributeToEntity
 {
     [testEntity.managedObjectContext performBlockAndWait:^{
-        XCTAssertEqualObjects(testEntity.mappedStringAttribute, @"Mapped value", @"mappedStringAttribute did not contain expected value, instead found: %@", testEntity.mappedStringAttribute);
+        XCTAssertEqualObjects(self->testEntity.mappedStringAttribute, @"Mapped value", @"mappedStringAttribute did not contain expected value, instead found: %@", self->testEntity.mappedStringAttribute);
     }];
 }
 
 - (void)testImportStringAttributeWithNullValue
 {
     [testEntity.managedObjectContext performBlockAndWait:^{
-        XCTAssertNil(testEntity.nullTestAttribute, @"nullTestAttribute did not contain expected value, instead found: %@", testEntity.nullTestAttribute);
+        XCTAssertNil(self->testEntity.nullTestAttribute, @"nullTestAttribute did not contain expected value, instead found: %@", self->testEntity.nullTestAttribute);
     }];
 }
 
 - (void)testImportNumberAsStringAttributeToEntity
 {
     [testEntity.managedObjectContext performBlockAndWait:^{
-        XCTAssertEqualObjects(testEntity.numberAsStringTestAttribute, @"10248909829", @"numberAsStringTestAttribute did not contain expected value, instead found: %@", testEntity.numberAsStringTestAttribute);
+        XCTAssertEqualObjects(self->testEntity.numberAsStringTestAttribute, @"10248909829", @"numberAsStringTestAttribute did not contain expected value, instead found: %@", self->testEntity.numberAsStringTestAttribute);
     }];
 }
 
 - (void)testImportBooleanAsStringAttributeToEntity
 {
     [testEntity.managedObjectContext performBlockAndWait:^{
-        XCTAssertTrue(testEntity.booleanAsStringTestAttribute, @"booleanFromStringTestAttribute did not contain expected value, instead found: %@", testEntity.booleanAsStringTestAttribute);
+        XCTAssertTrue(self->testEntity.booleanAsStringTestAttribute, @"booleanFromStringTestAttribute did not contain expected value, instead found: %@", self->testEntity.booleanAsStringTestAttribute);
     }];
 }
 
 - (void)testImportAttributeNotInJsonData
 {
     [testEntity.managedObjectContext performBlockAndWait:^{
-        NSRange rangeOfString = [testEntity.notInJsonAttribute rangeOfString:@"Core Data Model"];
+        NSRange rangeOfString = [self->testEntity.notInJsonAttribute rangeOfString:@"Core Data Model"];
 
-        XCTAssertNotEqual(@(rangeOfString.length), @0, @"notInJsonAttribute did not contain expected string, instead received: %@", testEntity.notInJsonAttribute);
+        XCTAssertNotEqual(@(rangeOfString.length), @0, @"notInJsonAttribute did not contain expected string, instead received: %@", self->testEntity.notInJsonAttribute);
     }];
 }
 
@@ -150,7 +150,7 @@
 - (void)testImportUIColorAttributeToEntity
 {
     [testEntity.managedObjectContext performBlockAndWait:^{
-        UIColor *actualColor = testEntity.colorTestAttribute;
+        UIColor *actualColor = self->testEntity.colorTestAttribute;
 
         if ([actualColor respondsToSelector:@selector(getRed:green:blue:alpha:)])
         {
@@ -184,7 +184,7 @@
 - (void)testImportNSColorAttributeToEntity
 {
     [testEntity.managedObjectContext performBlockAndWait:^{
-        NSColor *actualColor = testEntity.colorTestAttribute;
+        NSColor *actualColor = self->testEntity.colorTestAttribute;
 
         XCTAssertEqual([actualColor alphaComponent], (CGFloat)(255.0 / 255.0), @"Unexpected value returned");
         XCTAssertEqual([actualColor redComponent], (CGFloat)(64.0f / 255.0f), @"Unexpected value returned");
@@ -206,7 +206,7 @@
     NSDate *expectedDate = [self dateFromString:@"2011-07-23 22:30:40 +0000"];
 
     [testEntity.managedObjectContext performBlockAndWait:^{
-        XCTAssertEqualObjects(testEntity.dateTestAttribute, expectedDate, @"Unexpected value returned");
+        XCTAssertEqualObjects(self->testEntity.dateTestAttribute, expectedDate, @"Unexpected value returned");
     }];
 }
 
@@ -215,21 +215,21 @@
     NSDate *expectedDate = [self dateFromString:@"2011-08-05 01:56:04 +0000"];
 
     [testEntity.managedObjectContext performBlockAndWait:^{
-        XCTAssertEqualObjects(testEntity.dateWithCustomFormat, expectedDate, @"Unexpected value returned");
+        XCTAssertEqualObjects(self->testEntity.dateWithCustomFormat, expectedDate, @"Unexpected value returned");
     }];
 }
 
 - (void)testImportEpochDate
 {
     [testEntity.managedObjectContext performBlockAndWait:^{
-        XCTAssertEqualObjects(testEntity.unixTimeTestAttribute, [NSDate dateWithTimeIntervalSince1970:1388349428], @"unixTimeTestAttribute did not contain the expected value, instead found: %@", testEntity.unixTimeTestAttribute);
+        XCTAssertEqualObjects(self->testEntity.unixTimeTestAttribute, [NSDate dateWithTimeIntervalSince1970:1388349428], @"unixTimeTestAttribute did not contain the expected value, instead found: %@", self->testEntity.unixTimeTestAttribute);
     }];
 }
 
 - (void)testImportEpochDate13
 {
     [testEntity.managedObjectContext performBlockAndWait:^{
-        XCTAssertEqualObjects(testEntity.unixTime13TestAttribute, [NSDate dateWithTimeIntervalSince1970:1388349427.543], @"unixTimeTest13Attribute did not contain the expected value, instead found: %@", testEntity.unixTime13TestAttribute);
+        XCTAssertEqualObjects(self->testEntity.unixTime13TestAttribute, [NSDate dateWithTimeIntervalSince1970:1388349427.543], @"unixTimeTest13Attribute did not contain the expected value, instead found: %@", self->testEntity.unixTime13TestAttribute);
     }];
 }
 
