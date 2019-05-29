@@ -59,7 +59,7 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
     }
 }
 
-- (void) MR_createPathToStoreFileIfNeccessary:(NSURL *)urlForStore
+- (void) MR_createPathToStoreFileIfNecessary:(NSURL *)urlForStore
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *pathToStore = [urlForStore URLByDeletingLastPathComponent];
@@ -83,7 +83,7 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
     NSURL *url = [storeFileName isKindOfClass:[NSURL class]] ? storeFileName : [NSPersistentStore MR_urlForStoreName:storeFileName];
     NSError *error = nil;
     
-    [self MR_createPathToStoreFileIfNeccessary:url];
+    [self MR_createPathToStoreFileIfNecessary:url];
     
     NSPersistentStore *store = [self addPersistentStoreWithType:NSSQLiteStoreType
                                                   configuration:configuration
@@ -231,7 +231,7 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
 
 + (NSDictionary *) MR_autoMigrationOptions;
 {
-    // Adding the journalling mode recommended by apple
+    // Adding the journalling mode recommended by Apple
     NSMutableDictionary *sqliteOptions = [NSMutableDictionary dictionary];
     [sqliteOptions setObject:@"WAL" forKey:@"journal_mode"];
     

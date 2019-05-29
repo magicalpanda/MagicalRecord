@@ -110,7 +110,7 @@
 	 Return a view appropriate for the specified picker view and component.
 	 If it's the picker view, or if it's the kg or g component of the metric view, create a UIView that contains a label.  The label can then be offset in the containing view so that its text does not overlap the unit symbol.
 	 For the remaining components, simple create a label to contain the text.
-	 Give all the views tags so they can be idntified easily.
+	 Give all the views tags so they can be identified easily.
 	 */
 	
 	if (component == KG_COMPONENT) {		

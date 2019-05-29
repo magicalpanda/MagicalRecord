@@ -1,5 +1,5 @@
 //
-//  NSPersisentStoreHelperTests.m
+//  NSPersistentStoreHelperTests.m
 //  Magical Record
 //
 //  Created by Saul Mora on 7/15/11.
@@ -10,11 +10,11 @@
 #import <MagicalRecord/MagicalRecord.h>
 #import "MagicalRecordTestHelpers.h"
 
-@interface NSPersisentStoreHelperTests : XCTestCase
+@interface NSPersistentStoreHelperTests : XCTestCase
 
 @end
 
-@implementation NSPersisentStoreHelperTests
+@implementation NSPersistentStoreHelperTests
 
 - (NSString *) applicationStorageDirectory
 {

@@ -46,7 +46,7 @@ This release fixes an issue where the OS X framework was being built with instru
 * Adding changelog `da70884` - [Stephen Vanterpool](mailto:stephen@vanterpool.net)
 * Cleanup contextWillSave method Update deleting incompatible store `2eaec27` - [Saul Mora](mailto:saul@magicalpanda.com)
 * don't check the error, rely only on the return value of methods to determine success `64a81c6` - [Saul Mora](mailto:saul@magicalpanda.com)
-* removed MR_saveErrorHandler, as it and MR_saveWithErrorCallback were essentially duplicates MR_save now only saves the current context (it was essentially doing a MR_saveNestedContexts). If you need to save all the way out to disk, use MR_saveNestedContexts. Removed the action queue, unneccesary since core data introduced it's own queue support `f7c4350` - [Stephen Vanterpool](mailto:stephen@vanterpool.net)
+* removed MR_saveErrorHandler, as it and MR_saveWithErrorCallback were essentially duplicates MR_save now only saves the current context (it was essentially doing a MR_saveNestedContexts). If you need to save all the way out to disk, use MR_saveNestedContexts. Removed the action queue, unnecessary since core data introduced it's own queue support `f7c4350` - [Stephen Vanterpool](mailto:stephen@vanterpool.net)
 * Separate printing context chain method into its own method change contextWorkingName to property workingName `0fb7d36` - [Saul Mora](mailto:saul@magicalpanda.com)
 * Added fetchAllWithDelegate: method for NSFRC `c0a1657` - [Saul Mora](mailto:saul@magicalpanda.com)
 * Fixed Issue #294 - MR_requestAllSortedBy:ascending:inContext: did not use correct context `3656e74` - [Stephen Vanterpool](mailto:stephen@vanterpool.net)
@@ -67,7 +67,7 @@ This release fixes an issue where the OS X framework was being built with instru
 * Update shorthand methods and import the magical saves category so that MRSaveCompletionHandler resolves `1af1201` - [Tony Arnold](mailto:tony@thecocoabots.com)
 * Updated podspec to 2.1.beta.1 `5ed45f6` - [Stephen Vanterpool](mailto:stephen@vanterpool.net)
 * Minor text editing. `710d643` - [nerdery-isaac](mailto:isaac.greenspan@nerdery.com)
-* Added additional case that will trigger persistant store cleanup `36d1630` - [Stephen Vanterpool](mailto:stephen@vanterpool.net)
+* Added additional case that will trigger persistent store cleanup `36d1630` - [Stephen Vanterpool](mailto:stephen@vanterpool.net)
 * Alter saveWithBlock: so that it runs asynchronously. Fixes #349. `357b62e` - [Tony Arnold](mailto:tony@thecocoabots.com)
 * Execute save completion blocks on the main dispatch queue. `065352d` - [Tony Arnold](mailto:tony@thecocoabots.com)
 * Fix broken GHUnit tests after recent changes to the save methods `0c83121` - [Tony Arnold](mailto:tony@thecocoabots.com)
@@ -136,7 +136,7 @@ This release fixes an issue where the OS X framework was being built with instru
 * Fixing rookie mistake :/ - [Stephen Vanterpool](mailto:stephen@vanterpool.net)
 * Require ARC in podspec (was compiling with retain/release in pod installations) - [Ryan Maxwell](mailto:ryanm@xwell.co.nz)
 * Bump tag to 2.0.6 - [Ryan Maxwell](mailto:ryanm@xwell.co.nz)
-* Properly removing existing on-save notificaitons before replacing the default or root contexts - [Stephen Vanterpool](mailto:stephen@vanterpool.net)
+* Properly removing existing on-save notifications before replacing the default or root contexts - [Stephen Vanterpool](mailto:stephen@vanterpool.net)
 * Fixing potential concurrency issue with creating the actionQueue - [Stephen Vanterpool](mailto:stephen@vanterpool.net)
 * Cherry picking changes that make the context description more... descriptive - [Stephen Vanterpool](mailto:stephen@vanterpool.net)
 * Rolled back a commit that broke things if cleanup was used. It created the action_queue in a dispatch_once block, and never recreated it after a cleanup - [Stephen Vanterpool](mailto:stephen@vanterpool.net)

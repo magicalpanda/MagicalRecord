@@ -16,7 +16,7 @@
 
 @implementation NSManagedObjectContextHelperTests
 
-- (void) testCanCreateContextForCurrentThead
+- (void) testCanCreateContextForCurrentThread
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"

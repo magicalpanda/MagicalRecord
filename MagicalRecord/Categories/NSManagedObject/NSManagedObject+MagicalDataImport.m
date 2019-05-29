@@ -255,8 +255,8 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 
 - (BOOL) MR_performDataImportFromObject:(id)objectData relationshipBlock:(void(^)(NSRelationshipDescription*, id))relationshipBlock;
 {
-    BOOL didStartimporting = [self MR_preImport:objectData];
-    if (!didStartimporting) return NO;
+    BOOL didStartImporting = [self MR_preImport:objectData];
+    if (!didStartImporting) return NO;
     
     NSDictionary *attributes = [[self entity] attributesByName];
     [self MR_setAttributes:attributes forKeysWithObject:objectData];
@@ -269,16 +269,16 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
 
 - (BOOL)MR_importValuesForKeysWithObject:(id)objectData
 {
-    __weak typeof(self) weakself = self;
+    __weak typeof(self) weakSelf = self;
     return [self MR_performDataImportFromObject:objectData
                               relationshipBlock:^(NSRelationshipDescription *relationshipInfo, id localObjectData) {
 
-                                  NSManagedObject *relatedObject = [weakself MR_findObjectForRelationship:relationshipInfo withData:localObjectData];
+                                  NSManagedObject *relatedObject = [weakSelf MR_findObjectForRelationship:relationshipInfo withData:localObjectData];
 
                                   if (relatedObject == nil)
                                   {
                                       NSEntityDescription *entityDescription = [relationshipInfo destinationEntity];
-                                      relatedObject = [entityDescription MR_createInstanceInContext:[weakself managedObjectContext]];
+                                      relatedObject = [entityDescription MR_createInstanceInContext:[weakSelf managedObjectContext]];
                                   }
                                   if ([localObjectData isKindOfClass:[NSDictionary class]])
                                   {
@@ -297,7 +297,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
                                       }
                                   }
 
-                                  [weakself MR_addObject:relatedObject forRelationship:relationshipInfo];
+                                  [weakSelf MR_addObject:relatedObject forRelationship:relationshipInfo];
                               }];
 }
 
