@@ -158,7 +158,7 @@ APIs can often return data that has inconsistent formatting or values. The best 
 
 Method                          | Purpose
 --------------------------------|---------
-`- (BOOL) shouldImport;`<br><br>`func shouldImport(_ data: Any) -> Bool` | Called before an data is imported. Use this to cancel importing data on a specific instance of an entity by returning `NO` (`false` in Swift).
+`- (BOOL) shouldImport:(id)data;`<br><br>`func shouldImport(_ data: Any) -> Bool` | Called before an data is imported. Use this to cancel importing data on a specific instance of an entity by returning `NO` (`false` in Swift).
 `- (void) willImport:(id)data;`<br><br>`func willImport(_ data: Any)` | Called immediately before data is imported.
 `- (void) didImport:(id)data;`<br><br>`func didImport(_ data: Any)` | Called immediately after data has been imported.
 

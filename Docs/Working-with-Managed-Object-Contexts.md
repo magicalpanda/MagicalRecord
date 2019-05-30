@@ -4,11 +4,11 @@
 
 A variety of simple class methods are provided to help you create new contexts:
 
-- `+ [NSManagedObjectContext MR_newContext]`: Sets the default context as it's parent context. Has a concurrency type of **NSPrivateQueueConcurrencyType**.
+- `+ [NSManagedObjectContext MR_context]`: Sets the default context as it's parent context. Has a concurrency type of **NSPrivateQueueConcurrencyType**.
 - `+ [NSManagedObjectContext MR_newMainQueueContext]`: Has a concurrency type of **NSMainQueueConcurrencyType**.
 - `+ [NSManagedObjectContext MR_newPrivateQueueContext]`: Has a concurrency type of **NSPrivateQueueConcurrencyType**.
-- `+ [NSManagedObjectContext MR_newContextWithParent:…]`: Allows you to specify the parent context that will be set. Has a concurrency type of **NSPrivateQueueConcurrencyType**.
-- `+ [NSManagedObjectContext MR_newContextWithStoreCoordinator:…]`: Allows you to specify the persistent store coordinator for the new context. Has a concurrency type of **NSPrivateQueueConcurrencyType**.
+- `+ [NSManagedObjectContext MR_contextWithParent:…]`: Allows you to specify the parent context that will be set. Has a concurrency type of **NSPrivateQueueConcurrencyType**.
+- `+ [NSManagedObjectContext MR_contextWithStoreCoordinator:…]`: Allows you to specify the persistent store coordinator for the new context. Has a concurrency type of **NSPrivateQueueConcurrencyType**.
 
 ## The Default Context
 
@@ -34,12 +34,12 @@ If you need to create a new managed object context for use in non-main threads, 
 
 ```objective-c
 // Objective-C
-NSManagedObjectContext *myNewContext = [NSManagedObjectContext MR_newContext];
+NSManagedObjectContext *myNewContext = [NSManagedObjectContext MR_context];
 ```
 
 ```swift
 // Swift
-let myNewContext = NSManagedObjectContext.mr_new()
+let myNewContext = NSManagedObjectContext.mr_()
 ```
 
 This will create a new managed object context which has the same object model and persistent store as the default context, but is safe for use on another thread. It automatically sets the default context as it's parent context.
@@ -48,12 +48,12 @@ If you'd like to make your `myNewContext` instance the default for all fetch req
 
 ```objective-c
 // Objective-C
-[NSManagedObjectContext MR_setDefaultContext:myNewContext];
+[NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:myNewContext.persistentStoreCoordinator];
 ```
 
 ```swift
 // Swift
-NSManagedObjectContext.mr_set(default: myNewContext)
+NSManagedObjectContext.mr_initializeDefaultContext(with: myNewContext.persistentStoreCoordinator!)
 ```
 
 > **NOTE:** It is *highly* recommended that the default context is created and set on the main thread using a managed object context with a concurrency type of `NSMainQueueConcurrencyType`.
