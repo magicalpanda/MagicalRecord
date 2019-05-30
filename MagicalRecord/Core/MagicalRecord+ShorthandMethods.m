@@ -2,6 +2,7 @@
 //  Copyright (c) 2015 Magical Panda Software LLC. All rights reserved.
 
 #import "MagicalRecord+ShorthandMethods.h"
+#import <CoreData/CoreData.h>
 #import <objc/runtime.h>
 
 static NSString *const kMagicalRecordCategoryPrefix = @"MR_";
