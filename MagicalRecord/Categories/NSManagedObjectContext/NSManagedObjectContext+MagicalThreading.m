@@ -48,7 +48,8 @@ static volatile int32_t contextsCacheVersion = 0;
 		NSMutableDictionary *threadDict = [[NSThread currentThread] threadDictionary];
 		NSManagedObjectContext *threadContext = [threadDict objectForKey:kMagicalRecordManagedObjectContextKey];
 		NSNumber *currentCacheVersionForContext = [threadDict objectForKey:kMagicalRecordManagedObjectContextCacheVersionKey];
-		NSAssert((threadContext && currentCacheVersionForContext) || (!threadContext && !currentCacheVersionForContext),
+		NSAssert((threadContext != nil && currentCacheVersionForContext != nil)
+                 || (threadContext == nil && currentCacheVersionForContext == nil),
                  @"The Magical Record keys should either both be present or neither be present, otherwise we're in an inconsistent state!");
 		if ((threadContext == nil) || (currentCacheVersionForContext == nil) || ((int32_t)[currentCacheVersionForContext integerValue] != targetCacheVersionForContext))
 		{

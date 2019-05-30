@@ -168,14 +168,8 @@
 }
 
 
-- (void)viewDidUnload {
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    self.tableHeaderView = nil;
-	self.photoButton = nil;
-	self.nameTextField = nil;
-	self.overviewTextField = nil;
-	self.prepTimeTextField = nil;
-	[super viewDidUnload];
 }
 
 
@@ -569,7 +563,7 @@
 	self.recipe.thumbnailImage = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

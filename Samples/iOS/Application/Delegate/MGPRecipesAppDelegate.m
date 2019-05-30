@@ -19,9 +19,8 @@ static NSString * const kRecipesStoreName = @"Recipes.sqlite";
     [MagicalRecord setupCoreDataStackWithStoreNamed:kRecipesStoreName];
 
     // Override point for customization after application launch.
-//    self.window.backgroundColor = [UIColor whiteColor];
     self.recipeListController.managedObjectContext = [NSManagedObjectContext MR_defaultContext];
-    [self.window addSubview:self.tabBarController.view];
+    [self.window setRootViewController:self.tabBarController];
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -558,7 +558,7 @@
 				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = C7CF9651174966C4008D9D13 /* Build configuration list for PBXProject "MagicalRecordRecipes" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -790,7 +790,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../MagicalRecord\"/**";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../MagicalRecord\"/**",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "Application/Support/Recipes-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
@@ -817,7 +820,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../MagicalRecord\"/**";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../MagicalRecord\"/**",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "Application/Support/Recipes-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";

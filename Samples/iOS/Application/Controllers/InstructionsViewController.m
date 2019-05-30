@@ -61,14 +61,6 @@
 }
 
 
-- (void)viewDidUnload {
-	self.instructionsText = nil;
-	self.nameLabel = nil;
-    
-	[super viewDidUnload];
-}
-
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 

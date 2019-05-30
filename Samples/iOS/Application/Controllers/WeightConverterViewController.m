@@ -76,21 +76,6 @@
 }
 
 
-- (void)viewDidUnload {    
-	self.pickerViewContainer = nil;
-	
-	self.metricPickerController = nil;
-	self.metricPickerViewContainer = nil;
-	
-	self.imperialPickerController = nil;
-	self.imperialPickerViewContainer = nil;
-	
-	self.segmentedControl = nil;
-
-	[super viewDidUnload];
-}
-
-
 - (IBAction)toggleUnit {
 	
 	/*
