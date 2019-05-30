@@ -22,7 +22,7 @@ Data from external sources can be wildly variable in quality and structure, so w
 MagicalRecord makes use of the Xcode data modeling tool's "**User Info**" values to allow configuration of import options and mappings possible without having to edit any code.
 
 <p align="center">
-<img src="http://cl.ly/image/1e333E3W2Y3E/datamodeller_userinfogroup.png" alt="Xcode's 'User Info' group in the data modeller" width="324" height="374" style="margin: 0 auto;" />
+<img src="https://cl.ly/image/1e333E3W2Y3E/datamodeller_userinfogroup.png" alt="Xcode's 'User Info' group in the data modeller" width="324" height="374" style="margin: 0 auto;" />
 </p>
 
 > **For reference**: The user info keys and values are held in an NSDictionary that is attached to every entity, attribute and relationship in your data model, and can be accessed via the `userInfo` method on your `NSEntityDescription` instances.
@@ -191,4 +191,4 @@ If you also want to make sure that related records are removed during this updat
 }
 ```
 
-Source: http://stackoverflow.com/a/24252825/401092
+Source: https://stackoverflow.com/a/24252825/401092
