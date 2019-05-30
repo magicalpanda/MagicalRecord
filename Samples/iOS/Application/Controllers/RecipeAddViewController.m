@@ -58,7 +58,7 @@
     // Configure the navigation bar
     self.navigationItem.title = @"Add Recipe";
     
-    UIBarButtonItem *cancelButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancel)];
+    UIBarButtonItem *cancelButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancel)];
     self.navigationItem.leftBarButtonItem = cancelButtonItem;
     
     UIBarButtonItem *saveButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(save)];
@@ -68,13 +68,6 @@
 }
 
 
-- (void)viewDidUnload {
-	self.nameTextField = nil;
-    
-	[super viewDidUnload];
-}
-	
-	
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Support all orientations except upside-down
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);

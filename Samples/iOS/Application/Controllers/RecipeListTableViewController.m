@@ -99,10 +99,8 @@
 }
 
 // clean up our new observers
-- (void)viewDidUnload {
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-
-    [super viewDidUnload];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
