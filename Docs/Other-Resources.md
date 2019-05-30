@@ -7,3 +7,4 @@ The following articles highlight how to install and use aspects of MagicalRecord
 * [Super Happy Easy Fetching in Core Data](http://www.cimgf.com/2011/03/13/super-happy-easy-fetching-in-core-data/)
 * [Core Data and Threads, without the Headache](http://www.cimgf.com/2011/05/04/core-data-and-threads-without-the-headache/)
 * [Unit Testing with Core Data](http://www.cimgf.com/2012/05/15/unit-testing-with-core-data/)
+* [Using MagicalRecord with Swift](https://www.raywenderlich.com/1696-getting-started-with-magicalrecord)
