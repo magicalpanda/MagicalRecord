@@ -3,13 +3,12 @@ Pod::Spec.new do |s|
   s.name     = 'MagicalRecord'
   s.version  = '2.3.3'
   s.license  = 'MIT'
-  s.summary  = 'Super Awesome Easy Fetching for Core Data 1!!!11!!!!1!.'
+  s.summary  = 'Super Awesome Easy Fetching for Core Data!'
   s.homepage = 'https://github.com/magicalpanda/MagicalRecord'
   s.author   = { 'Saul Mora' => 'saul@magicalpanda.com', 'Tony Arnold' => 'tony@thecocoabots.com' }
   s.source   = { :git => 'https://github.com/magicalpanda/MagicalRecord.git', :tag => "v#{s.version}" }
   s.description  = 'Handy fetching, threading and data import helpers to make Core Data a little easier to use.'
-  s.requires_arc = true
-  s.ios.deployment_target = '6.1'
+  s.ios.deployment_target = '8.0'
   s.osx.deployment_target = '10.8'
 
   s.subspec 'Core' do |sp|
@@ -28,7 +27,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'CocoaLumberjack' do |sp|
-    sp.dependency 'CocoaLumberjack', '~> 2.0'
+    sp.dependency 'CocoaLumberjack', '~> 3.0'
     sp.dependency 'MagicalRecord/Core'
   end
 
