@@ -51,8 +51,8 @@
 + (MR_nullable instancetype) findFirstInContext:(MR_nonnull NSManagedObjectContext *)context;
 + (MR_nullable instancetype) findFirstWithPredicate:(MR_nullable NSPredicate *)searchTerm;
 + (MR_nullable instancetype) findFirstWithPredicate:(MR_nullable NSPredicate *)searchTerm inContext:(MR_nonnull NSManagedObjectContext *)context;
-+ (MR_nullable instancetype) findFirstWithPredicate:(MR_nullable NSPredicate *)searchterm sortedBy:(MR_nullable NSString *)property ascending:(BOOL)ascending;
-+ (MR_nullable instancetype) findFirstWithPredicate:(MR_nullable NSPredicate *)searchterm sortedBy:(MR_nullable NSString *)property ascending:(BOOL)ascending inContext:(MR_nonnull NSManagedObjectContext *)context;
++ (MR_nullable instancetype) findFirstWithPredicate:(MR_nullable NSPredicate *)searchTerm sortedBy:(MR_nullable NSString *)property ascending:(BOOL)ascending;
++ (MR_nullable instancetype) findFirstWithPredicate:(MR_nullable NSPredicate *)searchTerm sortedBy:(MR_nullable NSString *)property ascending:(BOOL)ascending inContext:(MR_nonnull NSManagedObjectContext *)context;
 + (MR_nullable instancetype) findFirstWithPredicate:(MR_nullable NSPredicate *)searchTerm andRetrieveAttributes:(MR_nullable NSArray *)attributes;
 + (MR_nullable instancetype) findFirstWithPredicate:(MR_nullable NSPredicate *)searchTerm andRetrieveAttributes:(MR_nullable NSArray *)attributes inContext:(MR_nonnull NSManagedObjectContext *)context;
 + (MR_nullable instancetype) findFirstWithPredicate:(MR_nullable NSPredicate *)searchTerm sortedBy:(MR_nullable NSString *)sortBy ascending:(BOOL)ascending andRetrieveAttributes:(MR_nullable id)attributes, ...;

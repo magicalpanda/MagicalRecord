@@ -21,7 +21,7 @@ typedef NS_ENUM (NSUInteger, MagicalRecordLoggingMask)
     /** Log warnings, and all errors */
     MagicalRecordLoggingMaskWarn = 1 << 1,
 
-    /** Log informative messagess, warnings and all errors */
+    /** Log informative messages, warnings and all errors */
     MagicalRecordLoggingMaskInfo = 1 << 2,
 
     /** Log debugging messages, informative messages, warnings and all errors */

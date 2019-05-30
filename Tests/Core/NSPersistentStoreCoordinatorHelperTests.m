@@ -32,7 +32,7 @@
     [MagicalRecordTestHelpers removeStoreFilesForStoreAtURL:testStoreURL];
 }
 
-- (void) testCreateCoodinatorWithSqlitePersistentStoreNamed
+- (void) testCreateCoordinatorWithSqlitePersistentStoreNamed
 {
     NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreNamed:@"TestStore.sqlite"];
 
@@ -44,7 +44,7 @@
     XCTAssertEqualObjects(storeType, NSSQLiteStoreType, @"Store type should be NSSQLiteStoreType, instead is %@", storeType);
 }
 
-- (void) testCreateCoodinatorWithSqlitePersistentStoreAtURL
+- (void) testCreateCoordinatorWithSqlitePersistentStoreAtURL
 {
     NSString *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     path = [path stringByAppendingPathComponent:@"TestStore.sqlite"];
@@ -87,7 +87,7 @@
     persistentStoreCount = [[testCoordinator persistentStores] count];
     XCTAssertEqual(persistentStoreCount, (NSUInteger)2, @"Expected there to be 2 persistent store, sadly there are %tu", persistentStoreCount);
 
-    NSPersistentStore *secondStore = [[testCoordinator persistentStores] objectAtIndex:1];
+    NSPersistentStore *secondStore = [testCoordinator persistentStores][1];
     NSString *secondStoreType = [secondStore type];
     XCTAssertEqualObjects(secondStoreType, NSInMemoryStoreType, @"Second store type should be NSInMemoryStoreType, instead is %@", secondStoreType);
 }
