@@ -8,6 +8,7 @@ MagicalRecord also provides some handy methods to set up background context for 
 For example, if we have Person entity, and we need to set the firstName and lastName fields, this is how you would use MagicalRecord to setup a background context for your use:
 
 ```objective-c
+// Objective-C
 Person *person; // Retrieve person entity
 [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
 
@@ -19,11 +20,25 @@ Person *person; // Retrieve person entity
 }];
 ```
 
+```swift
+// Swift
+let person = Person() // Retrieve person entity
+MagicalRecord.save({ (localContext) in
+
+	if let localPerson = person.mr_(in: localContext) {
+		localPerson.firstName = "John"
+		localPerson.lastName = "Appleseed"
+	}
+
+})
+```
+
 In this method, the specified block provides you with the proper context in which to perform your operations, you don't need to worry about setting up the context so that it tells the Default Context that it's done, and should update because changes were performed on another thread.
 
 To perform an action after this save block is completed, you can fill in a completion block:
 
 ```objective-c
+// Objective-C
 Person *person; // Retrieve person entity
 [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext){
 
@@ -37,6 +52,23 @@ Person *person; // Retrieve person entity
 	self.everyoneInTheDepartment = [Person findAll];
 
 }];
+```
+
+```swift
+// Swift
+let person = Person() // Retrieve person entity
+MagicalRecord.save({ (localContext) in
+
+	if let localPerson = person.mr_(in: localContext) {
+		localPerson.firstName = "John"
+		localPerson.lastName = "Appleseed"
+	}
+
+}) { (success, error) in
+
+	self.everyoneInTheDepartment = Person.findAll()
+	
+}
 ```
 
 This completion block is called on the main thread (queue), so this is also safe for triggering UI updates.

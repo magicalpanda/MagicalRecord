@@ -75,18 +75,36 @@ The basic idea behind MagicalRecord's importing is that you know the entity the 
 To automatically create a new instance from the object, you can use the following, shorter approach:
 
 ```objective-c
+// Objective-C
 NSDictionary *contactInfo = // Result from JSON parser or some other source
 
 Person *importedPerson = [Person MR_importFromObject:contactInfo];
 ```
 
+```swift
+// Swift
+let contactInfo = // Dictionary from JSON parser or some other source
+
+let importedPerson = Person.mr_import(from: contactInfo)
+```
+
 You can also use a two-stage approach:
 
 ```objective-c
+// Objective-C
 NSDictionary *contactInfo = // Result from JSON parser or some other source
 
 Person *person = [Person MR_createEntity]; // This doesn't have to be a new entity
 [person MR_importValuesForKeysWithObject:contactInfo];
+```
+
+```swift
+// Swift
+let contactInfo = // Dictionary from JSON parser or some other source
+
+if let person = Person.mr_createEntity() { // This doesn't have to be a new entity
+    person.mr_importValuesForKeys(with: contactInfo)
+}
 ```
 
 The two-stage approach can be helpful if you’re looking to update an existing object by overwriting its attributes.
@@ -98,9 +116,17 @@ The `+MR_importFromObject:` class method provides a wrapper around creating a ne
 A key item of note is that both these methods are synchronous. While some imports will take longer than others, it’s still highly advisable to perform *all imports* in the background so as to not impact user interaction. As previously discussed, MagicalRecord provides a handy API to make using background threads more manageable:
 
 ```objective-c
-[MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *)localContext {
+// Objective-C
+[MagicalRecord saveWithBlock:^(NSManagedObjectContext *)localContext {
   Person *importedPerson = [Person MR_importFromObject:personRecord inContext:localContext];
 }];
+```
+
+```swift
+// Swift
+MagicalRecord.save({ (localContext) in
+    let importedPerson = Person.mr_import(from: personRecord, in: localContext)
+})
 ```
 
 ## Importing Arrays
@@ -108,8 +134,15 @@ A key item of note is that both these methods are synchronous. While some import
 It’s common for a list of data to be served using a JSON array, or you’re importing a large list of a single type of data. The details of importing such a list are taken care of in the `+MR_importFromArray:` class method.
 
 ```objective-c
+// Objective-C
 NSArray *arrayOfPeopleData = /// result from JSON parser
 NSArray *people = [Person MR_importFromArray:arrayOfPeopleData];
+```
+
+```swift
+// Swift
+let arrayOfPeopleData = /// result from JSON parser
+let people = Person.mr_import(from: arrayOfPeopleData)
 ```
 
 This method, like `+MR_importFromObject:` is also synchronous, so for background importing, use the previously mentioned helper method for performing blocks in the background.
@@ -125,16 +158,17 @@ APIs can often return data that has inconsistent formatting or values. The best 
 
 Method                          | Purpose
 --------------------------------|---------
-`- (BOOL) shouldImport;`        | Called before an data is imported. Use this to cancel importing data on a specific instance of an entity by returning `NO`.
-`- (void) willImport:(id)data;` | Called immediately before data is imported.
-`- (void) didImport:(id)data;`  | Called immediately after data has been imported.
+`- (BOOL) shouldImport:(id)data;`<br><br>`func shouldImport(_ data: Any) -> Bool` | Called before an data is imported. Use this to cancel importing data on a specific instance of an entity by returning `NO` (`false` in Swift).
+`- (void) willImport:(id)data;`<br><br>`func willImport(_ data: Any)` | Called immediately before data is imported.
+`- (void) didImport:(id)data;`<br><br>`func didImport(_ data: Any)` | Called immediately after data has been imported.
 
 
 Generally, if your data is bad you'll want to fix what the import did after an attempt has been made to import any values.
 
 A common scenario is importing JSON data where numeric strings can often be misinterpreted as an actual number. If you want to ensure that a value is imported as a string, you could do the following:
 
-```obj-c
+```objective-c
+// Objective-C
 
 @interface MyGreatEntity
 
@@ -166,11 +200,33 @@ A common scenario is importing JSON data where numeric strings can often be misi
 @end
 ```
 
+```swift
+// Swift
+class MyGreatEntity: NSManagedObject {
+
+    var identifier: String?
+
+    override func didImport(_ data: Any) {
+        guard let dataDictionary = data as? [String: AnyObject] else {
+            return
+        }
+
+        let identifierValue = dataDictionary["my_identifier"]
+
+        if let numberValue = identifierValue as? NSNumber {
+            self.identifier = numberValue.stringValue
+        }
+    }
+
+}
+```
+
 ### Deleting local records on import update
 
 Sometimes you will want to make sure that subsequent import operations not only update but also delete local records that are not included as part of the remote dataset. To do this, fetch all local records not included in this update via their `relatedByAttribute` (`id` in the example below) and remove them immediately before importing the new dataset.
 
 ```objective-c
+// Objective-C
 NSArray *arrayOfPeopleData = /// result from JSON parser
 NSArray *people = [Person MR_importFromArray:arrayOfPeopleData];
 NSArray *idList = [arrayOfPeopleData valueForKey:@"id"];
@@ -178,9 +234,19 @@ NSPredicate *predicate = [NSPredicate predicateWithFormat:@"NOT(id IN %@)", idLi
 [Person MR_deleteAllMatchingPredicate:predicate];
 ```
 
+```swift
+// Swift
+let arrayOfPeopleData = /// result from JSON parser
+let people = Person.mr_import(from: arrayOfPeopleData)
+let idList = arrayOfPeopleData.map { $0.id }
+let predicate = NSPredicate(format: "NOT(id IN %@)", idList)
+Person.mr_deleteAll(matching: predicate)
+```
+
 If you also want to make sure that related records are removed during this update, you can use similar logic as above but implement it in the `willImport:` method of `Person`
 
 ```objective-c
+// Objective-C
 
 @implementation Person
 
@@ -188,6 +254,22 @@ If you also want to make sure that related records are removed during this updat
     NSArray *idList = [data[@"posts"] valueForKey:@"id"];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"NOT(id IN %@) AND person.id == %@", idList, self.id];
     [Post MR_deleteAllMatchingPredicate:predicate];
+}
+```
+
+```swift
+// Swift
+class Person: NSManagedObject {
+
+    override func willImport(_ data: Any) {
+        if let data = data as? [String: AnyObject],
+            let dataPosts = data["posts"] as? [Person] {
+            let idList = dataPosts.map { $0.id }
+            let predicate = NSPredicate(format: "NOT(id IN %@) AND person.id == %@", idList, self.id)
+            Post.mr_deleteAll(matching: predicate)
+        }
+    }
+
 }
 ```
 
