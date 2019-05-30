@@ -76,7 +76,7 @@ To take advantage of Apple's iCloud Core Data syncing, use **one** of the follow
                                    completion:(void (^)(void))completion;
 ```
 
-For further details, please refer to [Apple's "iCloud Programming Guide for Core Data"](https://developer.apple.com/library/ios/documentation/DataManagement/Conceptual/UsingCoreDataWithiCloudPG/Introduction/Introduction.html#//apple_ref/doc/uid/TP40013491).
+For further details, please refer to [Apple's "iCloud Programming Guide for Core Data"](https://developer.apple.com/library/archive/documentation/DataManagement/Conceptual/UsingCoreDataWithiCloudPG/Introduction/Introduction.html).
 
 
 ### Notes

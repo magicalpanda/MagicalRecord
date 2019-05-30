@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37F29F58229EFEB100570CA4 /* MagicalRecordInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F29F53229EFEB000570CA4 /* MagicalRecordInternal.m */; };
+		37F29F59229EFEB100570CA4 /* MagicalRecord+ShorthandMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F29F57229EFEB100570CA4 /* MagicalRecord+ShorthandMethods.m */; };
 		90610E1F18F4022D00E2C328 /* MagicalImportFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 90610DE718F4022D00E2C328 /* MagicalImportFunctions.m */; };
 		90610E2018F4022D00E2C328 /* NSAttributeDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 90610DE918F4022D00E2C328 /* NSAttributeDescription+MagicalDataImport.m */; };
 		90610E2118F4022D00E2C328 /* NSEntityDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 90610DEB18F4022D00E2C328 /* NSEntityDescription+MagicalDataImport.m */; };
@@ -31,8 +33,6 @@
 		90610E3418F4022D00E2C328 /* MagicalRecord+iCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 90610E1418F4022D00E2C328 /* MagicalRecord+iCloud.m */; };
 		90610E3518F4022D00E2C328 /* MagicalRecord+Options.m in Sources */ = {isa = PBXBuildFile; fileRef = 90610E1618F4022D00E2C328 /* MagicalRecord+Options.m */; };
 		90610E3618F4022D00E2C328 /* MagicalRecord+Setup.m in Sources */ = {isa = PBXBuildFile; fileRef = 90610E1818F4022D00E2C328 /* MagicalRecord+Setup.m */; };
-		90610E3718F4022D00E2C328 /* MagicalRecord+ShorthandSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 90610E1A18F4022D00E2C328 /* MagicalRecord+ShorthandSupport.m */; };
-		90610E3818F4022D00E2C328 /* MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 90610E1C18F4022D00E2C328 /* MagicalRecord.m */; };
 		C7CF968C17496F83008D9D13 /* MGPRecipesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF968217496F83008D9D13 /* MGPRecipesAppDelegate.m */; };
 		C7CF968E17496F83008D9D13 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C7CF968617496F83008D9D13 /* InfoPlist.strings */; };
 		C7CF968F17496F83008D9D13 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF968817496F83008D9D13 /* main.m */; };
@@ -83,6 +83,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		37F29F50229EFEB000570CA4 /* MagicalRecord+ShorthandMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MagicalRecord+ShorthandMethods.h"; sourceTree = "<group>"; };
+		37F29F51229EFEB000570CA4 /* MagicalRecordDeprecationMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordDeprecationMacros.h; sourceTree = "<group>"; };
+		37F29F52229EFEB000570CA4 /* MagicalRecordXcode7CompatibilityMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordXcode7CompatibilityMacros.h; sourceTree = "<group>"; };
+		37F29F53229EFEB000570CA4 /* MagicalRecordInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalRecordInternal.m; sourceTree = "<group>"; };
+		37F29F54229EFEB000570CA4 /* MagicalRecordInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordInternal.h; sourceTree = "<group>"; };
+		37F29F55229EFEB100570CA4 /* MagicalRecordLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordLogging.h; sourceTree = "<group>"; };
+		37F29F56229EFEB100570CA4 /* MagicalRecordShorthandMethodAliases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordShorthandMethodAliases.h; sourceTree = "<group>"; };
+		37F29F57229EFEB100570CA4 /* MagicalRecord+ShorthandMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MagicalRecord+ShorthandMethods.m"; sourceTree = "<group>"; };
+		37F29F5A229EFF1200570CA4 /* MagicalRecord.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MagicalRecord.h; sourceTree = "<group>"; };
 		90610DE618F4022D00E2C328 /* MagicalImportFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalImportFunctions.h; sourceTree = "<group>"; };
 		90610DE718F4022D00E2C328 /* MagicalImportFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalImportFunctions.m; sourceTree = "<group>"; };
 		90610DE818F4022D00E2C328 /* NSAttributeDescription+MagicalDataImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributeDescription+MagicalDataImport.h"; sourceTree = "<group>"; };
@@ -131,12 +140,6 @@
 		90610E1618F4022D00E2C328 /* MagicalRecord+Options.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MagicalRecord+Options.m"; sourceTree = "<group>"; };
 		90610E1718F4022D00E2C328 /* MagicalRecord+Setup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MagicalRecord+Setup.h"; sourceTree = "<group>"; };
 		90610E1818F4022D00E2C328 /* MagicalRecord+Setup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MagicalRecord+Setup.m"; sourceTree = "<group>"; };
-		90610E1918F4022D00E2C328 /* MagicalRecord+ShorthandSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MagicalRecord+ShorthandSupport.h"; sourceTree = "<group>"; };
-		90610E1A18F4022D00E2C328 /* MagicalRecord+ShorthandSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MagicalRecord+ShorthandSupport.m"; sourceTree = "<group>"; };
-		90610E1B18F4022D00E2C328 /* MagicalRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecord.h; sourceTree = "<group>"; };
-		90610E1C18F4022D00E2C328 /* MagicalRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalRecord.m; sourceTree = "<group>"; };
-		90610E1D18F4022D00E2C328 /* MagicalRecordShorthand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordShorthand.h; sourceTree = "<group>"; };
-		90610E1E18F4022D00E2C328 /* CoreData+MagicalRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreData+MagicalRecord.h"; sourceTree = "<group>"; };
 		C7CF965F17496EDC008D9D13 /* Recipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CF966217496EDC008D9D13 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		C7CF966417496EDC008D9D13 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -228,9 +231,9 @@
 		90610DE318F4022D00E2C328 /* MagicalRecord */ = {
 			isa = PBXGroup;
 			children = (
+				37F29F5A229EFF1200570CA4 /* MagicalRecord.h */,
 				90610DE418F4022D00E2C328 /* Categories */,
 				90610E0E18F4022D00E2C328 /* Core */,
-				90610E1E18F4022D00E2C328 /* CoreData+MagicalRecord.h */,
 			);
 			name = MagicalRecord;
 			path = ../../MagicalRecord;
@@ -318,11 +321,14 @@
 				90610E1618F4022D00E2C328 /* MagicalRecord+Options.m */,
 				90610E1718F4022D00E2C328 /* MagicalRecord+Setup.h */,
 				90610E1818F4022D00E2C328 /* MagicalRecord+Setup.m */,
-				90610E1918F4022D00E2C328 /* MagicalRecord+ShorthandSupport.h */,
-				90610E1A18F4022D00E2C328 /* MagicalRecord+ShorthandSupport.m */,
-				90610E1B18F4022D00E2C328 /* MagicalRecord.h */,
-				90610E1C18F4022D00E2C328 /* MagicalRecord.m */,
-				90610E1D18F4022D00E2C328 /* MagicalRecordShorthand.h */,
+				37F29F50229EFEB000570CA4 /* MagicalRecord+ShorthandMethods.h */,
+				37F29F57229EFEB100570CA4 /* MagicalRecord+ShorthandMethods.m */,
+				37F29F51229EFEB000570CA4 /* MagicalRecordDeprecationMacros.h */,
+				37F29F54229EFEB000570CA4 /* MagicalRecordInternal.h */,
+				37F29F53229EFEB000570CA4 /* MagicalRecordInternal.m */,
+				37F29F55229EFEB100570CA4 /* MagicalRecordLogging.h */,
+				37F29F56229EFEB100570CA4 /* MagicalRecordShorthandMethodAliases.h */,
+				37F29F52229EFEB000570CA4 /* MagicalRecordXcode7CompatibilityMacros.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -553,10 +559,11 @@
 			};
 			buildConfigurationList = C7CF9651174966C4008D9D13 /* Build configuration list for PBXProject "MagicalRecordRecipes" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = C7CF964D174966C4008D9D13;
 			productRefGroup = C7CF966017496EDC008D9D13 /* Products */;
@@ -615,7 +622,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "mogen=`which mogenerator`\nPlistBuddy=/usr/libexec/PlistBuddy\nHUMAN_FILES_OUTPUT_FOLDER=$PROJECT_DIR/Application/Models/entities\nMACHINE_FILES_OUTPUT_FOLDER=$PROJECT_DIR/Application/Models/generated\nMODEL_DATA_FOLDER=$PROJECT_DIR/Application/Models/Recipes.xcdatamodeld\n\n#figure out current model version\nCURRENT_MODEL_VERSION=`\"$PlistBuddy\" -c 'Print _XCCurrentVersionName' \"$MODEL_DATA_FOLDER/.xccurrentversion\"`\n\n\nif [[ -x $mogen ]]; then\necho \"Updating data objects from $MODEL_DATA_FOLDER/$CURRENT_MODEL_VERSION using $mogen\"\n\"$mogen\" -m \"$MODEL_DATA_FOLDER/$CURRENT_MODEL_VERSION\" -M \"$MACHINE_FILES_OUTPUT_FOLDER\" -H \"$HUMAN_FILES_OUTPUT_FOLDER\" --template-var arc=true\nfi";
+			shellScript = "mogen=`which mogenerator`\nPlistBuddy=/usr/libexec/PlistBuddy\nHUMAN_FILES_OUTPUT_FOLDER=$PROJECT_DIR/Application/Models/entities\nMACHINE_FILES_OUTPUT_FOLDER=$PROJECT_DIR/Application/Models/generated\nMODEL_DATA_FOLDER=$PROJECT_DIR/Application/Models/Recipes.xcdatamodeld\n\n#figure out current model version\nCURRENT_MODEL_VERSION=`\"$PlistBuddy\" -c 'Print _XCCurrentVersionName' \"$MODEL_DATA_FOLDER/.xccurrentversion\"`\n\n\nif [[ -x $mogen ]]; then\necho \"Updating data objects from $MODEL_DATA_FOLDER/$CURRENT_MODEL_VERSION using $mogen\"\n\"$mogen\" -m \"$MODEL_DATA_FOLDER/$CURRENT_MODEL_VERSION\" -M \"$MACHINE_FILES_OUTPUT_FOLDER\" -H \"$HUMAN_FILES_OUTPUT_FOLDER\" --template-var arc=true\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -652,6 +659,7 @@
 				90610E2C18F4022D00E2C328 /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				90610E3218F4022D00E2C328 /* MagicalRecord+Actions.m in Sources */,
 				90610E2018F4022D00E2C328 /* NSAttributeDescription+MagicalDataImport.m in Sources */,
+				37F29F59229EFEB100570CA4 /* MagicalRecord+ShorthandMethods.m in Sources */,
 				90610E3518F4022D00E2C328 /* MagicalRecord+Options.m in Sources */,
 				C7CF96EC17497086008D9D13 /* RecipeTableViewCell.m in Sources */,
 				C7CF96ED17497086008D9D13 /* TemperatureConverterViewController.m in Sources */,
@@ -662,15 +670,14 @@
 				C7CF96F4174971C4008D9D13 /* Recipes.xcdatamodeld in Sources */,
 				C7CF96FF1749725B008D9D13 /* Ingredient.m in Sources */,
 				C7CF97001749725B008D9D13 /* Recipe.m in Sources */,
-				90610E3718F4022D00E2C328 /* MagicalRecord+ShorthandSupport.m in Sources */,
 				90610E2718F4022D00E2C328 /* NSManagedObject+MagicalDataImport.m in Sources */,
 				C7CF97011749725B008D9D13 /* _Ingredient.m in Sources */,
 				C7CF97021749725B008D9D13 /* _Recipe.m in Sources */,
 				90610E3618F4022D00E2C328 /* MagicalRecord+Setup.m in Sources */,
 				90610E2918F4022D00E2C328 /* NSManagedObject+MagicalRecord.m in Sources */,
 				90610E2118F4022D00E2C328 /* NSEntityDescription+MagicalDataImport.m in Sources */,
+				37F29F58229EFEB100570CA4 /* MagicalRecordInternal.m in Sources */,
 				C7CF970517497348008D9D13 /* TemperatureCell.m in Sources */,
-				90610E3818F4022D00E2C328 /* MagicalRecord.m in Sources */,
 				C7CF97071749752D008D9D13 /* WeightConverterViewController.m in Sources */,
 				C7CF976117497858008D9D13 /* ImageToDataTransformer.m in Sources */,
 			);
@@ -694,6 +701,32 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -703,6 +736,31 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -734,7 +792,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../MagicalRecord\"/**";
 				INFOPLIST_FILE = "Application/Support/Recipes-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -761,7 +819,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../MagicalRecord\"/**";
 				INFOPLIST_FILE = "Application/Support/Recipes-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;

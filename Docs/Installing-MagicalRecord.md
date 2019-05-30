@@ -16,7 +16,7 @@
 
 ## Using CocoaPods
 
-One of the easiest ways to integrate MagicalRecord in your project is to use [CocoaPods](http://cocoapods.org/):
+One of the easiest ways to integrate MagicalRecord in your project is to use [CocoaPods](https://cocoapods.org/):
 
 1. Add the following line to your `Podfile`:
 
@@ -56,7 +56,7 @@ Xcode sub-projects allow your project to use and build MagicalRecord as an impli
 
 # Shorthand Category Methods
 
-By default, all of the category methods that MagicalRecord provides are prefixed with `MR_`. This is inline with [Apple's recommendation not to create unadorned category methods to avoid naming clashes](https://developer.apple.com/library/mac/documentation/cocoa/conceptual/ProgrammingWithObjectiveC/CustomizingExistingClasses/CustomizingExistingClasses.html#//apple_ref/doc/uid/TP40011210-CH6-SW4).
+By default, all of the category methods that MagicalRecord provides are prefixed with `MR_`. This is inline with [Apple's recommendation not to create unadorned category methods to avoid naming clashes](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/CustomizingExistingClasses/CustomizingExistingClasses.html#//apple_ref/doc/uid/TP40011210-CH6-SW4).
 
 If you like, you can include the following headers to use shorter, non-prefixed category methods:
 

@@ -102,7 +102,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
 - (void)MR_setWorkingName:(NSString *)workingName
 {
-    void (^setWorkingName)() = ^{
+    void (^setWorkingName)(void) = ^{
         [[self userInfo] setObject:workingName forKey:MagicalRecordContextWorkingName];
     };
 
@@ -120,7 +120,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 {
     __block NSString *workingName;
 
-    void (^getWorkingName)() = ^{
+    void (^getWorkingName)(void) = ^{
         workingName = [[self userInfo] objectForKey:MagicalRecordContextWorkingName];
     };
 

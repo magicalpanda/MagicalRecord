@@ -50,7 +50,7 @@
     self.singleTestEntity = [SingleRelatedEntity MR_importFromObject:self.testEntityData inContext:context];
 }
 
-- (void)testImportAnEntityRelatedToAbstractEntityViaToOneRelationshop
+- (void)testImportAnEntityRelatedToAbstractEntityViaToOneRelationship
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for managed object context"];
 

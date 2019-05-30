@@ -87,9 +87,4 @@ static SEL errorHandlerAction = nil;
     errorHandlerAction = action;
 }
 
-- (void) handleErrors:(NSError *)error
-{
-	[[self class] handleErrors:error];
-}
-
 @end

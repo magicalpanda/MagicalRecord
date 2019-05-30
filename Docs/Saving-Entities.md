@@ -46,7 +46,7 @@ __block UIBackgroundTaskIdentifier bgTask = [application beginBackgroundTaskWith
 }];
 ````
 
-Be sure to carefully [read the documentation for `beginBackgroundTaskWithExpirationHandler`](https://developer.apple.com/library/iOS/documentation/UIKit/Reference/UIApplication_Class/Reference/Reference.html#//apple_ref/occ/instm/UIApplication/beginBackgroundTaskWithExpirationHandler:), as inappropriately or unnecessarily extending your application's lifetime may earn your app a rejection from the App Store.
+Be sure to carefully [read the documentation for `beginBackgroundTaskWithExpirationHandler`](https://developer.apple.com/documentation/uikit/uiapplication/1623031-beginbackgroundtaskwithexpiratio), as inappropriately or unnecessarily extending your application's lifetime may earn your app a rejection from the App Store.
 
 ### On OS X
 
@@ -68,7 +68,7 @@ NSProcessInfo *processInfo = [NSProcessInfo processInfo];
 }];
 ````
 
-As with the iOS approach, be sure to [read the documentation on NSProcessInfo](https://developer.apple.com/library/mac/documentation/cocoa/reference/foundation/Classes/NSProcessInfo_Class/Reference/Reference.html) before implementing this approach in your app.
+As with the iOS approach, be sure to [read the documentation on NSProcessInfo](https://developer.apple.com/documentation/foundation/nsprocessinfo) before implementing this approach in your app.
 
 ---
 
@@ -76,7 +76,7 @@ As with the iOS approach, be sure to [read the documentation on NSProcessInfo](h
 
 ### Context For Current Thread Deprecation
 
-In earlier releases of MagicalRecord, we provided methods to retrieve the managed object context for the thread that the method was called on. Unfortunately, **it's not possible to return the context for the currently executing thread in a reliable manner** anymore. Grand Central Dispatch (GCD) makes no guarantees that a queue will be executed on a single thread, and our approach was based upon the older NSThread API while CoreData has transitioned to use GCD. For more details, please see Saul's post "[Why contextForCurrentThread Doesn't Work in MagicalRecord](http://saulmora.com/2013/09/15/why-contextforcurrentthread-doesn-t-work-in-magicalrecord/)".
+In earlier releases of MagicalRecord, we provided methods to retrieve the managed object context for the thread that the method was called on. Unfortunately, **it's not possible to return the context for the currently executing thread in a reliable manner** anymore. Grand Central Dispatch (GCD) makes no guarantees that a queue will be executed on a single thread, and our approach was based upon the older NSThread API while CoreData has transitioned to use GCD. For more details, please see Saul's post "[Why contextForCurrentThread Doesn't Work in MagicalRecord](https://web.archive.org/web/20161024234224/http://saulmora.com/coredata/magicalrecord/2013/09/15/why-contextforcurrentthread-doesn-t-work-in-magicalrecord.html)".
 
 In MagicalRecord 2.3.0, we continue to use `+MR_contextForCurrentThread` internally in a few places to maintain compatibility with older releases. These methods are deprecated, and you will be warned if you use them.
 

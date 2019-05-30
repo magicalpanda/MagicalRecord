@@ -32,7 +32,7 @@
     [MagicalRecordTestHelpers removeStoreFilesForStoreAtURL:testStoreURL];
 }
 
-- (void) testCreateCoodinatorWithSqlitePersistentStoreNamed
+- (void) testCreateCoordinatorWithSqlitePersistentStoreNamed
 {
     NSPersistentStoreCoordinator *testCoordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreNamed:@"TestStore.sqlite"];
 
@@ -44,7 +44,7 @@
     XCTAssertEqualObjects(storeType, NSSQLiteStoreType, @"Store type should be NSSQLiteStoreType, instead is %@", storeType);
 }
 
-- (void) testCreateCoodinatorWithSqlitePersistentStoreAtURL
+- (void) testCreateCoordinatorWithSqlitePersistentStoreAtURL
 {
     NSString *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     path = [path stringByAppendingPathComponent:@"TestStore.sqlite"];

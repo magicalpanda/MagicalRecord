@@ -28,7 +28,7 @@
         XCTAssertNotNil(entity, @"Entity should not be nil");
 
         NSRange stringRange = [[entity secondaryMappedAttribute] rangeOfString:@"sample json file"];
-        XCTAssertTrue(stringRange.length > 0, @"Expected string not contained withing secondary mapped attribute. Got %@", [entity secondaryMappedAttribute]);
+        XCTAssertTrue(stringRange.length > 0, @"Expected string not contained within secondary mapped attribute. Got %@", [entity secondaryMappedAttribute]);
     }];
 }
 

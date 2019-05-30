@@ -4,7 +4,7 @@
 
 Most methods in MagicalRecord return an `NSArray` of results.
 
-As an example, if you have an entity named *Person* related to a *Department* entity (as seen in many of [Apple's Core Data examples](.com/library/mac/documentation/Cocoa/Conceptual/CoreData/Articles/cdBasics.html#//apple_ref/doc/uid/TP40001650-TP1)), you can retrieve all of the *Person* entities from your persistent store using the following method:
+As an example, if you have an entity named *Person* related to a *Department* entity (as seen in many of [Apple's Core Data examples](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreData/nsfetchedresultscontroller.html)), you can retrieve all of the *Person* entities from your persistent store using the following method:
 
 ```objective-c
 NSArray *people = [Person MR_findAll];
