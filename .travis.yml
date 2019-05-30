@@ -22,12 +22,12 @@ matrix:
     #  xcode_scheme: libMagicalRecord for iOS
     #  xcode_destination: platform=iOS Simulator,OS=11.4,name=iPhone X
     #  env: DEVICE="iPhone X (11.4)"
-    #BROKEN like below and by testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented & testSaveToPersistentStoreWhenSaveIsSynchronous (since iOS 10.0)
+    #BROKEN like below and by testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented (since iOS 10.0)
     #- osx_image: xcode10.2
     #  xcode_scheme: MagicalRecord for iOS
     #  xcode_destination: platform=iOS Simulator,OS=10.3.1,name=iPhone 7 Plus
     #  env: DEVICE="iPhone 7 Plus (10.3.1)"
-    #BROKEN like below and by testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented & testSaveToPersistentStoreWhenSaveIsSynchronous (since iOS 10.0)
+    #BROKEN like below and by testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented (since iOS 10.0)
     #- osx_image: xcode10.2
     #  xcode_scheme: libMagicalRecord for iOS
     #  xcode_destination: platform=iOS Simulator,OS=10.3.1,name=iPhone 7 Plus
@@ -52,12 +52,12 @@ matrix:
     #  xcode_scheme: libMagicalRecord for iOS
     #  xcode_destination: platform=iOS Simulator,OS=8.1,name=iPhone 4s
     #  env: DEVICE="iPhone 4s (8.1)"
-    #BROKEN by testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented & testSaveToPersistentStoreWhenSaveIsSynchronous (since iOS 10.0)
+    #BROKEN by testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented (since iOS 10.0)
     #- osx_image: xcode10.1
     #  xcode_scheme: MagicalRecord for iOS
     #  xcode_destination: platform=iOS Simulator,OS=10.3.1,name=iPhone 7 Plus
     #  env: DEVICE="iPhone 7 Plus (10.3.1)"
-    #BROKEN by testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented & testSaveToPersistentStoreWhenSaveIsSynchronous (since iOS 10.0)
+    #BROKEN by testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented (since iOS 10.0)
     #- osx_image: xcode10.1
     #  xcode_scheme: libMagicalRecord for iOS
     #  xcode_destination: platform=iOS Simulator,OS=10.3.1,name=iPhone 7 Plus
@@ -98,12 +98,12 @@ matrix:
     #  xcode_scheme: libMagicalRecord for OS X
     #  xcode_destination: platform=macOS
     #  env: DEVICE="OS X 10.13"
-    #BROKEN by testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented & testSaveToPersistentStoreWhenSaveIsSynchronous (since OS X 10.12)
+    #BROKEN by testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented (since OS X 10.12)
     #- osx_image: xcode8.3
     #  xcode_scheme: MagicalRecord for OS X
     #  xcode_destination: platform=macOS
     #  env: DEVICE="OS X 10.12"
-    #BROKEN by testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented & testSaveToPersistentStoreWhenSaveIsSynchronous (since OS X 10.12)
+    #BROKEN by testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented (since OS X 10.12)
     #- osx_image: xcode8.3
     #  xcode_scheme: libMagicalRecord for OS X
     #  xcode_destination: platform=macOS
