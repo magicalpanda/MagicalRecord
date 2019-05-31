@@ -21,15 +21,15 @@
 
 - (void)testLongFormMethodsAreStillAvailableWhenShorthandIsEnabled
 {
-    expect([NSManagedObjectContext class]).to.respondTo(@selector(MR_rootSavingContext));
-    expect([NSManagedObjectContext MR_rootSavingContext]).to.respondTo(@selector(MR_saveWithBlock:));
+    XCTAssertTrue([[NSManagedObjectContext class] respondsToSelector:@selector(MR_rootSavingContext)]);
+    XCTAssertTrue([[NSManagedObjectContext MR_rootSavingContext] respondsToSelector:@selector(MR_saveWithBlock:)]);
 }
 
 - (void)testShorthandMethodsAreAvailableWhenEnabled
 {
-    expect([NSManagedObjectContext class]).to.respondTo(@selector(rootSavingContext));
-    expect([NSManagedObjectContext rootSavingContext]).toNot.beNil();
-    expect([NSManagedObjectContext rootSavingContext]).to.respondTo(@selector(saveWithBlock:));
+    XCTAssertTrue([[NSManagedObjectContext class] respondsToSelector:@selector(rootSavingContext)]);
+    XCTAssertNotNil([NSManagedObjectContext rootSavingContext]);
+    XCTAssertTrue([[NSManagedObjectContext rootSavingContext] respondsToSelector:@selector(saveWithBlock:)]);
 }
 
 @end

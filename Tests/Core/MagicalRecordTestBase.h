@@ -5,7 +5,6 @@
 
 #import <XCTest/XCTest.h>
 #import <CoreData/CoreData.h>
-#import <Expecta/Expecta.h>
 #import <MagicalRecord/MagicalRecord.h>
 
 @interface MagicalRecordTestBase : XCTestCase

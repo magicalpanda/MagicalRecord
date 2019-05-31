@@ -203,10 +203,6 @@
 		902CE12D18F61A2F0024F47C /* MagicalRecord+ActionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 902CE12B18F61A2F0024F47C /* MagicalRecord+ActionsTests.m */; };
 		902CE13918F61E410024F47C /* NSManagedObjectContext+MagicalSavesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 902CE13818F61E410024F47C /* NSManagedObjectContext+MagicalSavesTests.m */; };
 		902CE13A18F61E410024F47C /* NSManagedObjectContext+MagicalSavesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 902CE13818F61E410024F47C /* NSManagedObjectContext+MagicalSavesTests.m */; };
-		903125A11B10384A000E8841 /* Expecta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 903125941B103812000E8841 /* Expecta.framework */; };
-		903125A21B103860000E8841 /* Expecta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 903125921B103812000E8841 /* Expecta.framework */; };
-		903125A31B103881000E8841 /* libExpecta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9031259A1B103812000E8841 /* libExpecta.a */; };
-		903125A41B103886000E8841 /* libExpecta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9031259C1B103812000E8841 /* libExpecta.a */; };
 		90542E121863F20900916224 /* MagicalDataImportTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF978E174982AD008D9D13 /* MagicalDataImportTestCase.m */; };
 		90542E131863F20900916224 /* MagicalDataImportTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF978E174982AD008D9D13 /* MagicalDataImportTestCase.m */; };
 		90542E141863F20C00916224 /* ImportSingleEntityWithNoRelationshipsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CF978B174982AD008D9D13 /* ImportSingleEntityWithNoRelationshipsTests.m */; };
@@ -337,8 +333,6 @@
 		905D07C51A63DF130076B54E /* MagicalRecord+iCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CA150F832A00216827 /* MagicalRecord+iCloud.m */; };
 		905D07C61A63DF130076B54E /* MagicalRecord+Options.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CC150F832A00216827 /* MagicalRecord+Options.m */; };
 		905D07C71A63DF130076B54E /* MagicalRecord+Setup.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DD72CE150F832A00216827 /* MagicalRecord+Setup.m */; };
-		9088CFC61B1043F500E51758 /* Expecta.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 903125921B103812000E8841 /* Expecta.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9088CFC71B10440800E51758 /* Expecta.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 903125941B103812000E8841 /* Expecta.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9099490A17C2F3D400BC2B5C /* TestModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9099490817C2F3D400BC2B5C /* TestModel.xcdatamodeld */; };
 		9099490B17C2F3D400BC2B5C /* TestModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9099490817C2F3D400BC2B5C /* TestModel.xcdatamodeld */; };
 		9099493917C2F42100BC2B5C /* _AbstractRelatedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9099490E17C2F42100BC2B5C /* _AbstractRelatedEntity.m */; };
@@ -551,7 +545,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9088CFC71B10440800E51758 /* Expecta.framework in Copy Frameworks */,
 				9004F57A1A94D7D300A61312 /* MagicalRecord.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -563,7 +556,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9088CFC61B1043F500E51758 /* Expecta.framework in Copy Frameworks */,
 				9004F57D1A94D7F100A61312 /* MagicalRecord.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -696,7 +688,6 @@
 		9099493617C2F42100BC2B5C /* SingleEntityWithNoRelationships.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleEntityWithNoRelationships.m; sourceTree = "<group>"; };
 		9099493717C2F42100BC2B5C /* SingleRelatedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleRelatedEntity.h; sourceTree = "<group>"; };
 		9099493817C2F42100BC2B5C /* SingleRelatedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleRelatedEntity.m; sourceTree = "<group>"; };
-		90A0DE031C50D59300CF5A5A /* Cartfile.private */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.private; sourceTree = SOURCE_ROOT; };
 		90A0DE051C50D59300CF5A5A /* MagicalRecord.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = MagicalRecord.podspec; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		90AA771718F79A3300D49377 /* NSManagedObject+MagicalRecordTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+MagicalRecordTests.m"; sourceTree = "<group>"; };
 		90AA772318F79CCC00D49377 /* EntityWithoutEntityNameMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityWithoutEntityNameMethod.h; sourceTree = "<group>"; };
@@ -800,7 +791,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9004F5231A94CBF300A61312 /* MagicalRecord.framework in Frameworks */,
-				903125A11B10384A000E8841 /* Expecta.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -808,7 +798,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				903125A21B103860000E8841 /* Expecta.framework in Frameworks */,
 				9004F5681A94CC0E00A61312 /* MagicalRecord.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -845,7 +834,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				903125A41B103886000E8841 /* libExpecta.a in Frameworks */,
 				9004F4DF1A94C76E00A61312 /* libMagicalRecord.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -854,7 +842,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				903125A31B103881000E8841 /* libExpecta.a in Frameworks */,
 				9004F4DE1A94C76A00A61312 /* libMagicalRecord.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -889,7 +876,6 @@
 		90425374187102DC0066DA41 /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				90A0DE031C50D59300CF5A5A /* Cartfile.private */,
 				90A0DE051C50D59300CF5A5A /* MagicalRecord.podspec */,
 				905D07C91A63DFED0076B54E /* Info.plist */,
 			);
