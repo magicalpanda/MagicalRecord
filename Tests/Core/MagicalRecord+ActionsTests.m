@@ -21,13 +21,13 @@
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
         NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
 
-        expect([inserted hasChanges]).to.beTruthy();
+        XCTAssertTrue(inserted.hasChanges);
 
         [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
         objectId = [inserted objectID];
     }];
 
-    expect(objectId).toNot.beNil();
+    XCTAssertNotNil(objectId);
 
     XCTestExpectation *rootSavingExpectation = [self expectationWithDescription:@"Root Saving Context Fetch Object"];
     NSManagedObjectContext *rootSavingContext = [NSManagedObjectContext MR_rootSavingContext];
@@ -36,9 +36,9 @@
         NSError *fetchError;
         NSManagedObject *fetchedObject = [rootSavingContext existingObjectWithID:objectId error:&fetchError];
 
-        expect(fetchedObject).toNot.beNil();
-        expect(fetchError).to.beNil();
-        expect([fetchedObject hasChanges]).to.beFalsy();
+        XCTAssertNotNil(fetchedObject);
+        XCTAssertNil(fetchError);
+        XCTAssertFalse(fetchedObject.hasChanges);
 
         [rootSavingExpectation fulfill];
     }];
@@ -53,13 +53,13 @@
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
         NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
 
-        expect([inserted hasChanges]).to.beTruthy();
+        XCTAssertTrue(inserted.hasChanges);
 
         [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
         objectId = [inserted objectID];
     }];
 
-    expect(objectId).toNot.beNil();
+    XCTAssertNotNil(objectId);
 
     XCTestExpectation *rootSavingExpectation = [self expectationWithDescription:@"Root Saving Context Fetch Object"];
     NSManagedObjectContext *rootSavingContext = [NSManagedObjectContext MR_rootSavingContext];
@@ -68,9 +68,9 @@
         NSError *fetchError;
         NSManagedObject *fetchedObject = [rootSavingContext existingObjectWithID:objectId error:&fetchError];
 
-        expect(fetchedObject).toNot.beNil();
-        expect(fetchError).to.beNil();
-        expect([fetchedObject hasChanges]).to.beFalsy();
+        XCTAssertNotNil(fetchedObject);
+        XCTAssertNil(fetchError);
+        XCTAssertFalse(fetchedObject.hasChanges);
 
         [rootSavingExpectation fulfill];
     }];
@@ -90,7 +90,7 @@
 
         [inserted setValue:@YES forKey:kTestAttributeKey];
 
-        expect([inserted hasChanges]).to.beTruthy();
+        XCTAssertTrue(inserted.hasChanges);
 
         [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
         objectId = [inserted objectID];
@@ -101,7 +101,7 @@
 
     [rootSavingContext performBlock:^{
         fetchedObject = [rootSavingContext objectWithID:objectId];
-        expect([fetchedObject valueForKey:kTestAttributeKey]).to.beTruthy();
+        XCTAssertTrue([fetchedObject valueForKey:kTestAttributeKey]);
 
         [rootSavingExpectation fulfill];
     }];
@@ -120,7 +120,7 @@
         fetchedObject = [rootSavingContext objectWithID:objectId];
 
         // Async since the merge to the main thread context after persistence
-        expect([fetchedObject valueForKey:kTestAttributeKey]).to.beFalsy();
+        XCTAssertEqualObjects([fetchedObject valueForKey:kTestAttributeKey], @NO);
 
         [rootSavingExpectation fulfill];
     }];
@@ -141,19 +141,19 @@
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
         NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
 
-        expect([inserted hasChanges]).to.beTruthy();
+        XCTAssertTrue(inserted.hasChanges);
 
-        expect([localContext obtainPermanentIDsForObjects:@[inserted] error:nil]).to.beTruthy();
+        XCTAssertTrue([localContext obtainPermanentIDsForObjects:@[inserted] error:nil]);
         objectId = [inserted objectID];
 
-        expect(objectId).toNot.beNil();
-        expect(objectId.isTemporaryID).to.beFalsy();
+        XCTAssertNotNil(objectId);
+        XCTAssertFalse(objectId.isTemporaryID);
     } completion:^(BOOL contextDidSave, NSError *error) {
         saveSuccessState = contextDidSave;
         saveError = error;
 
-        expect(saveSuccessState).to.beTruthy();
-        expect(saveError).to.beNil();
+        XCTAssertTrue(saveSuccessState);
+        XCTAssertNil(saveError);
 
         NSManagedObjectContext *rootSavingContext = [NSManagedObjectContext MR_rootSavingContext];
 
@@ -161,9 +161,9 @@
             NSError *existingObjectError;
             NSManagedObject *existingObject = [rootSavingContext existingObjectWithID:objectId error:&existingObjectError];
 
-            expect(existingObject).toNot.beNil();
-            expect([existingObject hasChanges]).to.beFalsy();
-            expect(existingObjectError).to.beNil();
+            XCTAssertNotNil(existingObject);
+            XCTAssertFalse(existingObject.hasChanges);
+            XCTAssertNil(existingObjectError);
 
             [expectation fulfill];
         }];
@@ -179,7 +179,7 @@
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
         [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
     } completion:^(BOOL contextDidSave, NSError *error) {
-        expect([NSThread isMainThread]).to.beTruthy();
+        XCTAssertTrue(NSThread.isMainThread);
 
         [expectation fulfill];
     }];
@@ -196,19 +196,19 @@
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
         NSManagedObject *inserted = [SingleEntityWithNoRelationships MR_createEntityInContext:localContext];
 
-        expect([inserted hasChanges]).to.beTruthy();
+        XCTAssertTrue(inserted.hasChanges);
 
         [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
         objectId = [inserted objectID];
     } completion:^(BOOL contextDidSave, NSError *error) {
-        expect(contextDidSave).to.beTruthy();
+        XCTAssertTrue(contextDidSave);
 
         NSManagedObjectContext *rootSavingContext = [NSManagedObjectContext MR_rootSavingContext];
 
         [rootSavingContext performBlock:^{
             NSManagedObject *fetchedObject = [rootSavingContext objectWithID:objectId];
-            expect(fetchedObject).toNot.beNil();
-            expect([fetchedObject hasChanges]).to.beFalsy();
+            XCTAssertNotNil(fetchedObject);
+            XCTAssertFalse(fetchedObject.hasChanges);
 
             [contextSavedExpectation fulfill];
         }];
@@ -229,7 +229,7 @@
 
         [inserted setValue:@YES forKey:kTestAttributeKey];
 
-        expect([inserted hasChanges]).to.beTruthy();
+        XCTAssertTrue(inserted.hasChanges);
 
         [localContext obtainPermanentIDsForObjects:@[inserted] error:nil];
         objectId = [inserted objectID];
@@ -239,7 +239,7 @@
 
     [rootSavingContext performBlockAndWait:^{
         fetchedObject = [[NSManagedObjectContext MR_rootSavingContext] objectWithID:objectId];
-        expect([fetchedObject valueForKey:kTestAttributeKey]).to.beTruthy();
+        XCTAssertTrue([fetchedObject valueForKey:kTestAttributeKey]);
     }];
 
     XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for managed object context"];
@@ -251,8 +251,8 @@
     } completion:^(BOOL contextDidSave, NSError *error) {
         [rootSavingContext performBlock:^{
             fetchedObject = [rootSavingContext objectWithID:objectId];
-            expect(fetchedObject).toNot.beNil();
-            expect([fetchedObject valueForKey:kTestAttributeKey]).to.beFalsy();
+            XCTAssertNotNil(fetchedObject);
+            XCTAssertEqualObjects([fetchedObject valueForKey:kTestAttributeKey], @NO);
 
             [expectation fulfill];
         }];
