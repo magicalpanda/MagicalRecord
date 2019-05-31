@@ -20,9 +20,10 @@
     XCTestExpectation *childContextSavedExpectation = [self expectationWithDescription:@"Child Context Did Save"];
 
     __block NSManagedObjectID *insertedObjectID;
+    __block SingleEntityWithNoRelationships *insertedObject;
 
     [childContext performBlockAndWait:^{
-        SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
+        insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
 
         expect([insertedObject hasChanges]).to.beTruthy();
 
@@ -149,9 +150,10 @@
     NSManagedObjectContext *childContext = [NSManagedObjectContext MR_contextWithParent:parentContext];
 
     __block NSManagedObjectID *insertedObjectID;
+    __block SingleEntityWithNoRelationships *insertedObject;
 
     [childContext performBlockAndWait:^{
-        SingleEntityWithNoRelationships *insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
+        insertedObject = [SingleEntityWithNoRelationships MR_createEntityInContext:childContext];
 
         expect([insertedObject hasChanges]).to.beTruthy();
 
