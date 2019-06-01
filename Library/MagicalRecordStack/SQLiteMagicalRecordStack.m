@@ -91,7 +91,7 @@
     if (self)
     {
         _storeURL = url;
-        self.model = model;
+         self.model = model;
     }
     return self;
 }

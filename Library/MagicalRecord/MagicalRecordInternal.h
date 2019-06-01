@@ -8,7 +8,8 @@
 /**
  @since Available in v2.0 and later.
  */
-@interface MagicalRecord : NSObject
+NS_ROOT_CLASS
+@interface MagicalRecord
 
 /**
  Cleans up by setting the default stack to nil.

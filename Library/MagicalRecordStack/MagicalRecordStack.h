@@ -8,8 +8,8 @@
 
 @property (readwrite, nonnull, nonatomic, copy) NSString *stackName;
 
-@property (readwrite, nonnull, nonatomic, strong) NSManagedObjectContext *context;
-@property (readwrite, nonnull, nonatomic, strong) NSManagedObjectModel *model;
+@property (readwrite, null_resettable, nonatomic, strong) NSManagedObjectContext *context;
+@property (readwrite, null_resettable, nonatomic, strong) NSManagedObjectModel *model;
 @property (readwrite, nonnull, nonatomic, strong) NSPersistentStoreCoordinator *coordinator;
 @property (readwrite, nullable, nonatomic, strong) NSPersistentStore *store;
 
