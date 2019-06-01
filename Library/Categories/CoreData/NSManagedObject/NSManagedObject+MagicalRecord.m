@@ -103,7 +103,7 @@
     return [self MR_executeFetchRequest:request inContext:[[MagicalRecordStack defaultStack] context]];
 }
 
-+ (id)MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
++ (nullable id)MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
 {
     [request setFetchLimit:1];
 
@@ -115,7 +115,7 @@
     return [results objectAtIndex:0];
 }
 
-+ (id)MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request
++ (nullable id)MR_executeFetchRequestAndReturnFirstObject:(NSFetchRequest *)request
 {
     return [self MR_executeFetchRequestAndReturnFirstObject:request inContext:[[MagicalRecordStack defaultStack] context]];
 }
