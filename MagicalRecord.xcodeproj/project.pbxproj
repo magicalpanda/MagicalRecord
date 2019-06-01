@@ -479,65 +479,6 @@
 		C7CF9B6617498986008D9D13 /* SingleRelatedEntity.json in Resources */ = {isa = PBXBuildFile; fileRef = C7CF9B5217498985008D9D13 /* SingleRelatedEntity.json */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		903125911B103812000E8841 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 903125861B103812000E8841 /* Expecta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 908379791A8B972C009844DA;
-			remoteInfo = Expecta;
-		};
-		903125931B103812000E8841 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 903125861B103812000E8841 /* Expecta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 908379111A8B9660009844DA;
-			remoteInfo = "Expecta-iOS";
-		};
-		903125951B103812000E8841 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 903125861B103812000E8841 /* Expecta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3A0A598C1AD4418C003DA3E4;
-			remoteInfo = ExpectaTests;
-		};
-		903125971B103812000E8841 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 903125861B103812000E8841 /* Expecta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3A0A59BF1AD441CB003DA3E4;
-			remoteInfo = "Expecta-iOSTests";
-		};
-		903125991B103812000E8841 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 903125861B103812000E8841 /* Expecta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E9ACDF0C13B2DD520010F4D7;
-			remoteInfo = libExpecta;
-		};
-		9031259B1B103812000E8841 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 903125861B103812000E8841 /* Expecta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E93067CE13B2E6D100EA26FF;
-			remoteInfo = "libExpecta-iOS";
-		};
-		9031259D1B103812000E8841 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 903125861B103812000E8841 /* Expecta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9C4416F917FF3F4A00978F09;
-			remoteInfo = libExpectaTests;
-		};
-		9031259F1B103812000E8841 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 903125861B103812000E8841 /* Expecta.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E93067DA13B2E6D100EA26FF;
-			remoteInfo = "libExpecta-iOSTests";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		9004F5791A94D7C500A61312 /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -635,7 +576,6 @@
 		902CE11E18F6133E0024F47C /* MagicalRecordDeprecationMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordDeprecationMacros.h; sourceTree = "<group>"; };
 		902CE12B18F61A2F0024F47C /* MagicalRecord+ActionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MagicalRecord+ActionsTests.m"; sourceTree = "<group>"; };
 		902CE13818F61E410024F47C /* NSManagedObjectContext+MagicalSavesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+MagicalSavesTests.m"; sourceTree = "<group>"; };
-		903125861B103812000E8841 /* Expecta.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Expecta.xcodeproj; path = Carthage/Checkouts/expecta/Expecta.xcodeproj; sourceTree = SOURCE_ROOT; };
 		90425379187103D00066DA41 /* MagicalRecordTests-iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagicalRecordTests-iOS-Info.plist"; sourceTree = "<group>"; };
 		9042537A187103D00066DA41 /* MagicalRecordTests-iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MagicalRecordTests-iOS-Prefix.pch"; sourceTree = "<group>"; };
 		9042537B187103D00066DA41 /* MagicalRecordTests-OSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagicalRecordTests-OSX-Info.plist"; sourceTree = "<group>"; };
@@ -858,21 +798,6 @@
 			name = Abstract;
 			sourceTree = "<group>";
 		};
-		903125871B103812000E8841 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				903125921B103812000E8841 /* Expecta.framework */,
-				903125941B103812000E8841 /* Expecta.framework */,
-				903125961B103812000E8841 /* ExpectaTests.xctest */,
-				903125981B103812000E8841 /* Expecta-iOSTests.xctest */,
-				9031259A1B103812000E8841 /* libExpecta.a */,
-				9031259C1B103812000E8841 /* libExpecta.a */,
-				9031259E1B103812000E8841 /* libExpectaTests.xctest */,
-				903125A01B103812000E8841 /* libExpecta-iOSTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		90425374187102DC0066DA41 /* Support */ = {
 			isa = PBXGroup;
 			children = (
@@ -893,14 +818,6 @@
 				9042537C187103D00066DA41 /* MagicalRecordTests-OSX-Prefix.pch */,
 			);
 			path = Support;
-			sourceTree = "<group>";
-		};
-		907DABF31AFB204D003D7BB4 /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				903125861B103812000E8841 /* Expecta.xcodeproj */,
-			);
-			name = Vendor;
 			sourceTree = "<group>";
 		};
 		9099490C17C2F42100BC2B5C /* TestModel */ = {
@@ -998,7 +915,6 @@
 				C7CF9785174982AD008D9D13 /* DataImport */,
 				C77E5FA913D0CBE300298F87 /* Fixtures */,
 				90425378187103D00066DA41 /* Support */,
-				907DABF31AFB204D003D7BB4 /* Vendor */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1483,12 +1399,6 @@
 			mainGroup = C721C7A013D0A3750097AB6F;
 			productRefGroup = C721C7B113D0A3AF0097AB6F /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 903125871B103812000E8841 /* Products */;
-					ProjectRef = 903125861B103812000E8841 /* Expecta.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				905D07171A63DE190076B54E /* MagicalRecord for iOS */,
@@ -1502,65 +1412,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		903125921B103812000E8841 /* Expecta.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Expecta.framework;
-			remoteRef = 903125911B103812000E8841 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		903125941B103812000E8841 /* Expecta.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Expecta.framework;
-			remoteRef = 903125931B103812000E8841 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		903125961B103812000E8841 /* ExpectaTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = ExpectaTests.xctest;
-			remoteRef = 903125951B103812000E8841 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		903125981B103812000E8841 /* Expecta-iOSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Expecta-iOSTests.xctest";
-			remoteRef = 903125971B103812000E8841 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9031259A1B103812000E8841 /* libExpecta.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libExpecta.a;
-			remoteRef = 903125991B103812000E8841 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9031259C1B103812000E8841 /* libExpecta.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libExpecta.a;
-			remoteRef = 9031259B1B103812000E8841 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9031259E1B103812000E8841 /* libExpectaTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = libExpectaTests.xctest;
-			remoteRef = 9031259D1B103812000E8841 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		903125A01B103812000E8841 /* libExpecta-iOSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "libExpecta-iOSTests.xctest";
-			remoteRef = 9031259F1B103812000E8841 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9004F5111A94CBCF00A61312 /* Resources */ = {
