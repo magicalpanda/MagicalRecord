@@ -18,6 +18,8 @@
 
 - (void)testChainSave
 {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Chain Save Completed"];
+    
     //Test if a new Object can save from child context to parent context
     __block NSManagedObjectID *childObjectID;
 
@@ -46,11 +48,15 @@
 
         XCTAssertNotNil(parentObject);
 
-        SingleEntityWithNoRelationships *rootObject = (SingleEntityWithNoRelationships *)[[NSManagedObjectContext MR_rootSavingContext] objectWithID:childObjectID];
+        NSManagedObjectContext *rootSavingContext = [NSManagedObjectContext MR_rootSavingContext];
+        SingleEntityWithNoRelationships *rootObject = (SingleEntityWithNoRelationships *)[rootSavingContext objectWithID:childObjectID];
 
         XCTAssertNotNil(rootObject);
 
+        [expectation fulfill];
     }];
+    
+    [self waitForExpectationsWithTimeout:5.0f handler:nil];
 }
 
 @end
