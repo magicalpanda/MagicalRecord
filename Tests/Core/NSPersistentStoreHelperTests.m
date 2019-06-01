@@ -14,18 +14,17 @@
 
 @end
 
-@implementation NSPersistentStoreHelperTests
+@interface NSPersistentStore (MagicalRecordPrivate)
++ (NSString *)MR_applicationStorageDirectory;
+@end
 
-- (NSString *) applicationStorageDirectory
-{
-    return [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) firstObject];
-}
+@implementation NSPersistentStoreHelperTests
 
 #if TARGET_OS_IPHONE
 
 - (void) testDefaultStoreFolderForiOSDevicesIsTheApplicationSupportFolder
 {
-    NSString *applicationLibraryDirectory = [self applicationStorageDirectory];
+    NSString *applicationLibraryDirectory = [NSPersistentStore MR_applicationStorageDirectory];
     NSString *expectedStorePath = [applicationLibraryDirectory stringByAppendingPathComponent:kMagicalRecordDefaultStoreFileName];
     NSURL *expectedStoreUrl = [NSURL fileURLWithPath:expectedStorePath];
     NSURL *defaultStoreUrl = [NSPersistentStore MR_defaultLocalStoreUrl];
@@ -36,7 +35,7 @@
 - (void) testCanFindAURLInTheLibraryForiOSForASpecifiedStoreName
 {
     NSString *storeFileName = @"NotTheDefaultStoreName.storefile";
-    NSString *applicationLibraryDirectory = [self applicationStorageDirectory];
+    NSString *applicationLibraryDirectory = [NSPersistentStore MR_applicationStorageDirectory];
     NSString *expectedStorePath = [applicationLibraryDirectory stringByAppendingPathComponent:storeFileName];
 
     BOOL fileWasCreated = [[NSFileManager defaultManager] createFileAtPath:expectedStorePath contents:[storeFileName dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
