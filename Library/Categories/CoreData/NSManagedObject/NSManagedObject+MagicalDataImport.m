@@ -279,13 +279,14 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
     {
         relatedValue = singleRelatedObjectData;
     }
-    else if ([singleRelatedObjectData isKindOfClass:[NSDictionary class]])
-    {
-        relatedValue = [singleRelatedObjectData MR_relatedValueForRelationship:relationshipInfo];
-    }
+//    else if ([singleRelatedObjectData isKindOfClass:[NSDictionary class]])
+//    {
+//        relatedValue = [singleRelatedObjectData MR_relatedValueForRelationship:relationshipInfo];
+//    }
     else
     {
-        relatedValue = singleRelatedObjectData;
+//        relatedValue = singleRelatedObjectData;
+        relatedValue = [singleRelatedObjectData MR_relatedValueForRelationship:relationshipInfo];
     }
 
     if (relatedValue)
