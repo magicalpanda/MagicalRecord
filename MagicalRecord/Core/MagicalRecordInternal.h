@@ -42,7 +42,7 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext * __MR_nonnull context);
 
  @since Available in v1.0 and later.
  */
-NS_ROOT_CLASS @interface MagicalRecord
+@interface MagicalRecord : NSObject
 
 /**
  Returns the current version of MagicalRecord. See the MagicalRecordVersionTag enumeration for valid current and historical values.
