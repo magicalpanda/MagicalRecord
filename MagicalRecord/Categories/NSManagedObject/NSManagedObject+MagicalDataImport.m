@@ -224,7 +224,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     }
 }
 
-- (BOOL) MR_preImport:(id)objectData;
+- (BOOL) MR_preImport:(id)objectData
 {
     if ([self respondsToSelector:@selector(shouldImport:)])
     {
@@ -243,7 +243,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     return YES;
 }
 
-- (BOOL) MR_postImport:(id)objectData;
+- (BOOL) MR_postImport:(id)objectData
 {
     if ([self respondsToSelector:@selector(didImport:)])
     {
@@ -253,7 +253,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
     return YES;
 }
 
-- (BOOL) MR_performDataImportFromObject:(id)objectData relationshipBlock:(void(^)(NSRelationshipDescription*, id))relationshipBlock;
+- (BOOL) MR_performDataImportFromObject:(id)objectData relationshipBlock:(void(^)(NSRelationshipDescription*, id))relationshipBlock
 {
     BOOL didStartImporting = [self MR_preImport:objectData];
     if (!didStartImporting) return NO;
@@ -301,7 +301,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
                               }];
 }
 
-+ (id) MR_importFromObject:(id)objectData inContext:(NSManagedObjectContext *)context;
++ (id) MR_importFromObject:(id)objectData inContext:(NSManagedObjectContext *)context
 {
     __block NSManagedObject *managedObject;
 

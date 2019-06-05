@@ -38,7 +38,7 @@
 	return [NSNumber numberWithUnsignedInteger:[self MR_countOfEntitiesWithPredicate:searchTerm inContext:context]];
 }
 
-+ (NSNumber *) MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm;
++ (NSNumber *) MR_numberOfEntitiesWithPredicate:(NSPredicate *)searchTerm
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -47,7 +47,7 @@
 #pragma clang diagnostic pop
 }
 
-+ (NSUInteger) MR_countOfEntities;
++ (NSUInteger) MR_countOfEntities
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -55,12 +55,12 @@
 #pragma clang diagnostic pop
 }
 
-+ (NSUInteger) MR_countOfEntitiesWithContext:(NSManagedObjectContext *)context;
++ (NSUInteger) MR_countOfEntitiesWithContext:(NSManagedObjectContext *)context
 {
     return [self MR_countOfEntitiesWithPredicate:nil inContext:context];
 }
 
-+ (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter;
++ (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -68,7 +68,7 @@
 #pragma clang diagnostic pop
 }
 
-+ (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter inContext:(NSManagedObjectContext *)context;
++ (NSUInteger) MR_countOfEntitiesWithPredicate:(NSPredicate *)searchFilter inContext:(NSManagedObjectContext *)context
 {
 	NSError *error = nil;
 	NSFetchRequest *request = [self MR_createFetchRequestInContext:context];
@@ -162,7 +162,7 @@
 #pragma clang diagnostic pop
 }
 
-+ (NSArray *) MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString *)groupingKeyPath inContext:(NSManagedObjectContext *)context;
++ (NSArray *) MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString *)groupingKeyPath inContext:(NSManagedObjectContext *)context
 {
     NSExpression *expression = [NSExpression expressionForFunction:collectionOperator arguments:[NSArray arrayWithObject:[NSExpression expressionForKeyPath:attributeName]]];
 
@@ -185,7 +185,7 @@
     return results;
 }
 
-+ (NSArray *) MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString *)groupingKeyPath;
++ (NSArray *) MR_aggregateOperation:(NSString *)collectionOperator onAttribute:(NSString *)attributeName withPredicate:(NSPredicate *)predicate groupBy:(NSString *)groupingKeyPath
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"

@@ -13,12 +13,12 @@
 
 #pragma mark - Asynchronous saving
 
-+ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block;
++ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block
 {
     [self saveWithBlock:block completion:nil];
 }
 
-+ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
++ (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion
 {
     NSManagedObjectContext *savingContext  = [NSManagedObjectContext MR_rootSavingContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:savingContext];
@@ -36,7 +36,7 @@
 
 #pragma mark - Synchronous saving
 
-+ (void) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block;
++ (void) saveWithBlockAndWait:(void(^)(NSManagedObjectContext *localContext))block
 {
     NSManagedObjectContext *savingContext  = [NSManagedObjectContext MR_rootSavingContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:savingContext];
@@ -57,7 +57,7 @@
 #pragma mark - Deprecated Methods — DO NOT USE
 @implementation MagicalRecord (ActionsDeprecated)
 
-+ (void) saveUsingCurrentThreadContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion;
++ (void) saveUsingCurrentThreadContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(MRSaveCompletionHandler)completion
 {
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
 
@@ -72,7 +72,7 @@
     }];
 }
 
-+ (void) saveUsingCurrentThreadContextWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block;
++ (void) saveUsingCurrentThreadContextWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block
 {
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
 
@@ -114,7 +114,7 @@
     }];
 }
 
-+ (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *error))errorHandler;
++ (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *error))errorHandler
 {
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextForCurrentThread];
 

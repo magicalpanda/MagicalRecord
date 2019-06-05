@@ -28,7 +28,7 @@ static volatile int32_t contextsCacheVersion = 0;
 	OSAtomicIncrement32(&contextsCacheVersion);
 }
 
-+ (NSManagedObjectContext *) MR_contextForCurrentThread;
++ (NSManagedObjectContext *) MR_contextForCurrentThread
 {
 	if ([NSThread isMainThread])
 	{

@@ -25,42 +25,42 @@ static BOOL kMagicalRecordShouldDeleteStoreOnModelMismatch = NO;
 
 #pragma mark - Configuration Options
 
-+ (BOOL) shouldAutoCreateManagedObjectModel;
++ (BOOL) shouldAutoCreateManagedObjectModel
 {
     return kMagicalRecordShouldAutoCreateManagedObjectModel;
 }
 
-+ (void) setShouldAutoCreateManagedObjectModel:(BOOL)autoCreate;
++ (void) setShouldAutoCreateManagedObjectModel:(BOOL)autoCreate
 {
     kMagicalRecordShouldAutoCreateManagedObjectModel = autoCreate;
 }
 
-+ (BOOL) shouldAutoCreateDefaultPersistentStoreCoordinator;
++ (BOOL) shouldAutoCreateDefaultPersistentStoreCoordinator
 {
     return kMagicalRecordShouldAutoCreateDefaultPersistentStoreCoordinator;
 }
 
-+ (void) setShouldAutoCreateDefaultPersistentStoreCoordinator:(BOOL)autoCreate;
++ (void) setShouldAutoCreateDefaultPersistentStoreCoordinator:(BOOL)autoCreate
 {
     kMagicalRecordShouldAutoCreateDefaultPersistentStoreCoordinator = autoCreate;
 }
 
-+ (BOOL) shouldDeleteStoreOnModelMismatch;
++ (BOOL) shouldDeleteStoreOnModelMismatch
 {
     return kMagicalRecordShouldDeleteStoreOnModelMismatch;
 }
 
-+ (void) setShouldDeleteStoreOnModelMismatch:(BOOL)shouldDelete;
++ (void) setShouldDeleteStoreOnModelMismatch:(BOOL)shouldDelete
 {
     kMagicalRecordShouldDeleteStoreOnModelMismatch = shouldDelete;
 }
 
-+ (MagicalRecordLoggingLevel) loggingLevel;
++ (MagicalRecordLoggingLevel) loggingLevel
 {
     return kMagicalRecordLoggingLevel;
 }
 
-+ (void) setLoggingLevel:(MagicalRecordLoggingLevel)level;
++ (void) setLoggingLevel:(MagicalRecordLoggingLevel)level
 {
     kMagicalRecordLoggingLevel = level;
 }

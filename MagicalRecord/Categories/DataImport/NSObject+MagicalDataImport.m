@@ -18,7 +18,7 @@ NSUInteger const kMagicalRecordImportMaximumAttributeFailoverDepth = 10;
 
 @implementation NSObject (MagicalRecord_DataImport)
 
-- (NSString *) MR_lookupKeyForAttribute:(NSAttributeDescription *)attributeInfo;
+- (NSString *) MR_lookupKeyForAttribute:(NSAttributeDescription *)attributeInfo
 {
     NSString *attributeName = [attributeInfo name];
     NSString *lookupKey = [[attributeInfo userInfo] objectForKey:kMagicalRecordImportAttributeKeyMapKey] ?: attributeName;

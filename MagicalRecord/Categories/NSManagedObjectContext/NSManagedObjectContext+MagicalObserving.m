@@ -46,7 +46,7 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 
 #pragma mark - Context iCloud Merge Helpers
 
-- (void) MR_mergeChangesFromiCloud:(NSNotification *)notification;
+- (void) MR_mergeChangesFromiCloud:(NSNotification *)notification
 {
     [self performBlock:^{
         
@@ -64,7 +64,7 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
     }];
 }
 
-- (void) MR_mergeChangesFromNotification:(NSNotification *)notification;
+- (void) MR_mergeChangesFromNotification:(NSNotification *)notification
 {
 	MRLogVerbose(@"Merging changes to %@context%@",
           self == [NSManagedObjectContext MR_defaultContext] ? @"*** DEFAULT *** " : @"",
@@ -73,7 +73,7 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 	[self mergeChangesFromContextDidSaveNotification:notification];
 }
 
-- (void) MR_mergeChangesOnMainThread:(NSNotification *)notification;
+- (void) MR_mergeChangesOnMainThread:(NSNotification *)notification
 {
 	if ([NSThread isMainThread])
 	{
@@ -85,7 +85,7 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
 	}
 }
 
-- (void) MR_observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
+- (void) MR_observeiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
     if (![MagicalRecord isICloudEnabled]) return;
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
@@ -96,7 +96,7 @@ NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification = @"kMagica
     
 }
 
-- (void) MR_stopObservingiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator;
+- (void) MR_stopObservingiCloudChangesInCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
     if (![MagicalRecord isICloudEnabled]) return;
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];

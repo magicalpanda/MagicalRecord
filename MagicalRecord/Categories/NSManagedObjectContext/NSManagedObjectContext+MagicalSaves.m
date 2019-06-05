@@ -13,27 +13,27 @@
 
 @implementation NSManagedObjectContext (MagicalSaves)
 
-- (void) MR_saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion;
+- (void) MR_saveOnlySelfWithCompletion:(MRSaveCompletionHandler)completion
 {
     [self MR_saveWithOptions:MRSaveOptionNone completion:completion];
 }
 
-- (void) MR_saveOnlySelfAndWait;
+- (void) MR_saveOnlySelfAndWait
 {
     [self MR_saveWithOptions:MRSaveSynchronously completion:nil];
 }
 
-- (void) MR_saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion;
+- (void) MR_saveToPersistentStoreWithCompletion:(MRSaveCompletionHandler)completion
 {
     [self MR_saveWithOptions:MRSaveParentContexts completion:completion];
 }
 
-- (void) MR_saveToPersistentStoreAndWait;
+- (void) MR_saveToPersistentStoreAndWait
 {
     [self MR_saveWithOptions:MRSaveParentContexts | MRSaveSynchronously completion:nil];
 }
 
-- (void) MR_saveWithOptions:(MRSaveOptions)saveOptions completion:(MRSaveCompletionHandler)completion;
+- (void) MR_saveWithOptions:(MRSaveOptions)saveOptions completion:(MRSaveCompletionHandler)completion
 {
     __block BOOL hasChanges = NO;
 
@@ -138,12 +138,12 @@
 #pragma mark - Deprecated Methods — DO NOT USE
 @implementation NSManagedObjectContext (MagicalSavesDeprecated)
 
-- (void) MR_save;
+- (void) MR_save
 {
     [self MR_saveToPersistentStoreAndWait];
 }
 
-- (void) MR_saveWithErrorCallback:(void (^)(NSError *error))errorCallback;
+- (void) MR_saveWithErrorCallback:(void (^)(NSError *error))errorCallback
 {
     [self MR_saveWithOptions:MRSaveSynchronously | MRSaveParentContexts completion:^(BOOL contextDidSave, NSError *error) {
         if (!contextDidSave && errorCallback)
@@ -153,7 +153,7 @@
     }];
 }
 
-- (void) MR_saveInBackgroundCompletion:(void (^)(void))completion;
+- (void) MR_saveInBackgroundCompletion:(void (^)(void))completion
 {
     [self MR_saveOnlySelfWithCompletion:^(BOOL contextDidSave, NSError *error) {
         if (contextDidSave && completion)
@@ -163,7 +163,7 @@
     }];
 }
 
-- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback;
+- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback
 {
     [self MR_saveOnlySelfWithCompletion:^(BOOL contextDidSave, NSError *error) {
         if (!contextDidSave && errorCallback)
@@ -173,7 +173,7 @@
     }];
 }
 
-- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion;
+- (void) MR_saveInBackgroundErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion
 {
     [self MR_saveOnlySelfWithCompletion:^(BOOL contextDidSave, NSError *error) {
         if (contextDidSave && completion)
@@ -187,12 +187,12 @@
     }];
 }
 
-- (void) MR_saveNestedContexts;
+- (void) MR_saveNestedContexts
 {
     [self MR_saveToPersistentStoreWithCompletion:nil];
 }
 
-- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback;
+- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback
 {
     [self MR_saveToPersistentStoreWithCompletion:^(BOOL contextDidSave, NSError *error) {
         if (!contextDidSave && errorCallback)
@@ -202,7 +202,7 @@
     }];
 }
 
-- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion;
+- (void) MR_saveNestedContextsErrorHandler:(void (^)(NSError *error))errorCallback completion:(void (^)(void))completion
 {
     [self MR_saveToPersistentStoreWithCompletion:^(BOOL contextDidSave, NSError *error) {
         if (contextDidSave && completion)
