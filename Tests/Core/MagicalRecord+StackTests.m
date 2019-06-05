@@ -79,7 +79,7 @@
     [MagicalRecordTestHelpers removeStoreFilesForStoreAtURL:testStoreURL];
 }
 
-- (void) customErrorHandler:(id)error;
+- (void) customErrorHandler:(id)error
 {
 }
 

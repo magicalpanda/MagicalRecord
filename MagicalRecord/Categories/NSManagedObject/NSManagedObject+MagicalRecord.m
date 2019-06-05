@@ -13,7 +13,7 @@ static NSUInteger kMagicalRecordDefaultBatchSize = 20;
 
 @implementation NSManagedObject (MagicalRecord)
 
-+ (NSString *) MR_entityName;
++ (NSString *) MR_entityName
 {
     NSString *entityName;
 

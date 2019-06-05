@@ -40,7 +40,7 @@ NSString * const kMagicalRecordCleanedUpNotification = @"kMagicalRecordCleanedUp
                                     userInfo:nil];
 }
 
-+ (void) cleanUpStack;
++ (void) cleanUpStack
 {
 	[NSManagedObjectContext MR_cleanUp];
 	[NSManagedObjectModel MR_setDefaultManagedObjectModel:nil];
@@ -61,22 +61,22 @@ NSString * const kMagicalRecordCleanedUpNotification = @"kMagicalRecordCleanedUp
     return status;
 }
 
-+ (void) setDefaultModelNamed:(NSString *)modelName;
++ (void) setDefaultModelNamed:(NSString *)modelName
 {
     NSManagedObjectModel *model = [NSManagedObjectModel MR_managedObjectModelNamed:modelName];
     [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
 }
 
-+ (void) setDefaultModelFromClass:(Class)modelClass;
++ (void) setDefaultModelFromClass:(Class)modelClass
 {
     NSBundle *bundle = [NSBundle bundleForClass:modelClass];
     NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:[NSArray arrayWithObject:bundle]];
     [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
 }
 
-+ (NSString *) defaultStoreName;
++ (NSString *) defaultStoreName
 {
-    NSString *defaultName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(id)kCFBundleNameKey];
+    NSString *defaultName = [[[NSBundle mainBundle] infoDictionary] valueForKey:(NSString *)kCFBundleNameKey];
     if (defaultName == nil)
     {
         defaultName = kMagicalRecordDefaultStoreFileName;

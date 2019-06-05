@@ -63,7 +63,7 @@
     [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
 }
 
-+ (void) setupCoreDataStackWithInMemoryStore;
++ (void) setupCoreDataStackWithInMemoryStore
 {
     if ([NSPersistentStoreCoordinator MR_defaultStoreCoordinator] != nil) return;
     

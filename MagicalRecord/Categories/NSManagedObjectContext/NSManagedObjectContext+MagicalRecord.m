@@ -24,7 +24,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
 
 #pragma mark - Setup
 
-+ (void) MR_initializeDefaultContextWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
++ (void) MR_initializeDefaultContextWithCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
     NSAssert(coordinator, @"Provided coordinator cannot be nil!");
     if (MagicalRecordDefaultContext == nil)
@@ -49,7 +49,7 @@ static id MagicalRecordUbiquitySetupNotificationObserver;
     }
 }
 
-+ (NSManagedObjectContext *) MR_rootSavingContext;
++ (NSManagedObjectContext *) MR_rootSavingContext
 {
     NSAssert(MagicalRecordRootSavingContext != nil, @"Root saving context is nil! Did you forget to initialize the Core Data Stack?");
     return MagicalRecordRootSavingContext;

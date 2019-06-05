@@ -20,7 +20,7 @@
     self.testEntityData = [self dataFromJSONFixture];
 }
 
-- (Class)testEntityClass;
+- (Class)testEntityClass
 {
     return [NSManagedObject class];
 }
