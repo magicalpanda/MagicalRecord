@@ -49,9 +49,12 @@
         XCTAssertNotNil(parentObject);
 
         NSManagedObjectContext *rootSavingContext = [NSManagedObjectContext MR_rootSavingContext];
-        SingleEntityWithNoRelationships *rootObject = (SingleEntityWithNoRelationships *)[rootSavingContext objectWithID:childObjectID];
 
-        XCTAssertNotNil(rootObject);
+        [rootSavingContext performBlockAndWait:^{
+            SingleEntityWithNoRelationships *rootObject = (SingleEntityWithNoRelationships *)[rootSavingContext objectWithID:childObjectID];
+            
+            XCTAssertNotNil(rootObject);
+        }];
 
         [expectation fulfill];
     }];
