@@ -15,30 +15,6 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
 
 @implementation NSManagedObjectContext (MagicalObserving)
 
-- (void)MR_performBlock:(void (^)(void))block
-{
-    if ([self concurrencyType] == NSConfinementConcurrencyType)
-    {
-        block();
-    }
-    else
-    {
-        [self performBlock:block];
-    }
-}
-
-- (void)MR_performBlockAndWait:(void (^)(void))block
-{
-    if ([self concurrencyType] == NSConfinementConcurrencyType)
-    {
-        block();
-    }
-    else
-    {
-        [self performBlockAndWait:block];
-    }
-}
-
 #pragma mark - Context Observation Helpers
 
 - (void)MR_observeContextDidSave:(NSManagedObjectContext *)otherContext
@@ -112,7 +88,7 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
                                           object:self
                                         userInfo:[notification userInfo]];
     };
-    [self MR_performBlock:mergeBlock];
+    [self performBlock:mergeBlock];
 }
 
 - (void)MR_mergeChangesFromNotification:(NSNotification *)notification
@@ -129,7 +105,7 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
         [self mergeChangesFromContextDidSaveNotification:notification];
     };
 
-    [self MR_performBlock:mergeBlock];
+    [self performBlock:mergeBlock];
 }
 
 - (void)MR_mergeChangesOnMainThread:(NSNotification *)notification
@@ -167,6 +143,16 @@ NSString *const MagicalRecordDidMergeChangesFromiCloudNotification = @"kMagicalR
 
 #pragma mark - Deprecated Methods — DO NOT USE
 @implementation NSManagedObjectContext (MagicalObservingDeprecated)
+
+- (void)MR_performBlock:(void (^)(void))block
+{
+    [self performBlock:block];
+}
+
+- (void)MR_performBlockAndWait:(void (^)(void))block
+{
+    [self performBlockAndWait:block];
+}
 
 - (void)MR_observeContext:(NSManagedObjectContext *)otherContext
 {

@@ -66,11 +66,13 @@ dispatch_queue_t MR_saveQueue()
         {
             MRLogVerbose(@"%@ save starting", contextWorkingName);
 
-            NSManagedObjectContext *localContext = [self newConfinementContext];
-            [localContext MR_setWorkingName:contextWorkingName];
+            NSManagedObjectContext *localContext = [self newPrivateContext];
+            [localContext performBlockAndWait:^{
+                [localContext MR_setWorkingName:contextWorkingName];
 
-            block(localContext);
-
+                block(localContext);
+            }];
+            
             MRContextSaveOptions saveOptions = (MRContextSaveOptions)(MRContextSaveOptionsSaveParentContexts | MRContextSaveOptionsSaveSynchronously);
             [localContext MR_saveWithOptions:saveOptions completion:completion];
         }
@@ -87,18 +89,22 @@ dispatch_queue_t MR_saveQueue()
 - (BOOL)saveWithBlockAndWait:(void (^)(NSManagedObjectContext *localContext))block error:(NSError *__autoreleasing *)error
 {
     NSParameterAssert(block);
-    NSManagedObjectContext *localContext = [self newConfinementContext];
 
-    block(localContext);
+    __block BOOL saveSuccess = YES;
+    NSManagedObjectContext *localContext = [self newPrivateContext];
 
-    if (NO == [localContext hasChanges])
+    __block BOOL contextHasChanges = NO;
+    [localContext performBlockAndWait:^{
+        block(localContext);
+        contextHasChanges = localContext.hasChanges;
+    }];
+
+    if (NO == contextHasChanges)
     {
         MRLogInfo(@"NO CHANGES IN ** %@ ** CONTEXT - NOT SAVING", [localContext MR_workingName]);
 
         return YES;
     }
-
-    __block BOOL saveSuccess = YES;
 
     MRContextSaveOptions saveOptions = (MRContextSaveOptions)(MRContextSaveOptionsSaveParentContexts | MRContextSaveOptionsSaveSynchronously);
     [localContext MR_saveWithOptions:saveOptions completion:^(BOOL localSuccess, NSError *localSaveError) {

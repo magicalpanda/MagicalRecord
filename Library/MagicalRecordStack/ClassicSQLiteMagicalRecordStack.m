@@ -13,9 +13,9 @@
 
 @implementation ClassicSQLiteMagicalRecordStack
 
-- (NSManagedObjectContext *)newConfinementContext
+- (NSManagedObjectContext *)newPrivateContext
 {
-    NSManagedObjectContext *context = [NSManagedObjectContext MR_confinementContext];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_privateQueueContext];
     [context setPersistentStoreCoordinator:self.coordinator];
     [context setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
 
@@ -33,7 +33,7 @@
     dispatch_async(MR_saveQueue(), ^{
         MRLogVerbose(@"%@ save starting", contextWorkingName);
 
-        NSManagedObjectContext *localContext = [self newConfinementContext];
+        NSManagedObjectContext *localContext = [self newPrivateContext];
         NSManagedObjectContext *mainContext = [self context];
 
         [mainContext MR_observeContextDidSave:localContext];

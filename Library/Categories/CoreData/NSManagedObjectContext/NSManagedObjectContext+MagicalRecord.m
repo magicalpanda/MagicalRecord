@@ -21,10 +21,6 @@ NSString *MR_concurrencyStringFromType(NSManagedObjectContextConcurrencyType typ
     {
         return @"Main Queue";
     }
-    if (type == NSConfinementConcurrencyType)
-    {
-        return @"Confinement";
-    }
 
     return @"Unknown Concurrency";
 }
@@ -74,20 +70,6 @@ static NSString *const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSMa
     return [self MR_privateQueueContext];
 }
 
-+ (NSManagedObjectContext *)MR_confinementContext
-{
-    NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSConfinementConcurrencyType];
-    [context MR_setWorkingName:@"Confinement"];
-    return context;
-}
-
-+ (NSManagedObjectContext *)MR_confinementContextWithParent:(NSManagedObjectContext *)parentContext
-{
-    NSManagedObjectContext *context = [self MR_confinementContext];
-    [context setParentContext:parentContext];
-    return context;
-}
-
 + (NSManagedObjectContext *)MR_mainQueueContext
 {
     NSManagedObjectContext *context = [[self alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
@@ -120,13 +102,15 @@ static NSString *const kMagicalRecordNSManagedObjectContextWorkingName = @"kNSMa
 
 - (void)MR_setWorkingName:(NSString *)workingName
 {
-    [[self userInfo] setObject:workingName forKey:kMagicalRecordNSManagedObjectContextWorkingName];
+    [self performBlockAndWait:^{
+        self.userInfo[kMagicalRecordNSManagedObjectContextWorkingName] = workingName;
+    }];
 }
 
 - (NSString *)MR_workingName
 {
-    NSString *workingName = [[self userInfo] objectForKey:kMagicalRecordNSManagedObjectContextWorkingName];
-    if ([workingName length] == 0)
+    NSString *workingName = self.userInfo[kMagicalRecordNSManagedObjectContextWorkingName];
+    if (workingName.length == 0)
     {
         workingName = @"UNNAMED";
     }

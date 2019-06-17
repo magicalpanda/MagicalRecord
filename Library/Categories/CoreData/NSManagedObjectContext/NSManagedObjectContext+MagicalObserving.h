@@ -83,6 +83,8 @@ extern NSString *__nonnull const MagicalRecordDidMergeChangesFromiCloudNotificat
 
 @interface NSManagedObjectContext (MagicalObservingDeprecated)
 
+- (void)MR_performBlock:(void (^)(void))block MR_DEPRECATED_IN_3_0_PLEASE_USE("performBlock:");
+- (void)MR_performBlockAndWait:(void (^)(void))block MR_DEPRECATED_IN_3_0_PLEASE_USE("performBlockAndWait:");
 - (void)MR_observeContext:(NSManagedObjectContext *)otherContext MR_DEPRECATED_IN_3_0_PLEASE_USE("MR_observeContextDidSave:");
 - (void)MR_stopObservingContext:(NSManagedObjectContext *)otherContext MR_DEPRECATED_IN_3_0_PLEASE_USE("MR_stopObservingContextDidSave");
 
