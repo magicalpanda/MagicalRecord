@@ -53,7 +53,7 @@
 
 - (void) testDefaultStoreFolderForMacIsTheApplicationSupportDirectory
 {
-    NSString *applicationSupportDirectory = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *applicationSupportDirectory = [NSPersistentStore MR_applicationStorageDirectory];
     NSString *expectedStorePath = [applicationSupportDirectory stringByAppendingPathComponent:kMagicalRecordDefaultStoreFileName];
     NSURL *expectedStoreUrl = [NSURL fileURLWithPath:expectedStorePath];
     NSURL *defaultStoreUrl = [NSPersistentStore MR_defaultLocalStoreUrl];
@@ -64,7 +64,7 @@
 - (void) testCanFindAURLInTheApplicationSupportLibraryForMacForASpecifiedStoreName
 {
     NSString *storeFileName = @"NotTheDefaultStoreName.storefile";
-    NSString *applicationSupportDirectory = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *applicationSupportDirectory = [NSPersistentStore MR_applicationStorageDirectory];
     NSString *expectedStorePath = [applicationSupportDirectory stringByAppendingPathComponent:storeFileName];
 
     BOOL fileWasCreated = [[NSFileManager defaultManager] createFileAtPath:expectedStorePath contents:[storeFileName dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];

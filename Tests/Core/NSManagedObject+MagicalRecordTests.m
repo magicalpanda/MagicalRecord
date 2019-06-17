@@ -15,11 +15,15 @@
 
 @implementation NSManagedObjectMagicalRecord
 
+// +[NSManagedObject(_PFDynamicAccessorsAndPropertySupport) entityName] was subsequently added in iOS 10 and macOS 10.12
+// so this expectation has become obsolete
+/*
 - (void)testThatInternalEntityNameReturnsClassNameWhenEntityNameMethodIsNotImplemented
 {
     XCTAssertNotNil([EntityWithoutEntityNameMethod MR_entityName]);
     XCTAssertEqualObjects([EntityWithoutEntityNameMethod MR_entityName], NSStringFromClass([EntityWithoutEntityNameMethod class]));
 }
+*/
 
 - (void)testThatInternalEntityNameReturnsProvidedNameWhenEntityNameMethodIsImplemented
 {
