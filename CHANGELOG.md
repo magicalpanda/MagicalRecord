@@ -1,6 +1,6 @@
 # Changelog
 
-## Master
+## Version 2.4.0
 * Adding tvOS support
 * Adding watchOS support (CocoaPods only)
 * Updating CocoaLumberjack for 3.x support
