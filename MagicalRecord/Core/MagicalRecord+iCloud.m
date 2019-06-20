@@ -29,6 +29,7 @@ static BOOL _iCloudEnabled = NO;
     }
 }
 
+#if TARGET_OS_OSX || TARGET_OS_IOS
 + (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID localStoreNamed:(NSString *)localStore
 {
     [self setupCoreDataStackWithiCloudContainer:containerID
@@ -82,5 +83,6 @@ static BOOL _iCloudEnabled = NO;
     [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
     [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
 }
+#endif
 
 @end

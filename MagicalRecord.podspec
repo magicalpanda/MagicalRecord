@@ -10,6 +10,7 @@ Pod::Spec.new do |s|
   s.description  = 'Handy fetching, threading and data import helpers to make Core Data a little easier to use.'
   s.ios.deployment_target = '8.0'
   s.osx.deployment_target = '10.8'
+  s.tvos.deployment_target = '9.0'
 
   s.subspec 'Core' do |sp|
     sp.framework    = 'CoreData'
