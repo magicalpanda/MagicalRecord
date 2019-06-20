@@ -1,18 +1,16 @@
 # Changelog
 
 ## Master
-* Removed obsolete expecta matchers for tests
+* Adding tvOS support
+* Adding watchOS support (CocoaPods only)
 * Updating CocoaLumberjack for 3.x support
 * CGFloat precision for MR_colorFromString()
-* MagicalRecord class is no longer an NSObject
+* Removed obsolete expecta matchers for tests
 
 ## Version 2.3.2
-
 This release fixes an issue where the OS X framework was being built with instrumentation data, and included in the binary builds posted to GitHub. It contains no other fixes over MagicalRecord v2.3.1.
 
-
 ## Version 2.3.1
-
 - CocoaPods users who want to use:
     - Shorthand method aliases should add `pod 'MagicalRecord/ShorthandMethodAliases'` to their Podfile, and run `pod update`
     - CocoaLumberjack should add `pod 'MagicalRecord/CocoaLumberjack'` to their Podfile, and run `pod update`
@@ -22,7 +20,6 @@ This release fixes an issue where the OS X framework was being built with instru
 - Add a fix for CocoaLumberjack reporting duplicate definitions of LOG_MAYBE
 - Added error logging when the passed value for `relatedByAttribute` is invalid during a relationship import
 - Added more lightweight generics and nullability annotations
-
 
 ## Version 2.3
 * Dynamic framework targets are provided for both OS X 10.8+ and iOS 8.0+
