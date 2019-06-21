@@ -252,6 +252,13 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
     return [self MR_addSqliteStoreNamed:storeFileName withOptions:options];
 }
 
+- (NSPersistentStore *) MR_addAutoMigratingSqliteStoreNamed:(NSString *) storeFileName withOptions:(NSDictionary *) options
+{
+    NSMutableDictionary *sqliteOptions = [NSMutableDictionary dictionaryWithDictionary:[[self class] MR_autoMigrationOptions]];
+    [sqliteOptions addEntriesFromDictionary:options];
+    return [self MR_addSqliteStoreNamed:storeFileName withOptions:options];
+}
+
 - (NSPersistentStore *) MR_addAutoMigratingSqliteStoreAtURL:(NSURL *)storeURL
 {
     NSDictionary *options = [[self class] MR_autoMigrationOptions];
@@ -264,15 +271,22 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
 
 + (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *) storeFileName
 {
+    return [self MR_coordinatorWithAutoMigratingSqliteStoreNamed:storeFileName withOptions:nil];
+}
+
++ (NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreNamed:(NSString *)storeFileName withOptions:(NSDictionary *) options
+{
     NSManagedObjectModel *model = [NSManagedObjectModel MR_defaultManagedObjectModel];
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
-    
-    [coordinator MR_addAutoMigratingSqliteStoreNamed:storeFileName];
-    
+
+    [coordinator MR_addAutoMigratingSqliteStoreNamed:storeFileName withOptions:options];
+
     //HACK: lame solution to fix automigration error "Migration failed after first pass"
-    if ([[coordinator persistentStores] count] == 0) 
+    if ([[coordinator persistentStores] count] == 0)
     {
-        [coordinator performSelector:@selector(MR_addAutoMigratingSqliteStoreNamed:) withObject:storeFileName afterDelay:0.5];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [coordinator performSelector:@selector(MR_addAutoMigratingSqliteStoreNamed:withOptions:) withObject:storeFileName withObject:options];
+        });
     }
 
     return coordinator;
