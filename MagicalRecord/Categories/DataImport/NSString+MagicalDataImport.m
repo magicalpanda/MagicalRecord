@@ -1,5 +1,5 @@
 //
-//  NSString+MagicalRecord_MagicalDataImport.m
+//  NSString+MagicalDataImport.m
 //  Magical Record
 //
 //  Created by Saul Mora on 12/10/11.
