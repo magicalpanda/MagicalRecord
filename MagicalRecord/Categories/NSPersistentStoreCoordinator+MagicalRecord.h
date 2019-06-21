@@ -26,7 +26,9 @@ OBJC_EXPORT NSString * __MR_nonnull const kMagicalRecordPSCMismatchCouldNotRecre
 + (MR_nonnull NSPersistentStoreCoordinator *) MR_newPersistentStoreCoordinator NS_RETURNS_RETAINED;
 
 + (MR_nonnull NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreNamed:(MR_nonnull NSString *)storeFileName;
++ (MR_nonnull NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreNamed:(MR_nonnull NSString *)storeFileName withOptions:(MR_nullable __autoreleasing NSDictionary *)options;
 + (MR_nonnull NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreNamed:(MR_nonnull NSString *)storeFileName;
++ (MR_nonnull NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreNamed:(MR_nonnull NSString *)storeFileName withOptions:(MR_nullable __autoreleasing NSDictionary *)options;
 + (MR_nonnull NSPersistentStoreCoordinator *) MR_coordinatorWithSqliteStoreAtURL:(MR_nonnull NSURL *)storeURL;
 + (MR_nonnull NSPersistentStoreCoordinator *) MR_coordinatorWithAutoMigratingSqliteStoreAtURL:(MR_nonnull NSURL *)storeURL;
 + (MR_nonnull NSPersistentStoreCoordinator *) MR_coordinatorWithPersistentStore:(MR_nonnull NSPersistentStore *)persistentStore;

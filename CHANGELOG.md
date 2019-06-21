@@ -1,11 +1,14 @@
 # Changelog
 
 ## Version 2.4.0
-* Adding tvOS support
-* Adding watchOS support (CocoaPods only)
-* Updating CocoaLumberjack for 3.x support
-* CGFloat precision for MR_colorFromString()
-* Removed obsolete expecta matchers for tests
+* Adding tvOS support (Cœur, #1362)
+* Adding watchOS support, CocoaPods only (Cœur, #1363)
+* Updating CocoaLumberjack for 3.x support (LaurentiuUngur, #1352)
+* CGFloat precision for `MR_colorFromString()` (Cœur, #1324)
+* To allow custom options like Data Protection level on the Core Data store files, we expose `MR_coordinatorWithSqliteStoreNamed:withOptions:` and `MR_coordinatorWithAutoMigratingSqliteStoreNamed:withOptions:` (leslie-lei, #1185)
+* Documentation in Swift (ssuhanov, #1295)
+* Removed obsolete expecta matchers for tests (Cœur)
+* Fixed and improved CI tests (Cœur)
 
 ## Version 2.3.2
 This release fixes an issue where the OS X framework was being built with instrumentation data, and included in the binary builds posted to GitHub. It contains no other fixes over MagicalRecord v2.3.1.
