@@ -5,7 +5,7 @@
 	<key>numberAsStringTestAttribute</key>
 	<integer>10248909829</integer>
 	<key>int64TestAttribute</key>
-	<integer>42</integer>
+	<integer>10158365420975381</integer>
 	<key>stringTestAttribute</key>
 	<string>This is a test value</string>
 	<key>int32TestAttribute</key>
@@ -30,7 +30,7 @@
 	<string>8/5/2011 1-56-04 AM</string>
 	<key>nullTestAttribte</key>
 	<string></string>
-    <key>booleanAsStringTestAttribute</key>
+	<key>booleanAsStringTestAttribute</key>
 	<string>true</string>
 </dict>
 </plist>

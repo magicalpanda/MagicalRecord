@@ -74,7 +74,7 @@
 - (void)testImportInt64AttributeToEntity
 {
     [testEntity.managedObjectContext performBlockAndWait:^{
-        XCTAssertEqualObjects(self->testEntity.int64TestAttribute, @42, @"int64TestAttribute did not contain expected value, instead found: %@", self->testEntity.int64TestAttribute);
+        XCTAssertEqualObjects(self->testEntity.int64TestAttribute, @10158365420975381, @"int64TestAttribute did not contain expected value, instead found: %@", self->testEntity.int64TestAttribute);
     }];
 }
 
