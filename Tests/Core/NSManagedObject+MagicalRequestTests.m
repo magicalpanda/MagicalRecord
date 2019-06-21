@@ -28,13 +28,13 @@
                                                        withPredicate:predicate
                                                            inContext:context];
 
-    expect(request.sortDescriptors[0].ascending).to.equal(YES);
-    expect(request.sortDescriptors[1].ascending).to.equal(NO);
-    expect(request.sortDescriptors[2].ascending).to.equal(YES);
+    XCTAssertEqual(request.sortDescriptors[0].ascending, YES);
+    XCTAssertEqual(request.sortDescriptors[1].ascending, NO);
+    XCTAssertEqual(request.sortDescriptors[2].ascending, YES);
 
-    expect(request.sortDescriptors[0].key).to.equal(@"key1");
-    expect(request.sortDescriptors[1].key).to.equal(@"key2");
-    expect(request.sortDescriptors[2].key).to.equal(@"key3");
+    XCTAssertEqualObjects(request.sortDescriptors[0].key, @"key1");
+    XCTAssertEqualObjects(request.sortDescriptors[1].key, @"key2");
+    XCTAssertEqualObjects(request.sortDescriptors[2].key, @"key3");
 }
 
 @end
