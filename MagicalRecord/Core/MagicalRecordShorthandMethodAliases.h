@@ -307,7 +307,9 @@
 + (MR_nonnull NSPersistentStoreCoordinator *) coordinatorWithInMemoryStore;
 + (MR_nonnull NSPersistentStoreCoordinator *) newPersistentStoreCoordinator NS_RETURNS_RETAINED;
 + (MR_nonnull NSPersistentStoreCoordinator *) coordinatorWithSqliteStoreNamed:(MR_nonnull NSString *)storeFileName;
++ (MR_nonnull NSPersistentStoreCoordinator *) coordinatorWithSqliteStoreNamed:(MR_nonnull NSString *)storeFileName withOptions:(MR_nullable __autoreleasing NSDictionary *)options;
 + (MR_nonnull NSPersistentStoreCoordinator *) coordinatorWithAutoMigratingSqliteStoreNamed:(MR_nonnull NSString *)storeFileName;
++ (MR_nonnull NSPersistentStoreCoordinator *) coordinatorWithAutoMigratingSqliteStoreNamed:(MR_nonnull NSString *)storeFileName withOptions:(MR_nullable __autoreleasing NSDictionary *)options;
 + (MR_nonnull NSPersistentStoreCoordinator *) coordinatorWithSqliteStoreAtURL:(MR_nonnull NSURL *)storeURL;
 + (MR_nonnull NSPersistentStoreCoordinator *) coordinatorWithAutoMigratingSqliteStoreAtURL:(MR_nonnull NSURL *)storeURL;
 + (MR_nonnull NSPersistentStoreCoordinator *) coordinatorWithPersistentStore:(MR_nonnull NSPersistentStore *)persistentStore;
