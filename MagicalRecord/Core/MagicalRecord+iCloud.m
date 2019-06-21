@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Magical Panda Software LLC. All rights reserved.
 //
 
+#include <TargetConditionals.h>
+#if TARGET_OS_OSX || TARGET_OS_IOS
 #import "MagicalRecord+iCloud.h"
 #import "NSPersistentStoreCoordinator+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
@@ -29,7 +31,6 @@ static BOOL _iCloudEnabled = NO;
     }
 }
 
-#if TARGET_OS_OSX || TARGET_OS_IOS
 + (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID localStoreNamed:(NSString *)localStore
 {
     [self setupCoreDataStackWithiCloudContainer:containerID
@@ -83,6 +84,6 @@ static BOOL _iCloudEnabled = NO;
     [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
     [NSManagedObjectContext MR_initializeDefaultContextWithCoordinator:coordinator];
 }
-#endif
 
 @end
+#endif

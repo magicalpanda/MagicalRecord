@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Magical Panda Software LLC. All rights reserved.
 //
 
+#include <TargetConditionals.h>
+#if TARGET_OS_OSX || TARGET_OS_IOS
 #import <MagicalRecord/MagicalRecordInternal.h>
 #import <MagicalRecord/MagicalRecordXcode7CompatibilityMacros.h>
 
@@ -13,7 +15,6 @@
 
 + (BOOL)isICloudEnabled;
 
-#if TARGET_OS_OSX || TARGET_OS_IOS
 + (void)setupCoreDataStackWithiCloudContainer:(MR_nonnull NSString *)containerID
                               localStoreNamed:(MR_nonnull NSString *)localStore;
 
@@ -41,6 +42,6 @@
                               localStoreAtURL:(MR_nonnull NSURL *)storeURL
                       cloudStorePathComponent:(MR_nullable NSString *)pathSubcomponent
                                    completion:(void (^ __MR_nullable)(void))completion;
-#endif
 
 @end
+#endif
