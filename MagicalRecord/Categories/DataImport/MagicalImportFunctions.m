@@ -35,10 +35,16 @@ NSDate * MR_dateFromString(NSString *value, NSString *format)
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-    [formatter setLocale:[NSLocale currentLocale]];
+    [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
     [formatter setDateFormat:format];
     
     NSDate *parsedDate = [formatter dateFromString:value];
+    
+    if (parsedDate == nil) {
+        // fallback to legacy behavior from MagicalRecord 2.3 and older
+        [formatter setLocale:[NSLocale currentLocale]];
+        parsedDate = [formatter dateFromString:value];
+    }
     
     return parsedDate;
 }

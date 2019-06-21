@@ -4,6 +4,7 @@
 * Adding tvOS support (Cœur, #1362)
 * Adding watchOS support, CocoaPods only (Cœur, #1363)
 * Updating CocoaLumberjack for 3.x support (LaurentiuUngur, #1352)
+* Fix date format parsing when local isn't US (Cœur, #964)
 * CGFloat precision for `MR_colorFromString()` (Cœur, #1324)
 * To allow custom options like Data Protection level on the Core Data store files, we expose `MR_coordinatorWithSqliteStoreNamed:withOptions:` and `MR_coordinatorWithAutoMigratingSqliteStoreNamed:withOptions:` (leslie-lei, #1185)
 * Documentation in Swift (ssuhanov, #1295)
