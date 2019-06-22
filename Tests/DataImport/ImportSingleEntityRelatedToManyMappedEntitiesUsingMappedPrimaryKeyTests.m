@@ -40,4 +40,23 @@
     }];
 }
 
+- (void)testImportNilData
+{
+    SingleEntityRelatedToManyMappedEntitiesUsingMappedPrimaryKey *entity = [[self testEntityClass] MR_importFromObject:self.testEntityData inContext:[NSManagedObjectContext MR_defaultContext]];
+    
+    XCTAssertNotNil(entity, @"Entity should not be nil");
+    
+    [entity.managedObjectContext performBlockAndWait:^{
+        // testing that importing nothing will not change the relationship
+        [entity MR_importValuesForKeysWithObject:@{}];
+        NSUInteger mappedEntitiesCount = entity.mappedEntities.count;
+        XCTAssertEqual(mappedEntitiesCount, (NSUInteger)4, @"Expected 4 mapped entities, received %zd", mappedEntitiesCount);
+        
+        // testing that importing `null` will nullify the relationship
+        [entity MR_importValuesForKeysWithObject:@{@"mappedEntities":[NSNull null]}];
+        mappedEntitiesCount = entity.mappedEntities.count;
+        XCTAssertEqual(mappedEntitiesCount, (NSUInteger)0, @"Expected 0 mapped entities, received %zd", mappedEntitiesCount);
+    }];
+}
+
 @end
