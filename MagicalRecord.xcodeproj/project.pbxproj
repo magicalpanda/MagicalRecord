@@ -829,6 +829,9 @@
 		37CA2607229FEB7000EAB9F6 /* MagicalRecord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MagicalRecord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37CA260F229FEB7000EAB9F6 /* MagicalRecord for tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MagicalRecord for tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		37CA2616229FEB7000EAB9F6 /* MagicalRecordTests-tvOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MagicalRecordTests-tvOS-Info.plist"; sourceTree = "<group>"; };
+		37CF3EAD22BDFEFE00705F72 /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = SOURCE_ROOT; };
+		37CF3EAE22BDFEFE00705F72 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = SOURCE_ROOT; };
+		37CF3EAF22BDFEFE00705F72 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		581ECBEB187F63FF00084FEE /* ImportMultipleEntitiesWithNoPrimaryKeyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportMultipleEntitiesWithNoPrimaryKeyTests.m; sourceTree = "<group>"; };
 		581ECBF6187F660B00084FEE /* MultipleEntitiesWithNoPrimaryKey.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = MultipleEntitiesWithNoPrimaryKey.json; path = Fixtures/MultipleEntitiesWithNoPrimaryKey.json; sourceTree = "<group>"; };
 		9004F5211A94CBCF00A61312 /* MagicalRecord for iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MagicalRecord for iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1096,6 +1099,9 @@
 			isa = PBXGroup;
 			children = (
 				90A0DE051C50D59300CF5A5A /* MagicalRecord.podspec */,
+				37CF3EAE22BDFEFE00705F72 /* CHANGELOG.md */,
+				37CF3EAD22BDFEFE00705F72 /* CONTRIBUTING.md */,
+				37CF3EAF22BDFEFE00705F72 /* README.md */,
 				905D07C91A63DFED0076B54E /* Info.plist */,
 			);
 			path = Support;
