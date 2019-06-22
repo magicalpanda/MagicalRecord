@@ -133,6 +133,32 @@ peopleRequest.propertiesToFetch = ["FirstName", "LastName"]
 let people = Person.mr_executeFetchRequest(peopleRequest)
 ```
 
+#### Find excluding subentities
+
+To fetch all sorted, excluding subentities:
+
+```objective-c
+// Objective-C
+NSFetchRequest *peopleRequest = [Person MR_requestAllSortedBy:@"LastName" ascending:YES withPredicate:nil];
+NSFetchedResultsController *controller = [Person MR_fetchController:peopleRequest delegate:nil useFileCache:NO groupedBy:nil inContext:[NSManagedObjectContext MR_defaultContext]];
+controller.fetchRequest.includesSubentities = NO;
+[Person MR_performFetch:controller];
+
+NSArray *people = controller.fetchedObjects;
+```
+
+```swift
+// Swift
+let peopleRequest = Person.mr_requestAllSorted(by: "LastName", ascending: true, with: nil)
+let controller = Person.mr_fetchController(peopleRequest, delegate: nil, useFileCache: false, groupedBy: nil, in: NSManagedObjectContext.mr_default())
+controller.fetchRequest.includesSubentities = false
+Person.mr_performFetch(controller)
+
+let people = controller.fetchedObjects
+```
+
+Note: `MR_defaultContext`/`mr_default()` is for main thread. See `Working-with-Managed-Object-Contexts.md` for other contexts.
+
 #### Find the number of entities
 
 You can also perform a count of all entities of a specific type in your persistent store:
