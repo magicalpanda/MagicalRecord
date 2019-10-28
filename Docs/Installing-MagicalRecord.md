@@ -23,12 +23,12 @@ One of the easiest ways to integrate MagicalRecord in your project is to use [Co
     a. Plain
 
     ````ruby
-    pod "MagicalRecord"
+    pod 'MagicalRecord', :git => 'https://github.com/magicalpanda/MagicalRecord'
     ````
     b. With CocoaLumberjack as Logger
 
     ````ruby
-    pod "MagicalRecord/CocoaLumberjack"
+    pod 'MagicalRecord/CocoaLumberjack', :git => 'https://github.com/magicalpanda/MagicalRecord'
     ````
 
 2. In your project directory, run `pod update`
