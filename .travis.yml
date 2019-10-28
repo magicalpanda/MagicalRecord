@@ -2,35 +2,43 @@ language: objective-c
 xcode_project: MagicalRecord.xcodeproj
 matrix:
   include:
-    - osx_image: xcode10.2
+    - osx_image: xcode11.1
       xcode_scheme: MagicalRecord for iOS
-      xcode_destination: platform=iOS Simulator,OS=12.2,name=iPhone Xʀ
-      env: DEVICE="iPhone Xʀ (12.2)"
-    - osx_image: xcode10.2
+      xcode_destination: platform=iOS Simulator,OS=13.1,name=iPhone 11 Pro Max
+      env: DEVICE="iPhone 11 Pro Max (13.1)"
+    - osx_image: xcode11.1
       xcode_scheme: libMagicalRecord for iOS
-      xcode_destination: platform=iOS Simulator,OS=12.2,name=iPhone Xʀ
-      env: DEVICE="iPhone Xʀ (12.2)"
-    #- osx_image: xcode10.2
+      xcode_destination: platform=iOS Simulator,OS=13.1,name=iPhone 11 Pro Max
+      env: DEVICE="iPhone 11 Pro Max (13.1)"
+    - osx_image: xcode10.3
+      xcode_scheme: MagicalRecord for iOS
+      xcode_destination: platform=iOS Simulator,OS=12.4,name=iPhone Xʀ
+      env: DEVICE="iPhone Xʀ (12.4)"
+    - osx_image: xcode10.3
+      xcode_scheme: libMagicalRecord for iOS
+      xcode_destination: platform=iOS Simulator,OS=12.4,name=iPhone Xʀ
+      env: DEVICE="iPhone Xʀ (12.4)"
+    #- osx_image: xcode10.3
     #  xcode_scheme: MagicalRecord for iOS
     #  xcode_destination: platform=iOS Simulator,OS=11.4,name=iPhone X
     #  env: DEVICE="iPhone X (11.4)"
-    #- osx_image: xcode10.2
+    #- osx_image: xcode10.3
     #  xcode_scheme: libMagicalRecord for iOS
     #  xcode_destination: platform=iOS Simulator,OS=11.4,name=iPhone X
     #  env: DEVICE="iPhone X (11.4)"
-    #- osx_image: xcode10.2
+    #- osx_image: xcode10.3
     #  xcode_scheme: MagicalRecord for iOS
     #  xcode_destination: platform=iOS Simulator,OS=10.3.1,name=iPhone 7 Plus
     #  env: DEVICE="iPhone 7 Plus (10.3.1)"
-    #- osx_image: xcode10.2
+    #- osx_image: xcode10.3
     #  xcode_scheme: libMagicalRecord for iOS
     #  xcode_destination: platform=iOS Simulator,OS=10.3.1,name=iPhone 7 Plus
     #  env: DEVICE="iPhone 7 Plus (10.3.1)"
-    #- osx_image: xcode10.2
+    #- osx_image: xcode10.3
     #  xcode_scheme: MagicalRecord for iOS
     #  xcode_destination: platform=iOS Simulator,OS=9.3,name=iPhone 6s Plus
     #  env: DEVICE="iPhone 6s Plus (9.3)"
-    #- osx_image: xcode10.2
+    #- osx_image: xcode10.3
     #  xcode_scheme: libMagicalRecord for iOS
     #  xcode_destination: platform=iOS Simulator,OS=9.3,name=iPhone 6s Plus
     #  env: DEVICE="iPhone 6s Plus (9.3)"
@@ -42,14 +50,22 @@ matrix:
       xcode_scheme: libMagicalRecord for iOS
       xcode_destination: platform=iOS Simulator,OS=8.1,name=iPhone 4s
       env: DEVICE="iPhone 4s (8.1)"
-    - osx_image: xcode10.2
+    - osx_image: xcode11.1
       xcode_scheme: MagicalRecord for OS X
       xcode_destination: platform=macOS
-      env: DEVICE="OS X 10.14"
-    - osx_image: xcode10.2
+      env: DEVICE="OS X 10.15"
+    - osx_image: xcode11.1
       xcode_scheme: libMagicalRecord for OS X
       xcode_destination: platform=macOS
-      env: DEVICE="OS X 10.14"
+      env: DEVICE="OS X 10.15"
+    #- osx_image: xcode10.3
+    #  xcode_scheme: MagicalRecord for OS X
+    #  xcode_destination: platform=macOS
+    #  env: DEVICE="OS X 10.14"
+    #- osx_image: xcode10.3
+    #  xcode_scheme: libMagicalRecord for OS X
+    #  xcode_destination: platform=macOS
+    #  env: DEVICE="OS X 10.14"
     #- osx_image: xcode9.4
     #  xcode_scheme: MagicalRecord for OS X
     #  xcode_destination: platform=macOS
@@ -74,14 +90,14 @@ matrix:
       xcode_scheme: libMagicalRecord for OS X
       xcode_destination: platform=OS X
       env: DEVICE="OS X 10.11"
-    - osx_image: xcode10.2
+    - osx_image: xcode11.1
       xcode_scheme: MagicalRecord for tvOS
-      xcode_destination: platform=tvOS Simulator,OS=12.2,name=Apple TV 4K (at 1080p)
-      env: DEVICE="Apple TV 4K (at 1080p) (12.2)"
-    - osx_image: xcode10.2
+      xcode_destination: platform=tvOS Simulator,OS=13.0,name=Apple TV 4K (at 1080p)
+      env: DEVICE="Apple TV 4K (at 1080p) (13.0)"
+    - osx_image: xcode11.1
       xcode_scheme: libMagicalRecord for tvOS
-      xcode_destination: platform=tvOS Simulator,OS=12.2,name=Apple TV 4K (at 1080p)
-      env: DEVICE="Apple TV 4K (at 1080p) (12.2)"
+      xcode_destination: platform=tvOS Simulator,OS=13.0,name=Apple TV 4K (at 1080p)
+      env: DEVICE="Apple TV 4K (at 1080p) (13.0)"
     # Xcode 7.3 gives "Platform 'appletvos' is not yet supported.", so we use Xcode 8.0 as minimal requirement
     - osx_image: xcode8.0
       xcode_scheme: MagicalRecord for tvOS

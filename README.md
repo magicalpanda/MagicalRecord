@@ -14,6 +14,13 @@ MagicalRecord was inspired by the ease of Ruby on Rails' Active Record fetching.
 * Allow for clear, simple, one-line fetches
 * Still allow the modification of the NSFetchRequest when request optimizations are needed
 
+## Status of the project
+
+This project's activity has stopped, superseded by Core Data itself. Our latest versions available are:
+
+- MagicalRecord 2.4.0, a stable version, available from tag '2.4.0' or `pod 'MagicalRecord', :git => 'https://github.com/magicalpanda/MagicalRecord'`.
+- MagicalRecord 3.0.0, an experimental version, available in two flavors, one is branch `release/3.0` and the other is branch `maintenance/3.0`.
+
 ## Documentation
 
 - [Installation](Docs/Installing-MagicalRecord.md)
@@ -29,13 +36,8 @@ MagicalRecord was inspired by the ease of Ruby on Rails' Active Record fetching.
 
 ## Support
 
-MagicalRecord is provided as-is, free of charge. For support, you have a few choices:
+This project's activity has stopped. MagicalRecord is provided as-is, free of charge. For support, you have a few choices:
 
-- Ask your support question on [Stackoverflow.com](https://stackoverflow.com), and tag your question with **MagicalRecord**. The core team will be notified of your question only if you mark your question with this tag. The general Stack Overflow community is provided the opportunity to answer the question to help you faster, and to reap the reputation points. If the community is unable to answer, we'll try to step in and answer your question.
-- If you believe you have found a bug in MagicalRecord, please submit a support ticket on the [Github Issues page for MagicalRecord](https://github.com/magicalpanda/magicalrecord/issues). We'll get to them as soon as we can. Please do **NOT** ask general questions on the issue tracker. Support questions will be closed unanswered.
+- Ask your support question on [Stack Overflow](https://stackoverflow.com), and tag your question with **MagicalRecord**.
+- If you believe you have found a bug in MagicalRecord, please submit a support ticket on the [GitHub Issues page for MagicalRecord](https://github.com/magicalpanda/magicalrecord/issues) or a pull request. Please do **NOT** ask general questions on the issue tracker. Support questions will be closed unanswered.
 - For more personal or immediate support, [MagicalPanda](http://magicalpanda.com/) is available for hire to consult on your project.
-
-
-## Twitter
-
-Follow [@MagicalRecord](https://twitter.com/magicalrecord) on twitter to stay up to date with the latest updates relating to MagicalRecord.
