@@ -256,7 +256,7 @@ NSString * const kMagicalRecordPSCMismatchCouldNotRecreateStore = @"kMagicalReco
 {
     NSMutableDictionary *sqliteOptions = [NSMutableDictionary dictionaryWithDictionary:[[self class] MR_autoMigrationOptions]];
     [sqliteOptions addEntriesFromDictionary:options];
-    return [self MR_addSqliteStoreNamed:storeFileName withOptions:options];
+    return [self MR_addSqliteStoreNamed:storeFileName withOptions:sqliteOptions];
 }
 
 - (NSPersistentStore *) MR_addAutoMigratingSqliteStoreAtURL:(NSURL *)storeURL
