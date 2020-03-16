@@ -21,6 +21,12 @@
 + (void) MR_initializeDefaultContextWithCoordinator:(MR_nonnull NSPersistentStoreCoordinator *)coordinator;
 
 #pragma mark - Default Contexts
+
+/**
+ Set a root context responsible
+ */
++ (void)MR_setRootSavingContext:(MR_nonnull NSManagedObjectContext *)context;
+
 /**
  Root context responsible for sending changes to the main persistent store coordinator that will be saved to disk.
 
@@ -30,6 +36,10 @@
  */
 + (MR_nonnull NSManagedObjectContext *) MR_rootSavingContext;
 
+/**
+ Set a Default context responsible
+ */
++ (void) MR_setDefaultContext:(MR_nonnull NSManagedObjectContext *)moc;
 /**
  @discussion Please do not use this context for saving changes, as it will block the main thread when doing so.
 
